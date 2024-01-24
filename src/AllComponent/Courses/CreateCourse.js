@@ -12,13 +12,21 @@ const CreateCourses =({handleHeaderLabels})=>{
     setTackerPage(page);
     handleHeaderLabels(page)
   }
-  return(
+  return (
     <Box className="courseMainTrack">
-    <Tracker trackerPage={trackerPage} handleTrackerPage={handleTrackerPage}/>
-     {trackerPage===0?<CreateForm handleTrackerPage={handleTrackerPage}/>:trackerPage===1?<EditPrice handleTrackerPage={handleTrackerPage}/>:<AddContent/>}
+      <Tracker
+        trackerPage={trackerPage}
+        handleTrackerPage={handleTrackerPage}
+      />
+      {trackerPage === 0 ? (
+        <CreateForm handleTrackerPage={handleTrackerPage} />
+      ) : trackerPage === 1 ? (
+        <EditPrice handleTrackerPage={handleTrackerPage} />
+      ) : (
+        <AddContent />
+      )}
     </Box>
-    
-  )
+  );
 }
 
 export default CreateCourses;
