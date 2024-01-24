@@ -1,0 +1,73 @@
+.Add-main-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 30px;
+    margin: 28px 0px;
+  }
+  .cardImage{
+   border-top-right-radius: 15px;
+   border-top-left-radius: 15px;
+    height: 27vh;
+    width: 100%;
+  }
+ 
+  
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 15px;
+    background-color: white;
+    color: black;
+    padding-bottom: 0;
+    width: 90%;
+  }
+  .AddCourses{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+  }
+  .FolderImg{
+    width: 50% !important;
+  }
+  .AddBtn{
+    /* margin-top: -10px !important; */
+    font-size: 1rem;
+    border-radius: 15px !important;
+  }
+  .CardData{
+    margin-left: 12px;
+    text-align: left;
+  }
+  .Namep{
+    margin-top: -10px ;
+    color: grey;
+    font-size: 0.8rem;
+  }
+  .Yearp{ 
+    margin-top: -8px ;
+    text-align: center;
+    font-size: 0.8rem;
+    width: 20%;
+    color: rgb(0, 179, 255);
+    background-color: rgba(153, 249, 249, 0.717);
+  }
+
+  @media screen and (max-width: 1280px) {
+    .cardImage{
+       height: 22vh;
+     }
+    
+  }
+  @media screen and (max-width: 962px) {
+    .Add-main-cards {
+        grid-template-columns: 1fr 1fr;
+      }
+  }
+  @media screen and (max-width: 562px) {
+    .Add-main-cards {
+        grid-template-columns: 1fr;
+      }
+  }

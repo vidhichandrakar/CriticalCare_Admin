@@ -1,0 +1,279 @@
+.mainBox{
+ display: block;
+ margin: auto;
+ width:96%;
+ margin-top:2.5%;
+ margin-left: 2%;
+ /* background-color: red; */
+ justify-content: center;
+ /* border: 1px solid red; */
+}
+.HeaderBox{
+  display: flex;
+  flex-direction: row;
+}
+.HeaderLeft{
+  width:60%;
+  margin-top: 5px;
+  /* background-color: aliceblue; */
+}
+.subHeader{
+  font-size: 0.85em !important;
+  color: #7c7a7a;
+  font-weight: bold !important;
+}
+.selectDesign{
+  background-color: #fff;
+  /* border:none !important; */
+  text-align: center;
+  /* box-shadow: 1px 1px 5px 1px #f7f7f7!important; */
+  border-radius: 15px !important;
+}
+.logoDesign{
+   width: 60px;
+   height: 40px;
+   background-color: rgba(224, 184, 24, 0.236);
+  border-radius: 50%;
+  color:rgb(255, 186, 37);
+
+}
+.headerText{
+  font-size: 1.7em !important;
+  font-weight: 600 !important;
+}
+.logoText{
+  margin-top: 23% !important;
+  font-size: 0.9em !important;
+  font-weight: bold !important;
+
+}
+.labelDesign{
+  color: #000 !important;
+  font-size: 1.25em !important;
+  font-weight: bold;
+  text-align: left !important;
+}
+.HeaderRight{
+  width: 60%;
+  justify-content: end;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+/* Create courses Css */
+
+.createBoxHeader{
+  padding-top: 2%;
+}
+.courseMainTrack{
+  background-color: #fff !important;
+  border-radius: 15px;
+  width:100% !important;
+  display: flex;
+  
+  margin-top: 2%;
+  flex-direction: column;
+}
+.trackerBox{
+  justify-content: left;
+  align-items: start;
+  float: inline-start;
+  text-align: left;
+  border-bottom: 2px solid #818181;
+
+}
+.trackerStepText{
+ text-align: left;
+ font-weight: bold !important;
+}
+.trackerMainBox{
+  width:100%;
+  
+  margin-left: -3%;
+  padding-bottom: 10px;
+
+}
+.trackerStep{
+  width:60%;
+}
+
+.formMain{
+  padding: 3%;
+  width:50%;
+}
+.textField{
+  /* padding:  11px 15px 13px  15px  !important; */
+   font-size: 0.9rem !important;
+   color:#202020 !important;
+  
+
+}
+.MuiOutlinedInput-root{
+  border-radius: 10px !important;
+}
+.BoxShadow{
+  border-radius: 80px !important;
+  font-size: 0.7rem !important;
+  margin-top: 3% !important;
+
+}
+.thumbnailUpload{
+  margin-top: 3%;
+}
+.iconThumbicon{
+  color:#0f7af5 !important;
+  font-size: 1.8em !important;
+}
+.iconThumb{
+  color:#0f7af5 !important;
+  text-transform: none !important;
+  font-size: 0.9em !important;
+}
+.fontRecommend{
+  font-size: 0.76em !important;
+  color: #918e8e;
+
+}
+.divider{
+  background-color: #000;
+  margin-top: 4%;
+   padding: 0.5px;
+}
+.categorytext{
+  font-size: 0.9em !important;
+  font-weight: 500;
+  color: #8e8888;
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-style: normal !important;
+}
+.coursesButton{
+  margin-top: 5% !important;
+  width:200px !important;
+  background-color:#0f7af5 !important;
+  text-transform: none !important;
+}
+.categoryBox{
+  display: flex;
+  flex-direction: row;
+}
+.categorySelect{
+  margin-left: -2%;
+  margin-top: 4%
+}
+.Editcategory{
+  margin-left: -2%;
+}
+.rightCat{
+  margin-left: 8%;
+}
+.rightEditPrice{
+  margin-left: 2%;
+}
+
+
+.editFirstBox{
+  display: flex;
+  flex-direction: row;
+}
+.editFirstText{
+  margin-left: 3% !important;
+}
+.marginscndBox{
+  margin-left: 9%;
+}
+
+
+
+
+
+
+
+
+@media screen and (max-width: 580px)  {
+  .subHeader{
+    font-size: 0.8em !important;
+    flex-wrap: wrap;
+  }
+  .headerText{
+    font-size: 1.3em !important;
+  }
+  .HeaderLeft{
+    margin-left: 2%;
+    margin-top: 2% !important;
+    width:35% !important;
+  }
+  .HeaderRight{
+    width:65%;
+  }
+  .categoryBox{
+    display: flex;
+    flex-direction: column;
+  }
+  .rightCat{
+    margin-left: 0%;
+  }
+  
+}
+@media screen and (max-width:992px)  {
+  .formMain{
+    width:90%;
+  }
+  
+  
+}
+@media screen and (max-width: 480px)  {
+  .subHeader{
+    font-size: 0.55em !important;
+  }
+ 
+  .headerText{
+    font-size: 1em !important;
+  }
+  .HeaderLeft{
+    margin-left: 2%;
+    margin-top: 2% !important;
+  }
+  .HeaderRight{
+    display: block;
+  }
+  .selectDesign{
+    width: 225px;
+    height: 50px;
+  }
+  .categoryBox{
+    display: flex;
+    flex-direction: column;
+  }
+  .rightCat{
+    margin-left: 0%;
+  }
+}
+@media screen and (max-width: 280px) {
+  .selectDesign{
+    width: 184px;
+  }
+}
+/* Upcoming Courses CSS */
+.formMainUpcoming{
+  padding: 3%;
+  width:90%;
+}
+.BoxShadowUpcoming{
+  border-radius: 80px !important;
+  font-size: 0.7rem !important;
+  margin-top: 2% !important;
+
+}
+.divider-upcoming{
+  background-color: #000;
+  margin-top: 4%;
+   padding: 0.5px;
+   width: 50%;
+}
+.checkboxDesign .MuiTypography-root{
+  font-size: 0.85em !important;
+  font-weight: 600 !important;
+}
+.checkbox-icon{
+  font-weight: 300 !important;
+}

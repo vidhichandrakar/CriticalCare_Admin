@@ -1,0 +1,60 @@
+.MainBox {
+  height: 100vh;
+  display: flex !important;
+  margin: auto !important;
+  align-items: center;
+  justify-content: center;
+}
+.loginBox {
+  box-shadow: 1px 1px 4px 2px #ecebeb !important;
+  border-radius: 10px 10px 10px 10px;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+.Leftcomponent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 50%;
+  background-color: #F8F8F8;
+  border-right: solid 1px;
+}
+.Leftimg {
+  height: 13vh;
+}
+.RightBox{
+    background-color: white;
+width: 50%;
+}
+.BoxWidth{
+    margin: 10%;
+    margin-top: 15% !important;
+  }
+  .loginText{
+    text-align: center;
+    font-size: 1.5rem !important;
+    font-weight: 600 !important;
+  }
+  .EmailText{
+    color: grey;
+    margin-bottom: -2% !important;
+  }
+  .BoxShadow{
+    box-shadow: 1px 1px 5px 1px #d1d0d0 !important;
+    text-align: center !important;
+    border-radius: 10px !important;
+    font-size: 0.7rem !important;
+    margin-top: 3% !important;
+  }
+.LoginBtn{
+    width: 30% !important;
+    height: 5vh !important;
+    margin-top: 10% !important;
+    margin-left: 35% !important;
+    background-color: #80baff !important;
+    border-radius: 8px  !important;
+    text-transform: none !important;
+}

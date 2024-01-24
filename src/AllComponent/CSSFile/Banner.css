@@ -1,0 +1,126 @@
+.BannerMain{
+    margin: 30px;
+}
+.BannerBox{
+    height: 66vh;
+    overflow-y: scroll;
+    margin-top: 6%;
+    background-color: white;
+    
+}
+.BannerMainBox{
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.HeadText h2{
+    margin-left: 20px;
+    /* margin-top: 20px; */
+}
+.HeadText{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin: 0px 0px;
+    border-bottom: solid 2px grey;
+}
+.Deletebtn{
+    color: red !important;
+    text-transform: none !important;
+}
+.Deleteicon{
+    width: 20% !important;
+    margin-right: 10% !important;
+}
+.BannerHead{
+    display: flex;
+    flex-direction:row;
+    justify-content: space-between;
+}
+.BannerImage{
+    /* width: 30% !important; */
+    border-top-right-radius: 15px !important;
+    border-top-left-radius: 15px !important;
+}
+.InsideBannerBox{
+    margin: 20px;
+    border: solid 2px grey ;
+}
+.InsideMainBox{
+    margin: 20px;
+    
+}
+
+.BorderBottom{
+    border: solid 2px gray;
+    text-align: center;
+    align-items: center;
+}
+.BorderBottom p{
+    margin-left: 10px;
+    color: grey;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+.changeBtn{
+    text-transform: none !important;
+}
+.fontSize1{
+    color: grey;
+    font-size: 1rem;
+}
+
+
+.container {
+    position: relative;
+    width: 30%;
+  }
+  
+  .image {
+    opacity: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+  
+  .middle {
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  .container:hover .image {
+    background-color: black;
+    opacity: 0.5;
+  }
+  
+  .container:hover .middle {
+    opacity: 1;
+  }
+  .text:hover {
+    cursor: pointer;
+  }
+  .text {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    padding: 7px 10px;
+    border-radius: 30px;
+    border: white;
+    text-align: center;
+  }
+  .PencilIcon{
+
+    width: 20% !important;
+    margin-right: 6px;
+  }

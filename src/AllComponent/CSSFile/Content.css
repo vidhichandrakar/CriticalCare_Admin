@@ -1,0 +1,55 @@
+.contentDisplay{
+  display: flex;
+  flex-direction: row;
+  /* background-color: RED; */
+  width:94%;
+  
+}
+.contentleftBox{
+  width:70%;
+  /* border: 2px solid #eee; */
+  padding: 1%;
+  height: 50%;
+}
+.contentRightBox{
+  margin:2%;
+  width:30%;
+   border: 2px solid #eee;
+}
+.contentInnerLeftBox{
+  height: 40vh;
+  padding: 4%;
+}
+.contentInnerLeftBox:hover{
+ background-color: #eee;
+}
+.folderIconContent{
+  font-size: 5em !important;
+  color: #0075FF !important;
+}
+.folderIconContentTwo{
+  font-size: 3.5em !important;
+  color: #0075FF !important;
+  margin-top: 2%;
+}
+.firstTree{
+  display: flex;
+  flex-direction: row;
+}
+.innerTree{
+  display: flex;
+  flex-direction: row;
+  margin-left: 5%;
+  margin-top: 2%;
+}
+.innerHeading{
+  margin-left: 3%;
+  margin-top: 2%;
+}
+.innerHeadingOne{
+  font-size: 1.2em !important;
+}
+
+.innerHeadingTwo{
+  color: #c9c2c2;
+}

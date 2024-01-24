@@ -1,0 +1,728 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  background-color: #f4f9fd;
+}
+
+.icon {
+  vertical-align: middle;
+  line-height: 1px;
+  font-size: 20px;
+}
+.icon_header {
+  vertical-align: middle;
+  line-height: 1px;
+  font-size: 26px;
+}
+.icon,
+.icon_header {
+  margin-right: 5px;
+}
+.icon {
+  margin-left: 12px;
+}
+
+.close_icon {
+  color: red;
+  margin-left: 30px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  grid-template-rows: 0.2fr 3fr;
+  grid-template-areas:
+    "sidebar main main main"
+    "sidebar main main main";
+  height: 100vh;
+}
+
+/* Sidebar  */
+#sidebar {
+  grid-area: sidebar;
+  overflow-y: auto;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  margin: 20px;
+}
+.Sider-Box {
+  height: 100%;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.sidebar-title {
+  display: flex;
+  padding: 0 23px;
+}
+.SideBarLogo {
+  margin-left: 5px;
+  width: 95%;
+  height: 40px;
+}
+
+.sidebar-title > span {
+  display: none;
+}
+
+.sidebar-brand {
+  margin-top: 15px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.sidebar-list {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin-top: 20px;
+  list-style-type: none;
+}
+
+.sidebar-list-item {
+  /* padding: 20px 20px 20px 20px;  */
+  /* padding: 7px 4px; */
+  font-size: 15px;
+}
+.BottomLine {
+  /* margin-top: -20px; */
+  margin-left: 20px;
+}
+
+.hoverrr {
+  width: 84%;
+  padding: 6px 0px !important;
+  align-items: center;
+  margin-top: -18px;
+  border-radius: 5px;
+}
+
+.hoverrr:hover {
+  background-color: #E5F7FD !important;
+  cursor: pointer;
+  border-right: 3px solid #0075FF !important;
+  color: grey !important;
+}
+
+.sidebar-list-item > a {
+  text-decoration: none;
+  margin-top: 20px;
+  color: grey;
+  /* padding: 7px 4px; */
+  font-size: 1rem;
+}
+
+.sidebar-responsive {
+  display: inline !important;
+  position: absolute;
+
+  z-index: 12 !important;
+}
+
+/* End Sidebar  */
+
+/* Start Main  */
+.menu-icon {
+  display: none;
+}
+.main-container {
+  grid-area: main;
+  overflow-y: auto;
+}
+.margin20 {
+  margin: 20px;
+}
+/*End Main  */
+
+/* Start Dashborad */
+/* .DashBoardMAinBox{
+  margin: 20px;
+ } */
+.Head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px;
+}
+.Head h1 {
+  font-size: 1.3rem;
+}
+.Head p {
+  font-weight: 600;
+  color: grey;
+  margin-left: 1px;
+  margin-top: -14px;
+  font-size: 0.65rem;
+}
+.DropDown {
+  padding: 6px 0px;
+  width: 15%;
+  height: 0%;
+  border-radius: 9px;
+  margin-top: 13px;
+  border: solid white;
+  font-size: 1rem;
+}
+.AdditionalBox {
+  background-color: white;
+  border-radius: 15px;
+  /* margin: 20px; */
+}
+.TextHeading {
+  font-size: 1.2rem;
+  margin-left: 30px;
+  padding: 18px;
+}
+.Additionalmain-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 45px;
+  margin: 15px 45px;
+}
+.Addcard {
+  font-size: 1rem;
+  text-align: center;
+  background-color: #f4f9fd !important;
+  padding-bottom: 20px;
+  margin-bottom: 25px;
+  color: rgb(19, 170, 235);
+  border-radius: 15px;
+}
+.AdditionalIcon {
+  padding-top: 30px;
+  /* margin-top: 10%; */
+  vertical-align: bottom;
+  line-height: 1px;
+  font-size: 3rem !important;
+}
+.OurOfferBox {
+  background-color: white;
+  border-radius: 15px;
+  /* margin: 20px; */
+}
+.Offer-main-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+  margin: 15px 45px;
+}
+.Offer-card {
+  border: solid 1px black;
+  text-align: left;
+  padding-bottom: 20px;
+  margin-bottom: 25px;
+  color: rgb(19, 170, 235);
+  border-radius: 15px;
+  background-color: white;
+}
+.CardRow {
+  display: flex;
+  flex-direction: row;
+  margin: 15px;
+  width: 100%;
+}
+.OfferIcon {
+  margin-top: 4%;
+  margin-left: 5%;
+  font-size: 3rem !important;
+}
+.OfferCardText {
+  font-size: 1.2rem;
+  color: black;
+  margin-left: 7%;
+}
+.OfferCardText h3 {
+padding: 2px 2px;
+}
+.OfferCardText p {
+  /* margin-top: -13%; */
+  color: grey;
+  font-size: 1rem;
+}
+
+.OfferButton {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-left: 5%;
+  text-decoration: none !important;
+}
+.ArrowIcon {
+  margin-top: -2px;
+  margin-left: 1%;
+}
+/* End Dashborad */
+
+@media screen and (max-width: 992px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.2fr 3fr;
+    grid-template-areas:
+      "sidebar main"
+      "sidebar main";
+  }
+  .header {
+    justify-content: space-between;
+  }
+  /* margin: 20px; */
+}
+.Head h1 {
+  font-size: 1.3rem;
+}
+.Head p {
+  font-weight: 600;
+  color: grey;
+  margin-left: 1px;
+  margin-top: -14px;
+  font-size: 0.65rem;
+}
+/* End Dashborad */
+
+/* START OF USER  */
+
+.m20 {
+  margin: 30px;
+}
+.searchnfilter {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: left !important;
+}
+.searchnfilter button {
+  border-radius: 15px !important;
+  margin-left: 2%;
+  padding: 2px 14px;
+  border: 0.5px solid grey;
+  background-color: #ffffff;
+  font-size: large;
+  color: grey;
+  height: 6vh;
+  margin-top: 2%;
+}
+.searchBar {
+  height: 6vh;
+  background-color: #ffffff !important;
+  border:  solid 0px grey;
+}
+
+.filterButton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.filterIcon {
+  margin-right: 10px;
+}
+.completeTable {
+  height: 68vh !important;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 15px;
+  font-size: small;
+  margin-top: 2%;
+}
+.headingOfTable{
+  font-weight: bold;
+}
+.bluePara {
+  color: dodgerblue;
+  font-weight: bold;
+}
+.PhoneText{
+  color: grey !important;
+  font-size: 0.9rem !important;
+}
+.TableHover:hover{
+  cursor: pointer;
+}
+.parentTable .MuiTableCell-root {
+  border-bottom: 0px !important;
+}
+
+/* END OF USER  */
+
+/* START OF TRANSACTION  */
+
+
+
+.transactionCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 40px;
+  margin-top: 2%;
+}
+.boxNoOne{
+  display: flex;
+  flex-direction: row;
+  background-color: #ffffff;
+  border-radius: 15px !important;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3%;
+  box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.2)!important;
+}
+.boxValue {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgb(41, 41, 41);
+  margin-left: 4%;
+}
+.boxNumber {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #0075ff;
+  margin-right: 7%;
+}
+
+.transactionTableHeading {
+  text-align: left !important;
+}
+.transactionCompleteTable {
+  height: 95%;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 1%;
+  padding: 20px 35px;
+  font-size: small;
+  padding-bottom: 14%;
+  margin-top: 2%;
+}
+.courseName {
+  text-align: center !important;
+  align-items: center !important;
+}
+.greyboldnumbers {
+  color: grey;
+}
+.firstCourseName {
+  margin-left: 25%;
+}
+.transactionDate {
+  margin-left: 8%;
+}
+.transactionAmount {
+  margin-left: 5%;
+}
+
+/* END OF TRANSACTION  */
+
+/* START OF MY TEAM  */
+
+.myTeamCompleteTable {
+  height: 95%;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 1%;
+  padding: 20px 35px;
+  font-size: small;
+  padding-bottom: 6%;
+}
+.moreVertIcon button {
+  background-color: #ffffff !important;
+  color: darkgray !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.redDelete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: red !important;
+  padding: 6px 25px !important;
+  font-weight: 700 !important;
+}
+.Deleticon{
+  width: 30% !important;
+  margin-right: 25%;
+}
+.blueBlockUser {
+  color: rgb(68, 68, 187) !important;
+}
+
+/* END OF MY TEAM  */
+/* START OF TEST PORTAL  */
+
+.testPortalSearchBarSection {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between;
+}
+.freeTestButton {
+  color: dodgerblue;
+  border: none !important;
+}
+.addTestButton {
+  background-color: dodgerblue !important;
+  border-radius: 10px !important;
+  align-items: center !important;
+  margin-top: 22px !important;
+  border: none !important;
+  color: #ffffff !important;
+  width: 15% !important;
+  height: 42px !important;
+}
+.TestPortalcompleteTable {
+  height: 95%;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 1%;
+  padding: 20px 35px;
+  font-size: small;
+  padding-bottom: 13% !important;
+  margin-top: 2%;
+}
+.TestPortalhrLine {
+  width: 100%;
+}
+.lastData {
+  display: flex;
+  flex-direction: row;
+}
+.lastTableCell{
+  display: flex !important;
+  flex-direction: row !important;
+  border-spacing: 4%;
+  font-size: 1rem !important;
+}
+.lastValue{
+  font-size: 0.875rem !important;
+}
+.phNumber{
+  color: #0075ff;
+  border: 0.1px solid rgb(241 241 247);
+  background-color: rgb(241 241 247);
+  margin-left: 2% !important;
+  font-size: 0.875rem !important;
+}
+
+/* END OF TEST PORTAL  */
+
+/* START OF ADMIN TESTIMONIAL  */
+
+.addTestimonialButton {
+  background-color: dodgerblue;
+  border-radius: 10px !important;
+  border: none;
+  color: #ffffff;
+  padding: 0px 13px;
+  width: 160px;
+  margin-top: 22px;
+  height: 33px !important;
+}
+.testimonialCompleteTable {
+  height: 95%;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 1%;
+  padding: 20px 35px;
+  font-size: small;
+  margin-top: 2%;
+  padding-bottom: 21% !important;
+}
+.testPortalSearchBarSection{
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between;
+}
+
+/* END OF ADMIN TESTIMONIAL  */
+
+/* START OF COURSES CREATE COUPON  */
+
+.allTheContent {
+  background-color: #ffffff;
+  padding-bottom: 19% !important;
+  margin: 21px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.352) !important;
+}
+.discountTypediv {
+  padding: 20px 20px !important;
+}
+.flatDiscountDiv {
+  padding: 20px 20px !important;
+}
+.StartnEndDiv {
+  padding: 20px 20px !important;
+  margin: 18px 2px;
+  display: flex;
+  flex-direction: row;
+}
+.minOrderDiv {
+  padding: 20px 20px !important;
+}
+.asterisk {
+  color: red;
+}
+.inputFeildOne {
+  border: 0.5px solid grey;
+  padding: 8px 100px;
+  border-radius: 7px !important;
+  text-align: left !important;
+}
+.inputFeildTwo {
+  border-radius: 7px !important;
+  padding: 8px 197px;
+  border: 0.5px solid grey;
+  text-align: left !important;
+}
+.createButton {
+  background-color: rgb(73, 73, 227) !important;
+  border-radius: 7px !important;
+  color: #ffffff !important;
+  padding: 10px 10px;
+  margin-left: 2% !important;
+}
+
+/* END OF COURSES CREATE COUPON  */
+
+/* START OF COURSE->>TRICS 1 FREE MOCK TEST  */
+
+.another-main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.completeTricsBox {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 20px 30px;
+  border-radius: 10px !important;
+  width: 72%;
+}
+.leftSideRow {
+  width: 63% !important;
+}
+.blackPara {
+  font-weight: bold;
+}
+.greyPara {
+  color: grey !important;
+  font-size: smaller;
+}
+.PoPIcon{
+  margin-right: 10%;
+}
+.PricenOfferPrice {
+  display: flex;
+  flex-direction: row;
+}
+.offerPrice {
+  margin-left: 37%;
+}
+.CatagorynSubCatagory {
+  display: flex;
+  flex-direction: row;
+}
+.subCatagory {
+  margin-left: 34%;
+}
+.StuEnrViewAll {
+  display: flex;
+  flex-direction: row;
+}
+.rightSideRow {
+  width: 262px;
+  height: 33%;
+  padding: 10px 10px;
+  background-color: white;
+  border-radius: 23px;
+}
+.Today{
+  background-color: #ffffff !important;
+}
+.blueViewAll {
+  margin-top: 3%;
+  color: dodgerblue;
+  margin-left: 2%;
+}
+.whiteBoxOfContent {
+  background-color: #ffffff;
+  width: 21%;
+  height: 22vh;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.contentOneContent {
+  display: flex;
+  flex-direction: row;
+  border: solid 1px rgba(128, 128, 128, 0.329);
+  padding: 0px 22px;
+  margin: 4%;
+  border-radius: 7px !important;
+}
+.folderIcon {
+  color: dodgerblue;
+  margin-top: 12% !important;
+  background-color: rgba(72, 113, 146, 0.594);
+  border-radius: 50%;
+  width: 100%;
+}
+.ContentCol {
+  margin-left: 10px;
+}
+.mt-10px {
+  margin-top: -12px;
+}
+
+
+.catagorytextofTrics {
+  width: 92% !important;
+  display: flex !important;
+  flex-direction: row !important;
+  background-color: #ffffff !important;
+  color: dodgerblue !important;
+  border-radius: 7px !important;
+  border: 1px solid dodgerblue !important;
+  box-shadow: none !important;
+  padding: 10px 30px !important;
+  height: 5vh;
+  margin: 4% !important;
+  margin-top: 8% !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+}
+
+/* END OF COURSE->>TRICS 1 FREE MOCK TEST  */
+
+.DropDown {
+  padding: 6px 0px;
+  width: 15%;
+  height: 0%;
+  border-radius: 9px;
+  margin-top: 13px;
+  border: solid white;
+  font-size: 1rem;
+}
+.AdditionalBox {
+  background-color: white;
+  border-radius: 15px;
+}
+
+.menu-icon {
+  display: inline;
+}
+.main-cards {
+  grid-template-columns: 1fr 1fr;
+}
+
+@media screen and (max-width: 562px) {
+  .main-cards {
+    grid-template-columns: 1fr;
+  }
+  .Offer-main-cards {
+    grid-template-columns: 1fr;
+  }
+  .transactionCards {
+    grid-template-columns: 1fr;
+  }
+}

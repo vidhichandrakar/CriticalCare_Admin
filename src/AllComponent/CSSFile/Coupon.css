@@ -1,0 +1,86 @@
+.radioButtonForm{
+  margin-top: 3%;
+  width:100%;
+}
+.scndRadioBtn{
+  margin-left:  30%;
+  
+}
+.radio-icon{
+  color:rgb(132, 189, 246);
+}
+.couponHedaerBox{
+  display: flex !important;
+  flex-direction: row !important;
+  width:100%;
+  padding-bottom: 1%;
+  border-bottom: 3px solid #b5abab !important;
+  /* background-color: red; */
+
+}
+.couponButton{
+  width:200px !important;
+  background-color:#0f7af5 !important;
+  text-transform: none !important;
+  margin-left: 12%;
+}
+.couponHeaderButton{
+  margin-left: 72%;
+  margin-top: 2% !important;
+}
+.couponHeaderText{
+  margin-top: 4% !important;
+  color: #998e8e  !important;
+  font-size: 0.9em !important;
+  font-weight: 550 !important;
+}
+.couponLeftBox{
+  width:30%;
+  display: block;
+  margin: auto;
+  padding: 2%;
+  text-align: center;
+}
+.couponRightBox{
+  width:90%;
+  margin-left: 3%;
+  /* background-color: red; */
+  color: #998e8e;
+  font-size: 1.15em !important;
+}
+.couponLastBox{
+ width:13%;
+ justify-content: center;
+ display: flex;
+ margin: auto;
+ color: #998e8e;
+}
+.verticalDivider{
+  background-color: #beb4b4;
+  width: 3px;
+  height:150px;
+}
+.courseMainCoupon{
+  background-color: #fff !important;
+  border-radius: 15px;
+  width:100% !important;
+  display: flex;
+  
+  margin-top: 2%;
+  flex-direction: column;
+}
+.formMainCoupon{
+  padding: 1%;
+  width:100%;
+}
+.yellowBox{
+  background-color: rgb(246, 241, 231);
+  height: 26px;
+  width: 80%;
+  border: 2px dashed rgb(251, 207, 103);
+  align-items: center;
+  display: block;
+  margin: auto;
+  text-align: center;
+  margin-top: 2%;
+}
