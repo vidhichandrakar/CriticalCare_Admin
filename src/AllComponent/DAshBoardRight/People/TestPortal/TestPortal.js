@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import CourseHeader from "../../Courses/CoursesHeader";
+import CourseHeader from "../../../Courses/CoursesHeader";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Paper from "@mui/material/Paper";
@@ -9,12 +9,32 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import SearchBar from "../../../Util/SearchBar";
+import SearchBar from "../../../../Util/SearchBar";
 import Popover from "@mui/material/Popover";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import SideBar from "../../AdminDashboardMain/SideBar";
+import SideBar from "../../../AdminDashboardMain/SideBar";
+import { Link } from "react-router-dom";
+import {Box, TextField } from "@mui/material";
+// import Button from '@mui/material/Button';
+import { styled } from '@mui/material/styles';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+// import Typography from '@mui/material/Typography';
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  '& .MuiDialogContent-root': {
+    padding: theme.spacing(2),
+  },
+  '& .MuiDialogActions-root': {
+    padding: theme.spacing(1),
+  },
+}));
 
 const TestPortal = () => {
   const [page, setPage] = useState(0);
@@ -138,6 +158,15 @@ const TestPortal = () => {
   };
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+
+  const [opened, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleCloseDialog = () => {
+    setOpen(false);
+  };
   return (
     <div className='grid-container'>
       <SideBar />
@@ -156,7 +185,75 @@ const TestPortal = () => {
               <FilterAltIcon /> Filter
             </Button>
           </div>
-          <Button className="addTestButton"> + Add Test </Button>
+          <Button >  </Button>
+          <React.Fragment>
+        <Button variant="outlined" className="addTestButton" onClick={handleClickOpen}>
+        + Add Test
+        </Button>
+        <BootstrapDialog
+        className="PopUP"
+          onClose={handleCloseDialog}
+          aria-labelledby="customized-dialog-title"
+          open={opened}
+        >
+          <DialogTitle sx={{ m: 0, p: 2, fontSize: "1rem" }} id="customized-dialog-title">
+          Create New Test
+          </DialogTitle>
+          <IconButton
+            aria-label="close"
+            onClick={handleCloseDialog}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+         
+          <DialogContent dividers>
+            <Typography gutterBottom >
+             Test Name
+            </Typography>
+            <TextField
+        inputProps={{ className: "textField" }}
+        fullWidth
+        size="small"
+        placeholder="e.g. General Knowledge"
+        id="fullWidth"
+        className="BoxShadowInputField"
+        />
+            <Typography gutterBottom sx={{mt: 2}}>
+              Test Duration
+            </Typography>
+            <Box className="FlexRow" sx={{mt: -1}}>
+            <Typography className="FlexRow"><TextField
+        inputProps={{ className: "textField" }}
+        fullWidth
+        size="small"
+        placeholder="0"
+        id="fullWidth"
+        className="BoxShadowInputField"
+         /><p className="TimeText"> Hour </p>
+        </Typography>
+            <Typography className="FlexRow">
+              <TextField
+        inputProps={{ className: "textField" }}
+        fullWidth
+        size="small"
+        placeholder="0"
+        id="fullWidth"
+        className="BoxShadowInputField"
+        sx={{ml: 4}}
+         /> <p className="TimeText" >Minute</p></Typography>
+            </Box>
+          </DialogContent>
+          <DialogActions>
+          <Button variant="contained" className="CreateBtn">Create</Button>
+          </DialogActions>
+        </BootstrapDialog>
+        </React.Fragment>
         </div>
         <Paper
           sx={{ width: "100%", overflow: "hidden" }}

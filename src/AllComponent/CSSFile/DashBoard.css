@@ -67,7 +67,10 @@ body {
 .sidebar-title > span {
   display: none;
 }
-
+.textDecoration{
+  text-decoration: none !important;
+  color: rgba(17, 16, 16, 0.662);
+}
 .sidebar-brand {
   margin-top: 15px;
   font-size: 20px;
@@ -453,6 +456,19 @@ padding: 2px 2px;
   flex-direction: row !important;
   justify-content: space-between;
 }
+.mt-3{
+  margin-top: 100px !important;
+}
+.TimeText{
+margin-left: 10px !important;
+}
+
+.FlexRow{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
 .freeTestButton {
   color: dodgerblue;
   border: none !important;
@@ -500,7 +516,25 @@ padding: 2px 2px;
   margin-left: 2% !important;
   font-size: 0.875rem !important;
 }
+.BoxShadowInputField{
+  box-shadow: 1px 1px 5px 1px #d1d0d0 !important;
+    text-align: center !important;
+    border-radius: 10px !important;
+    font-size: 0.7rem !important;
+    margin-top: 0px !important;
+}
+.PopUP .MuiDialog-paper{
+  border-radius: 10px !important;
+}
+.CreateBtn{
+  padding: 5px 25px !important;
+  margin: 20px !important;
+  margin-right: 40% !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
 
+}
 /* END OF TEST PORTAL  */
 
 /* START OF ADMIN TESTIMONIAL  */
