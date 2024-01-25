@@ -153,7 +153,7 @@ const MyTeam = () => {
         <CourseHeader Heading={"My Team (5)"} subHeading={"View, Filter & Manage all your users"} />
         <div className="searchnfilter">
         <SearchBar mt = "2%" placeholder="Search by name"/>
-          <Button>
+          <Button className="filterButton">
             <FilterAltIcon /> Filter
           </Button>
         </div>
@@ -222,8 +222,8 @@ const MyTeam = () => {
                   horizontal: "right",
                 }}
               >
-                <Typography sx={{ p: 1 }} className="redDelete"> <DeleteIcon/> Delete </Typography>
-                <Typography sx={{ p: 1 }} className="blueBlockUser"> <BlockIcon/> Block User</Typography>
+                <Typography  className="redDelete"> <DeleteIcon/> Delete </Typography>
+                <Typography  className="blueBlockUser"> <BlockIcon/> Block User</Typography>
               </Popover>
             </TableBody>
           </Table>
