@@ -79,27 +79,27 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                 vertical: "bottom",
                 horizontal: "left",
               }}
-              sx={{ ml: 20 }}
+              sx={{ ml: 20, mt: -3 }}
             >
-              <Link to="/YourCourses">
+              <Link to="/YourCourses" className="textDecoration" >
                 {" "}
-                <Typography sx={{ p: 1, textDecoration: "none",textDecorationLine: 'none', color: 'greys' }}>
+                <Typography className="textDecoration" sx={{ p: 1, textDecoration: "none",textDecorationLine: 'none', color: 'greys' }}>
                   My Courses
                 </Typography>
               </Link>
-              <Link to="/CreateCoupon">
+              <Link to="/CreateCoupon" className="textDecoration" >
                 {" "}
                 <Typography sx={{ p: 1, textDecoration: "none" }}>
                   Manage Coupons
                 </Typography>
-              </Link>
-              <Link to="/User">
+              </Link >
+              <Link to="/User" className="textDecoration" >
                 {" "}
                 <Typography sx={{ p: 1, textDecoration: "none" }}>
                   Category / Sub Catoggry
                 </Typography>
               </Link>
-              <Link to="/UpcomingCoursesMain">
+              <Link to="/UpcomingCoursesMain" className="textDecoration" >
                 {" "}
                 <Typography sx={{ p: 1, textDecoration: "none" }}>
                   Upcoming Course / Blogs{" "}
@@ -156,15 +156,15 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                 vertical: "bottom",
                 horizontal: "left",
               }}
-              sx={{ ml: 15 }}
+              sx={{ ml: 20, mt: -3 }}
             >
-              <Link to="/User">
+              <Link to="/User" className="textDecoration" >
                 {" "}
                 <Typography sx={{ p: 1, textDecoration: "none" }}>
                   User
                 </Typography>
               </Link>
-              <Link to="/MyTeam">
+              <Link to="/MyTeam" className="textDecoration" >
                 {" "}
                 <Typography sx={{ p: 1 }}>My Team</Typography>
               </Link>
