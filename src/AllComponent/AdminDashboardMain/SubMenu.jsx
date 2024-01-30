@@ -53,7 +53,7 @@ function SimpleMenu() {
         aria-haspopup="true"
         onClick={handleClick}
         onMouseOver={handleClick}
-        // onMouseLeave={handleCloseHover}
+        onMouseLeave={handleCloseHover}
       >
         <MenuBookIcon className="icon" />
         Courses
@@ -70,7 +70,7 @@ function SimpleMenu() {
         }}
         getContentAnchorEl={null}
         anchorOrigin={{ horizontal: "left", vertical: "top" }}
-        sx={{ ml: "10%", mt: "1%" }}
+        // sx={{ ml: "10%", mt: "1%" }}
       >
          <Link to="/YourCourses" className="textDecoration">
             {" "}
