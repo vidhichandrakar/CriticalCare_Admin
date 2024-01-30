@@ -17,7 +17,6 @@ import Button from "@mui/material/Button";
 import SideBar from "../../../AdminDashboardMain/SideBar";
 import { Link } from "react-router-dom";
 import {Box, TextField } from "@mui/material";
-// import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -25,7 +24,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-// import Typography from '@mui/material/Typography';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -328,8 +326,8 @@ const TestPortal = () => {
                   }}
                   sx={{ml:-12}}
                 >   
-                  <Typography className="redDelete">
-                    <DeleteIcon className="Deleticon" /> Delete
+                  <Typography className="redDeleteofTestPortal">
+                    <DeleteIcon/> Delete
                   </Typography>
                 </Popover>
                 

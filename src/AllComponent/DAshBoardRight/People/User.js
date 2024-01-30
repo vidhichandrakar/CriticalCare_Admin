@@ -15,7 +15,9 @@ import SearchBar from "../../../Util/SearchBar";
 import Popover from "@mui/material/Popover";
 import CourseHeader from "../../Courses/CoursesHeader";
 import SideBar from "../../AdminDashboardMain/SideBar";
-import {columns} from "../../../Data/JsonData"
+import {columns} from "../../../Data/JsonData";
+import BlockIcon from '@mui/icons-material/Block';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const User = () => {
   const [page, setPage] = React.useState(0);
@@ -203,7 +205,7 @@ const User = () => {
       />
 
       <div className="searchnfilter">
-        <SearchBar mt = "2%" />
+        <SearchBar mt = "2%" placeholder="Search by name" />
         <Button className="filterButton">
           <FilterAltIcon className="filterIcon" /> Filter
         </Button>
@@ -276,9 +278,8 @@ const User = () => {
                   horizontal: "right",
                 }}
               >
-                <Typography sx={{ p: 1 }}>{openData.full_name}</Typography>
-                <Typography sx={{ p: 1 }}>Edit </Typography>
-                <Typography sx={{ p: 1 }}>Delete</Typography>
+                 <Typography  className="redDelete"> <DeleteIcon/> Delete </Typography>
+                <Typography  className="blueBlockUser"> <BlockIcon/> Block User</Typography>
               </Popover>
             </TableBody>
           </Table>
