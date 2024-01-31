@@ -273,7 +273,12 @@
 .checkboxDesign .MuiTypography-root{
   font-size: 0.85em !important;
   font-weight: 600 !important;
+  
 }
 .checkbox-icon{
   font-weight: 300 !important;
+  border: solid black 1px !important;
+}
+.formikValidaionRedBorder{
+  color: red;
 }

@@ -1,11 +1,19 @@
 import { Box, Typography, TextField, Button } from "@mui/material";
 import React from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 import UploadIcon from "@mui/icons-material/Upload";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { CommonTypography, commonButton, commonTextField } from "../../Util/CommonFields";
+import { commmonNameDescriptionSchema } from "../ValidationSchema/UpcomingCoursesBoxSchema";
+import {
+  CommonTypography,
+  commonButton,
+  commonTextField,
+} from "../../Util/CommonFields";
+import { Formik, Field, useFormik, ErrorMessage, Form } from "formik";
+import "../CSSFile/Courses.css";
+
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
   clipPath: "inset(50%)",
@@ -20,7 +28,7 @@ const VisuallyHiddenInput = styled("input")({
 const BpIcon = styled("span")(({ theme }) => ({
   borderRadius: 3,
   width: 16,
-  height: 16,  
+  height: 16,
 }));
 
 const BpCheckedIcon = styled(BpIcon)({
@@ -43,95 +51,155 @@ const BpCheckedIcon = styled(BpIcon)({
 });
 
 const UpcomingCourseBox = ({}) => {
+  const formik = useFormik({
+    initialValues: {
+      courseDescription: "here is",
+      courseName: "Rajdeepak",
+      fileUploadType: null,
+    },
+    validationSchema: commmonNameDescriptionSchema,
+    onSubmit:(value)=>{
+      console.log("valus=====>/", value);
+    }
+  });
+
   return (
-    <Box className="courseMainTrack">
-      <div className="formMainUpcoming">
-        {CommonTypography({ fontWeight: 600, label: "Name" })}
-        {commonTextField({
-          id: "fullWidth",
-          className: "BoxShadow",
-          inputClassName: "textField",
-          labels: "Enter course name",
-        })}
-        {CommonTypography({
-          fontWeight: 600,
-          label: "Description",
-          sx: { marginTop: "3%" },
-        })}
-        <TextField
-          inputProps={{ className: "textField" }}
-          fullWidth
-          id="outlined-multiline-static"
-          multiline
-          rows={4}
-          placeholder="Enter course description here"
-          className="BoxShadowUpcoming"
-          // onChange={(event) => handleTextChange("emailId", event.target.value)}
-        />
+    <>
+      <Formik>
+        <form>
+          <Box className="courseMainTrack">
+            {console.log("formik==>", formik)}
+            <div className="formMainUpcoming">
+              {CommonTypography({ fontWeight: 600, label: "Name" })}
+              {/* <TextField */}
+              {commonTextField(
+                {
+                  id: "fullWidth",
+                  className: "BoxShadow",
+                  inputClassName: "textField",
+                  labels: "Enter course name",
+                },
+                (Option = {
+                  formik: { formik },
+                  name: "courseName",
+                  value: formik.values.courseName,
+                })
+              )}
 
-        {CommonTypography({
-          fontWeight: 600,
-          label: " Add Thumbnail",
-          sx: { marginTop: "3%" },
-        })}
-        <Box className="thumbnailUpload">
-          <Button
-            component="label"
-            variant="outlined"
-            startIcon={<UploadIcon className="iconThumbicon" />}
-            className="iconThumb"
-          >
-            Upload Thumbnail Image
-            <VisuallyHiddenInput type="file" />
-          </Button>
-          <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
-            Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
-          </Typography>
-        </Box>
-        <Box className="divider-upcoming"></Box>
+              <br />
+              {formik.touched.courseName && formik.errors.courseName && (
+                <span className="formikValidaionRedBorder">
+                  {formik.errors.courseName}
+                </span>
+              )}
 
-        {CommonTypography({
-          fontWeight: 600,
-          label: "Choose Section",
-          sx: { marginTop: "3%" },
-        })}
-        <FormGroup sx={{ marginLeft: "5px", marginTop: "1%" }}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                sx={{
-                  "&:hover": { bgcolor: "transparent" },
-                }}
-                disableRipple
-                color="default"
-                checkedIcon={<BpCheckedIcon />}
-                icon={<BpIcon />}
-                inputProps={{ "aria-label": "Checkbox demo" }}
+              {CommonTypography({
+                fontWeight: 600,
+                label: "Description",
+                sx: { marginTop: "3%" },
+              })}
+
+              <TextField
+                inputProps={{ className: "textField" }}
+                fullWidth
+                id="outlined-multiline-static"
+                multiline
+                rows={4}
+                placeholder="Enter course description here"
+                className="BoxShadowUpcoming"
+                name="courseDescription"
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                value={formik.values.courseDescription}
+                // onChange={(event) => handleTextChange("emailId", event.target.value)}
               />
-            }
-            label="Blogs"
-            className="checkboxDesign"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                sx={{
-                  "&:hover": { bgcolor: "transparent" },
-                }}
-                disableRipple
-                color="default"
-                checkedIcon={<BpCheckedIcon />}
-                icon={<BpIcon />}
-                inputProps={{ "aria-label": "Checkbox demo" }}
-              />
-            }
-            label="Upcoming Courses"
-            className="checkboxDesign"
-          />
-        </FormGroup>
-        {commonButton({handleTrackerPage:()=>{},className:"coursesButton",label:"Post"})}
-      </div>
-    </Box>
+
+              {formik.touched.courseDescription &&
+                formik.errors.courseDescription && (
+                  <span className="formikValidaionRedBorder">
+                    {formik.errors.courseDescription}
+                  </span>
+                )}
+
+              {CommonTypography({
+                fontWeight: 600,
+                label: " Add Thumbnail",
+                sx: { marginTop: "3%" },
+              })}
+              <Box className="thumbnailUpload">
+                <Button
+                  component="label"
+                  variant="outlined"
+                  startIcon={<UploadIcon className="iconThumbicon" />}
+                  className="iconThumb"
+                >
+                  Upload Thumbnail Image
+                  <VisuallyHiddenInput
+                    type="file"
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    name="fileUploadType"
+                    value={formik.values.fileUploadType}
+                    accept=".jpg, .png,"
+                  />
+                </Button>
+                <Typography>updlod{formik.values.fileUploadType}</Typography>
+                <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
+                  Recommended Image size :{" "}
+                  <b>800px x 600px, PNG or JPEG file</b>
+                </Typography>
+              </Box>
+              <Box className="divider-upcoming"></Box>
+
+              {CommonTypography({
+                fontWeight: 600,
+                label: "Choose Section",
+                sx: { marginTop: "3%" },
+              })}
+              <FormGroup sx={{ marginLeft: "5px", marginTop: "1%" }}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      sx={{
+                        "&:hover": { bgcolor: "transparent" },
+                      }}
+                      disableRipple
+                      color="default"
+                      checkedIcon={<BpCheckedIcon />}
+                      icon={<BpIcon />}
+                      inputProps={{ "aria-label": "Checkbox demo" }}
+                    />
+                  }
+                  label="Blogs"
+                  className="checkboxDesign"
+                />
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      sx={{
+                        "&:hover": { bgcolor: "transparent" },
+                      }}
+                      disableRipple
+                      color="default"
+                      checkedIcon={<BpCheckedIcon />}
+                      icon={<BpIcon />}
+                      inputProps={{ "aria-label": "Checkbox demo" }}
+                    />
+                  }
+                  label="Upcoming Courses"
+                  className="checkboxDesign"
+                />
+              </FormGroup>
+              {commonButton({
+                handleTrackerPage: () => {},
+                className: "coursesButton",
+                label: "Post",
+              })}
+            </div>
+          </Box>
+        </form>
+      </Formik>
+    </>
   );
 };
 export default UpcomingCourseBox;

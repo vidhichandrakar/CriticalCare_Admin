@@ -1,12 +1,15 @@
 import { Box, Typography, TextField } from "@mui/material";
 import React from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 import Button from "@mui/material/Button";
 import UploadIcon from "@mui/icons-material/Upload";
 import MenuItem from "@mui/material/MenuItem";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { Formik, Field, useFormik, ErrorMessage, Form } from "formik";
+import {commmonNameDescriptionSchema} from "../ValidationSchema/UpcomingCoursesBoxSchema";
+import "../CSSFile/Courses.css";
 import {
   CommonTypography,
   commonButton,
@@ -25,15 +28,50 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 const CreateForm = ({ handleTrackerPage }) => {
+  const formik = useFormik({
+    initialValues: {
+      courseDescription: "here is",
+      courseName: "Rajdeepak",
+      fileUploadType: null,
+      SelectCategory:null
+    },
+    validationSchema: commmonNameDescriptionSchema,
+    onSubmit:(value)=>{
+      console.log("valus=====>/", value);
+    }
+  });
+
+  const handleEditPrice=()=>{
+    // handleTrackerPage(1);
+    console.log("formik.values.courseDescription",formik.values.courseDescription)
+    if(formik.values.courseDescription && formik.values.courseName){
+      console.log("jjkjn ");
+    }
+
+
+  }
+
   return (
     <div className="formMain">
       {CommonTypography({ fontWeight: 600, label: "Name" })}
-      {commonTextField({
-        id: "fullWidth",
-        className: "BoxShadow",
-        inputClassName: "textField",
-        labels: "Enter course name",
-      })}
+      {commonTextField(
+        {
+          id: "fullWidth",
+          className: "BoxShadow",
+          inputClassName: "textField",
+          labels: "Enter course name",
+        },
+        (Option = {
+          formik: { formik },
+          name: "courseName",
+          value: formik.values.courseName,
+        })
+      )}
+      {formik.touched.courseName && formik.errors.courseName && (
+        <span className="formikValidaionRedBorder">
+          {formik.errors.courseName}
+        </span>
+      )}
       {CommonTypography({
         fontWeight: 600,
         sx: { marginTop: "5%" },
@@ -47,8 +85,17 @@ const CreateForm = ({ handleTrackerPage }) => {
         rows={4}
         placeholder="Enter course description area"
         className="BoxShadow"
+        name="courseDescription"
+        onBlur={formik.handleBlur}
+        onChange={formik.handleChange}
+        value={formik.values.courseDescription}
         // onChange={(event) => handleTextChange("emailId", event.target.value)}
       />
+      {formik.touched.courseDescription && formik.errors.courseDescription && (
+        <span className="formikValidaionRedBorder">
+          {formik.errors.courseDescription}
+        </span>
+      )}
       {CommonTypography({
         fontWeight: 600,
         sx: { marginTop: "5%" },
@@ -63,8 +110,16 @@ const CreateForm = ({ handleTrackerPage }) => {
           className="iconThumb"
         >
           Upload Thumbnail Image
-          <VisuallyHiddenInput type="file" />
+          <VisuallyHiddenInput
+            type="file"
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+            name="fileUploadType"
+            value={formik.values.fileUploadType}
+            accept=".jpg, .png,"
+          />
         </Button>
+        <Typography>updlod{formik.values.fileUploadType}</Typography>
         <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
           Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
         </Typography>
@@ -88,9 +143,20 @@ const CreateForm = ({ handleTrackerPage }) => {
                 { id: 3, label: "Option 3" },
               ],
               className: "categorytext",
-            })}
+            },
+            (Option = {
+              formik: { formik },
+              name: "SelectCategory",
+              // value: formik.values.SelectCategory,
+            })
+            )}
           </FormControl>
         </Box>
+        {/* {formik.touched.SelectCategory && formik.errors.SelectCategory && (
+        <span className="formikValidaionRedBorder">
+          {formik.errors.SelectCategory}
+        </span>
+      )} */}
         <Box className="rightCat">
           {CommonTypography(
             { fontWeight: 600, label: "Sub Category" },
@@ -111,8 +177,10 @@ const CreateForm = ({ handleTrackerPage }) => {
           </FormControl>
         </Box>
       </Box>
+
+      
       {commonButton({
-        handleTrackerPage: () => handleTrackerPage(1),
+        handleTrackerPage: () => handleEditPrice(),
         className: "coursesButton",
         label: "Edit price",
       })}
