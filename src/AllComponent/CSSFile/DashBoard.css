@@ -318,12 +318,13 @@ padding: 2px 2px;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  text-transform: none !important;
 }
 .filterIcon {
   margin-right: 10px;
 }
 .completeTable {
-  height: 68vh !important;
+  height: 65vh !important;
   width: 100%;
   background-color: #ffffff;
   border-radius: 15px;
@@ -433,12 +434,12 @@ padding: 2px 2px;
   box-shadow: none !important;
 }
 .redDelete {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  /* display: flex; */
+  /* align-items: center; */
+  /* justify-content: center; */
   color: red !important;
-  padding: 6px 25px !important;
-  font-weight: 700 !important;
+  /* padding: 6px 25px !important; */
+  /* font-weight: 700 !important; */
 }
 .Deleticon{
   width: 30% !important;
@@ -532,7 +533,10 @@ margin-left: 10px !important;
   font-size: 0.8rem !important;
   font-weight: 600 !important;
   text-transform: none !important;
-
+}
+.redDeleteofTestPortal{
+  color: red !important;
+  padding: 2px 20px;
 }
 /* END OF TEST PORTAL  */
 

@@ -9,48 +9,55 @@ import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
 import PersonIcon from "@mui/icons-material/Person";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
-import {
-  Dropdown,
-  DropdownMenuItem,
-  DropdownNestedMenuItem,
-} from "./HoverOpenSideBar/NestedDropdown";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+// import { Button } from "@mui/material";
+// import makeStyles from "@mui/material/styles/makeStyles";
+import SimpleMenu from "./SubMenu";
 
-import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import makeStyles from "@material-ui/styles/makeStyles";
-
-const theme = createTheme({
-  palette: {
-    ochre: {
-      main: "#000",
-      light: "#E9DB5D",
-      dark: "#A29415",
-      contrastText: "#242105",
-    },
-    fonts: {
-      fontWeight: 600,
-    },
-  },
-});
-const useStyles = makeStyles({
-  popOverRoot: {
-    pointerEvents: "none"
-  }
-});
-
+// const useStyles = makeStyles({
+//   popOverRoot: {
+//     pointerEvents: "none"
+//   }
+// });
 function SideBar({ openSidebarToggle, OpenSidebar }) {
-  // const [anchorEl, setAnchorEl] = React.useState(null);
-  const [anchorE2, setAnchorE2] = React.useState(false);
-  let currentlyHovering = false;
-  const styles = useStyles();
-
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorE2, setAnchorE2] = React.useState(null);
+  // const styles = useStyles();
+  const handlePopoverOpen = (event) => {
+    setAnchorE2(event.currentTarget);
+  };
 
-  function handleClick(event) {
-    if (anchorEl !== event.currentTarget) {
-      setAnchorEl(event.currentTarget);
+  const handlePopoverClose = () => {
+    setAnchorE2(null);
+  };
+
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+    console.log(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+
+
+  const handleClick2 = (event) => {
+    setAnchorE2(event.currentTarget);
+  };
+  const handleClose2 = () => {
+    setAnchorE2(null);
+  };
+  const opens = Boolean(anchorE2);
+  const ids = opens ? "simple-popover" : undefined;
+  let currentlyHovering = false;
+  // const styles = useStyles();
+
+  function handleClickNew(event) {
+    if (anchorE2 !== event.currentTarget) {
+      setAnchorE2(event.currentTarget);
     }
   }
 
@@ -58,46 +65,18 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
     currentlyHovering = true;
   }
 
-  function handleClose() {
-    setAnchorEl(null);
+  function handleCloseNew() {
+    setAnchorE2(null);
   }
 
   function handleCloseHover() {
     currentlyHovering = false;
     setTimeout(() => {
       if (!currentlyHovering) {
-        handleClose();
+        handleCloseNew();
       }
     }, 50);
   }
-
-  // const handleClick = (event) => {
-  //   setAnchorEl(event.currentTarget);
-  //   console.log(event.currentTarget);
-  // };
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
-  // const open = Boolean(anchorEl);
-  // const id = open ? "simple-popover" : undefined;
-
-  // const handlePopoverOpen = (event) => {
-  //   setAnchorE2(event.currentTarget);
-  // };
-
-  // const handlePopoverClose = () => {
-  //   setAnchorE2(null);
-  // };
-
-  // const handleClick2 = (event) => {
-  //   setAnchorE2(event.currentTarget);
-  // };
-  // const handleClose2 = () => {
-  //   setAnchorE2(null);
-  // };
-  // const opens = Boolean(anchorE2);
-  // const ids = opens ? "simple-popover" : undefined;
-
   return (
     <aside
       id="sidebar"
@@ -115,46 +94,91 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
 
         <div className="sidebar-list sidebar-list-item BottomLine">
           <Link to="/">
-            <Typography className="hoverrr" sx={{ mt: -2 }}>
+            <Typography
+              className="hoverrr"
+              sx={{ mt: -2 }}
+            >
               <DashboardIcon className="icon" />
               DashBoard
             </Typography>
           </Link>
 
           <Link>
-            <div>
+          <SimpleMenu/>
+          {/* <div>
               <Typography
-              // onClick={handleClick2}
-              // className="hoverrr"
-              // sx={{ mt: -2 }}
-              // aria-owns={opens ? 'mouse-over-popover' : undefined}
-              // aria-haspopup="true"
-              // onMouseOver={handlePopoverOpen}
-              // onMouseOut={handlePopoverClose}
+                className="hoverrr"
+                // sx={{ mt: -2 }}
+
+                aria-owns={anchorE2 ? "simple-menu" : undefined}
+                aria-haspopup="true"
+                onClick={handleClickNew}
+                onMouseOver={handleClickNew}
+                onMouseLeave={handleCloseHover}
               >
-                {/* <MenuBookIcon className="icon" />
-              Courses */}
+                <MenuBookIcon className="icon" />
+                Courses
               </Typography>
-              {/* <Popover
-              id="mouse-over-popover"
-              sx={{
-                pointerEvents: 'none',ml: 20, mt: -3 
-              }}
+              <Menu
+                id="simple-menu"
+                anchorEl={anchorE2}
+                open={Boolean(anchorE2)}
+                onClose={handleCloseNew}
+                MenuListProps={{
+                  onMouseEnter: handleHover,
+                  onMouseLeave: handleCloseHover,
+                  style: { pointerEvents: "auto" }
+                }}
+                getContentAnchorEl={null}
+                PopoverClasses={{
+                  root: styles.popOverRoot
+                }}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                sx={{ marginLeft: "8%" }}
+              >
+                <MenuItem onClick={() => console.log("enter")}>Profile</MenuItem>
+                <MenuItem onClick={handleCloseNew}>My account</MenuItem>
+                <MenuItem onClick={handleClose}>Logout</MenuItem>
+              </Menu>
+    </div> */}
+          {/* <div  aria-owns={opens ? 'mouse-over-popover' : undefined}
+                aria-haspopup="true"
+                onMouseEnter={handlePopoverOpen}
+                onMouseLeave={handlePopoverClose}>
+            {console.log("opens",opens , anchorE2)}
+              <Typography
+                className="hoverrr"
+                sx={{ mt: -2 }}
+               
+              >
+              <MenuBookIcon className="icon" />
+              Courses
+            </Typography>
+            <Popover
+             id="mouse-over-popover"
+             sx={{
+               pointerEvents: 'none',
+               ml: 20, mt: -3 
+             }}
               open={opens}
               anchorEl={anchorE2}
+              onClose={handlePopoverClose}
               anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
+                vertical: "bottom",
+                horizontal: "left",
               }}
+              onMouseEnter={handlePopoverOpen}
               transformOrigin={{
                 vertical: 'top',
                 horizontal: 'left',
               }}
-              onRequestClose={handlePopoverClose}
-              // disableRestoreFocus
-              aria-hidden={!opens}
-              elevation={8}
-              // onOpen={handlePopoverOpen}
             >
               <Link to="/YourCourses" className="textDecoration" >
                 {" "}
@@ -180,53 +204,43 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                   Upcoming Course / Blogs{" "}
                 </Typography>
               </Link>
-            </Popover> */}
-              {/* <ThemeProvider theme={theme}>
-              <DropdownNestedMenuItem
-            label="Courses"
-            rightIcon={<MenuBookIcon />}
-            menu={[
-              <DropdownMenuItem onClick={() => {}}>
-                Top Long Course
-              </DropdownMenuItem>,
-              <DropdownMenuItem onClick={() => {}}>
-                Top Short Course
-              </DropdownMenuItem>,
-              <DropdownMenuItem onClick={() => {}}>
-                Top Crash Course
-              </DropdownMenuItem>,
-            ]}
-          >
-
-          </DropdownNestedMenuItem>
-            </ThemeProvider> */}
-            </div>
+            </Popover>
+            </div> */}
           </Link>
 
           <Link to="/TestPortal">
-            <Typography className="hoverrr" sx={{ mt: -2 }}>
+            <Typography
+              className="hoverrr"
+              sx={{ mt: -2 }}
+            >
               <AssignmentIcon className="icon" />
               Test Portal
             </Typography>
           </Link>
 
           <Link to="/">
-            <Typography className="hoverrr" sx={{ mt: -2 }}>
+            <Typography
+              className="hoverrr"
+              sx={{ mt: -2 }}
+            >
               <ForumIcon className="icon" />
               Chats
             </Typography>
           </Link>
 
           <Link to="/Analytics">
-            <Typography className="hoverrr" sx={{ mt: -2 }}>
+            <Typography             
+              className="hoverrr"
+              sx={{ mt: -2 }}
+            >
               <SignalCellularAltIcon className="icon" />
               Analytics
             </Typography>
           </Link>
 
-          {/* <Link>
+          <Link>
             <Typography
-              onClick={handleClick}
+               onClick={handleClick} 
               className="hoverrr"
               sx={{ mt: -2 }}
             >
@@ -243,69 +257,31 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               }}
               sx={{ ml: 20, mt: -3 }}
             >
-              <Link to="/User" className="textDecoration">
+              <Link to="/User" className="textDecoration" >
                 {" "}
                 <Typography sx={{ p: 1, textDecoration: "none" }}>
                   User
                 </Typography>
               </Link>
-              <Link to="/MyTeam" className="textDecoration">
+              <Link to="/MyTeam" className="textDecoration" >
                 {" "}
                 <Typography sx={{ p: 1 }}>My Team</Typography>
               </Link>
             </Popover>
-          </Link> */}
+          </Link>
 
           <Link to="/Testimonial">
-            <Typography className="hoverrr" sx={{ mt: -2 }}>
+            <Typography
+              className="hoverrr"
+              sx={{ mt: -2 }}
+            >
               <PersonIcon className="icon" />
               Testimonial
             </Typography>
           </Link>
-          <Link to="/Testimonial">
-            <Typography className="hoverrr" sx={{ mt: -2 }}>
-              <div>
-                <Button
-                  aria-owns={anchorEl ? "simple-menu" : undefined}
-                  aria-haspopup="true"
-                  onClick={handleClick}
-                  onMouseOver={handleClick}
-                  onMouseLeave={handleCloseHover}
-                  // className="hoverrr"
-                >
-                <PersonIcon className="icon" /> People
-                </Button>
-                <Menu
-                  id="simple-menu"
-                  anchorEl={anchorEl}
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
-                  MenuListProps={{
-                    onMouseEnter: handleHover,
-                    // onMouseLeave: handleCloseHover,
-                    style: { pointerEvents: "auto" },
-                  }}
-                  getContentAnchorEl={null}
-                  anchorOrigin={{ horizontal: "left", vertical: "bottom" }}
-                  PopoverClasses={{
-                    root: styles.popOverRoot,
-                  }}
-                  sx={{m: 15}}
-                > <MenuItem onClick={handleClose}> <Link to="/User" className="textDecoration">
-                {" "}
-                <Typography sx={{ p: 1, textDecoration: "none" }}>
-                  User
-                </Typography>
-              </Link></MenuItem>
-                  <MenuItem onClick={handleClose}> <Link to="/MyTeam" className="textDecoration">
-                {" "}
-                <Typography sx={{ p: 1 }}>My Team</Typography>
-              </Link></MenuItem>
-                 
-                </Menu>
-              </div>
-            </Typography>
-          </Link>
+          
+          
+          
         </div>
       </div>
     </aside>

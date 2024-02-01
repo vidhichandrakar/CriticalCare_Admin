@@ -7,6 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import DoneIcon from '@mui/icons-material/Done';
 import {
   CommonTypography,
   commonButton,
@@ -27,13 +28,17 @@ const VisuallyHiddenInput = styled("input")({
 const CreateForm = ({ handleTrackerPage }) => {
   return (
     <div className="formMain">
-      {CommonTypography({ fontWeight: 600, label: "Name" })}
+      <div className="FlexRow">
+        {CommonTypography({ fontWeight: 600, label: "Name" })}
+          <DoneIcon className="RightTick"/>
+      </div>
       {commonTextField({
         id: "fullWidth",
         className: "BoxShadow",
         inputClassName: "textField",
         labels: "Enter course name",
       })}
+      
       {CommonTypography({
         fontWeight: 600,
         sx: { marginTop: "5%" },

@@ -15,9 +15,10 @@
   margin:2%;
   width:30%;
    border: 2px solid #eee;
+   border-radius: 3% !important;
 }
 .contentInnerLeftBox{
-  height: 40vh;
+  /* height: 40vh; */
   padding: 4%;
 }
 .contentInnerLeftBox:hover{
@@ -52,4 +53,20 @@
 
 .innerHeadingTwo{
   color: #c9c2c2;
+}
+.videoText{
+  color: #a19e9e !important;
+  font-size: 0.8em !important;
+  margin-top: 1.5% !important;
+}
+.contentButton{
+  text-transform: none !important;
+  margin-top: 3%;
+  font-size: 1.1em !important;
+}
+.contentRightHeading{
+  margin-left: 10% !important;
+  margin-top: 6% !important;
+  font-size: 1.6em !important;
+  font-weight: 550 !important;
 }
