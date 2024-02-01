@@ -191,6 +191,7 @@ const Testimonial = () => {
                       return (
                         <TableRow
                           hover
+                          className="TableHover"
                           role="checkbox"
                           tabIndex={-1}
                           key={row.code}
