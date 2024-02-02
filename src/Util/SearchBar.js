@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 
 const SearchBar = ({mt, placeholder}) => {
+  const [searchBarValue, setSearchBarValue] = useState("")
+  const handlechangeSearchbar = (event) => {
+    const Events = event.target.value
+    if(Events.length >= 4){
+      setSearchBarValue(Events)
+      console.log(Events)
+    }
+  }
   return (
     
       
@@ -14,12 +22,12 @@ const SearchBar = ({mt, placeholder}) => {
             startAdornment={<InputAdornment sx={{mr:1}}><SearchIcon/></InputAdornment>}
             aria-describedby="outlined-weight-helper-text"
             inputProps={{
-              'aria-label': 'weight',
-              
+              'aria-label': 'weight', 
             }}
             sx={{ borderRadius: 30 }}
             className= "searchBar"
             placeholder= {placeholder}
+            onChange={handlechangeSearchbar}
           />
           </FormControl>
     
