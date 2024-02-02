@@ -2,9 +2,9 @@ import { Button, MenuItem, Select, TextField, Typography } from "@mui/material";
 import React from "react";
 
 export const commonTextField =({className,inputClassName,labels},Option={
-  sx:{}
+  sx:{},handleInput:()=>{}
 })=>{
-  const {sx} = Option;
+  const {sx,handleInput} = Option;
   return(
     <TextField
     inputProps={{ className: inputClassName }}
@@ -14,7 +14,7 @@ export const commonTextField =({className,inputClassName,labels},Option={
     id="fullWidth"
     sx={sx}
     className={className}
-    // onChange={(event) => handleTextChange("emailId", event.target.value)}
+    onChange={(event)=> handleInput(event.target.value,"name")}
   />
   )
 }

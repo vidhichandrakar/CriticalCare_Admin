@@ -100,6 +100,19 @@
 .formMain{
   padding: 3%;
   width:50%;
+  
+}
+.FlexRow{
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  justify-content: space-between;
+}
+.RightTick{
+  color: white;
+  background-color: #0ff55c;
+  border: #0ff55c !important;
+  border-radius: 100%;
 }
 .textField{
   /* padding:  11px 15px 13px  15px  !important; */

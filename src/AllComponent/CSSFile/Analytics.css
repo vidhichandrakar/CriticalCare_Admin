@@ -116,3 +116,13 @@ font-weight: 500;
         grid-template-columns: 1fr;
       }
   }
+
+  .custumDatePicker{
+    margin-left: 20px;
+  }
+.custumDatePickerBg{
+  margin-top: 2 !important;
+  min-width: 200!important;
+  background-color :"#fff"!important;
+  border-radius: 10!important;
+}
