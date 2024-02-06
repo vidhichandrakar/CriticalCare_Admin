@@ -1,110 +1,81 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Popover from 'material-ui/Popover';
-import Typography from 'material-ui/Typography';
-import { withStyles } from 'material-ui/styles';
-import Grow from 'material-ui/transitions/Grow';
-import Paper from 'material-ui/Paper';
-import { Manager, Target, Popper } from 'react-popper';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
 
-const styles = theme => ({
-  paper: {
-    padding: theme.spacing.unit,
-  },
-  popover: {
-    pointerEvents: 'none',
-  },
-  popperClose: {
-    pointerEvents: 'none',
-  },
-});
+export default function SwipeableTemporaryDrawer() {
+  const [state, setState] = React.useState({left: false});
 
-class MouseOverPopover extends Component {
-  state = {
-    anchorEl: null,
-    popperOpen: false,
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event &&
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
+    ) {
+      return;
+    }
+
+    setState({ ...state, [anchor]: open });
   };
 
-  handlePopoverOpen = event => {
-    this.setState({ anchorEl: event.target });
-  };
+  const list = (anchor) => (
+    <Box
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+      <List>
+        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
 
-  handlePopoverClose = () => {
-    this.setState({ anchorEl: null });
-  };
+  return (
+    <div>
 
-  handlePopperOpen = () => {
-    this.setState({ popperOpen: true });
-  };
-
-  handlePopperClose = () => {
-    this.setState({ popperOpen: false });
-  };
-
-  render() {
-    const { classes } = this.props;
-    const { anchorEl, popperOpen } = this.state;
-    const open = !!anchorEl;
-
-    return (
-      <div className="wrapper">
-        <Typography onMouseOver={this.handlePopoverOpen} onMouseOut={this.handlePopoverClose}>
-          Hover with a Popover.
-        </Typography>
-        <Popover
-          className={classes.popover}
-          classes={{
-            paper: classes.paper,
-          }}
-          open={open}
-          anchorEl={anchorEl}
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'left',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-          onRequestClose={this.handlePopoverClose}
-        >
-          <Typography>I use Popover.</Typography>
-        </Popover>
-        <Manager>
-          <Target>
-            <Typography
-              aria-describedby="react-popper-tooltip"
-              onMouseOver={this.handlePopperOpen}
-              onMouseOut={this.handlePopperClose}
-            >
-              Hover with react-popper.
-            </Typography>
-          </Target>
-          <Popper
-            placement="bottom-start"
-            eventsEnabled={popperOpen}
-            className={!popperOpen ? classes.popperClose : ''}
+        <React.Fragment key={"right"}>
+          <Button onClick={toggleDrawer("right", true)}>Profile</Button>
+          <SwipeableDrawer
+            anchor={"right"}
+            open={state["right"]}
+            onClose={toggleDrawer("right", false)}
+            onOpen={toggleDrawer("right", true)}
           >
-            <Grow in={popperOpen} style={{ transformOrigin: '0 0 0' }}>
-              <Paper
-                id="react-popper-tooltip"
-                className={classes.paper}
-                role="tooltip"
-                aria-hidden={!popperOpen}
-                elevation={8}
-              >
-                <Typography>I use react-popper.</Typography>
-              </Paper>
-            </Grow>
-          </Popper>
-        </Manager>
-      </div>
-    );
-  }
+            {list("right")}
+          </SwipeableDrawer>
+        </React.Fragment>
+   
+    </div>
+  );
 }
-
-MouseOverPopover.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(MouseOverPopover);

@@ -82,7 +82,7 @@ const CreateForm = ({ handleTrackerPage }) => {
         multiline
         rows={4}
         placeholder="Enter course description area"
-        className="BoxShadow"
+        className="DescBoxShadow"
         onChange={(event) => handleInput(event.target.value, "description")}
       />
       {CommonTypography({
