@@ -269,6 +269,7 @@ const User = () => {
                   );
                 })}
               <Popover
+               sx={{m: -7, mt: 0.7}}
                 id={openId}
                 open={open}
                 anchorEl={anchorEl}
@@ -278,8 +279,8 @@ const User = () => {
                   horizontal: "right",
                 }}
               >
-                 <Typography  className="redDelete"> <DeleteIcon/> Delete </Typography>
-                <Typography  className="blueBlockUser"> <BlockIcon/> Block User</Typography>
+                 <Typography  className="redDeleteofTestPortal"> <DeleteIcon className="deleteIcon"/> Delete </Typography>
+                <Typography  className="redDeleteofTestPortal blueBlockUser"> <BlockIcon className="deleteIcon"/> Block User</Typography>
               </Popover>
             </TableBody>
           </Table>

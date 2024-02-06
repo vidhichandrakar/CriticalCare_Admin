@@ -51,6 +51,7 @@ const CouponBox = ({}) => {
         </Box>
       ))}
       <Popover
+      sx={{m: -7, mt: 0.7}}
         id={id}
         open={open}
         anchorEl={anchorEl}
@@ -58,10 +59,11 @@ const CouponBox = ({}) => {
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "right",
+          
         }}
       >
-        <Typography sx={{ p: 1 }}>Edit</Typography>
-        <Typography sx={{ p: 1 }}>Delete</Typography>
+        <Typography sx={{ p: 1, mt: -1, mr:5 }} >Edit</Typography>
+        <Typography sx={{ p: 1, mt: -1, mr:5 }} >Delete</Typography>
       </Popover>
     </>
   );

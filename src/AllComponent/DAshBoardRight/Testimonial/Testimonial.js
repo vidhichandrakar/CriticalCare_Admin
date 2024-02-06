@@ -186,6 +186,7 @@ const Testimonial = () => {
                   );
                 })}
               <Popover
+               sx={{m: -7, mt: 0.7}}
                 id={openId}
                 open={open}
                 anchorEl={anchorEl}
@@ -196,7 +197,10 @@ const Testimonial = () => {
                 }}
               >
 
-                <Typography sx={{ p: 1 }} className='redDelete'><DeleteIcon/> Delete</Typography>
+                {/* <Typography sx={{ p: 0.7 }} className='redDelete'><DeleteIcon/> Delete</Typography> */}
+                <Typography className="redDeleteofTestPortal">
+                    <DeleteIcon className="deleteIcon"/> <span>Delete</span>
+                  </Typography>
               </Popover>
             </TableBody>
           </Table>
