@@ -15,6 +15,7 @@ import UpcomingCoursesMain from '../UpcomingCourses/UpcomingCourses.Main';
 import CouponMain from '../Coupons/Coupons.main';
 import YourCourses from '../Courses/YourCourses';
 import CreateCourses from '../Courses/MainCourses.component';
+import Accordian from '../Courses/AddContent/Accordian';
 // import AddTestDailog from '../DAshBoardRight/People/TestPortal/AddTestDailog';
 
 
@@ -37,7 +38,7 @@ const RouterMain = () => {
             <Route exact path="/Analytics" element= {<Analytics />}> </Route>
             <Route exact path="/UpcomingCoursesMain" element= {<UpcomingCoursesMain />}> </Route>
             <Route exact path="/CouponMain" element= {<CouponMain />}> </Route>
-            {/* <Route exact path="/AddTestDailog" element= {<AddTestDailog />}> </Route> */}
+            <Route exact path="/Accordian" element= {<Accordian/>}> </Route>
     </Routes>
     </div>
   )
