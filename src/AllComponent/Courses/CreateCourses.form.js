@@ -1,12 +1,13 @@
 import { Box, Typography, TextField } from "@mui/material";
-import React from "react";
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 import Button from "@mui/material/Button";
 import UploadIcon from "@mui/icons-material/Upload";
 import MenuItem from "@mui/material/MenuItem";
 import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import DoneIcon from "@mui/icons-material/Done";
 import {
   CommonTypography,
   commonButton,
@@ -24,21 +25,56 @@ const VisuallyHiddenInput = styled("input")({
   whiteSpace: "nowrap",
   width: 1,
 });
+
 const CreateForm = ({ handleTrackerPage }) => {
+  const [hideValidationTickName, sethideValidationTickName] = useState(false);
+  const [hideValidationTickDesc, sethideValidationTickDesc] = useState(false);
+  const handleInput = (value, type) => {
+    if (type === "name") {
+      if (value.length >= 4) {
+        console.log("fullWidth", value);
+        sethideValidationTickName(true);
+      } else {
+        console.log("fullWidth", value);
+        sethideValidationTickName(false);
+      }
+    }
+
+   else if (type === "description") {
+      if (value.length >= 4) {
+        console.log("fullWidth", value);
+        sethideValidationTickDesc(true);
+      } else {
+        console.log("fullWidth", value);
+        sethideValidationTickDesc(false);
+      }
+    }
+  };
+
   return (
     <div className="formMain">
-      {CommonTypography({ fontWeight: 600, label: "Name" })}
-      {commonTextField({
-        id: "fullWidth",
-        className: "BoxShadow",
-        inputClassName: "textField",
-        labels: "Enter course name",
-      })}
-      {CommonTypography({
-        fontWeight: 600,
-        sx: { marginTop: "5%" },
-        label: "Description",
-      })}
+      <div className="FlexRow">
+        {CommonTypography({ fontWeight: 600, label: "Name" })}
+        {hideValidationTickName && <DoneIcon className="RightTick" />}
+      </div>
+      {commonTextField(
+        {
+          id: "fullWidth",
+          className: "BoxShadow",
+          inputClassName: "textField",
+          labels: "Enter course name",
+        },
+        (Option = { handleInput: handleInput })
+      )}
+      <div className="FlexRow">
+        {CommonTypography({
+          fontWeight: 600,
+          sx: { marginTop: "5%" },
+          label: "Description",
+        })}
+
+        {hideValidationTickDesc && <DoneIcon className="RightTick" />}
+      </div>
       <TextField
         inputProps={{ className: "textField" }}
         fullWidth
@@ -47,7 +83,7 @@ const CreateForm = ({ handleTrackerPage }) => {
         rows={4}
         placeholder="Enter course description area"
         className="BoxShadow"
-        // onChange={(event) => handleTextChange("emailId", event.target.value)}
+        onChange={(event) => handleInput(event.target.value, "description")}
       />
       {CommonTypography({
         fontWeight: 600,
@@ -58,7 +94,7 @@ const CreateForm = ({ handleTrackerPage }) => {
       <Box className="thumbnailUpload">
         <Button
           component="label"
-          variant="outlined"
+          variant="outlined-multiline-static"
           startIcon={<UploadIcon className="iconThumbicon" />}
           className="iconThumb"
         >

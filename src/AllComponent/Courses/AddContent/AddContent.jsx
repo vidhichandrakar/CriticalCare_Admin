@@ -14,9 +14,9 @@ const AddContent = ({})=>{
         </Box>
         
       </Box>
-      {/* <Box className="contentRightBox">
-      <Typography> Contents</Typography>
-      </Box> */}
+      <Box className="contentRightBox">
+      <Typography className="contentRightHeading"> Add content</Typography>
+      </Box>
 
     </div>
   )
