@@ -37,20 +37,49 @@ const CouponBox = ({}) => {
               </Box>
             </Box>
             <Box className="verticalDivider"></Box>
-            <Box className="couponRightBox">
-              <h5>2023/08/27, 05:39 am - 2023/08/29, 06:30 pm</h5>
+           
+           <Box className="flexcol width60">
+           <div className="flexrow">
+            <Box className="DiscountBox">
+              <Typography>
+                DISCOUNT
+              </Typography>
+              <Box className="flexrow mt-2">
+                <h6>
+                  Created by 360 Critical care
+                </h6>
+                <h6 className="UsedText">
+                  Public Coupon
+                </h6>
+              </Box>
             </Box>
             <Box className="couponLastBox">
+              <h6 style={{color: "white", backgroundColor: "red"}}>EXPIRED</h6>
               <MoreVertIcon
                 aria-describedby={id}
                 variant="contained"
                 onClick={handleClick}
               />
             </Box>
+            </div> 
+            <div className="flexrow">
+            <Box className="couponRightBox flexrow">
+              <h6>2023/08/27, 05:39 am - 2023/08/29, 06:30 pm</h6>
+              <h6 className="UsedText">Used 1 times</h6>
+            </Box>
+            <Box>
+              <p className="ShowHideBtn">Show Details</p>
+            </Box>
+          
+
+            </div>
+            </Box>
+           
           </div>
         </Box>
       ))}
       <Popover
+      sx={{m: -7, mt: 0.7}}
         id={id}
         open={open}
         anchorEl={anchorEl}
@@ -58,10 +87,11 @@ const CouponBox = ({}) => {
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "right",
+          
         }}
       >
-        <Typography sx={{ p: 1 }}>Edit</Typography>
-        <Typography sx={{ p: 1 }}>Delete</Typography>
+        <Typography sx={{ p: 1, mt: -1, mr:5 }} >Edit</Typography>
+        <Typography sx={{ p: 1, mt: -1, mr:5 }} >Delete</Typography>
       </Popover>
     </>
   );

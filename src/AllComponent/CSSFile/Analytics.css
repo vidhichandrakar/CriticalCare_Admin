@@ -4,11 +4,11 @@
   display: flex;
   padding: 6PX 11PX !important;
 } */
-/* .selectDesign {
+.selectDesign {
   background-color: white !important;
   text-align: left;
   border-radius: 15px !important;
-} */
+}
 /* .FromControlDropDown {
   text-align: left;
   border-radius: 15px !important;
@@ -121,7 +121,7 @@ font-weight: 500;
     margin-left: 20px;
   }
 .custumDatePickerBg{
-  margin-top: 2 !important;
+  /* margin-top: 2 !important; */
   min-width: 200!important;
   background-color :"#fff"!important;
   border-radius: 10!important;

@@ -41,19 +41,51 @@
   padding: 2%;
   text-align: center;
 }
+.width60{
+  width: 100%;
+}
+.flexcol{
+  display: flex;
+  flex-direction: column;
+}
+.flexrow{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.UsedText{
+  color: #0f7af5;
+  margin-left: 5%;
+}
+.ShowHideBtn{
+  font-size: 0.7rem !important;
+  /* border: solid black 2px !important; */
+  width: 100% !important;
+  color: #0f7af5;
+
+}
 .couponRightBox{
-  width:90%;
-  margin-left: 3%;
+  width:88%;
+  margin-left: 2%;
   /* background-color: red; */
   color: #998e8e;
   font-size: 1.15em !important;
 }
+.mt-2{
+  margin-top: -2%;
+}
 .couponLastBox{
- width:13%;
+ /* width:13%; */
  justify-content: center;
+ align-items: center;
  display: flex;
- margin: auto;
+ /* margin: auto; */
  color: #998e8e;
+ margin-top: -5% !important;
+}
+.DiscountBox{
+  margin-left: 2%;
+  width: 88%;
 }
 .verticalDivider{
   background-color: #beb4b4;
@@ -61,15 +93,15 @@
   height:150px;
 }
 .courseMainCoupon{
+  display: flex !important;
+  flex-direction: column !important;
   background-color: #fff !important;
   border-radius: 15px;
   width:100% !important;
-  display: flex;
-  
   margin-top: 2%;
-  flex-direction: column;
+
 }
-.formMainCoupon{
+  .formMainCoupon{
   padding: 1%;
   width:100%;
 }

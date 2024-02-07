@@ -38,7 +38,7 @@ const CreateCouponForm =({})=>{
         InputProps={{
           startAdornment:<CurrencyRupeeIcon sx={{color:"#aca9a9",fontSize:"1.1em"}}/>
         }}
-        // onChange={(event) => handleTextChange("emailId", event.target.value)}
+
       />
        <Box sx={{ marginTop: "5%" }} className="editFirstBox" >
         <Box>
@@ -51,7 +51,6 @@ const CreateCouponForm =({})=>{
         placeholder="01/10/2024"
         id="fullWidth"
         className="BoxShadow"
-        // onChange={(event) => handleTextChange("emailId", event.target.value)}
       />
         </Box>
         <Box className="marginscndBox">
@@ -64,7 +63,6 @@ const CreateCouponForm =({})=>{
         placeholder="01/10/2024"
         id="fullWidth"
         className="BoxShadow"
-        // onChange={(event) => handleTextChange("emailId", event.target.value)}
       />
         </Box>
       </Box>

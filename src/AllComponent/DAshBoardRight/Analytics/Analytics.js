@@ -15,6 +15,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import RajTest from "../../AdminDashboardMain/RajTest"
 
 const Analytics = () => {
   const [defautlValueDate, setDefaultValueDate] = useState("Last 7 days");
@@ -47,7 +48,6 @@ const Analytics = () => {
     }
   };
   const handleCustumDate = (e) => {
-    // e={}
     console.log("ijhb", e, moment(new Date(e)).format("MM/DD/YYYY"));
   };
   return (
@@ -71,13 +71,11 @@ const Analytics = () => {
               }}
             >
               <Select
-                // displayEmpty
                 size="small"
                 renderValue={() => {
                   return <em className={"categorytext"}>{defautlValueDate}</em>;
                 }}
                 inputProps={{ "aria-label": "Without label" }}
-                // value="defautlValueDate"
                 defaultValue={defautlValueDate}
                 onChange={handleChangeDate}
               >
@@ -90,12 +88,10 @@ const Analytics = () => {
             {customDate &&  (
               <div className="custumDatePicker">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  {/* <DemoContainer className="custumDatePickerBg" components={["DatePicker"]}> */}
                     <DatePicker className="custumDatePickerBg"renderInput={(params) => <TextField size="small" {...params} sx={{m: 0.5, mt: 0.7, background: '#fff',}} />}
                       onChange={handleCustumDate}
                       label="Select Start Date"
                     />
-                  {/* </DemoContainer> */}
                 </LocalizationProvider>
               </div>
             )}
@@ -104,7 +100,7 @@ const Analytics = () => {
               <div className="custumDatePicker">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DemoContainer components={["DatePicker"]}>
-                    <DatePicker
+                    <DatePicker className="custumDatePickerBg"
                       onChange={handleCustumDate}
                       label="Select End Date"
                     />
@@ -146,7 +142,9 @@ const Analytics = () => {
             </div>
           </Box>
         </div>
+        <RajTest />
       </main>
+     
     </div>
   );
 };

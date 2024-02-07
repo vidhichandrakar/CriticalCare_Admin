@@ -70,7 +70,7 @@ export const AdditionalData = [
         heading: "Coupons"
     },
     {
-        href : "#",
+        href : "/Trics1FreeMockTest",
         icon: <BookmarkAddedIcon />,
         heading: "Zoom"
     },
