@@ -760,3 +760,13 @@ margin-left: 10px !important;
     grid-template-columns: 1fr;
   }
 }
+
+.useInfoCheckbox{
+  display: flex !important;
+  flex-direction: row !important;
+  margin-left: 12px;
+}
+.userCheckBoxDiv{
+  margin-left: 20px;
+
+}
