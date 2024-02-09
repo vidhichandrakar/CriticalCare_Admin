@@ -79,21 +79,21 @@ const CourseHeader = ({ Heading, subHeading }) => {
           </Box>
           <Box className="flexrow BasicInfo">
             <Box className="flexrow">
-              <PermIdentityOutlinedIcon className="infoicon" />{" "}
+              <PermIdentityOutlinedIcon className="infoicon" />
               <Typography className="InfoTextLeft">Email:</Typography>
             </Box>
             <Typography className="InfoTextRight">360 Critcial Care</Typography>
           </Box>
           <Box className="flexrow BasicInfo">
             <Box className="flexrow">
-              <PermIdentityOutlinedIcon className="infoicon" />{" "}
+              <PermIdentityOutlinedIcon className="infoicon" />
               <Typography className="InfoTextLeft">Mobile:</Typography>
             </Box>
             <Typography className="InfoTextRight">360 Critcial Care</Typography>
           </Box>
           <Box className="flexrow BasicInfo">
             <Box className="flexrow">
-              <PermIdentityOutlinedIcon className="infoicon" />{" "}
+              <PermIdentityOutlinedIcon className="infoicon" />
               <Typography className="InfoTextLeft">About:</Typography>
             </Box>
             <Typography className="InfoTextRight">360 Critcial Care</Typography>
@@ -110,21 +110,21 @@ const CourseHeader = ({ Heading, subHeading }) => {
           </Box>
           <Box className="flexrow BasicInfo">
             <Box className="flexrow">
-              <PermIdentityOutlinedIcon className="infoicon" />{" "}
+              <PermIdentityOutlinedIcon className="infoicon" />
               <Typography className="InfoTextLeft">Name:</Typography>
             </Box>
             <Typography className="InfoTextRight">360 Critcial Care</Typography>
           </Box>
           <Box className="flexrow BasicInfo">
             <Box className="flexrow">
-              <PermIdentityOutlinedIcon className="infoicon" />{" "}
+              <PermIdentityOutlinedIcon className="infoicon" />
               <Typography className="InfoTextLeft">Email:</Typography>
             </Box>
             <Typography className="InfoTextRight">360 Critcial Care</Typography>
           </Box>
           <Box className="flexrow BasicInfo">
             <Box className="flexrow">
-              <PermIdentityOutlinedIcon className="infoicon" />{" "}
+              <PermIdentityOutlinedIcon className="infoicon" />
               <Typography className="InfoTextLeft">Mobile:</Typography>
             </Box>
             <Typography className="InfoTextRight">360 Critcial Care</Typography>
