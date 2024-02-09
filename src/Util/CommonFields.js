@@ -19,17 +19,21 @@ export const commonTextField =({className,inputClassName,labels},Option={
   )
 }
 
-export const commonSelect =({placeholder,menuItemList,className})=>{
+export const commonSelect =({placeholder,menuItemList,className},Option={handleInput:()=>{},categoryValue:''})=>{
+  const{handleInput,categoryValue} = Option;
+  console.log("categoryValue",categoryValue);
   return(
     <Select
     displayEmpty
     size="small"
     renderValue={() => {
-      return <em className={className}>{placeholder}</em>;
+      return <em className={className}>{categoryValue?categoryValue:placeholder}</em>;
     }}
     inputProps={{ "aria-label": "Without label" }}
+    value={categoryValue}
+    onChange={(event)=> handleInput(event.target.value,"category")}
   >
-   {menuItemList.map(menu=><MenuItem value={menu.id}>{menu.label}</MenuItem>)} 
+   {menuItemList.map(menu=><MenuItem value={menu.label}>{menu.label}</MenuItem>)} 
   </Select>
   )
 }

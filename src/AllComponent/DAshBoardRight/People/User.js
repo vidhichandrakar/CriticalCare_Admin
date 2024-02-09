@@ -15,9 +15,10 @@ import SearchBar from "../../../Util/SearchBar";
 import Popover from "@mui/material/Popover";
 import CourseHeader from "../../Courses/CoursesHeader";
 import SideBar from "../../AdminDashboardMain/SideBar";
-import {columns} from "../../../Data/JsonData";
-import BlockIcon from '@mui/icons-material/Block';
-import DeleteIcon from '@mui/icons-material/Delete';
+import { columns } from "../../../Data/JsonData";
+import BlockIcon from "@mui/icons-material/Block";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Checkbox from "@mui/material/Checkbox";
 
 const User = () => {
   const [page, setPage] = React.useState(0);
@@ -25,11 +26,18 @@ const User = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [openId, setOpenId] = React.useState(0);
   const [openData, setOpenData] = React.useState("");
+  const [checkedValue , setCheckedValue] = React.useState([]);
 
-  
-  
   const createData = (User_Info, Full_Name, Date_of_Registration, Actions) => {
     return { User_Info, Full_Name, Date_of_Registration, Actions };
+  };
+  const handleChangeOnCheckBox=(event,data)=>{
+    //uncheck me bhi add ho rh hai, to true false ka kam krna hai
+    let selectValue = [...checkedValue];
+    selectValue.push(data)
+    console.log(event)
+    console.log(data);
+    setCheckedValue(selectValue);
   }
   const rows = [
     createData(
@@ -173,17 +181,9 @@ const User = () => {
       />
     ),
   ];
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
 
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-  
   const handleClick = (event, id, data) => {
-    setAnchorEl(event.currentTarget)
+    setAnchorEl(event.currentTarget);
     setOpenId(id);
     setOpenData(data);
   };
@@ -196,97 +196,109 @@ const User = () => {
   const id = open ? "simple-popover" : undefined;
 
   return (
-    <div className='grid-container'>
+    <div className="grid-container">
       <SideBar />
-    <div className=" m20">
-      <CourseHeader
-        Heading={"Users (357)"}
-        subHeading={"View, Filter & Manage all your users"}
-      />
-
-      <div className="searchnfilter">
-        <SearchBar mt = "2%" placeholder="Search by name" />
-        <Button className="filterButton">
-          <FilterAltIcon className="filterIcon" /> Filter
-        </Button>
-      </div>
-      <Paper
-        sx={{ width: "100%", overflow: "hidden" }}
-        className="completeTable"
-      >
-        <TableContainer sx={{ maxHeight: 540 }}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                {columns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    align={column.align}
-                    style={{ minWidth: column.minWidth, fontWeight: 600}}
-                    className="headingOfTable"
-                  >
-                    {column.label}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody className="parentTable">
-              {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <TableRow
-                      hover
-                      className="TableHover"
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.code}
-
+      <div className=" m20">
+        <CourseHeader
+          Heading={"Users (357)"}
+          subHeading={"View, Filter & Manage all your users"}
+        />
+{console.log("checkedValue",checkedValue)}
+        <div className="searchnfilter">
+          <SearchBar mt="2%" placeholder="Search by name" />
+          <Button className="filterButton">
+            <FilterAltIcon className="filterIcon" /> Filter
+          </Button>
+        </div>
+        <Paper
+          sx={{ width: "100%", overflow: "hidden" }}
+          className="completeTable"
+        >
+          <TableContainer sx={{ maxHeight: 540 }}>
+            <Table stickyHeader aria-label="sticky table">
+              <TableHead>
+                <TableRow>
+                  {columns.map((column) => (
+                    <TableCell
+                      key={column.id}
+                      align={column.align}
+                      style={{ minWidth: column.minWidth, fontWeight: 600 }}
+                      className="headingOfTable"
                     >
-                      {columns.map((column) => {
-                        const value = row[column.id];
-                        console.log(row, Object.keys(row), column.id);
-                        return (
-                          <Fragment>
-                            {column.id === "User_Info" ? (
-                              <TableCell key={column.id} align={column.align} >
-                                <Typography className="bluePara">
-                                 {value.name}
-                                </Typography>
-                                <Typography className="PhoneText">
-                                 { value.phone}
-                                </Typography>
-                              </TableCell>
-                            ) : (
-                              <TableCell key={column.id} align={column.align}>
-                              { value}
-                              </TableCell>
-                            )}
-                          </Fragment>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
-              <Popover
-               sx={{m: -7, mt: 0.7}}
-                id={openId}
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "right",
-                }}
-              >
-                 <Typography  className="redDeleteofTestPortal"> <DeleteIcon className="deleteIcon"/> Delete </Typography>
-                <Typography  className="redDeleteofTestPortal blueBlockUser"> <BlockIcon className="deleteIcon"/> Block User</Typography>
-              </Popover>
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Paper>
-    </div>
+                      {column.label}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody className="parentTable">
+                {rows
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row) => {
+                    return (
+                      <TableRow
+                        hover
+                        className="TableHover"
+                        role="checkbox"
+                        tabIndex={-1}
+                        key={row.code}
+                      >
+                        {columns.map((column) => {
+                          const value = row[column.id];
+                          console.log(row, Object.keys(row), column.id);
+                          return (
+                            <Fragment>
+                              {column.id === "User_Info" ? (
+                                <TableCell
+                                  key={column.id}
+                                  align={column.align}
+                                  className="useInfoCheckbox"
+                                >
+                                  <Checkbox onChange={(event)=>handleChangeOnCheckBox(event, row.User_Info)} />
+                                  <div className="userCheckBoxDiv">
+                                    <Typography className="bluePara">
+                                      {value.name}
+                                    </Typography>
+                                    <Typography className="PhoneText">
+                                      {value.phone}
+                                    </Typography>
+                                  </div>
+                                </TableCell>
+                              ) : (
+                                <TableCell key={column.id} align={column.align}>
+                                  {value}
+                                </TableCell>
+                              )}
+                            </Fragment>
+                          );
+                        })}
+                      </TableRow>
+                    );
+                  })}
+                <Popover
+                  sx={{ m: -7, mt: 0.7 }}
+                  id={openId}
+                  open={open}
+                  anchorEl={anchorEl}
+                  onClose={handleClose}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "right",
+                  }}
+                >
+                  <Typography className="redDeleteofTestPortal">
+                    {" "}
+                    <DeleteIcon className="deleteIcon" /> Delete{" "}
+                  </Typography>
+                  <Typography className="redDeleteofTestPortal blueBlockUser">
+                    {" "}
+                    <BlockIcon className="deleteIcon" /> Block User
+                  </Typography>
+                </Popover>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
+      </div>
     </div>
   );
 };
