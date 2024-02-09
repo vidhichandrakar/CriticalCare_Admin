@@ -244,71 +244,6 @@ const Testimonial = () => {
                       horizontal: "right",
                     }}
                   >
-<<<<<<< HEAD
-                    {column.label}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody className="parentTable">
-              {rows
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => {
-                  return (
-                    <TableRow
-                      hover
-                      role="checkbox"
-                      tabIndex={-1}
-                      key={row.code}
-                    >
-                      {columns.map((column) => {
-                        const value = row[column.id];
-                        console.log(row, Object.keys(row), column.id, value);
-                        return (
-                          <Fragment>
-                            {column.id === "Commments" ? (
-                              <TableCell key={column.id} align={column.align} className='lastTableCellOfTestimonial'>
-                                <Typography className='lastValue'>
-                                 {value}
-                                </Typography>
-                                <Typography className="phNumber">
-                                 FREE TEST 
-                                </Typography>
-                              </TableCell>
-                            ) : (
-                              <TableCell key={column.id} align={column.align} sx={{minWidth: 100}}>
-                              { value}
-                              </TableCell>
-                            )}
-                          </Fragment>
-                        );
-                      })}
-                    </TableRow>
-                  );
-                })}
-              <Popover
-               sx={{m: -7, mt: 0.7}}
-                id={openId}
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "right",
-                }}
-              >
-
-                {/* <Typography sx={{ p: 0.7 }} className='redDelete'><DeleteIcon/> Delete</Typography> */}
-                <Typography className="redDeleteofTestPortal">
-                    <DeleteIcon className="deleteIcon"/> <span>Delete</span>
-                  </Typography>
-              </Popover>
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Paper>
-
-=======
                     <Typography sx={{ p: 1 }} className="redDelete">
                       <DeleteIcon /> Delete
                     </Typography>
@@ -318,7 +253,6 @@ const Testimonial = () => {
             </TableContainer>
           </Paper>
         </div>
->>>>>>> 03e02ee9bc3051f83adf16a0366ddd1f1d5f4a96
       </div>
     </div>
   );

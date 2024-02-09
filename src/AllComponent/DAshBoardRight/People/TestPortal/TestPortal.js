@@ -328,7 +328,9 @@ const TestPortal = () => {
                   sx={{ml:-12}}
                 >   
                   <Typography className="redDeleteofTestPortal">
-                    <DeleteIcon className="deleteIcon"/> <span>Delete</span>
+                    <DeleteIcon className="deleteIcon"/> 
+                    {id}
+                    <span>Delete</span>
                   </Typography>
                 </Popover>
                 

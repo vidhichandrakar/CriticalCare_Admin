@@ -19,10 +19,6 @@
     "dayjs": "^1.11.10",
     "install": "^0.13.0",
     "moment": "^2.30.1",
-<<<<<<< HEAD
-=======
-    "@tippyjs/react": "^4.2.6",
->>>>>>> d75bfc108fb2040f8335925ad88d6ba935894829
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.3",
