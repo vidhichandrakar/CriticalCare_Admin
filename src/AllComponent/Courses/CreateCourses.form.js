@@ -68,7 +68,7 @@ const CreateForm = ({ handleTrackerPage }) => {
   };
 
   const handleEditPrice = () => {
-    // handleTrackerPage(1);
+    handleTrackerPage(1);
     console.log("iuhjk");
     if (
       storedBasicInfo.Name.length <= 3 &&
