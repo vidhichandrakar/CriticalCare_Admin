@@ -33,12 +33,10 @@ const CourseHeader = ({ Heading, subHeading }) => {
   const [state, setState] = useState({
     left: false,
   });
-  const [menuOptipnOpen, setMenuOptipnOpen] = useState(false);
   const [value, setValue] = useState("");
 
   const handleChange = (event) => {
     setValue("event");
-    setMenuOptipnOpen(false);
   };
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -174,7 +172,6 @@ const CourseHeader = ({ Heading, subHeading }) => {
         <Typography className="subHeader">{subHeading}</Typography>
       </Box>
       <Box className="HeaderRight">
-        {console.log(menuOptipnOpen, "hjhjkkl;lkj")}
         <FormControl sx={{ m: 1, minWidth: 240 }}>
           <Select
             className="selectDesign"
@@ -193,7 +190,7 @@ const CourseHeader = ({ Heading, subHeading }) => {
             <MenuItem
               className="selectDesign hoverrr"
               value={"Profile"}
-              onClick={toggleDrawer("right", true)}
+              onClick={toggleDrawer("right", true)} 
             >
               <PermIdentityOutlinedIcon />
               Profile

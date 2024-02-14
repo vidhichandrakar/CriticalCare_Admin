@@ -4,9 +4,6 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Popover from "@mui/material/Popover";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 const CouponBox = ({}) => {
@@ -26,8 +23,8 @@ const CouponBox = ({}) => {
     setAnchorEl(null);
   };
 
-  // const open = Boolean(anchorEl);
-  // const id = open ? "simple-popover" : undefined;
+  const open = Boolean(anchorEl);
+  const ids = open ? "simple-popover" : undefined;
 
   const boxOpen = Boolean(anchorEl);
   const id = boxOpen ? "simple-popover" : undefined;
@@ -133,7 +130,7 @@ const CouponBox = ({}) => {
       ))}
       <Popover
         sx={{ m: -7, mt: 0.7 }}
-        id={id}
+        id={ids}
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}

@@ -565,6 +565,26 @@ margin-left: 10px !important;
   justify-content: space-between;
 }
 
+.width50{
+  width: 50%;
+  padding: 26px 10px;
+}
+.mt2{
+  margin-top: 5%;
+}
+.BookIcon{
+  width: 50%;
+  color: rgb(21, 203, 244);
+}
+.AddButton{
+  color: rgb(21, 203, 244) !important;
+}
+.textAdd{
+  margin-left: 10% !important;
+}
+.pad20{
+  padding: 26px 10px;
+}
 /* END OF ADMIN TESTIMONIAL  */
 
 /* START OF COURSES CREATE COUPON  */
