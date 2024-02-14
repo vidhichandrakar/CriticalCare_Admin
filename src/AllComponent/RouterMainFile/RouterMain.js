@@ -1,7 +1,6 @@
 import React from 'react'
 import {Routes, Route} from 'react-router-dom';
 import Dashboard from '../DAshBoardRight/Dashboard/Dashboard';
-import Banner from '../DAshBoardRight/Banner/Banner';
 import User from '../DAshBoardRight/People/User';
 import Transaction from '../DAshBoardRight/Analytics/Transaction';
 import MainCourses from '../Courses/MainCourses.component';
@@ -15,6 +14,7 @@ import UpcomingCoursesMain from '../UpcomingCourses/UpcomingCourses.Main';
 import CouponMain from '../Coupons/Coupons.main';
 import YourCourses from '../Courses/YourCourses';
 import CreateCourses from '../Courses/MainCourses.component';
+import Banner from '../DAshBoardRight/Banner/Banner';
 // import AddTestDailog from '../DAshBoardRight/People/TestPortal/AddTestDailog';
 
 
@@ -24,7 +24,6 @@ const RouterMain = () => {
      <Routes>
             <Route exact path="/" element= {<Dashboard />}> </Route>
             <Route exact path="/CreateCourses" element= {<CreateCourses />}> </Route>
-            <Route exact path="/Banner" element= {<Banner />}> </Route>
             <Route exact path="/User" element= {< User />}> </Route>
             <Route exact path="/Transaction" element= {<Transaction />}> </Route>
             <Route exact path="/MainCourses" element= {<MainCourses />}> </Route>
@@ -36,7 +35,8 @@ const RouterMain = () => {
             <Route exact path="/YourCourses" element= {<YourCourses />}> </Route>
             <Route exact path="/Analytics" element= {<Analytics />}> </Route>
             <Route exact path="/UpcomingCoursesMain" element= {<UpcomingCoursesMain />}> </Route>
-            <Route exact path="/CouponMain" element= {<CouponMain />}> </Route>
+            <Route exact path="/Banner" element= {<Banner />}> </Route>
+            <Route exact path="/Coupon" element= {<CouponMain />}> </Route>
             {/* <Route exact path="/AddTestDailog" element= {<AddTestDailog />}> </Route> */}
     </Routes>
     </div>

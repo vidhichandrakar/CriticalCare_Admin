@@ -86,7 +86,35 @@ function SimpleMenu() {
               My Courses
             </Typography>
           </Link>
+          <Link to="/Banner" className="textDecoration">
+            {" "}
+            <Typography
+              className="textDecoration"
+              sx={{
+                p: 1,
+                textDecoration: "none",
+                textDecorationLine: "none",
+                color: "greys",
+              }}
+            >
+              Banner
+            </Typography>
+          </Link>
           {" "}
+          <Link to="/Coupon" className="textDecoration">
+            {" "}
+            <Typography
+              className="textDecoration"
+              sx={{
+                p: 1,
+                textDecoration: "none",
+                textDecorationLine: "none",
+                color: "greys",
+              }}
+            >
+              Coupons
+            </Typography>
+          </Link>
           <Link to="/CreateCoupon" className="textDecoration">
             {" "}
             <Typography sx={{ p: 1, textDecoration: "none" }}>
