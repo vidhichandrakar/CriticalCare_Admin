@@ -79,7 +79,7 @@ const Trics1FreeMockTest = () => {
                 {" "}
                 <p className="blackPara">Student Enrolled</p>
               </div>
-              <span className="blueViewAll">View All</span>
+              <span className="blueViewAll pointer">View All</span>
             </div>
             <p className="greyPara">44</p>
           </div>

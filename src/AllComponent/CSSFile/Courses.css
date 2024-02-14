@@ -35,7 +35,7 @@
    background-color: rgba(224, 184, 24, 0.236);
   border-radius: 50%;
   color:rgb(255, 186, 37);
-
+  text-align: center;
 }
 .headerText{
   font-size: 1.7em !important;

@@ -573,7 +573,11 @@ margin-left: 10px !important;
   margin-top: 5%;
 }
 .BookIcon{
-  width: 50%;
+  width: 100%;
+  height: 50vh;
+  /* margin: 20px; */
+  text-align: center;
+  display: inline-block;
   color: rgb(21, 203, 244);
 }
 .AddButton{
@@ -584,6 +588,9 @@ margin-left: 10px !important;
 }
 .pad20{
   padding: 26px 10px;
+}
+.pointer{
+  cursor: pointer;
 }
 /* END OF ADMIN TESTIMONIAL  */
 

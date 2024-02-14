@@ -169,7 +169,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
             </Typography>
           </Link>
 
-          <Link to="/Accordian">
+          <Link to="/">
             <Typography
               className="hoverrr"
               sx={{ mt: -2 }}

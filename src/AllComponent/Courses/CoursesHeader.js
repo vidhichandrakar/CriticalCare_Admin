@@ -13,7 +13,6 @@ import LogoutTwoToneIcon from "@mui/icons-material/LogoutTwoTone";
 import ClearIcon from "@mui/icons-material/Clear";
 import Switch from "@mui/material/Switch";
 import WarningIcon from "@mui/icons-material/Warning";
-
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
@@ -36,7 +35,7 @@ const CourseHeader = ({ Heading, subHeading }) => {
   const [value, setValue] = useState("");
 
   const handleChange = (event) => {
-    setValue("event");
+    setState(false);
   };
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -45,7 +44,7 @@ const CourseHeader = ({ Heading, subHeading }) => {
     ) {
       return;
     }
-    setState({ ...state, [anchor]: open });
+    setState({state, [anchor]: open });
   };
 
   const list = (anchor) => (
@@ -58,13 +57,13 @@ const CourseHeader = ({ Heading, subHeading }) => {
     >
       <Box className="flexrow JustfiSB">
         <h3>My Profile</h3>
-        <ClearIcon className="Xicon" />
+        <ClearIcon onClick={handleChange} className="Xicon pointer" />
       </Box>
       <Box className="BasicInfoBox">
         <Box className="margin20">
           <Box className="flexrow JustfiSB">
               <Box className="flexrow width80">
-             <h5>Basic Information</h5> <DoneIcon className="TickIcon"/>
+             <h5>Basic Information</h5> <DoneIcon  className="TickIcon "/>
             </Box>
             <Button>Edit</Button>
           </Box>
@@ -192,7 +191,7 @@ const CourseHeader = ({ Heading, subHeading }) => {
               value={"Profile"}
               onClick={toggleDrawer("right", true)} 
             >
-              <PermIdentityOutlinedIcon />
+              <PermIdentityOutlinedIcon  />
               Profile
             </MenuItem>
             <MenuItem className="selectDesign hoverrr" value={"Profiles"}>
@@ -200,17 +199,14 @@ const CourseHeader = ({ Heading, subHeading }) => {
               Recharge
             </MenuItem>
             <MenuItem className="selectDesign hoverrr" value={"Profiled"}>
-              {" "}
               <SettingsOutlinedIcon />
               Settings
             </MenuItem>
             <MenuItem className="selectDesign hoverrr" value={"Profilea"}>
-              {" "}
               <QuizOutlinedIcon />
               Help and Support
             </MenuItem>
             <MenuItem className="selectDesign hoverrr" value={"Profileik"}>
-              {" "}
               <LogoutTwoToneIcon />
               Logout
             </MenuItem>
