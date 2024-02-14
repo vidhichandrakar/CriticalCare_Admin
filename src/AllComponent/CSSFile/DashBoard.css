@@ -770,3 +770,22 @@ margin-left: 10px !important;
   margin-left: 20px;
 
 }
+
+.countSelectedValue{
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  justify-content: space-between ;
+}
+
+.countedCheckBox{
+  background-color: white !important;
+  width: 30%;
+  border-radius: 10px !important;
+  border-color: white !important;
+  cursor:default !important ;
+  align-items: center !important;
+  text-align: center !important;
+  color: #0075ff !important;
+  
+}
