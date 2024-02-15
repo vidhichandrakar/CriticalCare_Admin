@@ -10,7 +10,9 @@ import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import QuizOutlinedIcon from "@mui/icons-material/QuizOutlined";
 import LogoutTwoToneIcon from "@mui/icons-material/LogoutTwoTone";
-
+import ClearIcon from "@mui/icons-material/Clear";
+import Switch from "@mui/material/Switch";
+import WarningIcon from "@mui/icons-material/Warning";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
@@ -22,17 +24,18 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
+import DoneIcon from "@mui/icons-material/Done";
+
+const label = { inputProps: { "aria-label": "Switch demo" } };
 
 const CourseHeader = ({ Heading, subHeading }) => {
   const [state, setState] = useState({
     left: false,
   });
-  const [menuOptipnOpen, setMenuOptipnOpen] = useState(false);
   const [value, setValue] = useState("");
 
   const handleChange = (event) => {
-    setValue("event");
-    setMenuOptipnOpen(false);
+    setState(false);
   };
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -41,41 +44,123 @@ const CourseHeader = ({ Heading, subHeading }) => {
     ) {
       return;
     }
-    setState({ ...state, [anchor]: open });
+    setState({state, [anchor]: open });
   };
 
   const list = (anchor) => (
     <Box
-      sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
+      sx={{
+        width: anchor === "top" || anchor === "bottom" ? "auto" : 450,
+        margin: "20px",
+      }}
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
     >
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      <Box className="flexrow JustfiSB">
+        <h3>My Profile</h3>
+        <ClearIcon onClick={handleChange} className="Xicon pointer" />
+      </Box>
+      <Box className="BasicInfoBox">
+        <Box className="margin20">
+          <Box className="flexrow JustfiSB">
+              <Box className="flexrow width80">
+             <h5>Basic Information</h5> <DoneIcon  className="TickIcon "/>
+            </Box>
+            <Button>Edit</Button>
+          </Box>
+          <Box className="flexrow BasicInfo">
+            <Box className="flexrow">
+              <PermIdentityOutlinedIcon className="infoicon" />{" "}
+              <Typography className="InfoTextLeft">Name:</Typography>
+            </Box>
+            <Typography className="InfoTextRight">360 Critcial Care</Typography>
+          </Box>
+          <Box className="flexrow BasicInfo">
+            <Box className="flexrow">
+              <PermIdentityOutlinedIcon className="infoicon" />
+              <Typography className="InfoTextLeft">Email:</Typography>
+            </Box>
+            <Typography className="InfoTextRight">360 Critcial Care</Typography>
+          </Box>
+          <Box className="flexrow BasicInfo">
+            <Box className="flexrow">
+              <PermIdentityOutlinedIcon className="infoicon" />
+              <Typography className="InfoTextLeft">Mobile:</Typography>
+            </Box>
+            <Typography className="InfoTextRight">360 Critcial Care</Typography>
+          </Box>
+          <Box className="flexrow BasicInfo">
+            <Box className="flexrow">
+              <PermIdentityOutlinedIcon className="infoicon" />
+              <Typography className="InfoTextLeft">About:</Typography>
+            </Box>
+            <Typography className="InfoTextRight">360 Critcial Care</Typography>
+          </Box>
+        </Box>
+      </Box>
+      <Box className="BasicInfoBox">
+        <Box className="margin20">
+          <Box className="flexrow JustfiSB">
+          <Box className="flexrow width80">
+             <h5>Bank Details</h5> <DoneIcon className="TickIcon"/>
+            </Box>
+            <Button>Edit</Button>
+          </Box>
+          <Box className="flexrow BasicInfo">
+            <Box className="flexrow">
+              <PermIdentityOutlinedIcon className="infoicon" />
+              <Typography className="InfoTextLeft">Name:</Typography>
+            </Box>
+            <Typography className="InfoTextRight">360 Critcial Care</Typography>
+          </Box>
+          <Box className="flexrow BasicInfo">
+            <Box className="flexrow">
+              <PermIdentityOutlinedIcon className="infoicon" />
+              <Typography className="InfoTextLeft">Email:</Typography>
+            </Box>
+            <Typography className="InfoTextRight">360 Critcial Care</Typography>
+          </Box>
+          <Box className="flexrow BasicInfo">
+            <Box className="flexrow">
+              <PermIdentityOutlinedIcon className="infoicon" />
+              <Typography className="InfoTextLeft">Mobile:</Typography>
+            </Box>
+            <Typography className="InfoTextRight">360 Critcial Care</Typography>
+          </Box>
+        </Box>
+      </Box>
+      <Box className="BasicInfoBox">
+        <Box className="margin20">
+        <Box className="flexrow JustfiSB">
+          <h5>Show Classplus Branding</h5>
+          <Switch {...label} />
+        </Box>
+        </Box>
+      </Box>
+
+      <Box className="BasicInfoBox">
+        <Box className="margin20">
+        <Box className="flexrow JustfiSB">
+          <Box className="flexrow width80">
+           <Typography> Text Details </Typography><WarningIcon  className="WarningIcon"/>
+          </Box>
+          <Button>Edit</Button>
+        </Box>
+        <Box className="flexrow BasicInfo">
+          <Box className="flexrow width80">
+            <PermIdentityOutlinedIcon />
+            Billing Address:
+          </Box>
+        </Box>
+        <Box className="flexrow BasicInfo">
+          <Box className="flexrow width80">
+            <PermIdentityOutlinedIcon />
+            GSTIN:
+          </Box>
+        </Box>
+        </Box>
+      </Box>
+
+     
     </Box>
   );
 
@@ -86,7 +171,6 @@ const CourseHeader = ({ Heading, subHeading }) => {
         <Typography className="subHeader">{subHeading}</Typography>
       </Box>
       <Box className="HeaderRight">
-        {console.log(menuOptipnOpen, "hjhjkkl;lkj")}
         <FormControl sx={{ m: 1, minWidth: 240 }}>
           <Select
             className="selectDesign"
@@ -102,30 +186,29 @@ const CourseHeader = ({ Heading, subHeading }) => {
             }
             value={value}
           >
-            <MenuItem className="selectDesign" value={"Profiles"}>
+            <MenuItem
+              className="selectDesign hoverrr"
+              value={"Profile"}
+              onClick={toggleDrawer("right", true)} 
+            >
+              <PermIdentityOutlinedIcon  />
+              Profile
+            </MenuItem>
+            <MenuItem className="selectDesign hoverrr" value={"Profiles"}>
               <CurrencyRupeeIcon />
               Recharge
             </MenuItem>
-            <MenuItem className="selectDesign" value={"Profiled"}>
-              {" "}
+            <MenuItem className="selectDesign hoverrr" value={"Profiled"}>
               <SettingsOutlinedIcon />
               Settings
             </MenuItem>
-            <MenuItem className="selectDesign" value={"Profilea"}>
-              {" "}
+            <MenuItem className="selectDesign hoverrr" value={"Profilea"}>
               <QuizOutlinedIcon />
               Help and Support
             </MenuItem>
-            <MenuItem className="selectDesign" value={"Profileik"}>
-              {" "}
+            <MenuItem className="selectDesign hoverrr" value={"Profileik"}>
               <LogoutTwoToneIcon />
               Logout
-            </MenuItem>
-
-            <MenuItem value={"Profile"} onClick={toggleDrawer("right", true)}>
-              {/* <Button onClick={toggleDrawer("right", true)}> */}
-                Profile
-                {/* </Button> */}
             </MenuItem>
           </Select>
         </FormControl>

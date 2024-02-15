@@ -4,6 +4,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Popover from "@mui/material/Popover";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+<<<<<<< HEAD
 import RestoreFromTrashSharpIcon from "@mui/icons-material/RestoreFromTrashSharp";
 import HistorySharpIcon from "@mui/icons-material/HistorySharp";
 import NoteAltOutlinedIcon from "@mui/icons-material/NoteAltOutlined";
@@ -25,6 +26,9 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+=======
+import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+>>>>>>> b0c226b5600fbd361ad750bf3be5c0f5b6f8705e
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -58,7 +62,11 @@ const CouponBox = () => {
   };
 
   const open = Boolean(anchorEl);
+<<<<<<< HEAD
   const id = open ? "simple-popover" : undefined;
+=======
+  const ids = open ? "simple-popover" : undefined;
+>>>>>>> b0c226b5600fbd361ad750bf3be5c0f5b6f8705e
 
   const handleClickOpen = () => {
     setOpenSecond(true);
@@ -526,7 +534,7 @@ const CouponBox = () => {
       ))}
       <Popover
         sx={{ m: -7, mt: 0.7 }}
-        id={id}
+        id={ids}
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}

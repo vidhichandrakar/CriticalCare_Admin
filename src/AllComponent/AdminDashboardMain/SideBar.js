@@ -23,6 +23,7 @@ import SimpleMenu from "./SubMenu";
 function SideBar({ openSidebarToggle, OpenSidebar }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorE2, setAnchorE2] = React.useState(null);
+  const [anchorE3, setAnchorE3] = React.useState(null);
   // const styles = useStyles();
   const handlePopoverOpen = (event) => {
     setAnchorE2(event.currentTarget);
@@ -40,8 +41,17 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const handleClickCourse = (event) => {
+    setAnchorE3(event.currentTarget);
+    console.log(event.currentTarget);
+  };
+  const handleCloseCourse = () => {
+    setAnchorE3(null);
+  };
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+  const Courseopen = Boolean(anchorE3);
+  const idss = Courseopen ? "simple-popover" : undefined;
 
 
   const handleClick2 = (event) => {
@@ -104,90 +114,32 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
           </Link>
 
           <Link>
-          <SimpleMenu/>
-          {/* <div>
-              <Typography
-                className="hoverrr"
-                // sx={{ mt: -2 }}
-
-                aria-owns={anchorE2 ? "simple-menu" : undefined}
-                aria-haspopup="true"
-                onClick={handleClickNew}
-                onMouseOver={handleClickNew}
-                onMouseLeave={handleCloseHover}
-              >
-                <MenuBookIcon className="icon" />
+          {/* <SimpleMenu/> */}
+            <Typography
+               onClick={handleClickCourse} 
+              className="hoverrr"
+              sx={{ mt: -2 }}
+            >
+             <MenuBookIcon className="icon" />
                 Courses
-              </Typography>
-              <Menu
-                id="simple-menu"
-                anchorEl={anchorE2}
-                open={Boolean(anchorE2)}
-                onClose={handleCloseNew}
-                MenuListProps={{
-                  onMouseEnter: handleHover,
-                  onMouseLeave: handleCloseHover,
-                  style: { pointerEvents: "auto" }
-                }}
-                getContentAnchorEl={null}
-                PopoverClasses={{
-                  root: styles.popOverRoot
-                }}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                sx={{ marginLeft: "8%" }}
-              >
-                <MenuItem onClick={() => console.log("enter")}>Profile</MenuItem>
-                <MenuItem onClick={handleCloseNew}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
-              </Menu>
-    </div> */}
-          {/* <div  aria-owns={opens ? 'mouse-over-popover' : undefined}
-                aria-haspopup="true"
-                onMouseEnter={handlePopoverOpen}
-                onMouseLeave={handlePopoverClose}>
-            {console.log("opens",opens , anchorE2)}
-              <Typography
-                className="hoverrr"
-                sx={{ mt: -2 }}
-               
-              >
-              <MenuBookIcon className="icon" />
-              Courses
             </Typography>
             <Popover
-             id="mouse-over-popover"
-             sx={{
-               pointerEvents: 'none',
-               ml: 20, mt: -3 
-             }}
-              open={opens}
-              anchorEl={anchorE2}
-              onClose={handlePopoverClose}
+              id={idss}
+              open={Courseopen}
+              anchorEl={anchorE3}
+              onClose={handleCloseCourse}
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "left",
               }}
-              onMouseEnter={handlePopoverOpen}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
+              sx={{ ml: 20, mt: -3 }}
             >
-              <Link to="/YourCourses" className="textDecoration" >
-                {" "}
+             <Link to="/YourCourses" className="textDecoration" >
                 <Typography className="textDecoration" sx={{ p: 1, textDecoration: "none",textDecorationLine: 'none', color: 'greys' }}>
                   My Courses
                 </Typography>
               </Link>
               <Link to="/CreateCoupon" className="textDecoration" >
-                {" "}
                 <Typography sx={{ p: 1, textDecoration: "none" }}>
                   Manage Coupons
                 </Typography>
@@ -204,10 +156,9 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                   Upcoming Course / Blogs{" "}
                 </Typography>
               </Link>
+            
             </Popover>
-            </div> */}
           </Link>
-
           <Link to="/TestPortal">
             <Typography
               className="hoverrr"
@@ -218,7 +169,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
             </Typography>
           </Link>
 
-          <Link to="/Accordian">
+          <Link to="/">
             <Typography
               className="hoverrr"
               sx={{ mt: -2 }}
@@ -238,6 +189,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
             </Typography>
           </Link>
 
+         
           <Link>
             <Typography
                onClick={handleClick} 

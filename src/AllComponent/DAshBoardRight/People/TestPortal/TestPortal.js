@@ -24,6 +24,20 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
+import ClearIcon from "@mui/icons-material/Clear";
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import BookIcon from '@mui/icons-material/Book';
+import BookmarkAddedIcon from '@mui/icons-material/BookmarkAdded';
+import FormControl from "@mui/material/FormControl";
+import {
+  CommonTypography,
+  commonButton,
+  commonSelect,
+  commonTextField,
+} from "../../../../Util/CommonFields" ;
+import Checkbox from '@mui/material/Checkbox';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -40,6 +54,33 @@ const TestPortal = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openId, setOpenId] = useState(0);
   const [openData, setOpenData] = useState("");
+
+  const [state, setState] = useState({
+    left: false,
+  });
+  const [menuOptipnOpen, setMenuOptipnOpen] = useState(false);
+  const [value, setValue] = useState("");
+
+  const handleChangeClose = () => {
+    setState(false)
+  }
+  const handleChange = (event) => {
+    setValue(event.target.value);
+    setMenuOptipnOpen(false);
+  };
+  const toggleDrawer = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setState({ ...state, [anchor]: open });
+    setValue(event.target.value);
+  };
+
+
+
   const columns = [
     {
       id: "Tests",
@@ -57,6 +98,10 @@ const TestPortal = () => {
     },
   ];
   const createData = (Tests, Date, Actions) => {
+    let dataa = Tests
+     dataa = [...dataa];
+
+    console.log("dataa",dataa)
     return { Tests, Date, Actions };
   }
   const rows = [
@@ -165,6 +210,155 @@ const TestPortal = () => {
   const handleCloseDialog = () => {
     setOpen(false);
   };
+
+  const list = (anchor) => (
+    <Box
+      sx={{
+        width: anchor === "top" || anchor === "bottom" ? "auto" : 450,
+        margin: "20px",
+      }}
+      role="presentation"
+    >
+      <Box className="flexrow JustfiSB">
+        <h3>Module 9 Neuromonitoring</h3>
+        <ClearIcon onClick={handleChangeClose} className="Xicon pointer" />
+      </Box>
+      <Box className="mt2">
+        <Typography>Add test to</Typography>
+        <Box className="mt2 BasicInfoBox">
+          <Box className="flexrow JustfiSB">
+              <Box className="flexrow width50">
+                <BookIcon className="BookIcon"/><Typography className="textAdd">Course</Typography>
+            </Box>
+            <Button className="AddButton">Add to Course <ArrowRightAltIcon /></Button>
+          </Box>
+        </Box>
+        <Box className="mt2 BasicInfoBox">
+          <Box className="flexrow JustfiSB">
+              <Box className="flexrow width50">
+                <BookmarkAddedIcon className="BookIcon"/><Typography className="textAdd">Free Test</Typography>
+            </Box>
+            <Button className="AddButton">Add to Free Test <ArrowRightAltIcon /></Button>
+          </Box>
+        </Box>
+      </Box>
+    </Box>
+  );
+
+  
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
+  const AddCourse = (anchor) => (
+    <Box
+      sx={{
+        width: anchor === "top" || anchor === "bottom" ? "auto" : 450,
+        margin: "20px",
+      }}
+      role="presentation"
+    >
+      <Box className="flexrow">
+        <KeyboardBackspaceIcon />
+        <h3>Add To Course</h3>
+      </Box>
+      <Box className="mt2">
+        <Box className="mt2 BasicInfoBox">
+          <Box className="flexrow pad20">
+                <BookIcon className="BookIcon"/><Typography className="textAdd">Module 9 Neuromonitoring</Typography>
+          </Box>
+        </Box>
+        <Box className="mt2">
+        <FormControl sx={{ mt: 2, minWidth: 450 }} className="categorySelect">
+          <Typography>Select Course</Typography>
+            {commonSelect(
+              {
+                placeholder: "Select Category",
+                menuItemList: [
+                  { id: 1, label: "Java Script" },
+                  { id: 2, label: "React JS" },
+                  { id: 3, label: "Python" },
+                ],
+                className: "categorytext",
+              },
+            )}
+          </FormControl>
+        </Box>
+        <Box className="mt2">
+        <div className="FlexRow">
+        {CommonTypography({ fontWeight: 600, label: "Number of a\ttempts" })}
+      </div>
+      {commonTextField(
+        {
+          id: "fullWidth",
+          className: "BoxShadow",
+          inputClassName: "textField",
+          labels: "Enter course name",
+        },
+      )}
+        </Box>
+        <Box className="flexrow mt2">
+           <Checkbox {...label} />
+           <Typography>Set unlimited attempts</Typography>
+        </Box>
+      </Box>
+    </Box>
+  );
+  const AddFreeTest = (anchor) => (
+    <Box
+      sx={{
+        width: anchor === "top" || anchor === "bottom" ? "auto" : 450,
+        margin: "20px",
+      }}
+      role="presentation"
+    >
+      <Box className="flexrow">
+        <KeyboardBackspaceIcon />
+        <h3>Add To Course</h3>
+      </Box>
+      <Box className="mt2">
+        <Box className="mt2 BasicInfoBox">
+          <Box className="flexrow pad20">
+                <BookIcon className="BookIcon"/><Typography className="textAdd">Module 9 Neuromonitoring</Typography>
+          </Box>
+        </Box>
+        <Box className="mt2">
+        <FormControl sx={{ mt: 2, minWidth: 450 }} className="categorySelect">
+          <Typography>Select Course</Typography>
+            {commonSelect(
+              {
+                placeholder: "Select Category",
+                menuItemList: [
+                  { id: 1, label: "Java Script" },
+                  { id: 2, label: "React JS" },
+                  { id: 3, label: "Python" },
+                ],
+                className: "categorytext",
+              },
+            )}
+          </FormControl>
+        </Box>
+        <Box className="mt2">
+        <div className="FlexRow">
+        {CommonTypography({ fontWeight: 600, label: "Number of a\ttempts" })}
+      </div>
+      {commonTextField(
+        {
+          id: "fullWidth",
+          className: "BoxShadow",
+          inputClassName: "textField",
+          labels: "Enter course name",
+        },
+      )}
+        </Box>
+        <Box className="flexrow mt2">
+           <Checkbox {...label} />
+           <Typography>Set unlimited attempts</Typography>
+        </Box>
+      </Box>
+    </Box>
+  );
+
+
+
   return (
     <div className='grid-container'>
       <SideBar />
@@ -326,9 +520,18 @@ const TestPortal = () => {
                     horizontal: "right",
                   }}
                   sx={{ml:-12}}
+                  value={value}
                 >   
+                  <Button className="redDeleteofTestPortal"
+                  onClick={toggleDrawer("right", true)}
+                  value={value}
+                  >
+                    <DeleteIcon className="deleteIcon" /> 
+                    <span >Delete</span>
+                  </Button>
                   <Typography className="redDeleteofTestPortal">
-                    <DeleteIcon className="deleteIcon"/> <span>Delete</span>
+                    <DeleteIcon className="deleteIcon"/> 
+                    <span>Deleted</span>
                   </Typography>
                 </Popover>
                 
@@ -336,6 +539,14 @@ const TestPortal = () => {
             </Table>
           </TableContainer>
         </Paper>
+        <SwipeableDrawer
+          anchor={"right"}
+          open={state["right"]}
+          onClose={toggleDrawer("right", false)}
+          onOpen={toggleDrawer("right", true)}
+        >
+          {list("right")}
+        </SwipeableDrawer>
       </div>
     </div>
     </div>

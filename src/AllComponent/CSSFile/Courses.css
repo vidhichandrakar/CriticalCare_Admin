@@ -35,7 +35,7 @@
    background-color: rgba(224, 184, 24, 0.236);
   border-radius: 50%;
   color:rgb(255, 186, 37);
-
+  text-align: center;
 }
 .headerText{
   font-size: 1.7em !important;
@@ -59,9 +59,52 @@
   display: flex;
   flex-direction: row-reverse;
 }
+.JustfiSB{
+  justify-content: space-between;
+}
+.Xicon{
+  border-radius: 5px;
+  color: grey;
+  background-color: #f4f9fd;
+}
+.BasicInfoBox{
+  background-color: #f4f9fd;
+  border-radius: 5px;
+}
+
+.BasicInfo{
+  margin-top: 18px;
+  color: grey;
+}
+.InfoTextLeft{
+  margin-left: 15% !important;
+}
+.InfoTextRight{
+  margin-left: 8% !important;
+}
+.infoicon{
+  width: 30% !important;
+}
+.margin20{
+  margin: 20px;
+}
+.width80{
+  width: 70%;
+}
+.TickIcon{
+  height: 2vh !important;
+  width: 5% !important;
+  margin-left: 3%;
+  background-color: #0ff55c;
+  border-radius: 50%;
+  color:white;
+}
+.WarningIcon{
+  color: yellow;
+  margin-left: 2% !important;
+}
 
 /* Create courses Css */
-
 .createBoxHeader{
   padding-top: 2%;
 }

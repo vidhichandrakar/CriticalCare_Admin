@@ -21,24 +21,26 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Checkbox from "@mui/material/Checkbox";
 
 const User = () => {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [openId, setOpenId] = React.useState(0);
-  const [openData, setOpenData] = React.useState("");
-  const [checkedValue , setCheckedValue] = React.useState([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [openId, setOpenId] = useState(0);
+  const [openData, setOpenData] = useState("");
+  const [checkedValue, setCheckedValue] = useState([]);
 
   const createData = (User_Info, Full_Name, Date_of_Registration, Actions) => {
     return { User_Info, Full_Name, Date_of_Registration, Actions };
   };
-  const handleChangeOnCheckBox=(event,data)=>{
-    //uncheck me bhi add ho rh hai, to true false ka kam krna hai
+  const handleChangeOnCheckBox = (event, data) => {
     let selectValue = [...checkedValue];
-    selectValue.push(data)
-    console.log(event)
-    console.log(data);
-    setCheckedValue(selectValue);
-  }
+    console.log("eventt", event.target.checked);
+    if (event.target.checked === true) {
+      selectValue.push(data);
+      setCheckedValue(selectValue);
+    } else {
+      setCheckedValue(selectValue.filter((item) => data.phone != item.phone));
+    }
+  };
   const rows = [
     createData(
       { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
@@ -47,7 +49,7 @@ const User = () => {
       <MoreVertIcon
         onClick={(event) =>
           handleClick(event, "id1", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
+            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "75895576" },
             full_name: "Sheikh Shoeb",
             date: "12/10/23",
           })
@@ -55,13 +57,13 @@ const User = () => {
       />
     ),
     createData(
-      { name: "jitendra.chandrakar@gmail.com", phone: "7589576" },
+      { name: "jitendra.chandrakar@gmail.com", phone: "758329576" },
       "Jitendra Chandrakar",
       "19/Dec/2023",
       <MoreVertIcon
         onClick={(event) =>
           handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
+            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "758529576" },
             full_name: "Jitendra Chandrakar",
             date: "12/10/23",
           })
@@ -69,13 +71,13 @@ const User = () => {
       />
     ),
     createData(
-      { name: "pranab.raj@gmail.com", phone: "7589576" },
+      { name: "pranab.raj@gmail.com", phone: "7589585276" },
       "Pranab Raj",
       "19/Dec/2023",
       <MoreVertIcon
         onClick={(event) =>
           handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
+            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "758941576" },
             full_name: "Pranab Raj",
             date: "12/10/23",
           })
@@ -83,13 +85,13 @@ const User = () => {
       />
     ),
     createData(
-      { name: "saniakhan@gmail.com", phone: "7589576" },
+      { name: "saniakhan@gmail.com", phone: "758952576" },
       "Sania Khan",
       "19/Dec/2023",
       <MoreVertIcon
         onClick={(event) =>
           handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
+            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "758429576" },
             full_name: "Sania Khan",
             date: "12/10/23",
           })
@@ -97,13 +99,13 @@ const User = () => {
       />
     ),
     createData(
-      { name: "rahulamin@gmail.com", phone: "7589576" },
+      { name: "rahulamin@gmail.com", phone: "75489576" },
       "Rahul Amin",
       "19/Dec/2023",
       <MoreVertIcon
         onClick={(event) =>
           handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
+            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "758902576" },
             full_name: "Rahul Amin",
             date: "12/10/23",
           })
@@ -111,13 +113,16 @@ const User = () => {
       />
     ),
     createData(
-      { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
+      { name: "sheikhshoeb194@gmail.com", phone: "7501289576" },
       "Menka",
       "19/Dec/2023",
       <MoreVertIcon
         onClick={(event) =>
           handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
+            User_Info: {
+              name: "sheikhshoeb194@gmail.com",
+              phone: "7589551076",
+            },
             full_name: "Menka",
             date: "12/10/23",
           })
@@ -125,13 +130,13 @@ const User = () => {
       />
     ),
     createData(
-      { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
+      { name: "sheikhshoeb194@gmail.com", phone: "758529576" },
       "Ramesh",
       "19/Dec/2023",
       <MoreVertIcon
         onClick={(event) =>
           handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
+            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "758951076" },
             full_name: "Ramesh",
             date: "12/10/23",
           })
@@ -139,13 +144,13 @@ const User = () => {
       />
     ),
     createData(
-      { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
+      { name: "sheikhshoeb194@gmail.com", phone: "758952576" },
       "Rakesh Pal",
       "19/Dec/2023",
       <MoreVertIcon
         onClick={(event) =>
           handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
+            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "758419576" },
             full_name: "Rakesh Pal",
             date: "12/10/23",
           })
@@ -159,7 +164,7 @@ const User = () => {
       <MoreVertIcon
         onClick={(event) =>
           handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
+            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "758529576" },
             full_name: "Ashutosh",
             date: "12/10/23",
           })
@@ -173,7 +178,7 @@ const User = () => {
       <MoreVertIcon
         onClick={(event) =>
           handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
+            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "755289576" },
             full_name: "Pixel Insource",
             date: "12/10/23",
           })
@@ -203,13 +208,23 @@ const User = () => {
           Heading={"Users (357)"}
           subHeading={"View, Filter & Manage all your users"}
         />
-{console.log("checkedValue",checkedValue)}
         <div className="searchnfilter">
           <SearchBar mt="2%" placeholder="Search by name" />
           <Button className="filterButton">
             <FilterAltIcon className="filterIcon" /> Filter
           </Button>
         </div>
+        {checkedValue.length>0 ?
+        <div className="countSelectedValue">
+          
+          <Button className="countedCheckBox" disabled>
+            {checkedValue.length} Selected
+          </Button>
+          <Button className="deleteButton" variant="outlined" color="error">
+            Delete
+          </Button>
+        </div>:null
+        }
         <Paper
           sx={{ width: "100%", overflow: "hidden" }}
           className="completeTable"
@@ -253,7 +268,14 @@ const User = () => {
                                   align={column.align}
                                   className="useInfoCheckbox"
                                 >
-                                  <Checkbox onChange={(event)=>handleChangeOnCheckBox(event, row.User_Info)} />
+                                  <Checkbox
+                                    onChange={(event) =>
+                                      handleChangeOnCheckBox(
+                                        event,
+                                        row.User_Info
+                                      )
+                                    }
+                                  />
                                   <div className="userCheckBoxDiv">
                                     <Typography className="bluePara">
                                       {value.name}

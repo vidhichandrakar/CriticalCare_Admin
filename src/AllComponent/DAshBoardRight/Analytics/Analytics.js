@@ -142,7 +142,7 @@ const Analytics = () => {
             </div>
           </Box>
         </div>
-        <RajTest />
+        
       </main>
      
     </div>
