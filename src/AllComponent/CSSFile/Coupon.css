@@ -5,8 +5,7 @@
 }
 .scndRadioBtn{
   margin-left:  30%;
-  
-}
+  }
 .radio-icon{
   color:rgb(132, 189, 246);
 }
@@ -16,7 +15,6 @@
   width:100%;
   padding-bottom: 1%;
   border-bottom: 3px solid #b5abab !important;
-
 }
 .couponButton{
   width:200px !important;
@@ -61,7 +59,6 @@
   font-size: 0.7rem !important;
   width: 100% !important;
   color: #0f7af5;
-
 }
 .couponRightBox{
   width:85%;
@@ -83,10 +80,21 @@
   margin-left: 2%;
   width: 88%;
 }
-.verticalDivider{
-  background-color: #beb4b4;
+.verticalDividerOne{
+  background-color: rgb(224 223 223);
   width: 3px;
   height:150px;
+}
+.verticalDividerTwo{
+  background-color: rgb(224 223 223);
+  width: 2px;
+  height: 17px;
+  margin-left: 4%;
+}
+.circleIcon{
+  color: rgb(224 223 223) !important;
+  margin-left: 76% !important;
+  padding: -50%;
 }
 .courseMainCoupon{
   display: flex !important;
@@ -94,9 +102,8 @@
   background-color: #fff !important;
   width:100% !important;
   margin-top: 2%;
-
 }
-  .formMainCoupon{
+.formMainCoupon{
   padding: 1%;
   width:100%;
 }
@@ -123,7 +130,7 @@
 
 
 
-/* SHRISHTI'S ACCORDION CSS */
+/* ACCORDION CSS */
 
 
 
@@ -133,12 +140,12 @@
   width: 90%;
 }
 .couponInfoHeading p{
-  color: #675757;
+  color: #4c3e3e;
 }
 .completeCouponInfo{
   background-color:white;
   width: 98% !important;
-  border-top: 1px solid gray;
+  border-top: 1px solid rgb(224 223 223);
   padding-left: 15px;
 }
 .completeCouponInfoBoxes{
@@ -149,10 +156,14 @@
 .couponInfoBoxes{
   flex-direction: column;
   width: 84%;
-  height: 66%;
-  padding: 3%;
-  border: 0.2px solid rgb(152, 149, 149);
+  height: 55%;
+  padding: 6%;
+  border: 0.2px solid rgb(224 223 223);
   padding: -20px -20px;
+}
+.couponInfoBoxes:hover{
+  border: 0.2px solid rgb(152, 149, 149);
+  cursor: pointer;
 }
 .couponInfoBoxes p{
   color: grey;
@@ -160,4 +171,55 @@
 }
 .couponInfoBoxes h3{
   font-weight: 500 !important;
+}
+.discount{
+  font-weight:bolder !important;
+}
+.editButton{
+opacity:0 !important;
+background: none !important;
+color: blue !important;
+}
+.couponInfoBoxes:hover .editButton{
+ opacity: 1 !important;
+}
+.numberAndButton{
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+}
+.makeFirstHeadCenter{
+  text-align: center;
+}
+.popUpDiscount{
+  border: 2px dashed rgb(251, 207, 103) !important;
+  background-color: #ffffe2;
+  text-align: center !important;
+  padding: 8px 0;
+  letter-spacing: 2px;
+}
+.overallUseageLimit{
+  margin-bottom: 0px;
+  margin-top: 50px;
+  font-weight: 500;
+}
+.lastParaGreyColor{
+  color: rgb(195, 186, 186);
+}
+.makingThisButtonBlue{
+  background-color: #4598f9 !important;
+  color: #fff !important;
+  text-transform: none !important;
+}
+.MuiDialog-backdrop{
+  background-color:red !important;
+  /* opacity: 0.5 !important; */
+  /* z-index: 1000; */
+  /* background-color: '#000000'; */
+}
+.couponBackDrop{
+  /* opacity: 0.5 !important; */
+  /* display: inline-block; */
+  /* z-index: 1000;
+  background-color: '#000000'; */
 }
