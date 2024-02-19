@@ -7,6 +7,7 @@ import img from "../../../Media/Images/banner2.jpg";
 import Typography from "@mui/material/Typography";
 import ModeIcon from "@mui/icons-material/Mode";
 import { styled } from "@mui/material/styles";
+import BannerPopUp from "./BannerPopUp";
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
   clipPath: "inset(50%)",
@@ -20,18 +21,44 @@ const VisuallyHiddenInput = styled("input")({
 });
 const BannerCard = (props) => {
   const [storedFilePath, setStoredFilePath] = useState([]);
+  const [openPopUp, setOpenPopUp] = useState(false);
 
   const handleImageUpload = (value, id) => {
     let storedPath = [...storedFilePath];
-    let data = { id: id, value: value };
-    storedPath.push(data);
-    setStoredFilePath(storedPath);
+    // let data = { id: id, value: value };
+    // storedPath.push(data);
+    // setStoredFilePath(storedPath);
     console.log("value and id", storedPath);
     console.log("storedFilePath", storedFilePath);
+    let array2 = [...storedPath];
+    let array3 = [];
+    let abc = array2.find((data) => data.id === id);
+    console.log("abc", abc);
+    if (abc) {
+      array2.map((data) => {
+        if (data.id == id) {
+          let obj = Object.assign({}, data);
+          obj.value = value;
+          array3.push(obj);
+        } else {
+          array3.push(data);
+        }
+      });
+    } else {
+      array3.push(...storedPath, { id: id, value: value });
+    }
+
+    console.log("array3...", array3);
+    setStoredFilePath(array3);
   };
+
+  const handleClickPopUp=()=>{
+    setOpenPopUp(!openPopUp);
+
+  }
   return (
     <>
-      {/* {console.log("storedFileP====ath", storedFilePath)} */}
+    <BannerPopUp openPopUp={openPopUp} handleClickPopUp={handleClickPopUp}/>
       {props.Data.map((value, index) => (
         <div className="BannerMainBox">
           <div className="InsideBannerBox">
@@ -66,14 +93,7 @@ const BannerCard = (props) => {
                   </Button>
                 </div>
               </div>
-              <div>kjhbn</div>
-              {/* {storedFilePath.map((item) => {
-                return item.value;
-              })} */}
-              {console.log("storedFilePathksdfv",storedFilePath)}
               {storedFilePath?.map((row) => {
-                console.log("71", row.id, row.value);
-                console.log("72", value.id);
                 return row.id === value.id ? row.value : null;
               })}
 
@@ -82,7 +102,7 @@ const BannerCard = (props) => {
               </CardContent>
               <div className="BannerHead BorderBottom">
                 <p>{value.boxtitle}</p>
-                <Button className="changeBtn">Change</Button>
+                <Button className="changeBtn" onClick={handleClickPopUp}>Change</Button>
               </div>
             </main>
           </div>
