@@ -31,7 +31,6 @@ const BannerCard = (props) => {
   };
   return (
     <>
-      {/* {console.log("storedFileP====ath", storedFilePath)} */}
       {props.Data.map((value, index) => (
         <div className="BannerMainBox">
           <div className="InsideBannerBox">
@@ -49,13 +48,12 @@ const BannerCard = (props) => {
                   src={value.img}
                   alt="Avatar"
                   className="BannerImage image"
-                  // style={{width:"100%"}}
                 />
                 <div class="middle">
                   <Button class="text" component="label">
                     {" "}
                     <ModeIcon className="PencilIcon" />
-                    change
+                    Change
                     <VisuallyHiddenInput
                       type="file"
                       accept="image/*"
@@ -66,10 +64,8 @@ const BannerCard = (props) => {
                   </Button>
                 </div>
               </div>
-              <div>kjhbn</div>
-              {/* {storedFilePath.map((item) => {
-                return item.value;
-              })} */}
+              {/* <div>kjhbn</div> */}
+              
               {console.log("storedFilePathksdfv",storedFilePath)}
               {storedFilePath?.map((row) => {
                 console.log("71", row.id, row.value);

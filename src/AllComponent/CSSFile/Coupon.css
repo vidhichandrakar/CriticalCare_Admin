@@ -93,8 +93,8 @@
 }
 .circleIcon{
   color: rgb(224 223 223) !important;
-  margin-left: 76% !important;
-  padding: -50%;
+  margin-left: 27px !important;
+  font-size:xx-small !important;
 }
 .courseMainCoupon{
   display: flex !important;
