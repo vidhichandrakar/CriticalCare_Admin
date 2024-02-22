@@ -86,12 +86,9 @@ body {
 }
 
 .sidebar-list-item {
-  /* padding: 20px 20px 20px 20px;  */
-  /* padding: 7px 4px; */
   font-size: 15px;
 }
 .BottomLine {
-  /* margin-top: -20px; */
   margin-left: 20px;
 }
 
@@ -114,7 +111,6 @@ body {
   text-decoration: none;
   margin-top: 20px;
   color: grey;
-  /* padding: 7px 4px; */
   font-size: 1rem;
 }
 
@@ -141,9 +137,7 @@ body {
 /*End Main  */
 
 /* Start Dashborad */
-/* .DashBoardMAinBox{
-  margin: 20px;
- } */
+
 .Head {
   display: flex;
   flex-direction: row;
@@ -172,7 +166,6 @@ body {
 .AdditionalBox {
   background-color: white;
   border-radius: 15px;
-  /* margin: 20px; */
 }
 .TextHeading {
   font-size: 1.2rem;
@@ -196,7 +189,6 @@ body {
 }
 .AdditionalIcon {
   padding-top: 30px;
-  /* margin-top: 10%; */
   vertical-align: bottom;
   line-height: 1px;
   font-size: 3rem !important;
@@ -204,7 +196,6 @@ body {
 .OurOfferBox {
   background-color: white;
   border-radius: 15px;
-  /* margin: 20px; */
 }
 .Offer-main-cards {
   display: grid;
@@ -241,7 +232,6 @@ body {
 padding: 2px 2px;
 }
 .OfferCardText p {
-  /* margin-top: -13%; */
   color: grey;
   font-size: 1rem;
 }
@@ -271,7 +261,6 @@ padding: 2px 2px;
   .header {
     justify-content: space-between;
   }
-  /* margin: 20px; */
 }
 .Head h1 {
   font-size: 1.3rem;
@@ -354,7 +343,10 @@ padding: 2px 2px;
 /* START OF TRANSACTION  */
 
 
-
+.h50vh{
+ height: 55vh !important; 
+ border-radius: 15px !important;
+}
 .transactionCards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -434,12 +426,7 @@ padding: 2px 2px;
   box-shadow: none !important;
 }
 .redDelete {
-  /* display: flex; */
-  /* align-items: center; */
-  /* justify-content: center; */
   color: red !important;
-  /* padding: 6px 25px !important; */
-  /* font-weight: 700 !important; */
 }
 .Deleticon{
   width: 30% !important;
@@ -536,7 +523,17 @@ margin-left: 10px !important;
 }
 .redDeleteofTestPortal{
   color: red !important;
-  padding: 2px 20px;
+  display: flex !important; 
+  flex-direction:row!important;
+  align-items:left!important;
+  padding: 3px 9px !important;
+}
+.blueBlockUser{
+  color: #0075ff !important;
+
+}
+.deleteIcon{
+  margin-right:10px ;
 }
 /* END OF TEST PORTAL  */
 
@@ -568,6 +565,26 @@ margin-left: 10px !important;
   justify-content: space-between;
 }
 
+.width50{
+  width: 50%;
+  padding: 26px 10px;
+}
+.mt2{
+  margin-top: 5%;
+}
+.BookIcon{
+  width: 50%;
+  color: rgb(21, 203, 244);
+}
+.AddButton{
+  color: rgb(21, 203, 244) !important;
+}
+.textAdd{
+  margin-left: 10% !important;
+}
+.pad20{
+  padding: 26px 10px;
+}
 /* END OF ADMIN TESTIMONIAL  */
 
 /* START OF COURSES CREATE COUPON  */
@@ -699,7 +716,7 @@ margin-left: 10px !important;
 .folderIcon {
   color: dodgerblue;
   margin-top: 12% !important;
-  background-color: rgba(72, 113, 146, 0.594);
+  background-color: rgba(182 204 221 / 59%);
   border-radius: 50%;
   width: 100%;
 }
@@ -762,4 +779,14 @@ margin-left: 10px !important;
   .transactionCards {
     grid-template-columns: 1fr;
   }
+}
+
+.useInfoCheckbox{
+  display: flex !important;
+  flex-direction: row !important;
+  margin-left: 12px;
+}
+.userCheckBoxDiv{
+  margin-left: 20px;
+
 }

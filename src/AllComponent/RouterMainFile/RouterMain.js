@@ -15,8 +15,6 @@ import CouponMain from '../Coupons/Coupons.main';
 import YourCourses from '../Courses/YourCourses';
 import CreateCourses from '../Courses/MainCourses.component';
 import Banner from '../DAshBoardRight/Banner/Banner';
-// import AddTestDailog from '../DAshBoardRight/People/TestPortal/AddTestDailog';
-
 
 const RouterMain = () => {
   return (
@@ -35,9 +33,8 @@ const RouterMain = () => {
             <Route exact path="/YourCourses" element= {<YourCourses />}> </Route>
             <Route exact path="/Analytics" element= {<Analytics />}> </Route>
             <Route exact path="/UpcomingCoursesMain" element= {<UpcomingCoursesMain />}> </Route>
-            <Route exact path="/Banner" element= {<Banner />}> </Route>
-            <Route exact path="/Coupon" element= {<CouponMain />}> </Route>
-            {/* <Route exact path="/AddTestDailog" element= {<AddTestDailog />}> </Route> */}
+            <Route exact path="/CouponMain" element= {<CouponMain />}> </Route>
+            <Route exact path="/Banner" element= {<Banner/>}> </Route>
     </Routes>
     </div>
   )

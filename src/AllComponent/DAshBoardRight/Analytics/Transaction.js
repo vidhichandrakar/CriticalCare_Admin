@@ -34,21 +34,17 @@ const Transaction = () => {
     const columns = [
         {
           id: "User_Info",
-          label: "Studemt Name",
-          // minWidth: 170
+          label: "Student Name",
         },
         {
           id: "Full_Name",
           label: "Course Name",
           align: "center",
-          //  minWidth: 100
         },
         {
           id: "Date_of_Registration",
           label: "Transaction Date",
-          // minWidth: 170,
           align: "center",
-          // format: (value) => value.toLocaleString('en-US'),
         },
         {
           id: "Actions",
@@ -70,29 +66,13 @@ const Transaction = () => {
           { name: "Pranab Raj", phone: "7589576" },
           "TRICS 1 FREE MOCK TEST FOR EDIC-1",
           "19/Dec/2023",
-          <MoreVertIcon
-            onClick={(event) =>
-              handleClick(event, "id1", {
-                User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
-                full_name: "TRICS 1 FREE MOCK TEST FOR EDIC-1",
-                date: "12/10/23",
-              })
-            }
-          />
+          "₹1.00"
         ),
         createData(
-          { name: "Sania Khan", phone: "asdfghjkl" },
+          { name: "Sania Khan", phone: "7534626" },
           "TRICS 1 FREE MOCK TEST FOR EDIC-1",
           "19/Dec/2023",
-          <MoreVertIcon
-            onClick={(event) =>
-              handleClick(event, "id2", {
-                User_Info: { name: "sheikhshoeb194@gmail.com", phone: "asdfghjkl" },
-                full_name: "TRICS 1 FREE MOCK TEST FOR EDIC-1",
-                date: "12/10/23",
-              })
-            }
-          />
+          "₹1.00"
         ),
        ];
     
@@ -140,7 +120,7 @@ const Transaction = () => {
         sx={{ width: "100%", overflow: "hidden", height: "4%" }}
         className="completeTable h50vh"
       >
-        <TableContainer sx={{ maxHeight: 540 }}>
+        <TableContainer sx={{ maxHeight: 540 }} >
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
@@ -191,20 +171,7 @@ const Transaction = () => {
                     </TableRow>
                   );
                 })}
-              <Popover
-                id={openId}
-                // open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "right",
-                }}
-              >
-                <Typography sx={{ p: 1 }}>{openData.full_name}</Typography>
-                <Typography sx={{ p: 1 }}>Edit </Typography>
-                <Typography sx={{ p: 1 }}>Delete</Typography>
-              </Popover>
+             
             </TableBody>
           </Table>
         </TableContainer>
@@ -218,63 +185,3 @@ const Transaction = () => {
 }
 
 export default Transaction;
-//   return (
-//     <div className='main-container'>
-//     <div className=' m20'>
-//         <CourseHeader Heading={"Transaction Dashboard"} />
-
-//         <div className='searchnfilter'>
-//            <SearchBar />
-//         </div>
-
-//        <div className='transactionCards'> 
-//         <div className='boxNoOne'>
-//             <span className='boxValue'>Transactions</span>
-//             <span className='boxNumber'>2</span>
-//         </div>
-//         <div className='boxNoTwo'>
-//             <span className='boxValue'>Transactions Amount</span>
-//             <span className='boxNumber'>₹2</span>
-//         </div>
-//         <div className='boxNoThree'>
-//             <span className='boxValue'>Avg Order Value</span>
-//             <span className='boxNumber'>₹1</span>
-//         </div>
-//         </div>
-
-//         <table className='transactionCompleteTable'>
-//             <tr className='transactionTableHeading'>
-//                 <th>
-//                     Student Name
-//                 </th>
-//                 <th className='courseName'>
-//                     Course Name
-//                 </th>
-//                 <th>
-//                     Transaction Date
-//                 </th>
-//                 <th>
-//                     Transaction Amount
-//                 </th>
-//             </tr>
-//             <hr className='hrLine'/>
-
-    
-//             <tr>
-//                 <td><h4>Pranab Raj</h4> <h4 className='greyboldnumbers'>+918889844180</h4></td>
-//                 <td><p className='firstCourseName'>TRICS 1 FREE MOCK TEST FOR EDIC-1</p></td>
-//                 <td><p className='transactionDate'>19/Dec/2023</p></td>
-//                 <td className='transactionAmount'> ₹1.00</td> 
-//             </tr>
-//             <tr>
-//                 <td><h4>Sania Khan</h4> <h4 className='greyboldnumbers'>+918889844180</h4></td>
-//                 <td><p className='firstCourseName'>TRICS 1 FREE MOCK TEST FOR EDIC-1</p></td>
-//                 <td><p className='transactionDate'>19/Dec/2023</p></td>
-//                 <td className='transactionAmount'> ₹1.00</td> 
-//             </tr>
-//         </table>
-      
-//     </div>
-//     </div>
-
-//   )

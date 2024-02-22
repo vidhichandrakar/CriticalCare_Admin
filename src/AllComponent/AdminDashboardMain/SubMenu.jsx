@@ -69,8 +69,8 @@ function SimpleMenu() {
           style: { pointerEvents: "auto" },
         }}
         getContentAnchorEl={null}
-        anchorOrigin={{ horizontal: "left", vertical: "top" }}
-        // sx={{ ml: "10%", mt: "1%" }}
+        anchorOrigin={{ horizontal: "center", vertical: "top" }}
+        // sx={{ ml: 5, }}
       >
          <Link to="/YourCourses" className="textDecoration">
             {" "}
@@ -134,6 +134,7 @@ function SimpleMenu() {
               Upcoming Course / Blogs{" "}
             </Typography>
           </Link>
+         
       </Menu>
     </div>
   );
