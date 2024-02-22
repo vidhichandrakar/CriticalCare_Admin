@@ -61,6 +61,9 @@ const TestPortal = () => {
   const [menuOptipnOpen, setMenuOptipnOpen] = useState(false);
   const [value, setValue] = useState("");
 
+  const handleChangeClose = () => {
+    setState(false)
+  }
   const handleChange = (event) => {
     setValue(event.target.value);
     setMenuOptipnOpen(false);
@@ -217,8 +220,8 @@ const TestPortal = () => {
       role="presentation"
     >
       <Box className="flexrow JustfiSB">
-        <h3>Props Ke jariye name</h3>
-        <ClearIcon className="Xicon" />
+        <h3>Module 9 Neuromonitoring</h3>
+        <ClearIcon onClick={handleChangeClose} className="Xicon pointer" />
       </Box>
       <Box className="mt2">
         <Typography>Add test to</Typography>

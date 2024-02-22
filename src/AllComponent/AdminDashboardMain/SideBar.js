@@ -11,20 +11,13 @@ import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-// import { Button } from "@mui/material";
-// import makeStyles from "@mui/material/styles/makeStyles";
 import SimpleMenu from "./SubMenu";
 
-// const useStyles = makeStyles({
-//   popOverRoot: {
-//     pointerEvents: "none"
-//   }
-// });
+
 function SideBar({ openSidebarToggle, OpenSidebar }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorE2, setAnchorE2] = React.useState(null);
   const [anchorE3, setAnchorE3] = React.useState(null);
-  // const styles = useStyles();
   const handlePopoverOpen = (event) => {
     setAnchorE2(event.currentTarget);
   };
@@ -32,8 +25,6 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const handlePopoverClose = () => {
     setAnchorE2(null);
   };
-
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
     console.log(event.currentTarget);
@@ -63,7 +54,6 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const opens = Boolean(anchorE2);
   const ids = opens ? "simple-popover" : undefined;
   let currentlyHovering = false;
-  // const styles = useStyles();
 
   function handleClickNew(event) {
     if (anchorE2 !== event.currentTarget) {
@@ -106,7 +96,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
           <Link to="/">
             <Typography
               className="hoverrr"
-              sx={{ mt: -2 }}
+              sx={{ mt: 1 }}
             >
               <DashboardIcon className="icon" />
               DashBoard
@@ -159,6 +149,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
             
             </Popover>
           </Link>
+          
           <Link to="/TestPortal">
             <Typography
               className="hoverrr"
@@ -169,7 +160,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
             </Typography>
           </Link>
 
-          <Link to="/Accordian">
+          <Link to="/">
             <Typography
               className="hoverrr"
               sx={{ mt: -2 }}
