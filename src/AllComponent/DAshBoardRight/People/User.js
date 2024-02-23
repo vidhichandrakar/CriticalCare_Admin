@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Typography from "@mui/material/Typography";
@@ -9,7 +9,6 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import SearchBar from "../../../Util/SearchBar";
 import Popover from "@mui/material/Popover";
@@ -19,6 +18,7 @@ import { columns } from "../../../Data/JsonData";
 import BlockIcon from "@mui/icons-material/Block";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Checkbox from "@mui/material/Checkbox";
+import axios from "axios";
 
 const User = () => {
   const [page, setPage] = useState(0);
@@ -31,6 +31,18 @@ const User = () => {
   const createData = (User_Info, Full_Name, Date_of_Registration, Actions) => {
     return { User_Info, Full_Name, Date_of_Registration, Actions };
   };
+  const getAllUserDetails = () => {
+    axios
+      .get("https://teamnodejs-98fd0b00ec80.herokuapp.com/users")
+      .then((data) => console.log(data.data))
+      .catch((error) => console.log(error));
+  };
+useEffect(()=>{
+
+},[getAllUserDetails])
+
+
+
   const handleChangeOnCheckBox = (event, data) => {
     let selectValue = [...checkedValue];
     console.log("eventt", event.target.checked);
@@ -214,17 +226,16 @@ const User = () => {
             <FilterAltIcon className="filterIcon" /> Filter
           </Button>
         </div>
-        {checkedValue.length>0 ?
-        <div className="countSelectedValue">
-          
-          <Button className="countedCheckBox" disabled>
-            {checkedValue.length} Selected
-          </Button>
-          <Button className="deleteButton" variant="outlined" color="error">
-            Delete
-          </Button>
-        </div>:null
-        }
+        {checkedValue.length > 0 ? (
+          <div className="countSelectedValue">
+            <Button className="countedCheckBox" disabled>
+              {checkedValue.length} Selected
+            </Button>
+            <Button className="deleteButton" variant="outlined" color="error">
+              Delete
+            </Button>
+          </div>
+        ) : null}
         <Paper
           sx={{ width: "100%", overflow: "hidden" }}
           className="completeTable"

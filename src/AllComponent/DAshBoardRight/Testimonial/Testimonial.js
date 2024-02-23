@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React, {Fragment, useState} from "react";
 import CourseHeader from "../../Courses/CoursesHeader";
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -8,7 +8,6 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import SearchBar from "../../../Util/SearchBar";
 import Button from "@mui/material/Button";
@@ -84,8 +83,8 @@ const Testimonial = () => {
     ),
   ];
 
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -95,9 +94,9 @@ const Testimonial = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [openId, setOpenId] = React.useState(0);
-  const [openData, setOpenData] = React.useState("");
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [openId, setOpenId] = useState(0);
+  const [openData, setOpenData] = useState("");
   const handleClick = (event, id, data) => {
     setAnchorEl(event.currentTarget);
     setOpenId(id);
