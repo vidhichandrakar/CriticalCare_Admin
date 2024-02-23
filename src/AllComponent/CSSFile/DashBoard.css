@@ -522,11 +522,13 @@ margin-left: 10px !important;
   text-transform: none !important;
 }
 .redDeleteofTestPortal{
-  color: red !important;
+  /* color: red !important; */
   display: flex !important; 
   flex-direction:row!important;
   align-items:left!important;
+  text-align: left !important;
   padding: 3px 9px !important;
+  cursor: pointer;
 }
 .blueBlockUser{
   color: #0075ff !important;

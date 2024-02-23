@@ -54,6 +54,7 @@ const TestPortal = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openId, setOpenId] = useState(0);
   const [openData, setOpenData] = useState("");
+  const [popHeading, setPopHeading] = useState("");
 
   const [state, setState] = useState({
     left: false,
@@ -111,9 +112,7 @@ const TestPortal = () => {
       <MoreVertIcon
         onClick={(event) =>
           handleClick(event, "id1", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
-            full_name: "Sheikh Shoeb",
-            date: "12/10/23",
+          Tests: "Module 9 Neuromonitoring"
           })
         }
       />
@@ -124,9 +123,7 @@ const TestPortal = () => {
       <MoreVertIcon
         onClick={(event) =>
           handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
-            full_name: "Jitendra Chandrakar",
-            date: "12/10/23",
+            Tests:  "Module 7 Resuscitation & initial management of Critically",
           })
         }
       />
@@ -137,9 +134,7 @@ const TestPortal = () => {
       <MoreVertIcon
         onClick={(event) =>
           handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
-            full_name: "Pranab Raj",
-            date: "12/10/23",
+           Tests:  "Module 6-Trauma, Toxicology, Pregnancy, Endocrine-Mock Test"
           })
         }
       />
@@ -150,9 +145,7 @@ const TestPortal = () => {
       <MoreVertIcon
         onClick={(event) =>
           handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
-            full_name: "Sania Khan",
-            date: "12/10/23",
+            Tests:  "Module 5-Gastroeneterology-Mock Test",
           })
         }
       />
@@ -163,9 +156,7 @@ const TestPortal = () => {
       <MoreVertIcon
         onClick={(event) =>
           handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
-            full_name: "Rahul Amin",
-            date: "12/10/23",
+           Tests: "Module 4-Infection & Antimicrobials",
           })
         }
       />
@@ -176,25 +167,19 @@ const TestPortal = () => {
       <MoreVertIcon
         onClick={(event) =>
           handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
-            full_name: "Menka",
-            date: "12/10/23",
+            Tests:"TRICS 1 FREE MOCK TEST FOR EDIC-1"
           })
         }
       />
     ),
   ];
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-  const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
+  
   const handleClick = (event, id, data) => {
+    console.log(data)
     setAnchorEl(event.currentTarget);
     setOpenId(id);
     setOpenData(data);
+    setPopHeading(data.Tests);
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -220,7 +205,7 @@ const TestPortal = () => {
       role="presentation"
     >
       <Box className="flexrow JustfiSB">
-        <h3>Module 9 Neuromonitoring</h3>
+        <h4>{popHeading}</h4>
         <ClearIcon onClick={handleChangeClose} className="Xicon pointer" />
       </Box>
       <Box className="mt2">
@@ -263,7 +248,7 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
       <Box className="mt2">
         <Box className="mt2 BasicInfoBox">
           <Box className="flexrow pad20">
-                <BookIcon className="BookIcon"/><Typography className="textAdd">Module 9 Neuromonitoring</Typography>
+                <BookIcon className="BookIcon"/><Typography className="textAdd">{popHeading}</Typography>
           </Box>
         </Box>
         <Box className="mt2">
@@ -522,19 +507,16 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
                   sx={{ml:-12}}
                   value={value}
                 >   
-                  <Button className="redDeleteofTestPortal"
+                  <Typography className="redDeleteofTestPortal"
                   onClick={toggleDrawer("right", true)}
                   value={value}
                   >
-                    <DeleteIcon className="deleteIcon" /> 
-                    <span >Delete</span>
-                  </Button>
+                   Add
+                  </Typography>
                   <Typography className="redDeleteofTestPortal">
-                    <DeleteIcon className="deleteIcon"/> 
-                    <span>Deleted</span>
+                    Test stats
                   </Typography>
                 </Popover>
-                
               </TableBody>
             </Table>
           </TableContainer>
