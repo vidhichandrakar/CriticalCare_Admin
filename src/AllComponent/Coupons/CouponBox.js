@@ -58,8 +58,10 @@ const CouponBox = () => {
   };
 
   const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
   const ids = open ? "simple-popover" : undefined;
+
+  const boxOpen = Boolean(anchorEl);
+  const id = boxOpen ? "simple-popover" : undefined;
 
   const handleClickOpen = () => {
     setOpenSecond(true);

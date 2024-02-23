@@ -14,7 +14,6 @@
 }
 .HeadText h2{
     margin-left: 20px;
-    /* margin-top: 20px; */
 }
 .HeadText{
     display: flex;
@@ -37,21 +36,18 @@
     justify-content: space-between;
 }
 .BannerImage{
-    /* width: 30% !important; */
     border-top-right-radius: 15px !important;
     border-top-left-radius: 15px !important;
 }
 .InsideBannerBox{
     margin: 20px;
-    border: solid 2px grey ;
+    border: 2px solid grey ;
 }
 .InsideMainBox{
     margin: 20px;
-    
 }
-
 .BorderBottom{
-    border: solid 2px gray;
+    border: 1px solid gray;
     text-align: center;
     align-items: center;
 }

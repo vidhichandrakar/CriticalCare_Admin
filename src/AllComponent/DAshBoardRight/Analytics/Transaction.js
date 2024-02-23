@@ -1,6 +1,4 @@
 import React, {Fragment, useState} from 'react'
-// import FilterAltIcon from '@mui/icons-material/FilterAlt';
-// import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CourseHeader from '../../Courses/CoursesHeader';
 import SearchBar from '../../../Util/SearchBar';
 import {TranscationCardData} from "../../../Data/JsonData"
@@ -8,7 +6,6 @@ import TransactionCard from './TranscationCard';
 import styled from 'styled-components';
 import {  alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
-// import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -49,15 +46,11 @@ const Transaction = () => {
         {
           id: "Actions",
           label: "Transaction Amount",
-          // minWidth: 170,
           align: "center",
-          // format: (value) => value.toLocaleString('en-US'),
         },
       ];
     
-      function createData(User_Info, Full_Name, Date_of_Registration, Actions) {
-        // const density = population / size;
-    
+      function createData(User_Info, Full_Name, Date_of_Registration, Actions) {    
         return { User_Info, Full_Name, Date_of_Registration, Actions };
       }
     

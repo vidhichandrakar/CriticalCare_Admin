@@ -76,13 +76,12 @@ const BannerCard = (props) => {
                   src={value.img}
                   alt="Avatar"
                   className="BannerImage image"
-                  // style={{width:"100%"}}
                 />
                 <div class="middle">
                   <Button class="text" component="label">
                     {" "}
                     <ModeIcon className="PencilIcon" />
-                    change
+                    Change
                     <VisuallyHiddenInput
                       type="file"
                       accept="image/*"
@@ -93,6 +92,9 @@ const BannerCard = (props) => {
                   </Button>
                 </div>
               </div>
+            
+              
+              {console.log("storedFilePathksdfv",storedFilePath)}
               {storedFilePath?.map((row) => {
                 return row.id === value.id ? row.value : null;
               })}

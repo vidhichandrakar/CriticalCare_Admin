@@ -189,13 +189,14 @@ const Testimonial = () => {
                 open={open}
                 anchorEl={anchorEl}
                 onClose={handleClose}
+                className="testimonialPopOver"
                 anchorOrigin={{
                   vertical: "bottom",
                   horizontal: "right",
                 }}
               >
 
-                <Typography sx={{ p: 1 }} className='redDelete'><DeleteIcon/> Delete</Typography>
+                <Typography sx={{ p: 0.5 }} className='redDeleteofTestimonial'><DeleteIcon/> Delete</Typography>
               </Popover>
             </TableBody>
           </Table>

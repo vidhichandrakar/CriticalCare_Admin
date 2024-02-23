@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Typography from "@mui/material/Typography";
@@ -19,6 +20,7 @@ import BlockIcon from "@mui/icons-material/Block";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Checkbox from "@mui/material/Checkbox";
 import axios from "axios";
+import { getAllUsersApi } from "../../ActionFactory/apiActions";
 
 const User = () => {
   const [page, setPage] = useState(0);
@@ -27,7 +29,13 @@ const User = () => {
   const [openId, setOpenId] = useState(0);
   const [openData, setOpenData] = useState("");
   const [checkedValue, setCheckedValue] = useState([]);
-
+  const [userData, setUserData] = useState([])
+  useEffect(()=>{
+    getAllUsersApi({callBack:response=>{
+      const userCallBack = response?.data;
+      setUserData(userCallBack);
+    }})
+  },[])
   const createData = (User_Info, Full_Name, Date_of_Registration, Actions) => {
     return { User_Info, Full_Name, Date_of_Registration, Actions };
   };
@@ -45,7 +53,6 @@ useEffect(()=>{
 
   const handleChangeOnCheckBox = (event, data) => {
     let selectValue = [...checkedValue];
-    console.log("eventt", event.target.checked);
     if (event.target.checked === true) {
       selectValue.push(data);
       setCheckedValue(selectValue);
