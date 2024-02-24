@@ -11,7 +11,7 @@ import { AnalyticsSmallData } from "../../../Data/JsonData";
 import { commonSelect } from "../../../Util/CommonFields";
 import SideBar from "../../AdminDashboardMain/SideBar";
 import moment from "moment";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo/DemoContainer";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";

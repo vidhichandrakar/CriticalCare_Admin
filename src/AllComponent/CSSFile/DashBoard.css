@@ -20,16 +20,15 @@ body {
   margin-right: 5px;
 }
 .icon {
-  margin-left: 12px;
+  margin: 1px 12px;
+  font-size:larger !important;
 }
-
 .close_icon {
   color: red;
   margin-left: 30px;
   margin-top: 10px;
   cursor: pointer;
 }
-
 .grid-container {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -53,7 +52,6 @@ body {
   background-color: white;
   border-radius: 10px;
 }
-
 .sidebar-title {
   display: flex;
   padding: 0 23px;
@@ -63,7 +61,6 @@ body {
   width: 95%;
   height: 40px;
 }
-
 .sidebar-title > span {
   display: none;
 }
@@ -76,7 +73,6 @@ body {
   font-size: 20px;
   font-weight: 700;
 }
-
 .sidebar-list {
   display: flex;
   flex-direction: column;
@@ -84,40 +80,34 @@ body {
   margin-top: 20px;
   list-style-type: none;
 }
-
 .sidebar-list-item {
   font-size: 15px;
 }
 .BottomLine {
   margin-left: 20px;
 }
-
 .hoverrr {
   width: 84%;
-  padding: 6px 0px !important;
+  padding: 11px 0px !important;
   align-items: center;
-  margin-top: -18px;
   border-radius: 5px;
+  margin-left: 7px !important;
 }
-
 .hoverrr:hover {
   background-color: #E5F7FD !important;
   cursor: pointer;
   border-right: 3px solid #0075FF !important;
-  color: grey !important;
+  color: #0075FF !important;
 }
-
 .sidebar-list-item > a {
   text-decoration: none;
   margin-top: 20px;
   color: grey;
   font-size: 1rem;
 }
-
 .sidebar-responsive {
   display: inline !important;
   position: absolute;
-
   z-index: 12 !important;
 }
 
@@ -577,7 +567,6 @@ margin-left: 10px !important;
 .BookIcon{
   width: 100%;
   height: 50vh;
-  /* margin: 20px; */
   text-align: center;
   display: inline-block;
   color: rgb(21, 203, 244);
@@ -593,6 +582,14 @@ margin-left: 10px !important;
 }
 .pointer{
   cursor: pointer;
+}
+.redDeleteofTestimonial{
+  color: red !important;
+  padding: 3px 17px !important;
+}
+.testimonialPopOver{
+  padding: 30px;
+  margin-left: -85px;
 }
 /* END OF ADMIN TESTIMONIAL  */
 
@@ -798,4 +795,23 @@ margin-left: 10px !important;
 .userCheckBoxDiv{
   margin-left: 20px;
 
+}
+
+.countSelectedValue{
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  justify-content: space-between ;
+}
+
+.countedCheckBox{
+  background-color: white !important;
+  width: 30%;
+  border-radius: 10px !important;
+  border-color: white !important;
+  cursor:default !important ;
+  align-items: center !important;
+  text-align: center !important;
+  color: #0075ff !important;
+  
 }

@@ -248,7 +248,8 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
       <Box className="mt2">
         <Box className="mt2 BasicInfoBox">
           <Box className="flexrow pad20">
-                <BookIcon className="BookIcon"/><Typography className="textAdd">{popHeading}</Typography>
+                <BookIcon className="BookIcon"/><Typography className="textAdd">{popHeading
+                }</Typography>
           </Box>
         </Box>
         <Box className="mt2">

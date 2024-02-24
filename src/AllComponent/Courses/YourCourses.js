@@ -13,6 +13,7 @@ import SideBar from "../AdminDashboardMain/SideBar";
 import { Link } from "react-router-dom";
 
 const YourCourses = () => {
+  
   return (
     <div className='grid-container'>
       <SideBar />
@@ -32,7 +33,7 @@ const YourCourses = () => {
             </Button></Link>
           </div>
         </div>
-       <YourCoursesCard Data = {YourCoursesCardData}/>
+        <YourCoursesCard Data = {YourCoursesCardData}/>
       </div>
     </div>
     </div>
