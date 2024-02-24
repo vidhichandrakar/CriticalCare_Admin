@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Select, Box, Typography, TextField, Button } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -11,11 +11,16 @@ import Popover from "@mui/material/Popover";
 import DoctorsImage from "../../../Media/Images/db7187e8-b7cf-47ed-8900-6de89dabde06.png";
 import CourseHeader from "../../Courses/CoursesHeader";
 import SideBar from "../../AdminDashboardMain/SideBar";
+import { useLocation } from "react-router-dom";
 
 
 const Trics1FreeMockTest = () => {
   const [anchorEl, setAnchorEl] = useState(null);
-
+  let location = useLocation();
+   useEffect(()=>{
+    const courseId = location.state?.id;
+    console.log(courseId);
+   },[])
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };

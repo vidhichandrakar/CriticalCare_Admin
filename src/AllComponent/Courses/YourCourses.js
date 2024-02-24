@@ -12,11 +12,13 @@ import { YourCoursesCardData } from "../../Data/JsonData";
 import SideBar from "../AdminDashboardMain/SideBar";
 import { Link } from "react-router-dom";
 import { getAllCourses } from "../ActionFactory/apiActions";
+import {useNavigate} from "react-router-dom";
 
 const YourCourses = () => {
   const [allCourses, setAllCourses] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
+    navigate("/Trics1FreeMockTest",{ state:{id:1}})
     getAllCourses({
       callBack: (response) => {
         const userCallBack = response?.data;
