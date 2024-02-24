@@ -202,7 +202,7 @@ const TestPortal = () => {
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
-  const [opened, setOpen] = React.useState(false);
+  const [opened, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);

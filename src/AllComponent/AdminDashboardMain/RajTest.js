@@ -10,9 +10,10 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import { useState } from 'react';
 
 export default function SwipeableTemporaryDrawer() {
-  const [state, setState] = React.useState({left: false});
+  const [state, setState] = useState({left: false});
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (

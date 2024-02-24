@@ -69,8 +69,8 @@ const Transaction = () => {
         ),
        ];
     
-      const [page, setPage] = React.useState(0);
-      const [rowsPerPage, setRowsPerPage] = React.useState(10);
+      const [page, setPage] = useState(0);
+      const [rowsPerPage, setRowsPerPage] = useState(10);
     
       const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -80,9 +80,9 @@ const Transaction = () => {
         setRowsPerPage(+event.target.value);
         setPage(0);
       };
-      const [anchorEl, setAnchorEl] = React.useState(null);
-      const [openId, setOpenId] = React.useState(0);
-      const [openData, setOpenData] = React.useState("");
+      const [anchorEl, setAnchorEl] = useState(null);
+      const [openId, setOpenId] = useState(0);
+      const [openData, setOpenData] = useState("");
       const handleClick = (event, id, data) => {
         setAnchorEl(event.currentTarget);
         setOpenId(id);

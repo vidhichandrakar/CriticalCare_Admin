@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Select, Box, Typography, TextField, Button } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -14,7 +14,7 @@ import SideBar from "../../AdminDashboardMain/SideBar";
 
 
 const Trics1FreeMockTest = () => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

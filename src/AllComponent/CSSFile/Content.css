@@ -70,3 +70,20 @@
   font-size: 1.6em !important;
   font-weight: 550 !important;
 }
+
+ /* RIGHTBOX CSS  */
+
+
+
+ .rightBoxComplete{
+  padding: 26px 26px;
+ }
+ .rightBoxTypography{
+  color: #a19e9e;
+  font-size: large !important;
+  padding: 10px 10px;
+ }
+ .folderIconRightBox{
+  color: #0075FF !important;
+  margin-right: 7%;
+ }
