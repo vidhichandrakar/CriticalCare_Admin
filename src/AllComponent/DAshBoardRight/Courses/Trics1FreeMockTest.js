@@ -11,10 +11,12 @@ import Popover from "@mui/material/Popover";
 import DoctorsImage from "../../../Media/Images/db7187e8-b7cf-47ed-8900-6de89dabde06.png";
 import CourseHeader from "../../Courses/CoursesHeader";
 import SideBar from "../../AdminDashboardMain/SideBar";
+import { useParams } from 'react-router-dom';
 
 
 const Trics1FreeMockTest = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+  // const { id } = useParams();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -27,7 +29,9 @@ const Trics1FreeMockTest = () => {
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
   return (
+
     <div className='grid-container'>
+      {console.log("useParasms",useParams())}
       <SideBar />
     <div className="mainBox">
       <CourseHeader  Heading={"TRICS 1 FREE MOCK TEST FOR EDIC-1"} />
