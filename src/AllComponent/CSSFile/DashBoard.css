@@ -522,6 +522,10 @@ margin-left: 10px !important;
 }
 .deleteIcon{
   margin-right:10px ;
+  cursor: pointer;
+}
+.redDeleteofTestPortal:hover{
+ cursor: pointer;
 }
 /* END OF TEST PORTAL  */
 

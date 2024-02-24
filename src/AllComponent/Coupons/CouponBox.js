@@ -7,7 +7,6 @@ import Stack from "@mui/material/Stack";
 import RestoreFromTrashSharpIcon from "@mui/icons-material/RestoreFromTrashSharp";
 import HistorySharpIcon from "@mui/icons-material/HistorySharp";
 import NoteAltOutlinedIcon from "@mui/icons-material/NoteAltOutlined";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CircleIcon from "@mui/icons-material/Circle";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
@@ -23,7 +22,8 @@ import { useTheme } from "@mui/material/styles";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";import Select from "@mui/material/Select";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -38,11 +38,11 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 const CouponBox = () => {
   const arrayColumn = [1, 2, 3, 4, 5, 6, 7, 8];
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
   const [showDetail, setShowDetail] = useState(false);
   const [showDetailFlag, setShowDetailFlag] = useState(false);
-  const [openSecond, setOpenSecond] = React.useState(false);
-  const [personName, setPersonName] = React.useState([]);
+  const [openSecond, setOpenSecond] = useState(false);
+  const [personName, setPersonName] = useState([]);
 
   const handleShowDetail = (value) => {
     setShowDetail(value);

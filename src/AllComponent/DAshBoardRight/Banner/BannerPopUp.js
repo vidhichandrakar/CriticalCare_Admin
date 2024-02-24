@@ -1,38 +1,23 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
-import axios from "axios";
-import { useTheme } from "@mui/material/styles";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
 import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
 import "./BannerPopUp.css";
 import { Typography } from "@mui/material";
 import { commonSelect } from "../../../Util/CommonFields";
 
 function BannerPopUp({openPopUp, handleClickPopUp}) {
-  const [open, setOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState("");
   const [dropdownValue, setDropdownValue] = useState("");
   const [hideDropDown, setHideDropDown] = useState(false);
 
   
   const handleChangeOnRadio = (e) => {
-    console.log(e);
-    console.log("radio btun");
-    console.log(e.target.value);
     setSelectedValue(e.target.value);
     if (e.target.value === "catCourses") {
       setHideDropDown(true);
@@ -41,7 +26,6 @@ function BannerPopUp({openPopUp, handleClickPopUp}) {
     }
   };
   const handleInput = (value, type) => {
-    console.log(value);
     setDropdownValue(value);
   };
 
@@ -58,7 +42,6 @@ function BannerPopUp({openPopUp, handleClickPopUp}) {
               const formData = new FormData(event.currentTarget);
               const formJson = Object.fromEntries(formData.entries());
               const email = formJson.email;
-              console.log(email);
               handleClickPopUp();
             },
           }}
@@ -93,7 +76,6 @@ function BannerPopUp({openPopUp, handleClickPopUp}) {
                 name="radio-buttons"
                 labelPlacement="start"
                 className="innerRdioText"
-                // inputProps={{ 'aria-label': 'B' }}
               />
             </Box>
             <Box className="popUpRadioBtn">
