@@ -15,6 +15,8 @@ import Popover from "@mui/material/Popover";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Typography from "@mui/material/Typography";
 import SideBar from "../../AdminDashboardMain/SideBar";
+import { TablePagination } from "@mui/material";
+import Stack from '@mui/material/Stack';
 
 const Testimonial = () => {
 
@@ -81,6 +83,32 @@ const Testimonial = () => {
         }
       />
     ),
+    // createData(
+    //   " It was a great experience for me because I was a dropper and had only PW as a source for my coaching. I love Alakh sir since because of him I cleared the exam with good marks and also made my family proud. My experience with PW was full of learning and grooming.",
+    //   "Jitendra Chandrakar",
+    //   <MoreVertIcon
+    //     onClick={(event) =>
+    //       handleClick(event, "id2", {
+    //         User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
+    //         full_name: "Jitendra Chandrakar",
+    //         date: "12/10/23",
+    //       })
+    //     }
+    //   />
+    // ),
+    // createData(
+    //   " It was a great experience for me because I was a dropper and had only PW as a source for my coaching. I love Alakh sir since because of him I cleared the exam with good marks and also made my family proud. My experience with PW was full of learning and grooming.",
+    //   "Jitendra Chandrakar",
+    //   <MoreVertIcon
+    //     onClick={(event) =>
+    //       handleClick(event, "id2", {
+    //         User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
+    //         full_name: "Jitendra Chandrakar",
+    //         date: "12/10/23",
+    //       })
+    //     }
+    //   />
+    // ),
   ];
 
   const [page, setPage] = useState(0);
@@ -229,6 +257,7 @@ const Testimonial = () => {
               </Table>
             </TableContainer>
 
+            <Stack spacing={60}>
             <TablePagination
               rowsPerPageOptions={[2, 25, 100]}
               component="div"
@@ -237,7 +266,9 @@ const Testimonial = () => {
               page={page}
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
+              sx={{mb:1, position: "sticky"}}
             />
+            </Stack>
           </Paper>
         </div>
       </div>
