@@ -21,7 +21,6 @@ body {
 }
 .icon {
   margin: 1px 12px;
-  font-size:larger !important;
 }
 .close_icon {
   color: red;
@@ -87,10 +86,8 @@ body {
   margin-left: 20px;
 }
 .hoverrr {
-  width: 84%;
   padding: 11px 0px !important;
-  align-items: center;
-  border-radius: 5px;
+  font-size: 19px !important;
   margin-left: 7px !important;
 }
 .hoverrr:hover {
@@ -589,9 +586,15 @@ margin-left: 10px !important;
 .redDeleteofTestimonial{
   color: red !important;
   padding: 3px 17px !important;
+  font-size: 18px !important;
+}
+.redDeleteIcon{
+  font-size: large !important;
 }
 .testimonialPopOver{
-  padding: 30px;
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 3% !important;
   margin-left: -85px;
 }
 /* END OF ADMIN TESTIMONIAL  */

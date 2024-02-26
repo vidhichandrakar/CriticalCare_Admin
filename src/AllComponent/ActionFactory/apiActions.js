@@ -21,3 +21,17 @@ export const deleteUser = ({ userId, callBack }) => {
     callBack(response);
   });
 };
+
+export const getCourseById = ({ courseId, callBack }) => {
+  const url = APIS.allCourses + "/" + courseId;
+  axios.get(url).then((response) => {
+    callBack(response);
+  });
+};
+
+export const deleteCourses = ({ courseId, callBack }) => {
+  const url = APIS.allCourses + "/" + courseId;
+  axios.delete(url).then((response) => {
+    callBack(response);
+  });
+};
