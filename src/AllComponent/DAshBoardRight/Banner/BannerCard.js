@@ -3,7 +3,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
-import img from "../../../Media/Images/banner2.jpg";
 import Typography from "@mui/material/Typography";
 import ModeIcon from "@mui/icons-material/Mode";
 import { styled } from "@mui/material/styles";
@@ -25,15 +24,10 @@ const BannerCard = (props) => {
 
   const handleImageUpload = (value, id) => {
     let storedPath = [...storedFilePath];
-    // let data = { id: id, value: value };
-    // storedPath.push(data);
-    // setStoredFilePath(storedPath);
-    console.log("value and id", storedPath);
-    console.log("storedFilePath", storedFilePath);
+
     let array2 = [...storedPath];
     let array3 = [];
     let abc = array2.find((data) => data.id === id);
-    console.log("abc", abc);
     if (abc) {
       array2.map((data) => {
         if (data.id == id) {
@@ -47,18 +41,15 @@ const BannerCard = (props) => {
     } else {
       array3.push(...storedPath, { id: id, value: value });
     }
-
-    console.log("array3...", array3);
     setStoredFilePath(array3);
   };
 
-  const handleClickPopUp=()=>{
+  const handleClickPopUp = () => {
     setOpenPopUp(!openPopUp);
-
-  }
+  };
   return (
     <>
-    <BannerPopUp openPopUp={openPopUp} handleClickPopUp={handleClickPopUp}/>
+      <BannerPopUp openPopUp={openPopUp} handleClickPopUp={handleClickPopUp} />
       {props.Data.map((value, index) => (
         <div className="BannerMainBox">
           <div className="InsideBannerBox">
@@ -92,9 +83,7 @@ const BannerCard = (props) => {
                   </Button>
                 </div>
               </div>
-            
-              
-              {console.log("storedFilePathksdfv",storedFilePath)}
+
               {storedFilePath?.map((row) => {
                 return row.id === value.id ? row.value : null;
               })}
@@ -104,7 +93,9 @@ const BannerCard = (props) => {
               </CardContent>
               <div className="BannerHead BorderBottom">
                 <p>{value.boxtitle}</p>
-                <Button className="changeBtn" onClick={handleClickPopUp}>Change</Button>
+                <Button className="changeBtn" onClick={handleClickPopUp}>
+                  Change
+                </Button>
               </div>
             </main>
           </div>

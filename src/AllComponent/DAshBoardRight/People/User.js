@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useEffect } from "react";
-// import React, { Fragment, useEffect, useState } from "react";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Typography from "@mui/material/Typography";
@@ -46,14 +45,13 @@ const User = () => {
       selectValue.push(data);
       setCheckedValue(selectValue);
     } else {
-      setCheckedValue(selectValue.filter((item) => data.phone != item.phone));
+      setCheckedValue(selectValue.filter((item) => data != item));
     }
   };
 
   const handleClick = (event, id) => {
     setAnchorEl(event.currentTarget);
     setOpenId(id);
-
   };
 
   const handleClose = () => {
@@ -61,15 +59,35 @@ const User = () => {
   };
 
   const handleDelete = () => {
-    const userId =  openId;
-    deleteUser({userId,callBack: () => {
-      getAllUsersApi({
-        callBack: (response) => {
-          const userCallBack = response?.data;
-          setUserData(userCallBack);
+    const userId = openId;
+    deleteUser({
+      userId,
+      callBack: () => {
+        getAllUsersApi({
+          callBack: (response) => {
+            const userCallBack = response?.data;
+            setUserData(userCallBack);
+          },
+        });
+      },
+    });
+  };
+
+  const deleteSelectedItem = () => {
+    console.log("calling", checkedValue);
+    checkedValue.map((item) => {
+      deleteUser({
+        userId: item,
+        callBack: () => {
+          getAllUsersApi({
+            callBack: (response) => {
+              const userCallBack = response?.data;
+              setUserData(userCallBack);
+            },
+          });
         },
       });
-    }})
+    });
   };
 
   return (
@@ -91,7 +109,12 @@ const User = () => {
             <Button className="countedCheckBox" disabled>
               {checkedValue.length} Selected
             </Button>
-            <Button className="deleteButton" variant="outlined" color="error">
+            <Button
+              className="deleteButton"
+              onClick={deleteSelectedItem}
+              variant="outlined"
+              color="error"
+            >
               Delete
             </Button>
           </div>
@@ -149,7 +172,7 @@ const User = () => {
                           <TableCell>
                             <MoreVertIcon //need to remove this hardcode this code, more ... three drops in last column
                               onClick={(event) =>
-                                handleClick(event,row.User_id)
+                                handleClick(event, row.User_id)
                               }
                             />
                           </TableCell>
