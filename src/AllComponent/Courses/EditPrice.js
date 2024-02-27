@@ -30,6 +30,14 @@ const EditPrice = ({ handleTrackerPage, handleInputChange }) => {
       storedValues.offerPrice = value;
     }
     setEditPriceData(storedValues);
+    if (
+      storedValues.duration &&
+      storedValues.years &&
+      storedValues.regularPrice &&
+      storedValues.offerPrice
+    ) {
+      handleInputChange("editPrice", storedValues);
+    }
   };
   const handlePricePage = () => {
     const storedValues = editPriceData;
