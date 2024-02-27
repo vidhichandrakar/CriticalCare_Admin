@@ -1,39 +1,27 @@
-import react, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Trics1FreeMockTest from "../DAshBoardRight/Courses/Trics1FreeMockTest";
-import { Button } from "@mui/material";
+import moment from "moment/moment";
+import react from "react";
+import cardimg from "../../Media/Images/db7187e8-b7cf-47ed-8900-6de89dabde06.png";
 
-
-const YourCoursesCard = ({Data}) => {
-  // const [showComponentA, setShowComponentA] = useState(true);
-  // const HandleClick = () => {
-  //   setShowComponentA((prevShowComponentA) => !prevShowComponentA);
-  // };
-
+const YourCoursesCard = ({ allCourses }) => {
   return (
     <>
-      {Data.map((value, index) => {
-        const {head, Created, Year, Price} = value
-        return <>
-        {/* <div className="card"> */}
-        {/* {showComponentA ?  */}
-        <Button className="card"
-        //  onClick={HandleClick}
-         >
-          <Link to="/Trics1FreeMockTest">
-            <img src={value.img} className="cardImage" />
-          </Link>
-          <div className="CardData" key={index}>
-            <p className="Headp">{head}</p>
-            <p className="Namep">{Created}</p>
-            <p className="Yearp">{Year}</p>
-            <p className="Pricep">{Price}</p>
-          </div>
-          </Button> 
-          {/* : <Trics1FreeMockTest />} */}
-        {/* </div> */}
-        </>
-})}
+      {allCourses.length
+        ? allCourses.map((item) => {
+            return (
+              <div className="card">
+                <img src={cardimg} className="cardImage" />
+                <div className="CardData">
+                  <p className="Headp">{item.CourseName}</p>
+                  <p className="Namep">
+                    {moment(item.createdAt).format("DD/MM/YYYY")}
+                  </p>
+                  <p className="Yearp">{item.Price}</p>
+                  <p className="Pricep">{item.Offer_Price}</p>
+                </div>
+              </div>
+            );
+          })
+        : null}
     </>
   );
 };

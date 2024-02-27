@@ -1,4 +1,5 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
+// import React, { Fragment, useEffect, useState } from "react";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Typography from "@mui/material/Typography";
@@ -9,7 +10,6 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import SearchBar from "../../../Util/SearchBar";
 import Popover from "@mui/material/Popover";
@@ -19,25 +19,27 @@ import { columns } from "../../../Data/JsonData";
 import BlockIcon from "@mui/icons-material/Block";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Checkbox from "@mui/material/Checkbox";
-import { getAllUsersApi } from "../../ActionFactory/apiActions";
+import axios from "axios";
+import { deleteUser, getAllUsersApi } from "../../ActionFactory/apiActions";
+import moment from "moment/moment";
 
 const User = () => {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
   const [anchorEl, setAnchorEl] = useState(null);
   const [openId, setOpenId] = useState(0);
   const [openData, setOpenData] = useState("");
   const [checkedValue, setCheckedValue] = useState([]);
-  const [userData, setUserData] = useState([])
-  useEffect(()=>{
-    getAllUsersApi({callBack:response=>{
-      const userCallBack = response?.data;
-      setUserData(userCallBack);
-    }})
-  },[])
-  const createData = (User_Info, Full_Name, Date_of_Registration, Actions) => {
-    return { User_Info, Full_Name, Date_of_Registration, Actions };
-  };
+  const [userData, setUserData] = useState([]);
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+  useEffect(() => {
+    getAllUsersApi({
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setUserData(userCallBack);
+      },
+    });
+  }, []);
+
   const handleChangeOnCheckBox = (event, data) => {
     let selectValue = [...checkedValue];
     if (event.target.checked === true) {
@@ -47,164 +49,28 @@ const User = () => {
       setCheckedValue(selectValue.filter((item) => data.phone != item.phone));
     }
   };
-  const rows = [
-    createData(
-      { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
-      "Sheikh Shoeb",
-      "19/Dec/2023",
-      <MoreVertIcon
-        onClick={(event) =>
-          handleClick(event, "id1", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "75895576" },
-            full_name: "Sheikh Shoeb",
-            date: "12/10/23",
-          })
-        }
-      />
-    ),
-    createData(
-      { name: "jitendra.chandrakar@gmail.com", phone: "758329576" },
-      "Jitendra Chandrakar",
-      "19/Dec/2023",
-      <MoreVertIcon
-        onClick={(event) =>
-          handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "758529576" },
-            full_name: "Jitendra Chandrakar",
-            date: "12/10/23",
-          })
-        }
-      />
-    ),
-    createData(
-      { name: "pranab.raj@gmail.com", phone: "7589585276" },
-      "Pranab Raj",
-      "19/Dec/2023",
-      <MoreVertIcon
-        onClick={(event) =>
-          handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "758941576" },
-            full_name: "Pranab Raj",
-            date: "12/10/23",
-          })
-        }
-      />
-    ),
-    createData(
-      { name: "saniakhan@gmail.com", phone: "758952576" },
-      "Sania Khan",
-      "19/Dec/2023",
-      <MoreVertIcon
-        onClick={(event) =>
-          handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "758429576" },
-            full_name: "Sania Khan",
-            date: "12/10/23",
-          })
-        }
-      />
-    ),
-    createData(
-      { name: "rahulamin@gmail.com", phone: "75489576" },
-      "Rahul Amin",
-      "19/Dec/2023",
-      <MoreVertIcon
-        onClick={(event) =>
-          handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "758902576" },
-            full_name: "Rahul Amin",
-            date: "12/10/23",
-          })
-        }
-      />
-    ),
-    createData(
-      { name: "sheikhshoeb194@gmail.com", phone: "7501289576" },
-      "Menka",
-      "19/Dec/2023",
-      <MoreVertIcon
-        onClick={(event) =>
-          handleClick(event, "id2", {
-            User_Info: {
-              name: "sheikhshoeb194@gmail.com",
-              phone: "7589551076",
-            },
-            full_name: "Menka",
-            date: "12/10/23",
-          })
-        }
-      />
-    ),
-    createData(
-      { name: "sheikhshoeb194@gmail.com", phone: "758529576" },
-      "Ramesh",
-      "19/Dec/2023",
-      <MoreVertIcon
-        onClick={(event) =>
-          handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "758951076" },
-            full_name: "Ramesh",
-            date: "12/10/23",
-          })
-        }
-      />
-    ),
-    createData(
-      { name: "sheikhshoeb194@gmail.com", phone: "758952576" },
-      "Rakesh Pal",
-      "19/Dec/2023",
-      <MoreVertIcon
-        onClick={(event) =>
-          handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "758419576" },
-            full_name: "Rakesh Pal",
-            date: "12/10/23",
-          })
-        }
-      />
-    ),
-    createData(
-      "ashutosh.a@gmail.com",
-      "Ashutosh",
-      "19/Dec/2023",
-      <MoreVertIcon
-        onClick={(event) =>
-          handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "758529576" },
-            full_name: "Ashutosh",
-            date: "12/10/23",
-          })
-        }
-      />
-    ),
-    createData(
-      "pixelinsource@gmail.com",
-      "Pixel Insource",
-      "19/Dec/2023",
-      <MoreVertIcon
-        onClick={(event) =>
-          handleClick(event, "id2", {
-            User_Info: { name: "sheikhshoeb194@gmail.com", phone: "755289576" },
-            full_name: "Pixel Insource",
-            date: "12/10/23",
-          })
-        }
-      />
-    ),
-  ];
 
-  const handleClick = (event, id, data) => {
+  const handleClick = (event, id) => {
     setAnchorEl(event.currentTarget);
     setOpenId(id);
-    setOpenData(data);
+
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
 
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
+  const handleDelete = () => {
+    const userId =  openId;
+    deleteUser({userId,callBack: () => {
+      getAllUsersApi({
+        callBack: (response) => {
+          const userCallBack = response?.data;
+          setUserData(userCallBack);
+        },
+      });
+    }})
+  };
 
   return (
     <div className="grid-container">
@@ -220,17 +86,16 @@ const User = () => {
             <FilterAltIcon className="filterIcon" /> Filter
           </Button>
         </div>
-        {checkedValue.length>0 ?
-        <div className="countSelectedValue">
-          
-          <Button className="countedCheckBox" disabled>
-            {checkedValue.length} Selected
-          </Button>
-          <Button className="deleteButton" variant="outlined" color="error">
-            Delete
-          </Button>
-        </div>:null
-        }
+        {checkedValue.length > 0 ? (
+          <div className="countSelectedValue">
+            <Button className="countedCheckBox" disabled>
+              {checkedValue.length} Selected
+            </Button>
+            <Button className="deleteButton" variant="outlined" color="error">
+              Delete
+            </Button>
+          </div>
+        ) : null}
         <Paper
           sx={{ width: "100%", overflow: "hidden" }}
           className="completeTable"
@@ -252,56 +117,46 @@ const User = () => {
                 </TableRow>
               </TableHead>
               <TableBody className="parentTable">
-                {rows
-                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  .map((row) => {
-                    return (
-                      <TableRow
-                        hover
-                        className="TableHover"
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={row.code}
-                      >
-                        {columns.map((column) => {
-                          const value = row[column.id];
-                          console.log(row, Object.keys(row), column.id);
-                          return (
-                            <Fragment>
-                              {column.id === "User_Info" ? (
-                                <TableCell
-                                  key={column.id}
-                                  align={column.align}
-                                  className="useInfoCheckbox"
-                                >
-                                  <Checkbox
-                                    onChange={(event) =>
-                                      handleChangeOnCheckBox(
-                                        event,
-                                        row.User_Info
-                                      )
-                                    }
-                                  />
-                                  <div className="userCheckBoxDiv">
-                                    <Typography className="bluePara">
-                                      {value.name}
-                                    </Typography>
-                                    <Typography className="PhoneText">
-                                      {value.phone}
-                                    </Typography>
-                                  </div>
-                                </TableCell>
-                              ) : (
-                                <TableCell key={column.id} align={column.align}>
-                                  {value}
-                                </TableCell>
-                              )}
-                            </Fragment>
-                          );
-                        })}
-                      </TableRow>
-                    );
-                  })}
+                {userData.length
+                  ? userData.map((row) => {
+                      return (
+                        <TableRow
+                          hover
+                          className="TableHover"
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={row?.code}
+                        >
+                          <TableCell className="useInfoCheckbox">
+                            <Checkbox
+                              onChange={(event) =>
+                                handleChangeOnCheckBox(event, row.User_id)
+                              }
+                            />
+                            <div className="userCheckBoxDiv">
+                              <Typography className="bluePara">
+                                {row.Email_id}
+                              </Typography>
+                              <Typography className="PhoneText">
+                                {row.Phone_no}
+                              </Typography>
+                            </div>
+                          </TableCell>
+                          <TableCell>{row.UserName}</TableCell>
+                          <TableCell>
+                            {moment(row.createdAt).format("MM/DD/YYYY")}
+                          </TableCell>
+                          <TableCell>
+                            <MoreVertIcon //need to remove this hardcode this code, more ... three drops in last column
+                              onClick={(event) =>
+                                handleClick(event,row.User_id)
+                              }
+                            />
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })
+                  : null}
                 <Popover
                   sx={{ m: -7, mt: 0.7 }}
                   id={openId}
@@ -313,7 +168,10 @@ const User = () => {
                     horizontal: "right",
                   }}
                 >
-                  <Typography className="redDeleteofTestPortal">
+                  <Typography
+                    className="redDeleteofTestPortal"
+                    onClick={handleDelete}
+                  >
                     {" "}
                     <DeleteIcon className="deleteIcon" /> Delete{" "}
                   </Typography>

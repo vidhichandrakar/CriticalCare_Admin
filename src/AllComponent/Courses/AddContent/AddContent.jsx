@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import React from "react";
 import "../../CSSFile/Content.css";
 import LeftBox from "./LeftBox";
+import RightBox from "./RightBox";
 
 const AddContent = ({})=>{
   return(
@@ -16,6 +17,9 @@ const AddContent = ({})=>{
       </Box>
       <Box className="contentRightBox">
       <Typography className="contentRightHeading"> Add content</Typography>
+      <Box>
+        <RightBox/>
+      </Box>
       </Box>
 
     </div>
