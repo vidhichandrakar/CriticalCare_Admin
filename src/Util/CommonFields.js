@@ -2,9 +2,10 @@ import { Button, MenuItem, Select, TextField, Typography } from "@mui/material";
 import React from "react";
 
 export const commonTextField =({className,inputClassName,labels},Option={
-  sx:{},handleInput:()=>{}
+  sx:{},handleInput:()=>{},
+  type:""
 })=>{
-  const {sx,handleInput} = Option;
+  const {sx,handleInput,type} = Option;
   return(
     <TextField
     inputProps={{ className: inputClassName }}
@@ -14,26 +15,25 @@ export const commonTextField =({className,inputClassName,labels},Option={
     id="fullWidth"
     sx={sx}
     className={className}
-    onChange={(event)=> handleInput(event.target.value,"name")}
+    onChange={(event)=> handleInput(event.target.value,type)}
   />
   )
 }
 
-export const commonSelect =({placeholder,menuItemList,className},Option={handleInput:()=>{},categoryValue:''})=>{
-  const{handleInput,categoryValue} = Option;
-  console.log("categoryValue",categoryValue);
+export const commonSelect =({placeholder,menuItemList,className},Option={handleInput:()=>{},categoryValue:{},type:""})=>{
+  const{handleInput,categoryValue,type} = Option;
   return(
     <Select
     displayEmpty
     size="small"
     renderValue={() => {
-      return <em className={className}>{categoryValue?categoryValue:placeholder}</em>;
+      return <em className={className}>{categoryValue?categoryValue.label:placeholder}</em>;
     }}
     inputProps={{ "aria-label": "Without label" }}
-    value={categoryValue}
-    onChange={(event)=> handleInput(event.target.value,"category")}
+    value={categoryValue.label}
+    onChange={(event)=> handleInput(event.target.value,type)}
   >
-   {menuItemList.map(menu=><MenuItem value={menu.label}>{menu.label}</MenuItem>)} 
+   {menuItemList.map(menu=><MenuItem value={menu}>{menu.label}</MenuItem>)} 
   </Select>
   )
 }

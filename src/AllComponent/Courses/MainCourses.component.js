@@ -7,15 +7,9 @@ import SideBar from "../AdminDashboardMain/SideBar";
 const MainCourses = ({})=>{
   const [headerLabel,setHeaderLabel] = useState("Create Course");
   const [subHeaderLabel,setSubHeaderLabel] = useState("Add / view content of your course");
-  const labels=[
-    {id:0,labels:"Create Course",subLabels:"Add / view content of your course"},
-    {id:1,labels:"Nephrology (Course Name)",subLabels:""},
-    {id:2,labels:"Nephrology (Course Name)",subLabels:"Add / view content of your course"}
-  ]
+  
   const handleHeaderLabels = (value)=>{
-    let heading = labels.filter(val=>val.id===value);
-    setHeaderLabel(heading[0].labels);
-    setSubHeaderLabel(heading[0].subLabels);
+    setHeaderLabel(value);
   }
   return(
     <div className='grid-container'>
