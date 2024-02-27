@@ -1,5 +1,5 @@
 import { Box} from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import FormControl from "@mui/material/FormControl";
 import {
   CommonTypography,
@@ -8,7 +8,31 @@ import {
   commonTextField,
 } from "../../Util/CommonFields";
 
-const EditPrice = ({ handleTrackerPage }) => {
+const EditPrice = ({ handleTrackerPage, handleInputChange }) => {
+  const [editPriceData, setEditPriceData] = useState({
+    duration:"",
+     years:"",
+     regularPrice:"",
+     offerPrice:""
+  });
+
+  const handleInpurPrice =(value, type)=>{
+    let storedValues = Object.assign({}, editPriceData);
+   if(type === "duration"){
+    storedValues.duration = value;
+   }
+   else if(type === "years"){
+    storedValues.years = value;
+   }
+   else if(type === "regularPrice"){
+    storedValues.regularPrice = value;
+   }
+   else if(type === "offerPrice"){
+    storedValues.offerPrice = value;
+   }
+   setEditPriceData(storedValues);
+   handleInputChange("editPrice",storedValues);
+  }
   return (
     <div className="formMain">
       <Box sx={{ mt: "5%" }} className="editFirstBox">
@@ -28,6 +52,8 @@ const EditPrice = ({ handleTrackerPage }) => {
             },
             (Option = {
               sx: { width: 240, marginTop: "4% !important" },
+              handleInput: handleInpurPrice,
+              type:"duration"
             })
           )}
         </Box>
@@ -47,7 +73,12 @@ const EditPrice = ({ handleTrackerPage }) => {
                 { id: 3, label: "Option 3" },
               ],
               className: "categorytext",
-            })}
+            },
+            (Option = {
+              handleInput: handleInpurPrice,
+              categoryValue: editPriceData.years,
+              type:"years"
+            }))}
           </FormControl>
         </Box>
       </Box>
@@ -68,6 +99,8 @@ const EditPrice = ({ handleTrackerPage }) => {
             },
             (Option = {
               sx: { width: 240, marginTop: "4% !important" },
+              handleInput: handleInpurPrice,
+              type:'regularPrice'
             })
           )}
         </Box>
@@ -87,6 +120,8 @@ const EditPrice = ({ handleTrackerPage }) => {
             },
             (Option = {
               sx: { width: 240, marginTop: "4% !important" },
+              handleInput: handleInpurPrice,
+              type:'offerPrice'
             })
           )}
         </Box>

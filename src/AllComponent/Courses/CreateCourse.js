@@ -5,23 +5,60 @@ import CreateForm from "./CreateCourses.form";
 import EditPrice from "./EditPrice";
 import AddContent from "./AddContent/AddContent";
 import SideBar from "../AdminDashboardMain/SideBar";
+import { createCourse } from "../ActionFactory/apiActions";
 
-const CreateCourses =({handleHeaderLabels})=>{
-  const [trackerPage,setTackerPage]=useState(0);
-  const handleTrackerPage =(page)=>{
+const CreateCourses = ({ handleHeaderLabels }) => {
+  const [trackerPage, setTackerPage] = useState(0);
+  const [basicInfo, setBasicInfo] = useState({});
+  const [editPrice, setEditPrice] = useState({});
+  const handleTrackerPage = (page) => {
     setTackerPage(page);
-    handleHeaderLabels(page)
+    handleHeaderLabels(page);
+    if (page === 2) {
+      handleCreateCourse();
+    } 
   }
+  const handleCreateCourse = () => {
+    const courseData = {
+      CourseName: basicInfo?.Name,
+      Description: basicInfo?.Description,
+      Price: parseInt(editPrice?.regularPrice),
+      Offer_Price: parseInt(editPrice?.offerPrice),
+      Sub_Category_Id: basicInfo?.subCategory?.id,
+      Duration_Id: parseInt(editPrice?.duration),
+      Duration_Type_id: 91,
+      thumbnail_path: basicInfo?.thumbnailPath,
+      content_type_id: 11,
+      Created_by: 1,
+      Modiefied_by: 2,
+    }
+    createCourse({
+      courseData, callBack: (response) => {
+
+      }
+    })
+  }
+
+  const handleInputChange = (type, value) => {
+    if (type === "basicInfo") {
+      setBasicInfo(value);
+    }
+    else if (type === "editPrice") {
+      setEditPrice(value);
+    }
+  }
+
   return (
     <Box className="courseMainTrack">
+      {console.log(basicInfo, editPrice)}
       <Tracker
         trackerPage={trackerPage}
         handleTrackerPage={handleTrackerPage}
       />
       {trackerPage === 0 ? (
-        <CreateForm handleTrackerPage={handleTrackerPage} />
+        <CreateForm handleTrackerPage={handleTrackerPage} handleInputChange={handleInputChange} />
       ) : trackerPage === 1 ? (
-        <EditPrice handleTrackerPage={handleTrackerPage} />
+        <EditPrice handleTrackerPage={handleTrackerPage} handleInputChange={handleInputChange} />
       ) : (
         <AddContent />
       )}

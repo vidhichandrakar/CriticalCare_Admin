@@ -22,6 +22,13 @@ export const deleteUser = ({ userId, callBack }) => {
   });
 };
 
+export const createCourse =({courseData, callBack})=>{
+  const url = APIS.allCourses;
+  axios.post(url,courseData).then((response) => {
+    callBack(response);
+  });
+}
+
 export const getCourseById = ({ courseId, callBack }) => {
   const url = APIS.allCourses + "/" + courseId;
   axios.get(url).then((response) => {
