@@ -4,19 +4,19 @@ import Tracker from "./Tracker";
 import CreateForm from "./CreateCourses.form";
 import EditPrice from "./EditPrice";
 import AddContent from "./AddContent/AddContent";
-import SideBar from "../AdminDashboardMain/SideBar";
 import { createCourse } from "../ActionFactory/apiActions";
-
+import { ToastContainer, toast } from "react-toastify";
 const CreateCourses = ({ handleHeaderLabels }) => {
   const [trackerPage, setTackerPage] = useState(0);
   const [basicInfo, setBasicInfo] = useState({});
   const [editPrice, setEditPrice] = useState({});
   const handleTrackerPage = (page) => {
     setTackerPage(page);
-    handleHeaderLabels(page);
+    console.log("dkjskdj",basicInfo)
+    handleHeaderLabels(basicInfo.Name);
     if (page === 2) {
       handleCreateCourse();
-    } 
+    }
   }
   const handleCreateCourse = () => {
     const courseData = {
@@ -34,7 +34,20 @@ const CreateCourses = ({ handleHeaderLabels }) => {
     }
     createCourse({
       courseData, callBack: (response) => {
-
+        toast.success(
+          "Course added successfully!",
+          {
+            autoClose: 500,
+          }
+        );
+      },
+      error: () => {
+        toast.error(
+          "Something went wrong!",
+          {
+            autoClose: 500,
+          }
+        );
       }
     })
   }
@@ -62,6 +75,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       ) : (
         <AddContent />
       )}
+      <ToastContainer/>
     </Box>
   );
 }

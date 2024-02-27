@@ -3,12 +3,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
 import UploadIcon from "@mui/icons-material/Upload";
-import MenuItem from "@mui/material/MenuItem";
-import FormHelperText from "@mui/material/FormHelperText";
+
+import { ToastContainer, toast } from "react-toastify";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import DoneIcon from "@mui/icons-material/Done";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
   CommonTypography,
@@ -17,6 +16,7 @@ import {
   commonTextField,
 } from "../../Util/CommonFields";
 import { Category, Description } from "@mui/icons-material";
+import { category } from "../../Util/masterFile";
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
   clipPath: "inset(50%)",
@@ -29,19 +29,19 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-const CreateForm = ({ handleTrackerPage, handleInputChange}) => {
+const CreateForm = ({ handleTrackerPage, handleInputChange }) => {
   const [hideValidationTickName, sethideValidationTickName] = useState(false);
   const [hideValidationTickDesc, sethideValidationTickDesc] = useState(false);
   const [storedBasicInfo, setStoredBasicInfo] = useState({
     Name: "",
     Description: "",
     Category: "",
-    subCategory:"",
-    thumbnailPath:""
+    subCategory: "",
+    thumbnailPath: ""
   });
 
   const handleInput = (value, type) => {
-    console.log(type,value)
+    console.log(type, value)
     let storedValues = Object.assign({}, storedBasicInfo);
     if (/^\s/.test(value)) value = "";
     if (type === "name") {
@@ -65,18 +65,18 @@ const CreateForm = ({ handleTrackerPage, handleInputChange}) => {
     else if (type === "subCategory") {
       storedValues.subCategory = value;
     }
-    else if(type=="file"){
+    else if (type == "file") {
       storedValues.thumbnailPath = value
     }
     setStoredBasicInfo(storedValues);
-    if(hideValidationTickDesc && hideValidationTickName){
-    handleInputChange("basicInfo",storedValues);
+    if(hideValidationTickDesc && hideValidationTickName && storedValues.Category){
+      handleInputChange("basicInfo", storedValues);
     }
 
   };
 
   const handleEditPrice = () => {
-   
+
     if (
       storedBasicInfo.Name.length <= 3 &&
       storedBasicInfo.Description.length <= 3 &&
@@ -102,7 +102,8 @@ const CreateForm = ({ handleTrackerPage, handleInputChange}) => {
       toast.error("Category Should not be less then 3 character", {
         autoClose: 500,
       });
-    }else{
+    } else {
+      handleInputChange("basicInfo", storedBasicInfo);
       handleTrackerPage(1);
     }
   };
@@ -120,7 +121,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange}) => {
           inputClassName: "textField",
           labels: "Enter course name",
         },
-        (Option = { handleInput: handleInput, type:"name" })
+        (Option = { handleInput: handleInput, type: "name" })
       )}
       <div className="FlexRow">
         {CommonTypography({
@@ -155,10 +156,13 @@ const CreateForm = ({ handleTrackerPage, handleInputChange}) => {
           className="iconThumb"
         >
           Upload Thumbnail Image
-          <VisuallyHiddenInput type="file" onChange={(event)=>handleInput(event.target.value,"file")}/>
+          <VisuallyHiddenInput type="file" onChange={(event) => handleInput(event.target.value, "file")} />
         </Button>
         <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
           Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
+        </Typography>
+        <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
+          {storedBasicInfo.thumbnailPath}
         </Typography>
       </Box>
       <Box className="divider"></Box>
@@ -175,17 +179,13 @@ const CreateForm = ({ handleTrackerPage, handleInputChange}) => {
             {commonSelect(
               {
                 placeholder: "Select Category",
-                menuItemList: [
-                  { id: 1, label: "Java Script" },
-                  { id: 2, label: "React JS" },
-                  { id: 3, label: "Python" },
-                ],
+                menuItemList: category,
                 className: "categorytext",
               },
               (Option = {
                 handleInput: handleInput,
                 categoryValue: storedBasicInfo.Category,
-                type:"category"
+                type: "category"
               })
             )}
           </FormControl>
@@ -207,11 +207,11 @@ const CreateForm = ({ handleTrackerPage, handleInputChange}) => {
               ],
               className: "categorytext",
             },
-            (Option = {
-              handleInput: handleInput,
-              categoryValue: storedBasicInfo.subCategory,
-              type:"subCategory"
-            }))}
+              (Option = {
+                handleInput: handleInput,
+                categoryValue: storedBasicInfo.subCategory,
+                type: "subCategory"
+              }))}
           </FormControl>
         </Box>
       </Box>

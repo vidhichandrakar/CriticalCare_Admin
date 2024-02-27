@@ -22,10 +22,12 @@ export const deleteUser = ({ userId, callBack }) => {
   });
 };
 
-export const createCourse =({courseData, callBack})=>{
+export const createCourse =({courseData, callBack,error})=>{
   const url = APIS.allCourses;
   axios.post(url,courseData).then((response) => {
     callBack(response);
+  }).catch(errorMsg=>{
+    error(errorMsg);
   });
 }
 

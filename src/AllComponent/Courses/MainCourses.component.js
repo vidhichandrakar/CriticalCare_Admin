@@ -13,9 +13,9 @@ const MainCourses = ({})=>{
     {id:2,labels:"Nephrology (Course Name)",subLabels:"Add / view content of your course"}
   ]
   const handleHeaderLabels = (value)=>{
-    let heading = labels.filter(val=>val.id===value);
-    setHeaderLabel(heading[0].labels);
-    setSubHeaderLabel(heading[0].subLabels);
+    console.log("lan",value)
+    setHeaderLabel(value);
+    // setSubHeaderLabel(heading[0].subLabels);
   }
   return(
     <div className='grid-container'>
