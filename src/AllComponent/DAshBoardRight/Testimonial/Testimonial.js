@@ -257,7 +257,7 @@ const Testimonial = () => {
               </Table>
             </TableContainer>
 
-            <Stack spacing={60}>
+            <footer>
             <TablePagination
               rowsPerPageOptions={[2, 25, 100]}
               component="div"
@@ -266,9 +266,9 @@ const Testimonial = () => {
               page={page}
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
-              sx={{mb:1, position: "sticky"}}
+              className="testimonialPagination"
             />
-            </Stack>
+            </footer>
           </Paper>
         </div>
       </div>

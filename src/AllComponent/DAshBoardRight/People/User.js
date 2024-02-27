@@ -1,5 +1,4 @@
 import React, { Fragment, useState, useEffect } from "react";
-// import React, { Fragment, useEffect, useState } from "react";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Typography from "@mui/material/Typography";
@@ -22,6 +21,8 @@ import Checkbox from "@mui/material/Checkbox";
 import axios from "axios";
 import { deleteUser, getAllUsersApi } from "../../ActionFactory/apiActions";
 import moment from "moment/moment";
+import { TablePagination } from "@mui/material";
+import Stack from '@mui/material/Stack';
 
 const User = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -72,6 +73,33 @@ const User = () => {
     }})
   };
 
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
+
+  // const rows = [
+  //   createData(
+  //     "Can't express the amount of respect to all the members in this platform who are working so hard for us. We are so blessed to have this lovely platform in our generation!",
+  //     "Sheikh Shoeb",
+  //     <MoreVertIcon
+  //       onClick={(event) =>
+  //         handleClick(event, "id1", {
+  //           User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
+  //           full_name: "Sheikh Shoeb",
+  //           date: "12/10/23",
+  //         })
+  //       }
+  //     />
+  //   ),]
+
   return (
     <div className="grid-container">
       <SideBar />
@@ -96,9 +124,10 @@ const User = () => {
             </Button>
           </div>
         ) : null}
+
         <Paper
           sx={{ width: "100%", overflow: "hidden" }}
-          className="completeTable"
+          className="userCompleteTable"
         >
           <TableContainer sx={{ maxHeight: 540 }}>
             <Table stickyHeader aria-label="sticky table">
@@ -116,6 +145,8 @@ const User = () => {
                   ))}
                 </TableRow>
               </TableHead>
+
+
               <TableBody className="parentTable">
                 {userData.length
                   ? userData.map((row) => {
@@ -142,9 +173,9 @@ const User = () => {
                               </Typography>
                             </div>
                           </TableCell>
-                          <TableCell>{row.UserName}</TableCell>
+                          <TableCell className="fullNameHead">{row.UserName}</TableCell>
                           <TableCell>
-                            {moment(row.createdAt).format("MM/DD/YYYY")}
+                            {moment(row.createdAt).format("MM/DD/YYYY")} 
                           </TableCell>
                           <TableCell>
                             <MoreVertIcon //need to remove this hardcode this code, more ... three drops in last column
@@ -158,7 +189,7 @@ const User = () => {
                     })
                   : null}
                 <Popover
-                  sx={{ m: -7, mt: 0.7 }}
+                  sx={{ m: -7, mt: 0.7, ml: -18 }}
                   id={openId}
                   open={open}
                   anchorEl={anchorEl}
@@ -183,6 +214,18 @@ const User = () => {
               </TableBody>
             </Table>
           </TableContainer>
+
+          <Stack spacing={60}>
+            <TablePagination
+              rowsPerPageOptions={[2, 25, 100]}
+              component="div"
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              className="userPagination"
+            />
+            </Stack>
         </Paper>
       </div>
     </div>

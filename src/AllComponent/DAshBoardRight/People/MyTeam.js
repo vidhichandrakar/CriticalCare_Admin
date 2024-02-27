@@ -17,6 +17,7 @@ import CourseHeader from "../../Courses/CoursesHeader";
 import DeleteIcon from "@mui/icons-material/Delete";
 import BlockIcon from "@mui/icons-material/Block";
 import SideBar from "../../AdminDashboardMain/SideBar";
+import Stack from '@mui/material/Stack';
 
 const MyTeam = () => {
   const [action, setAction] = useState(false);
@@ -30,7 +31,6 @@ const MyTeam = () => {
     {
       id: "User_Info",
       label: "User Info",
-      // minWidth: 170
     },
     {
       id: "Full_Name",
@@ -159,6 +159,8 @@ const MyTeam = () => {
               <FilterAltIcon /> Filter
             </Button>
           </div>
+
+          
           <Paper
             sx={{ width: "100%", overflow: "hidden" }}
             className="completeTable"
@@ -222,7 +224,7 @@ const MyTeam = () => {
                       );
                     })}
                   <Popover
-                    sx={{ m: -7, mt: 0.7 }}
+                    sx={{ m: -7, mt: 0.7, ml: -12 }}
                     id={openId}
                     open={open}
                     anchorEl={anchorEl}
@@ -233,17 +235,34 @@ const MyTeam = () => {
                     }}
                   >
                     <Typography className="redDeleteofTestPortal">
-                      {" "}
-                      <DeleteIcon className="deleteIcon" /> Delete{" "}
+                      <DeleteIcon className="deleteIcon" /> Delete
                     </Typography>
                     <Typography className="redDeleteofTestPortal blueBlockUser">
-                      {" "}
                       <BlockIcon className="deleteIcon" /> Block User
                     </Typography>
                   </Popover>
+
                 </TableBody>
               </Table>
             </TableContainer>
+
+            <footer>
+            <Stack spacing={60}>
+            <TablePagination
+              rowsPerPageOptions={[3, 25, 100]}
+              component="div"
+              count={rows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              sx={{mb:1
+                // position: "sticky"
+              }}
+              className="myTeamPagination"
+            />
+            </Stack>
+            </footer>
           </Paper>
         </div>
       </div>
