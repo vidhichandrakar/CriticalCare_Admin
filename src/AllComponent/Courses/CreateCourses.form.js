@@ -1,5 +1,5 @@
 import { Box, Typography, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
 import UploadIcon from "@mui/icons-material/Upload";
@@ -16,7 +16,7 @@ import {
   commonTextField,
 } from "../../Util/CommonFields";
 import { Category, Description } from "@mui/icons-material";
-import { category } from "../../Util/masterFile";
+import { category, subCategory } from "../../Util/masterFile";
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
   clipPath: "inset(50%)",
@@ -29,7 +29,7 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-const CreateForm = ({ handleTrackerPage, handleInputChange }) => {
+const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const [hideValidationTickName, sethideValidationTickName] = useState(false);
   const [hideValidationTickDesc, sethideValidationTickDesc] = useState(false);
   const [storedBasicInfo, setStoredBasicInfo] = useState({
@@ -37,11 +37,31 @@ const CreateForm = ({ handleTrackerPage, handleInputChange }) => {
     Description: "",
     Category: "",
     subCategory: "",
-    thumbnailPath: ""
+    thumbnailPath: "",
   });
 
+  useEffect(() => {
+    let storedValues = Object.assign({}, storedBasicInfo);
+    storedValues.Name = courseData?.CourseName;
+    if (storedValues.Name?.length >= 4) {
+      sethideValidationTickName(true);
+    }
+    storedValues.Description = courseData?.Description;
+    if (storedValues.Description?.length >= 4) {
+      sethideValidationTickDesc(true);
+    }
+    subCategory.map((item) => {
+      if (item.id === courseData.Sub_Category_Id) {
+        storedValues.subCategory = item;
+      }
+    });
+    storedValues.thumbnailPath = courseData?.thumbnail_path;
+    setStoredBasicInfo(storedValues);
+    console.log("storedValues=====>couses", storedValues);
+  }, [courseData]);
+
   const handleInput = (value, type) => {
-    console.log(type, value)
+    console.log(type, value);
     let storedValues = Object.assign({}, storedBasicInfo);
     if (/^\s/.test(value)) value = "";
     if (type === "name") {
@@ -61,22 +81,22 @@ const CreateForm = ({ handleTrackerPage, handleInputChange }) => {
       }
     } else if (type === "category") {
       storedValues.Category = value;
-    }
-    else if (type === "subCategory") {
+    } else if (type === "subCategory") {
       storedValues.subCategory = value;
-    }
-    else if (type == "file") {
-      storedValues.thumbnailPath = value
+    } else if (type == "file") {
+      storedValues.thumbnailPath = value;
     }
     setStoredBasicInfo(storedValues);
-    if(hideValidationTickDesc && hideValidationTickName && storedValues.Category){
+    if (
+      hideValidationTickDesc &&
+      hideValidationTickName &&
+      storedValues.Category
+    ) {
       handleInputChange("basicInfo", storedValues);
     }
-
   };
 
   const handleEditPrice = () => {
-
     if (
       storedBasicInfo.Name.length <= 3 &&
       storedBasicInfo.Description.length <= 3 &&
@@ -121,7 +141,11 @@ const CreateForm = ({ handleTrackerPage, handleInputChange }) => {
           inputClassName: "textField",
           labels: "Enter course name",
         },
-        (Option = { handleInput: handleInput, type: "name" })
+        (Option = {
+          handleInput: handleInput,
+          type: "name",
+          value: storedBasicInfo.Name,
+        })
       )}
       <div className="FlexRow">
         {CommonTypography({
@@ -140,6 +164,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange }) => {
         rows={4}
         placeholder="Enter course description area"
         className="DescBoxShadow"
+        value={storedBasicInfo.Description}
         onChange={(event) => handleInput(event.target.value, "description")}
       />
       {CommonTypography({
@@ -156,7 +181,10 @@ const CreateForm = ({ handleTrackerPage, handleInputChange }) => {
           className="iconThumb"
         >
           Upload Thumbnail Image
-          <VisuallyHiddenInput type="file" onChange={(event) => handleInput(event.target.value, "file")} />
+          <VisuallyHiddenInput
+            type="file"
+            onChange={(event) => handleInput(event.target.value, "file")}
+          />
         </Button>
         <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
           Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
@@ -164,6 +192,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange }) => {
         <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
           {storedBasicInfo.thumbnailPath}
         </Typography>
+        <img src={storedBasicInfo.thumbnailPath}/>
       </Box>
       <Box className="divider"></Box>
       <Box sx={{ marginTop: "5%" }} className="categoryBox">
@@ -185,7 +214,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange }) => {
               (Option = {
                 handleInput: handleInput,
                 categoryValue: storedBasicInfo.Category,
-                type: "category"
+                type: "category",
               })
             )}
           </FormControl>
@@ -198,20 +227,18 @@ const CreateForm = ({ handleTrackerPage, handleInputChange }) => {
             })
           )}
           <FormControl sx={{ m: 1, minWidth: 240 }} className="categorySelect">
-            {commonSelect({
-              placeholder: "Select Sub Category",
-              menuItemList: [
-                { id: 1, label: "Option 1" },
-                { id: 2, label: "Option 2" },
-                { id: 3, label: "Option 3" },
-              ],
-              className: "categorytext",
-            },
+            {commonSelect(
+              {
+                placeholder: "Select Sub Category",
+                menuItemList: subCategory,
+                className: "categorytext",
+              },
               (Option = {
                 handleInput: handleInput,
                 categoryValue: storedBasicInfo.subCategory,
-                type: "subCategory"
-              }))}
+                type: "subCategory",
+              })
+            )}
           </FormControl>
         </Box>
       </Box>

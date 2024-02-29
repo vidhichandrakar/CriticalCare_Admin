@@ -48,17 +48,19 @@ const Trics1FreeMockTest = () => {
     deleteCourses({
       courseId,
       callBack: (response) => {
-        // const userCallBack = response?.data;
-        // setCourseData(userCallBack);
         navigate("/YourCourses")
       },
     });
     
   }
 
+  const handleEdit=(id)=>{
+    console.log("editing")
+    navigate("/CreateCourses",{ state:{id:courseId}}) 
+  }
+
   return (
     <div className="grid-container">
-      {console.log("useParasms", useParams())}
       <SideBar />
       <div className="mainBox">
         <CourseHeader Heading={"TRICS 1 FREE MOCK TEST FOR EDIC-1"} />
@@ -150,12 +152,13 @@ const Trics1FreeMockTest = () => {
                   sx={{ width: "230px" }}
                   value={10}
                   className="greyPara"
+                  onClick={handleEdit}
                 >
                   {" "}
                   <EditIcon className="PoPIcon" />
                   Edit
                 </MenuItem>
-                <MenuItem onClick={handleDeleteCourse} value={20} className="greyPara">
+                <MenuItem onClick={()=>handleDeleteCourse(id)} value={20} className="greyPara">
                   {" "}
                   <DeleteIcon className="PoPIcon" />
                   Delete

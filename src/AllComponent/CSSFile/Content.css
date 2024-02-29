@@ -79,11 +79,13 @@
   padding: 26px 26px;
  }
  .rightBoxTypography{
-  color: #a19e9e;
+  color: #8e8383;
   font-size: large !important;
+  /* font-weight: 18%; */
   padding: 10px 10px;
  }
  .folderIconRightBox{
   color: #0075FF !important;
   margin-right: 7%;
+  margin-bottom: -2%;
  }

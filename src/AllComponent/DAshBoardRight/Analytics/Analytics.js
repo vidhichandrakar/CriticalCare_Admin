@@ -15,7 +15,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo/DemoContainer"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import RajTest from "../../AdminDashboardMain/RajTest"
+import RajTest from "../../AdminDashboardMain/RajTest";
 
 const Analytics = () => {
   const [defautlValueDate, setDefaultValueDate] = useState("Last 7 days");
@@ -29,27 +29,22 @@ const Analytics = () => {
     { id: 5, label: "Custom Date" },
   ];
   const handleChangeDate = (e) => {
-    console.log(e.target.value);
     setDefaultValueDate(e.target.value);
-    console.log("date pciker");
 
     if (e.target.value === "Last 7 Days") {
       console.log(moment().subtract(7, "days").calendar(), "7 din");
-      setCustomDate(false)
+      setCustomDate(false);
     } else if (e.target.value === "Last 15 Days") {
-      setCustomDate(false)
+      setCustomDate(false);
       console.log(moment().subtract(15, "days").calendar(), "15 din");
     } else if (e.target.value === "Last 30 Days") {
       console.log(moment().subtract(1, "months").calendar(), "30 days");
-      setCustomDate(false)
-    }
-    else if(e.target.value === "Custom Date"){
-      setCustomDate(true)
+      setCustomDate(false);
+    } else if (e.target.value === "Custom Date") {
+      setCustomDate(true);
     }
   };
-  const handleCustumDate = (e) => {
-    console.log("ijhb", e, moment(new Date(e)).format("MM/DD/YYYY"));
-  };
+  const handleCustumDate = (e) => {};
   return (
     <div className="grid-container">
       <SideBar />
@@ -85,13 +80,21 @@ const Analytics = () => {
               </Select>
             </FormControl>
 
-            {customDate &&  (
+            {customDate && (
               <div className="custumDatePicker">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker className="custumDatePickerBg"renderInput={(params) => <TextField size="small" {...params} sx={{m: 0.5, mt: 0.7, background: '#fff',}} />}
-                      onChange={handleCustumDate}
-                      label="Select Start Date"
-                    />
+                  <DatePicker
+                    className="custumDatePickerBg"
+                    renderInput={(params) => (
+                      <TextField
+                        size="small"
+                        {...params}
+                        sx={{ m: 0.5, mt: 0.7, background: "#fff" }}
+                      />
+                    )}
+                    onChange={handleCustumDate}
+                    label="Select Start Date"
+                  />
                 </LocalizationProvider>
               </div>
             )}
@@ -100,7 +103,8 @@ const Analytics = () => {
               <div className="custumDatePicker">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DemoContainer components={["DatePicker"]}>
-                    <DatePicker className="custumDatePickerBg"
+                    <DatePicker
+                      className="custumDatePickerBg"
                       onChange={handleCustumDate}
                       label="Select End Date"
                     />
@@ -142,9 +146,7 @@ const Analytics = () => {
             </div>
           </Box>
         </div>
-        
       </main>
-     
     </div>
   );
 };

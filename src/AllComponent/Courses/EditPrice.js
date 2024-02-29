@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import FormControl from "@mui/material/FormControl";
 import {
   CommonTypography,
@@ -10,7 +10,7 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import { years } from "../../Util/masterFile";
 
-const EditPrice = ({ handleTrackerPage, handleInputChange }) => {
+const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const [editPriceData, setEditPriceData] = useState({
     duration: "",
     years: "",
@@ -18,6 +18,14 @@ const EditPrice = ({ handleTrackerPage, handleInputChange }) => {
     offerPrice: "",
   });
 
+  useEffect(() => {
+    let storedValues = Object.assign({}, editPriceData);
+    storedValues.duration = courseData.Duration_Id;
+    storedValues.regularPrice = courseData.Price;
+    storedValues.offerPrice = courseData.Offer_Price;
+    setEditPriceData(storedValues);
+    console.log("courseDataEdit", storedValues);
+  }, [courseData]);
   const handleInpurPrice = (value, type) => {
     let storedValues = Object.assign({}, editPriceData);
     if (type === "duration") {
@@ -76,6 +84,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange }) => {
               sx: { width: 240, marginTop: "4% !important" },
               handleInput: handleInpurPrice,
               type: "duration",
+              value: editPriceData.duration,
             })
           )}
         </Box>
@@ -121,6 +130,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange }) => {
               sx: { width: 240, marginTop: "4% !important" },
               handleInput: handleInpurPrice,
               type: "regularPrice",
+              value: editPriceData.regularPrice,
             })
           )}
         </Box>
@@ -142,6 +152,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange }) => {
               sx: { width: 240, marginTop: "4% !important" },
               handleInput: handleInpurPrice,
               type: "offerPrice",
+              value: editPriceData.offerPrice,
             })
           )}
         </Box>
