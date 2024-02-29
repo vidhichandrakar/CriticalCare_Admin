@@ -43,6 +43,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { DesktopTimePicker } from "@mui/x-date-pickers/DesktopTimePicker";
 import Divider from '@mui/material/Divider';
+import moment from "moment/moment";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -69,11 +70,66 @@ const TestPortal = () => {
     endTime :"",
     checkbox :"",
   });
+  const [courseDataChange, setCourseDataChange] = useState({
+    dropdownValue: "",
+    inputFieldVAlue: "",
+    checkBox:"",
+  });
 
-  const handleInputChange = (event) => {
-    console.log(event, "line7")
+  const handleAddCourseInputChange = (e,type) => {
+    console.log(e, "line80", type)
+    let storedValues = Object.assign({}, courseDataChange);
+    if(type === "dropdownValue"){
+      storedValues.dropdownValue = e
+      console.log(storedValues.startDate , "chelbox")
+    }
+    else if(type === "inputFieldValue"){
+      storedValues.inputField = e
+      console.log(storedValues.startDate , "chelbox")
+    }
+    else if(type === "checkBox"){
+      storedValues.checkBox = e.target.checked
+      console.log(storedValues.checkBox , "chelbox")
+    }
+    setCourseDataChange(storedValues);
+  } 
+  
+  const handleInputChange = (event,type) => {
+    console.log(event, "line7", type)
     console.log("datework", event)
+    let storedValues = Object.assign({}, change);
+    if(type === "startDate"){
+      storedValues.startDate = moment(new Date(event)).format("MM/DD/YYYY")
+      console.log(storedValues.startDate , "chelbox")
+    }
+    else if(type === "startTime"){
+      storedValues.startTime = moment(event).format("HH:MM aa")
+      console.log(storedValues.startDate , "chelbox")
+    }
+    else if(type === "endDate"){
+      storedValues.endDate = moment(event).format("MM/DD/YYYY")
+      console.log(storedValues.startDate , "chelbox")
+    }
+    else if(type === "endTime"){
+      storedValues.endTime = moment(event).format("HH:MM aa")
+      console.log(storedValues.startDate , "chelbox")
+    }
+   else if(type === "checkbox"){
+      storedValues.checkbox = event.target.check
+      console.log(storedValues.checkbox , "chelbox")
+   }
+   setChange(storedValues)
+
   }
+  function validateForm()
+{
+
+    var z = document.forms["myForm"]["num"].value;
+    if(!z.match(/^\d+/))
+        {
+        alert("Please only enter numeric characters only for your Age! (Allowed input:0-9)")
+        }
+}
    
 
   const HandleClick = () => {
@@ -242,6 +298,7 @@ const TestPortal = () => {
         <h4>{popHeading}</h4>
         <ClearIcon onClick={handleChangeClose} className="Xicon pointer" />
       </Box>
+      <Divider />
       <Box className="mt2">
         <Typography>Add test to</Typography>
         <Box className="mt2 BasicInfoBox">
@@ -298,33 +355,49 @@ const TestPortal = () => {
           <FormControl sx={{ mt: 2, minWidth: 450 }} className="categorySelect">
             <Typography>Select Course</Typography>
             {commonSelect({
-              placeholder: "Select Category",
+              // placeholder: "Select Category",
               menuItemList: [
                 { id: 1, label: "Java Script" },
                 { id: 2, label: "React JS" },
                 { id: 3, label: "Python" },
               ],
-              className: "categorytext",
-            })}
+              // className: "categorytext",
+            }, (Option = {
+              // sx: { width: 240, marginTop: "4% !important" },  
+              categoryValue: courseDataChange.dropdownValue,
+              handleInput: handleAddCourseInputChange,
+              type: "dropdownValue",
+            }))}
           </FormControl>
         </Box>
         <Box className="mt2">
           <div className="FlexRow">
             {CommonTypography({
               fontWeight: 600,
-              label: "Number of a\ttempts",
+              label: "Number of attempts",
             })}
           </div>
           {commonTextField({
             id: "fullWidth",
             className: "BoxShadow",
-            inputClassName: "textField",
+            inputClassName: "textFieldValue",
             labels: "Enter course name",
-          })}
+          }, (Option = {
+            // sx: { width: 240, marginTop: "4% !important" },  
+            handleInput: handleAddCourseInputChange,
+            type: "duration",
+          }))}
         </Box>
         <Box className="flexrow mt2">
-          <Checkbox {...label} />
+          <Checkbox {...label} 
+          onChange={(e) => handleAddCourseInputChange(e, "chechBox")} />
           <Typography>Set unlimited attempts</Typography>
+        </Box>
+        <Box className="CourseDivider">
+        <Divider  />
+        </Box>
+        <Box className="coursebtn">
+          <Button variant="contained">Add to Course</Button>
         </Box>
       </Box>
     </Box>
@@ -353,7 +426,7 @@ const TestPortal = () => {
         <Box className="mt2">
           {console.log(change)}
           <FormControl sx={{ mt: 2, minWidth: 450 }} className="categorySelect">
-            <Typography>Select Course</Typography>
+            <Typography>When can students attempts?</Typography>
             <Box className="flexrow DateBox">
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer
@@ -367,8 +440,10 @@ const TestPortal = () => {
                 <DemoItem label="Start Date">
                   <DesktopDatePicker 
                   // defaultValue={dayjs("2022-04-17")}
+                  // value={change.startDate}
+                  id="startDate"
                   name="startDate"
-                   onChange={(event) => handleInputChange(event)} />
+                   onChange={(event) => handleInputChange(event, "startDate")} />
                 </DemoItem>
               </LocalizationProvider>
               <LocalizationProvider dateAdapter={AdapterDayjs} 
@@ -385,8 +460,9 @@ const TestPortal = () => {
                   <DemoItem label="Start Time" className="TimeBox">
                     <DesktopTimePicker
                       className="TimeBox"
+                      value={change.endDate}
                       name="endDate"
-                      onChange={(event) => handleInputChange(event)} 
+                      onChange={(event) => handleInputChange(event, "endDate")} 
                     />
                   </DemoItem>
                 </DemoContainer>
@@ -405,8 +481,9 @@ const TestPortal = () => {
                 <DemoItem label="End Date">
                   <DesktopDatePicker 
                   // defaultValue={dayjs("2022-04-17")}
+                value={change.startTime}
                   name="startTime"
-                   onChange={(event) => handleInputChange(event)}  />
+                   onChange={(event) => handleInputChange(event, "startTime")}  />
                 </DemoItem>
               </LocalizationProvider>
               <LocalizationProvider dateAdapter={AdapterDayjs} className="TimeBox">
@@ -421,10 +498,11 @@ const TestPortal = () => {
                   <DemoItem label="End Time" className="TimeBox" >
                     <DesktopTimePicker
                       // defaultValue={dayjs("2022-04-17T15:30")}
+                      value={change.endTime}
                       name="endTime"
                   className="TimeBox"
                       
-                      onChange={(event) => handleInputChange(event)} 
+                      onChange={(event) => handleInputChange(event, "endTime")} 
                     />
                   </DemoItem>
                 </DemoContainer>
@@ -435,7 +513,7 @@ const TestPortal = () => {
         <Box className="flexrow mt2">
           <Checkbox {...label} 
           name="checkBox"
-           onChange={(event) => handleInputChange(event)} />
+           onChange={(event) => handleInputChange(event, "checkBox")} />
           <Typography>
             Check for no end time,so students can attempts anytime
           </Typography>
@@ -443,7 +521,9 @@ const TestPortal = () => {
         <Box className="flexrow">
           <h3>Number of attempts</h3>
         </Box>
+        <Box className="FreeTestDivider">
         <Divider />
+        </Box>
         <Box className="BtnBox">
           <Button variant="contained">Add to Free test</Button>
         </Box>

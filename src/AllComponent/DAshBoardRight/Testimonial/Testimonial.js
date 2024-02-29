@@ -15,7 +15,7 @@ import Popover from "@mui/material/Popover";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Typography from "@mui/material/Typography";
 import SideBar from "../../AdminDashboardMain/SideBar";
-import TablePagination from "@mui/material/TablePagination";
+import { TablePagination } from "@mui/material";
 
 const Testimonial = () => {
 

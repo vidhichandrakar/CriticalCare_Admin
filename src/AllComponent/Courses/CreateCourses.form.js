@@ -3,12 +3,11 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
 import UploadIcon from "@mui/icons-material/Upload";
-import MenuItem from "@mui/material/MenuItem";
-import FormHelperText from "@mui/material/FormHelperText";
+
+import { ToastContainer, toast } from "react-toastify";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import DoneIcon from "@mui/icons-material/Done";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
   CommonTypography,
@@ -17,6 +16,7 @@ import {
   commonTextField,
 } from "../../Util/CommonFields";
 import { Category, Description } from "@mui/icons-material";
+import { category } from "../../Util/masterFile";
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
   clipPath: "inset(50%)",
@@ -29,47 +29,54 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-const CreateForm = ({ handleTrackerPage }) => {
+const CreateForm = ({ handleTrackerPage, handleInputChange }) => {
   const [hideValidationTickName, sethideValidationTickName] = useState(false);
   const [hideValidationTickDesc, sethideValidationTickDesc] = useState(false);
   const [storedBasicInfo, setStoredBasicInfo] = useState({
     Name: "",
     Description: "",
     Category: "",
+    subCategory: "",
+    thumbnailPath: ""
   });
 
   const handleInput = (value, type) => {
+    console.log(type, value)
     let storedValues = Object.assign({}, storedBasicInfo);
     if (/^\s/.test(value)) value = "";
-    // console.log("Value",value)
     if (type === "name") {
       storedValues.Name = value;
 
       if (value.length >= 4) {
-        console.log("fullWidth", value);
         sethideValidationTickName(true);
       } else {
-        console.log("fullWidth", value);
         sethideValidationTickName(false);
       }
     } else if (type === "description") {
       storedValues.Description = value;
       if (value.length >= 4) {
-        console.log("fullWidth", value);
         sethideValidationTickDesc(true);
       } else {
-        console.log("fullWidth", value);
         sethideValidationTickDesc(false);
       }
     } else if (type === "category") {
       storedValues.Category = value;
     }
+    else if (type === "subCategory") {
+      storedValues.subCategory = value;
+    }
+    else if (type == "file") {
+      storedValues.thumbnailPath = value
+    }
     setStoredBasicInfo(storedValues);
+    if(hideValidationTickDesc && hideValidationTickName && storedValues.Category){
+      handleInputChange("basicInfo", storedValues);
+    }
+
   };
 
   const handleEditPrice = () => {
-    handleTrackerPage(1);
-    console.log("iuhjk");
+
     if (
       storedBasicInfo.Name.length <= 3 &&
       storedBasicInfo.Description.length <= 3 &&
@@ -95,12 +102,14 @@ const CreateForm = ({ handleTrackerPage }) => {
       toast.error("Category Should not be less then 3 character", {
         autoClose: 500,
       });
+    } else {
+      handleInputChange("basicInfo", storedBasicInfo);
+      handleTrackerPage(1);
     }
   };
 
   return (
     <div className="formMain">
-      {console.log("stored", storedBasicInfo)}
       <div className="FlexRow">
         {CommonTypography({ fontWeight: 600, label: "Name" })}
         {hideValidationTickName && <DoneIcon className="RightTick" />}
@@ -112,7 +121,7 @@ const CreateForm = ({ handleTrackerPage }) => {
           inputClassName: "textField",
           labels: "Enter course name",
         },
-        (Option = { handleInput: handleInput })
+        (Option = { handleInput: handleInput, type: "name" })
       )}
       <div className="FlexRow">
         {CommonTypography({
@@ -147,10 +156,13 @@ const CreateForm = ({ handleTrackerPage }) => {
           className="iconThumb"
         >
           Upload Thumbnail Image
-          <VisuallyHiddenInput type="file" />
+          <VisuallyHiddenInput type="file" onChange={(event) => handleInput(event.target.value, "file")} />
         </Button>
         <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
           Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
+        </Typography>
+        <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
+          {storedBasicInfo.thumbnailPath}
         </Typography>
       </Box>
       <Box className="divider"></Box>
@@ -167,16 +179,13 @@ const CreateForm = ({ handleTrackerPage }) => {
             {commonSelect(
               {
                 placeholder: "Select Category",
-                menuItemList: [
-                  { id: 1, label: "Java Script" },
-                  { id: 2, label: "React JS" },
-                  { id: 3, label: "Python" },
-                ],
+                menuItemList: category,
                 className: "categorytext",
               },
               (Option = {
                 handleInput: handleInput,
                 categoryValue: storedBasicInfo.Category,
+                type: "category"
               })
             )}
           </FormControl>
@@ -197,7 +206,12 @@ const CreateForm = ({ handleTrackerPage }) => {
                 { id: 3, label: "Option 3" },
               ],
               className: "categorytext",
-            })}
+            },
+              (Option = {
+                handleInput: handleInput,
+                categoryValue: storedBasicInfo.subCategory,
+                type: "subCategory"
+              }))}
           </FormControl>
         </Box>
       </Box>

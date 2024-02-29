@@ -13,10 +13,11 @@ import SideBar from "../AdminDashboardMain/SideBar";
 import { Link } from "react-router-dom";
 import { getAllCourses } from "../ActionFactory/apiActions";
 
+
 const YourCourses = () => {
   const [allCourses, setAllCourses] = useState([]);
-
   useEffect(() => {
+    
     getAllCourses({
       callBack: (response) => {
         const userCallBack = response?.data;

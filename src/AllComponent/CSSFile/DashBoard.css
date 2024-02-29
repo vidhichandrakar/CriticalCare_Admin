@@ -566,10 +566,9 @@ margin-left: 10px !important;
   margin-top: 5%;
 }
 .BookIcon{
-  width: 100%;
-  height: 50vh;
-  text-align: center;
-  display: inline-block;
+  width: 10% !important;
+  height: 6vh !important;
+  margin-left: 6%;
   color: rgb(21, 203, 244);
 }
 .DateBox{
@@ -581,21 +580,32 @@ margin-left: 10px !important;
   margin-top: 0% !important;
   padding: 3% !important;
 }
-.BtnBox{
-  margin-top: 10%;
+.CourseDivider{
+  margin-top: 45%;
+}
+.coursebtn{
+  margin-top: 7%;
   display: flex;
   justify-content: right ;
-  float: right;
+}
+.FreeTestDivider{
+  margin-top: 15%;
+}
+.BtnBox{
+  margin-top: 7%;
+  display: flex;
+  justify-content: right ;
+  
  
 }
 .AddButton{
   color: rgb(21, 203, 244) !important;
 }
 .textAdd{
-  margin-left: 10% !important;
+  margin-left: 2% !important;
 }
 .pad20{
-  padding: 26px 10px;
+  padding: 13px 10px;
 }
 .pointer{
   cursor: pointer;
