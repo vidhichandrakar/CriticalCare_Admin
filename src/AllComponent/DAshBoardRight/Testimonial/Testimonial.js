@@ -83,32 +83,6 @@ const Testimonial = () => {
         }
       />
     ),
-    // createData(
-    //   " It was a great experience for me because I was a dropper and had only PW as a source for my coaching. I love Alakh sir since because of him I cleared the exam with good marks and also made my family proud. My experience with PW was full of learning and grooming.",
-    //   "Jitendra Chandrakar",
-    //   <MoreVertIcon
-    //     onClick={(event) =>
-    //       handleClick(event, "id2", {
-    //         User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
-    //         full_name: "Jitendra Chandrakar",
-    //         date: "12/10/23",
-    //       })
-    //     }
-    //   />
-    // ),
-    // createData(
-    //   " It was a great experience for me because I was a dropper and had only PW as a source for my coaching. I love Alakh sir since because of him I cleared the exam with good marks and also made my family proud. My experience with PW was full of learning and grooming.",
-    //   "Jitendra Chandrakar",
-    //   <MoreVertIcon
-    //     onClick={(event) =>
-    //       handleClick(event, "id2", {
-    //         User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
-    //         full_name: "Jitendra Chandrakar",
-    //         date: "12/10/23",
-    //       })
-    //     }
-    //   />
-    // ),
   ];
 
   const [page, setPage] = useState(0);

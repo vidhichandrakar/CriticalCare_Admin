@@ -46,7 +46,7 @@ body {
   margin: 20px;
 }
 .Sider-Box {
-  height: 100%;
+  /* height: 100%; */
   background-color: white;
   border-radius: 10px;
 }
@@ -65,6 +65,10 @@ body {
 .textDecoration{
   text-decoration: none !important;
   color: rgba(17, 16, 16, 0.662);
+  /* padding: 30px !important; */
+  /* text-align: left !important; */
+  /* justify-content: left !important; */
+  /* padding: 10px !important; */
 }
 .sidebar-brand {
   margin-top: 15px;
@@ -105,6 +109,49 @@ body {
   display: inline !important;
   position: absolute;
   z-index: 12 !important;
+}
+.manageCoupons{
+  margin-left: -27px !important;
+}
+.myCoursess{
+  margin-left: -68px !important;
+}
+.userCollapse{
+  margin-left: -94px !important;
+}
+.myTeamCollapse{
+  margin-left: -81px !important;
+}
+.coursesHead{
+  font-size: xx-large !important;
+  margin-left: 11px !important;
+  /* font-size: 19px !important; */
+  /* font-weight: 900 !important; */
+}
+.listItems{
+  /* display: grid; */
+  /* grid-template-rows: 1fr 1fr 1fr 1fr; */
+  display: flex;
+  flex-direction: column;
+  /* width: 86% !important; */
+  text-align: left !important;
+  /* justify-content: left !important; */
+  /* background-color: rgb(245, 245, 234) !important; */
+  margin-left: -35px !important;
+  /* padding-left: 0%; */
+  /* height: 30% !important; */
+}
+.listButton{
+  /* padding: 11px 0px !important; */
+  font-size: 20% !important;
+  margin-left: 5px !important;
+  margin-top: -18px !important;
+}
+.listButton:hover{
+  background-color: #E5F7FD !important;
+  cursor: pointer;
+  border-right: 3px solid #0075FF !important;
+  color: #0075FF !important;
 }
 
 /* End Sidebar  */
