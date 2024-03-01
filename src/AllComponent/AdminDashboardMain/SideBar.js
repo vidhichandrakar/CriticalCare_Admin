@@ -377,13 +377,11 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
        <Collapse in={openCollapse} timeout="auto" unmountOnExit>
          <List component="div">
            <ListItemButton 
-          //  sx={{ pl: 1 }}
             className="listItems">
 
              <Link to="/YourCourses" className="textDecoration" >
               <ul type="disc" className="myCoursess">
                 <li><Typography className="textDecoration" sx={{ textDecoration: "none",
-                // textDecorationLine: 'none', 
                 color: 'greys' }}>
                   My Courses
                 </Typography></li>
