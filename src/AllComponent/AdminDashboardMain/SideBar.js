@@ -282,14 +282,12 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   };
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-    console.log(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
   };
   const handleClickCourse = (event) => {
     setAnchorE3(event.currentTarget);
-    console.log(event.currentTarget);
   };
   const handleCloseCourse = () => {
     setAnchorE3(null);

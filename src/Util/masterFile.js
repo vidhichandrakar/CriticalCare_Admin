@@ -10,3 +10,8 @@ export const years = [
   { id: 3, label: "Year(s)" },
 ];
 
+export const subCategory=[
+  {id:1, label:"Sub Category 1"},
+  {id:2, label:"Sub Category 2"},
+  {id:3, label:"Sub Category 3"}
+]
