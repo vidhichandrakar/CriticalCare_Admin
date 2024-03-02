@@ -37,17 +37,18 @@ const CreateCourses = ({ handleHeaderLabels }) => {
 
   const handleCreateCourse = () => {
     const courseData = {
-      CourseName: basicInfo?.Name,
-      Description: basicInfo?.Description,
-      Price: parseInt(editPrice?.regularPrice),
-      Offer_Price: parseInt(editPrice?.offerPrice),
-      Sub_Category_Id: basicInfo?.subCategory?.id,
-      Duration_Id: parseInt(editPrice?.duration),
-      Duration_Type_id: 91,
+      course_name: basicInfo?.Name,
+      description: basicInfo?.Description,
+      price: parseInt(editPrice?.regularPrice),
+      offer_price: parseInt(editPrice?.offerPrice),
+      sub_category_id: basicInfo?.subCategory?.id,
+      duration_id: parseInt(editPrice?.duration),
+      duration_type_id: 91,
       thumbnail_path: basicInfo?.thumbnailPath,
       content_type_id: 11,
-      Created_by: 1,
-      Modiefied_by: 2,
+      modiefied_by: 1,
+      created_by: 2,
+      
     };
     createCourse({
       courseData,

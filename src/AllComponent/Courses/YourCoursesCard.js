@@ -15,7 +15,7 @@ const YourCoursesCard = ({ allCourses }) => {
     <>
       {allCourses.length
         ? allCourses.map((item) => {
-          const id = item.Course_Id;
+          const id = item.course_id;
 
             return (
               <div className="card" onClick={()=>handleCourse(id)}>
@@ -23,12 +23,12 @@ const YourCoursesCard = ({ allCourses }) => {
                   <img src={cardimg} className="cardImage" />
                 </Link>
                 <div className="CardData">
-                  <p className="Headp">{item.CourseName}</p>
+                  <p className="Headp">{item.course_name}</p>
                   <p className="Namep">
                     {moment(item.createdAt).format("DD/MM/YYYY")}
                   </p>
-                  <p className="Yearp">{item.Price}</p>
-                  <p className="Pricep">{item.Offer_Price}</p>
+                  <p className="Yearp">{item.price}</p>
+                  <p className="Pricep">{item.offer_price}</p>
                 </div>
               </div>
             );
