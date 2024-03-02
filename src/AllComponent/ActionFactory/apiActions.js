@@ -44,3 +44,10 @@ export const deleteCourses = ({ courseId, callBack }) => {
     callBack(response);
   });
 };
+
+export const getCategory = ({ callBack }) => {
+  const url = APIS.getCategory;
+  axios.get(url).then((response) => {
+    callBack(response);
+  });
+};
