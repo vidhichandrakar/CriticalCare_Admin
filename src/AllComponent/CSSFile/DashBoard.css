@@ -46,7 +46,7 @@ body {
   margin: 20px;
 }
 .Sider-Box {
-  height: 100%;
+  /* height: 100%; */
   background-color: white;
   border-radius: 10px;
 }
@@ -105,6 +105,41 @@ body {
   display: inline !important;
   position: absolute;
   z-index: 12 !important;
+}
+.manageCoupons{
+  margin-left: -27px !important;
+}
+.myCoursess{
+  margin-left: -68px !important;
+}
+.userCollapse{
+  margin-left: -94px !important;
+}
+.myTeamCollapse{
+  margin-left: -81px !important;
+}
+.coursesHead{
+  font-size: xx-large !important;
+  margin-left: 11px !important;
+  /* font-size: 19px !important; */
+  /* font-weight: 900 !important; */
+}
+.listItems{
+  display: flex;
+  flex-direction: column;
+  text-align: left !important;
+  margin-left: -35px !important;
+}
+.listButton{
+  font-size: 20% !important;
+  margin-left: 5px !important;
+  margin-top: -18px !important;
+}
+.listButton:hover{
+  background-color: #E5F7FD !important;
+  cursor: pointer;
+  border-right: 3px solid #0075FF !important;
+  color: #0075FF !important;
 }
 
 /* End Sidebar  */
@@ -518,12 +553,13 @@ margin-left: 10px !important;
   text-transform: none !important;
 }
 .redDeleteofTestPortal{
-  color: red !important;
+  /* color: red !important; */
   display: flex !important; 
   flex-direction:row!important;
   align-items:left!important;
+  text-align: left !important;
   padding: 3px 9px !important;
-  text-transform: none !important;
+  cursor: pointer;
 }
 .blueBlockUser{
   color: #0075ff !important;
@@ -563,20 +599,46 @@ margin-left: 10px !important;
   margin-top: 5%;
 }
 .BookIcon{
-  width: 100%;
-  height: 50vh;
-  text-align: center;
-  display: inline-block;
+  width: 10% !important;
+  height: 6vh !important;
+  margin-left: 6%;
   color: rgb(21, 203, 244);
+}
+.DateBox{
+  justify-content: space-around;
+  align-items: center !important;
+  padding: 2%;
+}
+.TimeBox{
+  margin-top: 0% !important;
+  padding: 3% !important;
+}
+.CourseDivider{
+  margin-top: 45%;
+}
+.coursebtn{
+  margin-top: 7%;
+  display: flex;
+  justify-content: right ;
+}
+.FreeTestDivider{
+  margin-top: 15%;
+}
+.BtnBox{
+  margin-top: 7%;
+  display: flex;
+  justify-content: right ;
+  
+ 
 }
 .AddButton{
   color: rgb(21, 203, 244) !important;
 }
 .textAdd{
-  margin-left: 10% !important;
+  margin-left: 2% !important;
 }
 .pad20{
-  padding: 26px 10px;
+  padding: 13px 10px;
 }
 .pointer{
   cursor: pointer;

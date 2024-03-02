@@ -32,7 +32,7 @@ export const commonSelect =({placeholder,menuItemList,className},Option={handleI
       return <em className={className}>{categoryValue?categoryValue.label:placeholder}</em>;
     }}
     inputProps={{ "aria-label": "Without label" }}
-    value={categoryValue.label}
+    value={categoryValue?.label}
     onChange={(event)=> handleInput(event.target.value,type)}
   >
    {menuItemList.map(menu=><MenuItem value={menu}>{menu.label}</MenuItem>)} 

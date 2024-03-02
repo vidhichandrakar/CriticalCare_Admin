@@ -16,7 +16,7 @@
   border-radius: 15px;
   color: black;
   font-weight: 800;
-  background-color: white;
+  background-color: white !important;
 }
 .Card h4{
   color: rgb(82, 82, 82);
