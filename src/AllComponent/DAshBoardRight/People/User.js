@@ -104,20 +104,6 @@ const User = () => {
     setPage(0);
   };
 
-  // const rows = [
-  //   createData(
-  //     "Can't express the amount of respect to all the members in this platform who are working so hard for us. We are so blessed to have this lovely platform in our generation!",
-  //     "Sheikh Shoeb",
-  //     <MoreVertIcon
-  //       onClick={(event) =>
-  //         handleClick(event, "id1", {
-  //           User_Info: { name: "sheikhshoeb194@gmail.com", phone: "7589576" },
-  //           full_name: "Sheikh Shoeb",
-  //           date: "12/10/23",
-  //         })
-  //       }
-  //     />
-  //   ),]
 
   return (
     <div className="grid-container">
@@ -185,26 +171,26 @@ const User = () => {
                           <TableCell className="useInfoCheckbox">
                             <Checkbox
                               onChange={(event) =>
-                                handleChangeOnCheckBox(event, row.User_id)
+                                handleChangeOnCheckBox(event, row.user_id)
                               }
                             />
                             <div className="userCheckBoxDiv">
                               <Typography className="bluePara">
-                                {row.Email_id}
+                                {row.email_id}
                               </Typography>
                               <Typography className="PhoneText">
-                                {row.Phone_no}
+                                {row.phone_no}
                               </Typography>
                             </div>
                           </TableCell>
-                          <TableCell className="fullNameHead">{row.UserName}</TableCell>
+                          <TableCell className="fullNameHead">{row.user_name}</TableCell>
                           <TableCell>
                             {moment(row.createdAt).format("MM/DD/YYYY")} 
                           </TableCell>
                           <TableCell>
                             <MoreVertIcon //need to remove this hardcode this code, more ... three drops in last column
                               onClick={(event) =>
-                                handleClick(event, row.User_id)
+                                handleClick(event, row.user_id)
                               }
                             />
                           </TableCell>

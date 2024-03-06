@@ -141,7 +141,6 @@ const Transaction = () => {
                     >
                       {columns.map((column) => {
                         const value = row[column.id];
-                        console.log(row, Object.keys(row), column.id);
                         return (
                           <Fragment>
                             {column.id === "User_Info" ? (
