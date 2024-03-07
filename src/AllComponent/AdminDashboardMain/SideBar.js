@@ -104,6 +104,12 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
       }
     }
   };
+
+  const [highlight, setHighlight] = React.useState(false);
+  const handleHighlight = () =>{
+    setHighlight(true);
+  };
+
   return (
     <aside
       id="sidebar"
@@ -121,7 +127,10 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
 
         <div className="sidebar-list sidebar-list-item BottomLine">
           <Link to="/">
-            <Typography className="hoverrr" sx={{ mt: 1 }}>
+            <Typography 
+            id="hoverrr"
+            className={highlight ? "hoverrr2" : ""}
+             sx={{ mt: 1 }} onClick={handleHighlight}>
               <DashboardIcon className="icon" />
               DashBoard
             </Typography>
@@ -199,21 +208,30 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
           </Link>
 
           <Link to="/TestPortal">
-            <Typography className="hoverrr" sx={{ mt: -2 }}>
+            <Typography 
+            id="hoverrr"
+            className={highlight ? "hoverrr2" : ""}
+             sx={{ mt: -2 }} onClick={handleHighlight}>
               <AssignmentIcon className="icon" />
               Test Portal
             </Typography>
           </Link>
 
           <Link to="/">
-            <Typography className="hoverrr" sx={{ mt: -2 }}>
+            <Typography 
+            id="hoverrr"
+            className={highlight ? "hoverrr2" : ""}
+             sx={{ mt: -2 }} onClick={handleHighlight}>
               <ForumIcon className="icon" />
               Chats
             </Typography>
           </Link>
 
           <Link to="/Analytics">
-            <Typography className="hoverrr" sx={{ mt: -2 }}>
+            <Typography 
+            id="hoverrr"
+            className={highlight ? "hoverrr2" : ""}
+             sx={{ mt: -2 }} onClick={handleHighlight}>
               <SignalCellularAltIcon className="icon" />
               Analytics
             </Typography>
@@ -248,7 +266,10 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
           </Link>
 
           <Link to="/Testimonial">
-            <Typography className="hoverrr" sx={{ mt: -2 }}>
+            <Typography 
+            id="hoverrr"
+            className={highlight ? "hoverrr2" : ""}
+             sx={{ mt: -2 }} onClick={handleHighlight}>
               <PersonIcon className="icon" />
               Testimonial
             </Typography>
