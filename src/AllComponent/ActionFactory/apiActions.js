@@ -51,3 +51,24 @@ export const getCategory = ({ callBack }) => {
     callBack(response);
   });
 };
+
+export const createCategory = ({ payload, callBack }) => {
+  const url = APIS.getCategory;
+  axios.post(url, payload).then((response) => {
+    callBack(response);
+  });
+};
+
+export const updateDuration = ({ payload, callBack }) => {
+  const url = APIS.updateDuration;
+  axios.post(url, payload).then((response) => {
+    callBack(response);
+  });
+};
+
+export const updateMemberDetails = ({ payload, callBack }) => {
+  const url = APIS.updateMember;
+  axios.post(url, payload).then((response) => {
+    callBack(response);
+  });
+};
