@@ -46,7 +46,7 @@ body {
   margin: 20px;
 }
 .Sider-Box {
-  /* height: 100%; */
+  height: 100%;
   background-color: white;
   border-radius: 10px;
 }
@@ -65,6 +65,7 @@ body {
 .textDecoration{
   text-decoration: none !important;
   color: rgba(17, 16, 16, 0.662);
+  font-size: 0.9rem !important;
 }
 .sidebar-brand {
   margin-top: 15px;
@@ -84,17 +85,50 @@ body {
 .BottomLine {
   margin-left: 20px;
 }
-.hoverrr {
-  padding: 11px 0px !important;
-  font-size: 19px !important;
-  margin-left: 7px !important;
+#hoverrr {
+     padding: 3px 0px !important;
+    font-size: 15px !important;
+    margin-left: 7px !important;
 }
-.hoverrr:hover {
+#hoverrr:hover {
   background-color: #E5F7FD !important;
   cursor: pointer;
   border-right: 3px solid #0075FF !important;
   color: #0075FF !important;
 }
+/* .highlightTestPortal{
+  background-color: #E5F7FD !important;
+  border-right: 3px solid #0075FF !important;
+  color: #0075FF !important;
+}
+.highlightDashboard{
+  background-color: #E5F7FD !important;
+  border-right: 3px solid #0075FF !important;
+  color: #0075FF !important;
+}
+.highlightChats{
+  background-color: #E5F7FD !important;
+  border-right: 3px solid #0075FF !important;
+  color: #0075FF !important;
+}
+.highlightAnalytics{
+  background-color: #E5F7FD !important;
+  border-right: 3px solid #0075FF !important;
+  color: #0075FF !important;
+}
+.highlightTestimonials{
+  background-color: #E5F7FD !important;
+  border-right: 3px solid #0075FF !important;
+  color: #0075FF !important;
+} */
+
+.hoverrr2{
+  background-color: #E5F7FD !important;
+  border-right: 3px solid #0075FF !important;
+  color: #0075FF !important;
+}
+
+
 .sidebar-list-item > a {
   text-decoration: none;
   margin-top: 20px;
@@ -109,8 +143,13 @@ body {
 .manageCoupons{
   margin-left: -27px !important;
 }
-.myCoursess{
-  margin-left: -68px !important;
+.myCourses{
+  margin-left: 16px !important;
+  margin-top: -17px;
+}
+.listDesign{
+  margin-left: 16px !important;
+    margin-top: 11%;
 }
 .userCollapse{
   margin-left: -94px !important;
@@ -119,10 +158,8 @@ body {
   margin-left: -81px !important;
 }
 .coursesHead{
-  font-size: xx-large !important;
+  font-size: 15px !important;
   margin-left: 11px !important;
-  /* font-size: 19px !important; */
-  /* font-weight: 900 !important; */
 }
 .listItems{
   display: flex;
