@@ -72,3 +72,24 @@ export const updateMemberDetails = ({ payload, callBack }) => {
     callBack(response);
   });
 };
+
+export const getTeam = ({ callBack }) => {
+  const url = APIS.updateMember;
+  axios.get(url).then((response)=>{
+    callBack(response);
+  });
+};
+
+export const deleteMember = ({ userId, callBack }) => {
+  const url = APIS.updateMember + "/" + userId;
+  axios.delete(url).then((response) => {
+    callBack(response);
+  });
+};
+
+export const updateTeam = ({ payload, callBack }) => {
+  const url = APIS.updateMember;
+  axios.post(url, payload).then((response) => {
+    callBack(response);
+  });
+};

@@ -30,14 +30,16 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const opens = Boolean(anchorE2);
   const ids = opens ? "simple-popover" : undefined;
   let currentlyHovering = false;
-  const [openCollapse, setOpenCollapse] = useState(true);
-  const [openPeople, setOpenPeople] = useState(true);
+  const [openCollapse, setOpenCollapse] = useState(false);
+  const [openPeople, setOpenPeople] = useState(false);
   const [hideCatConfig, setHideCatConfig] = useState(false);
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
   const Courseopen = Boolean(anchorE3);
   const idss = Courseopen ? "simple-popover" : undefined;
   const [hideUnHide, setHideUnHide] = useState(false);
+  const [hideSubConfig , setHideSubConfig] = useState(false);
+  const [selectedConfigValue, setSelectedConfigValue] = useState("");
 
   const handlePopoverOpen = (event) => {
     setAnchorE2(event.currentTarget);
@@ -98,8 +100,10 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
     setOpenPeople(!openPeople);
   };
 
-  const handleCatConfig = () => {
+  const handleCatConfig = (value) => {
     setHideCatConfig(true);
+    setSelectedConfigValue(value)
+
   };
   const handleCloseCat = () => {
     setHideCatConfig(false);
@@ -116,6 +120,10 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const handleHighlight = () =>{
     setHighlight(true);
   };
+
+  const handleHideSubCat=()=>{
+    setHideSubConfig(!hideSubConfig);
+  }
 
   return (
     <aside
@@ -281,15 +289,42 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               Testimonial
             </Typography>
           </Link>
-          <Link onClick={handleCatConfig}>
-            <Typography className="hoverrr" sx={{ mt: -2 }}>
-              <PersonIcon className="icon" />
-              Configuration
-            </Typography>
+          <Link >
+            <ListItemButton onClick={handleHideSubCat} className="listButton">
+              <PersonIcon />
+              <ListItemText primary="Configuration" className="coursesHead" />
+              {hideSubConfig ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+
+            <Collapse in={hideSubConfig} timeout="auto" unmountOnExit>
+              <List component="div">
+               <ul>
+                    <li className="myCourses" onClick={()=>handleCatConfig("category")}>
+                    <Link  className="textDecoration">
+                    <Typography sx={{ textDecoration: "none" }} className="textDecoration">
+                          Category
+                        </Typography>
+                    </Link>
+                    </li>
+                    <li className="listDesign" onClick={()=>handleCatConfig("duration")}>
+                    <Link  className="textDecoration">
+                    <Typography className="textDecoration">Duration</Typography>
+                    </Link>
+                    </li>
+                    <li className="listDesign">
+                    <Link  className="textDecoration" onClick={()=>handleCatConfig("teamMember")}>
+                    <Typography className="textDecoration">Team Member</Typography>
+                    </Link>
+                    </li>
+                  </ul>
+                 
+              </List>
+            </Collapse>
           </Link>
         </div>
         {hideCatConfig && (
           <AddCategory
+            selectedConfigValue={selectedConfigValue}
             handleCloseCat={handleCloseCat}
             hideCatConfig={hideCatConfig}
           />

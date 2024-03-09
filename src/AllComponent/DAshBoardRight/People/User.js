@@ -22,7 +22,7 @@ import axios from "axios";
 import { deleteUser, getAllUsersApi } from "../../ActionFactory/apiActions";
 import moment from "moment/moment";
 import { TablePagination } from "@mui/material";
-import Stack from '@mui/material/Stack';
+import Stack from "@mui/material/Stack";
 
 const User = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -31,6 +31,8 @@ const User = () => {
   const [checkedValue, setCheckedValue] = useState([]);
   const [userData, setUserData] = useState([]);
   const open = Boolean(anchorEl);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const id = open ? "simple-popover" : undefined;
   useEffect(() => {
     getAllUsersApi({
@@ -92,9 +94,6 @@ const User = () => {
     });
   };
 
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -103,7 +102,6 @@ const User = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
 
   return (
     <div className="grid-container">
@@ -156,7 +154,6 @@ const User = () => {
                 </TableRow>
               </TableHead>
 
-
               <TableBody className="parentTable">
                 {userData.length
                   ? userData.map((row) => {
@@ -183,9 +180,11 @@ const User = () => {
                               </Typography>
                             </div>
                           </TableCell>
-                          <TableCell className="fullNameHead">{row.user_name}</TableCell>
+                          <TableCell className="fullNameHead">
+                            {row.user_name}
+                          </TableCell>
                           <TableCell>
-                            {moment(row.createdAt).format("MM/DD/YYYY")} 
+                            {moment(row.createdAt).format("MM/DD/YYYY")}
                           </TableCell>
                           <TableCell>
                             <MoreVertIcon //need to remove this hardcode this code, more ... three drops in last column
@@ -235,7 +234,7 @@ const User = () => {
               onRowsPerPageChange={handleChangeRowsPerPage}
               className="userPagination"
             />
-            </Stack>
+          </Stack>
         </Paper>
       </div>
     </div>

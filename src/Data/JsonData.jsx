@@ -186,3 +186,25 @@ export const columns = [
     align: "center",
   },
 ];
+
+export const teamColumns = [
+  {
+    id: "member_Name",
+    label: "Member Name",
+  },
+  {
+    id: "email_id",
+    label: "Email ID",
+    align: "center",
+  },
+  {
+    id: "phone_no",
+    label: "Phone No.",
+    align: "center",
+  },
+  {
+    id: "Actions",
+    label: "Actions",
+    align: "center",
+  },
+];
