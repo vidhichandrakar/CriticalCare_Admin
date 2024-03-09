@@ -208,3 +208,36 @@ export const teamColumns = [
     align: "center",
   },
 ];
+
+export const testimonalColumns = [
+  {
+    id: "comment",
+    label: "Comments",
+  },
+  {
+    id: "author",
+    label: "Author",
+    align: "center",
+  },
+  {
+    id: "Actions",
+    label: "Actions",
+    align: "center",
+  },
+];
+export const testPortalColumns = [
+  {
+    id: "test_name",
+    label: "Test Name",
+  },
+  {
+    id: "createdAt",
+    label: "Date",
+    align: "center",
+  },
+  {
+    id: "Actions",
+    label: "Actions",
+    align: "center",
+  },
+];

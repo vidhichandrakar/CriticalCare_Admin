@@ -26,10 +26,12 @@ import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import { Box, TextField } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 import axios from "axios";
 import {
   deleteMember,
   deleteUser,
+  getTeamByID,
   getAllUsersApi,
   getTeam,
   updateTeam,
@@ -37,6 +39,7 @@ import {
 import moment from "moment/moment";
 import { TablePagination } from "@mui/material";
 import Stack from "@mui/material/Stack";
+import { add } from "date-fns";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -57,9 +60,9 @@ const MyTeam = () => {
   const id = open ? "simple-popover" : undefined;
   const [opened, setOpen] = useState(false);
   const [addTeam, setAddTeam] = useState({
-    memberName:"",
-    emailID:"",
-    PhoneNo:""
+    memberName: "",
+    emailID: "",
+    PhoneNo: "",
   });
   useEffect(() => {
     getTeam({
@@ -110,21 +113,23 @@ const MyTeam = () => {
   };
   const handleCloseDialog = () => {
     setOpen(false);
+    setAddTeam({
+      memberName: "",
+      emailID: "",
+      PhoneNo: "",
+    });
   };
-const handleInput=(value,type)=>{
-  let storedValues = Object.assign({}, addTeam);
-  if(type==="MemberName"){
-  storedValues.memberName = value;
-  }
-  else if(type==="EmailID"){
-  storedValues.emailID = value
-  }
-  else if(type==="PhoneNo"){
-  storedValues.PhoneNo = value
-  }
-  setAddTeam(storedValues)
-
-}
+  const handleInput = (value, type) => {
+    let storedValues = Object.assign({}, addTeam);
+    if (type === "MemberName") {
+      storedValues.memberName = value;
+    } else if (type === "EmailID") {
+      storedValues.emailID = value;
+    } else if (type === "PhoneNo") {
+      storedValues.PhoneNo = value;
+    }
+    setAddTeam(storedValues);
+  };
   const handleCreateTeam = () => {
     const payload = {
       member_name: addTeam.memberName,
@@ -132,7 +137,30 @@ const handleInput=(value,type)=>{
       phone_no: addTeam.PhoneNo,
     };
     console.log("payloadpayload", payload);
-    updateTeam({ payload, callBack: (response) => {} });
+    updateTeam({
+      payload,
+      callBack: (response) => {
+        setOpen(false);
+      },
+    });
+  };
+
+  const handleEdit = () => {
+    console.log("etidn", openId);
+    setOpen(true);
+    const teamId = openId;
+    getTeamByID({
+      teamId,
+      callBack: (response) => {
+        console.log(response.data);
+        const data = response.data;
+        let storedValues = Object.assign({}, addTeam);
+        storedValues.PhoneNo = data.phone_no;
+        storedValues.emailID = data.email_id;
+        storedValues.memberName = data.member_name;
+        setAddTeam(storedValues);
+      },
+    });
   };
   return (
     <div className="grid-container">
@@ -142,8 +170,6 @@ const handleInput=(value,type)=>{
           Heading={"My Team"}
           subHeading={"View, Filter & Manage all your users"}
         />
-        
-        {console.log("addTeam",addTeam)}
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">
             <SearchBar mt="2%" placeholder="Search by name" />
@@ -190,7 +216,8 @@ const handleInput=(value,type)=>{
                 id="fullWidth"
                 className="BoxShadowInputField"
                 type="MemberName"
-                onChange={(e)=>handleInput(e.target.value,"MemberName")}
+                value={addTeam.memberName}
+                onChange={(e) => handleInput(e.target.value, "MemberName")}
               />
               <Typography gutterBottom sx={{ mt: 2 }}>
                 Email ID
@@ -204,7 +231,8 @@ const handleInput=(value,type)=>{
                     id="fullWidth"
                     className="BoxShadowInputField"
                     type="EmailID"
-                    onChange={(e)=>handleInput(e.target.value,"EmailID")}
+                    value={addTeam.emailID}
+                    onChange={(e) => handleInput(e.target.value, "EmailID")}
                   />
                   <p className="TimeText"> Phone No. </p>
                 </Typography>
@@ -216,8 +244,9 @@ const handleInput=(value,type)=>{
                     id="fullWidth"
                     className="BoxShadowInputField"
                     sx={{ ml: 4 }}
+                    value={addTeam.PhoneNo}
                     type="PhoneNo"
-                    onChange={(e)=>handleInput(e.target.value,"PhoneNo")}
+                    onChange={(e) => handleInput(e.target.value, "PhoneNo")}
                   />{" "}
                 </Typography>
               </Box>
@@ -303,9 +332,13 @@ const handleInput=(value,type)=>{
                     {" "}
                     <DeleteIcon className="deleteIcon" /> Delete{" "}
                   </Typography>
-                  <Typography className="redDeleteofTestPortal blueBlockUser">
+                  <Typography
+                    className="redDeleteofTestPortal blueBlockUser"
+                    onClick={handleEdit}
+                  >
                     {" "}
-                    <BlockIcon className="deleteIcon" /> Block User
+                    <EditIcon className="deleteIcon" />
+                    Edit
                   </Typography>
                 </Popover>
               </TableBody>
