@@ -30,7 +30,13 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const opens = Boolean(anchorE2);
   const ids = opens ? "simple-popover" : undefined;
   let currentlyHovering = false;
+  const [openCollapse, setOpenCollapse] = useState(true);
+  const [openPeople, setOpenPeople] = useState(true);
   const [hideCatConfig, setHideCatConfig] = useState(false);
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+  const Courseopen = Boolean(anchorE3);
+  const idss = Courseopen ? "simple-popover" : undefined;
   const [hideUnHide, setHideUnHide] = useState(false);
 
   const handlePopoverOpen = (event) => {
@@ -52,10 +58,6 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const handleCloseCourse = () => {
     setAnchorE3(null);
   };
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
-  const Courseopen = Boolean(anchorE3);
-  const idss = Courseopen ? "simple-popover" : undefined;
 
   const handleClick2 = (event) => {
     setAnchorE2(event.currentTarget);
@@ -88,14 +90,19 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   }
 
   // collapse
-  const [openCollapse, setOpenCollapse] = React.useState(false);
-  const [openPeople, setOpenPeople] = React.useState(false);
   const navigate = useNavigate();
   const handleClickCollapse = () => {
     setOpenCollapse(!openCollapse);
   };
   const handleClickPeople = () => {
     setOpenPeople(!openPeople);
+  };
+
+  const handleCatConfig = () => {
+    setHideCatConfig(true);
+  };
+  const handleCloseCat = () => {
+    setHideCatConfig(false);
   };
   const handleCoursesSubMenu = (type) => {
     switch (type) {
