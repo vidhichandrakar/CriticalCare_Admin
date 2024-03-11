@@ -1,4 +1,21 @@
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar Link {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.sidebar Link.active {
+  background-color: lightblue;
+}
+
+
+
 /* *{
+
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -17,6 +34,7 @@ body{
   display: flex;
   height: 100vh;
 }
+
 
 
 .container{

@@ -15,12 +15,15 @@ import CouponMain from '../Coupons/Coupons.main';
 import YourCourses from '../Courses/YourCourses';
 import CreateCourses from '../Courses/MainCourses.component';
 import Banner from '../DAshBoardRight/Banner/Banner';
+import Chat from '../DAshBoardRight/Chat';
+import LoginPage from '../LoginFiles/LoginPage';
 
 const RouterMain = () => {
   return (
     <div>
      <Routes>
-            <Route exact path="/" element= {<Dashboard />}> </Route>
+            <Route exact path="/Dashboard" element= {<Dashboard />}> </Route>
+            <Route exact path="/" element= {<LoginPage/>}> </Route>
             <Route exact path="/CreateCourses" element= {<CreateCourses />}> </Route>
             <Route exact path="/User" element= {< User />}> </Route>
             <Route exact path="/Transaction" element= {<Transaction />}> </Route>
@@ -35,6 +38,7 @@ const RouterMain = () => {
             <Route exact path="/UpcomingCoursesMain" element= {<UpcomingCoursesMain />}> </Route>
             <Route exact path="/CouponMain" element= {<CouponMain />}> </Route>
             <Route exact path="/Banner" element= {<Banner/>}> </Route>
+            <Route exact path="/chat" element= {<Chat />}> </Route>
     </Routes>
     </div>
   )

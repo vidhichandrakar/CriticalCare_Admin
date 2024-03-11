@@ -19,6 +19,12 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorE2, setAnchorE2] = useState(null);
   const [anchorE3, setAnchorE3] = useState(null);
+  const [selectedItem, setSelectedItem] = useState('Home');
+
+  // Function to handle menu item selection
+  const handleMenuItemClick = (itemName) => {
+    setSelectedItem(itemName);
+  };
   // const styles = useStyles();
   const handlePopoverOpen = (event) => {
     setAnchorE2(event.currentTarget);
@@ -92,8 +98,9 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
           </span>
         </div>
 
-        <div className="sidebar-list sidebar-list-item BottomLine">
-          <Link to="/">
+        <div className=" sidebar sidebar-list sidebar-list-item BottomLine">
+          <Link to="/Dashboard"
+          className={selectedItem === 'Home' ? 'active' : ''} onClick={() => handleMenuItemClick('Home')}>
             <Typography
               className="hoverrr"
               sx={{ mt: 1 }}
@@ -104,7 +111,6 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
           </Link>
 
           <Link>
-          {/* <SimpleMenu/> */}
             <Typography
                onClick={handleClickCourse} 
               className="hoverrr"
@@ -160,7 +166,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
             </Typography>
           </Link>
 
-          <Link to="/">
+          <Link to="/chat">
             <Typography
               className="hoverrr"
               sx={{ mt: -2 }}
