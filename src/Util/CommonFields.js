@@ -6,7 +6,6 @@ export const commonTextField =({className,inputClassName,labels},Option={
   type:""
 })=>{
   const {sx,handleInput,type,value} = Option;
-  console.log("valee==>",value);
   return(
     <TextField
     inputProps={{ className: inputClassName }}

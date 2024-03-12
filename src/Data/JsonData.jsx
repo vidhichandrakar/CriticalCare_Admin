@@ -186,3 +186,58 @@ export const columns = [
     align: "center",
   },
 ];
+
+export const teamColumns = [
+  {
+    id: "member_Name",
+    label: "Member Name",
+  },
+  {
+    id: "email_id",
+    label: "Email ID",
+    align: "center",
+  },
+  {
+    id: "phone_no",
+    label: "Phone No.",
+    align: "center",
+  },
+  {
+    id: "Actions",
+    label: "Actions",
+    align: "center",
+  },
+];
+
+export const testimonalColumns = [
+  {
+    id: "comment",
+    label: "Comments",
+  },
+  {
+    id: "author",
+    label: "Author",
+    align: "center",
+  },
+  {
+    id: "Actions",
+    label: "Actions",
+    align: "center",
+  },
+];
+export const testPortalColumns = [
+  {
+    id: "test_name",
+    label: "Test Name",
+  },
+  {
+    id: "createdAt",
+    label: "Date",
+    align: "center",
+  },
+  {
+    id: "Actions",
+    label: "Actions",
+    align: "center",
+  },
+];

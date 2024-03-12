@@ -17,6 +17,7 @@ import {
 } from "../../Util/CommonFields";
 import { Category, Description } from "@mui/icons-material";
 import { category, subCategory } from "../../Util/masterFile";
+import { getCategory } from "../ActionFactory/apiActions";
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
   clipPath: "inset(50%)",
@@ -39,19 +40,31 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     subCategory: "",
     thumbnailPath: "",
   });
+  const [cat, setCat] = useState([]);
+
+  useEffect(() => {
+    // console.log("courseId==>", courseId);
+    getCategory({
+      // courseId,
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setCat(userCallBack);
+      },
+    });
+  }, []);
 
   useEffect(() => {
     let storedValues = Object.assign({}, storedBasicInfo);
-    storedValues.Name = courseData?.CourseName;
+    storedValues.Name = courseData?.course_name;
     if (storedValues.Name?.length >= 4) {
       sethideValidationTickName(true);
     }
-    storedValues.Description = courseData?.Description;
+    storedValues.Description = courseData?.description;
     if (storedValues.Description?.length >= 4) {
       sethideValidationTickDesc(true);
     }
     subCategory.map((item) => {
-      if (item.id === courseData.Sub_Category_Id) {
+      if (item.id === courseData.sub_category_id) {
         storedValues.subCategory = item;
       }
     });
@@ -73,7 +86,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
         sethideValidationTickName(false);
       }
     } else if (type === "description") {
-      storedValues.Description = value;
+      storedValues.description = value;
       if (value.length >= 4) {
         sethideValidationTickDesc(true);
       } else {
@@ -131,6 +144,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   return (
     <div className="formMain">
       <div className="FlexRow">
+        {console.log("catcatcat===>",cat)}
         {CommonTypography({ fontWeight: 600, label: "Name" })}
         {hideValidationTickName && <DoneIcon className="RightTick" />}
       </div>

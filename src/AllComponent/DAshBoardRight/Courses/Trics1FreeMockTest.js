@@ -67,22 +67,22 @@ const Trics1FreeMockTest = () => {
         <div className="another-main-container">
           <div className="completeTricsBox">
             <div className="leftSideRow">
-              <p className="blackPara">{courseData.CourseName}</p>
+              <p className="blackPara">{courseData.course_name}</p>
               <p className="greyPara">TRICS 1 FREE MOCK TEST FOR EDIC-1</p>
               <hr />
 
               <p className="blackPara">Description</p>
-              <p className="greyPara">{courseData.Description}</p>
+              <p className="greyPara">{courseData.description}</p>
               <hr />
 
               <div className="PricenOfferPrice">
                 <div>
                   <p className="blackPara">Price</p>
-                  <p className="greyPara">{courseData.Price}</p>
+                  <p className="greyPara">{courseData.price}</p>
                 </div>
                 <div className="offerPrice">
                   <p className="blackPara">Offer Price</p>
-                  <p className="greyPara">{courseData.Offer_Price}</p>
+                  <p className="greyPara">{courseData.offer_price}</p>
                 </div>
               </div>
               <hr />

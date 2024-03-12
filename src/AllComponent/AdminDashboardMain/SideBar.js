@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, {useState} from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../Media/Logo.png";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import ForumIcon from "@mui/icons-material/Forum";
@@ -7,25 +7,34 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
 import PersonIcon from "@mui/icons-material/Person";
-import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import SimpleMenu from "./SubMenu";
-import { useState } from "react";
-
+import List from "@mui/material/List";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import Collapse from "@mui/material/Collapse";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import AddCategory from "../Configuration/AddCategory";
 
 function SideBar({ openSidebarToggle, OpenSidebar }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorE2, setAnchorE2] = useState(null);
   const [anchorE3, setAnchorE3] = useState(null);
-  const [selectedItem, setSelectedItem] = useState('Home');
 
-  // Function to handle menu item selection
-  const handleMenuItemClick = (itemName) => {
-    setSelectedItem(itemName);
-  };
-  // const styles = useStyles();
+  const opens = Boolean(anchorE2);
+  const ids = opens ? "simple-popover" : undefined;
+  let currentlyHovering = false;
+  const [openCollapse, setOpenCollapse] = useState(false);
+  const [openPeople, setOpenPeople] = useState(false);
+  const [hideCatConfig, setHideCatConfig] = useState(false);
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+  const Courseopen = Boolean(anchorE3);
+  const idss = Courseopen ? "simple-popover" : undefined;
+  const [hideUnHide, setHideUnHide] = useState(false);
+  const [hideSubConfig , setHideSubConfig] = useState(false);
+  const [selectedConfigValue, setSelectedConfigValue] = useState("");
+
   const handlePopoverOpen = (event) => {
     setAnchorE2(event.currentTarget);
   };
@@ -45,11 +54,6 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const handleCloseCourse = () => {
     setAnchorE3(null);
   };
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
-  const Courseopen = Boolean(anchorE3);
-  const idss = Courseopen ? "simple-popover" : undefined;
-
 
   const handleClick2 = (event) => {
     setAnchorE2(event.currentTarget);
@@ -57,9 +61,6 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const handleClose2 = () => {
     setAnchorE2(null);
   };
-  const opens = Boolean(anchorE2);
-  const ids = opens ? "simple-popover" : undefined;
-  let currentlyHovering = false;
 
   function handleClickNew(event) {
     if (anchorE2 !== event.currentTarget) {
@@ -83,6 +84,41 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
       }
     }, 50);
   }
+
+  // collapse
+  const navigate = useNavigate();
+  const handleClickCollapse = () => {
+    setOpenCollapse(!openCollapse);
+  };
+  const handleClickPeople = () => {
+    setOpenPeople(!openPeople);
+  };
+
+  const handleCatConfig = (value) => {
+    setHideCatConfig(true);
+    setSelectedConfigValue(value)
+
+  };
+  const handleCloseCat = () => {
+    setHideCatConfig(false);
+  };
+  const handleCoursesSubMenu = (type) => {
+    switch (type) {
+      case "coupons": {
+        navigate("/CreateCoupon");
+      }
+    }
+  };
+
+  const [highlight, setHighlight] = useState(false);
+  const handleHighlight = () =>{
+    setHighlight(true);
+  };
+
+  const handleHideSubCat=()=>{
+    setHideSubConfig(!hideSubConfig);
+  }
+
   return (
     <aside
       id="sidebar"
@@ -98,140 +134,195 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
           </span>
         </div>
 
-        <div className=" sidebar sidebar-list sidebar-list-item BottomLine">
-          <Link to="/Dashboard"
-          className={selectedItem === 'Home' ? 'active' : ''} onClick={() => handleMenuItemClick('Home')}>
-            <Typography
-              className="hoverrr"
-              sx={{ mt: 1 }}
-            >
+        <div className="sidebar-list sidebar-list-item BottomLine">
+          <Link to="/DashBoard">
+            <Typography 
+            id="hoverrr"
+            className={highlight ? "hoverrr2" : ""}
+             sx={{ mt: 1 }} onClick={handleHighlight}>
               <DashboardIcon className="icon" />
               DashBoard
             </Typography>
           </Link>
 
           <Link>
-            <Typography
-               onClick={handleClickCourse} 
-              className="hoverrr"
-              sx={{ mt: -2 }}
+            <ListItemButton
+              onClick={handleClickCollapse}
+              className="listButton"
             >
-             <MenuBookIcon className="icon" />
-                Courses
-            </Typography>
-            <Popover
-              id={idss}
-              open={Courseopen}
-              anchorEl={anchorE3}
-              onClose={handleCloseCourse}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              sx={{ ml: 20, mt: -3 }}
-            >
-             <Link to="/YourCourses" className="textDecoration" >
-                <Typography className="textDecoration" sx={{ p: 1, textDecoration: "none",textDecorationLine: 'none', color: 'greys' }}>
-                  My Courses
-                </Typography>
-              </Link>
-              <Link to="/CreateCoupon" className="textDecoration" >
-                <Typography sx={{ p: 1, textDecoration: "none" }}>
-                  Manage Coupons
-                </Typography>
-              </Link >
-              <Link to="/User" className="textDecoration" >
-                {" "}
-                <Typography sx={{ p: 1, textDecoration: "none" }}>
-                  Category / Sub Catoggry
-                </Typography>
-              </Link>
-              <Link to="/UpcomingCoursesMain" className="textDecoration" >
-                {" "}
-                <Typography sx={{ p: 1, textDecoration: "none" }}>
-                  Upcoming Course / Blogs{" "}
-                </Typography>
-              </Link>
+              <MenuBookIcon className="blueHoverIcon" />
+              <ListItemText primary="Courses" className="coursesHead" />
+              {openCollapse ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+
+            <Collapse in={openCollapse} timeout="auto" unmountOnExit>
+              <List component="div" sx={{ marginLeft: "4%" }}>
+                <ul type="disc">
+                  <li className="myCourses">
+                    <Link to="/YourCourses" className="textDecoration">
+                      <Typography
+                        className="textDecoration"
+                        sx={{
+                          textDecoration: "none",
+                          color: "greys",
+                        }}
+                      >
+                        My Courses
+                      </Typography>
+                    </Link>
+                  </li>
+                  <li className="listDesign">
+                    <Link to="/CreateCoupon" className="textDecoration">
+                      <Typography
+                        className="textDecoration"
+                        sx={{
+                          textDecoration: "none",
+                          color: "greys",
+                        }}
+                      >
+                        Manage Coupons
+                      </Typography>
+                    </Link>
+                  </li>
+                  <li className="listDesign">
+                    <Link to="/User" className="textDecoration">
+                      <Typography
+                        className="textDecoration"
+                        sx={{
+                          textDecoration: "none",
+                          color: "greys",
+                        }}
+                      >
+                        Category / Sub Catoggry
+                      </Typography>
+                    </Link>
+                  </li>
+                  <li className="listDesign">
+                    <Link to="/YourCourses" className="textDecoration">
+                      <Typography
+                        className="textDecoration"
+                        sx={{
+                          textDecoration: "none",
+                          color: "greys",
+                        }}
+                      >
+                        Upcoming Course / Blogs
+                      </Typography>
+                    </Link>
+                  </li>
+                </ul>
             
-            </Popover>
+              </List>
+            </Collapse>
           </Link>
-          
+
           <Link to="/TestPortal">
-            <Typography
-              className="hoverrr"
-              sx={{ mt: -2 }}
-            >
+            <Typography 
+            id="hoverrr"
+            className={highlight ? "hoverrr2" : ""}
+             sx={{ mt: -2 }} onClick={handleHighlight}>
               <AssignmentIcon className="icon" />
               Test Portal
             </Typography>
           </Link>
 
-          <Link to="/chat">
-            <Typography
-              className="hoverrr"
-              sx={{ mt: -2 }}
-            >
+          <Link to="/Chat">
+            <Typography 
+            id="hoverrr"
+            className={highlight ? "hoverrr2" : ""}
+             sx={{ mt: -2 }} onClick={handleHighlight}>
               <ForumIcon className="icon" />
               Chats
             </Typography>
           </Link>
 
           <Link to="/Analytics">
-            <Typography             
-              className="hoverrr"
-              sx={{ mt: -2 }}
-            >
+            <Typography 
+            id="hoverrr"
+            className={highlight ? "hoverrr2" : ""}
+             sx={{ mt: -2 }} onClick={handleHighlight}>
               <SignalCellularAltIcon className="icon" />
               Analytics
             </Typography>
           </Link>
 
-         
           <Link>
-            <Typography
-               onClick={handleClick} 
-              className="hoverrr"
-              sx={{ mt: -2 }}
-            >
-              <PersonIcon className="icon" /> People
-            </Typography>
-            <Popover
-              id={id}
-              open={open}
-              anchorEl={anchorEl}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              sx={{ ml: 20, mt: -3 }}
-            >
-              <Link to="/User" className="textDecoration" >
-                {" "}
-                <Typography sx={{ p: 1, textDecoration: "none" }}>
-                  User
-                </Typography>
-              </Link>
-              <Link to="/MyTeam" className="textDecoration" >
-                {" "}
-                <Typography sx={{ p: 1 }}>My Team</Typography>
-              </Link>
-            </Popover>
+            <ListItemButton onClick={handleClickPeople} className="listButton">
+              <PersonIcon />
+              <ListItemText primary="People" className="coursesHead" />
+              {openPeople ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+
+            <Collapse in={openPeople} timeout="auto" unmountOnExit>
+              <List component="div">
+               <ul>
+                    <li className="myCourses">
+                    <Link to="/User" className="textDecoration">
+                    <Typography sx={{ textDecoration: "none" }} className="textDecoration">
+                          User
+                        </Typography>
+                    </Link>
+                    </li>
+                    <li className="listDesign">
+                    <Link to="/MyTeam" className="textDecoration">
+                    <Typography className="textDecoration">My Team</Typography>
+                    </Link>
+                    </li>
+                  </ul>
+                 
+              </List>
+            </Collapse>
           </Link>
 
           <Link to="/Testimonial">
-            <Typography
-              className="hoverrr"
-              sx={{ mt: -2 }}
-            >
+            <Typography 
+            id="hoverrr"
+            className={highlight ? "hoverrr2" : ""}
+             sx={{ mt: -2 }} onClick={handleHighlight}>
               <PersonIcon className="icon" />
               Testimonial
             </Typography>
           </Link>
-          
-          
-          
+          <Link >
+            <ListItemButton onClick={handleHideSubCat} className="listButton">
+              <PersonIcon />
+              <ListItemText primary="Configuration" className="coursesHead" />
+              {hideSubConfig ? <ExpandLess /> : <ExpandMore />}
+            </ListItemButton>
+
+            <Collapse in={hideSubConfig} timeout="auto" unmountOnExit>
+              <List component="div">
+               <ul>
+                    <li className="myCourses" onClick={()=>handleCatConfig("category")}>
+                    <Link  className="textDecoration">
+                    <Typography sx={{ textDecoration: "none" }} className="textDecoration">
+                          Category
+                        </Typography>
+                    </Link>
+                    </li>
+                    <li className="listDesign" onClick={()=>handleCatConfig("duration")}>
+                    <Link  className="textDecoration">
+                    <Typography className="textDecoration">Duration</Typography>
+                    </Link>
+                    </li>
+                    <li className="listDesign">
+                    <Link  className="textDecoration" onClick={()=>handleCatConfig("teamMember")}>
+                    <Typography className="textDecoration">Team Member</Typography>
+                    </Link>
+                    </li>
+                  </ul>
+                 
+              </List>
+            </Collapse>
+          </Link>
         </div>
+        {hideCatConfig && (
+          <AddCategory
+            selectedConfigValue={selectedConfigValue}
+            handleCloseCat={handleCloseCat}
+            hideCatConfig={hideCatConfig}
+          />
+        )}
       </div>
     </aside>
   );

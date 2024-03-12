@@ -20,9 +20,9 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
 
   useEffect(() => {
     let storedValues = Object.assign({}, editPriceData);
-    storedValues.duration = courseData.Duration_Id;
-    storedValues.regularPrice = courseData.Price;
-    storedValues.offerPrice = courseData.Offer_Price;
+    storedValues.duration = courseData.duration_id;
+    storedValues.regularPrice = courseData.price;
+    storedValues.offerPrice = courseData.offer_price;
     setEditPriceData(storedValues);
     console.log("courseDataEdit", storedValues);
   }, [courseData]);

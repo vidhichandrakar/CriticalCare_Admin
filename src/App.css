@@ -12,7 +12,9 @@
   background-color: lightblue;
 }
 
-
+.css-1ex1afd-MuiTableCell-root{
+  align-items: center !important;
+}
 
 /* *{
 
