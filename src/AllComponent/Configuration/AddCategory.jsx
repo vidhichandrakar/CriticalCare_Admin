@@ -126,6 +126,9 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   type: "description",
                 })
               )}
+              
+              <div className="flexrow mt4">
+                <div className="flexcol">
               {CommonTypography({ fontWeight: 600, label: "Created By" })}
               {commonTextField(
                 {
@@ -140,6 +143,8 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   //   value: storedBasicInfo.Name,
                 })
               )}
+              </div>
+              <div className="flexcol ml2">
               {CommonTypography({ fontWeight: 600, label: "Modified By" })}
               {commonTextField(
                 {
@@ -154,6 +159,8 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   //   value: storedBasicInfo.Name,
                 })
               )}
+              </div>
+              </div>
             </>
           ) : selectedConfigValue === "duration" ? (
             <>
@@ -171,6 +178,8 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   //   value: storedBasicInfo.Name,
                 })
               )}
+               <div className="flexrow mt4">
+                <div className="flexcol">
               {CommonTypography({ fontWeight: 600, label: "Created By" })}
               {commonTextField(
                 {
@@ -185,6 +194,8 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   //   value: storedBasicInfo.Name,
                 })
               )}
+               </div>
+              <div className="flexcol ml2">
               {CommonTypography({ fontWeight: 600, label: "Modified By" })}
               {commonTextField(
                 {
@@ -199,6 +210,8 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   //   value: storedBasicInfo.Name,
                 })
               )}
+               </div>
+              </div>
             </>
           ) : (
             <>
@@ -216,6 +229,8 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   //   value: storedBasicInfo.Name,
                 })
               )}
+              <div className="flexrow mt4">
+                <div className="flexcol">
               {CommonTypography({ fontWeight: 600, label: "Email ID" })}
               {commonTextField(
                 {
@@ -230,6 +245,8 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   //   value: storedBasicInfo.Name,
                 })
               )}
+               </div>
+              <div className="flexcol ml2">
               {CommonTypography({ fontWeight: 600, label: "Phone No." })}
               {commonTextField(
                 {
@@ -244,6 +261,8 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   //   value: storedBasicInfo.Name,
                 })
               )}
+               </div>
+              </div>
             </>
           )}
         </DialogContent>

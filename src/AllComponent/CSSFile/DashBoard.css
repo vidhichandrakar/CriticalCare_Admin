@@ -398,14 +398,28 @@ padding: 2px 2px;
 .fullNameHead UserName{
   margin-left: 5% !important;
 }
+.css-1ex1afd-MuiTableCell-root{
+  text-align: center !important;
+}
 .userPagination{
   margin-bottom: 10px;
   position: fixed !important;
   width: 77%;
   bottom: 49px;
 }
+.mt4{
+  margin-top: 4%;
+}
+.ml2{
+  margin-left: 4%;
+}
+.flexcol{
+  display: flex;
+  flex-direction: column;
+}
 
 /* END OF USER  */
+
 
 /* START OF TRANSACTION  */
 

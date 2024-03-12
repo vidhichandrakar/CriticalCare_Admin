@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../Media/Logo.png";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
@@ -8,25 +8,19 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
 import PersonIcon from "@mui/icons-material/Person";
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
-import ListSubheader from "@mui/material/ListSubheader";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
-import SendIcon from "@mui/icons-material/Send";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import StarBorder from "@mui/icons-material/StarBorder";
 import AddCategory from "../Configuration/AddCategory";
 
 function SideBar({ openSidebarToggle, OpenSidebar }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [anchorE2, setAnchorE2] = useState(null);
   const [anchorE3, setAnchorE3] = useState(null);
+
   const opens = Boolean(anchorE2);
   const ids = opens ? "simple-popover" : undefined;
   let currentlyHovering = false;
@@ -116,7 +110,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
     }
   };
 
-  const [highlight, setHighlight] = React.useState(false);
+  const [highlight, setHighlight] = useState(false);
   const handleHighlight = () =>{
     setHighlight(true);
   };
@@ -141,7 +135,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
         </div>
 
         <div className="sidebar-list sidebar-list-item BottomLine">
-          <Link to="/">
+          <Link to="/DashBoard">
             <Typography 
             id="hoverrr"
             className={highlight ? "hoverrr2" : ""}
@@ -232,7 +226,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
             </Typography>
           </Link>
 
-          <Link to="/">
+          <Link to="/Chat">
             <Typography 
             id="hoverrr"
             className={highlight ? "hoverrr2" : ""}

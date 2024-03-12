@@ -20,32 +20,18 @@ const LoginEmailandPassword = () => {
       <Box className="BoxWidth">
         <Typography className="loginText">Login to Admin Panel</Typography>
         <Box sx={{ mt: 10 }}>
-          <Typography className="EmailText">Email</Typography>
-          <TextField
-            inputProps={{ className: "textField" }}
-            sx={{ textAlign: "center !important" }}
-            fullWidth
-            size="small"
-            placeholder="Enter Your Email"
-            id="fullWidth"
+           <TextField  id="fullWidth" label="Email" variant="outlined"
             className="BoxShadow"
-            onChange={(event) => keyDown(event.target.value)}
-          />
+            fullWidth
+           onChange={(event) => keyDown(event.target.value)} />
         </Box>
 
         {key ? (
-          <Box sx={{ mt: 4 }}>
-            <Typography className="EmailText">Password</Typography>
-            <TextField
-              inputProps={{ className: "textField" }}
-              sx={{ textAlign: "center !important" }}
-              fullWidth
-              size="small"
-              placeholder="Enter Your Password"
-              id="fullWidth"
-              className="BoxShadow"
-              onKeyDown={keyDown}
-            />
+          <Box sx={{ mt: 0 }}>
+            <TextField  id="fullWidth" label="Password" variant="outlined"
+            className="BoxShadow"
+            fullWidth
+            onKeyDown={keyDown} />
           </Box>
         ) : null}
 

@@ -305,7 +305,7 @@ const TestPortal = () => {
                           <TableCell className="fullNameHead">
                             {moment(row.createdAt).format("MM/DD/YYYY")}
                           </TableCell>
-                          <TableCell>{row.phone_no} </TableCell>
+                          {/* <TableCell>{row.phone_no} </TableCell> */}
                           <TableCell>
                             <MoreVertIcon //need to remove this hardcode this code, more ... three drops in last column
                               onClick={(event) =>
