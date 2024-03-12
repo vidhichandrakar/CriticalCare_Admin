@@ -54,8 +54,10 @@ const Testimonial = () => {
   const [openData, setOpenData] = useState("");
   const [userData, setUserData] = useState([]);
   const open = Boolean(anchorEl);
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  // const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  // const [page, setPage] = useState(0);
+  // const [rowsPerPage, setRowsPerPage] = useState(3);
   const id = open ? "simple-popover" : undefined;
   const [opened, setOpen] = useState(false);
   const [addTestimonal, setAddTestimonal] = useState({});
@@ -94,14 +96,26 @@ const Testimonial = () => {
   const handleClickOpen = () => {
     setOpen(true);
   };
+
+  const [page, setPage] = useState(2);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
+    setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
+  // const handleChangePage = (event, newPage) => {
+  //   setPage(newPage);
+  // };
+
+  // const handleChangeRowsPerPage = (event) => {
+  //   setRowsPerPage(+event.target.value, 4);
+  //   setPage(0);
+  // };
 
   const handleAddTeam = () => {
     setOpen(true);
@@ -131,6 +145,7 @@ const Testimonial = () => {
       },
     });
   };
+
   return (
     <div className="grid-container">
       <SideBar />
@@ -296,13 +311,20 @@ const Testimonial = () => {
 
           <Stack spacing={60}>
             <TablePagination
-              rowsPerPageOptions={[2, 25, 100]}
+              // rowsPerPageOptions={[2, 25, 100]}
+              // component="div"
+              // rowsPerPage={rowsPerPage}
+              // page={page}
+              // onPageChange={handleChangePage}
+              // onRowsPerPageChange={handleChangeRowsPerPage}
+              className="userPagination"
+              rowsPerPageOptions={[4, 25, 100]}
               component="div"
-              rowsPerPage={rowsPerPage}
+              count={100}
               page={page}
               onPageChange={handleChangePage}
+              rowsPerPage={rowsPerPage}
               onRowsPerPageChange={handleChangeRowsPerPage}
-              className="userPagination"
             />
           </Stack>
         </Paper>
