@@ -109,15 +109,7 @@ const Testimonial = () => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-  // const handleChangePage = (event, newPage) => {
-  //   setPage(newPage);
-  // };
-
-  // const handleChangeRowsPerPage = (event) => {
-  //   setRowsPerPage(+event.target.value, 4);
-  //   setPage(0);
-  // };
-
+  
   const handleAddTeam = () => {
     setOpen(true);
   };
