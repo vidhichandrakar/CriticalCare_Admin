@@ -42,6 +42,7 @@ const LoginEmailandPassword = () => {
       callBack: (response) => {
         localStorage.setItem("accessToken", response.data.token);
         token = localStorage.getItem("accessToken");
+        navigate("/DashBoard");
       },
     });
   };

@@ -43,7 +43,6 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const [cat, setCat] = useState([]);
 
   useEffect(() => {
-    // console.log("courseId==>", courseId);
     getCategory({
       // courseId,
       callBack: (response) => {
@@ -70,11 +69,9 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     });
     storedValues.thumbnailPath = courseData?.thumbnail_path;
     setStoredBasicInfo(storedValues);
-    console.log("storedValues=====>couses", storedValues);
   }, [courseData]);
 
   const handleInput = (value, type) => {
-    console.log(type, value);
     let storedValues = Object.assign({}, storedBasicInfo);
     if (/^\s/.test(value)) value = "";
     if (type === "name") {
@@ -111,8 +108,8 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
 
   const handleEditPrice = () => {
     if (
-      storedBasicInfo.Name.length <= 3 &&
-      storedBasicInfo.Description.length <= 3 &&
+      storedBasicInfo.Name?.length <= 3 &&
+      storedBasicInfo.Description?.length <= 3 &&
       storedBasicInfo.Category === ""
     ) {
       toast.error(
@@ -121,11 +118,11 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           autoClose: 500,
         }
       );
-    } else if (storedBasicInfo.Name.length <= 3) {
+    } else if (storedBasicInfo.Name?.length <= 3) {
       toast.error("Name Should not be less then 3 character", {
         autoClose: 500,
       });
-    } else if (storedBasicInfo.Description.length <= 3) {
+    } else if (storedBasicInfo.Description?.length <= 3) {
       toast.error("Description Should not be less then 3 character", {
         autoClose: 500,
       });
@@ -144,7 +141,6 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   return (
     <div className="formMain">
       <div className="FlexRow">
-        {console.log("catcatcat===>",cat)}
         {CommonTypography({ fontWeight: 600, label: "Name" })}
         {hideValidationTickName && <DoneIcon className="RightTick" />}
       </div>
