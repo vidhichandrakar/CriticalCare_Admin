@@ -17,7 +17,6 @@ import SideBar from "../../AdminDashboardMain/SideBar";
 import { testimonalColumns } from "../../../Data/JsonData";
 import BlockIcon from "@mui/icons-material/Block";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Checkbox from "@mui/material/Checkbox";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
@@ -27,18 +26,19 @@ import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import { Box, TextField } from "@mui/material";
 import {
-  deleteMember,
   deleteTestimonial,
-  deleteUser,
-  getAllUsersApi,
-  getTeam,
   getTestimonal,
-  updateTeam,
   updateTestimonial,
 } from "../../ActionFactory/apiActions";
-import moment from "moment/moment";
-import { TablePagination } from "@mui/material";
-import Stack from "@mui/material/Stack";
+import FirstPageIcon from '@mui/icons-material/FirstPage';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
+import LastPageIcon from '@mui/icons-material/LastPage';
+import { useTheme } from '@mui/material/styles';
+import PropTypes from 'prop-types';
+import TableFooter from '@mui/material/TableFooter';
+import TablePagination from '@mui/material/TablePagination';
+
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -47,6 +47,67 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     padding: theme.spacing(1),
   },
 }));
+
+function TablePaginationActions(props) {
+  console.log(props, "propsss")
+  const theme = useTheme();
+  const { count, page, rowsPerPage, onPageChange } = props;
+
+  const handleFirstPageButtonClick = (event) => {
+    onPageChange(event, 0);
+  };
+
+  const handleBackButtonClick = (event) => {
+    onPageChange(event, page - 1);
+  };
+
+  const handleNextButtonClick = (event) => {
+    onPageChange(event, page + 1);
+  };
+
+  const handleLastPageButtonClick = (event) => {
+    onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+  };
+
+  return (
+    <Box sx={{ flexShrink: 0, ml: 2.5 }}>
+      <IconButton
+        onClick={handleFirstPageButtonClick}
+        disabled={page === 0}
+        aria-label="first page"
+      >
+        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+      </IconButton>
+      <IconButton
+        onClick={handleBackButtonClick}
+        disabled={page === 0}
+        aria-label="previous page"
+      >
+        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+      </IconButton>
+      <IconButton
+        onClick={handleNextButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="next page"
+      >
+        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+      </IconButton>
+      <IconButton
+        onClick={handleLastPageButtonClick}
+        disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+        aria-label="last page"
+      >
+        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+      </IconButton>
+    </Box>
+  );
+}
+TablePaginationActions.propTypes = {
+  count: PropTypes.number.isRequired,
+  onPageChange: PropTypes.func.isRequired,
+  page: PropTypes.number.isRequired,
+  rowsPerPage: PropTypes.number.isRequired,
+};
 
 const Testimonial = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -61,7 +122,16 @@ const Testimonial = () => {
   const id = open ? "simple-popover" : undefined;
   const [opened, setOpen] = useState(false);
   const [addTestimonal, setAddTestimonal] = useState({});
-  
+
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const recordsPerPage = 4;
+  const lastIndex = currentPage * recordsPerPage;
+  const firstIndex = lastIndex - recordsPerPage;
+  const records = userData.slice(firstIndex, lastIndex);
+  const npage = Math.ceil(userData.length / recordsPerPage);
+  const numbers = [...Array(npage + 1).keys()].slice(1) ;
+   console.log(numbers, "number wala")
   useEffect(() => {
     getTestimonal({
       callBack: (response) => {
@@ -70,6 +140,22 @@ const Testimonial = () => {
       },
     });
   }, []);
+
+  
+  
+  const prePage = () => {
+    if(currentPage !== 1){
+      setCurrentPage(currentPage - 1)
+    }
+  }
+  const changeCPage = (id) => {
+    setCurrentPage(id)
+  }
+  const nextPage = () => {
+    if(currentPage !== npage){
+      setCurrentPage(currentPage + 1)
+    }
+  }
 
   const handleClick = (event, id) => {
     setAnchorEl(event.currentTarget);
@@ -98,15 +184,15 @@ const Testimonial = () => {
     setOpen(true);
   };
 
-  const [page, setPage] = useState(2);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(4);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    setRowsPerPage(parseInt(event.target.value, 3));
     setPage(0);
   };
   
@@ -247,7 +333,11 @@ const Testimonial = () => {
 
               <TableBody className="parentTable">
                 {userData.length
-                  ? userData.map((row) => {
+                  ? 
+                  (rowsPerPage > 0
+                    ? userData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    : userData
+                  ).map((row) => {
                       return (
                         <TableRow
                           hover
@@ -299,10 +389,29 @@ const Testimonial = () => {
                   </Typography>
                 </Popover>
               </TableBody>
+        <TablePagination
+              rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+              // colSpan={3}
+              count={userData.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              slotProps={{
+                select: {
+                  inputProps: {
+                    'aria-label': 'rows per page',
+                  },
+                  native: true,
+                },
+              }}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              ActionsComponent={TablePaginationActions}
+              className="Pagination"
+            />
             </Table>
           </TableContainer>
 
-          <Stack spacing={60}>
+          {/* <Stack spacing={60}>
             <TablePagination
               // rowsPerPageOptions={[2, 25, 100]}
               // component="div"
@@ -319,7 +428,24 @@ const Testimonial = () => {
               rowsPerPage={rowsPerPage}
               onRowsPerPageChange={handleChangeRowsPerPage}
             />
-          </Stack>
+          </Stack> */}
+          {/* <nav >
+            <ul className="Pagination">
+              <li>
+                <a href="#" onClick={prePage}>Prev</a>
+              </li>
+              {
+                numbers.map((n, i) => (
+                  <li key={i}>
+                    <a href="#" onClick={() => changeCPage(n)}>{n}</a>
+                  </li>                
+                  ))
+              }
+               <li>
+                <a href="#" onClick={nextPage}>Next</a>
+              </li>
+            </ul>
+          </nav> */}
         </Paper>
       </div>
     </div>
