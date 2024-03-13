@@ -7,23 +7,28 @@ import { login } from "../../ActionFactory/apiActions";
 import { useNavigate } from "react-router-dom";
 
 const LoginEmailandPassword = () => {
-  const [emailValue, setEmailValue] = useState("");
-  const [key, setkey] = useState("");
-  const [userLogin, setUserLogin] = useState({});
+  const [userLogin, setUserLogin] = useState({
+    email: "",
+    password: "",
+  });
   const navigate = useNavigate();
-
-  const handleEmail = (value) => {
-    setEmailValue(value);
-  };
+  const [disbaleLoginBtn, setDisableLogiBtn] = useState(true);
+  let token;
 
   const handleInput = (value, type) => {
-    setkey(value);
     let storedValues = Object.assign({}, userLogin);
     if (type === "email") {
       storedValues.email = value;
+      setDisableLogiBtn(true);
     } else if (type === "password") {
-      storedValues.password = value;
+      if (value === "") {
+        setDisableLogiBtn(true);
+      } else {
+        storedValues.password = value;
+        setDisableLogiBtn(false);
+      }
     }
+    // else if()
     setUserLogin(storedValues);
   };
 
@@ -32,18 +37,17 @@ const LoginEmailandPassword = () => {
       user_name: userLogin.email,
       password: userLogin.password,
     };
-    console.log("payload", payload);
     login({
       payload,
       callBack: (response) => {
-        navigate("/DashBoard");
+        localStorage.setItem("accessToken", response.data.token);
+        token = localStorage.getItem("accessToken");
       },
     });
   };
   return (
     <div className="RightBox">
       <Box className="BoxWidth">
-        {/* {console.log("userLogin", userLogin)} */}
         <Typography className="loginText">Login to Admin Panel</Typography>
         <Box sx={{ mt: 10 }}>
           <TextField
@@ -57,7 +61,7 @@ const LoginEmailandPassword = () => {
           />
         </Box>
 
-        {key ? (
+        {userLogin?.email != "" ? (
           <Box sx={{ mt: 0 }}>
             <TextField
               id="fullWidth"
@@ -65,7 +69,7 @@ const LoginEmailandPassword = () => {
               variant="outlined"
               className="BoxShadow"
               fullWidth
-              onKeyDown={keyDown}
+              // onKeyDown={keyDown}
               type="password"
               onChange={(event) => handleInput(event.target.value, "password")}
             />
@@ -76,6 +80,7 @@ const LoginEmailandPassword = () => {
           variant="contained"
           className="LoginBtn"
           onClick={handleUserLogin}
+          disabled={disbaleLoginBtn}
         >
           Login
         </Button>
