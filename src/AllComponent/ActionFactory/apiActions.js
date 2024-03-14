@@ -138,3 +138,11 @@ export const getTestByID = ({ testId, callBack }) => {
     callBack(response);
   });
 };
+
+
+export const login =({payload, callBack})=>{
+  const url = APIS.login;
+  axios.post(url,payload).then((response)=>{
+    callBack(response);
+  })
+}

@@ -633,9 +633,15 @@ margin-left: 10px !important;
   border: none !important;
   color: #ffffff !important;
   padding: 0px 13px !important;
-  width: 20% !important;
+  width: 25% !important;
   margin-top: 22px !important;
   height: 33px !important;
+}
+.Pagination{
+  margin-left: 45% !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  margin-bottom: 3% !important;
 }
 .testPortalSearchBarSection{
   display: flex !important;

@@ -8,4 +8,5 @@ export const APIS = {
   updateMember: REACT_APP_API + "/teamMember",
   getTestimonal: REACT_APP_API + "/testimonial",
   getTest: REACT_APP_API + "/test",
+  login: REACT_APP_API + "/login"
 };
