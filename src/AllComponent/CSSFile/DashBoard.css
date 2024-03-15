@@ -383,10 +383,8 @@ body {
 .fullNameHead UserName {
   margin-left: 5% !important;
 }
-.css-1ex1afd-MuiTableCell-root {
-  text-align: center !important;
-}
-.userPagination {
+
+.userPagination{
   margin-bottom: 10px;
   position: fixed !important;
   width: 77%;
@@ -628,6 +626,7 @@ body {
   position: absolute !important;
   right: 0 !important;
   bottom: 0;
+ 
 }
 .testPortalSearchBarSection {
   display: flex !important;
