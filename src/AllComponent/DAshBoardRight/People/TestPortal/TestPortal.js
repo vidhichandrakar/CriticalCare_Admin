@@ -132,7 +132,7 @@ const TestPortal = () => {
   const [addTest, setAddTest] = useState({
     testName: "",
     testDuration: "",
-    Hours: "",
+    hours: "",
   });
   useEffect(() => {
     getTest({
@@ -187,19 +187,19 @@ const TestPortal = () => {
   const handleInput = (value, type) => {
     let storedValues = Object.assign({}, addTest);
     if (type === "TestName") {
-      storedValues.memberName = value;
+      storedValues.testName = value;
     } else if (type === "TestDuration") {
-      storedValues.emailID = value;
+      storedValues.testDuration = value;
     } else if (type === "Hours") {
-      storedValues.PhoneNo = value;
+      storedValues.hours = value;
     }
     setAddTest(storedValues);
   };
   const handleCreateTeam = () => {
     const payload = {
-      member_name: addTest.memberName,
-      email_id: addTest.emailID,
-      phone_no: addTest.PhoneNo,
+      test_name: addTest.testName,
+      created_by: parseInt(addTest.hours),
+      duration_minute: parseInt(addTest.testDuration),
     };
     console.log("payloadpayload", payload);
     updateTeam({
@@ -282,7 +282,7 @@ const TestPortal = () => {
                 id="fullWidth"
                 className="BoxShadowInputField"
                 type="TestName"
-                value={addTest.testName}
+                value={addTest?.testName}
                 onChange={(e) => handleInput(e.target.value, "TestName")}
               />
               <Typography gutterBottom sx={{ mt: 2 }}>
@@ -298,7 +298,7 @@ const TestPortal = () => {
                     id="fullWidth"
                     className="BoxShadowInputField"
                     type="TestDuration"
-                    value={addTest.testDuration}
+                    value={addTest?.testDuration}
                     onChange={(e) =>
                       handleInput(e.target.value, "TestDuration")
                     }
@@ -314,7 +314,7 @@ const TestPortal = () => {
                     id="fullWidth"
                     className="BoxShadowInputField"
                     sx={{ ml: 4 }}
-                    value={addTest.Hours}
+                    value={addTest?.Hours}
                     type="hours"
                     onChange={(e) => handleInput(e.target.value, "Hours")}
                   />{" "}

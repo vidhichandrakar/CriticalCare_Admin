@@ -25,10 +25,10 @@ const YourCoursesCard = ({ allCourses }) => {
                 <div className="CardData">
                   <p className="Headp">{item.course_name}</p>
                   <p className="Namep">
-                    {moment(item.createdAt).format("DD/MM/YYYY")}
+                   Created By: {item.created_by}
                   </p>
-                  <p className="Yearp">{item.price}</p>
-                  <p className="Pricep">{item.offer_price}</p>
+                  <p className="Yearp">{item.duration_type_id} Year </p>
+                  <p className="Pricep">₹ {item.offer_price}</p>
                 </div>
               </div>
             );
