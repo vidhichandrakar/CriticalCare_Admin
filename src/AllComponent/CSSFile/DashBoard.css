@@ -359,6 +359,12 @@ body {
 .headingOfTable {
   font-weight: bold;
   margin-left: 20px !important;
+  /* text-align: left !important; */
+}
+.headingOfTable2{
+  font-weight: bold;
+  margin-left: 20px !important;
+  text-align: left !important;
 }
 .bluePara {
   color: dodgerblue;
@@ -585,7 +591,6 @@ body {
   text-transform: none !important;
 }
 .redDeleteofTestPortal {
-  /* color: red !important; */
   display: flex !important;
   flex-direction: row !important;
   align-items: left !important;
@@ -618,14 +623,11 @@ body {
   height: 33px !important;
 }
 .Pagination {
-  /* margin-left: 45% !important;
-  position: absolute !important;
-  bottom: 0 !important;
-  margin-bottom: 3% !important; */
   margin-right: 3%;
   position: absolute !important;
   right: 0 !important;
-  bottom: 0;
+  /* bottom: 0; */
+  bottom: 32px;
  
 }
 .testPortalSearchBarSection {

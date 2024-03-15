@@ -42,7 +42,6 @@ import {
 import { TablePagination } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { add } from "date-fns";
-
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
@@ -370,8 +369,7 @@ const TestPortal = () => {
                           key={row?.code}
                         >
                           <TableCell className="alignTableBody">
-                           
-                              {row.test_name}
+                           {row.test_name}
                           </TableCell>
                           <TableCell className="alignTableBody">
                               {`${row.duration_hour}hr : ${row.duration_minute}min`}
@@ -440,7 +438,6 @@ const TestPortal = () => {
             />
             </Table>
           </TableContainer>
-
         </Paper>
       </div>
     </div>

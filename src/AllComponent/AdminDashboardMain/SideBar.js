@@ -232,11 +232,6 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                   <li className="listDesign">
                     <Link to="/YourCourses" className="textDecoration">
                       <Typography
-                        // className="textDecoration"
-                        // sx={{
-                        //   textDecoration: "none",
-                        //   color: "greys",
-                        // }}
                         id="hoverrr"
                         className={
                           highlight === "upcomingCourses" ? "hoverrr2" : ""

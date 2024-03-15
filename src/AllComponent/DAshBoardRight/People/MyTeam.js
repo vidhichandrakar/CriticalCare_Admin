@@ -346,7 +346,7 @@ const MyTeam = () => {
                       key={column.id}
                       align={column.align}
                       style={{ minWidth: column.minWidth, fontWeight: 600 }}
-                      className="headingOfTable"
+                      className="headingOfTable2"
                     >
                       {column.label}
                     </TableCell>
