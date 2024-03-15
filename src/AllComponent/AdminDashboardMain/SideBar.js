@@ -23,7 +23,8 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const opens = Boolean(anchorE2);
   const ids = opens ? "simple-popover" : undefined;
   let currentlyHovering = false;
-  const [openCollapse, setOpenCollapse] = useState(false);
+  const [openCollapse, setOpenCollapse] = useState(localStorage.getItem("subMenuCourses")==="true"?true:false
+  );
   const [openPeople, setOpenPeople] = useState(false);
   const [hideCatConfig, setHideCatConfig] = useState(false);
   const open = Boolean(anchorEl);
@@ -84,21 +85,40 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
 
   const [highlight, setHighlight] = useState(false);
   useEffect(() => {
-    setHighlight(localStorage.getItem("activeMenu"));
+    const activeMenu= localStorage.getItem("activeMenu")
+    setHighlight(activeMenu);
   }, [localStorage.getItem("activeMenu")]);
 
   const handleHighlight = (type) => {
     setHighlight(type);
     localStorage.setItem("activeMenu", type);
-    console.log("dashboard", type);
-    console.log("testPortal", type);
-    console.log("chats", type);
-    console.log("analytics", type);
-    console.log("testimonials", type);
-    console.log("myCourses", type);
-    console.log("manageCoupons", type);
-    console.log("catagory", type);
-    console.log("upcomingCourses", type);
+    if(type === "myCourses" || type === "manageCoupons" || 
+     type === "catagory" || type === "upcoimgCourses"){
+      localStorage.setItem("subMenuCourses", true)
+      console.log("yes true");
+     }
+     else{
+      localStorage.setItem("subMenuCourses", false)
+      console.log("no false");
+     }
+  };
+
+  // people sub menu
+  const [highlightPeople, setHighlightPeople] = useState(false);
+  useEffect(() => {
+    const activeMenuPeople= localStorage.getItem("activeMenuPeople")
+    setHighlightPeople(activeMenuPeople);
+  }, [localStorage.getItem("activeMenuPeople")]);
+
+  const handleHighlightPeople = (type) => {
+    setHighlightPeople(type);
+    localStorage.setItem("activeMenuPeople", type);
+    if(type === "peopleUser" || type === "peopleMyTeam"){
+      localStorage.setItem("subMenuPeople", true)
+     }
+     else{
+      localStorage.setItem("subMenuPeople", false)
+     }
   };
 
   const handleHideSubCat = () => {
@@ -182,6 +202,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                       </Typography>
                     </Link>
                   </li>
+                  {console.log("show", openCollapse, localStorage.getItem("subMenuCourses"))}
                   <li className="listDesign">
                     <Link to="/CreateCoupon" className="textDecoration">
                       <Typography
@@ -281,8 +302,11 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                   <li className="myCourses">
                     <Link to="/User" className="textDecoration">
                       <Typography
+                        id="hoverrr"
+                        className={highlightPeople === "peopleUser" ? "hoverrr2" : ""}
                         sx={{ textDecoration: "none" }}
-                        className="textDecoration"
+                        onClick={() => handleHighlightPeople("peopleUser")}
+                        // className="textDecoration"
                       >
                         User
                       </Typography>
@@ -290,7 +314,13 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                   </li>
                   <li className="listDesign">
                     <Link to="/MyTeam" className="textDecoration">
-                      <Typography className="textDecoration">
+                      <Typography 
+                      // className="textDecoration"
+                      id="hoverrr"
+                        className={highlightPeople === "peopleMyTeam" ? "hoverrr2" : ""}
+                        sx={{ textDecoration: "none" }}
+                        onClick={() => handleHighlightPeople("peopleMyTeam")}
+                      >
                         My Team
                       </Typography>
                     </Link>
