@@ -38,6 +38,9 @@ body {
 }
 
 /* Sidebar  */
+.css-60tve4-MuiList-root{
+  margin-left: 0 !important;
+}
 #sidebar {
   grid-area: sidebar;
   overflow-y: auto;
@@ -99,38 +102,11 @@ body {
   border-right: 3px solid #0075ff !important;
   color: #0075ff !important;
 }
-/* .highlightTestPortal{
+.hoverrr2{
   background-color: #E5F7FD !important;
   border-right: 3px solid #0075FF !important;
   color: #0075FF !important;
 }
-.highlightDashboard{
-  background-color: #E5F7FD !important;
-  border-right: 3px solid #0075FF !important;
-  color: #0075FF !important;
-}
-.highlightChats{
-  background-color: #E5F7FD !important;
-  border-right: 3px solid #0075FF !important;
-  color: #0075FF !important;
-}
-.highlightAnalytics{
-  background-color: #E5F7FD !important;
-  border-right: 3px solid #0075FF !important;
-  color: #0075FF !important;
-}
-.highlightTestimonials{
-  background-color: #E5F7FD !important;
-  border-right: 3px solid #0075FF !important;
-  color: #0075FF !important;
-} */
-
-.hoverrr2 {
-  background-color: #e5f7fd !important;
-  border-right: 3px solid #0075ff !important;
-  color: #0075ff !important;
-}
-
 .sidebar-list-item > a {
   text-decoration: none;
   margin-top: 20px;
