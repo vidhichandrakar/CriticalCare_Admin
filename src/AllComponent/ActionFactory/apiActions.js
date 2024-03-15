@@ -133,7 +133,7 @@ export const getTest = ({ callBack }) => {
 };
 
 export const getTestByID = ({ testId, callBack }) => {
-  const url = APIS.updateMember + "/" + testId;
+  const url = APIS.getTest + "/" + testId;
   axios.get(url).then((response) => {
     callBack(response);
   });

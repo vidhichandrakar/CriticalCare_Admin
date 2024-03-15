@@ -246,7 +246,7 @@ const TestPortal = () => {
           </div>
           <Button className="addTestimonialButton" onClick={handleClickOpen}>
             {" "}
-            + Add Team{" "}
+            + Add Test{" "}
           </Button>
           <BootstrapDialog
             className="PopUP"
@@ -369,17 +369,19 @@ const TestPortal = () => {
                           tabIndex={-1}
                           key={row?.code}
                         >
-                          <TableCell className="useInfoCheckbox">
-                            <Typography className="PhoneText">
+                          <TableCell className="alignTableBody">
+                           
                               {row.test_name}
-                            </Typography>
                           </TableCell>
-                          <TableCell className="fullNameHead">
+                          <TableCell className="alignTableBody">
+                              {`${row.duration_hour}hr : ${row.duration_minute}min`}
+                          </TableCell>
+                          <TableCell className="alignTableBody">
                             {moment(row.createdAt).format("MM/DD/YYYY")}
                           </TableCell>
-                          {/* <TableCell>{row.phone_no} </TableCell> */}
-                          <TableCell>
-                            <MoreVertIcon //need to remove this hardcode this code, more ... three drops in last column
+                         
+                          <TableCell sx={{textAlign:"center"}}>
+                            <MoreVertIcon 
                               onClick={(event) =>
                                 handleClick(event, row.test_id)
                               }

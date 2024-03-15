@@ -83,7 +83,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
         sethideValidationTickName(false);
       }
     } else if (type === "description") {
-      storedValues.description = value;
+      storedValues.Description = value;
       if (value.length >= 4) {
         sethideValidationTickDesc(true);
       } else {
@@ -107,6 +107,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   };
 
   const handleEditPrice = () => {
+    console.log("edit",storedBasicInfo)
     if (
       storedBasicInfo.Name?.length <= 3 &&
       storedBasicInfo.Description?.length <= 3 &&

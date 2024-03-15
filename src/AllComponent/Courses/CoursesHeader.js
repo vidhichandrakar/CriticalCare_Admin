@@ -14,9 +14,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import Switch from "@mui/material/Switch";
 import WarningIcon from "@mui/icons-material/Warning";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
-import List from "@mui/material/List";
+
 import ProfileList from "../SubComponent/List"
 
 
