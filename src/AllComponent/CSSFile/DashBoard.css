@@ -55,14 +55,14 @@ body {
   padding: 0 23px;
 }
 .SideBarLogo {
-  margin-left: 5px;
+  margin-left: -10%;
   width: 95%;
   height: 40px;
 }
 .sidebar-title > span {
   display: none;
 }
-.textDecoration{
+.textDecoration {
   text-decoration: none !important;
   color: rgba(17, 16, 16, 0.662);
   font-size: 0.9rem !important;
@@ -72,29 +72,32 @@ body {
   font-size: 20px;
   font-weight: 700;
 }
+.css-60tve4-MuiList-root {
+  margin-left: 0 !important;
+}
 .sidebar-list {
   display: flex;
   flex-direction: column;
   padding: 0;
-  margin-top: 20px;
   list-style-type: none;
 }
 .sidebar-list-item {
   font-size: 15px;
+  margin-top: -10%;
 }
-.BottomLine {
+/* .BottomLine {
   margin-left: 20px;
-}
+} */
 #hoverrr {
-     padding: 3px 0px !important;
-    font-size: 15px !important;
-    margin-left: 7px !important;
+  padding: 3px 0px !important;
+  font-size: 15px !important;
+  /* margin-left: 7px !important; */
 }
 #hoverrr:hover {
-  background-color: #E5F7FD !important;
+  background-color: #e5f7fd !important;
   cursor: pointer;
-  border-right: 3px solid #0075FF !important;
-  color: #0075FF !important;
+  border-right: 3px solid #0075ff !important;
+  color: #0075ff !important;
 }
 /* .highlightTestPortal{
   background-color: #E5F7FD !important;
@@ -122,12 +125,11 @@ body {
   color: #0075FF !important;
 } */
 
-.hoverrr2{
-  background-color: #E5F7FD !important;
-  border-right: 3px solid #0075FF !important;
-  color: #0075FF !important;
+.hoverrr2 {
+  background-color: #e5f7fd !important;
+  border-right: 3px solid #0075ff !important;
+  color: #0075ff !important;
 }
-
 
 .sidebar-list-item > a {
   text-decoration: none;
@@ -140,43 +142,44 @@ body {
   position: absolute;
   z-index: 12 !important;
 }
-.manageCoupons{
+.manageCoupons {
   margin-left: -27px !important;
 }
-.myCourses{
+.myCourses {
   margin-left: 16px !important;
   margin-top: -17px;
 }
-.listDesign{
+.listDesign {
   margin-left: 16px !important;
-    margin-top: 11%;
+  margin-top: 11%;
 }
-.userCollapse{
+.userCollapse {
   margin-left: -94px !important;
 }
-.myTeamCollapse{
+.myTeamCollapse {
   margin-left: -81px !important;
 }
-.coursesHead{
+.coursesHead {
   font-size: 15px !important;
   margin-left: 11px !important;
 }
-.listItems{
+.listItems {
   display: flex;
   flex-direction: column;
   text-align: left !important;
   margin-left: -35px !important;
 }
-.listButton{
-  font-size: 20% !important;
-  margin-left: 5px !important;
+.listButton {
+  /* font-size: 20% !important;
+  margin-left: 5px !important; */
   margin-top: -18px !important;
+  margin-left: -2% !important;
 }
-.listButton:hover{
-  background-color: #E5F7FD !important;
+.listButton:hover {
+  background-color: #e5f7fd !important;
   cursor: pointer;
-  border-right: 3px solid #0075FF !important;
-  color: #0075FF !important;
+  border-right: 3px solid #0075ff !important;
+  color: #0075ff !important;
 }
 
 /* End Sidebar  */
@@ -287,7 +290,7 @@ body {
   margin-left: 7%;
 }
 .OfferCardText h3 {
-padding: 2px 2px;
+  padding: 2px 2px;
 }
 .OfferCardText p {
   color: grey;
@@ -356,7 +359,7 @@ padding: 2px 2px;
 .searchBar {
   height: 6vh;
   background-color: #ffffff !important;
-  border:  solid 0px grey;
+  border: solid 0px grey;
 }
 
 .filterButton {
@@ -377,7 +380,7 @@ padding: 2px 2px;
   font-size: small;
   margin-top: 2%;
 }
-.headingOfTable{
+.headingOfTable {
   font-weight: bold;
   margin-left: 20px !important;
 }
@@ -385,48 +388,46 @@ padding: 2px 2px;
   color: dodgerblue;
   font-weight: bold;
 }
-.PhoneText{
+.PhoneText {
   color: grey !important;
   font-size: 0.9rem !important;
 }
-.TableHover:hover{
+.TableHover:hover {
   cursor: pointer;
 }
 .parentTable .MuiTableCell-root {
   border-bottom: 0px !important;
 }
-.fullNameHead UserName{
+.fullNameHead UserName {
   margin-left: 5% !important;
 }
-.css-1ex1afd-MuiTableCell-root{
+.css-1ex1afd-MuiTableCell-root {
   text-align: center !important;
 }
-.userPagination{
+.userPagination {
   margin-bottom: 10px;
   position: fixed !important;
   width: 77%;
   bottom: 49px;
 }
-.mt4{
+.mt4 {
   margin-top: 4%;
 }
-.ml2{
+.ml2 {
   margin-left: 4%;
 }
-.flexcol{
+.flexcol {
   display: flex;
   flex-direction: column;
 }
 
 /* END OF USER  */
 
-
 /* START OF TRANSACTION  */
 
-
-.h50vh{
- height: 55vh !important; 
- border-radius: 15px !important;
+.h50vh {
+  height: 55vh !important;
+  border-radius: 15px !important;
 }
 .transactionCards {
   display: grid;
@@ -434,7 +435,7 @@ padding: 2px 2px;
   gap: 40px;
   margin-top: 2%;
 }
-.boxNoOne{
+.boxNoOne {
   display: flex;
   flex-direction: row;
   background-color: #ffffff;
@@ -442,7 +443,7 @@ padding: 2px 2px;
   justify-content: space-between;
   align-items: center;
   padding: 3%;
-  box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.2)!important;
+  box-shadow: 0 0px 2px 0 rgba(0, 0, 0, 0.2) !important;
 }
 .boxValue {
   font-size: 0.8rem;
@@ -506,17 +507,17 @@ padding: 2px 2px;
 .redDelete {
   color: red !important;
 }
-.Deleticon{
+.Deleticon {
   width: 30% !important;
   margin-right: 25%;
 }
 .blueBlockUser {
   color: rgb(68, 68, 187) !important;
 }
-.myTeamPagination{
-   position: fixed !important;
-   width: 76%;
-   bottom: 43px;
+.myTeamPagination {
+  position: fixed !important;
+  width: 76%;
+  bottom: 43px;
 }
 
 /* END OF MY TEAM  */
@@ -527,13 +528,13 @@ padding: 2px 2px;
   flex-direction: row !important;
   justify-content: space-between;
 }
-.mt-3{
+.mt-3 {
   margin-top: 100px !important;
 }
-.TimeText{
-margin-left: 10px !important;
+.TimeText {
+  margin-left: 10px !important;
 }
-.FlexRow{
+.FlexRow {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -570,32 +571,32 @@ margin-left: 10px !important;
   display: flex;
   flex-direction: row;
 }
-.lastTableCell{
+.lastTableCell {
   display: flex !important;
   flex-direction: row !important;
   border-spacing: 4%;
   font-size: 1rem !important;
 }
-.lastValue{
+.lastValue {
   font-size: 0.875rem !important;
 }
-.phNumber{
+.phNumber {
   color: #0075ff;
   border: 0.1px solid rgb(241 241 247);
   background-color: rgb(241 241 247);
   margin-left: 2% !important;
   font-size: 0.875rem !important;
 }
-.BoxShadowInputField{
-    text-align: center !important;
-    border-radius: 10px !important;
-    font-size: 0.7rem !important;
-    margin-top: 0px !important;
+.BoxShadowInputField {
+  text-align: center !important;
+  border-radius: 10px !important;
+  font-size: 0.7rem !important;
+  margin-top: 0px !important;
 }
-.PopUP .MuiDialog-paper{
+.PopUP .MuiDialog-paper {
   border-radius: 10px !important;
 }
-.CreateBtn{
+.CreateBtn {
   padding: 5px 25px !important;
   margin: 20px !important;
   margin-right: 40% !important;
@@ -603,25 +604,24 @@ margin-left: 10px !important;
   font-weight: 600 !important;
   text-transform: none !important;
 }
-.redDeleteofTestPortal{
+.redDeleteofTestPortal {
   /* color: red !important; */
-  display: flex !important; 
-  flex-direction:row!important;
-  align-items:left!important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: left !important;
   text-align: left !important;
   padding: 3px 9px !important;
   cursor: pointer;
 }
-.blueBlockUser{
+.blueBlockUser {
   color: #0075ff !important;
-
 }
-.deleteIcon{
-  margin-right:10px ;
+.deleteIcon {
+  margin-right: 10px;
   cursor: pointer;
 }
-.redDeleteofTestPortal:hover{
- cursor: pointer;
+.redDeleteofTestPortal:hover {
+  cursor: pointer;
 }
 /* END OF TEST PORTAL  */
 
@@ -637,89 +637,90 @@ margin-left: 10px !important;
   margin-top: 22px !important;
   height: 33px !important;
 }
-.Pagination{
-  margin-left: 45% !important;
+.Pagination {
+  /* margin-left: 45% !important;
   position: absolute !important;
   bottom: 0 !important;
-  margin-bottom: 3% !important;
+  margin-bottom: 3% !important; */
+  margin-right: 3%;
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 0;
 }
-.testPortalSearchBarSection{
+.testPortalSearchBarSection {
   display: flex !important;
   flex-direction: row !important;
   justify-content: space-between;
 }
-.width50{
+.width50 {
   width: 50%;
   padding: 26px 10px;
 }
-.mt2{
+.mt2 {
   margin-top: 5%;
 }
-.BookIcon{
+.BookIcon {
   width: 10% !important;
   height: 6vh !important;
   margin-left: 6%;
   color: rgb(21, 203, 244);
 }
-.DateBox{
+.DateBox {
   justify-content: space-around;
   align-items: center !important;
   padding: 2%;
 }
-.TimeBox{
+.TimeBox {
   margin-top: 0% !important;
   padding: 3% !important;
 }
-.CourseDivider{
+.CourseDivider {
   margin-top: 45%;
 }
-.coursebtn{
+.coursebtn {
   margin-top: 7%;
   display: flex;
-  justify-content: right ;
+  justify-content: right;
 }
-.FreeTestDivider{
+.FreeTestDivider {
   margin-top: 15%;
 }
-.BtnBox{
+.BtnBox {
   margin-top: 7%;
   display: flex;
-  justify-content: right ;
-  
- 
+  justify-content: right;
 }
-.AddButton{
+.AddButton {
   color: rgb(21, 203, 244) !important;
 }
-.textAdd{
+.textAdd {
   margin-left: 2% !important;
 }
-.pad20{
+.pad20 {
   padding: 13px 10px;
 }
-.pointer{
+.pointer {
   cursor: pointer;
 }
-.redDeleteofTestimonial{
+.redDeleteofTestimonial {
   color: red !important;
   padding: 3px 17px !important;
   font-size: 18px !important;
 }
-.redDeleteIcon{
+.redDeleteIcon {
   font-size: large !important;
 }
-.testimonialPopOver{
+.testimonialPopOver {
   display: flex !important;
   flex-direction: column !important;
   padding: 3% !important;
   margin-left: -85px;
 }
-.testimonialPagination{
+.testimonialPagination {
   position: fixed !important;
   width: 77%;
   bottom: 49px;
 }
-
 
 /* END OF ADMIN TESTIMONIAL  */
 
@@ -797,7 +798,7 @@ margin-left: 10px !important;
   color: grey !important;
   font-size: smaller;
 }
-.PoPIcon{
+.PoPIcon {
   margin-right: 10%;
 }
 .PricenOfferPrice {
@@ -825,7 +826,7 @@ margin-left: 10px !important;
   background-color: white;
   border-radius: 23px;
 }
-.Today{
+.Today {
   background-color: #ffffff !important;
 }
 .blueViewAll {
@@ -911,27 +912,27 @@ margin-left: 10px !important;
     grid-template-columns: 1fr;
   }
 }
-.useInfoCheckbox{
+.useInfoCheckbox {
   display: flex !important;
   flex-direction: row !important;
   margin-left: 12px;
 }
-.userCheckBoxDiv{
+.userCheckBoxDiv {
   margin-left: 20px;
 }
-.countSelectedValue{
+.countSelectedValue {
   display: flex;
   flex-direction: row;
   margin-top: 20px;
-  justify-content: space-between ;
+  justify-content: space-between;
 }
-.countedCheckBox{
+.countedCheckBox {
   background-color: white !important;
   width: 30%;
   border-radius: 10px !important;
   border-color: white !important;
-  cursor:default !important ;
+  cursor: default !important ;
   align-items: center !important;
   text-align: center !important;
   color: #0075ff !important;
-  }
+}
