@@ -14,21 +14,18 @@ import ClearIcon from "@mui/icons-material/Clear";
 import Switch from "@mui/material/Switch";
 import WarningIcon from "@mui/icons-material/Warning";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import Button from "@mui/material/Button";
 
-import DoneIcon from "@mui/icons-material/Done";
+import ProfileList from "../SubComponent/List"
 
-const label = { inputProps: { "aria-label": "Switch demo" } };
+
 
 const CourseHeader = ({ Heading, subHeading }) => {
+  
+  const [value, setValue] = useState("");
+
   const [state, setState] = useState({
     left: false,
   });
-  const [value, setValue] = useState("");
-
-  const handleChange = (event) => {
-    setState(false);
-  };
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -39,123 +36,7 @@ const CourseHeader = ({ Heading, subHeading }) => {
     setState({state, [anchor]: open });
   };
 
-  const list = (anchor) => (
-    <Box
-      sx={{
-        width: anchor === "top" || anchor === "bottom" ? "auto" : 450,
-        margin: "20px",
-      }}
-      role="presentation"
-    >
-      <Box className="flexrow JustfiSB">
-        <h3>My Profile</h3>
-        <ClearIcon onClick={handleChange} className="Xicon pointer" />
-      </Box>
-      <Box className="BasicInfoBox">
-        <Box className="margin20">
-          <Box className="flexrow JustfiSB">
-              <Box className="flexrow width80">
-             <h5>Basic Information</h5> <DoneIcon  className="TickIcon "/>
-            </Box>
-            <Button>Edit</Button>
-          </Box>
-          <Box className="flexrow BasicInfo">
-            <Box className="flexrow">
-              <PermIdentityOutlinedIcon className="infoicon" />{" "}
-              <Typography className="InfoTextLeft">Name:</Typography>
-            </Box>
-            <Typography className="InfoTextRight">360 Critcial Care</Typography>
-          </Box>
-          <Box className="flexrow BasicInfo">
-            <Box className="flexrow">
-              <PermIdentityOutlinedIcon className="infoicon" />
-              <Typography className="InfoTextLeft">Email:</Typography>
-            </Box>
-            <Typography className="InfoTextRight">360 Critcial Care</Typography>
-          </Box>
-          <Box className="flexrow BasicInfo">
-            <Box className="flexrow">
-              <PermIdentityOutlinedIcon className="infoicon" />
-              <Typography className="InfoTextLeft">Mobile:</Typography>
-            </Box>
-            <Typography className="InfoTextRight">360 Critcial Care</Typography>
-          </Box>
-          <Box className="flexrow BasicInfo">
-            <Box className="flexrow">
-              <PermIdentityOutlinedIcon className="infoicon" />
-              <Typography className="InfoTextLeft">About:</Typography>
-            </Box>
-            <Typography className="InfoTextRight">360 Critcial Care</Typography>
-          </Box>
-        </Box>
-      </Box>
-      <Box className="BasicInfoBox">
-        <Box className="margin20">
-          <Box className="flexrow JustfiSB">
-          <Box className="flexrow width80">
-             <h5>Bank Details</h5> <DoneIcon className="TickIcon"/>
-            </Box>
-            <Button>Edit</Button>
-          </Box>
-          <Box className="flexrow BasicInfo">
-            <Box className="flexrow">
-              <PermIdentityOutlinedIcon className="infoicon" />
-              <Typography className="InfoTextLeft">Name:</Typography>
-            </Box>
-            <Typography className="InfoTextRight">360 Critcial Care</Typography>
-          </Box>
-          <Box className="flexrow BasicInfo">
-            <Box className="flexrow">
-              <PermIdentityOutlinedIcon className="infoicon" />
-              <Typography className="InfoTextLeft">Email:</Typography>
-            </Box>
-            <Typography className="InfoTextRight">360 Critcial Care</Typography>
-          </Box>
-          <Box className="flexrow BasicInfo">
-            <Box className="flexrow">
-              <PermIdentityOutlinedIcon className="infoicon" />
-              <Typography className="InfoTextLeft">Mobile:</Typography>
-            </Box>
-            <Typography className="InfoTextRight">360 Critcial Care</Typography>
-          </Box>
-        </Box>
-      </Box>
-      <Box className="BasicInfoBox">
-        <Box className="margin20">
-        <Box className="flexrow JustfiSB">
-          <h5>Show Classplus Branding</h5>
-          <Switch {...label} />
-        </Box>
-        </Box>
-      </Box>
-
-      <Box className="BasicInfoBox">
-        <Box className="margin20">
-        <Box className="flexrow JustfiSB">
-          <Box className="flexrow width80">
-           <Typography> Text Details </Typography><WarningIcon  className="WarningIcon"/>
-          </Box>
-          <Button>Edit</Button>
-        </Box>
-        <Box className="flexrow BasicInfo">
-          <Box className="flexrow width80">
-            <PermIdentityOutlinedIcon />
-            Billing Address:
-          </Box>
-        </Box>
-        <Box className="flexrow BasicInfo">
-          <Box className="flexrow width80">
-            <PermIdentityOutlinedIcon />
-            GSTIN:
-          </Box>
-        </Box>
-        </Box>
-      </Box>
-
-     
-    </Box>
-  );
-
+ 
   return (
     <Box className="HeaderBox">
       <Box className="HeaderLeft">
@@ -210,7 +91,9 @@ const CourseHeader = ({ Heading, subHeading }) => {
           onClose={toggleDrawer("right", false)}
           onOpen={toggleDrawer("right", true)}
         >
-          {list("right")}
+          {ProfileList("right")}
+
+          {/* <List /> */}
         </SwipeableDrawer>
       </Box>
     </Box>

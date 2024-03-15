@@ -25,14 +25,15 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   };
 
   useEffect(() => {
-    console.log("courseId==>", courseId);
-    getCourseById({
-      courseId,
-      callBack: (response) => {
-        const userCallBack = response?.data;
-        setCourseData(userCallBack);
-      },
-    });
+    if (courseId) {
+      getCourseById({
+        courseId,
+        callBack: (response) => {
+          const userCallBack = response?.data;
+          setCourseData(userCallBack);
+        },
+      });
+    }
   }, [courseId]);
 
   const handleCreateCourse = () => {
@@ -48,7 +49,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       content_type_id: 11,
       modiefied_by: 1,
       created_by: 2,
-      
     };
     createCourse({
       courseData,
