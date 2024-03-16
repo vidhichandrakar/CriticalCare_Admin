@@ -24,10 +24,14 @@
 }
 .selectDesign{
   background-color: #fff;
-  /* border:none !important; */
   text-align: center;
   /* box-shadow: 1px 1px 5px 1px #f7f7f7!important; */
-  border-radius: 15px !important;
+  border-radius: 30% !important;
+  margin-top: -2px;
+  /* height: 15px; */
+}
+.designingIcons{
+  margin-right: 5%;
 }
 .logoDesign{
    width: 60px;
