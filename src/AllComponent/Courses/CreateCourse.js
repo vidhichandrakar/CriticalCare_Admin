@@ -42,6 +42,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       description: basicInfo?.Description,
       price: parseInt(editPrice?.regularPrice),
       offer_price: parseInt(editPrice?.offerPrice),
+      category_id:basicInfo?.Category?.id,
       sub_category_id: basicInfo?.subCategory?.id,
       duration_id: parseInt(editPrice?.duration),
       duration_type_id: 91,
