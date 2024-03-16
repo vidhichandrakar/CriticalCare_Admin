@@ -35,7 +35,7 @@ const LoginEmailandPassword = () => {
   const handleUserLogin = () => {
     const payload = {
       user_name: userLogin.email,
-      password: userLogin.password,
+      password: parseInt(userLogin.password),
     };
     login({
       payload,

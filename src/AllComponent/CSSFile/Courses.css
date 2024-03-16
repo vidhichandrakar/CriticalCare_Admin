@@ -234,7 +234,7 @@
   flex-direction: row;
 }
 .categorySelect{
-  margin-left: -2%;
+  margin-left: 0% !important;
   margin-top: 4%
 }
 .Editcategory{
