@@ -296,7 +296,7 @@ const User = () => {
                 </Popover>
               </TableBody>
               <TablePagination
-              rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
+              rowsPerPageOptions={[4, 10, 25, { label: 'All', value: -1 }]}
               // colSpan={3}
               count={userData.length}
               rowsPerPage={rowsPerPage}

@@ -68,27 +68,31 @@ const CourseHeader = ({ Heading, subHeading }) => {
               value={"Profile"}
               onClick={toggleDrawer("right", true)} 
             >
-              {/* <PermIdentityOutlinedIcon  /> */}
-              <PersonRoundedIcon className="designingIcons"/>
+            <PersonRoundedIcon className="designingIcons"/>
               Profile
             </MenuItem>
+
+            {/* <MenuItem className="selectDesign hoverrr" value={"Profiles"}> */}
             <MenuItem className="selectDesign hoverrr" value={"Profiles"}>
               <CurrencyRupeeIcon className="designingIcons" />
               Recharge
             </MenuItem>
+
             <MenuItem className="selectDesign hoverrr" value={"Profiled"}>
-              {/* <SettingsOutlinedIcon /> */}
               <SettingsRoundedIcon className="designingIcons"/>
               Settings
             </MenuItem>
+
             <MenuItem className="selectDesign hoverrr" value={"Profilea"}>
               <QuizRoundedIcon className="designingIcons" />
               Help and Support
             </MenuItem>
+
             <MenuItem className="selectDesign hoverrr" value={"Profileik"}>
               <LogoutTwoToneIcon className="designingIcons" />
               Logout
             </MenuItem>
+            
           </Select>
         </FormControl>
         <SwipeableDrawer
