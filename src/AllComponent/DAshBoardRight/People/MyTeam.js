@@ -389,7 +389,7 @@ const MyTeam = () => {
                     })
                   : null}
                 <Popover
-                  sx={{ m: -7, mt: 0.7, ml: -18 }}
+                  sx={{ m: -7, mt: 0.2, ml: -15 }}
                   id={openId}
                   open={open}
                   anchorEl={anchorEl}
