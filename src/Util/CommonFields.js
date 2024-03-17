@@ -20,7 +20,9 @@ export const commonTextField =({className,inputClassName,labels},Option={
   />
   )
 }
-
+export const capitalizeFirstLetter = (name) => {
+  return name.charAt(0).toUpperCase() + name.slice(1)
+}
 export const commonSelect =({placeholder,menuItemList,className},Option={handleInput:()=>{},categoryValue:{},type:""})=>{
   const{handleInput,categoryValue,type} = Option;
   return(
