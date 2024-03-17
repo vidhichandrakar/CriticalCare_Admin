@@ -3,6 +3,7 @@ import react from "react";
 import cardimg from "../../Media/Images/db7187e8-b7cf-47ed-8900-6de89dabde06.png";
 import { Link } from "react-router-dom";
 import {useNavigate} from "react-router-dom";
+import { capitalize } from "@material-ui/core";
 
 const YourCoursesCard = ({ allCourses }) => {
   
@@ -23,7 +24,7 @@ const YourCoursesCard = ({ allCourses }) => {
                   <img src={cardimg} className="cardImage" />
                 </Link>
                 <div className="CardData">
-                  <p className="Headp">{item.course_name}</p>
+                  <p className="Headp">{capitalize(item.course_name)}</p>
                   <p className="Namep">
                    Created By: {item.created_by}
                   </p>

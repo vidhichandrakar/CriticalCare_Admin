@@ -17,7 +17,8 @@ import LoaderComponent from "../../Util/LoaderComponent";
 
 const YourCourses = () => {
   const [allCourses, setAllCourses] = useState([]);
-  const [loaderState, setLoaderState] = useState(false)
+  const [loaderState, setLoaderState] = useState(false);
+  
   useEffect(() => {
     setLoaderState(true);
     getAllCourses({
