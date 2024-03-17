@@ -40,15 +40,19 @@
 }
 .css-6hp17o-MuiList-root-MuiMenu-list{
   /* margin: 10px 10px !important; */
-  padding: 1px 10px !important;
-  padding-top: 6px !important;
+  padding: 10px 10px !important;
+  padding-top: 10px !important;
   /* margin: 1px 10px !important; */
+  /* min-width: 220px; */
 }
-.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root {
+/* .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root {
   min-height: 42px;
+} */
+.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root {
+  min-height: 43px !important;
 }
 .designingIcons{
-  margin-right: 7%;
+  margin-right: 11%;
 }
 .logoDesign{
    width: 60px;
