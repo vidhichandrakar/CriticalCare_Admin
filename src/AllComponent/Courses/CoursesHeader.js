@@ -16,6 +16,9 @@ import WarningIcon from "@mui/icons-material/Warning";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 
 import ProfileList from "../SubComponent/List"
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
+import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
+import QuizRoundedIcon from '@mui/icons-material/QuizRounded';
 
 
 
@@ -43,6 +46,7 @@ const CourseHeader = ({ Heading, subHeading }) => {
         <Typography className="headerText">{Heading}</Typography>
         <Typography className="subHeader">{subHeading}</Typography>
       </Box>
+
       <Box className="HeaderRight">
         <FormControl sx={{ m: 1, minWidth: 240 }}>
           <Select
@@ -64,25 +68,31 @@ const CourseHeader = ({ Heading, subHeading }) => {
               value={"Profile"}
               onClick={toggleDrawer("right", true)} 
             >
-              <PermIdentityOutlinedIcon  />
+            <PersonRoundedIcon className="designingIcons"/>
               Profile
             </MenuItem>
+
+            {/* <MenuItem className="selectDesign hoverrr" value={"Profiles"}> */}
             <MenuItem className="selectDesign hoverrr" value={"Profiles"}>
-              <CurrencyRupeeIcon />
+              <CurrencyRupeeIcon className="designingIcons" />
               Recharge
             </MenuItem>
+
             <MenuItem className="selectDesign hoverrr" value={"Profiled"}>
-              <SettingsOutlinedIcon />
+              <SettingsRoundedIcon className="designingIcons"/>
               Settings
             </MenuItem>
+
             <MenuItem className="selectDesign hoverrr" value={"Profilea"}>
-              <QuizOutlinedIcon />
+              <QuizRoundedIcon className="designingIcons" />
               Help and Support
             </MenuItem>
+
             <MenuItem className="selectDesign hoverrr" value={"Profileik"}>
-              <LogoutTwoToneIcon />
+              <LogoutTwoToneIcon className="designingIcons" />
               Logout
             </MenuItem>
+            
           </Select>
         </FormControl>
         <SwipeableDrawer
