@@ -198,7 +198,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                         sx={{ mt: 1 }}
                         onClick={() => handleHighlight("catagory")}
                       >
-                        Category / Sub Catoggry
+                        Category / Sub Category
                       </Typography>
                     </Link>
                   </li>
