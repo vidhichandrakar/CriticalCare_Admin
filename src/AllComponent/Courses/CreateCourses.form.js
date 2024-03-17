@@ -230,6 +230,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
             )}
           </FormControl>
         </Box>
+        
         <Box className="rightCat">
           {CommonTypography(
             { fontWeight: 600, label: "Sub Category" },
