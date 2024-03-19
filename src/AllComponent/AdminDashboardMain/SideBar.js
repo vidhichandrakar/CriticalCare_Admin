@@ -23,9 +23,12 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const opens = Boolean(anchorE2);
   const ids = opens ? "simple-popover" : undefined;
   let currentlyHovering = false;
-  const [openCollapse, setOpenCollapse] = useState(localStorage.getItem("subMenuCourses")==="true"?true:false
+  const [openCollapse, setOpenCollapse] = useState(
+    localStorage.getItem("subMenuCourses") === "true" ? true : false
   );
-  const [openPeople, setOpenPeople] = useState(false);
+  const [openPeople, setOpenPeople] = useState(
+    localStorage.getItem("subMenuPeople") === "true" ? true : false
+  );
   const [hideCatConfig, setHideCatConfig] = useState(false);
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
@@ -34,31 +37,6 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const [hideUnHide, setHideUnHide] = useState(false);
   const [hideSubConfig, setHideSubConfig] = useState(false);
   const [selectedConfigValue, setSelectedConfigValue] = useState("");
-
-  const handlePopoverOpen = (event) => {
-    setAnchorE2(event.currentTarget);
-  };
-  const handlePopoverClose = () => {
-    setAnchorE2(null);
-  };
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const handleClickCourse = (event) => {
-    setAnchorE3(event.currentTarget);
-  };
-  const handleCloseCourse = () => {
-    setAnchorE3(null);
-  };
-  const handleClick2 = (event) => {
-    setAnchorE2(event.currentTarget);
-  };
-  const handleClose2 = () => {
-    setAnchorE2(null);
-  };
 
   // collapse
   const navigate = useNavigate();
@@ -86,41 +64,37 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const [highlight, setHighlight] = useState(false);
   const [highlightPeople, setHighlightPeople] = useState(false);
   useEffect(() => {
-    const activeMenu= localStorage.getItem("activeMenu")
+    const activeMenu = localStorage.getItem("activeMenu");
     setHighlight(activeMenu);
+    setHighlightPeople(activeMenu);
   }, [localStorage.getItem("activeMenu")]);
-
-  useEffect(() => {
-    const activeMenuPeople= localStorage.getItem("activeMenuPeople")
-    setHighlightPeople(activeMenuPeople);    
-  }, [localStorage.getItem("activeMenuPeople")]);
 
   const handleHighlight = (type) => {
     setHighlight(type);
     localStorage.setItem("activeMenu", type);
-    if(type === "myCourses" || type === "manageCoupons" || 
-     type === "catagory" || type === "upcoimgCourses"){
-      localStorage.setItem("subMenuCourses", true)
-      console.log("yes true");
-     }
-     else{
-      localStorage.setItem("subMenuCourses", false)
-      console.log("no false");
-     }
+    localStorage.setItem("subMenuPeople", false);
+    if (
+      type === "myCourses" ||
+      type === "manageCoupons" ||
+      type === "catagory" ||
+      type === "upcoimgCourses"
+    ) {
+      localStorage.setItem("subMenuCourses", true);
+    } else {
+      localStorage.setItem("subMenuCourses", false);
+    }
   };
 
-  const handleHighlightPeople = (type) => {   
+  const handleHighlightPeople = (type) => {
     setHighlightPeople(type);
-    localStorage.setItem("activeMenuPeople", type);
-    if(type === "peopleUser" || type === "peopleMyTeam"){
-      localStorage.setItem("subMenuCoursesPeople", true)
-      console.log("yes");
+    localStorage.setItem("activeMenu", type);
+    localStorage.setItem("subMenuCourses", false);
+    if (type === "peopleUser" || type === "peopleMyTeam") {
+      localStorage.setItem("subMenuPeople", true);
+    } else {
+      localStorage.setItem("subMenuPeople", false);
     }
-    else{
-      localStorage.setItem("subMenucoursesPeople", false)
-      console.log("no");
-    }
-  }
+  };
 
   const handleHideSubCat = () => {
     setHideSubConfig(!hideSubConfig);
@@ -174,23 +148,27 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
           </Link>
 
           <Link>
-            <ListItemButton onClick={handleClickCollapse} className="listButton">
+            <ListItemButton
+              onClick={handleClickCollapse}
+              className="listButton"
+            >
               <MenuBookIcon className="blueHoverIcon" />
               <ListItemText primary="Courses" className="coursesHead" />
               {openCollapse ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
 
-            <Collapse in={openCollapse} 
-            // timeout="auto"
-             unmountOnExit
-             >
+            <Collapse
+              in={openCollapse}
+              // timeout="auto"
+              unmountOnExit
+            >
               <List component="div" sx={{ marginLeft: "1%" }}>
                 <ul type="disc">
                   <li className="myCourses">
                     <Link to="/YourCourses" className="textDecoration">
                       <Typography
                         id="hoverrr"
-                        className={highlight === "myCourses" ? "hoverrr2" : ""}
+                        className={highlight === "myCourses" ? "hoverrr2 paddingD" : "paddingD"}
                         sx={{ mt: 1 }}
                         onClick={() => handleHighlight("myCourses")}
                       >
@@ -198,13 +176,12 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                       </Typography>
                     </Link>
                   </li>
-                  {console.log("show", openCollapse, localStorage.getItem("subMenuCourses"))}
                   <li className="listDesign">
                     <Link to="/CreateCoupon" className="textDecoration">
                       <Typography
                         id="hoverrr"
                         className={
-                          highlight === "manageCoupons" ? "hoverrr2" : ""
+                          highlight === "manageCoupons" ? "hoverrr2 paddingD" : "paddingD"
                         }
                         sx={{ mt: 1 }}
                         onClick={() => handleHighlight("manageCoupons")}
@@ -217,11 +194,11 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                     <Link to="/User" className="textDecoration">
                       <Typography
                         id="hoverrr"
-                        className={highlight === "catagory" ? "hoverrr2" : ""}
+                        className={highlight === "catagory" ? "hoverrr2 paddingD" : "paddingD"}
                         sx={{ mt: 1 }}
                         onClick={() => handleHighlight("catagory")}
                       >
-                        Category / Sub Catoggry
+                        Category / Sub Category
                       </Typography>
                     </Link>
                   </li>
@@ -230,7 +207,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                       <Typography
                         id="hoverrr"
                         className={
-                          highlight === "upcomingCourses" ? "hoverrr2" : ""
+                          highlight === "upcomingCourses" ? "hoverrr2 paddingD" : "paddingD"
                         }
                         sx={{ mt: 1 }}
                         onClick={() => handleHighlight("upcomingCourses")}
@@ -243,7 +220,6 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               </List>
             </Collapse>
           </Link>
-          {console.log("highlight", highlight)}
           <Link to="/TestPortal">
             <Typography
               id="hoverrr"
@@ -287,31 +263,34 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               {openPeople ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
 
-        <Collapse in={openPeople} 
-            // timeout="auto"
-             unmountOnExit
-             >
+            <Collapse
+              in={openPeople}
+              // timeout="auto"
+              unmountOnExit
+            >
               <List component="div">
                 <ul>
                   <li className="myCourses">
                     <Link to="/User" className="textDecoration">
                       <Typography
                         id="hoverrr"
-                        className={highlightPeople === "peopleUser" ? "hoverrr2" : ""}
-                        sx={{ textDecoration: "none" }}
+                        className={
+                          highlightPeople === "peopleUser" ? "hoverrr2 paddingD" : "paddingD"
+                        }
+                        sx={{ textDecoration: "none", }}
                         onClick={() => handleHighlightPeople("peopleUser")}
                       >
                         User
                       </Typography>
                     </Link>
                   </li>
-                  {console.log("show", openCollapse, localStorage.getItem("subMenuCoursesPeople"))}
-
                   <li className="listDesign">
                     <Link to="/MyTeam" className="textDecoration">
-                      <Typography 
-                      id="hoverrr"
-                        className={highlightPeople === "peopleMyTeam" ? "hoverrr2" : ""}
+                      <Typography
+                        id="hoverrr"
+                        className={
+                          highlightPeople === "peopleMyTeam" ? "hoverrr2 paddingD" : "paddingD"
+                        }
                         sx={{ textDecoration: "none" }}
                         onClick={() => handleHighlightPeople("peopleMyTeam")}
                       >

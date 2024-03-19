@@ -26,12 +26,29 @@
   background-color: #fff;
   text-align: center;
   /* box-shadow: 1px 1px 5px 1px #f7f7f7!important; */
-  border-radius: 30% !important;
-  margin-top: -2px;
-  /* height: 15px; */
+  border-radius: 15% !important;
+  font-weight: bolder !important;
+  margin-top: -3px;
+  /* margin-left: 20%; */
+  /* height: 27px; */
+}
+.selectDesign hoverrr{
+  /* font-family:Arial, Helvetica, sans-serif; */
+  /* height: 14% !important; */
+  /* border-radius: 15% !important; */
+  padding: 10px 10px !important;
+}
+.css-6hp17o-MuiList-root-MuiMenu-list{
+  /* margin: 10px 10px !important; */
+  padding: 1px 10px !important;
+  padding-top: 6px !important;
+  /* margin: 1px 10px !important; */
+}
+.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root {
+  min-height: 42px;
 }
 .designingIcons{
-  margin-right: 5%;
+  margin-right: 7%;
 }
 .logoDesign{
    width: 60px;
