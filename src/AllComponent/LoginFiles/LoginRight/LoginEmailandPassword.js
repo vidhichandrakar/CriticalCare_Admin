@@ -70,21 +70,29 @@ const LoginEmailandPassword = () => {
   return (
     <div className="RightBox">
       <Box className="BoxWidth">
-        <Typography className="loginText">Login to Admin Panel</Typography>
-        <Box sx={{ mt: 10 }}>
+        <Typography className="loginText">Login to Admin Panel
+        <Typography sx={{mt : 1, fontSize:21, color:"#199884"}}>
+            <u>{getOTP}</u>
+          </Typography>
+        </Typography>
+        
+          
+        
+        <Box sx={{ mt: 2 }}>
           <TextField
             id="fullWidth"
             label="Email"
             variant="outlined"
             className="BoxShadow"
             fullWidth
+            disabled
             type="email"
             onChange={(event) => handleInput(event.target.value, "email")}
           />
         </Box>
 
         {userLogin?.email != "" ? (
-          <Box sx={{ mt: 0 }}>
+          <Box sx={{ mt: 2 }}>
             <TextField
               id="fullWidth"
               label="Password"
@@ -98,26 +106,25 @@ const LoginEmailandPassword = () => {
           </Box>
         ) : null}
 
-        <Box sx={{ mt: 10 }}>
+        <Box sx={{ mt: 2 }}>
+          {console.log("enteredOTP",enteredOTP,phoneNO.length)}
           <TextField
             id="fullWidth"
             label="Enter Phone No"
             variant="outlined"
             className="BoxShadow"
             fullWidth
+            disabled={phoneNO?.length===10 && getOTP!==""}
+            type="number"
             onChange={(event) =>
               handleLoginByOTP(event.target.value, "password")
             }
           />
         </Box>
-        {
-          <h1>
-            <u>{getOTP}</u>
-          </h1>
-        }
+       
 
         {getOTP !== "" && (
-          <Box sx={{ mt: 10 }}>
+          <Box sx={{ mt: 2 }}>
             <TextField
               id="fullWidth"
               label="Enter OTP"
