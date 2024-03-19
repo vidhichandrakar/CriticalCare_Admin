@@ -149,7 +149,6 @@ const User = () => {
   };
 
   const deleteSelectedItem = () => {
-    console.log("calling", checkedValue);
     checkedValue.map((item) => {
       deleteUser({
         userId: item,

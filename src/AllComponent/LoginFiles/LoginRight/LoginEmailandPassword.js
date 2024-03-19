@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
-import { login } from "../../ActionFactory/apiActions";
+import { getUserId, login } from "../../ActionFactory/apiActions";
 import { useNavigate } from "react-router-dom";
 
 const LoginEmailandPassword = () => {
@@ -13,7 +13,12 @@ const LoginEmailandPassword = () => {
   });
   const navigate = useNavigate();
   const [disbaleLoginBtn, setDisableLogiBtn] = useState(true);
-  let token;
+  const [phoneNO, setPhoneNo] = useState();
+  const [getOTP, setGetOTP] = useState("");
+  const [loginWay, setLoginWay] = useState("");
+  const [enteredOTP, setEnteredOTP] = useState("");
+  const [hideOTPBtn, setHideOTPBtn] = useState(true);
+  let navigation = useNavigate();
 
   const handleInput = (value, type) => {
     let storedValues = Object.assign({}, userLogin);
@@ -33,19 +38,35 @@ const LoginEmailandPassword = () => {
   };
 
   const handleUserLogin = () => {
-    const payload = {
-      user_name: userLogin.email,
-      password: parseInt(userLogin.password),
-    };
-    login({
-      payload,
-      callBack: (response) => {
-        localStorage.setItem("accessToken", response.data.token);
-        token = localStorage.getItem("accessToken");
+    if (loginWay === "") {
+      const payload = {
+        phone_no: phoneNO?.toString(),
+      };
+      login({
+        payload,
+        callBack: (response) => {
+          setLoginWay("Get OTP");
+          setGetOTP(response.data.OTP);
+        },
+      });
+      setHideOTPBtn(false);
+    }
+    if (loginWay !== "") {
+      if (getOTP === parseInt(enteredOTP)) {
         navigate("/DashBoard");
-      },
-    });
+      }
+    }
   };
+  const handleLoginByOTP = (value, type) => {
+    setDisableLogiBtn(false);
+    setPhoneNo(value);
+    if (type === "password") {
+      setPhoneNo(value);
+    } else if (type === "OTP") {
+      setEnteredOTP(value);
+    }
+  };
+
   return (
     <div className="RightBox">
       <Box className="BoxWidth">
@@ -77,14 +98,55 @@ const LoginEmailandPassword = () => {
           </Box>
         ) : null}
 
-        <Button
-          variant="contained"
-          className="LoginBtn"
-          onClick={handleUserLogin}
-          disabled={disbaleLoginBtn}
-        >
-          Login
-        </Button>
+        <Box sx={{ mt: 10 }}>
+          <TextField
+            id="fullWidth"
+            label="Enter Phone No"
+            variant="outlined"
+            className="BoxShadow"
+            fullWidth
+            onChange={(event) =>
+              handleLoginByOTP(event.target.value, "password")
+            }
+          />
+        </Box>
+        {
+          <h1>
+            <u>{getOTP}</u>
+          </h1>
+        }
+
+        {getOTP !== "" && (
+          <Box sx={{ mt: 10 }}>
+            <TextField
+              id="fullWidth"
+              label="Enter OTP"
+              variant="outlined"
+              className="BoxShadow"
+              fullWidth
+              onChange={(event) => handleLoginByOTP(event.target.value, "OTP")}
+            />
+          </Box>
+        )}
+
+        {hideOTPBtn && (
+          <Button
+            variant="contained"
+            className="LoginBtn"
+            onClick={() => handleUserLogin()}
+          >
+            Get OTP
+          </Button>
+        )}
+        {getOTP && (
+          <Button
+            variant="contained"
+            className="LoginBtn"
+            onClick={() => handleUserLogin()}
+          >
+            Login
+          </Button>
+        )}
       </Box>
     </div>
   );
