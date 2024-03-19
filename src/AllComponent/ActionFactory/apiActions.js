@@ -140,9 +140,11 @@ export const getTestByID = ({ testId, callBack }) => {
 };
 
 
-export const login =({payload, callBack})=>{
+export const login =({payload, callBack,error})=>{
   const url = APIS.login;
   axios.post(url,payload).then((response)=>{
     callBack(response);
-  })
+  }).catch((errorMessage) => {
+    error(errorMessage);
+  });
 }
