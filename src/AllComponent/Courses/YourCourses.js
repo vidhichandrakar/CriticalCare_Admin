@@ -13,6 +13,8 @@ import SideBar from "../AdminDashboardMain/SideBar";
 import { Link } from "react-router-dom";
 import { getAllCourses } from "../ActionFactory/apiActions";
 import LoaderComponent from "../../Util/LoaderComponent";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const YourCourses = () => {
@@ -26,9 +28,14 @@ const YourCourses = () => {
         const userCallBack = response?.data;
         setAllCourses(userCallBack);
         setLoaderState(false)
-      },
+      },error:(error)=>{
+        toast.error(error.message);
+        console.log(error.message);
+        setLoaderState(false);
+      }
     });
-  }, []);
+  }, 
+  []);
   
   return (
     <div className="grid-container">
@@ -57,8 +64,10 @@ const YourCourses = () => {
           <YourCoursesCard allCourses={allCourses} Data={YourCoursesCardData} />
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
+
 };
 
 export default YourCourses;

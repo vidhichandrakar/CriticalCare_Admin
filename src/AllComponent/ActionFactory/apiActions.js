@@ -10,10 +10,12 @@ export const getAllUsersApi = ({ callBack, error }) => {
   });
 };
 
-export const getAllCourses = ({ callBack }) => {
+export const getAllCourses = ({ callBack, error }) => {
   const url = APIS.allCourses;
   axios.get(url).then((response) => {
     callBack(response);
+  }).catch((errorMessage) => {
+    error(errorMessage);
   });
 };
 
