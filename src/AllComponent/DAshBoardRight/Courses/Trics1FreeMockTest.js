@@ -14,7 +14,7 @@ import SideBar from "../../AdminDashboardMain/SideBar";
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { deleteCourses, getCourseById } from "../../ActionFactory/apiActions";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Trics1FreeMockTest = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -33,7 +33,6 @@ const Trics1FreeMockTest = () => {
   };
 
   useEffect(() => {
-    console.log("courseId==>", courseId);
     getCourseById({
       courseId,
       callBack: (response) => {
@@ -43,21 +42,18 @@ const Trics1FreeMockTest = () => {
     });
   }, [courseId]);
 
-  const handleDeleteCourse=()=>{
-    console.log("calling");
+  const handleDeleteCourse = () => {
     deleteCourses({
       courseId,
       callBack: (response) => {
-        navigate("/YourCourses")
+        navigate("/YourCourses");
       },
     });
-    
-  }
+  };
 
-  const handleEdit=(id)=>{
-    console.log("editing")
-    navigate("/CreateCourses",{ state:{id:courseId}}) 
-  }
+  const handleEdit = (id) => {
+    navigate("/CreateCourses", { state: { id: courseId } });
+  };
 
   return (
     <div className="grid-container">
@@ -158,7 +154,11 @@ const Trics1FreeMockTest = () => {
                   <EditIcon className="PoPIcon" />
                   Edit
                 </MenuItem>
-                <MenuItem onClick={()=>handleDeleteCourse(id)} value={20} className="greyPara">
+                <MenuItem
+                  onClick={() => handleDeleteCourse(id)}
+                  value={20}
+                  className="greyPara"
+                >
                   {" "}
                   <DeleteIcon className="PoPIcon" />
                   Delete

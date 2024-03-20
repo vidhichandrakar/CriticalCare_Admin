@@ -17,7 +17,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
 
   const handleTrackerPage = (page) => {
     setTackerPage(page);
-    console.log("dkjskdj", basicInfo);
     handleHeaderLabels(basicInfo.Name);
     if (page === 2) {
       handleCreateCourse();
@@ -76,7 +75,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
 
   return (
     <Box className="courseMainTrack">
-      {console.log("courseData====Create", courseData)}
       <Tracker
         trackerPage={trackerPage}
         handleTrackerPage={handleTrackerPage}

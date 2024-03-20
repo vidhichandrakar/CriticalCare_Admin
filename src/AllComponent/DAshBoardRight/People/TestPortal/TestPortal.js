@@ -59,7 +59,6 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 function TablePaginationActions(props) {
-  console.log(props, "propsss")
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
 
@@ -201,7 +200,6 @@ const TestPortal = () => {
       created_by: parseInt(addTest.hours),
       duration_minute: parseInt(addTest.testDuration),
     };
-    console.log("payloadpayload", payload);
     updateTeam({
       payload,
       callBack: (response) => {
@@ -211,13 +209,11 @@ const TestPortal = () => {
   };
 
   const handleEdit = () => {
-    console.log("etidn", openId);
     setOpen(true);
     const testId = openId;
     getTestByID({
       testId,
       callBack: (response) => {
-        console.log(response.data);
         const data = response.data;
         let storedValues = Object.assign({}, addTest);
         storedValues.testName = data.test_name;
