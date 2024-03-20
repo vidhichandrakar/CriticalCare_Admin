@@ -34,6 +34,8 @@ import LastPageIcon from '@mui/icons-material/LastPage';
 import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import LoaderComponent from "../../../Util/LoaderComponent";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function TablePaginationActions(props) {
   console.log(props, "propsss")
@@ -114,7 +116,10 @@ const User = () => {
         const userCallBack = response?.data;
         setUserData(userCallBack);
         setLoaderState(false);
-      },
+      },error:(error)=>{
+        toast.error(error.message);
+        console.log(error.message);
+      }
     });
   }, []);
 
@@ -329,6 +334,7 @@ const User = () => {
           
         </Paper>
       </div>
+      <ToastContainer />
     </div>
   );
 };

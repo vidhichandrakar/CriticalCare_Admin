@@ -49,6 +49,8 @@ import LastPageIcon from '@mui/icons-material/LastPage';
 import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import LoaderComponent from "../../../Util/LoaderComponent";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -146,7 +148,10 @@ const MyTeam = () => {
         const userCallBack = response?.data;
         setUserData(userCallBack);
         setLoaderState(false);
-      },
+      },error:(error)=>{
+        toast.error(error.message);
+        console.log(error.message);
+      }
     });
   }, []);
 
@@ -168,7 +173,10 @@ const MyTeam = () => {
           callBack: (response) => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
-          },
+          },error:(error)=>{
+            toast.error(error.message);
+            console.log(error.message);
+          }
         });
       },
     });
@@ -451,6 +459,7 @@ const MyTeam = () => {
           
         </Paper>
       </div>
+      <ToastContainer/>
     </div>
   );
 };

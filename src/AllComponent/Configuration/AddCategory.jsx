@@ -24,7 +24,6 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
       type === "createdBy" ||
       type === "modifiedBy"
     ) {
-      console.log("fisr if");
       let storedValues = Object.assign({}, updatedCat);
       if (type === "description") {
         storedValues.category_name = value;
@@ -35,7 +34,6 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
       }
       setUpdatedCat(storedValues);
     } else if (type === "duration") {
-      console.log("Seckon if");
       let storedValues = Object.assign({}, updatedDuration);
       if (type === "duration") {
         storedValues.duration_name = value;
@@ -46,16 +44,12 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
       type === "emailId" ||
       type === "phoneNo"
     ) {
-      console.log("tied if");
       let storedValues = Object.assign({}, saveMemberDetails);
       if (type === "memberName") {
         storedValues.member_name = value;
-        console.log("tied menemese");
       } else if (type === "emailId") {
-        console.log("mail if");
         storedValues.email_id = value;
       } else if (type === "phoneNo") {
-        console.log("phone if");
         storedValues.phone_no = value;
       }
       setSaveMemberDetails(storedValues);
@@ -67,7 +61,6 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
       created_by: updatedCat.created_by,
       modiefied_by: updatedCat.modiefied_by,
     };
-    console.log("payloadpayload", payload);
     createCategory({ payload, callBack: (response) => {} });
   };
   const handleDurationChanges = () => {
@@ -76,7 +69,6 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
       created_by: updatedCat.created_by,
       modiefied_by: updatedCat.modiefied_by,
     };
-    console.log("payloadpayload", payload);
     updateDuration({ payload, callBack: (response) => {} });
   };
   const handleMemberChanges = () => {
@@ -85,7 +77,6 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
       email_id: saveMemberDetails.email_id,
       phone_no: saveMemberDetails.phone_no,
     };
-    console.log("payloadpayload", payload);
     updateMemberDetails({ payload, callBack: (response) => {} });
   };
   return (
@@ -100,14 +91,10 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
             const formData = new FormData(event.currentTarget);
             const formJson = Object.fromEntries(formData.entries());
             const email = formJson.email;
-            console.log(email);
             handleCloseCat();
           },
         }}
       >
-        {console.log("saveMemberDetails", saveMemberDetails)}
-        {/* {console.log("updatedDuration", updatedDuration)}
-        {console.log("updatedCat", updatedCat)} */}
         <DialogTitle>Add {selectedConfigValue}</DialogTitle>
         <DialogContent>
           {selectedConfigValue === "category" ? (
@@ -126,40 +113,37 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   type: "description",
                 })
               )}
-              
               <div className="flexrow mt4">
                 <div className="flexcol">
-              {CommonTypography({ fontWeight: 600, label: "Created By" })}
-              {commonTextField(
-                {
-                  id: "fullWidth",
-                  className: "BoxShadow",
-                  inputClassName: "textField",
-                  labels: "Enter Created By",
-                },
-                (Option = {
-                  handleInput: handleInput,
-                  type: "createdBy",
-                  //   value: storedBasicInfo.Name,
-                })
-              )}
-              </div>
-              <div className="flexcol ml2">
-              {CommonTypography({ fontWeight: 600, label: "Modified By" })}
-              {commonTextField(
-                {
-                  id: "fullWidth",
-                  className: "BoxShadow",
-                  inputClassName: "textField",
-                  labels: "Enter Modified By",
-                },
-                (Option = {
-                  handleInput: handleInput,
-                  type: "modifiedBy",
-                  //   value: storedBasicInfo.Name,
-                })
-              )}
-              </div>
+                  {CommonTypography({ fontWeight: 600, label: "Created By" })}
+                  {commonTextField(
+                    {
+                      id: "fullWidth",
+                      className: "BoxShadow",
+                      inputClassName: "textField",
+                      labels: "Enter Created By",
+                    },
+                    (Option = {
+                      handleInput: handleInput,
+                      type: "createdBy",
+                    })
+                  )}
+                </div>
+                <div className="flexcol ml2">
+                  {CommonTypography({ fontWeight: 600, label: "Modified By" })}
+                  {commonTextField(
+                    {
+                      id: "fullWidth",
+                      className: "BoxShadow",
+                      inputClassName: "textField",
+                      labels: "Enter Modified By",
+                    },
+                    (Option = {
+                      handleInput: handleInput,
+                      type: "modifiedBy",
+                    })
+                  )}
+                </div>
               </div>
             </>
           ) : selectedConfigValue === "duration" ? (
@@ -175,42 +159,39 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                 (Option = {
                   handleInput: handleInput,
                   type: "duration",
-                  //   value: storedBasicInfo.Name,
                 })
               )}
-               <div className="flexrow mt4">
+              <div className="flexrow mt4">
                 <div className="flexcol">
-              {CommonTypography({ fontWeight: 600, label: "Created By" })}
-              {commonTextField(
-                {
-                  id: "fullWidth",
-                  className: "BoxShadow",
-                  inputClassName: "textField",
-                  labels: "Enter Created By",
-                },
-                (Option = {
-                  handleInput: handleInput,
-                  type: "createdBy",
-                  //   value: storedBasicInfo.Name,
-                })
-              )}
-               </div>
-              <div className="flexcol ml2">
-              {CommonTypography({ fontWeight: 600, label: "Modified By" })}
-              {commonTextField(
-                {
-                  id: "fullWidth",
-                  className: "BoxShadow",
-                  inputClassName: "textField",
-                  labels: "Enter Modified By",
-                },
-                (Option = {
-                  handleInput: handleInput,
-                  type: "modifiedBy",
-                  //   value: storedBasicInfo.Name,
-                })
-              )}
-               </div>
+                  {CommonTypography({ fontWeight: 600, label: "Created By" })}
+                  {commonTextField(
+                    {
+                      id: "fullWidth",
+                      className: "BoxShadow",
+                      inputClassName: "textField",
+                      labels: "Enter Created By",
+                    },
+                    (Option = {
+                      handleInput: handleInput,
+                      type: "createdBy",
+                    })
+                  )}
+                </div>
+                <div className="flexcol ml2">
+                  {CommonTypography({ fontWeight: 600, label: "Modified By" })}
+                  {commonTextField(
+                    {
+                      id: "fullWidth",
+                      className: "BoxShadow",
+                      inputClassName: "textField",
+                      labels: "Enter Modified By",
+                    },
+                    (Option = {
+                      handleInput: handleInput,
+                      type: "modifiedBy",
+                    })
+                  )}
+                </div>
               </div>
             </>
           ) : (
@@ -226,42 +207,39 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                 (Option = {
                   handleInput: handleInput,
                   type: "memberName",
-                  //   value: storedBasicInfo.Name,
                 })
               )}
               <div className="flexrow mt4">
                 <div className="flexcol">
-              {CommonTypography({ fontWeight: 600, label: "Email ID" })}
-              {commonTextField(
-                {
-                  id: "fullWidth",
-                  className: "BoxShadow",
-                  inputClassName: "textField",
-                  labels: "Enter Email name",
-                },
-                (Option = {
-                  handleInput: handleInput,
-                  type: "emailId",
-                  //   value: storedBasicInfo.Name,
-                })
-              )}
-               </div>
-              <div className="flexcol ml2">
-              {CommonTypography({ fontWeight: 600, label: "Phone No." })}
-              {commonTextField(
-                {
-                  id: "fullWidth",
-                  className: "BoxShadow",
-                  inputClassName: "textField",
-                  labels: "Enter Phone No.",
-                },
-                (Option = {
-                  handleInput: handleInput,
-                  type: "phoneNo",
-                  //   value: storedBasicInfo.Name,
-                })
-              )}
-               </div>
+                  {CommonTypography({ fontWeight: 600, label: "Email ID" })}
+                  {commonTextField(
+                    {
+                      id: "fullWidth",
+                      className: "BoxShadow",
+                      inputClassName: "textField",
+                      labels: "Enter Email name",
+                    },
+                    (Option = {
+                      handleInput: handleInput,
+                      type: "emailId",
+                    })
+                  )}
+                </div>
+                <div className="flexcol ml2">
+                  {CommonTypography({ fontWeight: 600, label: "Phone No." })}
+                  {commonTextField(
+                    {
+                      id: "fullWidth",
+                      className: "BoxShadow",
+                      inputClassName: "textField",
+                      labels: "Enter Phone No.",
+                    },
+                    (Option = {
+                      handleInput: handleInput,
+                      type: "phoneNo",
+                    })
+                  )}
+                </div>
               </div>
             </>
           )}

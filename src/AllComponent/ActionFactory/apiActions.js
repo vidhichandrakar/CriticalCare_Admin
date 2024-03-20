@@ -1,10 +1,12 @@
 import axios from "axios";
 import { APIS } from "./apiConstants";
 
-export const getAllUsersApi = ({ callBack }) => {
+export const getAllUsersApi = ({ callBack, error }) => {
   const url = APIS.getAllUsers;
   axios.get(url).then((response) => {
     callBack(response);
+  }).catch((errorMessage) => {
+    error(errorMessage);
   });
 };
 
@@ -76,10 +78,12 @@ export const updateMemberDetails = ({ payload, callBack }) => {
   });
 };
 
-export const getTeam = ({ callBack }) => {
+export const getTeam = ({ callBack,error }) => {
   const url = APIS.updateMember;
   axios.get(url).then((response) => {
     callBack(response);
+  }).catch((errorMessage) => {
+    error(errorMessage);
   });
 };
 
@@ -90,10 +94,20 @@ export const getTeamByID = ({ teamId, callBack }) => {
   });
 };
 
-export const deleteMember = ({ userId, callBack }) => {
+export const deleteMember = ({ userId, callBack, error }) => {
   const url = APIS.updateMember + "/" + userId;
   axios.delete(url).then((response) => {
     callBack(response);
+  }).catch((errorMessage) => {
+    error(errorMessage);
+  });
+};
+export const deleteTestPortal = ({ userId, callBack, error }) => {
+  const url = APIS.getTest + "/" + userId;
+  axios.delete(url).then((response) => {
+    callBack(response);
+  }).catch((errorMessage) => {
+    error(errorMessage);
   });
 };
 
@@ -140,9 +154,11 @@ export const getTestByID = ({ testId, callBack }) => {
 };
 
 
-export const login =({payload, callBack})=>{
+export const login =({payload, callBack,error})=>{
   const url = APIS.login;
   axios.post(url,payload).then((response)=>{
     callBack(response);
-  })
+  }).catch((errorMessage) => {
+    error(errorMessage);
+  });
 }

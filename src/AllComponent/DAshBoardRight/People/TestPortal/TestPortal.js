@@ -31,6 +31,7 @@ import moment from "moment/moment";
 import axios from "axios";
 import {
   deleteMember,
+  deleteTestPortal,
   deleteUser,
   getTeamByID,
   getAllUsersApi,
@@ -49,6 +50,8 @@ import LastPageIcon from '@mui/icons-material/LastPage';
 import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import LoaderComponent from "../../../../Util/LoaderComponent";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -60,7 +63,6 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 function TablePaginationActions(props) {
-  console.log(props, "propsss")
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
 
@@ -158,16 +160,19 @@ const TestPortal = () => {
 
   const handleDelete = () => {
     const userId = openId;
-    deleteMember({
+    deleteTestPortal({ 
       userId,
       callBack: () => {
-        getTeam({
+        getTest({
           callBack: (response) => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
           },
         });
-      },
+      },error:(error)=>{
+        toast.error(error.message);
+        console.log(error);
+      }
     });
   };
   const handleClickOpen = () => {
@@ -205,7 +210,6 @@ const TestPortal = () => {
       created_by: parseInt(addTest.hours),
       duration_minute: parseInt(addTest.testDuration),
     };
-    console.log("payloadpayload", payload);
     updateTeam({
       payload,
       callBack: (response) => {
@@ -215,13 +219,11 @@ const TestPortal = () => {
   };
 
   const handleEdit = () => {
-    console.log("etidn", openId);
     setOpen(true);
     const testId = openId;
     getTestByID({
       testId,
       callBack: (response) => {
-        console.log(response.data);
         const data = response.data;
         let storedValues = Object.assign({}, addTest);
         storedValues.testName = data.test_name;
@@ -445,7 +447,9 @@ const TestPortal = () => {
             </Table>
           </TableContainer>
         </Paper>
+        
       </div>
+      <ToastContainer />
     </div>
   );
 };

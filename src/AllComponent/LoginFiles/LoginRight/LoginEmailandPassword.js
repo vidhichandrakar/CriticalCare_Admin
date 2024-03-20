@@ -3,8 +3,10 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
-import { login } from "../../ActionFactory/apiActions";
+import { getUserId, login } from "../../ActionFactory/apiActions";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LoginEmailandPassword = () => {
   const [userLogin, setUserLogin] = useState({
@@ -13,7 +15,12 @@ const LoginEmailandPassword = () => {
   });
   const navigate = useNavigate();
   const [disbaleLoginBtn, setDisableLogiBtn] = useState(true);
-  let token;
+  const [phoneNO, setPhoneNo] = useState();
+  const [getOTP, setGetOTP] = useState("");
+  const [loginWay, setLoginWay] = useState("");
+  const [enteredOTP, setEnteredOTP] = useState("");
+  const [hideOTPBtn, setHideOTPBtn] = useState(true);
+  let navigation = useNavigate();
 
   const handleInput = (value, type) => {
     let storedValues = Object.assign({}, userLogin);
@@ -33,37 +40,66 @@ const LoginEmailandPassword = () => {
   };
 
   const handleUserLogin = () => {
-    const payload = {
-      user_name: userLogin.email,
-      password: parseInt(userLogin.password),
-    };
-    login({
-      payload,
-      callBack: (response) => {
-        localStorage.setItem("accessToken", response.data.token);
-        token = localStorage.getItem("accessToken");
+    if (loginWay === "") {
+      const payload = {
+        phone_no: phoneNO?.toString(),
+      };
+      login({
+        payload,
+        callBack: (response) => {
+          setLoginWay("Get OTP");
+          setGetOTP(response.data.OTP);
+          setHideOTPBtn(false);
+        },
+        error:(error)=>{
+          toast.error(error.message);
+          console.log(error.message);
+        }
+      });
+
+    }
+    if (loginWay !== "") {
+      if (getOTP === parseInt(enteredOTP)) {
         navigate("/DashBoard");
-      },
-    });
+      }
+    }
   };
+  const handleLoginByOTP = (value, type) => {
+    setDisableLogiBtn(false);
+    setPhoneNo(value);
+    if (type === "password") {
+      setPhoneNo(value);
+    } else if (type === "OTP") {
+      setEnteredOTP(value);
+    }
+  };
+
   return (
     <div className="RightBox">
       <Box className="BoxWidth">
-        <Typography className="loginText">Login to Admin Panel</Typography>
-        <Box sx={{ mt: 10 }}>
+        <Typography className="loginText">Login to Admin Panel
+        <Typography sx={{mt : 1, fontSize:21, color:"#199884"}}>
+            <u>{getOTP}</u>
+          </Typography>
+        </Typography>
+        
+          
+        
+        <Box sx={{ mt: 2 }}>
           <TextField
             id="fullWidth"
             label="Email"
             variant="outlined"
             className="BoxShadow"
             fullWidth
+            disabled
             type="email"
             onChange={(event) => handleInput(event.target.value, "email")}
           />
         </Box>
 
         {userLogin?.email != "" ? (
-          <Box sx={{ mt: 0 }}>
+          <Box sx={{ mt: 2 }}>
             <TextField
               id="fullWidth"
               label="Password"
@@ -77,15 +113,56 @@ const LoginEmailandPassword = () => {
           </Box>
         ) : null}
 
-        <Button
-          variant="contained"
-          className="LoginBtn"
-          onClick={handleUserLogin}
-          disabled={disbaleLoginBtn}
-        >
-          Login
-        </Button>
+        <Box sx={{ mt: 2 }}>
+          {console.log("enteredOTP",enteredOTP,phoneNO?.length)}
+          <TextField
+            id="fullWidth"
+            label="Enter Phone No"
+            variant="outlined"
+            className="BoxShadow"
+            fullWidth
+            disabled={phoneNO?.length===10 && getOTP!==""}
+            type="number"
+            onChange={(event) =>
+              handleLoginByOTP(event.target.value, "password")
+            }
+          />
+        </Box>
+       
+
+        {getOTP !== "" && (
+          <Box sx={{ mt: 2 }}>
+            <TextField
+              id="fullWidth"
+              label="Enter OTP"
+              variant="outlined"
+              className="BoxShadow"
+              fullWidth
+              onChange={(event) => handleLoginByOTP(event.target.value, "OTP")}
+            />
+          </Box>
+        )}
+
+        {hideOTPBtn && getOTP==="" &&(
+          <Button
+            variant="contained"
+            className="LoginBtn"
+            onClick={() => handleUserLogin()}
+          >
+            Get OTP
+          </Button>
+        )}
+        {getOTP && (
+          <Button
+            variant="contained"
+            className="LoginBtn"
+            onClick={() => handleUserLogin()}
+          >
+            Login
+          </Button>
+        )}
       </Box>
+      <ToastContainer />
     </div>
   );
 };
