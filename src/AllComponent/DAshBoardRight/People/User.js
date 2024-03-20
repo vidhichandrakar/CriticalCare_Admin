@@ -119,6 +119,7 @@ const User = () => {
       },error:(error)=>{
         toast.error(error.message);
         console.log(error.message);
+        setLoaderState(false);
       }
     });
   }, []);
@@ -153,7 +154,11 @@ const User = () => {
             setUserData(userCallBack);
           },
         });
-      },
+      },error:(error)=>{
+        toast.error(error.message);
+        console.log(error.message);
+        
+      }
     });
   };
 
@@ -171,7 +176,11 @@ const User = () => {
               setLoaderState(false);
             },
           });
-        },
+        },error:(error)=>{
+          toast.error(error.message);
+          console.log(error.message);
+          setLoaderState(false);
+        }
       });
     });
   };
