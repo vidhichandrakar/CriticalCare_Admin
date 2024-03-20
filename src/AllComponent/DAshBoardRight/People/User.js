@@ -33,6 +33,9 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
+import LoaderComponent from "../../../Util/LoaderComponent";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function TablePaginationActions(props) {
   console.log(props, "propsss")
@@ -103,14 +106,20 @@ const User = () => {
   const [userData, setUserData] = useState([]);
   const open = Boolean(anchorEl);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(4);
+  const [loaderState, setLoaderState] = useState(false);
   const id = open ? "simple-popover" : undefined;
   useEffect(() => {
+    setLoaderState(true);
     getAllUsersApi({
       callBack: (response) => {
         const userCallBack = response?.data;
         setUserData(userCallBack);
-      },
+        setLoaderState(false);
+      },error:(error)=>{
+        toast.error(error.message);
+        console.log(error.message);
+      }
     });
   }, []);
 
@@ -149,6 +158,8 @@ const User = () => {
   };
 
   const deleteSelectedItem = () => {
+    setLoaderState(true);
+    console.log("calling", checkedValue);
     checkedValue.map((item) => {
       deleteUser({
         userId: item,
@@ -157,6 +168,7 @@ const User = () => {
             callBack: (response) => {
               const userCallBack = response?.data;
               setUserData(userCallBack);
+              setLoaderState(false);
             },
           });
         },
@@ -181,6 +193,9 @@ const User = () => {
           Heading={"Users (357)"}
           subHeading={"View, Filter & Manage all your users"}
         />
+        <LoaderComponent
+      loaderState={loaderState}
+      />
         <div className="searchnfilter">
           <SearchBar mt="2%" placeholder="Search by name" />
           <Button className="filterButton">
@@ -319,6 +334,7 @@ const User = () => {
           
         </Paper>
       </div>
+      <ToastContainer />
     </div>
   );
 };

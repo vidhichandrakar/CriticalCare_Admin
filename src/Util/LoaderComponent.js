@@ -9,7 +9,6 @@ const LoaderComponent = ({ loaderState }) => {
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loaderState}
-        // onClick={handleLoader}
       >
         <CircularProgress color="inherit" size={100} />
       </Backdrop>

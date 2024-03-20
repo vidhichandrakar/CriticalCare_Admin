@@ -29,9 +29,7 @@ const YourCourses = () => {
       },
     });
   }, []);
-  const handleLoader = ()=>{
-    setLoaderState(false)
-  }
+  
   return (
     <div className="grid-container">
        
