@@ -48,6 +48,7 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
+import LoaderComponent from "../../../Util/LoaderComponent";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -59,6 +60,8 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 function TablePaginationActions(props) {
+  
+  const [loaderState, setLoaderState] = useState(false);
   console.log(props, "propsss")
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
@@ -135,11 +138,14 @@ const MyTeam = () => {
     emailID: "",
     PhoneNo: "",
   });
+  const [loaderState, setLoaderState] = useState(false);
   useEffect(() => {
+    setLoaderState(true);
     getTeam({
       callBack: (response) => {
         const userCallBack = response?.data;
         setUserData(userCallBack);
+        setLoaderState(false);
       },
     });
   }, []);
@@ -241,6 +247,9 @@ const MyTeam = () => {
           Heading={"My Team"}
           subHeading={"View, Filter & Manage all your users"}
         />
+        <LoaderComponent
+      loaderState={loaderState}
+      />
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">
             <SearchBar mt="2%" placeholder="Search by name" />
@@ -303,6 +312,7 @@ const MyTeam = () => {
                     className="BoxShadowInputField"
                     type="EmailID"
                     value={addTeam.emailID}
+                    // onChange={(e) => setInput(e.target.value)} 
                     onChange={(e) => handleInput(e.target.value, "EmailID")}
                   />
                   <p className="TimeText"> Phone No. </p>

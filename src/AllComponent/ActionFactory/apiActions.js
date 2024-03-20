@@ -119,7 +119,7 @@ export const updateTestimonial = ({ payload, callBack }) => {
 };
 
 export const deleteTestimonial = ({ userId, callBack }) => {
-  const url = APIS.updateMember + "/" + userId;
+  const url = APIS.getTestimonal + "/" + userId;
   axios.delete(url).then((response) => {
     callBack(response);
   });
