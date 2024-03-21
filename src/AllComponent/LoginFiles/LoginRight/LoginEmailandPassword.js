@@ -5,6 +5,8 @@ import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import { getUserId, login } from "../../ActionFactory/apiActions";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 const LoginEmailandPassword = () => {
@@ -48,9 +50,14 @@ const LoginEmailandPassword = () => {
         callBack: (response) => {
           setLoginWay("Get OTP");
           setGetOTP(response.data.OTP);
+          setHideOTPBtn(false);
         },
+        error:(error)=>{
+          toast.error(error.message);
+          console.log(error.message);
+        }
       });
-      setHideOTPBtn(false);
+
     }
     if (loginWay !== "") {
       if (getOTP === parseInt(enteredOTP)) {
@@ -136,7 +143,7 @@ const LoginEmailandPassword = () => {
           </Box>
         )}
 
-        {hideOTPBtn && (
+        {hideOTPBtn && getOTP==="" &&(
           <Button
             variant="contained"
             className="LoginBtn"
@@ -155,6 +162,7 @@ const LoginEmailandPassword = () => {
           </Button>
         )}
       </Box>
+      <ToastContainer />
     </div>
   );
 };
