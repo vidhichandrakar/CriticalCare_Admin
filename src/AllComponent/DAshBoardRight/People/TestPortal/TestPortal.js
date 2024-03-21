@@ -31,6 +31,7 @@ import moment from "moment/moment";
 import axios from "axios";
 import {
   deleteMember,
+  deleteTestPortal,
   deleteUser,
   getTeamByID,
   getAllUsersApi,
@@ -48,6 +49,9 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import { useTheme } from '@mui/material/styles';
 import PropTypes from 'prop-types';
+import LoaderComponent from "../../../../Util/LoaderComponent";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -133,11 +137,14 @@ const TestPortal = () => {
     testDuration: "",
     hours: "",
   });
+  const [loaderState, setLoaderState] = useState(false);
   useEffect(() => {
+    setLoaderState(true);
     getTest({
       callBack: (response) => {
         const userCallBack = response?.data;
         setUserData(userCallBack);
+        setLoaderState(false);
       },
     });
   }, []);
@@ -153,16 +160,19 @@ const TestPortal = () => {
 
   const handleDelete = () => {
     const userId = openId;
-    deleteMember({
+    deleteTestPortal({ 
       userId,
       callBack: () => {
-        getTeam({
+        getTest({
           callBack: (response) => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
           },
         });
-      },
+      },error:(error)=>{
+        toast.error(error.message);
+        console.log(error);
+      }
     });
   };
   const handleClickOpen = () => {
@@ -231,6 +241,9 @@ const TestPortal = () => {
           Heading={"Test Portal"}
           subHeading={"Only published test are shown here"}
         />
+         <LoaderComponent
+      loaderState={loaderState}
+      />
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">
             <SearchBar mt="2%" placeholder="Search by name" />
@@ -434,7 +447,9 @@ const TestPortal = () => {
             </Table>
           </TableContainer>
         </Paper>
+        
       </div>
+      <ToastContainer />
     </div>
   );
 };

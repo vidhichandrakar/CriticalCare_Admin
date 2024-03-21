@@ -1,17 +1,21 @@
 import axios from "axios";
 import { APIS } from "./apiConstants";
 
-export const getAllUsersApi = ({ callBack }) => {
+export const getAllUsersApi = ({ callBack, error }) => {
   const url = APIS.getAllUsers;
   axios.get(url).then((response) => {
     callBack(response);
+  }).catch((errorMessage) => {
+    error(errorMessage);
   });
 };
 
-export const getAllCourses = ({ callBack }) => {
+export const getAllCourses = ({ callBack, error }) => {
   const url = APIS.allCourses;
   axios.get(url).then((response) => {
     callBack(response);
+  }).catch((errorMessage) => {
+    error(errorMessage);
   });
 };
 
@@ -76,10 +80,12 @@ export const updateMemberDetails = ({ payload, callBack }) => {
   });
 };
 
-export const getTeam = ({ callBack }) => {
+export const getTeam = ({ callBack,error }) => {
   const url = APIS.updateMember;
   axios.get(url).then((response) => {
     callBack(response);
+  }).catch((errorMessage) => {
+    error(errorMessage);
   });
 };
 
@@ -90,10 +96,20 @@ export const getTeamByID = ({ teamId, callBack }) => {
   });
 };
 
-export const deleteMember = ({ userId, callBack }) => {
+export const deleteMember = ({ userId, callBack, error }) => {
   const url = APIS.updateMember + "/" + userId;
   axios.delete(url).then((response) => {
     callBack(response);
+  }).catch((errorMessage) => {
+    error(errorMessage);
+  });
+};
+export const deleteTestPortal = ({ userId, callBack, error }) => {
+  const url = APIS.getTest + "/" + userId;
+  axios.delete(url).then((response) => {
+    callBack(response);
+  }).catch((errorMessage) => {
+    error(errorMessage);
   });
 };
 
@@ -119,7 +135,7 @@ export const updateTestimonial = ({ payload, callBack }) => {
 };
 
 export const deleteTestimonial = ({ userId, callBack }) => {
-  const url = APIS.updateMember + "/" + userId;
+  const url = APIS.getTestimonal + "/" + userId;
   axios.delete(url).then((response) => {
     callBack(response);
   });

@@ -38,6 +38,7 @@ import { useTheme } from "@mui/material/styles";
 import PropTypes from "prop-types";
 import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
+import LoaderComponent from "../../../Util/LoaderComponent";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -126,7 +127,7 @@ const Testimonial = () => {
   const id = open ? "simple-popover" : undefined;
   const [opened, setOpen] = useState(false);
   const [addTestimonal, setAddTestimonal] = useState({});
-
+  const [loaderState, setLoaderState] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const recordsPerPage = 4;
   const lastIndex = currentPage * recordsPerPage;
@@ -136,10 +137,12 @@ const Testimonial = () => {
   const numbers = [...Array(npage + 1).keys()].slice(1);
   console.log(numbers, "number wala");
   useEffect(() => {
+    setLoaderState(true);
     getTestimonal({
       callBack: (response) => {
         const userCallBack = response?.data;
         setUserData(userCallBack);
+        setLoaderState(false);
       },
     });
   }, []);
@@ -168,6 +171,7 @@ const Testimonial = () => {
   };
 
   const handleDelete = () => {
+    setLoaderState(true);
     const userId = openId;
     deleteTestimonial({
       userId,
@@ -176,6 +180,7 @@ const Testimonial = () => {
           callBack: (response) => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
+            setLoaderState(false);
           },
         });
       },
@@ -234,6 +239,9 @@ const Testimonial = () => {
           Heading={"Testimonial"}
           subHeading={"Only published testiimonial are showm here"}
         />
+        <LoaderComponent
+      loaderState={loaderState}
+      />
         {console.log("addTestimonal", addTestimonal)}
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">

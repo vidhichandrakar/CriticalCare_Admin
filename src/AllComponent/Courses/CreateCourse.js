@@ -7,11 +7,14 @@ import AddContent from "./AddContent/AddContent";
 import { createCourse, getCourseById } from "../ActionFactory/apiActions";
 import { ToastContainer, toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
+import LoaderComponent from "../../Util/LoaderComponent";
+
 const CreateCourses = ({ handleHeaderLabels }) => {
   const [trackerPage, setTackerPage] = useState(0);
   const [basicInfo, setBasicInfo] = useState({});
   const [editPrice, setEditPrice] = useState({});
   const [courseData, setCourseData] = useState([]);
+  const [loaderState, setLoaderState] = useState(false);
   let location = useLocation();
   const courseId = location.state?.id;
 
@@ -24,12 +27,14 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   };
 
   useEffect(() => {
+    setLoaderState(true);
     if (courseId) {
       getCourseById({
         courseId,
         callBack: (response) => {
           const userCallBack = response?.data;
           setCourseData(userCallBack);
+          setLoaderState(false);
         },
       });
     }
@@ -79,6 +84,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         trackerPage={trackerPage}
         handleTrackerPage={handleTrackerPage}
       />
+      
       {trackerPage === 0 ? (
         <CreateForm
           handleTrackerPage={handleTrackerPage}
@@ -95,6 +101,9 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         <AddContent />
       )}
       <ToastContainer />
+      <LoaderComponent
+      loaderState={loaderState}
+      />
     </Box>
   );
 };

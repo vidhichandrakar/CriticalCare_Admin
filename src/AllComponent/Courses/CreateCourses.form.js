@@ -1,4 +1,4 @@
-import { Box, Typography, TextField } from "@mui/material";
+import { Box, Typography, TextField, Input } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
@@ -18,6 +18,7 @@ import {
 import { Category, Description } from "@mui/icons-material";
 import { category, subCategory } from "../../Util/masterFile";
 import { getCategory } from "../ActionFactory/apiActions";
+import { useDropzone } from "react-dropzone";
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
   clipPath: "inset(50%)",
@@ -41,7 +42,19 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     thumbnailPath: "",
   });
   const [cat, setCat] = useState([]);
-
+  const onInroVideoDrop = async (files) => {
+    console.log(files)
+    handleInput(files[0], "file")
+   };
+  const {
+    acceptedFiles,
+    fileRejections,
+    getRootProps: getIntroVideoRootProps,
+    getInputProps: getIntroVideoInputProps,
+  } = useDropzone({
+    onDrop: onInroVideoDrop,
+    accept: "image/jpeg, image/png, image/jpg, application/pdf",
+  });
   useEffect(() => {
     getCategory({
       // courseId,
@@ -70,7 +83,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     storedValues.thumbnailPath = courseData?.thumbnail_path;
     setStoredBasicInfo(storedValues);
   }, [courseData]);
-
+ 
   const handleInput = (value, type) => {
     let storedValues = Object.assign({}, storedBasicInfo);
     if (/^\s/.test(value)) value = "";
@@ -138,7 +151,9 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       handleTrackerPage(1);
     }
   };
-
+ const handleInputFile =(file)=>{
+  console.log(file)
+ }
   return (
     <div className="formMain">
       <div className="FlexRow">
@@ -192,10 +207,16 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           className="iconThumb"
         >
           Upload Thumbnail Image
-          <VisuallyHiddenInput
+          {/* <VisuallyHiddenInput
             type="file"
-            onChange={(event) => handleInput(event.target.value, "file")}
-          />
+            onDrop={(event)=>console.log("event",event)}
+            // onChange={(event) => handleInput(event.target.value, "file")}
+            onChange={(event) => console.log("input",event)}
+
+          /> */}
+          
+          <Input type="file" onChange={handleInputFile} inputProps={{ accept: 'image/*' }}/>
+          {/* <input type="file" onChange={handleInputFile}/> */}
         </Button>
         <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
           Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
@@ -205,6 +226,29 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
         </Typography>
         <img src={storedBasicInfo.thumbnailPath}/>
       </Box>
+      <div {...getIntroVideoRootProps({ className: "dropzone" })}>
+                      <input {...getIntroVideoInputProps()} />
+
+                      {/* <CloudUploadIcon
+                        sx={{ fontSize: "80px", color: "#1976d2" }}
+                      /> */}
+                      <Typography
+                        variant="h6"
+                        gutterBottom
+                        sx={{
+                          color: "#0e121b",
+                          fontWeight: "600",
+                          fontFamily: "Lato",
+                        }}
+                      >
+                        Drop or Select file
+                      </Typography>
+                      <Typography variant="body2" gutterBottom>
+                        Drop files here or click{" "}
+                        <span style={{ color: "#1976d2" }}>browse</span> through
+                        your machine
+                      </Typography>
+                    </div>
       <Box className="divider"></Box>
       <Box sx={{ marginTop: "5%" }} className="categoryBox">
         <Box>
