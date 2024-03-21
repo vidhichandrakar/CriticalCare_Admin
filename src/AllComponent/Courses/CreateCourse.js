@@ -47,7 +47,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       duration_type_id: 91,
       thumbnail_path: basicInfo?.thumbnailPath,
       content_type_id: 11,
-      modiefied_by: 1,
+      modified_by: 1,
       created_by: 2,
     };
     createCourse({
