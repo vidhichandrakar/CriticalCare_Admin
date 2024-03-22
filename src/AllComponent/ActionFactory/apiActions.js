@@ -27,6 +27,7 @@ export const deleteUser = ({ userId, callBack }) => {
 };
 
 export const createCourse = ({ courseData, callBack, error }) => {
+  console.log("payload",courseData);
   const url = APIS.allCourses;
   axios
     .post(url, courseData)

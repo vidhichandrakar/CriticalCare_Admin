@@ -39,12 +39,14 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     Description: "",
     Category: "",
     subCategory: "",
-    thumbnailPath: "",
+    thumbnailPath: null,
   });
   const [cat, setCat] = useState([]);
   const onInroVideoDrop = async (files) => {
     console.log(files)
-    handleInput(files[0], "file")
+    let storedValues = Object.assign({}, storedBasicInfo);
+    storedValues.thumbnailPath = files;
+    setStoredBasicInfo(storedValues);
    };
   const {
     acceptedFiles,
@@ -53,6 +55,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     getInputProps: getIntroVideoInputProps,
   } = useDropzone({
     onDrop: onInroVideoDrop,
+    onChange:(event)=>console.log(event),
     accept: "image/jpeg, image/png, image/jpg, application/pdf",
   });
   useEffect(() => {
@@ -222,9 +225,9 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
         </Typography>
         <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
-          {storedBasicInfo.thumbnailPath}
+          {/* {storedBasicInfo.thumbnailPath} */}
         </Typography>
-        <img src={storedBasicInfo.thumbnailPath}/>
+        {/* <img src={storedBasicInfo.thumbnailPath}/> */}
       </Box>
       <div {...getIntroVideoRootProps({ className: "dropzone" })}>
                       <input {...getIntroVideoInputProps()} />
