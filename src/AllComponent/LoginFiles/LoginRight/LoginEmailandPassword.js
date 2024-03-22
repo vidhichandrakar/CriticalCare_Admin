@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 const LoginEmailandPassword = () => {
   const [userLogin, setUserLogin] = useState({
     email: "",
@@ -114,7 +115,6 @@ const LoginEmailandPassword = () => {
         ) : null}
 
         <Box sx={{ mt: 2 }}>
-          {console.log("enteredOTP",enteredOTP,phoneNO?.length)}
           <TextField
             id="fullWidth"
             label="Enter Phone No"

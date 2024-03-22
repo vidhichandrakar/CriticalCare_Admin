@@ -18,7 +18,9 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   let location = useLocation();
   const courseId = location.state?.id;
 
+  //No need to remove until vidhi want to remove
   const handleTrackerPage = (page) => {
+    console.log("pageee",page)
     setTackerPage(page);
     handleHeaderLabels(basicInfo.Name);
     if (page === 2) {
@@ -27,8 +29,13 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   };
 
   useEffect(() => {
+<<<<<<< HEAD
     // setLoaderState(true);
+=======
+   
+>>>>>>> 75eea5b238318e884e2936eb51ebafbfc7b2d7fb
     if (courseId) {
+      setLoaderState(true);
       getCourseById({
         courseId,
         callBack: (response) => {
@@ -41,6 +48,22 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   }, [courseId]);
 
   const handleCreateCourse = () => {
+    console.log("basic info",basicInfo)
+    // let formData = new FormData();    //No need to remove until vidhi want to remove
+    // formData.append("course_name",basicInfo?.Name)
+    // formData.append("description",basicInfo?.Description)
+    // formData.append("price",parseInt(editPrice?.regularPrice))
+    // formData.append("offer_price",parseInt(editPrice?.offerPrice))
+    // formData.append("category_id",basicInfo?.Category?.id)
+
+    // formData.append("sub_category_id",basicInfo?.subCategory?.id)
+    // formData.append("duration_id",parseInt(editPrice?.duration))
+    // formData.append("duration_type_id",91)
+    // formData.append("thumbnail_path",basicInfo?.thumbnailPath)
+    // formData.append("content_type_id",1)
+    // formData.append("modified_by",2)
+    // formData.append("created_by",3)
+    // console.log("hjbfguyd",form)
     const courseData = {
       course_name: basicInfo?.Name,
       description: basicInfo?.Description,
@@ -52,9 +75,10 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       duration_type_id: 91,
       thumbnail_path: basicInfo?.thumbnailPath,
       content_type_id: 11,
-      modiefied_by: 1,
+      modified_by: 1,
       created_by: 2,
     };
+    // console.log("thumbnail basic info",courseData,basicInfo?.thumbnailPath) //No need to remove until vidhi want to remove
     createCourse({
       courseData,
       callBack: (response) => {
@@ -72,6 +96,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
 
   const handleInputChange = (type, value) => {
     if (type === "basicInfo") {
+      console.log("basic",value)
       setBasicInfo(value);
     } else if (type === "editPrice") {
       setEditPrice(value);
@@ -82,18 +107,18 @@ const CreateCourses = ({ handleHeaderLabels }) => {
     <Box className="courseMainTrack">
       <Tracker
         trackerPage={trackerPage}
-        handleTrackerPage={handleTrackerPage}
+        handleTrackerPage={handleTrackerPage}//No need to remove until vidhi want to remove
       />
       
       {trackerPage === 0 ? (
         <CreateForm
-          handleTrackerPage={handleTrackerPage}
+          handleTrackerPage={handleTrackerPage}//No need to remove until vidhi want to remove
           handleInputChange={handleInputChange}
           courseData={courseData}
         />
       ) : trackerPage === 1 ? (
         <EditPrice
-          handleTrackerPage={handleTrackerPage}
+          handleTrackerPage={handleTrackerPage}//No need to remove until vidhi want to remove
           handleInputChange={handleInputChange}
           courseData={courseData}
         />

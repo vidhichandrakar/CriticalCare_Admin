@@ -15,8 +15,12 @@ import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { deleteCourses, getCourseById } from "../../ActionFactory/apiActions";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+=======
+// import {  } from "react-router-dom";
+>>>>>>> 75eea5b238318e884e2936eb51ebafbfc7b2d7fb
 
 const Trics1FreeMockTest = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -35,6 +39,7 @@ const Trics1FreeMockTest = () => {
   };
 
   useEffect(() => {
+<<<<<<< HEAD
     getCourseById({
       courseId,
       callBack: (response) => {
@@ -45,6 +50,21 @@ const Trics1FreeMockTest = () => {
         console.log(error.message);
       }
     });
+=======
+    console.log("useNavigate hello",location);
+  }, []);
+  useEffect(() => {
+    if (courseId) {
+      console.log("defined", courseId);
+      getCourseById({
+        courseId,
+        callBack: (response) => {
+          const userCallBack = response?.data;
+          setCourseData(userCallBack);
+        },
+      });
+    }
+>>>>>>> 75eea5b238318e884e2936eb51ebafbfc7b2d7fb
   }, [courseId]);
 
   const handleDeleteCourse = () => {
@@ -71,8 +91,8 @@ const Trics1FreeMockTest = () => {
         <div className="another-main-container">
           <div className="completeTricsBox">
             <div className="leftSideRow">
-              <p className="blackPara">{courseData.course_name}</p>
-              <p className="greyPara">TRICS 1 FREE MOCK TEST FOR EDIC-1</p>
+              <p className="blackPara">Course Name</p>
+              <p className="greyPara">{courseData.course_name}</p>
               <hr />
 
               <p className="blackPara">Description</p>
