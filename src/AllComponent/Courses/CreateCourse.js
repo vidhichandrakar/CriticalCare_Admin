@@ -18,7 +18,9 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   let location = useLocation();
   const courseId = location.state?.id;
 
+  //No need to remove until vidhi want to remove
   const handleTrackerPage = (page) => {
+    console.log("pageee",page)
     setTackerPage(page);
     handleHeaderLabels(basicInfo.Name);
     if (page === 2) {
@@ -43,7 +45,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
 
   const handleCreateCourse = () => {
     console.log("basic info",basicInfo)
-    // let formData = new FormData();
+    // let formData = new FormData();    //No need to remove until vidhi want to remove
     // formData.append("course_name",basicInfo?.Name)
     // formData.append("description",basicInfo?.Description)
     // formData.append("price",parseInt(editPrice?.regularPrice))
@@ -72,7 +74,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       modified_by: 1,
       created_by: 2,
     };
-    // console.log("thumbnail basic info",courseData,basicInfo?.thumbnailPath)
+    // console.log("thumbnail basic info",courseData,basicInfo?.thumbnailPath) //No need to remove until vidhi want to remove
     createCourse({
       courseData,
       callBack: (response) => {
@@ -101,18 +103,18 @@ const CreateCourses = ({ handleHeaderLabels }) => {
     <Box className="courseMainTrack">
       <Tracker
         trackerPage={trackerPage}
-        handleTrackerPage={handleTrackerPage}
+        handleTrackerPage={handleTrackerPage}//No need to remove until vidhi want to remove
       />
       
       {trackerPage === 0 ? (
         <CreateForm
-          handleTrackerPage={handleTrackerPage}
+          handleTrackerPage={handleTrackerPage}//No need to remove until vidhi want to remove
           handleInputChange={handleInputChange}
           courseData={courseData}
         />
       ) : trackerPage === 1 ? (
         <EditPrice
-          handleTrackerPage={handleTrackerPage}
+          handleTrackerPage={handleTrackerPage}//No need to remove until vidhi want to remove
           handleInputChange={handleInputChange}
           courseData={courseData}
         />

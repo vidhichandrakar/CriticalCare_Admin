@@ -15,6 +15,7 @@ import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { deleteCourses, getCourseById } from "../../ActionFactory/apiActions";
 import { useNavigate } from "react-router-dom";
+// import {  } from "react-router-dom";
 
 const Trics1FreeMockTest = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -33,13 +34,19 @@ const Trics1FreeMockTest = () => {
   };
 
   useEffect(() => {
-    getCourseById({
-      courseId,
-      callBack: (response) => {
-        const userCallBack = response?.data;
-        setCourseData(userCallBack);
-      },
-    });
+    console.log("useNavigate hello",location);
+  }, []);
+  useEffect(() => {
+    if (courseId) {
+      console.log("defined", courseId);
+      getCourseById({
+        courseId,
+        callBack: (response) => {
+          const userCallBack = response?.data;
+          setCourseData(userCallBack);
+        },
+      });
+    }
   }, [courseId]);
 
   const handleDeleteCourse = () => {
@@ -63,8 +70,8 @@ const Trics1FreeMockTest = () => {
         <div className="another-main-container">
           <div className="completeTricsBox">
             <div className="leftSideRow">
-              <p className="blackPara">{courseData.course_name}</p>
-              <p className="greyPara">TRICS 1 FREE MOCK TEST FOR EDIC-1</p>
+              <p className="blackPara">Course Name</p>
+              <p className="greyPara">{courseData.course_name}</p>
               <hr />
 
               <p className="blackPara">Description</p>
