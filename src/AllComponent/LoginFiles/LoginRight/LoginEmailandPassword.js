@@ -21,6 +21,7 @@ const LoginEmailandPassword = () => {
   const [loginWay, setLoginWay] = useState("");
   const [enteredOTP, setEnteredOTP] = useState("");
   const [hideOTPBtn, setHideOTPBtn] = useState(true);
+  const [userInfo, setUserInfo] = useState({});
   let navigation = useNavigate();
 
   const handleInput = (value, type) => {
@@ -36,7 +37,6 @@ const LoginEmailandPassword = () => {
         setDisableLogiBtn(false);
       }
     }
-    // else if()
     setUserLogin(storedValues);
   };
 
@@ -50,6 +50,12 @@ const LoginEmailandPassword = () => {
         callBack: (response) => {
           setLoginWay("Get OTP");
           setGetOTP(response.data.OTP);
+          setUserInfo({
+            userId:response.data.user_id,
+            userName:response.data.user_name,
+            user_photo:response.data.user_photo
+          });
+          localStorage.setItem("loggedInUser",response?.data?.user_id)
           setHideOTPBtn(false);
         },
         error:(error)=>{
@@ -62,6 +68,7 @@ const LoginEmailandPassword = () => {
     if (loginWay !== "") {
       if (getOTP === parseInt(enteredOTP)) {
         navigate("/DashBoard");
+
       }
     }
   };
