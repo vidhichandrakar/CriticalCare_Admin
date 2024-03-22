@@ -64,7 +64,11 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       callBack: (response) => {
         const userCallBack = response?.data;
         setCat(userCallBack);
-      },
+      },error:(error)=>{
+        toast.error(error.message);
+        console.log(error.message);
+        // setLoaderState(false);
+      }
     });
   }, []);
 
@@ -277,6 +281,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
             )}
           </FormControl>
         </Box>
+        
         <Box className="rightCat">
           {CommonTypography(
             { fontWeight: 600, label: "Sub Category" },

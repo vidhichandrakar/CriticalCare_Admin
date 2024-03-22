@@ -111,6 +111,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
           </FormControl>
         </Box>
       </Box>
+
       <Box sx={{ marginTop: "5%" }} className="editFirstBox">
         <Box>
           {CommonTypography(
@@ -134,6 +135,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
             })
           )}
         </Box>
+
         <Box className="marginscndBox">
           {CommonTypography(
             { fontWeight: 600, label: "Offer Price" },
@@ -157,6 +159,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
           )}
         </Box>
       </Box>
+
       <Box className="divider"></Box>
       {commonButton({
         handleTrackerPage: () => handlePricePage(),

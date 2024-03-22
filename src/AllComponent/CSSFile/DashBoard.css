@@ -522,12 +522,15 @@ body {
 }
 .TimeText {
   margin-left: 10px !important;
+  margin-right: -23px;
 }
 .FlexRow {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
+  margin: 3px;
+  margin-top: 14px !important;
 }
 .freeTestButton {
   color: dodgerblue;

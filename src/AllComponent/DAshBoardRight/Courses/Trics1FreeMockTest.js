@@ -15,7 +15,12 @@ import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { deleteCourses, getCourseById } from "../../ActionFactory/apiActions";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+=======
 // import {  } from "react-router-dom";
+>>>>>>> 75eea5b238318e884e2936eb51ebafbfc7b2d7fb
 
 const Trics1FreeMockTest = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -34,6 +39,18 @@ const Trics1FreeMockTest = () => {
   };
 
   useEffect(() => {
+<<<<<<< HEAD
+    getCourseById({
+      courseId,
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setCourseData(userCallBack);
+      },error:(error)=>{
+        toast.error(error.message);
+        console.log(error.message);
+      }
+    });
+=======
     console.log("useNavigate hello",location);
   }, []);
   useEffect(() => {
@@ -47,6 +64,7 @@ const Trics1FreeMockTest = () => {
         },
       });
     }
+>>>>>>> 75eea5b238318e884e2936eb51ebafbfc7b2d7fb
   }, [courseId]);
 
   const handleDeleteCourse = () => {
@@ -54,7 +72,10 @@ const Trics1FreeMockTest = () => {
       courseId,
       callBack: (response) => {
         navigate("/YourCourses");
-      },
+      },error:(error)=>{
+        toast.error(error.message);
+        console.log(error.message);
+      }
     });
   };
 
@@ -180,6 +201,7 @@ const Trics1FreeMockTest = () => {
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 };
