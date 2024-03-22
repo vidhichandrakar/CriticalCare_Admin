@@ -48,7 +48,11 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       callBack: (response) => {
         const userCallBack = response?.data;
         setCat(userCallBack);
-      },
+      },error:(error)=>{
+        toast.error(error.message);
+        console.log(error.message);
+        // setLoaderState(false);
+      }
     });
   }, []);
 

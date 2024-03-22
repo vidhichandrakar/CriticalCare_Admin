@@ -27,7 +27,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   };
 
   useEffect(() => {
-    setLoaderState(true);
+    // setLoaderState(true);
     if (courseId) {
       getCourseById({
         courseId,

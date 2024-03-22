@@ -15,6 +15,8 @@ import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { deleteCourses, getCourseById } from "../../ActionFactory/apiActions";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Trics1FreeMockTest = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -38,7 +40,10 @@ const Trics1FreeMockTest = () => {
       callBack: (response) => {
         const userCallBack = response?.data;
         setCourseData(userCallBack);
-      },
+      },error:(error)=>{
+        toast.error(error.message);
+        console.log(error.message);
+      }
     });
   }, [courseId]);
 
@@ -47,7 +52,10 @@ const Trics1FreeMockTest = () => {
       courseId,
       callBack: (response) => {
         navigate("/YourCourses");
-      },
+      },error:(error)=>{
+        toast.error(error.message);
+        console.log(error.message);
+      }
     });
   };
 
@@ -173,6 +181,7 @@ const Trics1FreeMockTest = () => {
           </div>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 };

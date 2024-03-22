@@ -282,6 +282,7 @@ const MyTeam = () => {
             >
               Add New Member
             </DialogTitle>
+
             <IconButton
               aria-label="close"
               onClick={handleCloseDialog}
@@ -307,10 +308,13 @@ const MyTeam = () => {
                 value={addTeam.memberName}
                 onChange={(e) => handleInput(e.target.value, "MemberName")}
               />
+
+            <Box className="FlexRow" sx={{ mt: -1 }}>
               <Typography gutterBottom sx={{ mt: 2 }}>
                 Email ID
               </Typography>
-              <Box className="FlexRow" sx={{ mt: -1 }}>
+
+              {/* <Box className="FlexRow" sx={{ mt: -1 }}> */}
                 <Typography className="FlexRow">
                   <TextField
                     inputProps={{ className: "textField" }}
@@ -320,11 +324,11 @@ const MyTeam = () => {
                     className="BoxShadowInputField"
                     type="EmailID"
                     value={addTeam.emailID}
-                    // onChange={(e) => setInput(e.target.value)} 
                     onChange={(e) => handleInput(e.target.value, "EmailID")}
                   />
                   <p className="TimeText"> Phone No. </p>
                 </Typography>
+
                 <Typography className="FlexRow">
                   <TextField
                     inputProps={{ className: "textField" }}
@@ -339,6 +343,7 @@ const MyTeam = () => {
                   />{" "}
                 </Typography>
               </Box>
+
             </DialogContent>
             <DialogActions>
               <Button

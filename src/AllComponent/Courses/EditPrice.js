@@ -143,8 +143,6 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
               className: "editFirstText",
             })
           )}
-          <input type="tel" size="50%" onkeypress="return 
-            onlyNumberKey(event)" />
           {commonTextField(
             {
               id: "fullWidth",
