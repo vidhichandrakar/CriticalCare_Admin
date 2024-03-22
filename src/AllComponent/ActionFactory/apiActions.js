@@ -92,7 +92,14 @@ export const updateMemberDetails = ({ payload, callBack, error}) => {
     error(errorMessage);
   });
 };
-
+export const createTestPortal = ({ payload, callBack, error}) => {
+  const url = APIS.getTest;
+  axios.post(url, payload).then((response) => {
+    callBack(response);
+  }).catch((errorMessage) => {
+    error(errorMessage);
+  });
+};
 export const getTeam = ({ callBack,error }) => {
   const url = APIS.updateMember;
   axios.get(url).then((response) => {
