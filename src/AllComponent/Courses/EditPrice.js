@@ -8,6 +8,7 @@ import {
   commonTextField,
 } from "../../Util/CommonFields";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { years } from "../../Util/masterFile";
 
 const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
@@ -28,6 +29,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   }, [courseData]);
   const handleInpurPrice = (value, type) => {
     let storedValues = Object.assign({}, editPriceData);
+    console.log("valuetype", value, type);
     if (type === "duration") {
       storedValues.duration = value;
     } else if (type === "years") {
@@ -55,8 +57,16 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
       storedValues.regularPrice &&
       storedValues.offerPrice
     ) {
-      handleInputChange("editPrice", storedValues);
-      handleTrackerPage(2);
+      if (storedValues.regularPrice > storedValues.offerPrice) {
+        console.log("storedValues,storedValues", storedValues);
+        handleInputChange("editPrice", storedValues);
+
+        handleTrackerPage(2);
+      } else {
+        toast.error("Holls", {
+          autoClose: 500,
+        });
+      }
     } else {
       toast.error("Required fields cannot be empty!", {
         autoClose: 500,

@@ -43,11 +43,11 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   });
   const [cat, setCat] = useState([]);
   const onInroVideoDrop = async (files) => {
-    console.log(files)
+    console.log(files);
     let storedValues = Object.assign({}, storedBasicInfo);
     storedValues.thumbnailPath = files;
     setStoredBasicInfo(storedValues);
-   };
+  };
   const {
     acceptedFiles,
     fileRejections,
@@ -55,7 +55,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     getInputProps: getIntroVideoInputProps,
   } = useDropzone({
     onDrop: onInroVideoDrop,
-    onChange:(event)=>console.log(event),
+    onChange: (event) => console.log(event),
     accept: "image/jpeg, image/png, image/jpg, application/pdf",
   });
   useEffect(() => {
@@ -64,11 +64,12 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       callBack: (response) => {
         const userCallBack = response?.data;
         setCat(userCallBack);
-      },error:(error)=>{
+      },
+      error: (error) => {
         toast.error(error.message);
         console.log(error.message);
         // setLoaderState(false);
-      }
+      },
     });
   }, []);
 
@@ -90,7 +91,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     storedValues.thumbnailPath = courseData?.thumbnail_path;
     setStoredBasicInfo(storedValues);
   }, [courseData]);
- 
+
   const handleInput = (value, type) => {
     let storedValues = Object.assign({}, storedBasicInfo);
     if (/^\s/.test(value)) value = "";
@@ -127,7 +128,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   };
 
   const handleEditPrice = () => {
-    console.log("edit",storedBasicInfo)
+    console.log("edit", storedBasicInfo);
     if (
       storedBasicInfo.Name?.length <= 3 &&
       storedBasicInfo.Description?.length <= 3 &&
@@ -158,9 +159,9 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       handleTrackerPage(1);
     }
   };
- const handleInputFile =(file)=>{
-  console.log(file)
- }
+  const handleInputFile = (file) => {
+    console.log(file);
+  };
   return (
     <div className="formMain">
       <div className="FlexRow">
@@ -221,8 +222,11 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
             onChange={(event) => console.log("input",event)}
 
           /> */}
-          
-          <Input type="file" onChange={handleInputFile} inputProps={{ accept: 'image/*' }}/>
+          <Input
+            type="file"
+            onChange={handleInputFile}
+            inputProps={{ accept: "image/*" }}
+          />
           {/* <input type="file" onChange={handleInputFile}/> */}
         </Button>
         <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
@@ -234,28 +238,27 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
         {/* <img src={storedBasicInfo.thumbnailPath}/> */}
       </Box>
       <div {...getIntroVideoRootProps({ className: "dropzone" })}>
-                      <input {...getIntroVideoInputProps()} />
+        <input {...getIntroVideoInputProps()} />
 
-                      {/* <CloudUploadIcon
+        {/* <CloudUploadIcon
                         sx={{ fontSize: "80px", color: "#1976d2" }}
                       /> */}
-                      <Typography
-                        variant="h6"
-                        gutterBottom
-                        sx={{
-                          color: "#0e121b",
-                          fontWeight: "600",
-                          fontFamily: "Lato",
-                        }}
-                      >
-                        Drop or Select file
-                      </Typography>
-                      <Typography variant="body2" gutterBottom>
-                        Drop files here or click{" "}
-                        <span style={{ color: "#1976d2" }}>browse</span> through
-                        your machine
-                      </Typography>
-                    </div>
+        <Typography
+          variant="h6"
+          gutterBottom
+          sx={{
+            color: "#0e121b",
+            fontWeight: "600",
+            fontFamily: "Lato",
+          }}
+        >
+          Drop or Select file
+        </Typography>
+        <Typography variant="body2" gutterBottom>
+          Drop files here or click{" "}
+          <span style={{ color: "#1976d2" }}>browse</span> through your machine
+        </Typography>
+      </div>
       <Box className="divider"></Box>
       <Box sx={{ marginTop: "5%" }} className="categoryBox">
         <Box>
@@ -281,7 +284,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
             )}
           </FormControl>
         </Box>
-        
+
         <Box className="rightCat">
           {CommonTypography(
             { fontWeight: 600, label: "Sub Category" },
