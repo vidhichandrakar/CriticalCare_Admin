@@ -60,14 +60,12 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   });
   useEffect(() => {
     getCategory({
-      // courseId,
       callBack: (response) => {
         const userCallBack = response?.data;
         setCat(userCallBack);
       },error:(error)=>{
         toast.error(error.message);
         console.log(error.message);
-        // setLoaderState(false);
       }
     });
   }, []);
@@ -213,32 +211,18 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           startIcon={<UploadIcon className="iconThumbicon" />}
           className="iconThumb"
         >
-          Upload Thumbnail Image
-          {/* <VisuallyHiddenInput
-            type="file"
-            onDrop={(event)=>console.log("event",event)}
-            // onChange={(event) => handleInput(event.target.value, "file")}
-            onChange={(event) => console.log("input",event)}
-
-          /> */}
-          
+          Upload Thumbnail Image 
           <Input type="file" onChange={handleInputFile} inputProps={{ accept: 'image/*' }}/>
-          {/* <input type="file" onChange={handleInputFile}/> */}
         </Button>
         <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
           Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
         </Typography>
         <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
-          {/* {storedBasicInfo.thumbnailPath} */}
         </Typography>
-        {/* <img src={storedBasicInfo.thumbnailPath}/> */}
       </Box>
       <div {...getIntroVideoRootProps({ className: "dropzone" })}>
                       <input {...getIntroVideoInputProps()} />
 
-                      {/* <CloudUploadIcon
-                        sx={{ fontSize: "80px", color: "#1976d2" }}
-                      /> */}
                       <Typography
                         variant="h6"
                         gutterBottom
@@ -257,6 +241,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
                       </Typography>
                     </div>
       <Box className="divider"></Box>
+
       <Box sx={{ marginTop: "5%" }} className="categoryBox">
         <Box>
           {CommonTypography(

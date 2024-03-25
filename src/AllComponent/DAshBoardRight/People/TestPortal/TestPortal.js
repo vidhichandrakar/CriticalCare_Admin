@@ -236,7 +236,7 @@ const TestPortal = () => {
         let storedValues = Object.assign({}, addTest);
         storedValues.testName = data.test_name;
         storedValues.testDuration = data.duration_minute;
-        storedValues.Hours = data.duration_hour;
+        storedValues.hours = data.duration_hour;
         setAddTest(storedValues);
       },error:(error)=>{
         toast.error(error.message);
