@@ -207,6 +207,8 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
         label: "Add Thumbnail",
       })}
 
+<div {...getIntroVideoRootProps({ className: "dropzone" })}>
+        <input {...getIntroVideoInputProps()} />
       <Box className="thumbnailUpload">
         <Button
           component="label"
@@ -215,50 +217,16 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           className="iconThumb"
         >
           Upload Thumbnail Image
-          {/* <VisuallyHiddenInput
-            type="file"
-            onDrop={(event)=>console.log("event",event)}
-            // onChange={(event) => handleInput(event.target.value, "file")}
-            onChange={(event) => console.log("input",event)}
-
-          /> */}
-          <Input
-            type="file"
-            onChange={handleInputFile}
-            inputProps={{ accept: "image/*" }}
-          />
-          {/* <input type="file" onChange={handleInputFile}/> */}
-        </Button>
+         </Button>
         <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
           Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
         </Typography>
         <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
-          {/* {storedBasicInfo.thumbnailPath} */}
+          {storedBasicInfo?.thumbnailPath?.length && storedBasicInfo?.thumbnailPath[0]?.name}
         </Typography>
-        {/* <img src={storedBasicInfo.thumbnailPath}/> */}
       </Box>
-      <div {...getIntroVideoRootProps({ className: "dropzone" })}>
-        <input {...getIntroVideoInputProps()} />
-
-        {/* <CloudUploadIcon
-                        sx={{ fontSize: "80px", color: "#1976d2" }}
-                      /> */}
-        <Typography
-          variant="h6"
-          gutterBottom
-          sx={{
-            color: "#0e121b",
-            fontWeight: "600",
-            fontFamily: "Lato",
-          }}
-        >
-          Drop or Select file
-        </Typography>
-        <Typography variant="body2" gutterBottom>
-          Drop files here or click{" "}
-          <span style={{ color: "#1976d2" }}>browse</span> through your machine
-        </Typography>
       </div>
+    
       <Box className="divider"></Box>
       <Box sx={{ marginTop: "5%" }} className="categoryBox">
         <Box>
