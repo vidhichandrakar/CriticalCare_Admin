@@ -18,9 +18,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   let location = useLocation();
   const courseId = location.state?.id;
 
-  //No need to remove until vidhi want to remove
   const handleTrackerPage = (page) => {
-    console.log("pageee",page)
     setTackerPage(page);
     handleHeaderLabels(basicInfo.Name);
     if (page === 2) {
@@ -29,11 +27,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   };
 
   useEffect(() => {
-<<<<<<< HEAD
-    // setLoaderState(true);
-=======
    
->>>>>>> 75eea5b238318e884e2936eb51ebafbfc7b2d7fb
     if (courseId) {
       setLoaderState(true);
       getCourseById({
@@ -41,15 +35,17 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         callBack: (response) => {
           const userCallBack = response?.data;
           setCourseData(userCallBack);
-          setLoaderState(false);
+          
         },
       });
+      // setLoaderState(false);
     }
+    
   }, [courseId]);
 
   const handleCreateCourse = () => {
     console.log("basic info",basicInfo)
-    // let formData = new FormData();    //No need to remove until vidhi want to remove
+    // let formData = new FormData();
     // formData.append("course_name",basicInfo?.Name)
     // formData.append("description",basicInfo?.Description)
     // formData.append("price",parseInt(editPrice?.regularPrice))
@@ -78,7 +74,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       modified_by: 1,
       created_by: 2,
     };
-    // console.log("thumbnail basic info",courseData,basicInfo?.thumbnailPath) //No need to remove until vidhi want to remove
+    // console.log("thumbnail basic info",courseData,basicInfo?.thumbnailPath)
     createCourse({
       courseData,
       callBack: (response) => {
@@ -107,18 +103,18 @@ const CreateCourses = ({ handleHeaderLabels }) => {
     <Box className="courseMainTrack">
       <Tracker
         trackerPage={trackerPage}
-        handleTrackerPage={handleTrackerPage}//No need to remove until vidhi want to remove
+        handleTrackerPage={handleTrackerPage}
       />
       
       {trackerPage === 0 ? (
         <CreateForm
-          handleTrackerPage={handleTrackerPage}//No need to remove until vidhi want to remove
+          handleTrackerPage={handleTrackerPage}
           handleInputChange={handleInputChange}
           courseData={courseData}
         />
       ) : trackerPage === 1 ? (
         <EditPrice
-          handleTrackerPage={handleTrackerPage}//No need to remove until vidhi want to remove
+          handleTrackerPage={handleTrackerPage}
           handleInputChange={handleInputChange}
           courseData={courseData}
         />

@@ -70,6 +70,7 @@
   margin-top: -2%;
 }
 .couponLastBox{
+  margin-right: 1% !important;
  justify-content: center;
  align-items: center;
  display: flex;
@@ -213,10 +214,13 @@ color: blue !important;
 }
 .MuiDialog-backdrop{
   background-color:red !important;
+  /* opacity: 0.5 !important; */
+  /* z-index: 1000; */
+  /* background-color: '#000000'; */
 }
-.couponBoxIcon{
-  margin-top: 7px;
-  margin-right: 10px;
-  margin-bottom: -5px;
-}
-
+/* .couponBackDrop{
+  /* opacity: 0.5 !important; */
+  /* display: inline-block; */
+  /* z-index: 1000;
+  background-color: '#000000'; */
+/* }  */

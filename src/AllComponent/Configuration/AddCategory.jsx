@@ -12,8 +12,6 @@ import {
   updateDuration,
   updateMemberDetails,
 } from "../ActionFactory/apiActions";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
   const [updatedCat, setUpdatedCat] = useState({});
@@ -71,12 +69,7 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
       created_by: updatedCat.created_by,
       modiefied_by: updatedCat.modiefied_by,
     };
-    updateDuration({ payload, callBack: (response) => {} 
-    ,error:(error)=>{
-      toast.error(error.message);
-      console.log(error.message);
-    }
-  });
+    updateDuration({ payload, callBack: (response) => {} });
   };
   const handleMemberChanges = () => {
     const payload = {
@@ -84,13 +77,7 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
       email_id: saveMemberDetails.email_id,
       phone_no: saveMemberDetails.phone_no,
     };
-    updateMemberDetails({ payload, callBack: (response) => {}
-    ,error:(error)=>{
-      toast.error(error.message);
-      console.log(error.message);
-      // setLoaderState(false);
-    }
-  });
+    updateMemberDetails({ payload, callBack: (response) => {} });
   };
   return (
     <React.Fragment>
@@ -280,7 +267,6 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
           )}
         </DialogActions>
       </Dialog>
-      <ToastContainer/>
     </React.Fragment>
   );
 }

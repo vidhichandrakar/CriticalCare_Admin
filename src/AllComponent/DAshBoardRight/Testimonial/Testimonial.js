@@ -39,8 +39,6 @@ import PropTypes from "prop-types";
 import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import LoaderComponent from "../../../Util/LoaderComponent";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -173,7 +171,7 @@ const Testimonial = () => {
   };
 
   const handleDelete = () => {
-    // setLoaderState(true);
+    setLoaderState(true);
     const userId = openId;
     deleteTestimonial({
       userId,
@@ -183,12 +181,9 @@ const Testimonial = () => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
             setLoaderState(false);
-          }
+          },
         });
-      },error:(error)=>{
-        toast.error(error.message);
-        console.log(error.message);
-      }
+      },
     });
   };
   const handleClickOpen = () => {
@@ -232,11 +227,7 @@ const Testimonial = () => {
       payload,
       callBack: (response) => {
         setOpen(false);
-      },error:(error)=>{
-        toast.error(error.message);
-        console.log(error.message);
-        // setLoaderState(false);
-      }
+      },
     });
   };
 
@@ -430,7 +421,6 @@ const Testimonial = () => {
           </TableContainer>
         </Paper>
       </div>
-      <ToastContainer/>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import RestoreFromTrashSharpIcon from "@mui/icons-material/RestoreFromTrashSharp";
 import HistorySharpIcon from "@mui/icons-material/HistorySharp";
+import NoteAltOutlinedIcon from "@mui/icons-material/NoteAltOutlined";
 import CircleIcon from "@mui/icons-material/Circle";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
@@ -24,7 +25,6 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import NoteAltIcon from '@mui/icons-material/NoteAlt';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -539,16 +539,18 @@ const CouponBox = () => {
         }}
       >
         <Typography sx={{ p: 1, mt: -1, mr: 5 }}>
-          <NoteAltIcon className="couponBoxIcon"/>
+          {" "}
+          <NoteAltOutlinedIcon />
           Details
         </Typography>
         <Typography sx={{ p: 1, mt: -1, mr: 5 }}>
-          <HistorySharpIcon className="couponBoxIcon"/>
+          {" "}
+          <HistorySharpIcon />
           View Edit History
         </Typography>
         <Typography sx={{ p: 1, mt: -1, mr: 5 }}>
-          <RestoreFromTrashSharpIcon className="couponBoxIcon"/> 
-          Delete
+          {" "}
+          <RestoreFromTrashSharpIcon /> Delete
         </Typography>
       </Popover>
     </div>

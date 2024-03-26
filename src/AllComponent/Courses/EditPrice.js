@@ -9,6 +9,7 @@ import {
 } from "../../Util/CommonFields";
 import { ToastContainer, toast } from "react-toastify";
 import { years } from "../../Util/masterFile";
+import { Link } from "react-router-dom";
 
 const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const [editPriceData, setEditPriceData] = useState({
@@ -111,7 +112,6 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
           </FormControl>
         </Box>
       </Box>
-
       <Box sx={{ marginTop: "5%" }} className="editFirstBox">
         <Box>
           {CommonTypography(
@@ -135,7 +135,6 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
             })
           )}
         </Box>
-
         <Box className="marginscndBox">
           {CommonTypography(
             { fontWeight: 600, label: "Offer Price" },
@@ -159,13 +158,13 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
           )}
         </Box>
       </Box>
-
       <Box className="divider"></Box>
-      {commonButton({
-        handleTrackerPage: () => handlePricePage(),
+     <Link to ="/YourCourses"> {commonButton({
+        // handleTrackerPage: () => handlePricePage(),
+        className: "coursesButton",
         className: "coursesButton",
         label: "Add Content",
-      })}
+      })}</Link>
       <ToastContainer />
     </div>
   );

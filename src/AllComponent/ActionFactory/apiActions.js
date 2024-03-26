@@ -19,12 +19,10 @@ export const getAllCourses = ({ callBack, error }) => {
   });
 };
 
-export const deleteUser = ({ userId, callBack, error }) => {
+export const deleteUser = ({ userId, callBack }) => {
   const url = APIS.getAllUsers + "/" + userId;
   axios.delete(url).then((response) => {
     callBack(response);
-  }).catch((errorMessage) => {
-    error(errorMessage);
   });
 };
 
@@ -41,30 +39,24 @@ export const createCourse = ({ courseData, callBack, error }) => {
     });
 };
 
-export const getCourseById = ({ courseId, callBack, error }) => {
+export const getCourseById = ({ courseId, callBack }) => {
   const url = APIS.allCourses + "/" + courseId;
   axios.get(url).then((response) => {
     callBack(response);
-  }).catch((errorMessage) => {
-    error(errorMessage);
   });
 };
 
-export const deleteCourses = ({ courseId, callBack, error }) => {
+export const deleteCourses = ({ courseId, callBack }) => {
   const url = APIS.allCourses + "/" + courseId;
   axios.delete(url).then((response) => {
     callBack(response);
-  }).catch((errorMessage) => {
-    error(errorMessage);
   });
 };
 
-export const getCategory = ({ callBack ,error}) => {
+export const getCategory = ({ callBack }) => {
   const url = APIS.getCategory;
   axios.get(url).then((response) => {
     callBack(response);
-  }).catch((errorMessage) => {
-    error(errorMessage);
   });
 };
 
@@ -75,21 +67,17 @@ export const createCategory = ({ payload, callBack }) => {
   });
 };
 
-export const updateDuration = ({ payload, callBack, error }) => {
+export const updateDuration = ({ payload, callBack }) => {
   const url = APIS.updateDuration;
   axios.post(url, payload).then((response) => {
     callBack(response);
-  }).catch((errorMessage) => {
-    error(errorMessage);
   });
 };
 
-export const updateMemberDetails = ({ payload, callBack, error}) => {
+export const updateMemberDetails = ({ payload, callBack }) => {
   const url = APIS.updateMember;
   axios.post(url, payload).then((response) => {
     callBack(response);
-  }).catch((errorMessage) => {
-    error(errorMessage);
   });
 };
 
@@ -126,57 +114,45 @@ export const deleteTestPortal = ({ userId, callBack, error }) => {
   });
 };
 
-export const updateTeam = ({ payload, callBack, error }) => {     //test portal
+export const updateTeam = ({ payload, callBack }) => {
   const url = APIS.updateMember;
   axios.post(url, payload).then((response) => {
     callBack(response);
-  }).catch((errorMessage) => {
-    error(errorMessage);
   });
 };
 
-export const getTestimonal = ({ callBack, error }) => {
+export const getTestimonal = ({ callBack }) => {
   const url = APIS.getTestimonal;
   axios.get(url).then((response) => {
     callBack(response);
-  }).catch((errorMessage) => {
-    error(errorMessage);
   });
 };
 
-export const updateTestimonial = ({ payload, callBack, error }) => {
+export const updateTestimonial = ({ payload, callBack }) => {
   const url = APIS.getTestimonal;
   axios.post(url, payload).then((response) => {
     callBack(response);
-  }).catch((errorMessage) => {
-    error(errorMessage);
   });
 };
 
-export const deleteTestimonial = ({ userId, callBack, error }) => {
+export const deleteTestimonial = ({ userId, callBack }) => {
   const url = APIS.getTestimonal + "/" + userId;
   axios.delete(url).then((response) => {
     callBack(response);
-  }).catch((errorMessage) => {
-    error(errorMessage);
   });
 };
 
-export const getTest = ({ callBack, error }) => {
+export const getTest = ({ callBack }) => {
   const url = APIS.getTest;
   axios.get(url).then((response) => {
     callBack(response);
-  }).catch((errorMessage) => {
-    error(errorMessage);
   });
 };
 
-export const getTestByID = ({ testId, callBack, error }) => {    //test portal
+export const getTestByID = ({ testId, callBack }) => {
   const url = APIS.getTest + "/" + testId;
   axios.get(url).then((response) => {
     callBack(response);
-  }).catch((errorMessage) => {
-    error(errorMessage);
   });
 };
 

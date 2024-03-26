@@ -42,6 +42,7 @@
   flex-direction: row;
   margin-left: 5%;
   margin-top: 2%;
+  cursor: pointer;
 }
 .innerHeading{
   margin-left: 3%;
@@ -79,10 +80,16 @@
   padding: 26px 26px;
  }
  .rightBoxTypography{
+  cursor: pointer;
   color: #8e8383;
   font-size: large !important;
   /* font-weight: 18%; */
   padding: 10px 10px;
+ }
+ .rightBoxTypography:hover{
+  background-color: rgba(197, 197, 197, 0.454);
+  border-radius: 10px;
+
  }
  .folderIconRightBox{
   color: #0075FF !important;
