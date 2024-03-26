@@ -64,9 +64,8 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const [highlight, setHighlight] = useState(false);
   const [highlightPeople, setHighlightPeople] = useState(false);
   useEffect(() => {
-    const activeMenu = localStorage.getItem("activeMenu");
-    setHighlight(activeMenu);
-    setHighlightPeople(activeMenu);
+    setHighlight(window.location.pathname.replace("/",""));
+    setHighlightPeople(window.location.pathname.replace("/",""));
   }, [localStorage.getItem("activeMenu")]);
 
   const handleHighlight = (type) => {
@@ -138,9 +137,9 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
           <Link to="/DashBoard">
             <Typography
               id="hoverrr"
-              className={highlight === "dashboard" ? "hoverrr2" : ""}
+              className={highlight === "DashBoard" ? "hoverrr2" : ""}
               sx={{ mt: 1 }}
-              onClick={() => handleHighlight("dashboard")}
+              onClick={() => handleHighlight("DashBoard")}
             >
               <DashboardIcon className="icon" />
               DashBoard

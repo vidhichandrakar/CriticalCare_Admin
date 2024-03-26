@@ -80,7 +80,14 @@ export const updateMemberDetails = ({ payload, callBack }) => {
     callBack(response);
   });
 };
-
+export const createTestPortal = ({ payload, callBack, error}) => {
+  const url = APIS.getTest;
+  axios.post(url, payload).then((response) => {
+    callBack(response);
+  }).catch((errorMessage) => {
+    error(errorMessage);
+  });
+};
 export const getTeam = ({ callBack,error }) => {
   const url = APIS.updateMember;
   axios.get(url).then((response) => {
@@ -159,6 +166,15 @@ export const getTestByID = ({ testId, callBack }) => {
 
 export const login =({payload, callBack,error})=>{
   const url = APIS.login;
+  axios.post(url,payload).then((response)=>{
+    callBack(response);
+  }).catch((errorMessage) => {
+    error(errorMessage);
+  });
+}
+
+export const verifyOtp =({payload, callBack,error})=>{
+  const url = APIS.verifyLogin;
   axios.post(url,payload).then((response)=>{
     callBack(response);
   }).catch((errorMessage) => {

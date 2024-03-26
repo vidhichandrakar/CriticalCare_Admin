@@ -8,6 +8,7 @@ import { createCourse, getCourseById } from "../ActionFactory/apiActions";
 import { ToastContainer, toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
 import LoaderComponent from "../../Util/LoaderComponent";
+import { Link, useNavigate } from "react-router-dom";
 
 const CreateCourses = ({ handleHeaderLabels }) => {
   const [trackerPage, setTackerPage] = useState(0);
@@ -17,12 +18,16 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   const [loaderState, setLoaderState] = useState(false);
   let location = useLocation();
   const courseId = location.state?.id;
+  const navigate = useNavigate();
 
   const handleTrackerPage = (page) => {
-    setTackerPage(page);
-    handleHeaderLabels(basicInfo.Name);
+    
     if (page === 2) {
       handleCreateCourse();
+    }
+    else{
+      setTackerPage(page);
+      handleHeaderLabels(basicInfo.Name);
     }
   };
 
@@ -81,6 +86,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         toast.success("Course added successfully!", {
           autoClose: 500,
         });
+        navigate("/YourCourses");
       },
       error: () => {
         toast.error("Something went wrong!", {

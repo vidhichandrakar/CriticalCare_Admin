@@ -15,6 +15,8 @@ import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { deleteCourses, getCourseById } from "../../ActionFactory/apiActions";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Trics1FreeMockTest = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -33,13 +35,15 @@ const Trics1FreeMockTest = () => {
   };
 
   useEffect(() => {
-    getCourseById({
-      courseId,
-      callBack: (response) => {
-        const userCallBack = response?.data;
-        setCourseData(userCallBack);
-      },
-    });
+    if (courseId) {
+      getCourseById({
+        courseId,
+        callBack: (response) => {
+          const userCallBack = response?.data;
+          setCourseData(userCallBack);
+        },
+      });
+    }
   }, [courseId]);
 
   const handleDeleteCourse = () => {

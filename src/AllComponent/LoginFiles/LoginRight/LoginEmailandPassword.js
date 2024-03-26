@@ -1,14 +1,15 @@
 import React, { useState, setkey, key, keyDown } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { Typography } from "@mui/material";
+import { Typography, paperClasses } from "@mui/material";
 import Button from "@mui/material/Button";
-import { getUserId, login } from "../../ActionFactory/apiActions";
-import { useNavigate } from "react-router-dom";
+import { getUserId, login, verifyOtp } from "../../ActionFactory/apiActions";
+import { redirect, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoaderComponent from "../../../Util/LoaderComponent";
 
+import { validatePhoneNo } from "../../../Util/CommonUtils";
 
 const LoginEmailandPassword = () => {
   const [userLogin, setUserLogin] = useState({
@@ -23,7 +24,7 @@ const LoginEmailandPassword = () => {
   const [enteredOTP, setEnteredOTP] = useState("");
   const [hideOTPBtn, setHideOTPBtn] = useState(true);
   const [loaderState, setLoaderState] = useState(false);
-
+  const [userInfo, setUserInfo] = useState({});
   let navigation = useNavigate();
 
   const handleInput = (value, type) => {
@@ -39,7 +40,6 @@ const LoginEmailandPassword = () => {
         setDisableLogiBtn(false);
       }
     }
-    // else if()
     setUserLogin(storedValues);
   };
 
@@ -58,24 +58,45 @@ const LoginEmailandPassword = () => {
           setHideOTPBtn(false);
           setLoaderState(false);
         },
-        error:(error)=>{
+        error: (error) => {
           toast.error(error.message);
           console.log(error.message);
-        }
+        },
       });
-
     }
     if (loginWay !== "") {
-      if (getOTP === parseInt(enteredOTP)) {
-        navigate("/DashBoard");
-      }
+      // if (getOTP === parseInt(enteredOTP)) {
+        const payload = {
+          phone_no: phoneNO?.toString(),
+          OTP: parseInt(enteredOTP),
+        };
+        verifyOtp({
+          payload,
+          callBack: (response) => {
+            console.log("verify", response);
+            setUserInfo({
+              userId: response.data.user_id,
+              userName: response.data.user_name,
+              user_photo: response.data.user_photo,
+            });
+            localStorage.setItem("loggedInUser", JSON.stringify(response?.data));
+            navigation("/DashBoard")
+          },
+          error: (error) => {
+            toast.error(error.response.data.message);
+            console.log(error.response.data.message);
+          },
+        });
+      // }
     }
   };
   const handleLoginByOTP = (value, type) => {
+
     setDisableLogiBtn(false);
-    setPhoneNo(value);
     if (type === "password") {
-      setPhoneNo(value);
+      setPhoneNo(validatePhoneNo(value,phoneNO));
+      console.log("validatePhoneNo",validatePhoneNo(value,phoneNO));
+
     } else if (type === "OTP") {
       setEnteredOTP(value);
     }
@@ -87,14 +108,13 @@ const LoginEmailandPassword = () => {
       loaderState={loaderState}
       />
       <Box className="BoxWidth">
-        <Typography className="loginText">Login to Admin Panel
-        <Typography sx={{mt : 1, fontSize:21, color:"#199884"}}>
+        <Typography className="loginText">
+          Login to Admin Panel
+          <Typography sx={{ mt: 1, fontSize: 21, color: "#199884" }}>
             <u>{getOTP}</u>
           </Typography>
         </Typography>
-        
-          
-        
+
         <Box sx={{ mt: 2 }}>
           <TextField
             id="fullWidth"
@@ -133,12 +153,12 @@ const LoginEmailandPassword = () => {
             maxlength="10"
             disabled={phoneNO?.length===10 && getOTP!==""}
             type="number"
+            value={phoneNO}
             onChange={(event) =>
               handleLoginByOTP(event.target.value, "password")
             }
           />
         </Box>
-       
 
         {getOTP !== "" && (
           <Box sx={{ mt: 2 }}>
@@ -153,7 +173,7 @@ const LoginEmailandPassword = () => {
           </Box>
         )}
 
-        {hideOTPBtn && getOTP==="" &&(
+        {hideOTPBtn && getOTP === "" && (
           <Button
             variant="contained"
             className="LoginBtn"

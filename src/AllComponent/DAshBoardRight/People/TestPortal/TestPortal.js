@@ -39,6 +39,7 @@ import {
   updateTeam,
   getTest,
   getTestByID,
+  createTestPortal,
 } from "../../../ActionFactory/apiActions";
 import { TablePagination } from "@mui/material";
 import Stack from "@mui/material/Stack";
@@ -207,10 +208,11 @@ const TestPortal = () => {
   const handleCreateTeam = () => {
     const payload = {
       test_name: addTest.testName,
-      created_by: parseInt(addTest.hours),
-      duration_minute: parseInt(addTest.testDuration),
+      created_by: 2,
+      duration_hour: parseInt(addTest.testDuration),
+      duration_minute:parseInt(addTest.hours)
     };
-    updateTeam({
+    createTestPortal({
       payload,
       callBack: (response) => {
         setOpen(false);
