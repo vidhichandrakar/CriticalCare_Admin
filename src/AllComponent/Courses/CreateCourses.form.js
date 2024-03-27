@@ -60,6 +60,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   });
   useEffect(() => {
     getCategory({
+      // courseId,
       callBack: (response) => {
         const userCallBack = response?.data;
         setCat(userCallBack);
@@ -67,8 +68,8 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       error: (error) => {
         toast.error(error.message);
         console.log(error.message);
-      }
-      // },
+        // setLoaderState(false);
+      },
     });
   }, []);
 
@@ -215,79 +216,18 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           startIcon={<UploadIcon className="iconThumbicon" />}
           className="iconThumb"
         >
-          Upload Thumbnail Image 
-          <Input type="file" onChange={handleInputFile} inputProps={{ accept: 'image/*' }}/>
-
           Upload Thumbnail Image
-          {/* <VisuallyHiddenInput
-            type="file"
-            onDrop={(event)=>console.log("event",event)}
-            // onChange={(event) => handleInput(event.target.value, "file")}
-            onChange={(event) => console.log("input",event)}
-
-          /> */}
-          <Input
-            type="file"
-            onChange={handleInputFile}
-            inputProps={{ accept: "image/*" }}
-          />
-          {/* <input type="file" onChange={handleInputFile}/> */}
-        </Button>
-
-         {/* </Button> */}
+         </Button>
         <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
           Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
         </Typography>
         <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
+          {storedBasicInfo?.thumbnailPath?.length && storedBasicInfo?.thumbnailPath[0]?.name}
         </Typography>
       </Box>
-      <div {...getIntroVideoRootProps({ className: "dropzone" })}>
-        <input {...getIntroVideoInputProps()} />
-
-                      <Typography
-                        variant="h6"
-                        gutterBottom
-                        sx={{
-                          color: "#0e121b",
-                          fontWeight: "600",
-                          fontFamily: "Lato",
-                        }}
-                      >
-                        Drop or Select file
-                      </Typography>
-                      <Typography variant="body2" gutterBottom>
-                        Drop files here or click{" "}
-                        <span style={{ color: "#1976d2" }}>browse</span> through
-                        your machine
-                      </Typography>
-                    </div>
-        {/* <CloudUploadIcon
-                        sx={{ fontSize: "80px", color: "#1976d2" }}
-                      /> */}
-        <Typography
-          variant="h6"
-          gutterBottom
-          sx={{
-            color: "#0e121b",
-            fontWeight: "600",
-            fontFamily: "Lato",
-          }}
-        >
-          Drop or Select file
-        </Typography>
-        <Typography variant="body2" gutterBottom>
-          Drop files here or click{" "}
-          <span style={{ color: "#1976d2" }}>browse</span> through your machine
-        </Typography>
       </div>
-
-          {storedBasicInfo?.thumbnailPath?.length && storedBasicInfo?.thumbnailPath[0]?.name}
-        {/* </Typography> */}
-      {/* </Box> */}
-      {/* </div> */}
     
       <Box className="divider"></Box>
-
       <Box sx={{ marginTop: "5%" }} className="categoryBox">
         <Box>
           {CommonTypography(

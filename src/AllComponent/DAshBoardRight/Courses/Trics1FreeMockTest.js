@@ -64,8 +64,13 @@ const Trics1FreeMockTest = () => {
     deleteCourses({
       courseId,
       callBack: (response) => {
+        toast.success("deleted successfully!");
         navigate("/YourCourses");
       },
+      error:(error)=>{
+        toast.error(error.message);
+        console.log(error.message);
+      }
     });
   };
 
