@@ -7,6 +7,8 @@ import { getUserId, login, verifyOtp } from "../../ActionFactory/apiActions";
 import { redirect, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import LoaderComponent from "../../../Util/LoaderComponent";
+
 import { validatePhoneNo } from "../../../Util/CommonUtils";
 
 const LoginEmailandPassword = () => {
@@ -21,6 +23,7 @@ const LoginEmailandPassword = () => {
   const [loginWay, setLoginWay] = useState("");
   const [enteredOTP, setEnteredOTP] = useState("");
   const [hideOTPBtn, setHideOTPBtn] = useState(true);
+  const [loaderState, setLoaderState] = useState(false);
   const [userInfo, setUserInfo] = useState({});
   let navigation = useNavigate();
 
@@ -41,16 +44,19 @@ const LoginEmailandPassword = () => {
   };
 
   const handleUserLogin = () => {
+    setLoaderState(true);
     if (loginWay === "") {
       const payload = {
         phone_no: phoneNO?.toString(),
       };
       login({
+        
         payload,
         callBack: (response) => {
           setLoginWay("Get OTP");
           setGetOTP(response.data.OTP);
           setHideOTPBtn(false);
+          setLoaderState(false);
         },
         error: (error) => {
           toast.error(error.message);
@@ -98,6 +104,9 @@ const LoginEmailandPassword = () => {
 
   return (
     <div className="RightBox">
+       <LoaderComponent
+      loaderState={loaderState}
+      />
       <Box className="BoxWidth">
         <Typography className="loginText">
           Login to Admin Panel
@@ -141,7 +150,8 @@ const LoginEmailandPassword = () => {
             variant="outlined"
             className="BoxShadow"
             fullWidth
-            disabled={phoneNO?.length === 10 && getOTP !== ""}
+            maxlength="10"
+            disabled={phoneNO?.length===10 && getOTP!==""}
             type="number"
             value={phoneNO}
             onChange={(event) =>

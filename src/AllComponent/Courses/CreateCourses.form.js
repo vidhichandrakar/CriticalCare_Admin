@@ -67,12 +67,8 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       error: (error) => {
         toast.error(error.message);
         console.log(error.message);
-<<<<<<< HEAD
       }
-=======
-        // setLoaderState(false);
-      },
->>>>>>> 98047fedc7393f3b74f38db260d87cd3ace11437
+      // },
     });
   }, []);
 
@@ -210,6 +206,8 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
         label: "Add Thumbnail",
       })}
 
+<div {...getIntroVideoRootProps({ className: "dropzone" })}>
+        <input {...getIntroVideoInputProps()} />
       <Box className="thumbnailUpload">
         <Button
           component="label"
@@ -217,10 +215,9 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           startIcon={<UploadIcon className="iconThumbicon" />}
           className="iconThumb"
         >
-<<<<<<< HEAD
           Upload Thumbnail Image 
           <Input type="file" onChange={handleInputFile} inputProps={{ accept: 'image/*' }}/>
-=======
+
           Upload Thumbnail Image
           {/* <VisuallyHiddenInput
             type="file"
@@ -235,8 +232,9 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
             inputProps={{ accept: "image/*" }}
           />
           {/* <input type="file" onChange={handleInputFile}/> */}
->>>>>>> 98047fedc7393f3b74f38db260d87cd3ace11437
         </Button>
+
+         {/* </Button> */}
         <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
           Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
         </Typography>
@@ -246,7 +244,6 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       <div {...getIntroVideoRootProps({ className: "dropzone" })}>
         <input {...getIntroVideoInputProps()} />
 
-<<<<<<< HEAD
                       <Typography
                         variant="h6"
                         gutterBottom
@@ -264,7 +261,6 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
                         your machine
                       </Typography>
                     </div>
-=======
         {/* <CloudUploadIcon
                         sx={{ fontSize: "80px", color: "#1976d2" }}
                       /> */}
@@ -284,7 +280,12 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           <span style={{ color: "#1976d2" }}>browse</span> through your machine
         </Typography>
       </div>
->>>>>>> 98047fedc7393f3b74f38db260d87cd3ace11437
+
+          {storedBasicInfo?.thumbnailPath?.length && storedBasicInfo?.thumbnailPath[0]?.name}
+        {/* </Typography> */}
+      {/* </Box> */}
+      {/* </div> */}
+    
       <Box className="divider"></Box>
 
       <Box sx={{ marginTop: "5%" }} className="categoryBox">
@@ -311,7 +312,6 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
             )}
           </FormControl>
         </Box>
-
         <Box className="rightCat">
           {CommonTypography(
             { fontWeight: 600, label: "Sub Category" },

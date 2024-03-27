@@ -146,11 +146,7 @@ const TestPortal = () => {
         const userCallBack = response?.data;
         setUserData(userCallBack);
         setLoaderState(false);
-      },error:(error)=>{
-        toast.error(error.message);
-        console.log(error.message);
-        setLoaderState(false);
-      }
+      },
     });
   }, []);
 
@@ -220,11 +216,7 @@ const TestPortal = () => {
       payload,
       callBack: (response) => {
         setOpen(false);
-      },error:(error)=>{
-        toast.error(error.message);
-        console.log(error.message);
-        // setLoaderState(false);
-      }
+      },
     });
   };
 
@@ -240,11 +232,7 @@ const TestPortal = () => {
         storedValues.testDuration = data.duration_minute;
         storedValues.hours = data.duration_hour;
         setAddTest(storedValues);
-      },error:(error)=>{
-        toast.error(error.message);
-        console.log(error.message);
-        // setLoaderState(false);
-      }
+      },
     });
   };
   return (

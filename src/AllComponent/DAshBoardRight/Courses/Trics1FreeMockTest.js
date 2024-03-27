@@ -65,10 +65,7 @@ const Trics1FreeMockTest = () => {
       courseId,
       callBack: (response) => {
         navigate("/YourCourses");
-      },error:(error)=>{
-        toast.error(error.message);
-        console.log(error.message);
-      }
+      },
     });
   };
 
@@ -84,8 +81,8 @@ const Trics1FreeMockTest = () => {
         <div className="another-main-container">
           <div className="completeTricsBox">
             <div className="leftSideRow">
-              <p className="blackPara">Course Name</p>
-              <p className="greyPara">{courseData.course_name}</p>
+              <p className="blackPara">{courseData.course_name}</p>
+              <p className="greyPara">TRICS 1 FREE MOCK TEST FOR EDIC-1</p>
               <hr />
 
               <p className="blackPara">Description</p>
@@ -194,7 +191,6 @@ const Trics1FreeMockTest = () => {
           </div>
         </div>
       </div>
-      <ToastContainer/>
     </div>
   );
 };

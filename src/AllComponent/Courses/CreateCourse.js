@@ -8,6 +8,7 @@ import { createCourse, getCourseById } from "../ActionFactory/apiActions";
 import { ToastContainer, toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
 import LoaderComponent from "../../Util/LoaderComponent";
+import { Link, useNavigate } from "react-router-dom";
 
 const CreateCourses = ({ handleHeaderLabels }) => {
   const [trackerPage, setTackerPage] = useState(0);
@@ -17,14 +18,16 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   const [loaderState, setLoaderState] = useState(false);
   let location = useLocation();
   const courseId = location.state?.id;
+  const navigate = useNavigate();
 
-  //No need to remove until vidhi want to remove
   const handleTrackerPage = (page) => {
-    console.log("pageee",page)
-    setTackerPage(page);
-    handleHeaderLabels(basicInfo.Name);
+    
     if (page === 2) {
       handleCreateCourse();
+    }
+    else{
+      setTackerPage(page);
+      handleHeaderLabels(basicInfo.Name);
     }
   };
 
@@ -37,15 +40,17 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         callBack: (response) => {
           const userCallBack = response?.data;
           setCourseData(userCallBack);
-          setLoaderState(false);
+          
         },
       });
+      // setLoaderState(false);
     }
+    
   }, [courseId]);
 
   const handleCreateCourse = () => {
     console.log("basic info",basicInfo)
-    // let formData = new FormData();    //No need to remove until vidhi want to remove
+    // let formData = new FormData();
     // formData.append("course_name",basicInfo?.Name)
     // formData.append("description",basicInfo?.Description)
     // formData.append("price",parseInt(editPrice?.regularPrice))
@@ -74,13 +79,14 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       modified_by: 1,
       created_by: 2,
     };
-    // console.log("thumbnail basic info",courseData,basicInfo?.thumbnailPath) //No need to remove until vidhi want to remove
+    // console.log("thumbnail basic info",courseData,basicInfo?.thumbnailPath)
     createCourse({
       courseData,
       callBack: (response) => {
         toast.success("Course added successfully!", {
           autoClose: 500,
         });
+        navigate("/YourCourses");
       },
       error: () => {
         toast.error("Something went wrong!", {
@@ -103,18 +109,18 @@ const CreateCourses = ({ handleHeaderLabels }) => {
     <Box className="courseMainTrack">
       <Tracker
         trackerPage={trackerPage}
-        handleTrackerPage={handleTrackerPage}//No need to remove until vidhi want to remove
+        handleTrackerPage={handleTrackerPage}
       />
       
       {trackerPage === 0 ? (
         <CreateForm
-          handleTrackerPage={handleTrackerPage}//No need to remove until vidhi want to remove
+          handleTrackerPage={handleTrackerPage}
           handleInputChange={handleInputChange}
           courseData={courseData}
         />
       ) : trackerPage === 1 ? (
         <EditPrice
-          handleTrackerPage={handleTrackerPage}//No need to remove until vidhi want to remove
+          handleTrackerPage={handleTrackerPage}
           handleInputChange={handleInputChange}
           courseData={courseData}
         />
