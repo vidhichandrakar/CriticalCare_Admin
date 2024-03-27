@@ -60,16 +60,16 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
   const handleConfigChanges = () => {
     const payload = {
       category_name: updatedCat.category_name,
-      created_by: updatedCat.created_by,
-      modiefied_by: updatedCat.modiefied_by,
+      created_by: parseInt(localStorage.getItem("loggedInUser")),
+      modiefied_by: parseInt(localStorage.getItem("loggedInUser")),
     };
     createCategory({ payload, callBack: (response) => {} });
   };
   const handleDurationChanges = () => {
     const payload = {
       duration_name: updatedDuration.duration_name,
-      created_by: updatedCat.created_by,
-      modiefied_by: updatedCat.modiefied_by,
+      created_by: parseInt(localStorage.getItem("loggedInUser")),
+      modiefied_by: parseInt(localStorage.getItem("loggedInUser")),
     };
     updateDuration({ payload, callBack: (response) => {} 
     ,error:(error)=>{

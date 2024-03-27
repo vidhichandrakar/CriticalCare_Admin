@@ -16,7 +16,9 @@ export const commonTextField =({className,inputClassName,labels},Option={
     sx={sx}
     className={className}
     value={value}
-    onChange={(event)=> handleInput(event.target.value,type)}
+    onChange={(event)=> {
+      console.log("value  event",value, event);
+      handleInput(event.target.value,type)}}
   />
   )
 }

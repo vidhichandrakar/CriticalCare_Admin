@@ -45,6 +45,19 @@ const Trics1FreeMockTest = () => {
         console.log(error.message);
       }
     });
+    console.log("useNavigate hello",location);
+  }, []);
+  useEffect(() => {
+    if (courseId) {
+      console.log("defined", courseId);
+      getCourseById({
+        courseId,
+        callBack: (response) => {
+          const userCallBack = response?.data;
+          setCourseData(userCallBack);
+        },
+      });
+    }
   }, [courseId]);
 
   const handleDeleteCourse = () => {
