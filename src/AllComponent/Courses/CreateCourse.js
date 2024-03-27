@@ -40,10 +40,9 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         callBack: (response) => {
           const userCallBack = response?.data;
           setCourseData(userCallBack);
-          
+          setLoaderState(false);
         },
       });
-      // setLoaderState(false);
     }
     
   }, [courseId]);
