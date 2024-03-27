@@ -65,7 +65,6 @@ const Trics1FreeMockTest = () => {
     deleteCourses({
       courseId,
       callBack: (response) => {
-<<<<<<< HEAD
         toast.success("Course Deleted successfully!", {
           autoClose: 500,
         });
@@ -76,15 +75,6 @@ const Trics1FreeMockTest = () => {
           autoClose: 500,
         });
       },
-=======
-        toast.success("deleted successfully!");
-        navigate("/YourCourses");
-      },
-      error:(error)=>{
-        toast.error(error.message);
-        console.log(error.message);
-      }
->>>>>>> 6e01623cfc88c6625b70d80821167bdb8954c041
     });
   };
 
