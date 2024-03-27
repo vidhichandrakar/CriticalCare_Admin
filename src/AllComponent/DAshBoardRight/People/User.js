@@ -158,7 +158,6 @@ const User = () => {
       },error:(error)=>{
         toast.error(error.message);
         console.log(error.message);
-        
       }
     });
   };

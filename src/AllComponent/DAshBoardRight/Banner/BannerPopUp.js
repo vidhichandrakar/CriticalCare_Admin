@@ -64,7 +64,6 @@ function BannerPopUp({openPopUp, handleClickPopUp}) {
                 value="none"
                 name="radio-buttons"
                 labelPlacement="start"
-                // inputProps={{ 'aria-label': 'A' }}
               />
             </Box>
             <Box className="popUpRadioBtn">

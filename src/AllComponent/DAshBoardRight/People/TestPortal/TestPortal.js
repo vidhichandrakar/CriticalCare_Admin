@@ -215,6 +215,7 @@ const TestPortal = () => {
     createTestPortal({
       payload,
       callBack: (response) => {
+        toast.success("New Member added!");
         setOpen(false);
       },
     });
@@ -226,11 +227,12 @@ const TestPortal = () => {
     getTestByID({
       testId,
       callBack: (response) => {
+        // toast.success("");
         const data = response.data;
         let storedValues = Object.assign({}, addTest);
         storedValues.testName = data.test_name;
         storedValues.testDuration = data.duration_minute;
-        storedValues.Hours = data.duration_hour;
+        storedValues.hours = data.duration_hour;
         setAddTest(storedValues);
       },
     });

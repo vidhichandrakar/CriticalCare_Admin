@@ -169,14 +169,11 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
         </Box>
       </Box>
       <Box className="divider"></Box>
-     {/* <Link to ="/YourCourses">  */}
      {commonButton({
         handleTrackerPage: () => handlePricePage(),
         className: "coursesButton",
-        className: "coursesButton",
         label: "Add Content",
       })}
-      {/* </Link> */}
       <ToastContainer />
     </div>
   );
