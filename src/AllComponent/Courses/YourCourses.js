@@ -11,7 +11,7 @@ import YourCoursesCard from "./YourCoursesCard";
 import { YourCoursesCardData } from "../../Data/JsonData";
 import SideBar from "../AdminDashboardMain/SideBar";
 import { Link } from "react-router-dom";
-import { getAllCourses } from "../ActionFactory/apiActions";
+import { getAllCourses, getAllUsersApi } from "../ActionFactory/apiActions";
 import LoaderComponent from "../../Util/LoaderComponent";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,6 +20,7 @@ import "react-toastify/dist/ReactToastify.css";
 const YourCourses = () => {
   const [allCourses, setAllCourses] = useState([]);
   const [loaderState, setLoaderState] = useState(false);
+  const [userData, setUserData] = useState([]);
   
   useEffect(() => {
     setLoaderState(true);
@@ -34,6 +35,18 @@ const YourCourses = () => {
         setLoaderState(false);
       }
     });
+    getAllUsersApi({
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setUserData(userCallBack);
+        setLoaderState(false);
+      },error:(error)=>{
+        toast.error(error.message);
+        console.log(error.message);
+        setLoaderState(false);
+      }
+    });
+    
   }, 
   []);
   
@@ -61,7 +74,7 @@ const YourCourses = () => {
               </Link>
             </div>
           </div>
-          <YourCoursesCard allCourses={allCourses} Data={YourCoursesCardData} />
+          <YourCoursesCard allCourses={allCourses} userData={userData} Data={YourCoursesCardData} />
         </div>
       </div>
       <ToastContainer />

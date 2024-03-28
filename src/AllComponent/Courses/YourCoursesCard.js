@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 import { capitalize } from "@material-ui/core";
 
-const YourCoursesCard = ({ allCourses }) => {
+const YourCoursesCard = ({ allCourses, userData }) => {
   
   const navigate = useNavigate();
 
@@ -17,7 +17,8 @@ const YourCoursesCard = ({ allCourses }) => {
       {allCourses.length
         ? allCourses.map((item) => {
           const id = item.course_id;
-
+          const createdBy = userData.filter(user => user.user_id === item.created_by)
+            console.log(createdBy, "card createdBy")
             return (
               <div className="card" onClick={()=>handleCourse(id)}>
                 <Link  to={{query: {id:id}, pathname: "/Trics1FreeMockTest"}}>
@@ -26,10 +27,10 @@ const YourCoursesCard = ({ allCourses }) => {
                 <div className="CardData">
                   <p className="Headp">{capitalize(item.course_name)}</p>
                   <p className="Namep">
-                   Created By: {item.created_by}
+                   Created By: {createdBy[0].user_name}
                   </p>
                   <p className="Yearp">{item.duration_type_id} Year </p>
-                  <p className="Pricep">₹ {item.offer_price}</p>
+                  <p className="Pricep">₹{item.offer_price}</p>
                 </div>
               </div>
             );

@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { capitalizeFirstLetter } from "../../../Util/CommonFields";
 
 const Trics1FreeMockTest = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -66,13 +67,16 @@ const Trics1FreeMockTest = () => {
     deleteCourses({
       courseId,
       callBack: (response) => {
-        toast.success("deleted successfully!");
+        toast.success("Course Deleted successfully!", {
+          autoClose: 500,
+        });
         navigate("/YourCourses");
       },
-      error:(error)=>{
-        toast.error(error.message);
-        console.log(error.message);
-      }
+      error: () => {
+        toast.error("Something went wrong!", {
+          autoClose: 500,
+        });
+      },
     });
   };
 
@@ -98,8 +102,8 @@ const Trics1FreeMockTest = () => {
         <div className="another-main-container">
           <div className="completeTricsBox">
             <div className="leftSideRow">
-              <p className="blackPara">{courseData.course_name}</p>
-              <p className="greyPara">TRICS 1 FREE MOCK TEST FOR EDIC-1</p>
+              <p className="blackPara">Course Name</p>
+              <p className="greyPara">{capitalizeFirstLetter(courseData?.course_name)}</p>
               <hr />
 
               <p className="blackPara">Description</p>

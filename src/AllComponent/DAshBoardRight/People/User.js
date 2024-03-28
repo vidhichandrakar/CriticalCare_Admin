@@ -122,6 +122,7 @@ const User = () => {
         setLoaderState(false);
       }
     });
+    
   }, []);
 
   const handleChangeOnCheckBox = (event, data) => {
