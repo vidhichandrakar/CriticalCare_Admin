@@ -27,10 +27,10 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                 <div className="CardData">
                   <p className="Headp">{capitalize(item.course_name)}</p>
                   <p className="Namep">
-                   Created By: {createdBy[0].user_name}
+                   Created By: {createdBy[0]?.user_name}
                   </p>
                   <p className="Yearp">{item.duration_type_id} Year </p>
-                  <p className="Pricep">₹{item.offer_price}</p>
+                  <p className="Pricep">₹{item.price}</p>
                 </div>
               </div>
             );
