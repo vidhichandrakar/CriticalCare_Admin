@@ -130,7 +130,7 @@ const MyTeam = () => {
   const [userData, setUserData] = useState([]);
   const open = Boolean(anchorEl);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const id = open ? "simple-popover" : undefined;
   const [opened, setOpen] = useState(false);
   const [addTeam, setAddTeam] = useState({
