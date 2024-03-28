@@ -4,17 +4,18 @@
  width:96%;
  margin-top:2.5%;
  margin-left: 2%;
- /* background-color: red; */
  justify-content: center;
- /* border: 1px solid red; */
 }
 .HeaderBox{
   display: flex;
   flex-direction: row;
+  margin-left: -2%;
+  width: 100%;
 }
 .HeaderLeft{
   width:60%;
   margin-top: 5px;
+  margin-left: 3%;
 }
 .subHeader{
   font-size: 0.85em !important;
@@ -27,14 +28,9 @@
   border-radius: 15% !important;
   margin-top: -3px;
 }
-.selectDesign:hover{
- 
-}
 .css-6hp17o-MuiList-root-MuiMenu-list{
-  /* margin: 10px 10px !important; */
   padding: 1px 10px !important;
   padding-top: 6px !important;
-  /* margin: 1px 10px !important; */
 }
 .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root {
   min-height: 42px;
