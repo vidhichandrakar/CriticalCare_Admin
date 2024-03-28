@@ -15,6 +15,8 @@ import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { deleteCourses, getCourseById } from "../../ActionFactory/apiActions";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -82,7 +84,17 @@ const Trics1FreeMockTest = () => {
     <div className="grid-container">
       <SideBar />
       <div className="mainBox">
+
+        <div className="singleRow">
+      <Link to="/YourCourses">
+                <Button 
+                 className="backToCourses">
+                  <ArrowBackIosNewIcon/>
+                </Button>
+      </Link>
         <CourseHeader Heading={"TRICS 1 FREE MOCK TEST FOR EDIC-1"} />
+        </div>
+
         <div className="another-main-container">
           <div className="completeTricsBox">
             <div className="leftSideRow">

@@ -865,6 +865,16 @@ body {
   font-weight: 600 !important;
   text-decoration: none !important;
 }
+.singleRow{
+  display: flex !important;
+  flex-direction: row !important;
+  /* justify-content: space-between !important; */
+}
+.backToCourses{
+  color: black !important;
+  height: 49px;
+  margin-left: -30% !important;
+}
 
 /* END OF COURSE->>TRICS 1 FREE MOCK TEST  */
 
