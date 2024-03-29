@@ -1,14 +1,14 @@
 import React, { useState, setkey, key, keyDown } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { Typography, paperClasses } from "@mui/material";
+import { InputAdornment, Typography, paperClasses } from "@mui/material";
 import Button from "@mui/material/Button";
 import { getUserId, login, verifyOtp } from "../../ActionFactory/apiActions";
 import { redirect, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoaderComponent from "../../../Util/LoaderComponent";
-
+import India from "../../../Media/Images/India.png";
 import { validatePhoneNo } from "../../../Util/CommonUtils";
 
 const LoginEmailandPassword = () => {
@@ -50,7 +50,6 @@ const LoginEmailandPassword = () => {
         phone_no: phoneNO?.toString(),
       };
       login({
-        
         payload,
         callBack: (response) => {
           setLoginWay("Get OTP");
@@ -59,57 +58,96 @@ const LoginEmailandPassword = () => {
           setLoaderState(false);
         },
         error: (error) => {
-          const errorMessage = error?.response?.data?.message||error?.response?.data||"something went wrong"
+          const errorMessage =
+            error?.response?.data?.message ||
+            error?.response?.data ||
+            "something went wrong";
           toast.error(errorMessage);
           console.log(errorMessage, error);
           setLoaderState(false);
-          
         },
       });
     }
     if (loginWay !== "") {
       // if (getOTP === parseInt(enteredOTP)) {
-        const payload = {
-          phone_no: phoneNO?.toString(),
-          OTP: parseInt(enteredOTP),
-        };
-        verifyOtp({
-          payload,
-          callBack: (response) => {
-            console.log("verify", response);
-            setUserInfo({
-              userId: response.data.user_id,
-              userName: response.data.user_name,
-              user_photo: response.data.user_photo,
-            });
-            localStorage.setItem("loggedInUser", JSON.stringify(response?.data));
-            navigation("/DashBoard")
-          },
-          error: (error) => {
-            toast.error(error.response.data.message);
-            console.log(error.response.data.message);
-          },
-        });
+      const payload = {
+        phone_no: phoneNO?.toString(),
+        OTP: parseInt(enteredOTP),
+      };
+      verifyOtp({
+        payload,
+        callBack: (response) => {
+          console.log("verify", response);
+          setUserInfo({
+            userId: response.data.user_id,
+            userName: response.data.user_name,
+            user_photo: response.data.user_photo,
+          });
+          localStorage.setItem("loggedInUser", JSON.stringify(response?.data));
+          navigation("/DashBoard");
+        },
+        error: (error) => {
+          toast.error(error.response.data.message);
+          console.log(error.response.data.message);
+        },
+      });
       // }
     }
   };
+  
   const handleLoginByOTP = (value, type) => {
-
     setDisableLogiBtn(false);
     if (type === "password") {
-      setPhoneNo(validatePhoneNo(value,phoneNO));
-      console.log("validatePhoneNo",validatePhoneNo(value,phoneNO));
-
+      setPhoneNo(validatePhoneNo(value, phoneNO));
+      console.log("validatePhoneNo", validatePhoneNo(value, phoneNO));
     } else if (type === "OTP") {
       setEnteredOTP(value);
     }
   };
 
+
+  // const handleOtp = (type, value) => {
+  //   setDisableLogiBtn(false);
+  //   let prevOtp = { ...otpValue };
+  //   prevOtp[type] = value;
+  //   if (
+  //     prevOtp.otp1 != "" &&
+  //     prevOtp.otp2 != "" &&
+  //     prevOtp.otp3 != "" &&
+  //     prevOtp.otp4 != ""
+  //     // prevOtp.otp5 != "" &&
+  //     // prevOtp.otp6 != ""
+  //   ) {
+  //     prevOtp.disable = false;
+  //   } else {
+  //     prevOtp.disable = true;
+  //   }
+  //   setOtp(prevOtp);
+  //   console.log("typeee", type);
+  // };
+  // const handleLoginType = () => {
+  //   // cameFrom!=="signUp"?handleLoginOption(cameFrom==="signUp"?"loggIn":"continueOtp"):handleClick()
+  //   let typedOtp = parseInt(
+  //     otpValue.otp1 + otpValue.otp2 + otpValue.otp3 + otpValue.otp4
+  //   );
+
+  //   console.log("loginResponse.OTP", loginResponse?.OTP);
+  //   console.log("otpValueotpValue", typedOtp, parseInt(typedOtp));
+  //   if (loginResponse?.OTP === typedOtp) {
+  //     createUserByID({
+  //       userId: loginResponse.user_id,
+  //       callBack: (response) => {
+  //         localStorage.setItem("userId", loginResponse.user_id);
+  //         // console.log("response use id", response.data.user_name);
+  //         localStorage.setItem("userName", response.data.user_name);
+  //       },
+  //     });
+  //     navigateHome("/AllCourses");
+  //   }1
+
   return (
     <div className="RightBox">
-       <LoaderComponent
-      loaderState={loaderState}
-      />
+      <LoaderComponent loaderState={loaderState} />
       <Box className="BoxWidth">
         <Typography className="loginText">
           Login to Admin Panel
@@ -146,7 +184,7 @@ const LoginEmailandPassword = () => {
         ) : null}
 
         <Box sx={{ mt: 2 }}>
-          <TextField
+          {/* <TextField
             id="fullWidth"
             label="Enter Phone No"
             variant="outlined"
@@ -159,6 +197,32 @@ const LoginEmailandPassword = () => {
             onChange={(event) =>
               handleLoginByOTP(event.target.value, "password")
             }
+          /> */}
+          <TextField
+            id="fullWidth"
+            placeholder="Mobile Number"
+            className="phoneTextField BoxShadow"
+            sx={{ color: "#000" }}
+            variant="outlined"
+            inputProps={{ maxLength: 10 }}
+            disabled={phoneNO?.length === 10 && getOTP !== ""}
+            type="number"
+            value={phoneNO}
+            onChange={(event) =>
+              handleLoginByOTP(event.target.value, "password")
+            }
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <p className="phoneTextFieldStartIcon">
+                    <Box className="indiaBox">
+                      <img src={India} className="indiaImg" />
+                    </Box>{" "}
+                    <p className="startText"> +91 - </p>
+                  </p>
+                </InputAdornment>
+              ),
+            }}
           />
         </Box>
 
@@ -172,6 +236,47 @@ const LoginEmailandPassword = () => {
               fullWidth
               onChange={(event) => handleLoginByOTP(event.target.value, "OTP")}
             />
+
+            {/* <TextField
+              id="outlined-basic"
+              variant="outlined"
+              className="OTPBox"
+              onChange={(event) => handleOtp("otp1", event.target.value)}
+              inputProps={{
+                maxLength: 1,
+                className: "boxOtpWidth",
+              }}
+            />
+            <TextField
+              id="outlined-basic"
+              variant="outlined"
+              className="OTPBox"
+              onChange={(event) => handleOtp("otp2", event.target.value)}
+              inputProps={{
+                maxLength: 1,
+                className: "boxOtpWidth",
+              }}
+            />
+            <TextField
+              id="outlined-basic"
+              variant="outlined"
+              className="OTPBox"
+              onChange={(event) => handleOtp("otp3", event.target.value)}
+              inputProps={{
+                maxLength: 1,
+                className: "boxOtpWidth",
+              }}
+            />
+            <TextField
+              id="outlined-basic"
+              variant="outlined"
+              className="OTPBox"
+              onChange={(event) => handleOtp("otp4", event.target.value)}
+              inputProps={{
+                maxLength: 1,
+                className: "boxOtpWidth",
+              }}
+            /> */}
           </Box>
         )}
 
