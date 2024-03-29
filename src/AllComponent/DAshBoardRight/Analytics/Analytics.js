@@ -79,7 +79,7 @@ const Analytics = () => {
                 ))}
               </Select>
             </FormControl>
-
+                  <div className="DatePicker">
             {customDate && (
               <div className="custumDatePicker">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -98,9 +98,8 @@ const Analytics = () => {
                 </LocalizationProvider>
               </div>
             )}
-
             {customDate && (
-              <div className="custumDatePicker">
+              <div className="custumDatePicker mt-2">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DemoContainer components={["DatePicker"]}>
                     <DatePicker
@@ -112,6 +111,7 @@ const Analytics = () => {
                 </LocalizationProvider>
               </div>
             )}
+            </div>
           </div>
 
           <Box className="CardsRow">

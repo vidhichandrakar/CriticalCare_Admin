@@ -8,6 +8,8 @@ import { ToastContainer, toast } from "react-toastify";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import DoneIcon from "@mui/icons-material/Done";
+import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
+import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
 import "react-toastify/dist/ReactToastify.css";
 import {
   CommonTypography,
@@ -196,7 +198,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     <div className="formMain">
       <div className="FlexRow">
         {CommonTypography({ fontWeight: 600, label: "Name" })}
-        {hideValidationTickName && <DoneIcon className="RightTick" />}
+        {hideValidationTickName && <CheckCircleRoundedIcon className="RightTick" />}
       </div>
       {commonTextField(
         {
