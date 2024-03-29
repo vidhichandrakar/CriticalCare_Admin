@@ -15,8 +15,11 @@ import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { deleteCourses, getCourseById } from "../../ActionFactory/apiActions";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { capitalizeFirstLetter } from "../../../Util/CommonFields";
 
 const Trics1FreeMockTest = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -35,7 +38,22 @@ const Trics1FreeMockTest = () => {
   };
 
   useEffect(() => {
+    getCourseById({
+      courseId,
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setCourseData(userCallBack);
+      },
+      error: (error) => {
+        toast.error(error.message);
+        console.log(error.message);
+      },
+    });
+    console.log("useNavigate hello", location);
+  }, []);
+  useEffect(() => {
     if (courseId) {
+      console.log("defined", courseId);
       getCourseById({
         courseId,
         callBack: (response) => {
@@ -50,7 +68,15 @@ const Trics1FreeMockTest = () => {
     deleteCourses({
       courseId,
       callBack: (response) => {
+        toast.success("Course Deleted successfully!", {
+          autoClose: 500,
+        });
         navigate("/YourCourses");
+      },
+      error: () => {
+        toast.error("Something went wrong!", {
+          autoClose: 500,
+        });
       },
     });
   };
@@ -63,12 +89,22 @@ const Trics1FreeMockTest = () => {
     <div className="grid-container">
       <SideBar />
       <div className="mainBox">
-        <CourseHeader Heading={"TRICS 1 FREE MOCK TEST FOR EDIC-1"} />
+        <div className="singleRow">
+          <Link to="/YourCourses">
+            <Button className="backToCourses">
+              <ArrowBackIosNewIcon />
+            </Button>
+          </Link>
+          <CourseHeader Heading={"TRICS 1 FREE MOCK TEST FOR EDIC-1"} />
+        </div>
+
         <div className="another-main-container">
           <div className="completeTricsBox">
             <div className="leftSideRow">
-              <p className="blackPara">{courseData.course_name}</p>
-              <p className="greyPara">TRICS 1 FREE MOCK TEST FOR EDIC-1</p>
+              <p className="blackPara">Course Name</p>
+              <p className="greyPara">
+                {capitalizeFirstLetter(courseData?.course_name)}
+              </p>
               <hr />
 
               <p className="blackPara">Description</p>
@@ -104,10 +140,13 @@ const Trics1FreeMockTest = () => {
 
               <div className="StuEnrViewAll">
                 <div>
-                  {" "}
                   <p className="blackPara">Student Enrolled</p>
                 </div>
-                <span className="blueViewAll pointer">View All</span>
+                <span className="blueViewAll pointer">
+                  <Link to="/User" className="viewAllBlue">
+                    View All
+                  </Link>
+                </span>
               </div>
               <p className="greyPara">44</p>
             </div>
@@ -133,8 +172,9 @@ const Trics1FreeMockTest = () => {
               onClick={handleClick}
               className="catagorytextofTrics"
             >
-              <MoreHorizIcon />
+              {/* <MoreHorizIcon className="threeDotsIcon"/> */}
               More Options
+              <MoreHorizIcon className="threeDotsIcon" />
             </Button>
             <div className="Widthhh">
               <Popover

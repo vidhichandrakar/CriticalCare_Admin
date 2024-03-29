@@ -59,8 +59,11 @@ const LoginEmailandPassword = () => {
           setLoaderState(false);
         },
         error: (error) => {
-          toast.error(error.message);
-          console.log(error.message);
+          const errorMessage = error?.response?.data?.message||error?.response?.data||"something went wrong"
+          toast.error(errorMessage);
+          console.log(errorMessage, error);
+          setLoaderState(false);
+          
         },
       });
     }
@@ -136,7 +139,6 @@ const LoginEmailandPassword = () => {
               variant="outlined"
               className="BoxShadow"
               fullWidth
-              // onKeyDown={keyDown}
               type="password"
               onChange={(event) => handleInput(event.target.value, "password")}
             />

@@ -13,8 +13,8 @@ const AddContent = ({})=>{
         <Box className="contentInnerLeftBox"> 
          <LeftBox/>
         </Box>
-        
       </Box>
+      
       <Box className="contentRightBox">
       <Typography className="contentRightHeading"> Add content</Typography>
       <Box>

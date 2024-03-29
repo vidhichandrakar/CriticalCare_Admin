@@ -122,6 +122,7 @@ const User = () => {
         setLoaderState(false);
       }
     });
+    
   }, []);
 
   const handleChangeOnCheckBox = (event, data) => {
@@ -157,7 +158,6 @@ const User = () => {
       },error:(error)=>{
         toast.error(error.message);
         console.log(error.message);
-        
       }
     });
   };
