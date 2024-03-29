@@ -19,8 +19,12 @@ import {
 } from "../../Util/CommonFields";
 import { Category, Description } from "@mui/icons-material";
 import { category, subCategory } from "../../Util/masterFile";
-import { getCategory } from "../ActionFactory/apiActions";
+import { getCategory, getSubcategoryList } from "../ActionFactory/apiActions";
 import { useDropzone } from "react-dropzone";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import MenuItem from "@mui/material/MenuItem";
+
+// import FormControl from "@mui/material/FormControl";
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
   clipPath: "inset(50%)",
@@ -32,6 +36,16 @@ const VisuallyHiddenInput = styled("input")({
   whiteSpace: "nowrap",
   width: 1,
 });
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const [hideValidationTickName, sethideValidationTickName] = useState(false);
@@ -60,6 +74,8 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     onChange: (event) => console.log(event),
     accept: "image/jpeg, image/png, image/jpg, application/pdf",
   });
+  const [subCategoryList, setSubCategoryList] = useState([]);
+  const [selectedCategoryList, setSelectedcategoryList] = useState("");
   useEffect(() => {
     getCategory({
       // courseId,
@@ -69,7 +85,6 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       },
       error: (error) => {
         toast.error(error.message);
-        console.log(error.message);
         // setLoaderState(false);
       },
     });
@@ -164,6 +179,21 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const handleInputFile = (file) => {
     console.log(file);
   };
+  const handleChangeOnCat = (e) => {
+    let mainCatID = e?.target?.value?.category_id;
+    handleInput(mainCatID,"category");
+    getSubcategoryList({
+      mainCatID,
+      callBack: (response) => {
+        setSubCategoryList(response.data);
+        setSelectedcategoryList(e?.target?.value);
+      },
+    });
+  };
+  const handleChangeOnSubCat = (e) => {
+    let mainSubCatID = e?.target?.value?.category_id;
+    handleInput(mainSubCatID,"subCategory");
+  };
   return (
     <div className="formMain">
       <div className="FlexRow">
@@ -209,26 +239,27 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
         label: "Add Thumbnail",
       })}
 
-<div {...getIntroVideoRootProps({ className: "dropzone" })}>
+      <div {...getIntroVideoRootProps({ className: "dropzone" })}>
         <input {...getIntroVideoInputProps()} />
-      <Box className="thumbnailUpload">
-        <Button
-          component="label"
-          variant="outlined-multiline-static"
-          startIcon={<UploadIcon className="iconThumbicon" />}
-          className="iconThumb"
-        >
-          Upload Thumbnail Image
-         </Button>
-        <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
-          Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
-        </Typography>
-        <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
-          {storedBasicInfo?.thumbnailPath?.length && storedBasicInfo?.thumbnailPath[0]?.name}
-        </Typography>
-      </Box>
+        <Box className="thumbnailUpload">
+          <Button
+            component="label"
+            variant="outlined-multiline-static"
+            startIcon={<UploadIcon className="iconThumbicon" />}
+            className="iconThumb"
+          >
+            Upload Thumbnail Image
+          </Button>
+          <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
+            Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
+          </Typography>
+          <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
+            {storedBasicInfo?.thumbnailPath?.length &&
+              storedBasicInfo?.thumbnailPath[0]?.name}
+          </Typography>
+        </Box>
       </div>
-    
+
       <Box className="divider"></Box>
       <Box sx={{ marginTop: "5%" }} className="categoryBox">
         <Box>
@@ -240,18 +271,20 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           )}
 
           <FormControl sx={{ m: 1, minWidth: 240 }} className="categorySelect">
-            {commonSelect(
-              {
-                placeholder: "Select Category",
-                menuItemList: category,
-                className: "categorytext",
-              },
-              (Option = {
-                handleInput: handleInput,
-                categoryValue: storedBasicInfo.Category,
-                type: "category",
-              })
-            )}
+            <Select
+              label="Category"
+              value={cat.category_name}
+              onChange={(e) => handleChangeOnCat(e)}
+              input={<OutlinedInput />}
+              MenuProps={MenuProps}
+              inputProps={{ "aria-label": "Without label" }}
+            >
+              {cat.map((item) => (
+                <MenuItem key={item._id} value={item}>
+                  {item.category_name}
+                </MenuItem>
+              ))}
+            </Select>
           </FormControl>
         </Box>
         <Box className="rightCat">
@@ -262,18 +295,21 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
             })
           )}
           <FormControl sx={{ m: 1, minWidth: 240 }} className="categorySelect">
-            {commonSelect(
-              {
-                placeholder: "Select Sub Category",
-                menuItemList: subCategory,
-                className: "categorytext",
-              },
-              (Option = {
-                handleInput: handleInput,
-                categoryValue: storedBasicInfo.subCategory,
-                type: "subCategory",
-              })
-            )}
+            <Select
+              label="Sub Category"
+              value={subCategoryList?.category_name}
+              onChange={(e) => handleChangeOnSubCat(e)}
+              input={<OutlinedInput />}
+              MenuProps={MenuProps}
+              inputProps={{ "aria-label": "Without label" }}
+              disabled={selectedCategoryList === ""}
+            >
+              {subCategoryList?.map((item) => (
+                <MenuItem key={item._id} value={item}>
+                  {item.category_name}
+                </MenuItem>
+              ))}
+            </Select>
           </FormControl>
         </Box>
       </Box>

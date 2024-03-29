@@ -26,11 +26,9 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
     storedValues.regularPrice = courseData.price;
     storedValues.offerPrice = courseData.offer_price;
     setEditPriceData(storedValues);
-    console.log("courseDataEdit", storedValues);
   }, [courseData]);
   const handleInpurPrice = (value, type) => {
     let storedValues = Object.assign({}, editPriceData);
-    console.log("valuetype", value, type);
     if (type === "duration") {
       storedValues.duration = value;
     } else if (type === "years") {
@@ -58,13 +56,12 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
       storedValues.regularPrice &&
       storedValues.offerPrice
     ) {
-      if (storedValues.regularPrice > storedValues.offerPrice) {
-        console.log("storedValues,storedValues", storedValues);
+      if (parseInt(storedValues.regularPrice) > parseInt(storedValues.offerPrice)) {
         handleInputChange("editPrice", storedValues);
 
         handleTrackerPage(2);
       } else {
-        toast.error("Holls", {
+        toast.error("Offer Price Must Be Less Then Regular Price", {
           autoClose: 500,
         });
       }

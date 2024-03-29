@@ -69,8 +69,8 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       description: basicInfo?.Description,
       price: parseInt(editPrice?.regularPrice),
       offer_price: parseInt(editPrice?.offerPrice),
-      category_id:basicInfo?.Category?.id,
-      sub_category_id: basicInfo?.subCategory?.id,
+      category_id:basicInfo?.Category,
+      sub_category_id: basicInfo?.subCategory,
       duration_id: parseInt(editPrice?.duration),
       duration_type_id: 91,
       thumbnail_path: basicInfo?.thumbnailPath,
@@ -78,7 +78,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       modified_by: 1,
       created_by: 2,
     };
-    // console.log("thumbnail basic info",courseData,basicInfo?.thumbnailPath)
     createCourse({
       courseData,
       callBack: (response) => {
@@ -97,7 +96,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
 
   const handleInputChange = (type, value) => {
     if (type === "basicInfo") {
-      console.log("basic",value)
       setBasicInfo(value);
     } else if (type === "editPrice") {
       setEditPrice(value);
