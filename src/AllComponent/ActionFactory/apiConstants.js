@@ -10,4 +10,5 @@ export const APIS = {
   getTest: REACT_APP_API + "/test",
   login: REACT_APP_API + "/login",
   verifyLogin: REACT_APP_API + "/login/verify-otp",
+  getSubCategory: REACT_APP_API + "/category/subCategory",
 };

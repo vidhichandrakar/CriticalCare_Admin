@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -7,16 +7,55 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { CommonTypography, commonTextField } from "../../Util/CommonFields";
+import { useTheme } from "@mui/material/styles";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import {
   createCategory,
+  createSubCategory,
+  getCategory,
   updateDuration,
   updateMemberDetails,
 } from "../ActionFactory/apiActions";
+import { toast } from "react-toastify";
+import { Typography } from "@mui/material";
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
+  const theme = useTheme();
   const [updatedCat, setUpdatedCat] = useState({});
   const [updatedDuration, setUpdatedDuration] = useState({});
   const [saveMemberDetails, setSaveMemberDetails] = useState({});
+  const [subCategory, setSubCategory] = useState({});
+  const [selectedCategory, setSelectedCategory] = useState();
+  const [cat, setCat] = useState([]);
+
+  useEffect(() => {
+    if (selectedConfigValue === "SubCategory") {
+      getCategory({
+        // courseId,
+        callBack: (response) => {
+          const userCallBack = response?.data;
+          setCat(userCallBack);
+        },
+        error: (error) => {
+          toast.error(error.message);
+          // setLoaderState(false);
+        },
+      });
+    }
+  }, []);
 
   const handleInput = (value, type) => {
     if (
@@ -53,6 +92,8 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
         storedValues.phone_no = value;
       }
       setSaveMemberDetails(storedValues);
+    } else if (type === "SubCategory") {
+      setSubCategory(value);
     }
   };
   const handleConfigChanges = () => {
@@ -79,6 +120,20 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
     };
     updateMemberDetails({ payload, callBack: (response) => {} });
   };
+  const handleSubCatChanges = () => {
+    const selectedValue = selectedCategory.category_id;
+    const userId = JSON.parse(localStorage.getItem("loggedInUser"));
+    const payload = {
+      category_name: subCategory,
+      sub_category_type: "Y",
+      created_by: userId.user_id,
+      main_categoty_id: selectedValue,
+    };
+    createSubCategory({ payload, callBack: (response) => {} });
+  };
+  const handleChange = (e) => {
+    setSelectedCategory(e.target.value);
+  };
   return (
     <React.Fragment>
       <Dialog
@@ -97,7 +152,7 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
       >
         <DialogTitle>Add {selectedConfigValue}</DialogTitle>
         <DialogContent>
-          {selectedConfigValue === "category" ? (
+          {selectedConfigValue === "Category" ? (
             <>
               {" "}
               {CommonTypography({ fontWeight: 600, label: "Category" })}
@@ -146,7 +201,7 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                 </div>
               </div>
             </>
-          ) : selectedConfigValue === "duration" ? (
+          ) : selectedConfigValue === "Duration" ? (
             <>
               {CommonTypography({ fontWeight: 600, label: "Duration" })}
               {commonTextField(
@@ -192,6 +247,41 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                     })
                   )}
                 </div>
+              </div>
+            </>
+          ) : selectedConfigValue === "SubCategory" ? (
+            <>
+              <div>
+                {CommonTypography({ fontWeight: 600, label: "Category" })}
+                <FormControl sx={{ m: 1, width: 300, mt: 1 }}>
+                  <Select
+                    label="Category"
+                    value={cat.category_name}
+                    onChange={(e) => handleChange(e)}
+                    input={<OutlinedInput />}
+                    MenuProps={MenuProps}
+                    inputProps={{ "aria-label": "Without label" }}
+                  >
+                    {cat.map((item) => (
+                      <MenuItem key={item._id} value={item}>
+                        {item.category_name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  {CommonTypography({ fontWeight: 600, label: "Sub Category" })}
+                  {commonTextField(
+                    {
+                      id: "fullWidth",
+                      className: "BoxShadow",
+                      inputClassName: "textField",
+                      labels: "Sub Category",
+                    },
+                    (Option = {
+                      handleInput: handleInput,
+                      type: "SubCategory",
+                    })
+                  )}
+                </FormControl>
               </div>
             </>
           ) : (
@@ -246,15 +336,21 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseCat}>Cancel</Button>
-          {selectedConfigValue === "category" ? (
+          {selectedConfigValue === "Category" ? (
             <>
               <Button onClick={handleConfigChanges} type="submit">
                 Save
               </Button>
             </>
-          ) : selectedConfigValue === "duration" ? (
+          ) : selectedConfigValue === "Duration" ? (
             <>
               <Button onClick={handleDurationChanges} type="submit">
+                Save
+              </Button>
+            </>
+          ) : selectedConfigValue === "SubCategory" ? (
+            <>
+              <Button onClick={handleSubCatChanges} type="submit">
                 Save
               </Button>
             </>
