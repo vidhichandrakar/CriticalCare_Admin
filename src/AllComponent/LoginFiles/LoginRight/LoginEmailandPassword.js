@@ -95,15 +95,39 @@ const LoginEmailandPassword = () => {
     }
   };
   
-  const handleLoginByOTP = (value, type) => {
+  const handleLoginByOTP = (value, type, event) => {
     setDisableLogiBtn(false);
+    // console.log(event);
     if (type === "password") {
       setPhoneNo(validatePhoneNo(value, phoneNO));
-      console.log("validatePhoneNo", validatePhoneNo(value, phoneNO));
+      // console.log("validatePhoneNo", validatePhoneNo(value, phoneNO));
     } else if (type === "OTP") {
       setEnteredOTP(value);
     }
   };
+
+
+
+  // const [inputValue, setInputValue] = useState('');
+
+  const handleKeyDown =(event, value, originalNum) => {
+    setDisableLogiBtn(false);
+    
+    if(typeof(phoneNO) !== 'undefined' && phoneNO.length){
+      // if(!validatePhoneNo(phoneNO)){
+   if( phoneNO?.length === 10 && event.keyCode === 13){
+    // if(inputValue?.length === 10 && event.keyCode === 13){
+
+       // if( validatePhoneNo(phoneNO, originalNum) && event.keyCode === 13){
+      console.log("workingg");
+    // handleLoginByOTP(event);
+      setPhoneNo(validatePhoneNo(value, phoneNO, originalNum));
+   }
+  }
+   else{
+    handleLoginByOTP(false);
+   }
+  }
 
 
   // const handleOtp = (type, value) => {
@@ -169,7 +193,7 @@ const LoginEmailandPassword = () => {
           />
         </Box>
 
-        {userLogin?.email != "" ? (
+        {userLogin?.email !== "" ? (
           <Box sx={{ mt: 2 }}>
             <TextField
               id="fullWidth"
@@ -208,8 +232,9 @@ const LoginEmailandPassword = () => {
             disabled={phoneNO?.length === 10 && getOTP !== ""}
             type="number"
             value={phoneNO}
+            onKeyDown = {(event)=> handleKeyDown(event)}
             onChange={(event) =>
-              handleLoginByOTP(event.target.value, "password")
+              handleLoginByOTP(event.target.value, "password", event)
             }
             InputProps={{
               startAdornment: (
