@@ -8,7 +8,8 @@ import { redirect, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoaderComponent from "../../../Util/LoaderComponent";
-import India from "../../../Media/Images/India.png";
+import India from "../../../Media/Images/India.png"
+
 import { validatePhoneNo } from "../../../Util/CommonUtils";
 
 const LoginEmailandPassword = () => {
@@ -25,6 +26,14 @@ const LoginEmailandPassword = () => {
   const [hideOTPBtn, setHideOTPBtn] = useState(true);
   const [loaderState, setLoaderState] = useState(false);
   const [userInfo, setUserInfo] = useState({});
+  const [otpValue, setOtp] = useState({
+    value: "",
+    otp1: "",
+    otp2: "",
+    otp3: "",
+    otp4: "",
+    disable: true,
+  });
   let navigation = useNavigate();
 
   const handleInput = (value, type) => {
@@ -44,12 +53,16 @@ const LoginEmailandPassword = () => {
   };
 
   const handleUserLogin = () => {
+    let typedOtp = parseInt(
+      otpValue.otp1 + otpValue.otp2 + otpValue.otp3 + otpValue.otp4
+    );
     setLoaderState(true);
     if (loginWay === "") {
       const payload = {
         phone_no: phoneNO?.toString(),
       };
       login({
+        
         payload,
         callBack: (response) => {
           setLoginWay("Get OTP");
@@ -58,249 +71,312 @@ const LoginEmailandPassword = () => {
           setLoaderState(false);
         },
         error: (error) => {
-          const errorMessage =
-            error?.response?.data?.message ||
-            error?.response?.data ||
-            "something went wrong";
-          toast.error(errorMessage);
-          console.log(errorMessage, error);
-          setLoaderState(false);
+          toast.error(error.message);
+          console.log(error.message);
         },
       });
     }
     if (loginWay !== "") {
-      // if (getOTP === parseInt(enteredOTP)) {
-      const payload = {
-        phone_no: phoneNO?.toString(),
-        OTP: parseInt(enteredOTP),
-      };
-      verifyOtp({
-        payload,
-        callBack: (response) => {
-          console.log("verify", response);
-          setUserInfo({
-            userId: response.data.user_id,
-            userName: response.data.user_name,
-            user_photo: response.data.user_photo,
-          });
-          localStorage.setItem("loggedInUser", JSON.stringify(response?.data));
-          navigation("/DashBoard");
-        },
-        error: (error) => {
-          toast.error(error.response.data.message);
-          console.log(error.response.data.message);
-        },
-      });
-      // }
+        const payload = {
+          phone_no: phoneNO?.toString(),
+          OTP: typedOtp,
+        };
+        verifyOtp({
+          payload,
+          callBack: (response) => {
+            console.log("verify", response);
+            setUserInfo({
+              userId: response.data.user_id,
+              userName: response.data.user_name,
+              user_photo: response.data.user_photo,
+            });
+            localStorage.setItem("loggedInUser", JSON.stringify(response?.data));
+            navigation("/DashBoard")
+          },
+          error: (error) => {
+            toast.error(error.response.data.message);
+            console.log(error.response.data.message);
+            setLoaderState(false);
+          },
+        });
+      
     }
   };
   
-  const handleLoginByOTP = (value, type) => {
-    setDisableLogiBtn(false);
-    if (type === "password") {
-      setPhoneNo(validatePhoneNo(value, phoneNO));
-      console.log("validatePhoneNo", validatePhoneNo(value, phoneNO));
-    } else if (type === "OTP") {
-      setEnteredOTP(value);
+  const handleResendOTP = () => {
+    setLoaderState(true);
+    if (loginWay === "") {
+      const payload = {
+        phone_no: phoneNO?.toString(),
+      };
+      login({
+        
+        payload,
+        callBack: (response) => {
+          setLoginWay("Get OTP");
+          setGetOTP(response.data.OTP);
+          setHideOTPBtn(false);
+          setLoaderState(false);
+        },
+        error: (error) => {
+          toast.error(error.message);
+          console.log(error.message);
+          setLoaderState(false);
+        },
+      });
     }
+  }
+
+  const handleLoginByOTP = ({value, type}) => {
+    let prevOtp = { ...otpValue };
+    console.log(prevOtp, "Line=107")
+    prevOtp[type] = value;
+   if (
+      prevOtp.otp1 != "" &&
+      prevOtp.otp2 != "" &&
+      prevOtp.otp3 != "" &&
+      prevOtp.otp4 != ""
+    ) {
+      prevOtp.disable = false;
+    } else {
+      prevOtp.disable = true;
+    }
+    setOtp(prevOtp);
+    console.log(prevOtp, "Line127")
+    console.log("typeee line 120", type);
+    setDisableLogiBtn(false);
   };
-
-
-  // const handleOtp = (type, value) => {
-  //   setDisableLogiBtn(false);
-  //   let prevOtp = { ...otpValue };
-  //   prevOtp[type] = value;
-  //   if (
-  //     prevOtp.otp1 != "" &&
-  //     prevOtp.otp2 != "" &&
-  //     prevOtp.otp3 != "" &&
-  //     prevOtp.otp4 != ""
-  //     // prevOtp.otp5 != "" &&
-  //     // prevOtp.otp6 != ""
-  //   ) {
-  //     prevOtp.disable = false;
-  //   } else {
-  //     prevOtp.disable = true;
-  //   }
-  //   setOtp(prevOtp);
-  //   console.log("typeee", type);
-  // };
-  // const handleLoginType = () => {
-  //   // cameFrom!=="signUp"?handleLoginOption(cameFrom==="signUp"?"loggIn":"continueOtp"):handleClick()
-  //   let typedOtp = parseInt(
-  //     otpValue.otp1 + otpValue.otp2 + otpValue.otp3 + otpValue.otp4
-  //   );
-
-  //   console.log("loginResponse.OTP", loginResponse?.OTP);
-  //   console.log("otpValueotpValue", typedOtp, parseInt(typedOtp));
-  //   if (loginResponse?.OTP === typedOtp) {
-  //     createUserByID({
-  //       userId: loginResponse.user_id,
+  // const handleUserLogin = () => {
+  //   setLoaderState(true);
+  //   if (loginWay === "") {
+  //     const payload = {
+  //       phone_no: phoneNO?.toString(),
+  //     };
+  //     login({
+        
+  //       payload,
   //       callBack: (response) => {
-  //         localStorage.setItem("userId", loginResponse.user_id);
-  //         // console.log("response use id", response.data.user_name);
-  //         localStorage.setItem("userName", response.data.user_name);
+  //         setLoginWay("Get OTP");
+  //         setGetOTP(response.data.OTP);
+  //         setHideOTPBtn(false);
+  //         setLoaderState(false);
+  //       },
+  //       error: (error) => {
+  //         toast.error(error.message);
+  //         console.log(error.message);
   //       },
   //     });
-  //     navigateHome("/AllCourses");
-  //   }1
+  //   }
+  //   if (loginWay !== "") {
+  //       const payload = {
+  //         phone_no: phoneNO?.toString(),
+  //         OTP: parseInt(enteredOTP),
+  //       };
+  //       verifyOtp({
+  //         payload,
+  //         callBack: (response) => {
+  //           console.log("verify", response);
+  //           setUserInfo({
+  //             userId: response.data.user_id,
+  //             userName: response.data.user_name,
+  //             user_photo: response.data.user_photo,
+  //           });
+  //           localStorage.setItem("loggedInUser", JSON.stringify(response?.data));
+  //           navigation("/DashBoard")
+  //         },
+  //         error: (error) => {
+  //           toast.error(error.response.data.message);
+  //           console.log(error.response.data.message);
+  //           setLoaderState(false);
+  //         },
+  //       });
+      
+  //   }
+  // };
+  // const handleLoginByOTP = (value, type) => {
+
+  //   setDisableLogiBtn(false);
+  //   if (type === "password") {
+  //     setPhoneNo(validatePhoneNo(value,phoneNO));
+  //     console.log("validatePhoneNo",validatePhoneNo(value,phoneNO));
+  //   } else if (type === "OTP") {
+  //     setEnteredOTP(value);
+  //   }
+  // };
+  const handleLoginPhoneByOTP = (value, type) => {
+
+    setDisableLogiBtn(false);
+    if (type === "password") {
+      setPhoneNo(validatePhoneNo(value,phoneNO));
+      console.log("validatePhoneNo",validatePhoneNo(value,phoneNO));
+    } 
+  };
 
   return (
     <div className="RightBox">
-      <LoaderComponent loaderState={loaderState} />
-      <Box className="BoxWidth">
-        <Typography className="loginText">
-          Login to Admin Panel
-          <Typography sx={{ mt: 1, fontSize: 21, color: "#199884" }}>
-            <u>{getOTP}</u>
-          </Typography>
+    <LoaderComponent loaderState={loaderState} />
+    <Box className="BoxWidth">
+      <Typography className="loginText">
+        Login to Admin Panel
+        <Typography sx={{ mt: 1, fontSize: 21, color: "#199884" }}>
+          <u>{getOTP}</u>
         </Typography>
+      </Typography>
 
+      <Box sx={{ mt: 2 }}>
+        <TextField
+          id="fullWidth"
+          label="Email"
+          variant="outlined"
+          className="BoxShadow"
+          fullWidth
+          disabled
+          type="email"
+          onChange={(event) => handleInput(event.target.value, "email")}
+        />
+      </Box>
+
+      {userLogin?.email != "" ? (
         <Box sx={{ mt: 2 }}>
           <TextField
             id="fullWidth"
-            label="Email"
+            label="Password"
             variant="outlined"
             className="BoxShadow"
             fullWidth
-            disabled
-            type="email"
-            onChange={(event) => handleInput(event.target.value, "email")}
+            type="password"
+            onChange={(event) => handleInput(event.target.value, "password")}
           />
         </Box>
+      ) : null}
 
-        {userLogin?.email != "" ? (
-          <Box sx={{ mt: 2 }}>
-            <TextField
-              id="fullWidth"
-              label="Password"
-              variant="outlined"
-              className="BoxShadow"
-              fullWidth
-              type="password"
-              onChange={(event) => handleInput(event.target.value, "password")}
-            />
-          </Box>
-        ) : null}
+      <Box sx={{ mt: 2 }}>
+        {/* <TextField
+          id="fullWidth"
+          label="Enter Phone No"
+          variant="outlined"
+          className="BoxShadow"
+          fullWidth
+          maxlength="10"
+          disabled={phoneNO?.length===10 && getOTP!==""}
+          type="number"
+          value={phoneNO}
+          onChange={(event) =>
+            handleLoginByOTP(event.target.value, "password")
+          }
+        /> */}
+        <TextField
+          id="fullWidth"
+          placeholder="Mobile Number"
+          className="phoneTextField BoxShadow"
+          sx={{ color: "#000" }}
+          variant="outlined"
+          inputProps={{ maxLength: 10 }}
+          disabled={phoneNO?.length === 10 && getOTP !== ""}
+          type="number"
+          value={phoneNO}
+          onChange={(event) =>
+            handleLoginPhoneByOTP(event.target.value, "password")
+          }
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <p className="phoneTextFieldStartIcon">
+                  <Box className="indiaBox">
+                    <img src={India} className="indiaImg" />
+                  </Box>{" "}
+                  <p className="startText"> +91 - </p>
+                </p>
+              </InputAdornment>
+            ),
+          }}
+        />
+      </Box>
 
-        <Box sx={{ mt: 2 }}>
+      {getOTP !== "" && (
+        <Box sx={{ mt: 2 }} className="OTPMainBox">
           {/* <TextField
             id="fullWidth"
-            label="Enter Phone No"
+            label="Enter OTP"
             variant="outlined"
             className="BoxShadow"
             fullWidth
-            maxlength="10"
-            disabled={phoneNO?.length===10 && getOTP!==""}
-            type="number"
-            value={phoneNO}
-            onChange={(event) =>
-              handleLoginByOTP(event.target.value, "password")
-            }
+            onChange={(event) => handleLoginByOTP(event.target.value, "OTP")}
           /> */}
+          
           <TextField
-            id="fullWidth"
-            placeholder="Mobile Number"
-            className="phoneTextField BoxShadow"
-            sx={{ color: "#000" }}
+            id="outlined-basic"
             variant="outlined"
-            inputProps={{ maxLength: 10 }}
-            disabled={phoneNO?.length === 10 && getOTP !== ""}
-            type="number"
-            value={phoneNO}
-            onChange={(event) =>
-              handleLoginByOTP(event.target.value, "password")
-            }
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <p className="phoneTextFieldStartIcon">
-                    <Box className="indiaBox">
-                      <img src={India} className="indiaImg" />
-                    </Box>{" "}
-                    <p className="startText"> +91 - </p>
-                  </p>
-                </InputAdornment>
-              ),
+            className="OTPBox"
+            onChange={(event) => handleLoginByOTP({type:"otp1", value:event.target.value})}
+            inputProps={{ 
+              maxLength: 1,
+              className: "boxOtpWidth",
+            }}
+          />
+          <TextField
+            id="outlined-basic"
+            variant="outlined"
+            className="OTPBox"
+            onChange={(event) => handleLoginByOTP({type:"otp2", value:event.target.value})}
+            inputProps={{
+              maxLength: 1,
+              className: "boxOtpWidth",
+            }}
+          />
+          <TextField
+            id="outlined-basic"
+            variant="outlined"
+            className="OTPBox"
+            onChange={(event) => handleLoginByOTP({type:"otp3", value:event.target.value})}
+            inputProps={{
+              maxLength: 1,
+              className: "boxOtpWidth",
+            }}
+          />
+          <TextField
+            id="outlined-basic"
+            variant="outlined"
+            className="OTPBox"
+            onChange={(event) => handleLoginByOTP({type:"otp4", value:event.target.value})}
+            inputProps={{
+              maxLength: 1,
+              className: "boxOtpWidth",
             }}
           />
         </Box>
+      )}
 
-        {getOTP !== "" && (
-          <Box sx={{ mt: 2 }}>
-            <TextField
-              id="fullWidth"
-              label="Enter OTP"
-              variant="outlined"
-              className="BoxShadow"
-              fullWidth
-              onChange={(event) => handleLoginByOTP(event.target.value, "OTP")}
-            />
-
-            {/* <TextField
-              id="outlined-basic"
-              variant="outlined"
-              className="OTPBox"
-              onChange={(event) => handleOtp("otp1", event.target.value)}
-              inputProps={{
-                maxLength: 1,
-                className: "boxOtpWidth",
-              }}
-            />
-            <TextField
-              id="outlined-basic"
-              variant="outlined"
-              className="OTPBox"
-              onChange={(event) => handleOtp("otp2", event.target.value)}
-              inputProps={{
-                maxLength: 1,
-                className: "boxOtpWidth",
-              }}
-            />
-            <TextField
-              id="outlined-basic"
-              variant="outlined"
-              className="OTPBox"
-              onChange={(event) => handleOtp("otp3", event.target.value)}
-              inputProps={{
-                maxLength: 1,
-                className: "boxOtpWidth",
-              }}
-            />
-            <TextField
-              id="outlined-basic"
-              variant="outlined"
-              className="OTPBox"
-              onChange={(event) => handleOtp("otp4", event.target.value)}
-              inputProps={{
-                maxLength: 1,
-                className: "boxOtpWidth",
-              }}
-            /> */}
-          </Box>
-        )}
-
-        {hideOTPBtn && getOTP === "" && (
-          <Button
-            variant="contained"
-            className="LoginBtn"
-            onClick={() => handleUserLogin()}
-          >
-            Get OTP
-          </Button>
-        )}
-        {getOTP && (
-          <Button
-            variant="contained"
-            className="LoginBtn"
-            onClick={() => handleUserLogin()}
-          >
-            Login
-          </Button>
-        )}
-      </Box>
-      <ToastContainer />
-    </div>
+      {hideOTPBtn && getOTP === "" && (
+        <Button
+          variant="contained"
+          className="LoginBtn"
+          onClick={() => handleUserLogin()}
+        >
+          Get OTP
+        </Button>
+      )}
+      {getOTP && (
+        <Box className="LoginBtnBox">
+        <Button
+          variant="contained"
+          className="LoginBtn"
+          onClick={() => handleUserLogin()}
+        >
+          Login
+        </Button>
+        {/* <Button
+          variant="contained"
+          className="ResendBtn"
+          onClick={() => handleResendOTP()}
+        >
+          Resend OTP
+        </Button> */}
+        </Box>
+      )}
+    </Box>
+    <ToastContainer />
+  </div>
   );
 };
 

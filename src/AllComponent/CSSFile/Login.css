@@ -47,7 +47,7 @@ width: 50%;
     border-radius: 10px !important;
     font-size: 0.7rem !important;
     margin-top: 3% !important;
-    min-width: 559px !important;
+    min-width: 100% !important;
   }
   .indiaImg{
     width: 25px; 
@@ -85,4 +85,37 @@ width: 50%;
     background-color: #18568f !important;
     border-radius: 8px  !important;
     text-transform: none !important;
+}
+.OTPMainBox{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.OTPBox{
+  padding: 0px 5px !important;
+    border-color: #000 !important;
+    color: #000 !important;
+    width: 10%;
+    margin-top: 2% !important;
+    border-radius: 0 !important;
+}
+.boxOtpWidth{
+  /* padding: 0 0 !important; */
+  border-color:#000 !important;
+  border-radius: 0 !important;
+  text-align: center;
+  font-size: 1.3rem !important;
+}
+.LoginBtnBox{
+  display: flex;
+  flex-direction: column;
+}
+.ResendBtn{
+  width: 30% !important;
+  height: 5vh !important;
+  margin-top: 1% !important;
+  margin-left: 35% !important;
+  background-color: #18568f !important;
+  border-radius: 8px  !important;
+  text-transform: none !important;
 }
