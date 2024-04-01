@@ -74,12 +74,11 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       sub_category_id: basicInfo?.subCategory?.id,
       duration_id: parseInt(editPrice?.duration),
       duration_type_id: 91,
-      thumbnail_path: basicInfo?.thumbnailPath,
+      thumbnail_path: basicInfo?.thumbnailPath[0].path,
       content_type_id: 11,
       modified_by: 1,
       created_by: 2,
     };
-    // console.log("thumbnail basic info",courseData,basicInfo?.thumbnailPath)
     createCourse({
       courseData,
       callBack: (response) => {
