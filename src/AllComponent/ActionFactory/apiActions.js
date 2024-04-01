@@ -27,7 +27,6 @@ export const deleteUser = ({ userId, callBack }) => {
 };
 
 export const createCourse = ({ courseData, callBack, error }) => {
-  console.log("payload",courseData);
   const url = APIS.allCourses;
   axios
     .post(url, courseData)
@@ -180,4 +179,18 @@ export const verifyOtp =({payload, callBack,error})=>{
   }).catch((errorMessage) => {
     error(errorMessage);
   });
+}
+
+export const createSubCategory=({payload,callBack})=>{
+  const url= APIS.getCategory;
+  axios.post(url,payload).then((response)=>{
+    callBack(response);
+  })
+}
+
+export const getSubcategoryList = ({callBack, mainCatID})=>{
+  const url = APIS.getSubCategory + "/" + mainCatID;
+  axios.get(url).then((response)=>{
+    callBack(response);
+  })
 }

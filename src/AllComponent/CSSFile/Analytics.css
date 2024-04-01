@@ -3,6 +3,11 @@
   text-align: left;
   border-radius: 15px !important;
 }
+.DatePicker{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .CardsRow {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -107,9 +112,21 @@ font-weight: 500;
 
   .custumDatePicker{
     margin-left: 20px;
+    /* margin-top: 2%; */
+    height: 5vh !important;
+    padding: 10px 1px;
   }
 .custumDatePickerBg{
   min-width: 200!important;
-  background-color :"#fff"!important;
+  /* background-color :"#fff"!important; */
   border-radius: 10!important;
+}
+.mt-2{
+  margin-top: -2.6%;
+}
+.dropdown{
+  padding: 0 0;
+}
+.css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input{
+  padding: 15.5px 14px !important;
 }

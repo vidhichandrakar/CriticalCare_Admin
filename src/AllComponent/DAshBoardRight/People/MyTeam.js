@@ -40,8 +40,6 @@ import moment from "moment/moment";
 import { TablePagination } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { add } from "date-fns";
-
-
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
@@ -132,7 +130,7 @@ const MyTeam = () => {
   const [userData, setUserData] = useState([]);
   const open = Boolean(anchorEl);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const id = open ? "simple-popover" : undefined;
   const [opened, setOpen] = useState(false);
   const [addTeam, setAddTeam] = useState({
@@ -225,6 +223,7 @@ const MyTeam = () => {
     updateTeam({
       payload,
       callBack: (response) => {
+        toast.success("Created successfully");
         setOpen(false);
       },
     });
@@ -244,9 +243,13 @@ const MyTeam = () => {
         storedValues.emailID = data.email_id;
         storedValues.memberName = data.member_name;
         setAddTeam(storedValues);
-      },
+      },error:(error)=>{
+        toast.error(error.message);
+        console.log(error.message);
+      }
     });
   };
+  
   return (
     <div className="grid-container">
       <SideBar />

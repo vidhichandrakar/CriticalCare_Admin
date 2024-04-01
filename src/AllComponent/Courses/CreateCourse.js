@@ -16,6 +16,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   const [editPrice, setEditPrice] = useState({});
   const [courseData, setCourseData] = useState([]);
   const [loaderState, setLoaderState] = useState(false);
+  
   let location = useLocation();
   const courseId = location.state?.id;
   const navigate = useNavigate();
@@ -32,7 +33,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   };
 
   useEffect(() => {
-   
     if (courseId) {
       setLoaderState(true);
       getCourseById({
@@ -40,10 +40,10 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         callBack: (response) => {
           const userCallBack = response?.data;
           setCourseData(userCallBack);
-          
+          setLoaderState(false);
+          console.log("response",response);
         },
       });
-      // setLoaderState(false);
     }
     
   }, [courseId]);
@@ -70,8 +70,8 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       description: basicInfo?.Description,
       price: parseInt(editPrice?.regularPrice),
       offer_price: parseInt(editPrice?.offerPrice),
-      category_id:basicInfo?.Category?.id,
-      sub_category_id: basicInfo?.subCategory?.id,
+      category_id:basicInfo?.Category,
+      sub_category_id: basicInfo?.subCategory,
       duration_id: parseInt(editPrice?.duration),
       duration_type_id: 91,
       thumbnail_path: basicInfo?.thumbnailPath[0].path,
@@ -97,7 +97,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
 
   const handleInputChange = (type, value) => {
     if (type === "basicInfo") {
-      console.log("basic",value)
       setBasicInfo(value);
     } else if (type === "editPrice") {
       setEditPrice(value);

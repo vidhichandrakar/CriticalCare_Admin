@@ -50,6 +50,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
     setHideCatConfig(true);
     setSelectedConfigValue(value);
   };
+
   const handleCloseCat = () => {
     setHideCatConfig(false);
   };
@@ -64,8 +65,8 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const [highlight, setHighlight] = useState(false);
   const [highlightPeople, setHighlightPeople] = useState(false);
   useEffect(() => {
-    setHighlight(window.location.pathname.replace("/",""));
-    setHighlightPeople(window.location.pathname.replace("/",""));
+    setHighlight(window.location.pathname.replace("/", ""));
+    setHighlightPeople(window.location.pathname.replace("/", ""));
   }, [localStorage.getItem("activeMenu")]);
 
   const handleHighlight = (type) => {
@@ -167,7 +168,11 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                     <Link to="/YourCourses" className="textDecoration">
                       <Typography
                         id="hoverrr"
-                        className={highlight === "myCourses" ? "hoverrr2 paddingD" : "paddingD"}
+                        className={
+                          highlight === "myCourses"
+                            ? "hoverrr2 paddingD"
+                            : "paddingD"
+                        }
                         sx={{ mt: 1 }}
                         onClick={() => handleHighlight("myCourses")}
                       >
@@ -180,7 +185,9 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                       <Typography
                         id="hoverrr"
                         className={
-                          highlight === "manageCoupons" ? "hoverrr2 paddingD" : "paddingD"
+                          highlight === "manageCoupons"
+                            ? "hoverrr2 paddingD"
+                            : "paddingD"
                         }
                         sx={{ mt: 1 }}
                         onClick={() => handleHighlight("manageCoupons")}
@@ -193,7 +200,11 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                     <Link to="/User" className="textDecoration">
                       <Typography
                         id="hoverrr"
-                        className={highlight === "catagory" ? "hoverrr2 paddingD" : "paddingD"}
+                        className={
+                          highlight === "catagory"
+                            ? "hoverrr2 paddingD"
+                            : "paddingD"
+                        }
                         sx={{ mt: 1 }}
                         onClick={() => handleHighlight("catagory")}
                       >
@@ -206,7 +217,9 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                       <Typography
                         id="hoverrr"
                         className={
-                          highlight === "upcomingCourses" ? "hoverrr2 paddingD" : "paddingD"
+                          highlight === "upcomingCourses"
+                            ? "hoverrr2 paddingD"
+                            : "paddingD"
                         }
                         sx={{ mt: 1 }}
                         onClick={() => handleHighlight("upcomingCourses")}
@@ -274,9 +287,11 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                       <Typography
                         id="hoverrr"
                         className={
-                          highlightPeople === "peopleUser" ? "hoverrr2 paddingD" : "paddingD"
+                          highlightPeople === "peopleUser"
+                            ? "hoverrr2 paddingD"
+                            : "paddingD"
                         }
-                        sx={{ textDecoration: "none", }}
+                        sx={{ textDecoration: "none" }}
                         onClick={() => handleHighlightPeople("peopleUser")}
                       >
                         User
@@ -288,7 +303,9 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                       <Typography
                         id="hoverrr"
                         className={
-                          highlightPeople === "peopleMyTeam" ? "hoverrr2 paddingD" : "paddingD"
+                          highlightPeople === "peopleMyTeam"
+                            ? "hoverrr2 paddingD"
+                            : "paddingD"
                         }
                         sx={{ textDecoration: "none" }}
                         onClick={() => handleHighlightPeople("peopleMyTeam")}
@@ -325,7 +342,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                 <ul>
                   <li
                     className="myCourses"
-                    onClick={() => handleCatConfig("category")}
+                    onClick={() => handleCatConfig("Category")}
                   >
                     <Link className="textDecoration">
                       <Typography
@@ -338,7 +355,17 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                   </li>
                   <li
                     className="listDesign"
-                    onClick={() => handleCatConfig("duration")}
+                    onClick={() => handleCatConfig("SubCategory")}
+                  >
+                    <Link className="textDecoration">
+                      <Typography className="textDecoration">
+                        Sub Category
+                      </Typography>
+                    </Link>
+                  </li>
+                  <li
+                    className="listDesign"
+                    onClick={() => handleCatConfig("Duration")}
                   >
                     <Link className="textDecoration">
                       <Typography className="textDecoration">
@@ -349,7 +376,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                   <li className="listDesign">
                     <Link
                       className="textDecoration"
-                      onClick={() => handleCatConfig("teamMember")}
+                      onClick={() => handleCatConfig("Team Member")}
                     >
                       <Typography className="textDecoration">
                         Team Member

@@ -8,6 +8,8 @@ import { ToastContainer, toast } from "react-toastify";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import DoneIcon from "@mui/icons-material/Done";
+import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
+import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import "react-toastify/dist/ReactToastify.css";
 import {
   CommonTypography,
@@ -17,8 +19,12 @@ import {
 } from "../../Util/CommonFields";
 import { Category, Description } from "@mui/icons-material";
 import { category, subCategory } from "../../Util/masterFile";
-import { getCategory } from "../ActionFactory/apiActions";
+import { getCategory, getSubcategoryList } from "../ActionFactory/apiActions";
 import { useDropzone } from "react-dropzone";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import MenuItem from "@mui/material/MenuItem";
+
+// import FormControl from "@mui/material/FormControl";
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
   clipPath: "inset(50%)",
@@ -30,6 +36,16 @@ const VisuallyHiddenInput = styled("input")({
   whiteSpace: "nowrap",
   width: 1,
 });
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const [hideValidationTickName, sethideValidationTickName] = useState(false);
@@ -58,6 +74,8 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     onChange: (event) => console.log(event),
     accept: "image/jpeg, image/png, image/jpg, application/pdf",
   });
+  const [subCategoryList, setSubCategoryList] = useState([]);
+  const [selectedCategoryList, setSelectedcategoryList] = useState("");
   useEffect(() => {
     getCategory({
       // courseId,
@@ -67,30 +85,50 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       },
       error: (error) => {
         toast.error(error.message);
-        console.log(error.message);
         // setLoaderState(false);
       },
     });
   }, []);
 
   useEffect(() => {
-    let storedValues = Object.assign({}, storedBasicInfo);
-    storedValues.Name = courseData?.course_name;
-    if (storedValues.Name?.length >= 4) {
-      sethideValidationTickName(true);
-    }
-    storedValues.Description = courseData?.description;
-    if (storedValues.Description?.length >= 4) {
-      sethideValidationTickDesc(true);
-    }
-    subCategory.map((item) => {
-      if (item.id === courseData.sub_category_id) {
-        storedValues.subCategory = item;
+    if (courseData !== "") {
+      console.log("courseData on Edir course", courseData);
+      let storedValues = Object.assign({}, storedBasicInfo);
+      storedValues.Name = courseData?.course_name;
+      if (storedValues.Name?.length >= 4) {
+        sethideValidationTickName(true);
       }
-    });
-    storedValues.thumbnailPath = courseData?.thumbnail_path;
-    setStoredBasicInfo(storedValues);
-  }, [courseData]);
+      storedValues.Description = courseData?.description;
+      if (storedValues.Description?.length >= 4) {
+        sethideValidationTickDesc(true);
+      }
+      cat.map((item) => {
+        if (item.category_id === courseData?.category_id) {
+          storedValues.Category = item;
+          console.log("category", item);
+        }
+      });
+      if (courseData?.category_id) {
+        getSubcategoryList({
+          mainCatID: courseData.category_id,
+          callBack: (response) => {
+            setSubCategoryList(response.data);
+            setSelectedcategoryList(24); //added to enable syb category
+            response.data.map((item) => {
+              if (item.category_id === courseData?.sub_category_id) {
+                storedValues.subCategory = item;
+              }
+            });
+          },
+        });
+      }
+
+      storedValues.thumbnailPath = courseData?.thumbnail_path;
+      setStoredBasicInfo(storedValues);
+      console.log("edit storedValues", storedValues);
+      console.log("console category", cat);
+    }
+  }, [courseData, cat]);
 
   const handleInput = (value, type) => {
     let storedValues = Object.assign({}, storedBasicInfo);
@@ -140,11 +178,14 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           autoClose: 500,
         }
       );
-    } else if (storedBasicInfo.Name?.length <= 3) {
+    } else if (storedBasicInfo.Name?.length <= 3 || !storedBasicInfo.Name) {
       toast.error("Name Should not be less then 3 character", {
         autoClose: 500,
       });
-    } else if (storedBasicInfo.Description?.length <= 3) {
+    } else if (
+      storedBasicInfo.Description?.length <= 3 ||
+      !storedBasicInfo.Description
+    ) {
       toast.error("Description Should not be less then 3 character", {
         autoClose: 500,
       });
@@ -162,11 +203,30 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const handleInputFile = (file) => {
     console.log(file);
   };
+  const handleChangeOnCat = (e) => {
+    let mainCatID = e?.target?.value?.category_id;
+    handleInput(mainCatID, "category");
+    getSubcategoryList({
+      mainCatID,
+      callBack: (response) => {
+        setSubCategoryList(response.data);
+        setSelectedcategoryList(e?.target?.value);
+      },
+    });
+  };
+  const handleChangeOnSubCat = (e) => {
+    let mainSubCatID = e?.target?.value?.category_id;
+    handleInput(mainSubCatID, "subCategory");
+  };
   return (
     <div className="formMain">
       <div className="FlexRow">
+        {console.log("storedBasicInfo for edit", storedBasicInfo)}
+        {console.log("courseDatacourseData edit", courseData)}
         {CommonTypography({ fontWeight: 600, label: "Name" })}
-        {hideValidationTickName && <DoneIcon className="RightTick" />}
+        {hideValidationTickName && (
+          <CheckCircleRoundedIcon className="RightTick" />
+        )}
       </div>
       {commonTextField(
         {
@@ -207,26 +267,27 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
         label: "Add Thumbnail",
       })}
 
-<div {...getIntroVideoRootProps({ className: "dropzone" })}>
+      <div {...getIntroVideoRootProps({ className: "dropzone" })}>
         <input {...getIntroVideoInputProps()} />
-      <Box className="thumbnailUpload">
-        <Button
-          component="label"
-          variant="outlined-multiline-static"
-          startIcon={<UploadIcon className="iconThumbicon" />}
-          className="iconThumb"
-        >
-          Upload Thumbnail Image
-         </Button>
-        <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
-          Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
-        </Typography>
-        <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
-          {storedBasicInfo?.thumbnailPath?.length && storedBasicInfo?.thumbnailPath[0]?.name}
-        </Typography>
-      </Box>
+        <Box className="thumbnailUpload">
+          <Button
+            component="label"
+            variant="outlined-multiline-static"
+            startIcon={<UploadIcon className="iconThumbicon" />}
+            className="iconThumb"
+          >
+            Upload Thumbnail Image
+          </Button>
+          <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
+            Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
+          </Typography>
+          <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
+            {storedBasicInfo?.thumbnailPath?.length &&
+              storedBasicInfo?.thumbnailPath[0]?.name}
+          </Typography>
+        </Box>
       </div>
-    
+
       <Box className="divider"></Box>
       <Box sx={{ marginTop: "5%" }} className="categoryBox">
         <Box>
@@ -236,20 +297,25 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
               className: "editFirstText",
             })
           )}
-
+          {console.log(
+            "storedBasicInfo",
+            storedBasicInfo?.Category?.category_name
+          )}
           <FormControl sx={{ m: 1, minWidth: 240 }} className="categorySelect">
-            {commonSelect(
-              {
-                placeholder: "Select Category",
-                menuItemList: category,
-                className: "categorytext",
-              },
-              (Option = {
-                handleInput: handleInput,
-                categoryValue: storedBasicInfo.Category,
-                type: "category",
-              })
-            )}
+            <Select
+              label="Category"
+              value={storedBasicInfo?.Category}
+              onChange={(e) => handleChangeOnCat(e)}
+              input={<OutlinedInput />}
+              MenuProps={MenuProps}
+              inputProps={{ "aria-label": "Without label" }}
+            >
+              {cat.map((item) => (
+                <MenuItem key={item._id} value={item}>
+                  {item.category_name}
+                </MenuItem>
+              ))}
+            </Select>
           </FormControl>
         </Box>
         <Box className="rightCat">
@@ -260,18 +326,21 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
             })
           )}
           <FormControl sx={{ m: 1, minWidth: 240 }} className="categorySelect">
-            {commonSelect(
-              {
-                placeholder: "Select Sub Category",
-                menuItemList: subCategory,
-                className: "categorytext",
-              },
-              (Option = {
-                handleInput: handleInput,
-                categoryValue: storedBasicInfo.subCategory,
-                type: "subCategory",
-              })
-            )}
+            <Select
+              label="Sub Category"
+              value={storedBasicInfo?.subCategory?.category_name}
+              onChange={(e) => handleChangeOnSubCat(e)}
+              input={<OutlinedInput />}
+              MenuProps={MenuProps}
+              inputProps={{ "aria-label": "Without label" }}
+              disabled={selectedCategoryList === ""}
+            >
+              {subCategoryList?.map((item) => (
+                <MenuItem key={item.category_id} value={item}>
+                  {item.category_name}
+                </MenuItem>
+              ))}
+            </Select>
           </FormControl>
         </Box>
       </Box>

@@ -14,11 +14,11 @@ import ClearIcon from "@mui/icons-material/Clear";
 import Switch from "@mui/material/Switch";
 import WarningIcon from "@mui/icons-material/Warning";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-
 import ProfileList from "../SubComponent/List"
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import QuizRoundedIcon from '@mui/icons-material/QuizRounded';
+import { Link } from "react-router-dom";
 
 
 
@@ -29,6 +29,7 @@ const CourseHeader = ({ Heading, subHeading }) => {
   const [state, setState] = useState({
     left: false,
   });
+
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -72,7 +73,6 @@ const CourseHeader = ({ Heading, subHeading }) => {
               Profile
             </MenuItem>
 
-            {/* <MenuItem className="selectDesign hoverrr" value={"Profiles"}> */}
             <MenuItem className="selectDesign hoverrr" value={"Profiles"}>
               <CurrencyRupeeIcon className="designingIcons" />
               Recharge
@@ -88,11 +88,11 @@ const CourseHeader = ({ Heading, subHeading }) => {
               Help and Support
             </MenuItem>
 
-            <MenuItem className="selectDesign hoverrr" value={"Profileik"}>
+           <Link to="/" className="textDecoration"> <MenuItem className="selectDesign hoverrr" sx={{ color: "black"  }}  value={"Profileik"}>
               <LogoutTwoToneIcon className="designingIcons" />
               Logout
             </MenuItem>
-            
+            </Link>
           </Select>
         </FormControl>
         <SwipeableDrawer

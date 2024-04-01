@@ -95,7 +95,6 @@ const CreateCouponForm = ({}) => {
               <CurrencyRupeeIcon sx={{ color: "#aca9a9", fontSize: "1.1em" }} />
             ),
           }}
-          // onChange={(event) => handleTextChange("emailId", event.target.value)}
         />
         <Box className="divider"></Box>
         <Button variant="contained" className="coursesButton">

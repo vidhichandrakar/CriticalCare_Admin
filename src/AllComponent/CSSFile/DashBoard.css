@@ -820,6 +820,10 @@ body {
   color: dodgerblue;
   margin-left: 2%;
 }
+.viewAllBlue{
+  text-decoration: none;
+  color: #0075ff;
+}
 .whiteBoxOfContent {
   background-color: #ffffff;
   width: 21%;
@@ -836,17 +840,19 @@ body {
   border-radius: 7px !important;
 }
 .folderIcon {
-  color: dodgerblue;
+  color: grey;
   margin-top: 12% !important;
-  background-color: rgba(182 204 221 / 59%);
   border-radius: 50%;
-  width: 100%;
+  margin-right: 16% !important;
 }
 .ContentCol {
   margin-left: 10px;
 }
 .mt-10px {
   margin-top: -12px;
+}
+.threeDotsIcon{
+  margin-left: 5px;
 }
 .catagorytextofTrics {
   width: 92% !important;
@@ -864,6 +870,15 @@ body {
   font-size: 0.8rem !important;
   font-weight: 600 !important;
   text-decoration: none !important;
+}
+.singleRow{
+  display: flex !important;
+  flex-direction: row !important;
+}
+.backToCourses{
+  color: black !important;
+  height: 49px;
+  margin-left: -30% !important;
 }
 
 /* END OF COURSE->>TRICS 1 FREE MOCK TEST  */

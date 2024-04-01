@@ -44,12 +44,12 @@ import {
 import { TablePagination } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { add } from "date-fns";
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import LastPageIcon from '@mui/icons-material/LastPage';
-import { useTheme } from '@mui/material/styles';
-import PropTypes from 'prop-types';
+import FirstPageIcon from "@mui/icons-material/FirstPage";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import LastPageIcon from "@mui/icons-material/LastPage";
+import { useTheme } from "@mui/material/styles";
+import PropTypes from "prop-types";
 import LoaderComponent from "../../../../Util/LoaderComponent";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -90,28 +90,36 @@ function TablePaginationActions(props) {
         disabled={page === 0}
         aria-label="first page"
       >
-        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+        {theme.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
       </IconButton>
       <IconButton
         onClick={handleBackButtonClick}
         disabled={page === 0}
         aria-label="previous page"
       >
-        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+        {theme.direction === "rtl" ? (
+          <KeyboardArrowRight />
+        ) : (
+          <KeyboardArrowLeft />
+        )}
       </IconButton>
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="next page"
       >
-        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+        {theme.direction === "rtl" ? (
+          <KeyboardArrowLeft />
+        ) : (
+          <KeyboardArrowRight />
+        )}
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="last page"
       >
-        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+        {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
       </IconButton>
     </Box>
   );
@@ -139,6 +147,8 @@ const TestPortal = () => {
     hours: "",
   });
   const [loaderState, setLoaderState] = useState(false);
+  let refreshTable;
+
   useEffect(() => {
     setLoaderState(true);
     getTest({
@@ -161,7 +171,7 @@ const TestPortal = () => {
 
   const handleDelete = () => {
     const userId = openId;
-    deleteTestPortal({ 
+    deleteTestPortal({
       userId,
       callBack: () => {
         getTest({
@@ -170,10 +180,12 @@ const TestPortal = () => {
             setUserData(userCallBack);
           },
         });
-      },error:(error)=>{
+        handleClose();
+      },
+      error: (error) => {
         toast.error(error.message);
         console.log(error);
-      }
+      },
     });
   };
   const handleClickOpen = () => {
@@ -210,12 +222,21 @@ const TestPortal = () => {
       test_name: addTest.testName,
       created_by: 2,
       duration_hour: parseInt(addTest.testDuration),
-      duration_minute:parseInt(addTest.hours)
+      duration_minute: parseInt(addTest.hours),
     };
     createTestPortal({
       payload,
       callBack: (response) => {
+        console.log(response);
+        toast.success("New Member added!");
         setOpen(false);
+        getTest({
+          callBack: (response) => {
+            const userCallBack = response?.data;
+            setUserData(userCallBack);
+            setLoaderState(false);
+          },
+        });
       },
     });
   };
@@ -226,11 +247,12 @@ const TestPortal = () => {
     getTestByID({
       testId,
       callBack: (response) => {
+        // toast.success("");
         const data = response.data;
         let storedValues = Object.assign({}, addTest);
         storedValues.testName = data.test_name;
         storedValues.testDuration = data.duration_minute;
-        storedValues.Hours = data.duration_hour;
+        storedValues.hours = data.duration_hour;
         setAddTest(storedValues);
       },
     });
@@ -243,9 +265,7 @@ const TestPortal = () => {
           Heading={"Test Portal"}
           subHeading={"Only published test are shown here"}
         />
-         <LoaderComponent
-      loaderState={loaderState}
-      />
+        <LoaderComponent loaderState={loaderState} />
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">
             <SearchBar mt="2%" placeholder="Search by name" />
@@ -368,9 +388,12 @@ const TestPortal = () => {
               <TableBody className="parentTable">
                 {userData.length
                   ? (rowsPerPage > 0
-                    ? userData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    : userData
-                  ).map((row) => {
+                      ? userData.slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
+                      : userData
+                    ).map((row) => {
                       return (
                         <TableRow
                           hover
@@ -380,17 +403,17 @@ const TestPortal = () => {
                           key={row?.code}
                         >
                           <TableCell className="alignTableBody">
-                           {row.test_name}
+                            {row.test_name}
                           </TableCell>
                           <TableCell className="alignTableBody">
-                              {`${row.duration_hour}hr : ${row.duration_minute}min`}
+                            {`${row.duration_hour}hr : ${row.duration_minute}min`}
                           </TableCell>
                           <TableCell className="alignTableBody">
                             {moment(row.createdAt).format("MM/DD/YYYY")}
                           </TableCell>
-                         
-                          <TableCell sx={{textAlign:"center"}}>
-                            <MoreVertIcon 
+
+                          <TableCell sx={{ textAlign: "center" }}>
+                            <MoreVertIcon
                               onClick={(event) =>
                                 handleClick(event, row.test_id)
                               }
@@ -428,28 +451,27 @@ const TestPortal = () => {
                 </Popover>
               </TableBody>
               <TablePagination
-              rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-              // colSpan={3}
-              count={userData.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              slotProps={{
-                select: {
-                  inputProps: {
-                    'aria-label': 'rows per page',
+                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+                // colSpan={3}
+                count={userData.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                slotProps={{
+                  select: {
+                    inputProps: {
+                      "aria-label": "rows per page",
+                    },
+                    native: true,
                   },
-                  native: true,
-                },
-              }}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActions}
-              className="Pagination"
-            />
+                }}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActions}
+                className="Pagination"
+              />
             </Table>
           </TableContainer>
         </Paper>
-        
       </div>
       <ToastContainer />
     </div>
