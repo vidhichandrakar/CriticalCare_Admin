@@ -8,8 +8,8 @@ import { ToastContainer, toast } from "react-toastify";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import DoneIcon from "@mui/icons-material/Done";
-import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
-import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
+import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
+import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import "react-toastify/dist/ReactToastify.css";
 import {
   CommonTypography,
@@ -91,23 +91,44 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   }, []);
 
   useEffect(() => {
-    let storedValues = Object.assign({}, storedBasicInfo);
-    storedValues.Name = courseData?.course_name;
-    if (storedValues.Name?.length >= 4) {
-      sethideValidationTickName(true);
-    }
-    storedValues.Description = courseData?.description;
-    if (storedValues.Description?.length >= 4) {
-      sethideValidationTickDesc(true);
-    }
-    subCategory.map((item) => {
-      if (item.id === courseData.sub_category_id) {
-        storedValues.subCategory = item;
+    if (courseData !== "") {
+      console.log("courseData on Edir course", courseData);
+      let storedValues = Object.assign({}, storedBasicInfo);
+      storedValues.Name = courseData?.course_name;
+      if (storedValues.Name?.length >= 4) {
+        sethideValidationTickName(true);
       }
-    });
-    storedValues.thumbnailPath = courseData?.thumbnail_path;
-    setStoredBasicInfo(storedValues);
-  }, [courseData]);
+      storedValues.Description = courseData?.description;
+      if (storedValues.Description?.length >= 4) {
+        sethideValidationTickDesc(true);
+      }
+      cat.map((item) => {
+        if (item.category_id === courseData?.category_id) {
+          storedValues.Category = item;
+          console.log("category", item);
+        }
+      });
+      if (courseData?.category_id) {
+        getSubcategoryList({
+          mainCatID: courseData.category_id,
+          callBack: (response) => {
+            setSubCategoryList(response.data);
+            setSelectedcategoryList(24); //added to enable syb category
+            response.data.map((item) => {
+              if (item.category_id === courseData?.sub_category_id) {
+                storedValues.subCategory = item;
+              }
+            });
+          },
+        });
+      }
+
+      storedValues.thumbnailPath = courseData?.thumbnail_path;
+      setStoredBasicInfo(storedValues);
+      console.log("edit storedValues", storedValues);
+      console.log("console category", cat);
+    }
+  }, [courseData, cat]);
 
   const handleInput = (value, type) => {
     let storedValues = Object.assign({}, storedBasicInfo);
@@ -157,11 +178,14 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           autoClose: 500,
         }
       );
-    } else if (storedBasicInfo.Name?.length <= 3) {
+    } else if (storedBasicInfo.Name?.length <= 3 || !storedBasicInfo.Name) {
       toast.error("Name Should not be less then 3 character", {
         autoClose: 500,
       });
-    } else if (storedBasicInfo.Description?.length <= 3) {
+    } else if (
+      storedBasicInfo.Description?.length <= 3 ||
+      !storedBasicInfo.Description
+    ) {
       toast.error("Description Should not be less then 3 character", {
         autoClose: 500,
       });
@@ -181,7 +205,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   };
   const handleChangeOnCat = (e) => {
     let mainCatID = e?.target?.value?.category_id;
-    handleInput(mainCatID,"category");
+    handleInput(mainCatID, "category");
     getSubcategoryList({
       mainCatID,
       callBack: (response) => {
@@ -192,13 +216,17 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   };
   const handleChangeOnSubCat = (e) => {
     let mainSubCatID = e?.target?.value?.category_id;
-    handleInput(mainSubCatID,"subCategory");
+    handleInput(mainSubCatID, "subCategory");
   };
   return (
     <div className="formMain">
       <div className="FlexRow">
+        {console.log("storedBasicInfo for edit", storedBasicInfo)}
+        {console.log("courseDatacourseData edit", courseData)}
         {CommonTypography({ fontWeight: 600, label: "Name" })}
-        {hideValidationTickName && <CheckCircleRoundedIcon className="RightTick" />}
+        {hideValidationTickName && (
+          <CheckCircleRoundedIcon className="RightTick" />
+        )}
       </div>
       {commonTextField(
         {
@@ -269,11 +297,14 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
               className: "editFirstText",
             })
           )}
-
+          {console.log(
+            "storedBasicInfo",
+            storedBasicInfo?.Category?.category_name
+          )}
           <FormControl sx={{ m: 1, minWidth: 240 }} className="categorySelect">
             <Select
               label="Category"
-              value={cat.category_name}
+              value={storedBasicInfo?.Category}
               onChange={(e) => handleChangeOnCat(e)}
               input={<OutlinedInput />}
               MenuProps={MenuProps}
@@ -297,7 +328,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           <FormControl sx={{ m: 1, minWidth: 240 }} className="categorySelect">
             <Select
               label="Sub Category"
-              value={subCategoryList?.category_name}
+              value={storedBasicInfo?.subCategory?.category_name}
               onChange={(e) => handleChangeOnSubCat(e)}
               input={<OutlinedInput />}
               MenuProps={MenuProps}
@@ -305,7 +336,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
               disabled={selectedCategoryList === ""}
             >
               {subCategoryList?.map((item) => (
-                <MenuItem key={item._id} value={item}>
+                <MenuItem key={item.category_id} value={item}>
                   {item.category_name}
                 </MenuItem>
               ))}

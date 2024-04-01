@@ -16,6 +16,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   const [editPrice, setEditPrice] = useState({});
   const [courseData, setCourseData] = useState([]);
   const [loaderState, setLoaderState] = useState(false);
+  
   let location = useLocation();
   const courseId = location.state?.id;
   const navigate = useNavigate();
@@ -32,7 +33,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   };
 
   useEffect(() => {
-   
     if (courseId) {
       setLoaderState(true);
       getCourseById({
@@ -41,6 +41,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           const userCallBack = response?.data;
           setCourseData(userCallBack);
           setLoaderState(false);
+          console.log("response",response);
         },
       });
     }

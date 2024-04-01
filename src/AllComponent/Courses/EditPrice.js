@@ -73,6 +73,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   };
   return (
     <div className="formMain">
+      {console.log("storedValuesstoredValues,",editPriceData)}
       <Box sx={{ mt: "5%" }} className="editFirstBox">
         <Box>
           {CommonTypography(
