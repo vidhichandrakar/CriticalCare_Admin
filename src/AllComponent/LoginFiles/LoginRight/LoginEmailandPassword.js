@@ -1,14 +1,14 @@
 import React, { useState, setkey, key, keyDown } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { Typography, paperClasses } from "@mui/material";
+import { InputAdornment, Typography, paperClasses } from "@mui/material";
 import Button from "@mui/material/Button";
 import { getUserId, login, verifyOtp } from "../../ActionFactory/apiActions";
 import { redirect, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoaderComponent from "../../../Util/LoaderComponent";
-
+import India from "../../../Media/Images/India.png";
 import { validatePhoneNo } from "../../../Util/CommonUtils";
 
 const LoginEmailandPassword = () => {
@@ -50,7 +50,6 @@ const LoginEmailandPassword = () => {
         phone_no: phoneNO?.toString(),
       };
       login({
-        
         payload,
         callBack: (response) => {
           setLoginWay("Get OTP");
@@ -59,57 +58,70 @@ const LoginEmailandPassword = () => {
           setLoaderState(false);
         },
         error: (error) => {
-          const errorMessage = error?.response?.data?.message||error?.response?.data||"something went wrong"
+          const errorMessage =
+            error?.response?.data?.message ||
+            error?.response?.data ||
+            "something went wrong";
           toast.error(errorMessage);
           console.log(errorMessage, error);
           setLoaderState(false);
-          
         },
       });
     }
     if (loginWay !== "") {
-      // if (getOTP === parseInt(enteredOTP)) {
-        const payload = {
-          phone_no: phoneNO?.toString(),
-          OTP: parseInt(enteredOTP),
-        };
-        verifyOtp({
-          payload,
-          callBack: (response) => {
-            console.log("verify", response);
-            setUserInfo({
-              userId: response.data.user_id,
-              userName: response.data.user_name,
-              user_photo: response.data.user_photo,
-            });
-            localStorage.setItem("loggedInUser", JSON.stringify(response?.data));
-            navigation("/DashBoard")
-          },
-          error: (error) => {
-            toast.error(error.response.data.message);
-            console.log(error.response.data.message);
-          },
-        });
-      // }
+      const payload = {
+        phone_no: phoneNO?.toString(),
+        OTP: parseInt(enteredOTP),
+      };
+      verifyOtp({
+        payload,
+        callBack: (response) => {
+          console.log("verify", response);
+          setUserInfo({
+            userId: response.data.user_id,
+            userName: response.data.user_name,
+            user_photo: response.data.user_photo,
+          });
+          localStorage.setItem("loggedInUser", JSON.stringify(response?.data));
+          navigation("/DashBoard");
+        },
+        error: (error) => {
+          toast.error(error.response.data.message);
+          console.log(error.response.data.message);
+        },
+      });
     }
   };
-  const handleLoginByOTP = (value, type) => {
 
+  const handleLoginByOTP = (value, type, event) => {
     setDisableLogiBtn(false);
     if (type === "password") {
-      setPhoneNo(validatePhoneNo(value,phoneNO));
-      console.log("validatePhoneNo",validatePhoneNo(value,phoneNO));
-
+      setPhoneNo(validatePhoneNo(value, phoneNO));
     } else if (type === "OTP") {
       setEnteredOTP(value);
     }
   };
 
+  const handleKeyDown = (event, value, originalNum) => {
+    // setDisableLogiBtn(false);
+    console.log(event, phoneNO);
+    if (typeof phoneNO !== "undefined" && phoneNO?.length) {
+      if (phoneNO?.length === 10 && event.keyCode === 13) {
+        console.log("workingg");
+        handleUserLogin();
+      } else if (phoneNO?.length !== 10) {
+        console.log("only 10 digit no.");
+        setLoaderState(false);
+      } else {
+        toast.error("Invalid Phone Number");
+      }
+    }
+  };
+  // 9340290314
+
   return (
     <div className="RightBox">
-       <LoaderComponent
-      loaderState={loaderState}
-      />
+      <LoaderComponent loaderState={loaderState} />
       <Box className="BoxWidth">
         <Typography className="loginText">
           Login to Admin Panel
@@ -131,7 +143,7 @@ const LoginEmailandPassword = () => {
           />
         </Box>
 
-        {userLogin?.email != "" ? (
+        {userLogin?.email !== "" ? (
           <Box sx={{ mt: 2 }}>
             <TextField
               id="fullWidth"
@@ -148,17 +160,30 @@ const LoginEmailandPassword = () => {
         <Box sx={{ mt: 2 }}>
           <TextField
             id="fullWidth"
-            label="Enter Phone No"
+            placeholder="Mobile Number"
+            className="phoneTextField BoxShadow"
+            sx={{ color: "#000" }}
             variant="outlined"
-            className="BoxShadow"
-            fullWidth
-            maxlength="10"
-            disabled={phoneNO?.length===10 && getOTP!==""}
+            inputProps={{ maxLength: 10 }}
+            disabled={phoneNO?.length === 10 && getOTP !== ""}
             type="number"
             value={phoneNO}
+            onKeyDown={(event) => handleKeyDown(event)}
             onChange={(event) =>
-              handleLoginByOTP(event.target.value, "password")
+              handleLoginByOTP(event.target.value, "password", event)
             }
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <p className="phoneTextFieldStartIcon">
+                    <Box className="indiaBox">
+                      <img src={India} className="indiaImg" />
+                    </Box>{" "}
+                    <p className="startText"> +91 - </p>
+                  </p>
+                </InputAdornment>
+              ),
+            }}
           />
         </Box>
 

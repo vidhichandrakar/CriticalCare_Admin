@@ -18,6 +18,7 @@ import ProfileList from "../SubComponent/List"
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import QuizRoundedIcon from '@mui/icons-material/QuizRounded';
+import { Link } from "react-router-dom";
 
 
 
@@ -87,11 +88,11 @@ const CourseHeader = ({ Heading, subHeading }) => {
               Help and Support
             </MenuItem>
 
-            <MenuItem className="selectDesign hoverrr" value={"Profileik"}>
+           <Link to="/" className="textDecoration"> <MenuItem className="selectDesign hoverrr" sx={{ color: "black"  }}  value={"Profileik"}>
               <LogoutTwoToneIcon className="designingIcons" />
               Logout
             </MenuItem>
-            
+            </Link>
           </Select>
         </FormControl>
         <SwipeableDrawer

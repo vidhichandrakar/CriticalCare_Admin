@@ -47,7 +47,36 @@ width: 50%;
     border-radius: 10px !important;
     font-size: 0.7rem !important;
     margin-top: 3% !important;
+    min-width: 559px !important;
   }
+  .indiaImg{
+    width: 25px; 
+    height: 25px;
+}
+.phoneTextFieldStartIcon{
+  display: flex;
+  flex-direction: row;
+}
+.phoneTextField{
+  margin-top: 6% !important;
+}
+.indiaBox{
+  width:60px;
+  align-items: center;
+  justify-content: center;
+  display: block;
+  margin: auto;
+  padding: 3%;
+  
+  border-right: 1px solid #000;
+}
+.startText{
+  margin-left: 7%;
+  font-size: 1em !important;
+  font-weight: bold !important;
+  color:#000 !important
+}
+
 .LoginBtn{
     width: 30% !important;
     height: 5vh !important;
