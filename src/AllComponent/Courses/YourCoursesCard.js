@@ -22,7 +22,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
             return (
               <div className="card" onClick={()=>handleCourse(id)}>
                 <Link  to={{query: {id:id}, pathname: "/Trics1FreeMockTest"}}>
-                  <img src={cardimg} className="cardImage" />
+                  <img src={`data:image/png;base64,${item.thumbnail_path}`} className="cardImage" height={"auto"} />
                 </Link>
                 <div className="CardData">
                   <p className="Headp">{capitalize(item.course_name)}</p>

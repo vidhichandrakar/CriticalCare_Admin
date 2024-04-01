@@ -169,7 +169,7 @@ body {
 }
 .main-container {
   grid-area: main;
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 .margin20 {
   margin: 20px;

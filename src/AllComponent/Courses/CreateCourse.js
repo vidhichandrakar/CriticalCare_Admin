@@ -16,6 +16,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   const [editPrice, setEditPrice] = useState({});
   const [courseData, setCourseData] = useState([]);
   const [loaderState, setLoaderState] = useState(false);
+  
   let location = useLocation();
   const courseId = location.state?.id;
   const navigate = useNavigate();
@@ -32,7 +33,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   };
 
   useEffect(() => {
-   
     if (courseId) {
       setLoaderState(true);
       getCourseById({
@@ -41,6 +41,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           const userCallBack = response?.data;
           setCourseData(userCallBack);
           setLoaderState(false);
+          console.log("response",response);
         },
       });
     }
@@ -48,38 +49,23 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   }, [courseId]);
 
   const handleCreateCourse = () => {
-    console.log("basic info",basicInfo)
-    // let formData = new FormData();
-    // formData.append("course_name",basicInfo?.Name)
-    // formData.append("description",basicInfo?.Description)
-    // formData.append("price",parseInt(editPrice?.regularPrice))
-    // formData.append("offer_price",parseInt(editPrice?.offerPrice))
-    // formData.append("category_id",basicInfo?.Category?.id)
+    let formData = new FormData();
+    formData.append("course_name",basicInfo?.Name)
+    formData.append("description",basicInfo?.Description)
+    formData.append("price",parseInt(editPrice?.regularPrice))
+    formData.append("offer_price",parseInt(editPrice?.offerPrice))
+    formData.append("category_id",basicInfo?.Category?.category_id)
 
-    // formData.append("sub_category_id",basicInfo?.subCategory?.id)
-    // formData.append("duration_id",parseInt(editPrice?.duration))
-    // formData.append("duration_type_id",91)
-    // formData.append("thumbnail_path",basicInfo?.thumbnailPath)
-    // formData.append("content_type_id",1)
-    // formData.append("modified_by",2)
-    // formData.append("created_by",3)
-    // console.log("hjbfguyd",form)
-    const courseData = {
-      course_name: basicInfo?.Name,
-      description: basicInfo?.Description,
-      price: parseInt(editPrice?.regularPrice),
-      offer_price: parseInt(editPrice?.offerPrice),
-      category_id:basicInfo?.Category,
-      sub_category_id: basicInfo?.subCategory,
-      duration_id: parseInt(editPrice?.duration),
-      duration_type_id: 91,
-      thumbnail_path: basicInfo?.thumbnailPath,
-      content_type_id: 11,
-      modified_by: 1,
-      created_by: 2,
-    };
+    formData.append("sub_category_id",basicInfo?.subCategory?.category_id)
+    formData.append("duration_id",parseInt(editPrice?.duration))
+    formData.append("duration_type_id",91)
+    formData.append("thumbnail_path",basicInfo?.thumbnailPath, basicInfo?.thumbnailPath?.name)
+    formData.append("content_type_id",1)
+    formData.append("modified_by",2)
+    formData.append("created_by",3)
+    
     createCourse({
-      courseData,
+      courseData: formData,
       callBack: (response) => {
         toast.success("Course added successfully!", {
           autoClose: 500,
