@@ -107,10 +107,8 @@ const LoginEmailandPassword = () => {
     console.log(event, phoneNO);
     if (typeof phoneNO !== "undefined" && phoneNO?.length) {
       if (phoneNO?.length === 10 && event.keyCode === 13) {
-        console.log("workingg");
         handleUserLogin();
       } else if (phoneNO?.length !== 10) {
-        console.log("only 10 digit no.");
         setLoaderState(false);
       } else {
         toast.error("Invalid Phone Number");
