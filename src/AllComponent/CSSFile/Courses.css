@@ -193,11 +193,15 @@
   margin-top: 3% !important;
 
 }
-.BoxShadow{
+.BoxShadowCourses{
   border-radius: 80px !important;
   font-size: 0.7rem !important;
   margin-top: 3% !important;
-
+}
+/* .css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input{ */
+  .fieldSizeYears{
+  /* padding: 0% !important; */
+      padding: 7.5px 14px !important;
 }
 .thumbnailUpload{
   margin-top: 3%;
@@ -257,9 +261,9 @@
   display: flex;
   flex-direction: row;
 }
-/* .editFirstText{
+.editFirstText{
   margin-left: 3% !important;
-} */
+}
 .marginscndBox{
   margin-left: 9%;
 }

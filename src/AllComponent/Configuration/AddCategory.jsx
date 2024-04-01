@@ -44,14 +44,12 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
   useEffect(() => {
     if (selectedConfigValue === "SubCategory") {
       getCategory({
-        // courseId,
         callBack: (response) => {
           const userCallBack = response?.data;
           setCat(userCallBack);
         },
         error: (error) => {
           toast.error(error.message);
-          // setLoaderState(false);
         },
       });
     }

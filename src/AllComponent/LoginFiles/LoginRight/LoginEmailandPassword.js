@@ -128,12 +128,14 @@ const LoginEmailandPassword = () => {
           </Typography>
         </Typography>
 
-        <Box sx={{ mt: 2 }}>
+
+
+        {/* <Box sx={{ mt: 2 }}>          // dont remove this comment
           <TextField
             id="fullWidth"
             label="Email"
             variant="outlined"
-            className="BoxShadow"
+            className="BoxShadowLogin"
             fullWidth
             disabled
             type="email"
@@ -147,19 +149,19 @@ const LoginEmailandPassword = () => {
               id="fullWidth"
               label="Password"
               variant="outlined"
-              className="BoxShadow"
+              className="BoxShadowLogin"
               fullWidth
               type="password"
               onChange={(event) => handleInput(event.target.value, "password")}
             />
           </Box>
-        ) : null}
+        ) : null} */}
 
         <Box sx={{ mt: 2 }}>
           <TextField
             id="fullWidth"
             placeholder="Mobile Number"
-            className="phoneTextField BoxShadow"
+            className="phoneTextField BoxShadowLogin"
             sx={{ color: "#000" }}
             variant="outlined"
             inputProps={{ maxLength: 10 }}
@@ -191,7 +193,7 @@ const LoginEmailandPassword = () => {
               id="fullWidth"
               label="Enter OTP"
               variant="outlined"
-              className="BoxShadow"
+              className="BoxShadowLogin"
               fullWidth
               onChange={(event) => handleLoginByOTP(event.target.value, "OTP")}
             />
