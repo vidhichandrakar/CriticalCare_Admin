@@ -97,16 +97,16 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
   const handleConfigChanges = () => {
     const payload = {
       category_name: updatedCat.category_name,
-      created_by: parseInt(localStorage.getItem("loggedInUser")),
-      modiefied_by: parseInt(localStorage.getItem("loggedInUser")),
+      created_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
+      modiefied_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
     };
     createCategory({ payload, callBack: (response) => {} });
   };
   const handleDurationChanges = () => {
     const payload = {
       duration_name: updatedDuration.duration_name,
-      created_by: parseInt(localStorage.getItem("loggedInUser")),
-      modiefied_by: parseInt(localStorage.getItem("loggedInUser")),
+      created_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
+      modiefied_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
     };
     updateDuration({ payload, callBack: (response) => {} });
   };
@@ -120,7 +120,7 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
   };
   const handleSubCatChanges = () => {
     const selectedValue = selectedCategory.category_id;
-    const userId = JSON.parse(localStorage.getItem("loggedInUser"));
+    const userId = JSON.parse(localStorage.getItem("loggedInUser")).user_id;
     const payload = {
       category_name: subCategory,
       sub_category_type: "Y",
@@ -166,38 +166,6 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   type: "description",
                 })
               )}
-              <div className="flexrow mt4">
-                <div className="flexcol">
-                  {CommonTypography({ fontWeight: 600, label: "Created By" })}
-                  {commonTextField(
-                    {
-                      id: "fullWidth",
-                      className: "BoxShadow",
-                      inputClassName: "textField",
-                      labels: "Enter Created By",
-                    },
-                    (Option = {
-                      handleInput: handleInput,
-                      type: "createdBy",
-                    })
-                  )}
-                </div>
-                <div className="flexcol ml2">
-                  {CommonTypography({ fontWeight: 600, label: "Modified By" })}
-                  {commonTextField(
-                    {
-                      id: "fullWidth",
-                      className: "BoxShadow",
-                      inputClassName: "textField",
-                      labels: "Enter Modified By",
-                    },
-                    (Option = {
-                      handleInput: handleInput,
-                      type: "modifiedBy",
-                    })
-                  )}
-                </div>
-              </div>
             </>
           ) : selectedConfigValue === "Duration" ? (
             <>
@@ -214,38 +182,6 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   type: "duration",
                 })
               )}
-              <div className="flexrow mt4">
-                <div className="flexcol">
-                  {CommonTypography({ fontWeight: 600, label: "Created By" })}
-                  {commonTextField(
-                    {
-                      id: "fullWidth",
-                      className: "BoxShadow",
-                      inputClassName: "textField",
-                      labels: "Enter Created By",
-                    },
-                    (Option = {
-                      handleInput: handleInput,
-                      type: "createdBy",
-                    })
-                  )}
-                </div>
-                <div className="flexcol ml2">
-                  {CommonTypography({ fontWeight: 600, label: "Modified By" })}
-                  {commonTextField(
-                    {
-                      id: "fullWidth",
-                      className: "BoxShadow",
-                      inputClassName: "textField",
-                      labels: "Enter Modified By",
-                    },
-                    (Option = {
-                      handleInput: handleInput,
-                      type: "modifiedBy",
-                    })
-                  )}
-                </div>
-              </div>
             </>
           ) : selectedConfigValue === "SubCategory" ? (
             <>
