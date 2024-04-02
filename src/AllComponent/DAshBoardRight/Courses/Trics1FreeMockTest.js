@@ -97,7 +97,7 @@ const Trics1FreeMockTest = () => {
           </Link>
           <CourseHeader Heading={"TRICS 1 FREE MOCK TEST FOR EDIC-1"} />
         </div>
-
+        {console.log("courseData edit page", courseData)}
         <div className="another-main-container">
           <div className="completeTricsBox">
             <div className="leftSideRow">
@@ -152,7 +152,10 @@ const Trics1FreeMockTest = () => {
             </div>
 
             <div>
-              <img src={DoctorsImage} className="rightSideRow" />
+              <img
+                src={`data:image/png;base64,${courseData?.thumbnail_path}`}
+                className="rightSideRow"
+              />
             </div>
           </div>
 

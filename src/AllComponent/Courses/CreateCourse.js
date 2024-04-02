@@ -16,17 +16,15 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   const [editPrice, setEditPrice] = useState({});
   const [courseData, setCourseData] = useState([]);
   const [loaderState, setLoaderState] = useState(false);
-  
+
   let location = useLocation();
   const courseId = location.state?.id;
   const navigate = useNavigate();
 
   const handleTrackerPage = (page) => {
-    
     if (page === 2) {
       handleCreateCourse();
-    }
-    else{
+    } else {
       setTackerPage(page);
       handleHeaderLabels(basicInfo.Name);
     }
@@ -41,29 +39,40 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           const userCallBack = response?.data;
           setCourseData(userCallBack);
           setLoaderState(false);
-          console.log("response",response);
         },
       });
     }
-    
   }, [courseId]);
 
   const handleCreateCourse = () => {
     let formData = new FormData();
-    formData.append("course_name",basicInfo?.Name)
-    formData.append("description",basicInfo?.Description)
-    formData.append("price",parseInt(editPrice?.regularPrice))
-    formData.append("offer_price",parseInt(editPrice?.offerPrice))
-    formData.append("category_id",basicInfo?.Category?.category_id)
+    try {
+      formData.append("course_name", basicInfo?.Name);
+      formData.append("description", basicInfo?.Description);
+      formData.append("price", parseInt(editPrice?.regularPrice));
+      formData.append("offer_price", parseInt(editPrice?.offerPrice));
+      formData.append("category_id", basicInfo?.Category?.category_id);
+      formData.append("sub_category_id", basicInfo?.subCategory?.category_id);
+      formData.append("duration_id", parseInt(editPrice?.duration));
+      formData.append("duration_type_id", 91);
+      formData.append(
+        "thumbnail_path",
+        basicInfo?.thumbnailPath,
+        basicInfo?.thumbnailPath?.name
+      );
+      formData.append("content_type_id", 1);
+      formData.append(
+        "modified_by",
+        JSON.parse(localStorage.getItem("loggedInUser")).user_id
+      );
+      formData.append(
+        "created_by",
+        JSON.parse(localStorage.getItem("loggedInUser")).user_id
+      );
+    } catch (error) {
+      console.log(error);
+    }
 
-    formData.append("sub_category_id",basicInfo?.subCategory?.category_id)
-    formData.append("duration_id",parseInt(editPrice?.duration))
-    formData.append("duration_type_id",91)
-    formData.append("thumbnail_path",basicInfo?.thumbnailPath, basicInfo?.thumbnailPath?.name)
-    formData.append("content_type_id",1)
-    formData.append("modified_by",2)
-    formData.append("created_by",3)
-    
     createCourse({
       courseData: formData,
       callBack: (response) => {
@@ -94,7 +103,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         trackerPage={trackerPage}
         handleTrackerPage={handleTrackerPage}
       />
-      
+
       {trackerPage === 0 ? (
         <CreateForm
           handleTrackerPage={handleTrackerPage}
@@ -111,9 +120,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         <AddContent />
       )}
       <ToastContainer />
-      <LoaderComponent
-      loaderState={loaderState}
-      />
+      <LoaderComponent loaderState={loaderState} />
     </Box>
   );
 };
