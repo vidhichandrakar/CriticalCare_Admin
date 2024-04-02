@@ -88,7 +88,7 @@ const CourseHeader = ({ Heading, subHeading }) => {
               Help and Support
             </MenuItem>
 
-           <Link to="/" className="textDecoration"> <MenuItem className="selectDesign hoverrr" sx={{ color: "black"  }}  value={"Profileik"}>
+           <Link to="/admin" className="textDecoration"> <MenuItem className="selectDesign hoverrr" sx={{ color: "black"  }}  value={"Profileik"}>
               <LogoutTwoToneIcon className="designingIcons" />
               Logout
             </MenuItem>

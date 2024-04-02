@@ -23,7 +23,7 @@ const RouterMain = () => {
     <div>
      <Routes>
             <Route exact path="/Dashboard" element= {<Dashboard />}> </Route>
-            <Route exact path="/" element= {<LoginPage/>}> </Route>
+            <Route exact path="/admin" element= {<LoginPage/>}> </Route>
             <Route exact path="/CreateCourses" element= {<CreateCourses />}> </Route>
             <Route exact path="/User" element= {< User />}> </Route>
             <Route exact path="/Transaction" element= {<Transaction />}> </Route>
