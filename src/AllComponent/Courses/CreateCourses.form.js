@@ -236,6 +236,17 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     let mainSubCatID = e?.target?.value;
     handleInput(mainSubCatID, "subCategory");
   };
+  // const handleChangeOnSubCat = (e) => {
+  //   let mainSubCatID = e?.target?.value;
+  //   handleInput(mainSubCatID, "subCategory");
+  //   getSubcategoryList({
+  //     mainSubCatID,
+  //     callBack: (response) => {
+  //       setSubCategoryList(response.data);
+  //       setSelectedcategoryList(e?.target?.value);
+  //     },
+  //   });
+  // };
   return (
     <div className="formMain">
       <div className="FlexRow">
@@ -341,6 +352,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
             </Select>
           </FormControl>
         </Box>
+        
         <Box className="rightCat">
           {CommonTypography(
             { fontWeight: 600, label: "Sub Category" },
