@@ -153,7 +153,7 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
           {selectedConfigValue === "Category" ? (
             <>
               {" "}
-              {CommonTypography({ fontWeight: 600, label: "Category" })}
+              {CommonTypography({ fontWeight: 600, label: "Category", className: "addCatHeading"})}
               {commonTextField(
                 {
                   id: "fullWidth",
@@ -169,11 +169,11 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
             </>
           ) : selectedConfigValue === "Duration" ? (
             <>
-              {CommonTypography({ fontWeight: 600, label: "Duration" })}
+              {CommonTypography({ fontWeight: 600, label: "Duration" ,className: "durationHeading"})}
               {commonTextField(
                 {
                   id: "fullWidth",
-                  className: "BoxShadow",
+                  className: "BoxShadow-Duration",
                   inputClassName: "textField",
                   labels: "Enter Duration",
                 },
@@ -186,7 +186,7 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
           ) : selectedConfigValue === "SubCategory" ? (
             <>
               <div>
-                {CommonTypography({ fontWeight: 600, label: "Category" })}
+                {CommonTypography({ fontWeight: 600, label: "Category", className:"subCatHeading" })}
                 <FormControl sx={{ m: 1, width: 300, mt: 1 }}>
                   <Select
                     label="Category"
@@ -195,6 +195,7 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                     input={<OutlinedInput />}
                     MenuProps={MenuProps}
                     inputProps={{ "aria-label": "Without label" }}
+                    className="css-bdhsul-MuiTypography-root-MuiDialogTitle-root"
                   >
                     {cat.map((item) => (
                       <MenuItem key={item._id} value={item}>
@@ -206,7 +207,7 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   {commonTextField(
                     {
                       id: "fullWidth",
-                      className: "BoxShadow",
+                      className: "BoxShadow-ACat",
                       inputClassName: "textField",
                       labels: "Sub Category",
                     },
