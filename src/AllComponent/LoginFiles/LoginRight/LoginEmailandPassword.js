@@ -115,7 +115,6 @@ const LoginEmailandPassword = () => {
       }
     }
   };
-  // 9340290314
 
   return (
     <div className="RightBox">
