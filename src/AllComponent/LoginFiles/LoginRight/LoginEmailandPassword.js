@@ -57,13 +57,16 @@ const LoginEmailandPassword = () => {
       otpValue.otp1 + otpValue.otp2 + otpValue.otp3 + otpValue.otp4
     );
     setLoaderState(true);
-    if (loginWay === "") {
+    if (phoneNO?.length !== 10 ) {
+      toast.error("Enter 10 digit phone number");
+      setLoaderState(false);
+    }
+    else if (loginWay === "") {
       const payload = {
         phone_no: phoneNO?.toString(),
       };
       login({
-        
-        payload,
+         payload,
         callBack: (response) => {
           setLoginWay("Get OTP");
           setGetOTP(response.data.OTP);
@@ -71,12 +74,13 @@ const LoginEmailandPassword = () => {
           setLoaderState(false);
         },
         error: (error) => {
-          toast.error(error.message);
-          console.log(error.message);
+          toast.error(error.response.data.message);
+          console.log(error.response.data.message);
+          setLoaderState(false);
         },
       });
     }
-    if (loginWay !== "") {
+     else if (loginWay !== "") {
         const payload = {
           phone_no: phoneNO?.toString(),
           OTP: typedOtp,
@@ -105,12 +109,10 @@ const LoginEmailandPassword = () => {
   
   const handleResendOTP = () => {
     setLoaderState(true);
-    if (loginWay === "") {
       const payload = {
         phone_no: phoneNO?.toString(),
       };
       login({
-        
         payload,
         callBack: (response) => {
           setLoginWay("Get OTP");
@@ -124,7 +126,7 @@ const LoginEmailandPassword = () => {
           setLoaderState(false);
         },
       });
-    }
+    
   }
 
   const handleLoginByOTP = ({value, type}) => {
@@ -146,63 +148,6 @@ const LoginEmailandPassword = () => {
     console.log("typeee line 120", type);
     setDisableLogiBtn(false);
   };
-  // const handleUserLogin = () => {
-  //   setLoaderState(true);
-  //   if (loginWay === "") {
-  //     const payload = {
-  //       phone_no: phoneNO?.toString(),
-  //     };
-  //     login({
-        
-  //       payload,
-  //       callBack: (response) => {
-  //         setLoginWay("Get OTP");
-  //         setGetOTP(response.data.OTP);
-  //         setHideOTPBtn(false);
-  //         setLoaderState(false);
-  //       },
-  //       error: (error) => {
-  //         toast.error(error.message);
-  //         console.log(error.message);
-  //       },
-  //     });
-  //   }
-  //   if (loginWay !== "") {
-  //       const payload = {
-  //         phone_no: phoneNO?.toString(),
-  //         OTP: parseInt(enteredOTP),
-  //       };
-  //       verifyOtp({
-  //         payload,
-  //         callBack: (response) => {
-  //           console.log("verify", response);
-  //           setUserInfo({
-  //             userId: response.data.user_id,
-  //             userName: response.data.user_name,
-  //             user_photo: response.data.user_photo,
-  //           });
-  //           localStorage.setItem("loggedInUser", JSON.stringify(response?.data));
-  //           navigation("/DashBoard")
-  //         },
-  //         error: (error) => {
-  //           toast.error(error.response.data.message);
-  //           console.log(error.response.data.message);
-  //           setLoaderState(false);
-  //         },
-  //       });
-      
-  //   }
-  // };
-  // const handleLoginByOTP = (value, type) => {
-
-  //   setDisableLogiBtn(false);
-  //   if (type === "password") {
-  //     setPhoneNo(validatePhoneNo(value,phoneNO));
-  //     console.log("validatePhoneNo",validatePhoneNo(value,phoneNO));
-  //   } else if (type === "OTP") {
-  //     setEnteredOTP(value);
-  //   }
-  // };
   const handleLoginPhoneByOTP = (value, type) => {
 
     setDisableLogiBtn(false);
@@ -217,14 +162,11 @@ const LoginEmailandPassword = () => {
     console.log(event, phoneNO);
     if (typeof phoneNO !== "undefined" && phoneNO?.length) {
       if (phoneNO?.length === 10 && event.keyCode === 13) {
-        console.log("workingg");
         handleUserLogin();
       } else if (phoneNO?.length !== 10) {
-        console.log("only 10 digit no.");
-        toast.error("only 10 digit no.");
         setLoaderState(false);
       } else {
-        toast.error("Invalid Phone Number");
+        // toast.error("any key Invalid Phone Number");
       }
     }
   };
@@ -235,58 +177,16 @@ const LoginEmailandPassword = () => {
     <LoaderComponent loaderState={loaderState} />
     <Box className="BoxWidth">
       <Typography className="loginText">
-        Login to Admin Panel
+        Login to Admin Panel <span>7746003673</span>
         <Typography sx={{ mt: 1, fontSize: 21, color: "#199884" }}>
           <u>{getOTP}</u>
         </Typography>
       </Typography>
-
-      <Box sx={{ mt: 2 }}>
-        <TextField
-          id="fullWidth"
-          label="Email"
-          variant="outlined"
-          className="BoxShadow"
-          fullWidth
-          disabled
-          type="email"
-          onChange={(event) => handleInput(event.target.value, "email")}
-        />
-      </Box>
-
-      {userLogin?.email != "" ? (
         <Box sx={{ mt: 2 }}>
-          <TextField
-            id="fullWidth"
-            label="Password"
-            variant="outlined"
-            className="BoxShadow"
-            fullWidth
-            type="password"
-            onChange={(event) => handleInput(event.target.value, "password")}
-          />
-        </Box>
-      ) : null}
-
-      <Box sx={{ mt: 2 }}>
-        {/* <TextField
-          id="fullWidth"
-          label="Enter Phone No"
-          variant="outlined"
-          className="BoxShadow"
-          fullWidth
-          maxlength="10"
-          disabled={phoneNO?.length===10 && getOTP!==""}
-          type="number"
-          value={phoneNO}
-          onChange={(event) =>
-            handleLoginByOTP(event.target.value, "password")
-          }
-        /> */}
         <TextField
           id="fullWidth"
           placeholder="Mobile Number"
-          className="phoneTextField BoxShadow"
+          className="phoneTextField BoxShadow BoxShadowLogin"
           sx={{ color: "#000" }}
           variant="outlined"
           inputProps={{ maxLength: 10 }}
@@ -313,16 +213,7 @@ const LoginEmailandPassword = () => {
       </Box>
 
       {getOTP !== "" && (
-        <Box sx={{ mt: 2 }} className="OTPMainBox">
-          {/* <TextField
-            id="fullWidth"
-            label="Enter OTP"
-            variant="outlined"
-            className="BoxShadow"
-            fullWidth
-            onChange={(event) => handleLoginByOTP(event.target.value, "OTP")}
-          /> */}
-          
+        <Box sx={{ mt: 2 }} className="OTPMainBox">       
           <TextField
             id="outlined-basic"
             variant="outlined"
@@ -363,7 +254,6 @@ const LoginEmailandPassword = () => {
               className: "boxOtpWidth",
             }}
           />
-          
         </Box>
       )}
 
@@ -385,16 +275,16 @@ const LoginEmailandPassword = () => {
         >
           Login
         </Button>
-        {/* <Button
+        <Button
           variant="contained"
           className="ResendBtn"
           onClick={() => handleResendOTP()}
         >
           Resend OTP
-        </Button> */}
+        </Button>
         </Box>
       )}
-    </Box>
+     </Box>
     <ToastContainer />
   </div>
   );

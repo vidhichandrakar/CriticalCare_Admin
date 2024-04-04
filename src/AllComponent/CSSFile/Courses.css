@@ -179,11 +179,8 @@
   border-radius: 100%;
 }
 .textField{
-  /* padding:  11px 15px 13px  15px  !important; */
    font-size: 0.9rem !important;
    color:#202020 !important;
-  
-
 }
 .MuiOutlinedInput-root{
   border-radius: 15px !important;
@@ -191,13 +188,15 @@
 .DescBoxShadow{
   font-size: 0.7rem !important;
   margin-top: 3% !important;
-
 }
-.BoxShadow{
+.BoxShadowCourses{
   border-radius: 80px !important;
   font-size: 0.7rem !important;
   margin-top: 3% !important;
-
+}
+/* .css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input{ */
+.fieldSizeYears{
+  padding: 7.5px 14px !important;
 }
 .thumbnailUpload{
   margin-top: 3%;
@@ -214,7 +213,6 @@
 .fontRecommend{
   font-size: 0.76em !important;
   color: #918e8e;
-
 }
 .divider{
   background-color: #000;
@@ -251,18 +249,21 @@
 .rightEditPrice{
   margin-left: 2%;
 }
-
-
 .editFirstBox{
   display: flex;
   flex-direction: row;
 }
-/* .editFirstText{
+.editFirstText{
   margin-left: 3% !important;
-} */
+}
 .marginscndBox{
   margin-left: 9%;
 }
+.marginscndBoxYears{
+  margin-top: -2%;
+  margin-left: 8%;
+}
+
 
 
 

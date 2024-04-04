@@ -8,8 +8,8 @@ import { ToastContainer, toast } from "react-toastify";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import DoneIcon from "@mui/icons-material/Done";
-import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
-import CheckCircleRoundedIcon from '@mui/icons-material/CheckCircleRounded';
+import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
+import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import "react-toastify/dist/ReactToastify.css";
 import {
   CommonTypography,
@@ -24,7 +24,6 @@ import { useDropzone } from "react-dropzone";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
 
-// import FormControl from "@mui/material/FormControl";
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
   clipPath: "inset(50%)",
@@ -57,11 +56,18 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     subCategory: "",
     thumbnailPath: null,
   });
+  const [imgUpload, setImageWhileUpload] = useState("");
   const [cat, setCat] = useState([]);
   const onInroVideoDrop = async (files) => {
     console.log(files);
     let storedValues = Object.assign({}, storedBasicInfo);
-    storedValues.thumbnailPath = files;
+    storedValues.thumbnailPath = files[0];
+    await getBase64(files) // `file` your img file
+      .then((res) => {
+        console.log("abc", res.split(",")[1]);
+        setImageWhileUpload(res.split(",")[1]);
+      }) // `res` base64 of img file
+      .catch((err) => console.log(err));
     setStoredBasicInfo(storedValues);
   };
   const {
@@ -78,36 +84,52 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const [selectedCategoryList, setSelectedcategoryList] = useState("");
   useEffect(() => {
     getCategory({
-      // courseId,
       callBack: (response) => {
         const userCallBack = response?.data;
         setCat(userCallBack);
       },
       error: (error) => {
         toast.error(error.message);
-        // setLoaderState(false);
       },
     });
   }, []);
 
   useEffect(() => {
-    let storedValues = Object.assign({}, storedBasicInfo);
-    storedValues.Name = courseData?.course_name;
-    if (storedValues.Name?.length >= 4) {
-      sethideValidationTickName(true);
-    }
-    storedValues.Description = courseData?.description;
-    if (storedValues.Description?.length >= 4) {
-      sethideValidationTickDesc(true);
-    }
-    subCategory.map((item) => {
-      if (item.id === courseData.sub_category_id) {
-        storedValues.subCategory = item;
+    if (courseData !== "") {
+      let storedValues = Object.assign({}, storedBasicInfo);
+      storedValues.Name = courseData?.course_name;
+      if (storedValues.Name?.length >= 4) {
+        sethideValidationTickName(true);
       }
-    });
-    storedValues.thumbnailPath = courseData?.thumbnail_path;
-    setStoredBasicInfo(storedValues);
-  }, [courseData]);
+      storedValues.Description = courseData?.description;
+      if (storedValues.Description?.length >= 4) {
+        sethideValidationTickDesc(true);
+      }
+      cat.map((item) => {
+        if (item.category_id === courseData?.category_id) {
+          storedValues.Category = item;
+          console.log("category", item);
+        }
+      });
+      if (courseData?.category_id) {
+        getSubcategoryList({
+          mainCatID: courseData.category_id,
+          callBack: (response) => {
+            setSubCategoryList(response.data);
+            setSelectedcategoryList(24); //added to enable sub category
+            response.data.map((item) => {
+              if (item.category_id === courseData?.sub_category_id) {
+                storedValues.subCategory = item;
+              }
+            });
+          },
+        });
+      }
+
+      storedValues.thumbnailPath = courseData?.thumbnail_path;
+      setStoredBasicInfo(storedValues);
+    }
+  }, [courseData, cat]);
 
   const handleInput = (value, type) => {
     let storedValues = Object.assign({}, storedBasicInfo);
@@ -132,7 +154,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     } else if (type === "subCategory") {
       storedValues.subCategory = value;
     } else if (type == "file") {
-      storedValues.thumbnailPath = value;
+      storedValues.thumbnailPath = value[0];
     }
     setStoredBasicInfo(storedValues);
     if (
@@ -157,11 +179,14 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           autoClose: 500,
         }
       );
-    } else if (storedBasicInfo.Name?.length <= 3) {
+    } else if (storedBasicInfo.Name?.length <= 3 || !storedBasicInfo.Name) {
       toast.error("Name Should not be less then 3 character", {
         autoClose: 500,
       });
-    } else if (storedBasicInfo.Description?.length <= 3) {
+    } else if (
+      storedBasicInfo.Description?.length <= 3 ||
+      !storedBasicInfo.Description
+    ) {
       toast.error("Description Should not be less then 3 character", {
         autoClose: 500,
       });
@@ -176,12 +201,10 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       handleTrackerPage(1);
     }
   };
-  const handleInputFile = (file) => {
-    console.log(file);
-  };
+
   const handleChangeOnCat = (e) => {
     let mainCatID = e?.target?.value?.category_id;
-    handleInput(mainCatID,"category");
+    handleInput(e?.target?.value, "category");
     getSubcategoryList({
       mainCatID,
       callBack: (response) => {
@@ -190,15 +213,29 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       },
     });
   };
+  async function getBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(new Blob(file));
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+      reader.onerror = reject;
+    });
+  }
+
   const handleChangeOnSubCat = (e) => {
-    let mainSubCatID = e?.target?.value?.category_id;
-    handleInput(mainSubCatID,"subCategory");
+    let mainSubCatID = e?.target?.value;
+    handleInput(mainSubCatID, "subCategory");
   };
+
   return (
     <div className="formMain">
       <div className="FlexRow">
         {CommonTypography({ fontWeight: 600, label: "Name" })}
-        {hideValidationTickName && <CheckCircleRoundedIcon className="RightTick" />}
+        {hideValidationTickName && (
+          <CheckCircleRoundedIcon className="RightTick" />
+        )}
       </div>
       {commonTextField(
         {
@@ -254,9 +291,22 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
             Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
           </Typography>
           <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
-            {storedBasicInfo?.thumbnailPath?.length &&
-              storedBasicInfo?.thumbnailPath[0]?.name}
+            {storedBasicInfo?.thumbnailPath?.name}
           </Typography>
+          {imgUpload === "" && storedBasicInfo?.thumbnailPath && (
+            <img
+              src={`data:image/png;base64,${storedBasicInfo?.thumbnailPath}`}
+              width={140}
+              height={"auto"}
+            />
+          )}
+          {imgUpload != "" && (
+            <img
+              src={`data:image/png;base64,${imgUpload}`}
+              width={140}
+              height={"auto"}
+            />
+          )}
         </Box>
       </div>
 
@@ -269,11 +319,10 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
               className: "editFirstText",
             })
           )}
-
           <FormControl sx={{ m: 1, minWidth: 240 }} className="categorySelect">
             <Select
               label="Category"
-              value={cat.category_name}
+              value={storedBasicInfo?.Category}
               onChange={(e) => handleChangeOnCat(e)}
               input={<OutlinedInput />}
               MenuProps={MenuProps}
@@ -287,6 +336,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
             </Select>
           </FormControl>
         </Box>
+
         <Box className="rightCat">
           {CommonTypography(
             { fontWeight: 600, label: "Sub Category" },
@@ -297,7 +347,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           <FormControl sx={{ m: 1, minWidth: 240 }} className="categorySelect">
             <Select
               label="Sub Category"
-              value={subCategoryList?.category_name}
+              value={storedBasicInfo?.subCategory}
               onChange={(e) => handleChangeOnSubCat(e)}
               input={<OutlinedInput />}
               MenuProps={MenuProps}
@@ -305,7 +355,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
               disabled={selectedCategoryList === ""}
             >
               {subCategoryList?.map((item) => (
-                <MenuItem key={item._id} value={item}>
+                <MenuItem key={item.category_id} value={item}>
                   {item.category_name}
                 </MenuItem>
               ))}

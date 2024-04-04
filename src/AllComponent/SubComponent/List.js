@@ -75,7 +75,7 @@ const ProfileList = (anchor) => {
               {loggedUserDetails.phone_no}
             </Typography>
           </Box>
-          <Box className="flexrow BasicInfo">
+          {/* <Box className="flexrow BasicInfo">
             <Box className="flexrow">
               <PermIdentityOutlinedIcon className="infoicon" />
               <Typography className="InfoTextLeft">About:</Typography>
@@ -83,7 +83,7 @@ const ProfileList = (anchor) => {
             <Typography className="InfoTextRight">
               Need to check with Backend Team
             </Typography>
-          </Box>
+          </Box> */}
         </Box>
       </Box>
       <Box className="BasicInfoBox">

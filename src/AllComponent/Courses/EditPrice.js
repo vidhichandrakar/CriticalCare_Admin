@@ -73,6 +73,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   };
   return (
     <div className="formMain">
+      {console.log("storedValuesstoredValues,",editPriceData)}
       <Box sx={{ mt: "5%" }} className="editFirstBox">
         <Box>
           {CommonTypography(
@@ -96,11 +97,13 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
             })
           )}
         </Box>
-        <Box className="marginscndBox">
+
+        <Box className="marginscndBoxYears">
           {CommonTypography(
             { fontWeight: 600, label: "Years / Months / Days" },
             (Option = {
-              className: "editFirstText",
+              // className: "editFirstText",
+              className : "fieldSizeYears"
             })
           )}
           <FormControl sx={{ m: 1, minWidth: 240 }}>
@@ -119,6 +122,8 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
           </FormControl>
         </Box>
       </Box>
+
+
       <Box sx={{ marginTop: "5%" }} className="editFirstBox">
         <Box>
           {CommonTypography(
@@ -130,7 +135,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
           {commonTextField(
             {
               id: "fullWidth",
-              className: "BoxShadow",
+              className: "BoxShadowCourses",
               inputClassName: "textField",
               labels: "₹ 1000",
             },
@@ -142,6 +147,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
             })
           )}
         </Box>
+
         <Box className="marginscndBox">
           {CommonTypography(
             { fontWeight: 600, label: "Offer Price" },
@@ -165,6 +171,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
           )}
         </Box>
       </Box>
+
       <Box className="divider"></Box>
      {commonButton({
         handleTrackerPage: () => handlePricePage(),

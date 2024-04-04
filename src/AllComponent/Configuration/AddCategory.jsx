@@ -44,14 +44,12 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
   useEffect(() => {
     if (selectedConfigValue === "SubCategory") {
       getCategory({
-        // courseId,
         callBack: (response) => {
           const userCallBack = response?.data;
           setCat(userCallBack);
         },
         error: (error) => {
           toast.error(error.message);
-          // setLoaderState(false);
         },
       });
     }
@@ -99,16 +97,16 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
   const handleConfigChanges = () => {
     const payload = {
       category_name: updatedCat.category_name,
-      created_by: parseInt(localStorage.getItem("loggedInUser")),
-      modiefied_by: parseInt(localStorage.getItem("loggedInUser")),
+      created_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
+      modiefied_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
     };
     createCategory({ payload, callBack: (response) => {} });
   };
   const handleDurationChanges = () => {
     const payload = {
       duration_name: updatedDuration.duration_name,
-      created_by: parseInt(localStorage.getItem("loggedInUser")),
-      modiefied_by: parseInt(localStorage.getItem("loggedInUser")),
+      created_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
+      modiefied_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
     };
     updateDuration({ payload, callBack: (response) => {} });
   };
@@ -122,7 +120,7 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
   };
   const handleSubCatChanges = () => {
     const selectedValue = selectedCategory.category_id;
-    const userId = JSON.parse(localStorage.getItem("loggedInUser"));
+    const userId = JSON.parse(localStorage.getItem("loggedInUser")).user_id;
     const payload = {
       category_name: subCategory,
       sub_category_type: "Y",
@@ -155,7 +153,7 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
           {selectedConfigValue === "Category" ? (
             <>
               {" "}
-              {CommonTypography({ fontWeight: 600, label: "Category" })}
+              {CommonTypography({ fontWeight: 600, label: "Category", className: "addCatHeading"})}
               {commonTextField(
                 {
                   id: "fullWidth",
@@ -168,46 +166,14 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   type: "description",
                 })
               )}
-              <div className="flexrow mt4">
-                <div className="flexcol">
-                  {CommonTypography({ fontWeight: 600, label: "Created By" })}
-                  {commonTextField(
-                    {
-                      id: "fullWidth",
-                      className: "BoxShadow",
-                      inputClassName: "textField",
-                      labels: "Enter Created By",
-                    },
-                    (Option = {
-                      handleInput: handleInput,
-                      type: "createdBy",
-                    })
-                  )}
-                </div>
-                <div className="flexcol ml2">
-                  {CommonTypography({ fontWeight: 600, label: "Modified By" })}
-                  {commonTextField(
-                    {
-                      id: "fullWidth",
-                      className: "BoxShadow",
-                      inputClassName: "textField",
-                      labels: "Enter Modified By",
-                    },
-                    (Option = {
-                      handleInput: handleInput,
-                      type: "modifiedBy",
-                    })
-                  )}
-                </div>
-              </div>
             </>
           ) : selectedConfigValue === "Duration" ? (
             <>
-              {CommonTypography({ fontWeight: 600, label: "Duration" })}
+              {CommonTypography({ fontWeight: 600, label: "Duration" ,className: "durationHeading"})}
               {commonTextField(
                 {
                   id: "fullWidth",
-                  className: "BoxShadow",
+                  className: "BoxShadow-Duration",
                   inputClassName: "textField",
                   labels: "Enter Duration",
                 },
@@ -216,43 +182,11 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   type: "duration",
                 })
               )}
-              <div className="flexrow mt4">
-                <div className="flexcol">
-                  {CommonTypography({ fontWeight: 600, label: "Created By" })}
-                  {commonTextField(
-                    {
-                      id: "fullWidth",
-                      className: "BoxShadow",
-                      inputClassName: "textField",
-                      labels: "Enter Created By",
-                    },
-                    (Option = {
-                      handleInput: handleInput,
-                      type: "createdBy",
-                    })
-                  )}
-                </div>
-                <div className="flexcol ml2">
-                  {CommonTypography({ fontWeight: 600, label: "Modified By" })}
-                  {commonTextField(
-                    {
-                      id: "fullWidth",
-                      className: "BoxShadow",
-                      inputClassName: "textField",
-                      labels: "Enter Modified By",
-                    },
-                    (Option = {
-                      handleInput: handleInput,
-                      type: "modifiedBy",
-                    })
-                  )}
-                </div>
-              </div>
             </>
           ) : selectedConfigValue === "SubCategory" ? (
             <>
               <div>
-                {CommonTypography({ fontWeight: 600, label: "Category" })}
+                {CommonTypography({ fontWeight: 600, label: "Category", className:"subCatHeading" })}
                 <FormControl sx={{ m: 1, width: 300, mt: 1 }}>
                   <Select
                     label="Category"
@@ -261,6 +195,7 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                     input={<OutlinedInput />}
                     MenuProps={MenuProps}
                     inputProps={{ "aria-label": "Without label" }}
+                    className="css-bdhsul-MuiTypography-root-MuiDialogTitle-root"
                   >
                     {cat.map((item) => (
                       <MenuItem key={item._id} value={item}>
@@ -272,7 +207,7 @@ function AddCategory({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   {commonTextField(
                     {
                       id: "fullWidth",
-                      className: "BoxShadow",
+                      className: "BoxShadow-ACat",
                       inputClassName: "textField",
                       labels: "Sub Category",
                     },
