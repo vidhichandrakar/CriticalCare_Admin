@@ -212,6 +212,24 @@ const LoginEmailandPassword = () => {
     } 
   };
 
+  const handleKeyDown = (event, value, originalNum) => {
+    // setDisableLogiBtn(false);
+    console.log(event, phoneNO);
+    if (typeof phoneNO !== "undefined" && phoneNO?.length) {
+      if (phoneNO?.length === 10 && event.keyCode === 13) {
+        console.log("workingg");
+        handleUserLogin();
+      } else if (phoneNO?.length !== 10) {
+        console.log("only 10 digit no.");
+        toast.error("only 10 digit no.");
+        setLoaderState(false);
+      } else {
+        toast.error("Invalid Phone Number");
+      }
+    }
+  };
+  // 9340290314
+
   return (
     <div className="RightBox">
     <LoaderComponent loaderState={loaderState} />
@@ -275,6 +293,7 @@ const LoginEmailandPassword = () => {
           disabled={phoneNO?.length === 10 && getOTP !== ""}
           type="number"
           value={phoneNO}
+          onKeyDown={(event) => handleKeyDown(event)}
           onChange={(event) =>
             handleLoginPhoneByOTP(event.target.value, "password")
           }
@@ -344,6 +363,7 @@ const LoginEmailandPassword = () => {
               className: "boxOtpWidth",
             }}
           />
+          
         </Box>
       )}
 
