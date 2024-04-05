@@ -8,33 +8,18 @@ import { ToastContainer, toast } from "react-toastify";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import DoneIcon from "@mui/icons-material/Done";
-import DoneOutlinedIcon from "@mui/icons-material/DoneOutlined";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import "react-toastify/dist/ReactToastify.css";
 import {
   CommonTypography,
   commonButton,
-  commonSelect,
   commonTextField,
 } from "../../Util/CommonFields";
-import { Category, Description } from "@mui/icons-material";
-import { category, subCategory } from "../../Util/masterFile";
 import { getCategory, getSubcategoryList } from "../ActionFactory/apiActions";
 import { useDropzone } from "react-dropzone";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
 
-const VisuallyHiddenInput = styled("input")({
-  clip: "rect(0 0 0 0)",
-  clipPath: "inset(50%)",
-  height: 1,
-  overflow: "hidden",
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  whiteSpace: "nowrap",
-  width: 1,
-});
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -71,8 +56,6 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     setStoredBasicInfo(storedValues);
   };
   const {
-    acceptedFiles,
-    fileRejections,
     getRootProps: getIntroVideoRootProps,
     getInputProps: getIntroVideoInputProps,
   } = useDropzone({
