@@ -23,22 +23,21 @@ import { deleteUser, getAllUsersApi } from "../../ActionFactory/apiActions";
 import moment from "moment/moment";
 import { TablePagination } from "@mui/material";
 import Stack from "@mui/material/Stack";
-
 import IconButton from "@mui/material/IconButton";
 import { Box, TextField } from "@mui/material";
-
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import LastPageIcon from '@mui/icons-material/LastPage';
-import { useTheme } from '@mui/material/styles';
-import PropTypes from 'prop-types';
+import FirstPageIcon from "@mui/icons-material/FirstPage";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import LastPageIcon from "@mui/icons-material/LastPage";
+import { useTheme } from "@mui/material/styles";
+import PropTypes from "prop-types";
 import LoaderComponent from "../../../Util/LoaderComponent";
 import { ToastContainer, toast } from "react-toastify";
+import TableSortLabel from "@mui/material/TableSortLabel";
 import "react-toastify/dist/ReactToastify.css";
 
 function TablePaginationActions(props) {
-  console.log(props, "propsss")
+  console.log(props, "propsss");
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
 
@@ -65,28 +64,36 @@ function TablePaginationActions(props) {
         disabled={page === 0}
         aria-label="first page"
       >
-        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+        {theme.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
       </IconButton>
       <IconButton
         onClick={handleBackButtonClick}
         disabled={page === 0}
         aria-label="previous page"
       >
-        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+        {theme.direction === "rtl" ? (
+          <KeyboardArrowRight />
+        ) : (
+          <KeyboardArrowLeft />
+        )}
       </IconButton>
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="next page"
       >
-        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+        {theme.direction === "rtl" ? (
+          <KeyboardArrowLeft />
+        ) : (
+          <KeyboardArrowRight />
+        )}
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="last page"
       >
-        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+        {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
       </IconButton>
     </Box>
   );
@@ -116,13 +123,13 @@ const User = () => {
         const userCallBack = response?.data;
         setUserData(userCallBack);
         setLoaderState(false);
-      },error:(error)=>{
+      },
+      error: (error) => {
         toast.error(error.message);
         console.log(error.message);
         setLoaderState(false);
-      }
+      },
     });
-    
   }, []);
 
   const handleChangeOnCheckBox = (event, data) => {
@@ -155,10 +162,11 @@ const User = () => {
             setUserData(userCallBack);
           },
         });
-      },error:(error)=>{
+      },
+      error: (error) => {
         toast.error(error.message);
         console.log(error.message);
-      }
+      },
     });
   };
 
@@ -176,11 +184,12 @@ const User = () => {
               setLoaderState(false);
             },
           });
-        },error:(error)=>{
+        },
+        error: (error) => {
           toast.error(error.message);
           console.log(error.message);
           setLoaderState(false);
-        }
+        },
       });
     });
   };
@@ -202,9 +211,7 @@ const User = () => {
           Heading={"Users (357)"}
           subHeading={"View, Filter & Manage all your users"}
         />
-        <LoaderComponent
-      loaderState={loaderState}
-      />
+        <LoaderComponent loaderState={loaderState} />
         <div className="searchnfilter">
           <SearchBar mt="2%" placeholder="Search by name" />
           <Button className="filterButton">
@@ -251,9 +258,12 @@ const User = () => {
               <TableBody className="parentTable">
                 {userData.length
                   ? (rowsPerPage > 0
-                    ? userData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    : userData
-                  ).map((row) => {
+                      ? userData.slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
+                      : userData
+                    ).map((row) => {
                       return (
                         <TableRow
                           hover
@@ -278,6 +288,18 @@ const User = () => {
                             </div>
                           </TableCell>
                           <TableCell className="fullNameHead">
+                          <TableSortLabel
+              // active={orderBy === headCell.id}
+              // direction={orderBy === headCell.id ? order : 'asc'}
+              // onClick={createSortHandler(headCell.id)}
+            >
+              {/* {headCell.label}
+              {orderBy === headCell.id ? (
+                <Box component="span" sx={visuallyHidden}>
+                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                </Box>
+              ) : null} */}
+            </TableSortLabel>
                             {row.user_name}
                           </TableCell>
                           <TableCell>
@@ -319,28 +341,26 @@ const User = () => {
                 </Popover>
               </TableBody>
               <TablePagination
-              rowsPerPageOptions={[4, 10, 25, { label: 'All', value: -1 }]}
-              // colSpan={3}
-              count={userData.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              slotProps={{
-                select: {
-                  inputProps: {
-                    'aria-label': 'rows per page',
+                rowsPerPageOptions={[4, 10, 25, { label: "All", value: -1 }]}
+                // colSpan={3}
+                count={userData.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                slotProps={{
+                  select: {
+                    inputProps: {
+                      "aria-label": "rows per page",
+                    },
+                    native: true,
                   },
-                  native: true,
-                },
-              }}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActions}
-              className="Pagination"
-            />
+                }}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActions}
+                className="Pagination"
+              />
             </Table>
           </TableContainer>
-
-          
         </Paper>
       </div>
       <ToastContainer />

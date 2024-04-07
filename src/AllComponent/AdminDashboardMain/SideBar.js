@@ -14,7 +14,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import AddCategory from "../Configuration/AddCategory";
+import Configuration from "../Configuration/Configuration";
 
 function SideBar({ openSidebarToggle, OpenSidebar }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -389,7 +389,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
           </Link>
         </div>
         {hideCatConfig && (
-          <AddCategory
+          <Configuration
             selectedConfigValue={selectedConfigValue}
             handleCloseCat={handleCloseCat}
             hideCatConfig={hideCatConfig}
