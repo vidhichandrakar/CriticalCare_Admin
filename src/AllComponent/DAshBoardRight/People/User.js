@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useMemo } from "react";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Typography from "@mui/material/Typography";
@@ -35,6 +35,7 @@ import LoaderComponent from "../../../Util/LoaderComponent";
 import { ToastContainer, toast } from "react-toastify";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import "react-toastify/dist/ReactToastify.css";
+import { visuallyHidden } from "@mui/utils";
 
 function TablePaginationActions(props) {
   console.log(props, "propsss");
@@ -113,9 +114,12 @@ const User = () => {
   const [userData, setUserData] = useState([]);
   const open = Boolean(anchorEl);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(4);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [loaderState, setLoaderState] = useState(false);
   const id = open ? "simple-popover" : undefined;
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("user_name");
+
   useEffect(() => {
     setLoaderState(true);
     getAllUsersApi({
@@ -160,6 +164,7 @@ const User = () => {
           callBack: (response) => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
+            handleClose();
           },
         });
       },
@@ -182,6 +187,7 @@ const User = () => {
               const userCallBack = response?.data;
               setUserData(userCallBack);
               setLoaderState(false);
+              setCheckedValue([]);
             },
           });
         },
@@ -202,6 +208,52 @@ const User = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  function descendingComparator(a, b, orderBy) {
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
+    return 0;
+  }
+
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
+    setOrderBy(property);
+  };
+
+  const createSortHandler = (property) => (event) => {
+    handleRequestSort(event, property);
+  };
+
+  function getComparator(order, orderBy) {
+    return order === "desc"
+      ? (a, b) => descendingComparator(a, b, orderBy)
+      : (a, b) => -descendingComparator(a, b, orderBy);
+  }
+
+  function stableSort(array, comparator) {
+    const stabilizedThis = array.map((el, index) => [el, index]);
+    stabilizedThis.sort((a, b) => {
+      const order = comparator(a[0], b[0]);
+      if (order !== 0) {
+        return order;
+      }
+      return a[1] - b[1];
+    });
+    return stabilizedThis.map((el) => el[0]);
+  }
+
+  const visibleRows = useMemo(
+    () =>
+      stableSort(userData, getComparator(order, orderBy)).slice(
+        page * rowsPerPage,
+        page * rowsPerPage + rowsPerPage
+      ),
+    [order, orderBy, page, rowsPerPage, userData]
+  );
 
   return (
     <div className="grid-container">
@@ -248,74 +300,77 @@ const User = () => {
                       align={column.align}
                       style={{ minWidth: column.minWidth, fontWeight: 600 }}
                       className="headingOfTable2"
+                      sortDirection={orderBy === column.id ? order : false}
                     >
-                      {column.label}
+                      {column.id === "user_name" ||
+                      column.id === "updatedAt" ? (
+                        <TableSortLabel
+                          active={orderBy === column.id}
+                          direction={orderBy === column.id ? order : "asc"}
+                          onClick={createSortHandler(column.id)}
+                        >
+                          {column.label}
+                          {orderBy === column.id ? (
+                            <Box component="span" sx={visuallyHidden}>
+                              {order === "desc"
+                                ? "sorted descending"
+                                : "sorted ascending"}
+                            </Box>
+                          ) : null}
+                        </TableSortLabel>
+                      ) : (
+                        column.label
+                      )}
                     </TableCell>
                   ))}
                 </TableRow>
               </TableHead>
 
               <TableBody className="parentTable">
-                {userData.length
-                  ? (rowsPerPage > 0
-                      ? userData.slice(
-                          page * rowsPerPage,
-                          page * rowsPerPage + rowsPerPage
-                        )
-                      : userData
-                    ).map((row) => {
-                      return (
-                        <TableRow
-                          hover
-                          className="TableHover"
-                          role="checkbox"
-                          tabIndex={-1}
-                          key={row?.code}
-                        >
-                          <TableCell className="useInfoCheckbox">
-                            <Checkbox
-                              onChange={(event) =>
-                                handleChangeOnCheckBox(event, row.user_id)
-                              }
-                            />
-                            <div className="userCheckBoxDiv">
-                              <Typography className="bluePara">
-                                {row.email_id}
-                              </Typography>
-                              <Typography className="PhoneText">
-                                {row.phone_no}
-                              </Typography>
-                            </div>
-                          </TableCell>
-                          <TableCell className="fullNameHead">
-                          <TableSortLabel
-              // active={orderBy === headCell.id}
-              // direction={orderBy === headCell.id ? order : 'asc'}
-              // onClick={createSortHandler(headCell.id)}
-            >
-              {/* {headCell.label}
-              {orderBy === headCell.id ? (
-                <Box component="span" sx={visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </Box>
-              ) : null} */}
-            </TableSortLabel>
-                            {row.user_name}
-                          </TableCell>
-                          <TableCell>
-                            {moment(row.createdAt).format("MM/DD/YYYY")}
-                          </TableCell>
-                          <TableCell>
-                            <MoreVertIcon //need to remove this hardcode this code, more ... three drops in last column
-                              onClick={(event) =>
-                                handleClick(event, row.user_id)
-                              }
-                            />
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })
-                  : null}
+                {visibleRows.map((row) => {
+                  return (
+                    <TableRow
+                      hover
+                      className="TableHover"
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={row?.code}
+                    >
+                      {console.log("checkedValuecheckedValue", checkedValue)}
+                      <TableCell className="useInfoCheckbox">
+                        <Checkbox
+                          checked={
+                            checkedValue.filter(
+                              (value) => row.user_id === value
+                            ).length
+                          }
+                          onChange={(event) =>
+                            handleChangeOnCheckBox(event, row.user_id)
+                          }
+                        />
+                        <div className="userCheckBoxDiv">
+                          <Typography className="bluePara">
+                            {row.email_id}
+                          </Typography>
+                          <Typography className="PhoneText">
+                            {row.phone_no}
+                          </Typography>
+                        </div>
+                      </TableCell>
+                      <TableCell className="fullNameHead">
+                        {row.user_name}
+                      </TableCell>
+                      <TableCell>
+                        {moment(row.createdAt).format("MM/DD/YYYY")}
+                      </TableCell>
+                      <TableCell>
+                        <MoreVertIcon //need to remove this hardcode this code, more ... three drops in last column
+                          onClick={(event) => handleClick(event, row.user_id)}
+                        />
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
                 <Popover
                   sx={{ m: -7, mt: 0.7, ml: -18 }}
                   id={openId}
