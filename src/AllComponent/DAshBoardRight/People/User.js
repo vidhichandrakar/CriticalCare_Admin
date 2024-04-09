@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useMemo } from "react";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Typography from "@mui/material/Typography";
@@ -23,22 +23,21 @@ import { deleteUser, getAllUsersApi } from "../../ActionFactory/apiActions";
 import moment from "moment/moment";
 import { TablePagination } from "@mui/material";
 import Stack from "@mui/material/Stack";
-
 import IconButton from "@mui/material/IconButton";
 import { Box, TextField } from "@mui/material";
-
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import LastPageIcon from '@mui/icons-material/LastPage';
-import { useTheme } from '@mui/material/styles';
-import PropTypes from 'prop-types';
+import FirstPageIcon from "@mui/icons-material/FirstPage";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import LastPageIcon from "@mui/icons-material/LastPage";
+import { useTheme } from "@mui/material/styles";
+import PropTypes from "prop-types";
 import LoaderComponent from "../../../Util/LoaderComponent";
 import { ToastContainer, toast } from "react-toastify";
+import TableSortLabel from "@mui/material/TableSortLabel";
 import "react-toastify/dist/ReactToastify.css";
+import { visuallyHidden } from "@mui/utils";
 
 function TablePaginationActions(props) {
-  console.log(props, "propsss")
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
 
@@ -65,28 +64,36 @@ function TablePaginationActions(props) {
         disabled={page === 0}
         aria-label="first page"
       >
-        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+        {theme.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
       </IconButton>
       <IconButton
         onClick={handleBackButtonClick}
         disabled={page === 0}
         aria-label="previous page"
       >
-        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+        {theme.direction === "rtl" ? (
+          <KeyboardArrowRight />
+        ) : (
+          <KeyboardArrowLeft />
+        )}
       </IconButton>
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="next page"
       >
-        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+        {theme.direction === "rtl" ? (
+          <KeyboardArrowLeft />
+        ) : (
+          <KeyboardArrowRight />
+        )}
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="last page"
       >
-        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+        {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
       </IconButton>
     </Box>
   );
@@ -106,9 +113,12 @@ const User = () => {
   const [userData, setUserData] = useState([]);
   const open = Boolean(anchorEl);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(4);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const [loaderState, setLoaderState] = useState(false);
   const id = open ? "simple-popover" : undefined;
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("user_name");
+
   useEffect(() => {
     setLoaderState(true);
     getAllUsersApi({
@@ -116,13 +126,12 @@ const User = () => {
         const userCallBack = response?.data;
         setUserData(userCallBack);
         setLoaderState(false);
-      },error:(error)=>{
+      },
+      error: (error) => {
         toast.error(error.message);
-        console.log(error.message);
         setLoaderState(false);
-      }
+      },
     });
-    
   }, []);
 
   const handleChangeOnCheckBox = (event, data) => {
@@ -153,18 +162,18 @@ const User = () => {
           callBack: (response) => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
+            handleClose();
           },
         });
-      },error:(error)=>{
+      },
+      error: (error) => {
         toast.error(error.message);
-        console.log(error.message);
-      }
+      },
     });
   };
 
   const deleteSelectedItem = () => {
     setLoaderState(true);
-    console.log("calling", checkedValue);
     checkedValue.map((item) => {
       deleteUser({
         userId: item,
@@ -174,13 +183,14 @@ const User = () => {
               const userCallBack = response?.data;
               setUserData(userCallBack);
               setLoaderState(false);
+              setCheckedValue([]);
             },
           });
-        },error:(error)=>{
+        },
+        error: (error) => {
           toast.error(error.message);
-          console.log(error.message);
           setLoaderState(false);
-        }
+        },
       });
     });
   };
@@ -193,6 +203,51 @@ const User = () => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+  function descendingComparator(a, b, orderBy) {
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
+    return 0;
+  }
+
+  const handleRequestSort = (event, property) => {
+    const isAsc = orderBy === property && order === "asc";
+    setOrder(isAsc ? "desc" : "asc");
+    setOrderBy(property);
+  };
+
+  const createSortHandler = (property) => (event) => {
+    handleRequestSort(event, property);
+  };
+
+  function getComparator(order, orderBy) {
+    return order === "desc"
+      ? (a, b) => descendingComparator(a, b, orderBy)
+      : (a, b) => -descendingComparator(a, b, orderBy);
+  }
+
+  function stableSort(array, comparator) {
+    const stabilizedThis = array.map((el, index) => [el, index]);
+    stabilizedThis.sort((a, b) => {
+      const order = comparator(a[0], b[0]);
+      if (order !== 0) {
+        return order;
+      }
+      return a[1] - b[1];
+    });
+    return stabilizedThis.map((el) => el[0]);
+  }
+
+  const visibleRows = useMemo(() =>
+      stableSort(userData, getComparator(order, orderBy)).slice(
+        page * rowsPerPage,
+        page * rowsPerPage + rowsPerPage
+      ),
+    [order, orderBy, page, rowsPerPage, userData]
+  );
 
   return (
     <div className="grid-container">
@@ -202,9 +257,7 @@ const User = () => {
           Heading={"Users (357)"}
           subHeading={"View, Filter & Manage all your users"}
         />
-        <LoaderComponent
-      loaderState={loaderState}
-      />
+        <LoaderComponent loaderState={loaderState} />
         <div className="searchnfilter">
           <SearchBar mt="2%" placeholder="Search by name" />
           <Button className="filterButton">
@@ -241,59 +294,76 @@ const User = () => {
                       align={column.align}
                       style={{ minWidth: column.minWidth, fontWeight: 600 }}
                       className="headingOfTable2"
+                      sortDirection={orderBy === column.id ? order : false}
                     >
-                      {column.label}
+                      {column.id === "user_name" ||
+                      column.id === "updatedAt" ? (
+                        <TableSortLabel
+                          active={orderBy === column.id}
+                          direction={orderBy === column.id ? order : "asc"}
+                          onClick={createSortHandler(column.id)}
+                        >
+                          {column.label}
+                          {orderBy === column.id ? (
+                            <Box component="span" sx={visuallyHidden}>
+                              {order === "desc"
+                                ? "sorted descending"
+                                : "sorted ascending"}
+                            </Box>
+                          ) : null}
+                        </TableSortLabel>
+                      ) : (
+                        column.label
+                      )}
                     </TableCell>
                   ))}
                 </TableRow>
               </TableHead>
 
               <TableBody className="parentTable">
-                {userData.length
-                  ? (rowsPerPage > 0
-                    ? userData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    : userData
-                  ).map((row) => {
-                      return (
-                        <TableRow
-                          hover
-                          className="TableHover"
-                          role="checkbox"
-                          tabIndex={-1}
-                          key={row?.code}
-                        >
-                          <TableCell className="useInfoCheckbox">
-                            <Checkbox
-                              onChange={(event) =>
-                                handleChangeOnCheckBox(event, row.user_id)
-                              }
-                            />
-                            <div className="userCheckBoxDiv">
-                              <Typography className="bluePara">
-                                {row.email_id}
-                              </Typography>
-                              <Typography className="PhoneText">
-                                {row.phone_no}
-                              </Typography>
-                            </div>
-                          </TableCell>
-                          <TableCell className="fullNameHead">
-                            {row.user_name}
-                          </TableCell>
-                          <TableCell>
-                            {moment(row.createdAt).format("MM/DD/YYYY")}
-                          </TableCell>
-                          <TableCell>
-                            <MoreVertIcon //need to remove this hardcode this code, more ... three drops in last column
-                              onClick={(event) =>
-                                handleClick(event, row.user_id)
-                              }
-                            />
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })
-                  : null}
+                {visibleRows.map((row) => {
+                  return (
+                    <TableRow
+                      hover
+                      className="TableHover"
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={row?.code}
+                    >
+                      <TableCell className="useInfoCheckbox">
+                        <Checkbox
+                          checked={
+                            checkedValue.filter(
+                              (value) => row.user_id === value
+                            ).length
+                          }
+                          onChange={(event) =>
+                            handleChangeOnCheckBox(event, row.user_id)
+                          }
+                        />
+                        <div className="userCheckBoxDiv">
+                          <Typography className="bluePara">
+                            {row.email_id}
+                          </Typography>
+                          <Typography className="PhoneText">
+                            {row.phone_no}
+                          </Typography>
+                        </div>
+                      </TableCell>
+                      <TableCell className="fullNameHead">
+                        {row.user_name}
+                      </TableCell>
+                      <TableCell>
+                        {moment(row.createdAt).format("MM/DD/YYYY")}
+                      </TableCell>
+                      <TableCell>
+                        <MoreVertIcon //need to remove this hardcode this code, more ... three drops in last column
+                          onClick={(event) => handleClick(event, row.user_id)}
+                        />
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
                 <Popover
                   sx={{ m: -7, mt: 0.7, ml: -18 }}
                   id={openId}
@@ -319,28 +389,26 @@ const User = () => {
                 </Popover>
               </TableBody>
               <TablePagination
-              rowsPerPageOptions={[4, 10, 25, { label: 'All', value: -1 }]}
-              // colSpan={3}
-              count={userData.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              slotProps={{
-                select: {
-                  inputProps: {
-                    'aria-label': 'rows per page',
+                rowsPerPageOptions={[4, 10, 25, { label: "All", value: -1 }]}
+                // colSpan={3}
+                count={userData.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                slotProps={{
+                  select: {
+                    inputProps: {
+                      "aria-label": "rows per page",
+                    },
+                    native: true,
                   },
-                  native: true,
-                },
-              }}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActions}
-              className="Pagination"
-            />
+                }}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActions}
+                className="Pagination"
+              />
             </Table>
           </TableContainer>
-
-          
         </Paper>
       </div>
       <ToastContainer />

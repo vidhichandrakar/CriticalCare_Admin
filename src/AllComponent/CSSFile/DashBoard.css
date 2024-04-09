@@ -937,3 +937,25 @@ body {
   text-align: center !important;
   color: #0075ff !important;
 }
+
+
+
+  /* login page css */
+
+  
+.phoneTextField{
+  margin-top: 16% !important;
+}
+.phoneTextField2{
+  margin-top: 18% !important;
+}
+.BoxWidth{
+  /* width: 400px !important; */
+  max-width: 100% !important;
+  margin-top: 12% !important;
+}
+.BoxWidth2{
+  /* width: 400px !important; */
+  max-width: 100% !important;
+  margin-top: 28% !important;
+}
