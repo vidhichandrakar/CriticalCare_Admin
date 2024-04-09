@@ -62,7 +62,6 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 function TablePaginationActions(props) {
   
   const [loaderState, setLoaderState] = useState(false);
-  console.log(props, "propsss")
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
 
@@ -148,7 +147,6 @@ const MyTeam = () => {
         setLoaderState(false);
       },error:(error)=>{
         toast.error(error.message);
-        console.log(error.message);
       }
     });
   }, []);
@@ -171,9 +169,9 @@ const MyTeam = () => {
           callBack: (response) => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
+            handleClose();
           },error:(error)=>{
             toast.error(error.message);
-            console.log(error.message);
           }
         });
       },
@@ -219,7 +217,6 @@ const MyTeam = () => {
       email_id: addTeam.emailID,
       phone_no: addTeam.PhoneNo,
     };
-    console.log("payloadpayload", payload);
     updateTeam({
       payload,
       callBack: (response) => {
@@ -230,13 +227,11 @@ const MyTeam = () => {
   };
 
   const handleEdit = () => {
-    console.log("etidn", openId);
     setOpen(true);
     const teamId = openId;
     getTeamByID({
       teamId,
       callBack: (response) => {
-        console.log(response.data);
         const data = response.data;
         let storedValues = Object.assign({}, addTeam);
         storedValues.PhoneNo = data.phone_no;
@@ -245,7 +240,6 @@ const MyTeam = () => {
         setAddTeam(storedValues);
       },error:(error)=>{
         toast.error(error.message);
-        console.log(error.message);
       }
     });
   };

@@ -38,7 +38,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { visuallyHidden } from "@mui/utils";
 
 function TablePaginationActions(props) {
-  console.log(props, "propsss");
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
 
@@ -130,7 +129,6 @@ const User = () => {
       },
       error: (error) => {
         toast.error(error.message);
-        console.log(error.message);
         setLoaderState(false);
       },
     });
@@ -170,14 +168,12 @@ const User = () => {
       },
       error: (error) => {
         toast.error(error.message);
-        console.log(error.message);
       },
     });
   };
 
   const deleteSelectedItem = () => {
     setLoaderState(true);
-    console.log("calling", checkedValue);
     checkedValue.map((item) => {
       deleteUser({
         userId: item,
@@ -193,7 +189,6 @@ const User = () => {
         },
         error: (error) => {
           toast.error(error.message);
-          console.log(error.message);
           setLoaderState(false);
         },
       });
@@ -246,8 +241,7 @@ const User = () => {
     return stabilizedThis.map((el) => el[0]);
   }
 
-  const visibleRows = useMemo(
-    () =>
+  const visibleRows = useMemo(() =>
       stableSort(userData, getComparator(order, orderBy)).slice(
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage
@@ -336,7 +330,6 @@ const User = () => {
                       tabIndex={-1}
                       key={row?.code}
                     >
-                      {console.log("checkedValuecheckedValue", checkedValue)}
                       <TableCell className="useInfoCheckbox">
                         <Checkbox
                           checked={
