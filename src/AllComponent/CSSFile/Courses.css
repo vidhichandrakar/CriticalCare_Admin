@@ -360,3 +360,20 @@
 .checkbox-icon{
   font-weight: 300 !important;
 }
+.configurationDialog .MuiDialog-paper{
+    width:70% !important;
+    height:auto !important;
+}
+.addCatHeading{
+  margin-top: 3% !important;
+  margin-left: 1px !important;
+}
+.addCatTextField{
+  margin-top: 3% !important;
+}
+.closeHover{
+  margin-top: 0.8%;
+}
+.closeHover:hover{
+  cursor: pointer;
+}
