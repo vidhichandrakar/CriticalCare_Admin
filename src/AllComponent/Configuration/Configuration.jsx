@@ -148,24 +148,34 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
             handleCloseCat();
           },
         }}
+        className="configurationDialog"
       >
-        <div style={{display:"flex",flexDirection:"row"}}><DialogTitle>Add {selectedConfigValue}</DialogTitle> <CloseIcon /></div>
+        <DialogTitle style={{ display: "flex", flexDirection: "row" }}>
+          <Typography style={{ width: "100%", fontSize: "1.3rem" }}>
+            Add {selectedConfigValue}
+          </Typography>{" "}
+          <CloseIcon className="closeHover" onClick={() => handleCloseCat()} />
+        </DialogTitle>
 
         <DialogContent>
           {selectedConfigValue === "Category" ? (
             <>
               {" "}
-              {CommonTypography({
-                fontWeight: 600,
-                label: "Category",
-                className: "addCatHeading",
-              })}
+              {CommonTypography(
+                {
+                  fontWeight: 600,
+                  label: "Category",
+                },
+                (Option = {
+                  className: "addCatHeading",
+                })
+              )}
               {commonTextField(
                 {
                   id: "fullWidth",
-                  className: "BoxShadow",
+                  className: "BoxShadow addCatTextField",
                   inputClassName: "textField",
-                  labels: "Enter Category Description",
+                  labels: "Enter Category Name",
                 },
                 (Option = {
                   handleInput: handleInput,
@@ -175,15 +185,19 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
             </>
           ) : selectedConfigValue === "Duration" ? (
             <>
-              {CommonTypography({
-                fontWeight: 600,
-                label: "Duration",
-                className: "durationHeading",
-              })}
+              {CommonTypography(
+                {
+                  fontWeight: 600,
+                  label: "Duration",
+                },
+                (Option = {
+                  className: "addCatHeading",
+                })
+              )}
               {commonTextField(
                 {
                   id: "fullWidth",
-                  className: "BoxShadow-Duration",
+                  className: "BoxShadow-Duration addCatTextField",
                   inputClassName: "textField",
                   labels: "Enter Duration",
                 },
@@ -196,20 +210,21 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
           ) : selectedConfigValue === "SubCategory" ? (
             <>
               <div>
-                {CommonTypography({
-                  fontWeight: 600,
-                  label: "Category",
-                  className: "subCatHeading",
-                })}
-                <FormControl sx={{ m: 1, width: 300, mt: 1 }}>
+                {CommonTypography(
+                  {
+                    fontWeight: 600,
+                    label: "Category",
+                  },
+                  (Option = {
+                    className: "addCatHeading",
+                  })
+                )}
+                <FormControl sx={{ width: 540 }}>
                   <Select
                     label="Category"
                     value={cat.category_name}
                     onChange={(e) => handleChange(e)}
-                    input={<OutlinedInput />}
-                    MenuProps={MenuProps}
-                    inputProps={{ "aria-label": "Without label" }}
-                    className="css-bdhsul-MuiTypography-root-MuiDialogTitle-root"
+                    className="addCatTextField"
                   >
                     {cat.map((item) => (
                       <MenuItem key={item._id} value={item}>
@@ -217,11 +232,16 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                       </MenuItem>
                     ))}
                   </Select>
-                  {CommonTypography({ fontWeight: 600, label: "Sub Category" })}
+                  {CommonTypography(
+                    { fontWeight: 600, label: "Sub Category" },
+                    (Option = {
+                      className: "addCatHeading",
+                    })
+                  )}
                   {commonTextField(
                     {
                       id: "fullWidth",
-                      className: "BoxShadow-ACat",
+                      className: "BoxShadow-ACat addCatTextField",
                       inputClassName: "textField",
                       labels: "Sub Category",
                     },
@@ -235,11 +255,16 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
             </>
           ) : (
             <>
-              {CommonTypography({ fontWeight: 600, label: "Add Member" })}
+              {CommonTypography(
+                { fontWeight: 600, label: "Add Member" },
+                (Option = {
+                  className: "addCatHeading",
+                })
+              )}
               {commonTextField(
                 {
                   id: "fullWidth",
-                  className: "BoxShadow",
+                  className: "BoxShadow addCatTextField",
                   inputClassName: "textField",
                   labels: "Enter Member name",
                 },
@@ -250,11 +275,16 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
               )}
               <div className="flexrow mt4">
                 <div className="flexcol">
-                  {CommonTypography({ fontWeight: 600, label: "Email ID" })}
+                  {CommonTypography(
+                    { fontWeight: 600, label: "Email ID" },
+                    (Option = {
+                      className: "addCatHeading",
+                    })
+                  )}
                   {commonTextField(
                     {
                       id: "fullWidth",
-                      className: "BoxShadow",
+                      className: "BoxShadow addCatTextField",
                       inputClassName: "textField",
                       labels: "Enter Email name",
                     },
@@ -265,11 +295,16 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   )}
                 </div>
                 <div className="flexcol ml2">
-                  {CommonTypography({ fontWeight: 600, label: "Phone No." })}
+                  {CommonTypography(
+                    { fontWeight: 600, label: "Phone No." },
+                    (Option = {
+                      className: "addCatHeading",
+                    })
+                  )}
                   {commonTextField(
                     {
                       id: "fullWidth",
-                      className: "BoxShadow",
+                      className: "BoxShadow addCatTextField",
                       inputClassName: "textField",
                       labels: "Enter Phone No.",
                     },
