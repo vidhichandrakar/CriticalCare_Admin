@@ -79,6 +79,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
       type === "catagory" ||
       type === "upcoimgCourses"
     ) {
+      console.log("workingg");
       localStorage.setItem("subMenuCourses", true);
     } else {
       localStorage.setItem("subMenuCourses", false);
