@@ -287,7 +287,7 @@ const User = () => {
           <TableContainer sx={{ maxHeight: 540 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
-                <TableRow>
+                <TableRow >
                   {columns.map((column) => (
                     <TableCell
                       key={column.id}
@@ -336,6 +336,11 @@ const User = () => {
                             checkedValue.filter(
                               (value) => row.user_id === value
                             ).length
+                          }
+                          sx={
+                            {
+                               color:"rgb(216, 224, 240)"
+                            }
                           }
                           onChange={(event) =>
                             handleChangeOnCheckBox(event, row.user_id)
