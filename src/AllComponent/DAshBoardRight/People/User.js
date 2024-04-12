@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Typography from "@mui/material/Typography";
@@ -36,6 +37,7 @@ import { ToastContainer, toast } from "react-toastify";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import "react-toastify/dist/ReactToastify.css";
 import { visuallyHidden } from "@mui/utils";
+import { redirectRestriction } from "../../../Util/RedirectRestriction";
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -118,20 +120,26 @@ const User = () => {
   const id = open ? "simple-popover" : undefined;
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("user_name");
+  const authorized = JSON.parse(localStorage.getItem("loggedInUser"));
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setLoaderState(true);
-    getAllUsersApi({
-      callBack: (response) => {
-        const userCallBack = response?.data;
-        setUserData(userCallBack);
-        setLoaderState(false);
-      },
-      error: (error) => {
-        toast.error(error.message);
-        setLoaderState(false);
-      },
-    });
+    if (redirectRestriction()) {
+      setLoaderState(true);
+      getAllUsersApi({
+        callBack: (response) => {
+          const userCallBack = response?.data;
+          setUserData(userCallBack);
+          setLoaderState(false);
+        },
+        error: (error) => {
+          toast.error(error.message);
+          setLoaderState(false);
+        },
+      });
+    } else {
+      navigate("/admin");
+    }
   }, []);
 
   const handleChangeOnCheckBox = (event, data) => {
@@ -241,7 +249,8 @@ const User = () => {
     return stabilizedThis.map((el) => el[0]);
   }
 
-  const visibleRows = useMemo(() =>
+  const visibleRows = useMemo(
+    () =>
       stableSort(userData, getComparator(order, orderBy)).slice(
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage

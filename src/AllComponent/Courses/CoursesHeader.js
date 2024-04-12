@@ -14,16 +14,13 @@ import ClearIcon from "@mui/icons-material/Clear";
 import Switch from "@mui/material/Switch";
 import WarningIcon from "@mui/icons-material/Warning";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import ProfileList from "../SubComponent/List"
-import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
-import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
-import QuizRoundedIcon from '@mui/icons-material/QuizRounded';
+import ProfileList from "../SubComponent/ProfileList";
+import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
+import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
+import QuizRoundedIcon from "@mui/icons-material/QuizRounded";
 import { Link } from "react-router-dom";
 
-
-
 const CourseHeader = ({ Heading, subHeading }) => {
-  
   const [value, setValue] = useState("");
 
   const [state, setState] = useState({
@@ -37,10 +34,13 @@ const CourseHeader = ({ Heading, subHeading }) => {
     ) {
       return;
     }
-    setState({state, [anchor]: open });
+    setState({ state, [anchor]: open });
   };
 
- 
+  const handleLogout = () => {
+    localStorage.setItem("loggedInUser", null);
+  };
+
   return (
     <Box className="HeaderBox">
       <Box className="HeaderLeft">
@@ -67,9 +67,9 @@ const CourseHeader = ({ Heading, subHeading }) => {
             <MenuItem
               className="selectDesign hoverrr"
               value={"Profile"}
-              onClick={toggleDrawer("right", true)} 
+              onClick={toggleDrawer("right", true)}
             >
-            <PersonRoundedIcon className="designingIcons"/>
+              <PersonRoundedIcon className="designingIcons" />
               Profile
             </MenuItem>
 
@@ -79,7 +79,7 @@ const CourseHeader = ({ Heading, subHeading }) => {
             </MenuItem>
 
             <MenuItem className="selectDesign hoverrr" value={"Profiled"}>
-              <SettingsRoundedIcon className="designingIcons"/>
+              <SettingsRoundedIcon className="designingIcons" />
               Settings
             </MenuItem>
 
@@ -88,10 +88,17 @@ const CourseHeader = ({ Heading, subHeading }) => {
               Help and Support
             </MenuItem>
 
-           <Link to="/admin" className="textDecoration"> <MenuItem className="selectDesign hoverrr" sx={{ color: "black"  }}  value={"Profileik"}>
-              <LogoutTwoToneIcon className="designingIcons" />
-              Logout
-            </MenuItem>
+            <Link to="/admin" className="textDecoration">
+              {" "}
+              <MenuItem
+                className="selectDesign hoverrr"
+                sx={{ color: "black" }}
+                value={"Profileik"}
+                onClick={handleLogout}
+              >
+                <LogoutTwoToneIcon className="designingIcons" />
+                Log Out
+              </MenuItem>
             </Link>
           </Select>
         </FormControl>

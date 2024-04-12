@@ -82,6 +82,7 @@ const LoginEmailandPassword = () => {
         phone_no: phoneNO?.toString(),
         OTP: typedOtp,
       };
+      console.log("payload login", payload);
       verifyOtp({
         payload,
         callBack: (response) => {
@@ -123,12 +124,18 @@ const LoginEmailandPassword = () => {
   };
 
   const [key, setKey] = useState(null);
-  const handleLoginByOTP2 = (value, type, event) => {        //swtching to Tab
+  const handleLoginByOTP2 = (value, type, event) => {
+    //swtching to Tab
 
     let prevOtp2 = { ...otpValue };
     prevOtp2[type] = value;
     if (typeof phoneNO !== "undefined" && phoneNO?.length) {
-      if (prevOtp2.otp1 != "" || prevOtp2.otp2 != "" || prevOtp2.otp3 != "") {
+      if (
+        prevOtp2.otp1 != "" ||
+        prevOtp2.otp2 != "" ||
+        prevOtp2.otp3 != "" ||
+        prevOtp2.otp4 != ""
+      ) {
         prevOtp2.disable = false;
         // let tabVar = value.keyCode === 9;
         // onKeyDown={({event, data}) => handleKeyDown({event, data})}
@@ -136,7 +143,10 @@ const LoginEmailandPassword = () => {
         //  if (tabVar) {
         //   handleLoginByOTP2();
         // }
-      } else if (("otp1" || "otp2" || "otp3") && event.keyCode === 9) {
+      } else if (
+        ("otp1" || "otp2" || "otp3" || "otp4") &&
+        event.keyCode === 9
+      ) {
         handleLoginByOTP2(value);
       }
       setOtp(prevOtp2);
@@ -144,7 +154,8 @@ const LoginEmailandPassword = () => {
     }
   };
 
-  const handleLoginByOTP = ({ value, type }) => {       //switching to Enter
+  const handleLoginByOTP = ({ value, type }) => {
+    //switching to Enter
     let prevOtp = { ...otpValue };
     prevOtp[type] = value;
     if (
@@ -154,7 +165,7 @@ const LoginEmailandPassword = () => {
       prevOtp.otp4 != ""
     ) {
       prevOtp.disable = false;
-      handleUserLogin();
+      // handleUserLogin();
     } else {
       prevOtp.disable = true;
     }
@@ -185,7 +196,7 @@ const LoginEmailandPassword = () => {
       ) {
         prevOtp.disable = false;
         handleUserLogin();
-      } 
+      }
     }
   };
 

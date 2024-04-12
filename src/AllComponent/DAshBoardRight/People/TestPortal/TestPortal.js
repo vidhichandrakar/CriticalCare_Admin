@@ -1,5 +1,6 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import { useNavigate } from "react-router-dom";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -53,6 +54,7 @@ import PropTypes from "prop-types";
 import LoaderComponent from "../../../../Util/LoaderComponent";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { redirectRestriction } from "../../../../Util/RedirectRestriction";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -147,17 +149,22 @@ const TestPortal = () => {
     hours: "",
   });
   const [loaderState, setLoaderState] = useState(false);
-  let refreshTable;
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setLoaderState(true);
-    getTest({
-      callBack: (response) => {
-        const userCallBack = response?.data;
-        setUserData(userCallBack);
-        setLoaderState(false);
-      },
-    });
+    if (redirectRestriction()) {
+      setLoaderState(true);
+      getTest({
+        callBack: (response) => {
+          const userCallBack = response?.data;
+          setUserData(userCallBack);
+          setLoaderState(false);
+        },
+      });
+    }
+    else{
+      navigate("/admin")
+    }
   }, []);
 
   const handleClick = (event, id) => {
