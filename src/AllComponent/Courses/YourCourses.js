@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../CSSFile/YourCourses.css";
-import cardimg from "../../Media/Images/db7187e8-b7cf-47ed-8900-6de89dabde06.png";
 import CourseHeader from "./CoursesHeader";
-import Backdrop from '@mui/material/Backdrop';
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import Button from "@mui/material/Button";
 import Folder from "../../Media/Images/folder.avif";
@@ -15,53 +14,57 @@ import { getAllCourses, getAllUsersApi } from "../ActionFactory/apiActions";
 import LoaderComponent from "../../Util/LoaderComponent";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { redirectRestriction } from "../../Util/RedirectRestriction";
 
 const YourCourses = () => {
   const [allCourses, setAllCourses] = useState([]);
   const [loaderState, setLoaderState] = useState(false);
   const [userData, setUserData] = useState([]);
-  
+
+  const authorized = JSON.parse(localStorage.getItem("loggedInUser"));
+  const navigate = useNavigate();
+
   useEffect(() => {
-    setLoaderState(true);
-    getAllCourses({
-      callBack: (response) => {
-        const userCallBack = response?.data;
-        setAllCourses(userCallBack);
-        setLoaderState(false)
-      },error:(error)=>{
-        toast.error(error.message);
-        console.log(error.message);
-        setLoaderState(false);
-      }
-    });
-    getAllUsersApi({
-      callBack: (response) => {
-        const userCallBack = response?.data;
-        setUserData(userCallBack);
-        setLoaderState(false);
-      },error:(error)=>{
-        toast.error(error.message);
-        console.log(error.message);
-        setLoaderState(false);
-      }
-    });
-    
-  }, 
-  []);
-  
+    if (redirectRestriction()) {
+      setLoaderState(true);
+      getAllCourses({
+        callBack: (response) => {
+          const userCallBack = response?.data;
+          setAllCourses(userCallBack);
+          setLoaderState(false);
+        },
+        error: (error) => {
+          toast.error(error.message);
+          console.log(error.message);
+          setLoaderState(false);
+        },
+      });
+      getAllUsersApi({
+        callBack: (response) => {
+          const userCallBack = response?.data;
+          setUserData(userCallBack);
+          setLoaderState(false);
+        },
+        error: (error) => {
+          toast.error(error.message);
+          console.log(error.message);
+          setLoaderState(false);
+        },
+      });
+    } else {
+      navigate("/admin");
+    }
+  }, []);
+
   return (
     <div className="grid-container">
-       
       <SideBar />
       <div className="main-container margin20">
         <CourseHeader
           Heading={"Your Courses (3)"}
           subHeading={"Add/View courses of your brand"}
         />
-      <LoaderComponent
-      loaderState={loaderState}
-      />
+        <LoaderComponent loaderState={loaderState} />
         <SearchBar mt="2%" placeholder="Search by name" />
         <div className="Add-main-cards">
           <div className="card">
@@ -74,13 +77,16 @@ const YourCourses = () => {
               </Link>
             </div>
           </div>
-          <YourCoursesCard allCourses={allCourses} userData={userData} Data={YourCoursesCardData} />
+          <YourCoursesCard
+            allCourses={allCourses}
+            userData={userData}
+            Data={YourCoursesCardData}
+          />
         </div>
       </div>
       <ToastContainer />
     </div>
   );
-
 };
 
 export default YourCourses;

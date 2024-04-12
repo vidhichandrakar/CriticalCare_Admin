@@ -14,7 +14,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import Switch from "@mui/material/Switch";
 import WarningIcon from "@mui/icons-material/Warning";
 import SwipeableDrawer from "@mui/material/SwipeableDrawer";
-import ProfileList from "../SubComponent/List";
+import ProfileList from "../SubComponent/ProfileList";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import QuizRoundedIcon from "@mui/icons-material/QuizRounded";
@@ -35,6 +35,12 @@ const CourseHeader = ({ Heading, subHeading }) => {
       return;
     }
     setState({ state, [anchor]: open });
+
+  };
+
+  const handleLogout = () => {
+    localStorage.setItem("loggedInUser", null);
+
   };
 
   return (
@@ -90,9 +96,10 @@ const CourseHeader = ({ Heading, subHeading }) => {
                 className="selectDesign hoverrr"
                 sx={{ color: "black" }}
                 value={"Profileik"}
+                onClick={handleLogout}
               >
                 <LogoutTwoToneIcon className="designingIcons" />
-                Logout
+                Log Out
               </MenuItem>
             </Link>
           </Select>

@@ -54,7 +54,7 @@ const ProfileList = (anchor) => {
               <Typography className="InfoTextLeft">Name:</Typography>
             </Box>
             <Typography className="InfoTextRight">
-              {loggedUserDetails.user_name}
+              {loggedUserDetails?.user_name}
             </Typography>
           </Box>
           <Box className="flexrow BasicInfo">
@@ -63,7 +63,7 @@ const ProfileList = (anchor) => {
               <Typography className="InfoTextLeft">Email:</Typography>
             </Box>
             <Typography className="InfoTextRight">
-              {loggedUserDetails.email_id}
+              {loggedUserDetails?.email_id}
             </Typography>
           </Box>
           <Box className="flexrow BasicInfo">
@@ -72,7 +72,7 @@ const ProfileList = (anchor) => {
               <Typography className="InfoTextLeft">Mobile:</Typography>
             </Box>
             <Typography className="InfoTextRight">
-              {loggedUserDetails.phone_no}
+              {loggedUserDetails?.phone_no}
             </Typography>
           </Box>
           {/* <Box className="flexrow BasicInfo">
@@ -100,7 +100,7 @@ const ProfileList = (anchor) => {
               <Typography className="InfoTextLeft">Name:</Typography>
             </Box>
             <Typography className="InfoTextRight">
-              {loggedUserDetails.user_name}
+              {loggedUserDetails?.user_name}
             </Typography>
           </Box>
           <Box className="flexrow BasicInfo">
@@ -109,7 +109,7 @@ const ProfileList = (anchor) => {
               <Typography className="InfoTextLeft">Email:</Typography>
             </Box>
             <Typography className="InfoTextRight">
-              {loggedUserDetails.email_id}
+              {loggedUserDetails?.email_id}
             </Typography>
           </Box>
           <Box className="flexrow BasicInfo">
@@ -118,7 +118,7 @@ const ProfileList = (anchor) => {
               <Typography className="InfoTextLeft">Mobile:</Typography>
             </Box>
             <Typography className="InfoTextRight">
-              {loggedUserDetails.phone_no}
+              {loggedUserDetails?.phone_no}
             </Typography>
           </Box>
         </Box>
