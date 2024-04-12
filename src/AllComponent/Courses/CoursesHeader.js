@@ -35,10 +35,12 @@ const CourseHeader = ({ Heading, subHeading }) => {
       return;
     }
     setState({ state, [anchor]: open });
+
   };
 
   const handleLogout = () => {
     localStorage.setItem("loggedInUser", null);
+
   };
 
   return (

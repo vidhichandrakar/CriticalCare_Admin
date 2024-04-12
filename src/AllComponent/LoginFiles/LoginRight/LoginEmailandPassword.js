@@ -203,18 +203,19 @@ const LoginEmailandPassword = () => {
   return (
     <div className="RightBox">
       <LoaderComponent loaderState={loaderState} />
-      <Box className={getOTP ? "BoxWidth" : "BoxWidth2 phoneTextField2"}>
+      <Box className={getOTP ? "BoxWidth" : "BoxWidth phoneTextField2"}>
         <Typography className="loginText">
           Login to Admin Panel <span>7746003673</span>
           <Typography sx={{ mt: 1, fontSize: 21, color: "#199884" }}>
             <u>{getOTP}</u>
           </Typography>
         </Typography>
-        <Box sx={{ mt: 2 }}>
+        <Box sx={{ mt: 2 }} className="phNoBox">
           <TextField
             id="fullWidth"
             placeholder="Mobile Number"
-            className="phoneTextField BoxShadow BoxShadowLogin"
+            className="phoneTextField
+              BoxShadowLogin"
             sx={{ color: "#000" }}
             variant="outlined"
             inputProps={{ maxLength: 10 }}

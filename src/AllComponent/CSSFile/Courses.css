@@ -27,6 +27,7 @@
   text-align: center;
   border-radius: 15% !important;
   margin-top: -3px;
+  margin-right: -12%;
 }
 .css-6hp17o-MuiList-root-MuiMenu-list{
   padding: 1px 10px !important;
@@ -61,6 +62,7 @@
   font-size: 1.25em !important;
   font-weight: bold;
   text-align: left !important;
+  margin-left: 11%;
 }
 .HeaderRight{
   width: 60%;
