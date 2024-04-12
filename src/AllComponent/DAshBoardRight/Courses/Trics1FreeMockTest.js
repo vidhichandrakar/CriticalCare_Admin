@@ -20,6 +20,7 @@ import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { capitalizeFirstLetter } from "../../../Util/CommonFields";
+import { redirectRestriction } from "../../../Util/RedirectRestriction";
 
 const Trics1FreeMockTest = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -38,18 +39,23 @@ const Trics1FreeMockTest = () => {
   };
 
   useEffect(() => {
-    getCourseById({
-      courseId,
-      callBack: (response) => {
-        const userCallBack = response?.data;
-        setCourseData(userCallBack);
-      },
-      error: (error) => {
-        toast.error(error.message);
-        console.log(error.message);
-      },
-    });
-    console.log("useNavigate hello", location);
+    if (redirectRestriction()) {
+      if (courseId) {
+        getCourseById({
+          courseId,
+          callBack: (response) => {
+            const userCallBack = response?.data;
+            setCourseData(userCallBack);
+          },
+          error: (error) => {
+            toast.error(error.message);
+            console.log(error.message);
+          },
+        });
+      }
+    } else {
+      navigate("/admin");
+    }
   }, []);
   useEffect(() => {
     if (courseId) {

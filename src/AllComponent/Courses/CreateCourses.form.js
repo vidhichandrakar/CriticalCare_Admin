@@ -1,14 +1,13 @@
 import { Box, Typography, TextField, Input } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
 import Button from "@mui/material/Button";
 import UploadIcon from "@mui/icons-material/Upload";
-
 import { ToastContainer, toast } from "react-toastify";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import DoneIcon from "@mui/icons-material/Done";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
+import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import {
   CommonTypography,
@@ -19,6 +18,7 @@ import { getCategory, getSubcategoryList } from "../ActionFactory/apiActions";
 import { useDropzone } from "react-dropzone";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
+import { redirectRestriction } from "../../Util/RedirectRestriction";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -43,6 +43,10 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   });
   const [imgUpload, setImageWhileUpload] = useState("");
   const [cat, setCat] = useState([]);
+  const [subCategoryList, setSubCategoryList] = useState([]);
+  const [selectedCategoryList, setSelectedcategoryList] = useState("");
+  const navigate = useNavigate();
+
   const onInroVideoDrop = async (files) => {
     console.log(files);
     let storedValues = Object.assign({}, storedBasicInfo);
@@ -55,6 +59,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       .catch((err) => console.log(err));
     setStoredBasicInfo(storedValues);
   };
+
   const {
     getRootProps: getIntroVideoRootProps,
     getInputProps: getIntroVideoInputProps,
@@ -63,18 +68,21 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     onChange: (event) => console.log(event),
     accept: "image/jpeg, image/png, image/jpg, application/pdf",
   });
-  const [subCategoryList, setSubCategoryList] = useState([]);
-  const [selectedCategoryList, setSelectedcategoryList] = useState("");
+
   useEffect(() => {
-    getCategory({
-      callBack: (response) => {
-        const userCallBack = response?.data;
-        setCat(userCallBack);
-      },
-      error: (error) => {
-        toast.error(error.message);
-      },
-    });
+    if (redirectRestriction()) {
+      getCategory({
+        callBack: (response) => {
+          const userCallBack = response?.data;
+          setCat(userCallBack);
+        },
+        error: (error) => {
+          toast.error(error.message);
+        },
+      });
+    } else {
+      navigate("/admin");
+    }
   }, []);
 
   useEffect(() => {
