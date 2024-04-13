@@ -165,9 +165,7 @@ const LoginEmailandPassword = () => {
         handleUserLogin();
       } else if (phoneNO?.length !== 10) {
         setLoaderState(false);
-      } else {
-        // toast.error("any key Invalid Phone Number");
-      }
+      } 
     }
   };
   // 9340290314
