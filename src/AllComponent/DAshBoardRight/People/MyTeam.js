@@ -24,7 +24,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
-import { Box, TextField } from "@mui/material";
+import { Box, TableFooter, TextField } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import {
   deleteMember,
@@ -441,25 +441,28 @@ const MyTeam = () => {
                   </Typography>
                 </Popover>
               </TableBody>
-              <TablePagination
-                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                // colSpan={3}
-                count={userData.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                slotProps={{
-                  select: {
-                    inputProps: {
-                      "aria-label": "rows per page",
+              {userData?.length > 5 && <TableFooter>
+                <TablePagination
+                  rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+                  // colSpan={3}
+                  count={userData.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  slotProps={{
+                    select: {
+                      inputProps: {
+                        "aria-label": "rows per page",
+                      },
+                      native: true,
                     },
-                    native: true,
-                  },
-                }}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                ActionsComponent={TablePaginationActions}
-                className="Pagination"
-              />
+                  }}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                  ActionsComponent={TablePaginationActions}
+                // className="Pagination"
+                />
+              </TableFooter>}
+             
             </Table>
           </TableContainer>
         </Paper>

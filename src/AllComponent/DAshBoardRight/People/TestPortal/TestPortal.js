@@ -26,7 +26,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
-import { Box, TextField } from "@mui/material";
+import { Box, TableFooter, TextField } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import moment from "moment/moment";
 import axios from "axios";
@@ -430,6 +430,7 @@ const TestPortal = () => {
                       );
                     })
                   : null}
+                
                 <Popover
                   sx={{ m: -7, mt: 0.2, ml: -15 }}
                   id={openId}
@@ -456,26 +457,29 @@ const TestPortal = () => {
                     Edit
                   </Typography>
                 </Popover>
+               
               </TableBody>
-              <TablePagination
-                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                // colSpan={3}
-                count={userData.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                slotProps={{
-                  select: {
-                    inputProps: {
-                      "aria-label": "rows per page",
+              {userData?.length > 5 && <TableFooter>
+                <TablePagination
+                  rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+                  // colSpan={3}
+                  count={userData.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  slotProps={{
+                    select: {
+                      inputProps: {
+                        "aria-label": "rows per pageeee",
+                      },
+                      native: true,
                     },
-                    native: true,
-                  },
-                }}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                ActionsComponent={TablePaginationActions}
-                className="Pagination"
-              />
+                  }}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                  ActionsComponent={TablePaginationActions}
+                // className="Pagination"
+                />
+              </TableFooter>}
             </Table>
           </TableContainer>
         </Paper>
