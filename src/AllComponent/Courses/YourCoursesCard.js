@@ -18,9 +18,10 @@ const YourCoursesCard = ({ allCourses, userData }) => {
         ? allCourses.map((item) => {
           const id = item.course_id;
           const createdBy = userData.filter(user => user.user_id === item.created_by)
-            console.log(createdBy, "card createdBy")
+            console.log("item",item.is_publish)
             return (
               <div className="card" onClick={()=>handleCourse(id)}>
+                <div>{item.is_publish==="published"?"Published":"Not Publish"}</div>
                 <Link  to={{query: {id:id}, pathname: "/Trics1FreeMockTest"}}>
                   <img src={`data:image/png;base64,${item.thumbnail_path}`} className="cardImage" height={"auto"} />
                 </Link>

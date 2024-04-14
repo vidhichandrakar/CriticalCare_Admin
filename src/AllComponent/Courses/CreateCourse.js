@@ -69,6 +69,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         "created_by",
         JSON.parse(localStorage.getItem("loggedInUser")).user_id
       );
+      formData.append("is_publish", "published");
     } catch (error) {
       console.log(error);
     }
