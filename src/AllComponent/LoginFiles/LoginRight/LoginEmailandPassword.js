@@ -242,9 +242,7 @@ const LoginEmailandPassword = () => {
               onChange={
                 (event) =>
                   handleLoginByOTP({ type: "otp1", value: event.target.value })
-                // {handleNextTextField}
               }
-              // onChange={handleNextTextField}
               onKeyDown={(event) => handleKeyDown(event, "otp1")}
               inputRef={textField1Ref}
               inputProps={{
