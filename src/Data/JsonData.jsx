@@ -169,6 +169,7 @@ export const columns = [
   {
     id: "User_Info",
     label: "User Info",
+    align: "center",
   },
   {
     id: "user_name",

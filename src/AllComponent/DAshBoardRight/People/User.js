@@ -22,7 +22,7 @@ import Checkbox from "@mui/material/Checkbox";
 import axios from "axios";
 import { deleteUser, getAllUsersApi } from "../../ActionFactory/apiActions";
 import moment from "moment/moment";
-import { TablePagination } from "@mui/material";
+import { TableFooter, TablePagination } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import IconButton from "@mui/material/IconButton";
 import { Box, TextField } from "@mui/material";
@@ -296,7 +296,7 @@ const User = () => {
           <TableContainer sx={{ maxHeight: 540 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
-                <TableRow>
+                <TableRow >
                   {columns.map((column) => (
                     <TableCell
                       key={column.id}
@@ -345,6 +345,11 @@ const User = () => {
                             checkedValue.filter(
                               (value) => row.user_id === value
                             ).length
+                          }
+                          sx={
+                            {
+                               color:"rgb(216, 224, 240)"
+                            }
                           }
                           onChange={(event) =>
                             handleChangeOnCheckBox(event, row.user_id)
@@ -397,25 +402,27 @@ const User = () => {
                   </Typography>
                 </Popover>
               </TableBody>
-              <TablePagination
-                rowsPerPageOptions={[4, 10, 25, { label: "All", value: -1 }]}
-                // colSpan={3}
-                count={userData.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                slotProps={{
-                  select: {
-                    inputProps: {
-                      "aria-label": "rows per page",
+              {userData?.length > 5 && <TableFooter>
+                <TablePagination
+                  rowsPerPageOptions={[4, 10, 25, { label: "All", value: -1 }]}
+                  // colSpan={3}
+                  count={userData.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  slotProps={{
+                    select: {
+                      inputProps: {
+                        "aria-label": "rows per page",
+                      },
+                      native: true,
                     },
-                    native: true,
-                  },
-                }}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                ActionsComponent={TablePaginationActions}
-                className="Pagination"
-              />
+                  }}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                  ActionsComponent={TablePaginationActions}
+                // className="Pagination"
+                />
+              </TableFooter>}
             </Table>
           </TableContainer>
         </Paper>
