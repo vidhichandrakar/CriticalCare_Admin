@@ -1,4 +1,4 @@
-import React, { useState, setkey, key, keyDown } from "react";
+import React, { useState, useEffect, setkey, key, keyDown } from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { InputAdornment, Typography, paperClasses } from "@mui/material";
@@ -25,7 +25,7 @@ const LoginEmailandPassword = () => {
   const [enteredOTP, setEnteredOTP] = useState("");
   const [hideOTPBtn, setHideOTPBtn] = useState(true);
   const [loaderState, setLoaderState] = useState(false);
-  const [userInfo, setUserInfo] = useState({});
+      const [userInfo, setUserInfo] = useState({});
   const [otpValue, setOtp] = useState({
     value: "",
     otp1: "",
@@ -34,7 +34,34 @@ const LoginEmailandPassword = () => {
     otp4: "",
     disable: true,
   });
+  const [seconds, setSeconds] = useState(5);
+  const [isActive, setIsActive] = useState(true);
+  const [isResendDisabled, setIsResendDisabled] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+
   let navigation = useNavigate();
+
+  useEffect(() => {
+    let interval = null;
+    if (isActive) {
+      interval = setInterval(() => {
+        setSeconds((prevSeconds) => {
+          if (prevSeconds === 0) {
+            clearInterval(interval);
+            setIsActive(false);
+          }
+          return prevSeconds > 0 ? prevSeconds - 1 : 0;
+        });
+      }, 800);
+    } else {
+      // Enable resend button after 30 seconds
+      setTimeout(() => {
+        setIsResendDisabled(false);
+      });
+    }
+    return () => clearInterval(interval);
+  }, [isActive]);
+
 
   const handleInput = (value, type) => {
     let storedValues = Object.assign({}, userLogin);
@@ -72,6 +99,9 @@ const LoginEmailandPassword = () => {
           setGetOTP(response.data.OTP);
           setHideOTPBtn(false);
           setLoaderState(false);
+          setSeconds(5);
+    setIsActive(true);
+    setIsVisible(!isVisible);
         },
         error: (error) => {
           toast.error(error.response.data.message);
@@ -93,6 +123,7 @@ const LoginEmailandPassword = () => {
               userId: response.data.user_id,
               userName: response.data.user_name,
               user_photo: response.data.user_photo,
+
             });
             localStorage.setItem("loggedInUser", JSON.stringify(response?.data));
             navigation("/DashBoard")
@@ -105,6 +136,7 @@ const LoginEmailandPassword = () => {
         });
       
     }
+    
   };
   
   const handleResendOTP = () => {
@@ -119,6 +151,9 @@ const LoginEmailandPassword = () => {
           setGetOTP(response.data.OTP);
           setHideOTPBtn(false);
           setLoaderState(false);
+          setSeconds(5);
+      setIsActive(true);
+      setIsResendDisabled(true);
         },
         error: (error) => {
           toast.error(error.message);
@@ -126,7 +161,7 @@ const LoginEmailandPassword = () => {
           setLoaderState(false);
         },
       });
-    
+      
   }
 
   const handleLoginByOTP = ({value, type}) => {
@@ -178,7 +213,14 @@ const LoginEmailandPassword = () => {
         Login to Admin Panel <span>7746003673</span>
         <Typography sx={{ mt: 1, fontSize: 21, color: "#199884" }}>
           <u>{getOTP}</u>
+         
         </Typography>
+        {isVisible && (
+        <div>
+          <p>{seconds > 0 ? `OTP expires in ${seconds} seconds` : "OTP expired"}</p>
+        </div>
+      )}
+       
       </Typography>
         <Box sx={{ mt: 2 }}>
         <TextField
@@ -277,8 +319,10 @@ const LoginEmailandPassword = () => {
           variant="contained"
           className="ResendBtn"
           onClick={() => handleResendOTP()}
+          disabled={seconds}
         >
-          Resend OTP
+          <p>{isResendDisabled ? `Resend OTP (${seconds}s)` : "Resend OTP"}</p>
+          {/* Resend OTP */}
         </Button>
         </Box>
       )}

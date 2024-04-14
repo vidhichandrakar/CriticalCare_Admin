@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Typography from "@mui/material/Typography";
@@ -15,9 +16,7 @@ import Popover from "@mui/material/Popover";
 import CourseHeader from "../../Courses/CoursesHeader";
 import SideBar from "../../AdminDashboardMain/SideBar";
 import { teamColumns } from "../../../Data/JsonData";
-import BlockIcon from "@mui/icons-material/Block";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Checkbox from "@mui/material/Checkbox";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
@@ -27,28 +26,23 @@ import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import { Box, TextField } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
-import axios from "axios";
 import {
   deleteMember,
-  deleteUser,
   getTeamByID,
-  getAllUsersApi,
   getTeam,
   updateTeam,
 } from "../../ActionFactory/apiActions";
-import moment from "moment/moment";
 import { TablePagination } from "@mui/material";
-import Stack from "@mui/material/Stack";
-import { add } from "date-fns";
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import LastPageIcon from '@mui/icons-material/LastPage';
-import { useTheme } from '@mui/material/styles';
-import PropTypes from 'prop-types';
+import FirstPageIcon from "@mui/icons-material/FirstPage";
+import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
+import LastPageIcon from "@mui/icons-material/LastPage";
+import { useTheme } from "@mui/material/styles";
+import PropTypes from "prop-types";
 import LoaderComponent from "../../../Util/LoaderComponent";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { redirectRestriction } from "../../../Util/RedirectRestriction";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -60,9 +54,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 function TablePaginationActions(props) {
-  
   const [loaderState, setLoaderState] = useState(false);
-  console.log(props, "propsss")
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
 
@@ -89,28 +81,36 @@ function TablePaginationActions(props) {
         disabled={page === 0}
         aria-label="first page"
       >
-        {theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
+        {theme.direction === "rtl" ? <LastPageIcon /> : <FirstPageIcon />}
       </IconButton>
       <IconButton
         onClick={handleBackButtonClick}
         disabled={page === 0}
         aria-label="previous page"
       >
-        {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+        {theme.direction === "rtl" ? (
+          <KeyboardArrowRight />
+        ) : (
+          <KeyboardArrowLeft />
+        )}
       </IconButton>
       <IconButton
         onClick={handleNextButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="next page"
       >
-        {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+        {theme.direction === "rtl" ? (
+          <KeyboardArrowLeft />
+        ) : (
+          <KeyboardArrowRight />
+        )}
       </IconButton>
       <IconButton
         onClick={handleLastPageButtonClick}
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         aria-label="last page"
       >
-        {theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
+        {theme.direction === "rtl" ? <FirstPageIcon /> : <LastPageIcon />}
       </IconButton>
     </Box>
   );
@@ -121,7 +121,6 @@ TablePaginationActions.propTypes = {
   page: PropTypes.number.isRequired,
   rowsPerPage: PropTypes.number.isRequired,
 };
-
 
 const MyTeam = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -139,18 +138,24 @@ const MyTeam = () => {
     PhoneNo: "",
   });
   const [loaderState, setLoaderState] = useState(false);
+  const navigate = useNavigate();
+
   useEffect(() => {
-    setLoaderState(true);
-    getTeam({
-      callBack: (response) => {
-        const userCallBack = response?.data;
-        setUserData(userCallBack);
-        setLoaderState(false);
-      },error:(error)=>{
-        toast.error(error.message);
-        console.log(error.message);
-      }
-    });
+    if (redirectRestriction()) {
+      setLoaderState(true);
+      getTeam({
+        callBack: (response) => {
+          const userCallBack = response?.data;
+          setUserData(userCallBack);
+          setLoaderState(false);
+        },
+        error: (error) => {
+          toast.error(error.message);
+        },
+      });
+    } else {
+      navigate("/admin");
+    }
   }, []);
 
   const handleClick = (event, id) => {
@@ -171,10 +176,11 @@ const MyTeam = () => {
           callBack: (response) => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
-          },error:(error)=>{
+            handleClose();
+          },
+          error: (error) => {
             toast.error(error.message);
-            console.log(error.message);
-          }
+          },
         });
       },
     });
@@ -219,7 +225,6 @@ const MyTeam = () => {
       email_id: addTeam.emailID,
       phone_no: addTeam.PhoneNo,
     };
-    console.log("payloadpayload", payload);
     updateTeam({
       payload,
       callBack: (response) => {
@@ -230,26 +235,24 @@ const MyTeam = () => {
   };
 
   const handleEdit = () => {
-    console.log("etidn", openId);
     setOpen(true);
     const teamId = openId;
     getTeamByID({
       teamId,
       callBack: (response) => {
-        console.log(response.data);
         const data = response.data;
         let storedValues = Object.assign({}, addTeam);
         storedValues.PhoneNo = data.phone_no;
         storedValues.emailID = data.email_id;
         storedValues.memberName = data.member_name;
         setAddTeam(storedValues);
-      },error:(error)=>{
+      },
+      error: (error) => {
         toast.error(error.message);
-        console.log(error.message);
-      }
+      },
     });
   };
-  
+
   return (
     <div className="grid-container">
       <SideBar />
@@ -258,9 +261,7 @@ const MyTeam = () => {
           Heading={"My Team"}
           subHeading={"View, Filter & Manage all your users"}
         />
-        <LoaderComponent
-      loaderState={loaderState}
-      />
+        <LoaderComponent loaderState={loaderState} />
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">
             <SearchBar mt="2%" placeholder="Search by name" />
@@ -323,7 +324,7 @@ const MyTeam = () => {
                     className="BoxShadowInputField"
                     type="EmailID"
                     value={addTeam.emailID}
-                    // onChange={(e) => setInput(e.target.value)} 
+                    // onChange={(e) => setInput(e.target.value)}
                     onChange={(e) => handleInput(e.target.value, "EmailID")}
                   />
                   <p className="TimeText"> Phone No. </p>
@@ -378,9 +379,12 @@ const MyTeam = () => {
               <TableBody className="parentTable">
                 {userData.length
                   ? (rowsPerPage > 0
-                    ? userData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    : userData
-                  ).map((row) => {
+                      ? userData.slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
+                      : userData
+                    ).map((row) => {
                       return (
                         <TableRow
                           hover
@@ -438,31 +442,29 @@ const MyTeam = () => {
                 </Popover>
               </TableBody>
               <TablePagination
-              rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-              // colSpan={3}
-              count={userData.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              slotProps={{
-                select: {
-                  inputProps: {
-                    'aria-label': 'rows per page',
+                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+                // colSpan={3}
+                count={userData.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                slotProps={{
+                  select: {
+                    inputProps: {
+                      "aria-label": "rows per page",
+                    },
+                    native: true,
                   },
-                  native: true,
-                },
-              }}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-              ActionsComponent={TablePaginationActions}
-              className="Pagination"
-            />
+                }}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActions}
+                className="Pagination"
+              />
             </Table>
           </TableContainer>
-
-          
         </Paper>
       </div>
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 };

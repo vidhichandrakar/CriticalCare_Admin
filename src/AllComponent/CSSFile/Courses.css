@@ -27,6 +27,7 @@
   text-align: center;
   border-radius: 15% !important;
   margin-top: -3px;
+  margin-right: -12%;
 }
 .css-6hp17o-MuiList-root-MuiMenu-list{
   padding: 1px 10px !important;
@@ -61,6 +62,7 @@
   font-size: 1.25em !important;
   font-weight: bold;
   text-align: left !important;
+  margin-left: 11%;
 }
 .HeaderRight{
   width: 60%;
@@ -263,7 +265,9 @@
   margin-top: -2%;
   margin-left: 8%;
 }
-
+/* .css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+  padding: 15.5px 14px !important;
+} */
 
 
 
@@ -359,4 +363,21 @@
 }
 .checkbox-icon{
   font-weight: 300 !important;
+}
+.configurationDialog .MuiDialog-paper{
+    width:70% !important;
+    height:auto !important;
+}
+.addCatHeading{
+  margin-top: 3% !important;
+  margin-left: 1px !important;
+}
+.addCatTextField{
+  margin-top: 3% !important;
+}
+.closeHover{
+  margin-top: 0.8%;
+}
+.closeHover:hover{
+  cursor: pointer;
 }

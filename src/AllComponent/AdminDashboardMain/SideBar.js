@@ -79,6 +79,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
       type === "catagory" ||
       type === "upcoimgCourses"
     ) {
+      console.log("workingg");
       localStorage.setItem("subMenuCourses", true);
     } else {
       localStorage.setItem("subMenuCourses", false);
@@ -87,6 +88,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
 
   const handleHighlightPeople = (type) => {
     setHighlightPeople(type);
+    // setHighlightPeople(true);
     localStorage.setItem("activeMenu", type);
     localStorage.setItem("subMenuCourses", false);
     if (type === "peopleUser" || type === "peopleMyTeam") {

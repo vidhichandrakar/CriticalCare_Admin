@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
+import { redirectDocument, useNavigate } from "react-router-dom";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Typography from "@mui/material/Typography";
@@ -39,6 +40,7 @@ import PropTypes from "prop-types";
 import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import LoaderComponent from "../../../Util/LoaderComponent";
+import { redirectRestriction } from "../../../Util/RedirectRestriction";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -135,16 +137,21 @@ const Testimonial = () => {
   const records = userData.slice(firstIndex, lastIndex);
   const npage = Math.ceil(userData.length / recordsPerPage);
   const numbers = [...Array(npage + 1).keys()].slice(1);
-  console.log(numbers, "number wala");
+  const navigate = useNavigate();
+
   useEffect(() => {
-    setLoaderState(true);
-    getTestimonal({
-      callBack: (response) => {
-        const userCallBack = response?.data;
-        setUserData(userCallBack);
-        setLoaderState(false);
-      },
-    });
+    if (redirectRestriction()) {
+      setLoaderState(true);
+      getTestimonal({
+        callBack: (response) => {
+          const userCallBack = response?.data;
+          setUserData(userCallBack);
+          setLoaderState(false);
+        },
+      });
+    } else {
+      navigate("/admin");
+    }
   }, []);
 
   const prePage = () => {
@@ -239,9 +246,7 @@ const Testimonial = () => {
           Heading={"Testimonial"}
           subHeading={"Only published testiimonial are showm here"}
         />
-        <LoaderComponent
-      loaderState={loaderState}
-      />
+        <LoaderComponent loaderState={loaderState} />
         {console.log("addTestimonal", addTestimonal)}
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">
@@ -359,7 +364,7 @@ const Testimonial = () => {
                         >
                           <TableCell className="alignTableBody">
                             <Typography className="PhoneText">
-                            {row.comment}
+                              {row.comment}
                             </Typography>
                           </TableCell>
                           <TableCell className="alignTableBody">

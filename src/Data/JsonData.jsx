@@ -171,12 +171,12 @@ export const columns = [
     label: "User Info",
   },
   {
-    id: "Full_Name",
+    id: "user_name",
     label: "Full Name",
     align: "center",
   },
   {
-    id: "Date_of_Registration",
+    id: "updatedAt",
     label: "Date of registration",
     align: "center",
   },
