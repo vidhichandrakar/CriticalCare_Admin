@@ -404,24 +404,26 @@ const Testimonial = () => {
                   </Typography>
                 </Popover>
               </TableBody>
-              <TablePagination
-                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                count={userData.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                slotProps={{
-                  select: {
-                    inputProps: {
-                      "aria-label": "rows per page",
+              {userData?.length > 5 && <TableFooter>
+                <TablePagination
+                  rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+                  count={userData.length}
+                  rowsPerPage={rowsPerPage}
+                  page={page}
+                  slotProps={{
+                    select: {
+                      inputProps: {
+                        "aria-label": "rows per page",
+                      },
+                      native: true,
                     },
-                    native: true,
-                  },
-                }}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-                ActionsComponent={TablePaginationActions}
-                className="Pagination"
-              />
+                  }}
+                  onPageChange={handleChangePage}
+                  onRowsPerPageChange={handleChangeRowsPerPage}
+                  ActionsComponent={TablePaginationActions}
+                // className="Pagination"
+                />
+              </TableFooter>}
             </Table>
           </TableContainer>
         </Paper>

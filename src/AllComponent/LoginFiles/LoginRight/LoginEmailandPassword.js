@@ -36,22 +36,6 @@ const LoginEmailandPassword = () => {
   });
   let navigation = useNavigate();
 
-  const handleInput = (value, type) => {
-    let storedValues = Object.assign({}, userLogin);
-    if (type === "email") {
-      storedValues.email = value;
-      setDisableLogiBtn(true);
-    } else if (type === "password") {
-      if (value === "") {
-        setDisableLogiBtn(true);
-      } else {
-        storedValues.password = value;
-        setDisableLogiBtn(false);
-      }
-    }
-    setUserLogin(storedValues);
-  };
-
   const handleUserLogin = () => {
     let typedOtp = parseInt(
       otpValue.otp1 + otpValue.otp2 + otpValue.otp3 + otpValue.otp4
@@ -123,10 +107,13 @@ const LoginEmailandPassword = () => {
     });
   };
 
+
+  const handleNextTextField = () => {
+    textField2Ref.current.focus();
+  };
+
   const [key, setKey] = useState(null);
   const handleLoginByOTP2 = (value, type, event) => {
-    //swtching to Tab
-
     let prevOtp2 = { ...otpValue };
     prevOtp2[type] = value;
     if (typeof phoneNO !== "undefined" && phoneNO?.length) {
@@ -137,12 +124,6 @@ const LoginEmailandPassword = () => {
         prevOtp2.otp4 != ""
       ) {
         prevOtp2.disable = false;
-        // let tabVar = value.keyCode === 9;
-        // onKeyDown={({event, data}) => handleKeyDown({event, data})}
-        // handleKeyDown({data})
-        //  if (tabVar) {
-        //   handleLoginByOTP2();
-        // }
       } else if (
         ("otp1" || "otp2" || "otp3" || "otp4") &&
         event.keyCode === 9
@@ -154,8 +135,11 @@ const LoginEmailandPassword = () => {
     }
   };
 
+  const textField1Ref = useRef(null);
+  const textField2Ref = useRef(null);
+  const textField3Ref = useRef(null);
+  const textField4Ref = useRef(null);
   const handleLoginByOTP = ({ value, type }) => {
-    //switching to Enter
     let prevOtp = { ...otpValue };
     prevOtp[type] = value;
     if (
@@ -165,12 +149,20 @@ const LoginEmailandPassword = () => {
       prevOtp.otp4 != ""
     ) {
       prevOtp.disable = false;
-      // handleUserLogin();
     } else {
       prevOtp.disable = true;
     }
+
     setOtp(prevOtp);
     setDisableLogiBtn(false);
+
+    if (type === "otp1") {
+      textField2Ref.current.focus();
+    } else if (type === "otp2") {
+      textField3Ref.current.focus();
+    } else if (type === "otp3") {
+      textField4Ref.current.focus();
+    }
   };
 
   const handleLoginPhoneByOTP = (value, type) => {
@@ -247,10 +239,14 @@ const LoginEmailandPassword = () => {
               id="outlined-basic"
               variant="outlined"
               className="OTPBox"
-              onChange={(event) =>
-                handleLoginByOTP({ type: "otp1", value: event.target.value })
+              onChange={
+                (event) =>
+                  handleLoginByOTP({ type: "otp1", value: event.target.value })
+                // {handleNextTextField}
               }
+              // onChange={handleNextTextField}
               onKeyDown={(event) => handleKeyDown(event, "otp1")}
+              inputRef={textField1Ref}
               inputProps={{
                 maxLength: 1,
                 className: "boxOtpWidth",
@@ -264,6 +260,7 @@ const LoginEmailandPassword = () => {
                 handleLoginByOTP({ type: "otp2", value: event.target.value })
               }
               onKeyDown={(event) => handleKeyDown(event, "otp2")}
+              inputRef={textField2Ref}
               inputProps={{
                 maxLength: 1,
                 className: "boxOtpWidth",
@@ -277,6 +274,7 @@ const LoginEmailandPassword = () => {
                 handleLoginByOTP({ type: "otp3", value: event.target.value })
               }
               onKeyDown={(event) => handleKeyDown(event, "otp3")}
+              inputRef={textField3Ref}
               inputProps={{
                 maxLength: 1,
                 className: "boxOtpWidth",
@@ -290,6 +288,7 @@ const LoginEmailandPassword = () => {
                 handleLoginByOTP({ type: "otp4", value: event.target.value })
               }
               onKeyDown={(event) => handleKeyDown(event, "otp4")}
+              inputRef={textField4Ref}
               inputProps={{
                 maxLength: 1,
                 className: "boxOtpWidth",
@@ -332,3 +331,5 @@ const LoginEmailandPassword = () => {
 };
 
 export default LoginEmailandPassword;
+
+ 
