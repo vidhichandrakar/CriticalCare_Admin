@@ -70,6 +70,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   }, [localStorage.getItem("activeMenu")]);
 
   const handleHighlight = (type) => {
+    // console.log("type",type)
     setHighlight(type);
     localStorage.setItem("activeMenu", type);
     localStorage.setItem("subMenuPeople", false);
@@ -79,19 +80,22 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
       type === "catagory" ||
       type === "upcoimgCourses"
     ) {
+      // setHighlight(type);
       console.log("workingg");
       localStorage.setItem("subMenuCourses", true);
+      // setHighlight(type);
     } else {
       localStorage.setItem("subMenuCourses", false);
     }
   };
 
   const handleHighlightPeople = (type) => {
+    // console.log("type",type)
     setHighlightPeople(type);
-    // setHighlightPeople(true);
     localStorage.setItem("activeMenu", type);
     localStorage.setItem("subMenuCourses", false);
     if (type === "peopleUser" || type === "peopleMyTeam") {
+      setHighlightPeople(type);
       localStorage.setItem("subMenuPeople", true);
     } else {
       localStorage.setItem("subMenuPeople", false);

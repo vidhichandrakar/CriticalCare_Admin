@@ -40,6 +40,8 @@ const CourseHeader = ({ Heading, subHeading }) => {
 
   const handleLogout = () => {
     localStorage.setItem("loggedInUser", null);
+    localStorage.setItem("subMenuCourses", false);
+    localStorage.setItem("subMenuPeople", false);
 
   };
 

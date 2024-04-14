@@ -21,6 +21,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { capitalizeFirstLetter } from "../../../Util/CommonFields";
 import { redirectRestriction } from "../../../Util/RedirectRestriction";
+import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import IconButton from "@mui/material/IconButton";
 
 const Trics1FreeMockTest = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -91,6 +94,14 @@ const Trics1FreeMockTest = () => {
     navigate("/CreateCourses", { state: { id: courseId } });
   };
 
+  const handlePublish = (type) => {
+    if (courseData?.is_publish === "published") {
+      //need to send payload
+      console.log("type if part", type);
+    } else {
+      console.log("type", type);
+    }
+  };
   return (
     <div className="grid-container">
       <SideBar />
@@ -203,7 +214,6 @@ const Trics1FreeMockTest = () => {
                   className="greyPara"
                   onClick={handleEdit}
                 >
-                  {" "}
                   <EditIcon className="PoPIcon" />
                   Edit
                 </MenuItem>
@@ -212,15 +222,22 @@ const Trics1FreeMockTest = () => {
                   value={20}
                   className="greyPara"
                 >
-                  {" "}
                   <DeleteIcon className="PoPIcon" />
                   Delete
                 </MenuItem>
-                <MenuItem value={30} className="greyPara">
-                  {" "}
-                  <UnpublishedIcon className="PoPIcon" />
-                  Unpublish
+                <MenuItem
+                  value={30}
+                  className="greyPara"
+                  onClick={() => handlePublish()}
+                >
+                  <PublishedWithChangesIcon className="PoPIcon" />
+                  {courseData?.is_publish == "published"
+                    ? "UnPublish"
+                    : "Publish"}
                 </MenuItem>
+                <IconButton aria-label="add to favorites">
+                  <FavoriteIcon />
+                </IconButton>
               </Popover>
             </div>
           </div>

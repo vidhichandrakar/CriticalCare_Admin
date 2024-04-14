@@ -1,82 +1,40 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import { useState } from 'react';
+import React, { useRef } from 'react';
+import { TextField, Button } from '@mui/material';
 
-export default function SwipeableTemporaryDrawer() {
-  const [state, setState] = useState({left: false});
-
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event &&
-      event.type === 'keydown' &&
-      (event.key === 'Tab' || event.key === 'Shift')
-    ) {
-      return;
-    }
-
-    setState({ ...state, [anchor]: open });
+function Form() {
+  const textField1Ref = useRef(null);
+  const textField2Ref = useRef(null);
+  const textField3Ref = useRef(null);
+  const handleNextTextField = () => {
+    textField2Ref.current.focus();
   };
-
-  const list = (anchor) => (
-    <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
+  const handleNextTextField2 = () => {
+    textField3Ref.current.focus();
+  };
 
   return (
     <div>
-
-        <React.Fragment key={"right"}>
-          <Button onClick={toggleDrawer("right", true)}>Profile</Button>
-          <SwipeableDrawer
-            anchor={"right"}
-            open={state["right"]}
-            onClose={toggleDrawer("right", false)}
-            onOpen={toggleDrawer("right", true)}
-          >
-            {list("right")}
-          </SwipeableDrawer>
-        </React.Fragment>
-   
+      <TextField
+        label="Field 1"
+        inputRef={textField1Ref}
+        onChange={(event)=>event.target.value.length==1 && handleNextTextField()}
+        // Add any other props you need
+      />
+      <TextField
+        label="Field 2"
+        inputRef={textField2Ref}
+        onChange={(event)=>event.target.value.length==1 && handleNextTextField2()}
+        // Add any other props you need
+      />
+      <TextField
+        label="Field 2"
+        inputRef={textField3Ref}
+        onChange={(event)=>event.target.value.length==1 && handleNextTextField()}
+        // Add any other props you need
+      />
+      <Button onClick={handleNextTextField}>Next</Button>
     </div>
   );
 }
+
+export default Form;
