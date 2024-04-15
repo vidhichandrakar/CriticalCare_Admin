@@ -9,8 +9,10 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoaderComponent from "../../../Util/LoaderComponent";
 import India from "../../../Media/Images/India.png";
-
+import blueEnvlope from "../../../Media/Images/blueEnvlope.jpeg";
+import CircularProgress from '@mui/material/CircularProgress';
 import { validatePhoneNo } from "../../../Util/CommonUtils";
+import loginMan from "../../../Media/Images/loginMan.png";
 
 const LoginEmailandPassword = () => {
   const [userLogin, setUserLogin] = useState({
@@ -34,7 +36,7 @@ const LoginEmailandPassword = () => {
     otp4: "",
     disable: true,
   });
-  const [seconds, setSeconds] = useState(5);
+  const [seconds, setSeconds] = useState(60);
   const [isActive, setIsActive] = useState(true);
   const [isResendDisabled, setIsResendDisabled] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -57,7 +59,7 @@ const LoginEmailandPassword = () => {
       // Enable resend button after 30 seconds
       setTimeout(() => {
         setIsResendDisabled(false);
-      });
+      },60000);
     }
     return () => clearInterval(interval);
   }, [isActive]);
@@ -82,7 +84,7 @@ const LoginEmailandPassword = () => {
           setGetOTP(response.data.OTP);
           setHideOTPBtn(false);
           setLoaderState(false);
-          setSeconds(5);
+          setSeconds(60);
     setIsActive(true);
     setIsVisible(!isVisible);
         },
@@ -129,9 +131,8 @@ const LoginEmailandPassword = () => {
         setGetOTP(response.data.OTP);
         setHideOTPBtn(false);
         setLoaderState(false);
-        setSeconds(5);
+        setSeconds(60);
     setIsActive(true);
-    setIsVisible(!isVisible);
       },
       error: (error) => {
         toast.error(error.message);
@@ -229,23 +230,20 @@ const LoginEmailandPassword = () => {
   return (
     <div className="RightBox">
       <LoaderComponent loaderState={loaderState} />
-       <Box className={getOTP ? "BoxWidth" : "BoxWidth phoneTextField2"}>
+       <Box className={getOTP ? "BoxWidth" : "BoxWidth phoneTextField2 initialBoxWidth"}>
 
         {isVisible && (
         <Box className="OTPCard">
         <Typography sx={{ mt: 1, fontSize: 21, color: "#199884" }}>
-        <span className="OTPInTheBox">OTP Recieved:</span> <u className="OTPRecieved"> {getOTP}</u>
-        
-          </Typography>
+        <span className="OTPInTheBox">OTP Recieved:</span> <b className="OTPRecieved"> {getOTP}</b>
+        </Typography>
         </Box>
           )}
         <Typography className="loginText">
-          Login to Admin Panel <span>7746003673</span>
-          {isVisible && (
-        <div>
-          <p>{seconds > 0 ? `OTP expires in ${seconds} seconds` : "OTP expired"}</p>
-        </div>
-          )}
+          {/*   */}
+          
+          {getOTP !== "" ? <img src={blueEnvlope} width={350} height={200}/> :
+            <img src={loginMan} width={350} height={200}/>}
         </Typography>
 
         <Box sx={{ mt: 2 }} className="phNoBox">
@@ -282,15 +280,12 @@ const LoginEmailandPassword = () => {
         {getOTP !== "" && (
           <Box sx={{ mt: 2 }} className="OTPMainBox">
             <TextField
-              id="outlined-basic"
-              variant="outlined"
+              variant="standard"
               className="OTPBox"
               onChange={
                 (event) =>
                   handleLoginByOTP({ type: "otp1", value: event.target.value })
-                // {handleNextTextField}
               }
-              // onChange={handleNextTextField}
               onKeyDown={(event) => handleKeyDown(event, "otp1")}
               inputRef={textField1Ref}
               inputProps={{
@@ -299,8 +294,7 @@ const LoginEmailandPassword = () => {
               }}
             />
             <TextField
-              id="outlined-basic"
-              variant="outlined"
+              variant="standard"
               className="OTPBox"
               onChange={(event) =>
                 handleLoginByOTP({ type: "otp2", value: event.target.value })
@@ -313,8 +307,7 @@ const LoginEmailandPassword = () => {
               }}
             />
             <TextField
-              id="outlined-basic"
-              variant="outlined"
+              variant="standard"
               className="OTPBox"
               onChange={(event) =>
                 handleLoginByOTP({ type: "otp3", value: event.target.value })
@@ -327,8 +320,7 @@ const LoginEmailandPassword = () => {
               }}
             />
             <TextField
-              id="outlined-basic"
-              variant="outlined"
+              variant="standard"
               className="OTPBox"
               onChange={(event) =>
                 handleLoginByOTP({ type: "otp4", value: event.target.value })
@@ -354,19 +346,20 @@ const LoginEmailandPassword = () => {
           </Button>
         )}
         {getOTP && (
-          <Box className="LoginBtnBox">
+            <Box className="LoginBtnBox">
             <Box className="ResendButton">
-              <p>don't receive the otp?</p>
-            <Typography
+              <p>Don't recieve the OTP ?</p>
+            <Button
               variant="contained"
               className="ResendBtn"
               onClick={() => handleResendOTP()}
               disabled={seconds}
               >
-                <p>{isResendDisabled ? `Resend OTP (${seconds}s)` : "RESEND OTP"}</p>
-                
-            </Typography>
+                <p className="resendOTP">RESEND OTP ( {seconds} sec )</p>
+           </Button>
+          
             </Box>
+            
             <Button
               variant="contained"
               className="LoginBtn"

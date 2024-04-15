@@ -15,95 +15,103 @@
 }
 .Leftcomponent {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100%;
   width: 50%;
-  background-color: #F8F8F8;
+  background-color: #ffffff;
   border-right: solid 1px;
 }
 .Leftimg {
   height: 13vh;
+  margin-bottom: 10%;
 }
-.RightBox{
-    background-color: white;
-width: 50%;
+.RightBox {
+  background-color: white;
+  width: 50%;
 }
-.BoxWidth{
-    margin: 10%;
-    margin-top: 15% !important;
-    margin-top: 25% !important;
-    /* margin-top: 34% !important; */
-
-  }
-  .loginText{
-    text-align: center;
-    font-size: 1.5rem !important;
-    font-weight: 600 !important;
-  }
-  .EmailText{
-    color: grey;
-    margin-bottom: -2% !important;
-  }
-  .BoxShadowLogin{
-    text-align: center !important;
-    border-radius: 10px !important;
-    font-size: 0.7rem !important;
-    margin-top: 3% !important;
-    min-width: 100% !important;
-  }
-  .indiaImg{
-    width: 25px; 
-    height: 25px;
+.BoxWidth {
+  margin: 10%;
+  /* margin-top: 19% !important; */
+  margin-top: 25% !important;
+  /* margin-top: 34% !important; */
 }
-.phoneTextFieldStartIcon{
+.initialBoxWidth {
+  margin-top: 20% !important;
+}
+.loginText {
+  text-align: center;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+}
+.EmailText {
+  color: grey;
+  margin-bottom: -2% !important;
+}
+.BoxShadowLogin {
+  text-align: center !important;
+  border-radius: 10px !important;
+  font-size: 0.7rem !important;
+  margin-top: 3% !important;
+  /* min-width: 100% !important; */
+  min-width: 80% !important;
+  margin-left: 10% !important;
+}
+.indiaImg {
+  width: 25px;
+  height: 25px;
+}
+.phoneTextFieldStartIcon {
   display: flex;
   flex-direction: row;
 }
-.phoneTextField{
+.phoneTextField {
   margin-top: 6% !important;
+  font-size: 1.5rem !important;
 }
-.indiaBox{
-  width:60px;
+.indiaBox {
+  width: 60px;
   align-items: center;
   justify-content: center;
   display: block;
   margin: auto;
   padding: 3%;
-  
+
   border-right: 1px solid #000;
 }
-.startText{
+.startText {
   margin-left: 7%;
   font-size: 1em !important;
   font-weight: bold !important;
-  color:#000 !important
+  color: #000 !important;
 }
 
-.LoginBtn{
-    width: 60% !important;
-    height: 7vh !important;
-    margin-top: 10% !important;
-    margin-left: 20% !important;
-    background-color: #18568f !important;
-    border-radius: 8px  !important;
-    text-transform: none !important;
-    font-size: 1.2rem !important;
+.LoginBtn {
+  width: 60% !important;
+  height: 7vh !important;
+  margin-top: 5% !important;
+  margin-left: 20% !important;
+  background-color: #18568f !important;
+  border-radius: 8px !important;
+  text-transform: none !important;
+  font-size: 1.3rem !important;
 }
-.OTPMainBox{
+.OTPMainBox {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
-.OTPBox{
+.OTPBox {
+  border-bottom: 3px solid black;
   padding: 0px 5px !important;
-    border-color: #000 !important;
-    color: #000 !important;
-    width: 10%;
-    margin-top: 2% !important;
-    border-radius: 0 !important;
+  border-color: #000 !important;
+  color: #000 !important;
+  width: 10%;
+  margin-top: 2% !important;
+  border-radius: 0 !important;
 }
-.ResendButton{
+.ResendButton {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -111,21 +119,61 @@ width: 50%;
   text-align: left !important;
   margin-top: 2% !important;
 }
-.boxOtpWidth{
-  /* padding: 0 0 !important; */
-  border-color:#000 !important;
+.boxOtpWidth {
+  border-bottom: 2px solid rgb(207, 201, 201) !important;
   border-radius: 0 !important;
   text-align: center;
   font-size: 1.3rem !important;
 }
-.LoginBtnBox{
+.LoginBtnBox {
   display: flex;
   flex-direction: column;
 }
-.ResendBtn{
+
+.OTPInTheBox {
+  color: #000;
+  font-size: smaller !important;
+  font-family: math !important;
+  margin-right: 12px;
+}
+.OTPRecieved {
+  /* font-size: smaller !important; */
+  color: #199884 !important;
+  letter-spacing: 0.2em;
+  font-size: 1.4rem !important;
+}
+.OTPCard {
+  border-bottom: 4px solid #18568f !important;
+  background-color: white !important;
+  border-radius: 5px !important;
+  box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.352) !important;
+  width: 100%;
+  margin-top: -30% !important;
+  margin-bottom: 9%;
+  padding: 5px;
+}
+.css-1i96hcp-MuiTypography-root {
+  text-align: center !important;
+}
+
+.ResendButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: left !important;
+  margin-top: 2% !important;
+  font-family: sans-serif !important;
+}
+.ResendBtn {
   background-color: white !important;
   box-shadow: none !important;
   color: red !important;
   text-align: left !important;
-  margin-left: 1% !important;
+  /* margin-left: 1% !important; */
+  /* width: 50%; */
+  text-transform: none !important;
+}
+.resendOTP {
+  cursor: pointer;
 }
