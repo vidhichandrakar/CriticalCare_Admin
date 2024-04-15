@@ -59,7 +59,7 @@ const LoginEmailandPassword = () => {
       // Enable resend button after 30 seconds
       setTimeout(() => {
         setIsResendDisabled(false);
-      });
+      },60000);
     }
     return () => clearInterval(interval);
   }, [isActive]);
@@ -133,7 +133,6 @@ const LoginEmailandPassword = () => {
         setLoaderState(false);
         setSeconds(60);
     setIsActive(true);
-    setIsVisible(!isVisible);
       },
       error: (error) => {
         toast.error(error.message);
@@ -340,25 +339,24 @@ const LoginEmailandPassword = () => {
           <Button
             variant="contained"
             className="LoginBtn"
+            sx={{marginTop: "10%"}}
             onClick={() => handleUserLogin()}
           >
             Get OTP
           </Button>
         )}
         {getOTP && (
-  
-           
             <Box className="LoginBtnBox">
             <Box className="ResendButton">
-              <p>Don't recieve the OTP?</p>
-            <Typography
+              <p>Don't recieve the OTP ?</p>
+            <Button
               variant="contained"
               className="ResendBtn"
               onClick={() => handleResendOTP()}
               disabled={seconds}
               >
-                <p className="resendOTP">{ "RESEND OTP"}</p>
-           </Typography>
+                <p className="resendOTP">RESEND OTP ( {seconds} sec )</p>
+           </Button>
           
             </Box>
             

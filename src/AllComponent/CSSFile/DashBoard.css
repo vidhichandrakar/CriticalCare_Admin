@@ -65,6 +65,7 @@ body {
 .sidebar-title > span {
   display: none;
 }
+
 .textDecoration {
   text-decoration: none !important;
   color: rgba(17, 16, 16, 0.662);
@@ -951,14 +952,6 @@ body {
 .BoxWidth2{
   max-width: 100% !important;
   margin-top: 28% !important;
-}
-.selectDesign .MuiList-root-MuiMenu-list{
-  /* margin: 10% !important; */
-  /* background-color: red !important; */
-  /* color: green !important; */
-}
-.css-6hp17o-MuiList-root-MuiMenu-list {
-  /* margin: 0% !important; */
 }
 .selectDesign{
   /* padding: 5% !important; */
