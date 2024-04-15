@@ -230,18 +230,17 @@ const LoginEmailandPassword = () => {
     <div className="RightBox">
       <LoaderComponent loaderState={loaderState} />
        <Box className={getOTP ? "BoxWidth" : "BoxWidth phoneTextField2"}>
-        {setShowOTPCard ?
-        (<Box className="OTPCard">
-        <Typography sx={{ mt: 1, fontSize: 21, color: "#199884" }}>
-        <span className="OTPInTheBox">OTP -</span> <u> {getOTP}</u>
-          </Typography>
-        </Box>) : <></>}
 
+        {isVisible && (
+        <Box className="OTPCard">
+        <Typography sx={{ mt: 1, fontSize: 21, color: "#199884" }}>
+        <span className="OTPInTheBox">OTP Recieved:</span> <u className="OTPRecieved"> {getOTP}</u>
+        
+          </Typography>
+        </Box>
+          )}
         <Typography className="loginText">
           Login to Admin Panel <span>7746003673</span>
-          {/* <Typography sx={{ mt: 1, fontSize: 21, color: "#199884" }}>
-            <u>{getOTP}</u>
-          </Typography> */}
           {isVisible && (
         <div>
           <p>{seconds > 0 ? `OTP expires in ${seconds} seconds` : "OTP expired"}</p>

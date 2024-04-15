@@ -122,19 +122,31 @@ width: 50%;
   border-radius: 8px  !important;
   text-transform: none !important;
 }
+
 .OTPInTheBox{
   color: #000;
+  font-size: smaller !important;
+
+}
+.OTPRecieved{
+  font-size: smaller !important;
+  
+ color: #199884 !important;
 }
 .OTPCard{
-  border: 1px solid grey !important;
-  background-color: rgb(224 241 224) !important;
+
+  border-bottom: 4px solid #18568F !important;
+  background-color: white !important;
+  /* border-bottom: #18568f !important; */
   border-radius: 5px !important;
   box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.352) !important;
-  width: 60%;
-  height: 20% !important;
-  margin-left: 20% !important;
-  margin-top: -18% !important;
-  margin-bottom: 6%;
+  width: 100%;
+  /* height: 20% !important; */
+  /* margin-left: 21% !important; */
+  margin-top: -30% !important;
+  margin-bottom: 20%;
+  padding: 5px;
+  
 }
 .css-1i96hcp-MuiTypography-root{
   text-align: center !important;
