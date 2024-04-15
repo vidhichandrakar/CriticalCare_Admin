@@ -33,10 +33,13 @@ width: 50%;
 }
 .BoxWidth{
     margin: 10%;
-    margin-top: 15% !important;
+    /* margin-top: 19% !important; */
     margin-top: 25% !important;
     /* margin-top: 34% !important; */
 
+  }
+  .initialBoxWidth{
+    margin-top: 20% !important;
   }
   .loginText{
     text-align: center;
@@ -52,7 +55,9 @@ width: 50%;
     border-radius: 10px !important;
     font-size: 0.7rem !important;
     margin-top: 3% !important;
-    min-width: 100% !important;
+    /* min-width: 100% !important; */
+    min-width: 69% !important;
+    margin-left: 15% !important;
   }
   .indiaImg{
     width: 25px; 
@@ -64,6 +69,7 @@ width: 50%;
 }
 .phoneTextField{
   margin-top: 6% !important;
+  font-size: 1.5rem !important;
 }
 .indiaBox{
   width:60px;
@@ -98,7 +104,8 @@ width: 50%;
   justify-content: center;
 }
 .OTPBox{
-  padding: 0px 5px !important;
+    border-bottom: 3px solid black;
+    padding: 0px 5px !important;
     border-color: #000 !important;
     color: #000 !important;
     width: 10%;
@@ -106,7 +113,6 @@ width: 50%;
     border-radius: 0 !important;
 }
 .boxOtpWidth{
-  /* padding: 0 0 !important; */
   border-color:#000 !important;
   border-radius: 0 !important;
   text-align: center;
@@ -116,36 +122,26 @@ width: 50%;
   display: flex;
   flex-direction: column;
 }
-/* .ResendBtn{
-  width: 30% !important;
-  height: 5vh !important;
-  margin-top: 1% !important;
-  margin-left: 35% !important;
-  background-color: #18568f !important;
-  border-radius: 8px  !important;
-  text-transform: none !important;
-} */
 
 .OTPInTheBox{
   color: #000;
   font-size: smaller !important;
+  font-family: math !important;
+  margin-right: 12px;
 
 }
 .OTPRecieved{
-  font-size: smaller !important;
-  
- color: #199884 !important;
+  /* font-size: smaller !important; */
+  color: #199884 !important;
+  letter-spacing: 0.2em;
+  font-size: 1.4rem !important;
 }
 .OTPCard{
-
   border-bottom: 4px solid #18568F !important;
   background-color: white !important;
-  /* border-bottom: #18568f !important; */
   border-radius: 5px !important;
   box-shadow: 2px 2px 8px 2px rgba(0, 0, 0, 0.352) !important;
   width: 100%;
-  /* height: 20% !important; */
-  /* margin-left: 21% !important; */
   margin-top: -30% !important;
   margin-bottom: 9%;
   padding: 5px;
@@ -162,6 +158,7 @@ width: 50%;
             justify-content: center;
             text-align: left !important;
             margin-top: 2% !important;
+            font-family: sans-serif !important;
           }
           .ResendBtn{
             background-color: white !important;
@@ -170,3 +167,6 @@ width: 50%;
             text-align: left !important;
             margin-left: 1% !important;
           }
+.resendOTP{
+  cursor: pointer;
+}

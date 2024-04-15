@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoaderComponent from "../../../Util/LoaderComponent";
 import India from "../../../Media/Images/India.png";
+import blueEnvlope from "../../../Media/Images/blueEnvlope.jpeg";
 
 import { validatePhoneNo } from "../../../Util/CommonUtils";
 import loginMan from "../../../Media/Images/loginMan.png";
@@ -230,20 +231,20 @@ const LoginEmailandPassword = () => {
   return (
     <div className="RightBox">
       <LoaderComponent loaderState={loaderState} />
-       <Box className={getOTP ? "BoxWidth" : "BoxWidth phoneTextField2"}>
+       <Box className={getOTP ? "BoxWidth" : "BoxWidth phoneTextField2 initialBoxWidth"}>
 
         {isVisible && (
         <Box className="OTPCard">
         <Typography sx={{ mt: 1, fontSize: 21, color: "#199884" }}>
-        <span className="OTPInTheBox">OTP Recieved:</span> <u className="OTPRecieved"> {getOTP}</u>
-        
-          </Typography>
+        <span className="OTPInTheBox">OTP Recieved:</span> <b className="OTPRecieved"> {getOTP}</b>
+        </Typography>
         </Box>
           )}
         <Typography className="loginText">
-          {/* Login to Admin Panel <span>7746003673</span> */}
-          <img src={loginMan} width={350} height={200}/> 
-        
+          {/*   */}
+          
+          {getOTP !== "" ? <img src={blueEnvlope} width={350} height={200}/> :
+            <img src={loginMan} width={350} height={200}/>}
         </Typography>
 
         <Box sx={{ mt: 2 }} className="phNoBox">
@@ -280,15 +281,14 @@ const LoginEmailandPassword = () => {
         {getOTP !== "" && (
           <Box sx={{ mt: 2 }} className="OTPMainBox">
             <TextField
+            
               id="outlined-basic"
               variant="outlined"
               className="OTPBox"
               onChange={
                 (event) =>
                   handleLoginByOTP({ type: "otp1", value: event.target.value })
-                // {handleNextTextField}
               }
-              // onChange={handleNextTextField}
               onKeyDown={(event) => handleKeyDown(event, "otp1")}
               inputRef={textField1Ref}
               inputProps={{
@@ -355,14 +355,14 @@ const LoginEmailandPassword = () => {
            
             <Box className="LoginBtnBox">
             <Box className="ResendButton">
-              <p>don't receive the otp?</p>
+              <p>Don't recieve the OTP?</p>
             <Typography
               variant="contained"
               className="ResendBtn"
               onClick={() => handleResendOTP()}
               disabled={seconds}
               >
-                <p>{ "RESEND OTP"}</p>
+                <p className="resendOTP">{ "RESEND OTP"}</p>
            </Typography>
             </Box>
             
