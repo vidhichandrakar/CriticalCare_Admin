@@ -100,10 +100,11 @@ const CourseHeader = ({ Heading, subHeading }) => {
                 value={"Profileik"}
                 onClick={handleLogout}
               >
-                <LogoutTwoToneIcon className="designingIcons" />
+                <LogoutTwoToneIcon className="designingIconsLogout" />
                 Log Out
               </MenuItem>
             </Link>
+
           </Select>
         </FormControl>
         <SwipeableDrawer
