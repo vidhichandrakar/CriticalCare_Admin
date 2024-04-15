@@ -38,6 +38,7 @@ const LoginEmailandPassword = () => {
   const [isActive, setIsActive] = useState(true);
   const [isResendDisabled, setIsResendDisabled] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [showOTPCard, setShowOTPCard] = useState(false);
 
   let navigation = useNavigate();
   useEffect(() => {
@@ -63,10 +64,6 @@ const LoginEmailandPassword = () => {
 
 
   const handleUserLogin = () => {
-
-   
-
-    
     let typedOtp = parseInt(
       otpValue.otp1 + otpValue.otp2 + otpValue.otp3 + otpValue.otp4
     );
@@ -213,6 +210,7 @@ const LoginEmailandPassword = () => {
     if (typeof phoneNO !== "undefined" && phoneNO?.length) {
       if (phoneNO?.length === 10 && event.keyCode === 13) {
         handleUserLogin();
+        setShowOTPCard(true);
       } else if (phoneNO?.length !== 10) {
         setLoaderState(false);
       } else if (
@@ -231,18 +229,25 @@ const LoginEmailandPassword = () => {
   return (
     <div className="RightBox">
       <LoaderComponent loaderState={loaderState} />
-      <Box className={getOTP ? "BoxWidth" : "BoxWidth phoneTextField2"}>
+       <Box className={getOTP ? "BoxWidth" : "BoxWidth phoneTextField2"}>
+
+        {isVisible && (
+        <Box className="OTPCard">
+        <Typography sx={{ mt: 1, fontSize: 21, color: "#199884" }}>
+        <span className="OTPInTheBox">OTP Recieved:</span> <u className="OTPRecieved"> {getOTP}</u>
+        
+          </Typography>
+        </Box>
+          )}
         <Typography className="loginText">
           Login to Admin Panel <span>7746003673</span>
-          <Typography sx={{ mt: 1, fontSize: 21, color: "#199884" }}>
-            <u>{getOTP}</u>
-          </Typography>
           {isVisible && (
         <div>
           <p>{seconds > 0 ? `OTP expires in ${seconds} seconds` : "OTP expired"}</p>
         </div>
-      )}
+          )}
         </Typography>
+
         <Box sx={{ mt: 2 }} className="phNoBox">
           <TextField
             id="fullWidth"
@@ -342,6 +347,7 @@ const LoginEmailandPassword = () => {
           <Button
             variant="contained"
             className="LoginBtn"
+            sx={{marginTop: "10%"}}
             onClick={() => handleUserLogin()}
           >
             Get OTP
