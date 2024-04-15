@@ -106,7 +106,6 @@ body {
 }
 .hoverrr2{
   background-color: #E5F7FD !important;
-  /* background-color: blueviolet !important; */
   border-right: 3px solid #0075FF !important;
   color: #0075FF !important;
 }
@@ -149,8 +148,6 @@ body {
   margin-left: -35px !important;
 }
 .listButton {
-  /* font-size: 20% !important;
-  margin-left: 5px !important; */
   margin-top: -18px !important;
   margin-left: -2% !important;
 }
@@ -169,7 +166,6 @@ body {
 }
 .main-container {
   grid-area: main;
-  /* overflow-y: auto; */
 }
 .margin20 {
   margin: 20px;
@@ -955,4 +951,24 @@ body {
 .BoxWidth2{
   max-width: 100% !important;
   margin-top: 28% !important;
+}
+.selectDesign .MuiList-root-MuiMenu-list{
+  /* margin: 10% !important; */
+  /* background-color: red !important; */
+  /* color: green !important; */
+}
+.css-6hp17o-MuiList-root-MuiMenu-list {
+  /* margin: 0% !important; */
+}
+.selectDesign{
+  /* padding: 5% !important; */
+  background-color: red !important;
+}
+.selectDesign hoverrr{
+  padding: 5px 5px !important;
+  background-color: #0075FF !important;
+}
+.designingIconsLogout{
+  margin-right: 7%;
+  color: red;
 }

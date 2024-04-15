@@ -26,12 +26,12 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                   <img src={`data:image/png;base64,${item.thumbnail_path}`} className="cardImage" height={"auto"} />
                 </Link>
                 <div className="CardData">
-                  <p className="Headp">{capitalize(item.course_name)}</p>
+                  <b className="Headp">{capitalize(item.course_name)}</b>
                   <p className="Namep">
                    Created By: {createdBy[0]?.user_name}
                   </p>
                   <p className="Yearp">{item.duration_type_id} Year </p>
-                  <p className="Pricep">₹{item.price}</p>
+                  <b className="Pricep">₹{item.price}</b>
                 </div>
               </div>
             );
