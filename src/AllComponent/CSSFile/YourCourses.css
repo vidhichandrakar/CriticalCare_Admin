@@ -75,3 +75,41 @@
         grid-template-columns: 1fr;
       }
   }
+  .publish{ 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px 2px;
+    width: 60%;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: 0.9rem;
+    color: rgb(255, 255, 255);
+    position: absolute;
+    background-color: green;
+    opacity: 0.8;
+    justify-content: center;
+    height: 2.5vh;
+  }
+  .Npublish{ 
+    padding: 4px 2px;
+    width: 60%;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    font-size: 0.8rem;
+    color: rgb(255, 255, 255);
+    position: absolute;
+    background-color: rgb(255, 2, 2);
+    opacity: 0.8;
+  }
+  .publishBox{
+    position: relative;
+    text-align: center;
+    
+  }
+  .starIcon{
+    margin-left: 2% !important; 
+    width: 20% !important;
+    height: 3vh !important;
+    margin-top: -3% !important;
+  }
