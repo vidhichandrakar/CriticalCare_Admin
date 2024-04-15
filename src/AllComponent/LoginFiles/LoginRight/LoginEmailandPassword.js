@@ -349,6 +349,18 @@ const LoginEmailandPassword = () => {
         )}
         {getOTP && (
           <Box className="LoginBtnBox">
+            <Box className="ResendButton">
+              <p>don't receive the otp?</p>
+            <Typography
+              variant="contained"
+              className="ResendBtn"
+              onClick={() => handleResendOTP()}
+              disabled={seconds}
+              >
+                <p>{isResendDisabled ? `Resend OTP (${seconds}s)` : "RESEND OTP"}</p>
+                
+            </Typography>
+            </Box>
             <Button
               variant="contained"
               className="LoginBtn"
@@ -356,15 +368,7 @@ const LoginEmailandPassword = () => {
             >
               Login
             </Button>
-            <Button
-              variant="contained"
-              className="ResendBtn"
-              onClick={() => handleResendOTP()}
-              disabled={seconds}
-              >
-                <p>{isResendDisabled ? `Resend OTP (${seconds}s)` : "Resend OTP"}</p>
-                
-            </Button>
+            
           </Box>
         )}
       </Box>

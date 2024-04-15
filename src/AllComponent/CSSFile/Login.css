@@ -79,13 +79,14 @@ width: 50%;
 }
 
 .LoginBtn{
-    width: 30% !important;
-    height: 5vh !important;
-    margin-top: 10% !important;
-    margin-left: 35% !important;
+    width: 60% !important;
+    height: 7vh !important;
+    margin-top: 1% !important;
+    margin-left: 20% !important;
     background-color: #18568f !important;
     border-radius: 8px  !important;
     text-transform: none !important;
+    font-size: 1.2rem !important;
 }
 .OTPMainBox{
   display: flex;
@@ -100,6 +101,14 @@ width: 50%;
     margin-top: 2% !important;
     border-radius: 0 !important;
 }
+.ResendButton{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: left !important;
+  margin-top: 2% !important;
+}
 .boxOtpWidth{
   /* padding: 0 0 !important; */
   border-color:#000 !important;
@@ -112,11 +121,9 @@ width: 50%;
   flex-direction: column;
 }
 .ResendBtn{
-  width: 30% !important;
-  height: 5vh !important;
-  margin-top: 1% !important;
-  margin-left: 35% !important;
-  background-color: #18568f !important;
-  border-radius: 8px  !important;
-  text-transform: none !important;
+  background-color: white !important;
+  box-shadow: none !important;
+  color: red !important;
+  text-align: left !important;
+  margin-left: 1% !important;
 }
