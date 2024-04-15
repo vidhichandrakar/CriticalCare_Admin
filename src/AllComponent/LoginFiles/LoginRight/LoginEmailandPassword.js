@@ -11,6 +11,7 @@ import LoaderComponent from "../../../Util/LoaderComponent";
 import India from "../../../Media/Images/India.png";
 
 import { validatePhoneNo } from "../../../Util/CommonUtils";
+import loginMan from "../../../Media/Images/loginMan.png";
 
 const LoginEmailandPassword = () => {
   const [userLogin, setUserLogin] = useState({
@@ -240,12 +241,9 @@ const LoginEmailandPassword = () => {
         </Box>
           )}
         <Typography className="loginText">
-          Login to Admin Panel <span>7746003673</span>
-          {isVisible && (
-        <div>
-          <p>{seconds > 0 ? `OTP expires in ${seconds} seconds` : "OTP expired"}</p>
-        </div>
-          )}
+          {/* Login to Admin Panel <span>7746003673</span> */}
+          <img src={loginMan} width={350} height={200}/> 
+        
         </Typography>
 
         <Box sx={{ mt: 2 }} className="phNoBox">
@@ -353,7 +351,21 @@ const LoginEmailandPassword = () => {
           </Button>
         )}
         {getOTP && (
-          <Box className="LoginBtnBox">
+  
+           
+            <Box className="LoginBtnBox">
+            <Box className="ResendButton">
+              <p>don't receive the otp?</p>
+            <Typography
+              variant="contained"
+              className="ResendBtn"
+              onClick={() => handleResendOTP()}
+              disabled={seconds}
+              >
+                <p>{ "RESEND OTP"}</p>
+           </Typography>
+            </Box>
+            
             <Button
               variant="contained"
               className="LoginBtn"
@@ -361,15 +373,7 @@ const LoginEmailandPassword = () => {
             >
               Login
             </Button>
-            <Button
-              variant="contained"
-              className="ResendBtn"
-              onClick={() => handleResendOTP()}
-              disabled={seconds}
-              >
-                <p>{isResendDisabled ? `Resend OTP (${seconds}s)` : "Resend OTP"}</p>
-                
-            </Button>
+            
           </Box>
         )}
       </Box>
