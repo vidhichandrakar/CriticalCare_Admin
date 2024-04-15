@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import LoaderComponent from "../../../Util/LoaderComponent";
 import India from "../../../Media/Images/India.png";
 import blueEnvlope from "../../../Media/Images/blueEnvlope.jpeg";
-
+import CircularProgress from '@mui/material/CircularProgress';
 import { validatePhoneNo } from "../../../Util/CommonUtils";
 import loginMan from "../../../Media/Images/loginMan.png";
 
@@ -36,7 +36,7 @@ const LoginEmailandPassword = () => {
     otp4: "",
     disable: true,
   });
-  const [seconds, setSeconds] = useState(5);
+  const [seconds, setSeconds] = useState(60);
   const [isActive, setIsActive] = useState(true);
   const [isResendDisabled, setIsResendDisabled] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -84,7 +84,7 @@ const LoginEmailandPassword = () => {
           setGetOTP(response.data.OTP);
           setHideOTPBtn(false);
           setLoaderState(false);
-          setSeconds(5);
+          setSeconds(60);
     setIsActive(true);
     setIsVisible(!isVisible);
         },
@@ -131,7 +131,7 @@ const LoginEmailandPassword = () => {
         setGetOTP(response.data.OTP);
         setHideOTPBtn(false);
         setLoaderState(false);
-        setSeconds(5);
+        setSeconds(60);
     setIsActive(true);
     setIsVisible(!isVisible);
       },
@@ -281,9 +281,7 @@ const LoginEmailandPassword = () => {
         {getOTP !== "" && (
           <Box sx={{ mt: 2 }} className="OTPMainBox">
             <TextField
-            
-              id="outlined-basic"
-              variant="outlined"
+              variant="standard"
               className="OTPBox"
               onChange={
                 (event) =>
@@ -297,8 +295,7 @@ const LoginEmailandPassword = () => {
               }}
             />
             <TextField
-              id="outlined-basic"
-              variant="outlined"
+              variant="standard"
               className="OTPBox"
               onChange={(event) =>
                 handleLoginByOTP({ type: "otp2", value: event.target.value })
@@ -311,8 +308,7 @@ const LoginEmailandPassword = () => {
               }}
             />
             <TextField
-              id="outlined-basic"
-              variant="outlined"
+              variant="standard"
               className="OTPBox"
               onChange={(event) =>
                 handleLoginByOTP({ type: "otp3", value: event.target.value })
@@ -325,8 +321,7 @@ const LoginEmailandPassword = () => {
               }}
             />
             <TextField
-              id="outlined-basic"
-              variant="outlined"
+              variant="standard"
               className="OTPBox"
               onChange={(event) =>
                 handleLoginByOTP({ type: "otp4", value: event.target.value })
@@ -364,6 +359,7 @@ const LoginEmailandPassword = () => {
               >
                 <p className="resendOTP">{ "RESEND OTP"}</p>
            </Typography>
+          
             </Box>
             
             <Button
