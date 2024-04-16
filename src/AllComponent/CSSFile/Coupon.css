@@ -214,13 +214,4 @@ color: blue !important;
 }
 .MuiDialog-backdrop{
   background-color:red !important;
-  /* opacity: 0.5 !important; */
-  /* z-index: 1000; */
-  /* background-color: '#000000'; */
 }
-/* .couponBackDrop{
-  /* opacity: 0.5 !important; */
-  /* display: inline-block; */
-  /* z-index: 1000;
-  background-color: '#000000'; */
-/* }  */

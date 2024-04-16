@@ -46,9 +46,8 @@
     margin-top: 18px;
   }
   .Namep{
-        /* margin-top: -10px; */
-        color: grey;
-        font-size: 0.9rem;
+    color: grey;
+    font-size: 0.9rem;
   }
   .Yearp{ 
     margin-top: -8px ;
@@ -97,6 +96,7 @@
     opacity: 0.8;
     justify-content: center;
     height: 2.5vh;
+    margin-top: 28px;
   }
   .Npublish{ 
     padding: 4px 2px;
@@ -108,6 +108,7 @@
     position: absolute;
     background-color: rgb(255, 2, 2);
     opacity: 0.8;
+    margin-top: 28px;
   }
   .publishBox{
     position: relative;

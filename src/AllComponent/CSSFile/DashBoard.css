@@ -43,10 +43,13 @@ body {
 }
 #sidebar {
   grid-area: sidebar;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
   margin: 20px;
+}
+#sidebar:hover{
+  overflow-y: auto;
 }
 .Sider-Box {
   height: 100%;
@@ -66,11 +69,6 @@ body {
   display: none;
 }
 
-.textDecoration {
-  text-decoration: none !important;
-  color: rgba(17, 16, 16, 0.662);
-  font-size: 0.9rem !important;
-}
 .sidebar-brand {
   margin-top: 15px;
   font-size: 20px;
@@ -87,9 +85,10 @@ body {
 }
 .sidebar-list-item {
   font-size: 15px;
-  margin-top: -10%;
 }
-
+::-webkit-scrollbar { 
+  width: 5px; 
+}
 #hoverrr {
   padding: 10px 0px ;
   font-size: 15px !important;
@@ -943,14 +942,72 @@ body {
   max-width: 100% !important;
   margin-top: 28% !important;
 }
-.selectDesign{
-  background-color: red !important;
+.textDecoration {
+  text-decoration: none !important;
+  /* color: red !important; */
+  font-size: 0.9rem !important;
+  padding-bottom: 5px !important;
 }
+.textDecorationDD {
+  text-decoration: none !important;
+  color: red !important;
+  font-size: 0.9rem !important;
+  padding-bottom: 5px !important;
+}
+/* .selectDesign{ */
+  /* background-color: red !important; */
+  /* border-bottom-left-radius: 10px !important; */
+  /* border-bottom-right-radius: 10px !important; */
+/* } */
 .selectDesign hoverrr{
   padding: 5px 5px !important;
   background-color: #0075FF !important;
+  border-radius: 30px !important;
+}
+.designingIcons{
+  margin-right: 7%;
+  color: #ded19f!important;
+  /* color: black !important; */
 }
 .designingIconsLogout{
   margin-right: 7%;
   color: red;
 }
+.designingIconsLogout:hover{
+  /* font-size: 1.9rem !important; */
+}
+.eachBox{
+  background-color: white !important;
+  width: 100%;
+  height: 5vh;
+  border-radius: 30px;
+  padding: 3px 11px;
+  margin: -7px -11px;
+}
+.eachBox:hover{
+  background-color: #fef5e3 !important;
+}
+
+.HeaderRight{
+  width: 60%;
+  justify-content: end;
+  display: flex;
+  flex-direction: row-reverse;
+  /* background-color: grey !important; */
+}
+
+
+
+
+/* <li class="menu-item">
+<a href="#0" class="widgets">
+  <i class="ion ion-ios-aperture-outline"></i>
+  <span>Widgets</span>
+  <div class="dots"></div>
+</a>
+<ol class="sub-menu">
+  <li class="menu-item item--a"><a href="#0" class="item--a"><span>Big Widgets</span></a></li>
+  <li class="menu-item item--b"><a href="#0" class="item--b"><span>Bigger Widgets</span></a></li>
+  <li class="menu-item item--b"><a href="#0" class="item--c"><span>Huge Widgets</span></a></li>
+</ol>
+</li> */

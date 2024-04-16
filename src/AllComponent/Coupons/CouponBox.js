@@ -221,15 +221,6 @@ const CouponBox = () => {
                       aria-labelledby="customized-dialog-title"
                       open={openSecond}
                       className="couponBackDrop"
-                      // style={{width: '200px', marginLeft: '40%', backgroundColor: 'transparent'}}
-                      // BackdropProps={{invisible: true}}
-                      
-                      // PaperProps={{
-                      //   style: {
-                      //     backgroundColor: 'red !important',
-                      //     boxShadow: 'none',
-                      //   },
-                      // }}
                     >
                       <DialogTitle
                         sx={{ m: 0, p: 2 }}

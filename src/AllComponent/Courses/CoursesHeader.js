@@ -19,6 +19,9 @@ import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import QuizRoundedIcon from "@mui/icons-material/QuizRounded";
 import { Link } from "react-router-dom";
+import { DialogContent } from '@mui/material';
+import Divider from '@mui/material/Divider'; 
+
 
 const CourseHeader = ({ Heading, subHeading }) => {
   const [value, setValue] = useState("");
@@ -35,14 +38,12 @@ const CourseHeader = ({ Heading, subHeading }) => {
       return;
     }
     setState({ state, [anchor]: open });
-
   };
 
   const handleLogout = () => {
     localStorage.setItem("loggedInUser", null);
     localStorage.setItem("subMenuCourses", false);
     localStorage.setItem("subMenuPeople", false);
-
   };
 
   return (
@@ -68,45 +69,74 @@ const CourseHeader = ({ Heading, subHeading }) => {
             }
             value={value}
           >
+             {/* <MenuItem>
+            <li class="menu-item">
+<a href="#0" class="widgets">
+  <i class="ion ion-ios-aperture-outline"></i>
+  <span>Widgets</span>
+  <div class="dots"></div>
+</a>
+<ol class="sub-menu">
+  <li class="menu-item item--a"><a href="#0" class="item--a"><span>Big Widgets</span></a></li>
+  <li class="menu-item item--b"><a href="#0" class="item--b"><span>Bigger Widgets</span></a></li>
+  <li class="menu-item item--b"><a href="#0" class="item--c"><span>Huge Widgets</span></a></li>
+</ol>
+</li>
+             </MenuItem> */}
+
             <MenuItem
               className="selectDesign hoverrr"
               value={"Profile"}
               onClick={toggleDrawer("right", true)}
             >
+              <Box className="eachBox">
               <PersonRoundedIcon className="designingIcons" />
               Profile
+              </Box>
             </MenuItem>
+            <Divider/>
 
             <MenuItem className="selectDesign hoverrr" value={"Profiles"}>
+            <Box className="eachBox">
               <CurrencyRupeeIcon className="designingIcons" />
               Recharge
+              </Box>
             </MenuItem>
+            <Divider/>
 
             <MenuItem className="selectDesign hoverrr" value={"Profiled"}>
+            <Box className="eachBox">
               <SettingsRoundedIcon className="designingIcons" />
               Settings
+            </Box>
             </MenuItem>
+            <Divider/>
 
             <MenuItem className="selectDesign hoverrr" value={"Profilea"}>
+            <Box className="eachBox">
               <QuizRoundedIcon className="designingIcons" />
               Help and Support
+              </Box>
             </MenuItem>
+            <Divider/>
 
-            <Link to="/admin" className="textDecoration">
+            <Link to="/admin" className="textDecorationDD">
               {" "}
               <MenuItem
                 className="selectDesign hoverrr"
-                sx={{ color: "black" }}
                 value={"Profileik"}
                 onClick={handleLogout}
               >
+                <Box className="eachBox">
                 <LogoutTwoToneIcon className="designingIconsLogout" />
                 Log Out
+                </Box>
               </MenuItem>
             </Link>
 
           </Select>
         </FormControl>
+
         <SwipeableDrawer
           anchor={"right"}
           open={state["right"]}
