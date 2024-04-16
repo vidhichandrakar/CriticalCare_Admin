@@ -43,13 +43,13 @@ body {
 }
 #sidebar {
   grid-area: sidebar;
-  /* overflow-y: auto; */
+  overflow-y: auto;
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
   margin: 20px;
 }
 .Sider-Box {
-  /* height: 100%; */
+  height: 100%;
   background-color: white;
   border-radius: 10px;
 }
@@ -89,9 +89,7 @@ body {
   font-size: 15px;
   margin-top: -10%;
 }
-/* .BottomLine {
-  margin-left: 20px;
-} */
+
 #hoverrr {
   padding: 10px 0px ;
   font-size: 15px !important;
@@ -349,7 +347,6 @@ body {
   margin-right: 10px;
 }
 .userCompleteTable {
-  /* height: 65vh !important; */
   width: 100%;
   background-color: #ffffff;
   border-radius: 15px;
@@ -388,7 +385,6 @@ body {
 .fullNameHead UserName {
   margin-left: 5% !important;
 }
-
 .userPagination{
   margin-bottom: 10px;
   position: fixed !important;
@@ -625,10 +621,8 @@ body {
   margin-right: 9%;
   position: absolute !important;
   right: 0 !important;
-  /* bottom: 0; */
   bottom: 32px;
- 
-}
+ }
 .testPortalSearchBarSection {
   display: flex !important;
   flex-direction: row !important;
@@ -945,16 +939,11 @@ body {
 .phoneTextField2{
   margin-top: 18% !important;
 }
-/* .BoxWidth{
-  /* max-width: 100% !important;
-  margin-top: 32% !important;
-}  */
 .BoxWidth2{
   max-width: 100% !important;
   margin-top: 28% !important;
 }
 .selectDesign{
-  /* padding: 5% !important; */
   background-color: red !important;
 }
 .selectDesign hoverrr{

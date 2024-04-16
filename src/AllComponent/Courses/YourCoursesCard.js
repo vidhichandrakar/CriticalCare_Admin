@@ -23,7 +23,8 @@ const YourCoursesCard = ({ allCourses, userData }) => {
             return (
               <div className="card" onClick={()=>handleCourse(id)}>
                 <div className="publishBox">
-                {item.is_publish==="published"?<div className="publish"><StarRateIcon className="starIcon"/><p className="/">Publish</p></div>:<p className="Npublish">Not Publish</p>}
+                {item.is_publish==="published"?<div className="publish"><StarRateIcon className="starIcon"/>
+                <p className="/">Publish</p></div>:<p className="Npublish">Not Publish</p>}
                 <Link  to={{query: {id:id}, pathname: "/Trics1FreeMockTest"}}>
                   <img src={`data:image/png;base64,${item.thumbnail_path}`} className="cardImage" height={"auto"} />
                 </Link>

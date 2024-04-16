@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useRef, setkey, key, keyDown } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  setkey,
+  key,
+  keyDown,
+} from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { InputAdornment, Typography, paperClasses } from "@mui/material";
@@ -10,7 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 import LoaderComponent from "../../../Util/LoaderComponent";
 import India from "../../../Media/Images/India.png";
 import blueEnvlope from "../../../Media/Images/blueEnvlope.jpeg";
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from "@mui/material/CircularProgress";
 import { validatePhoneNo } from "../../../Util/CommonUtils";
 import loginMan from "../../../Media/Images/loginMan.png";
 
@@ -59,11 +66,10 @@ const LoginEmailandPassword = () => {
       // Enable resend button after 30 seconds
       setTimeout(() => {
         setIsResendDisabled(false);
-      },60000);
+      }, 60000);
     }
     return () => clearInterval(interval);
   }, [isActive]);
-
 
   const handleUserLogin = () => {
     let typedOtp = parseInt(
@@ -85,8 +91,8 @@ const LoginEmailandPassword = () => {
           setHideOTPBtn(false);
           setLoaderState(false);
           setSeconds(60);
-    setIsActive(true);
-    setIsVisible(!isVisible);
+          setIsActive(true);
+          setIsVisible(!isVisible);
         },
         error: (error) => {
           toast.error(error.response.data.message);
@@ -132,7 +138,7 @@ const LoginEmailandPassword = () => {
         setHideOTPBtn(false);
         setLoaderState(false);
         setSeconds(60);
-    setIsActive(true);
+        setIsActive(true);
       },
       error: (error) => {
         toast.error(error.message);
@@ -140,7 +146,6 @@ const LoginEmailandPassword = () => {
       },
     });
   };
-
 
   const handleNextTextField = () => {
     textField2Ref.current.focus();
@@ -230,20 +235,27 @@ const LoginEmailandPassword = () => {
   return (
     <div className="RightBox">
       <LoaderComponent loaderState={loaderState} />
-       <Box className={getOTP ? "BoxWidth" : "BoxWidth phoneTextField2 initialBoxWidth"}>
-
+      <Box
+        className={
+          getOTP ? "BoxWidth" : "BoxWidth phoneTextField2 initialBoxWidth"
+        }
+      >
         {isVisible && (
-        <Box className="OTPCard">
-        <Typography sx={{ mt: 1, fontSize: 21, color: "#199884" }}>
-        <span className="OTPInTheBox">OTP Recieved:</span> <b className="OTPRecieved"> {getOTP}</b>
-        </Typography>
-        </Box>
-          )}
+          <Box className="OTPCard">
+            <Typography sx={{ mt: 1, fontSize: 21, color: "#199884" }}>
+              <span className="OTPInTheBox">OTP Recieved:</span>{" "}
+              <b className="OTPRecieved"> {getOTP}</b>
+            </Typography>
+          </Box>
+        )}
         <Typography className="loginText">
           {/*   */}
-          
-          {getOTP !== "" ? <img src={blueEnvlope} width={350} height={200}/> :
-            <img src={loginMan} width={350} height={200}/>}
+
+          {getOTP !== "" ? (
+            <img src={blueEnvlope} width={350} height={200} />
+          ) : (
+            <img src={loginMan} width={350} height={200} />
+          )}
         </Typography>
 
         <Box sx={{ mt: 2 }} className="phNoBox">
@@ -282,9 +294,8 @@ const LoginEmailandPassword = () => {
             <TextField
               variant="standard"
               className="OTPBox"
-              onChange={
-                (event) =>
-                  handleLoginByOTP({ type: "otp1", value: event.target.value })
+              onChange={(event) =>
+                handleLoginByOTP({ type: "otp1", value: event.target.value })
               }
               onKeyDown={(event) => handleKeyDown(event, "otp1")}
               inputRef={textField1Ref}
@@ -339,27 +350,26 @@ const LoginEmailandPassword = () => {
           <Button
             variant="contained"
             className="LoginBtn"
-            sx={{marginTop: "10%"}}
+            sx={{ marginTop: "10%" }}
             onClick={() => handleUserLogin()}
           >
             Get OTP
           </Button>
         )}
         {getOTP && (
-            <Box className="LoginBtnBox">
+          <Box className="LoginBtnBox">
             <Box className="ResendButton">
               <p>Don't recieve the OTP ?</p>
-            <Button
-              variant="contained"
-              className="ResendBtn"
-              onClick={() => handleResendOTP()}
-              disabled={seconds}
+              <Button
+                variant="contained"
+                className="ResendBtn"
+                onClick={() => handleResendOTP()}
+                disabled={seconds}
               >
                 <p className="resendOTP">RESEND OTP ( {seconds} sec )</p>
-           </Button>
-          
+              </Button>
             </Box>
-            
+
             <Button
               variant="contained"
               className="LoginBtn"
@@ -367,7 +377,6 @@ const LoginEmailandPassword = () => {
             >
               Login
             </Button>
-            
           </Box>
         )}
       </Box>
@@ -377,5 +386,3 @@ const LoginEmailandPassword = () => {
 };
 
 export default LoginEmailandPassword;
-
- 
