@@ -944,7 +944,6 @@ body {
 }
 .textDecoration {
   text-decoration: none !important;
-  /* color: red !important; */
   font-size: 0.9rem !important;
   padding-bottom: 5px !important;
 }
@@ -953,12 +952,8 @@ body {
   color: red !important;
   font-size: 0.9rem !important;
   padding-bottom: 5px !important;
+  font-size: 1.9rem !important;
 }
-/* .selectDesign{ */
-  /* background-color: red !important; */
-  /* border-bottom-left-radius: 10px !important; */
-  /* border-bottom-right-radius: 10px !important; */
-/* } */
 .selectDesign hoverrr{
   padding: 5px 5px !important;
   background-color: #0075FF !important;
@@ -966,34 +961,57 @@ body {
 }
 .designingIcons{
   margin-right: 7%;
-  color: #ded19f!important;
-  /* color: black !important; */
+  /* color: grey !important; */
+  color: #f4f9fd !important;
+}
+.designingIcons:hover{ 
+  /* color: #ded19f !important; */
 }
 .designingIconsLogout{
   margin-right: 7%;
-  color: red;
+  color: red !important;
+  margin-bottom: -5px;
 }
 .designingIconsLogout:hover{
-  /* font-size: 1.9rem !important; */
 }
 .eachBox{
-  background-color: white !important;
+  background-color: #c3f7f7 !important;
+  /* background-color: #ded19f !important; */
+  color:#f4f9fd !important;
   width: 100%;
   height: 5vh;
-  border-radius: 30px;
+  border-radius: 15px;
   padding: 3px 11px;
   margin: -7px -11px;
 }
 .eachBox:hover{
-  background-color: #fef5e3 !important;
+  /* background-color: #fef5e3 !important; */
+  background-color: #f4f9fd !important;
+  /* color: #ded19f !important; */    
+  color: #c3f7f7 !important;
 }
 
+.eachBox .designingIcons:hover{
+  /* color: #ded19f !important;  */
+  color: #c3f7f7 !important ;
+}
+
+.eachBoxLogout{
+  width: 100%;
+  height: 5vh;
+  border-radius: 15px;
+  padding: 3px 11px;
+  margin: -7px -11px;
+}
 .HeaderRight{
   width: 60%;
   justify-content: end;
   display: flex;
   flex-direction: row-reverse;
   /* background-color: grey !important; */
+}
+.textDecorationDD:hover{
+  /* font-weight: 1.9rem !important */
 }
 
 
