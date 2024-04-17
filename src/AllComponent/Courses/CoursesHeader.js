@@ -69,54 +69,32 @@ const CourseHeader = ({ Heading, subHeading }) => {
             }
             value={value}
           >
-             {/* <MenuItem>
-            <li class="menu-item">
-<a href="#0" class="widgets">
-  <i class="ion ion-ios-aperture-outline"></i>
-  <span>Widgets</span>
-  <div class="dots"></div>
-</a>
-<ol class="sub-menu">
-  <li class="menu-item item--a"><a href="#0" class="item--a"><span>Big Widgets</span></a></li>
-  <li class="menu-item item--b"><a href="#0" class="item--b"><span>Bigger Widgets</span></a></li>
-  <li class="menu-item item--b"><a href="#0" class="item--c"><span>Huge Widgets</span></a></li>
-</ol>
-</li>
-             </MenuItem> */}
 
             <MenuItem
               className="selectDesign hoverrr"
               value={"Profile"}
               onClick={toggleDrawer("right", true)}
             >
-              <Box className="eachBox">
               <PersonRoundedIcon className="designingIcons" />
-              Profile
-              </Box>
+              <span className="ccLogout">Profile</span>
             </MenuItem>
             <Divider/>
 
             <MenuItem className="selectDesign hoverrr" value={"Profiles"}>
-            <Box className="eachBox">
               <CurrencyRupeeIcon className="designingIcons" />
-              Recharge
-              </Box>
+              <span className="ccLogout">Recharge</span>
             </MenuItem>
             <Divider/>
 
             <MenuItem className="selectDesign hoverrr" value={"Profiled"}>
-            <Box className="eachBox">
               <SettingsRoundedIcon className="designingIcons" />
-              Settings
-            </Box>
+              <span className="ccLogout">Settings</span>
             </MenuItem>
             <Divider/>
 
             <MenuItem className="selectDesign hoverrr" value={"Profilea"}>
-            <Box className="eachBox">
               <QuizRoundedIcon className="designingIcons" />
-              Help and Support
-              </Box>
+              <span className="ccLogout">Help and Support</span>
             </MenuItem>
             <Divider/>
 
@@ -127,10 +105,10 @@ const CourseHeader = ({ Heading, subHeading }) => {
                 value={"Profileik"}
                 onClick={handleLogout}
               >
-                <Box className="eachBoxLogout">
+                {/* <Box className="eachBoxLogout"> */}
                 <LogoutTwoToneIcon className="designingIconsLogout" />
-                Log Out
-                </Box>
+                <span className="ccLogout">Log Out</span>
+                {/* </Box> */}
               </MenuItem>
             </Link>
 

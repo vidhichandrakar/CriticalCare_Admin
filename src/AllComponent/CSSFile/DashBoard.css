@@ -51,6 +51,11 @@ body {
 #sidebar:hover{
   overflow-y: auto;
 }
+::-webkit-scrollbar { 
+  width: 5px; 
+  height: 30px !important;
+} 
+
 .Sider-Box {
   height: 100%;
   background-color: white;
@@ -85,9 +90,6 @@ body {
 }
 .sidebar-list-item {
   font-size: 15px;
-}
-::-webkit-scrollbar { 
-  width: 5px; 
 }
 #hoverrr {
   padding: 10px 0px ;
@@ -961,39 +963,20 @@ body {
 }
 .designingIcons{
   margin-right: 7%;
-  /* color: grey !important; */
-  color: #f4f9fd !important;
-}
-.designingIcons:hover{ 
-  /* color: #ded19f !important; */
+  color: #199884 !important;    
 }
 .designingIconsLogout{
   margin-right: 7%;
   color: red !important;
   margin-bottom: -5px;
 }
-.designingIconsLogout:hover{
-}
 .eachBox{
-  background-color: #c3f7f7 !important;
-  /* background-color: #ded19f !important; */
-  color:#f4f9fd !important;
+  background-color: #ffffff !important;
   width: 100%;
   height: 5vh;
   border-radius: 15px;
   padding: 3px 11px;
   margin: -7px -11px;
-}
-.eachBox:hover{
-  /* background-color: #fef5e3 !important; */
-  background-color: #f4f9fd !important;
-  /* color: #ded19f !important; */    
-  color: #c3f7f7 !important;
-}
-
-.eachBox .designingIcons:hover{
-  /* color: #ded19f !important;  */
-  color: #c3f7f7 !important ;
 }
 
 .eachBoxLogout{
@@ -1008,24 +991,22 @@ body {
   justify-content: end;
   display: flex;
   flex-direction: row-reverse;
-  /* background-color: grey !important; */
 }
-.textDecorationDD:hover{
-  /* font-weight: 1.9rem !important */
+.ccLogout{
+  font-size: 1.2rem;
+}
+.css-6hp17o-MuiList-root-MuiMenu-list {
+  padding: 1px 10px !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
 }
 
 
 
+.eachBox:hover{
+}
 
-/* <li class="menu-item">
-<a href="#0" class="widgets">
-  <i class="ion ion-ios-aperture-outline"></i>
-  <span>Widgets</span>
-  <div class="dots"></div>
-</a>
-<ol class="sub-menu">
-  <li class="menu-item item--a"><a href="#0" class="item--a"><span>Big Widgets</span></a></li>
-  <li class="menu-item item--b"><a href="#0" class="item--b"><span>Bigger Widgets</span></a></li>
-  <li class="menu-item item--b"><a href="#0" class="item--c"><span>Huge Widgets</span></a></li>
-</ol>
-</li> */
+.eachBox .designingIcons:hover{
+}
+.designingIconsLogout:hover{
+}
