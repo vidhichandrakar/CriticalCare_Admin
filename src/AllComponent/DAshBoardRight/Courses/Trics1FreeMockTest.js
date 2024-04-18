@@ -13,7 +13,11 @@ import CourseHeader from "../../Courses/CoursesHeader";
 import SideBar from "../../AdminDashboardMain/SideBar";
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { deleteCourses, getCourseById } from "../../ActionFactory/apiActions";
+import {
+  deleteCourses,
+  getCourseById,
+  publishNotPublishCourse,
+} from "../../ActionFactory/apiActions";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -94,13 +98,25 @@ const Trics1FreeMockTest = () => {
     navigate("/CreateCourses", { state: { id: courseId } });
   };
 
-  const handlePublish = (type) => {
-    if (courseData?.is_publish === "published") {
-      //need to send payload
-      console.log("type if part", type);
-    } else {
-      console.log("type", type);
-    }
+  const handlePublish = () => {
+    const payload = {
+      "is_publish": courseData?.is_publish==="not published"?"published":"not published",
+    };
+    publishNotPublishCourse({
+      courseId: courseData?.course_id,
+      payload,
+      callBack: (response) => {
+        console.log("payload publish",payload);
+        console.log("publish response",response);
+        navigate("/YourCourses");
+      },
+    });
+    // if (courseData?.is_publish === "published") {
+    //   //need to send payload
+    //   console.log("type if part", type);
+    // } else {
+    //   console.log("type", type);
+    // }
   };
   return (
     <div className="grid-container">
@@ -235,9 +251,6 @@ const Trics1FreeMockTest = () => {
                     ? "UnPublish"
                     : "Publish"}
                 </MenuItem>
-                <IconButton aria-label="add to favorites">
-                  <FavoriteIcon />
-                </IconButton>
               </Popover>
             </div>
           </div>

@@ -70,6 +70,8 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         JSON.parse(localStorage.getItem("loggedInUser")).user_id
       );
       formData.append("is_publish", "published");
+      formData.append("end_date","2024-01-24");
+      formData.append("start_date","2024-01-04");
     } catch (error) {
       console.log(error);
     }
