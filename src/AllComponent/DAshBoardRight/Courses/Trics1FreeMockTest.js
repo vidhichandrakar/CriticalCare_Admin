@@ -128,7 +128,7 @@ const Trics1FreeMockTest = () => {
               <ArrowBackIosNewIcon />
             </Button>
           </Link>
-          <CourseHeader Heading={"TRICS 1 FREE MOCK TEST FOR EDIC-1"} />
+          <CourseHeader Heading={capitalizeFirstLetter(courseData?.course_name)} />
         </div>
         {console.log("courseData edit page", courseData)}
         <div className="another-main-container">
@@ -251,6 +251,8 @@ const Trics1FreeMockTest = () => {
                     ? "UnPublish"
                     : "Publish"}
                 </MenuItem>
+                <IconButton aria-label="add to favorites">
+                </IconButton>
               </Popover>
             </div>
           </div>

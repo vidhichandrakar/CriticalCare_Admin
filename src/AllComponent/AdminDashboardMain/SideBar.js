@@ -80,17 +80,14 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
       type === "catagory" ||
       type === "upcoimgCourses"
     ) {
-      // setHighlight(type);
       console.log("workingg");
       localStorage.setItem("subMenuCourses", true);
-      // setHighlight(type);
     } else {
       localStorage.setItem("subMenuCourses", false);
     }
   };
 
   const handleHighlightPeople = (type) => {
-    // console.log("type",type)
     setHighlightPeople(type);
     localStorage.setItem("activeMenu", type);
     localStorage.setItem("subMenuCourses", false);
@@ -179,7 +176,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                             ? "hoverrr2 paddingD"
                             : "paddingD"
                         }
-                        sx={{ mt: 1 }}
+                        sx={{ mt: 1, color: "grey"}}
                         onClick={() => handleHighlight("myCourses")}
                       >
                         My Courses
@@ -195,7 +192,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                             ? "hoverrr2 paddingD"
                             : "paddingD"
                         }
-                        sx={{ mt: 1 }}
+                        sx={{ mt: 1, color: "grey" }}
                         onClick={() => handleHighlight("manageCoupons")}
                       >
                         Manage Coupons
@@ -211,7 +208,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                             ? "hoverrr2 paddingD"
                             : "paddingD"
                         }
-                        sx={{ mt: 1 }}
+                        sx={{ mt: 1, color: "grey"}}
                         onClick={() => handleHighlight("catagory")}
                       >
                         Category / Sub Category
@@ -227,7 +224,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                             ? "hoverrr2 paddingD"
                             : "paddingD"
                         }
-                        sx={{ mt: 1 }}
+                        sx={{ mt: 1, color: "grey" }}
                         onClick={() => handleHighlight("upcomingCourses")}
                       >
                         Upcoming Course / Blogs
@@ -297,7 +294,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                             ? "hoverrr2 paddingD"
                             : "paddingD"
                         }
-                        sx={{ textDecoration: "none" }}
+                        sx={{ textDecoration: "none", color: "grey" }}
                         onClick={() => handleHighlightPeople("peopleUser")}
                       >
                         User
@@ -313,7 +310,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                             ? "hoverrr2 paddingD"
                             : "paddingD"
                         }
-                        sx={{ textDecoration: "none" }}
+                        sx={{ textDecoration: "none", color: "grey" }}
                         onClick={() => handleHighlightPeople("peopleMyTeam")}
                       >
                         My Team
@@ -352,7 +349,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                   >
                     <Link className="textDecoration">
                       <Typography
-                        sx={{ textDecoration: "none" }}
+                        sx={{ textDecoration: "none", color: "grey" }}
                         className="textDecoration"
                       >
                         Category
@@ -364,7 +361,9 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                     onClick={() => handleCatConfig("SubCategory")}
                   >
                     <Link className="textDecoration">
-                      <Typography className="textDecoration">
+                      <Typography
+                      sx={{ textDecoration: "none", color: "grey" }}
+                       className="textDecoration">
                         Sub Category
                       </Typography>
                     </Link>
@@ -374,7 +373,9 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                     onClick={() => handleCatConfig("Duration")}
                   >
                     <Link className="textDecoration">
-                      <Typography className="textDecoration">
+                      <Typography 
+                      sx={{ textDecoration: "none", color: "grey" }}
+                      className="textDecoration">
                         Duration
                       </Typography>
                     </Link>
@@ -384,7 +385,9 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                       className="textDecoration"
                       onClick={() => handleCatConfig("Team Member")}
                     >
-                      <Typography className="textDecoration">
+                      <Typography 
+                      sx={{ textDecoration: "none", color: "grey" }}
+                      className="textDecoration">
                         Team Member
                       </Typography>
                     </Link>

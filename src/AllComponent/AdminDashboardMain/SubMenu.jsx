@@ -7,18 +7,10 @@ import { Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import MenuBookIcon from "@mui/icons-material/MenuBook";
-// import { Button } from "@mui/material";
-// import makeStyles from "@mui/styles/makeStyles";
-// const useStyles = makeStyles({
-//   popOverRoot: {
-//     pointerEvents: "none"
-//   }
-// });
+
 
 function SimpleMenu() {
   let currentlyHovering = false;
-  // const styles = useStyles();
-
   const [anchorEl, setAnchorEl] = useState(null);
 
   function handleClick(event) {
@@ -70,7 +62,6 @@ function SimpleMenu() {
         }}
         getContentAnchorEl={null}
         anchorOrigin={{ horizontal: "center", vertical: "top" }}
-        // sx={{ ml: 5, }}
       >
          <Link to="/YourCourses" className="textDecoration">
             {" "}

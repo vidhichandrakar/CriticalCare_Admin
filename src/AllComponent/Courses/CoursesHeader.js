@@ -19,6 +19,9 @@ import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import QuizRoundedIcon from "@mui/icons-material/QuizRounded";
 import { Link } from "react-router-dom";
+import { DialogContent } from '@mui/material';
+import Divider from '@mui/material/Divider'; 
+
 
 const CourseHeader = ({ Heading, subHeading }) => {
   const [value, setValue] = useState("");
@@ -35,14 +38,12 @@ const CourseHeader = ({ Heading, subHeading }) => {
       return;
     }
     setState({ state, [anchor]: open });
-
   };
 
   const handleLogout = () => {
     localStorage.setItem("loggedInUser", null);
     localStorage.setItem("subMenuCourses", false);
     localStorage.setItem("subMenuPeople", false);
-
   };
 
   return (
@@ -68,44 +69,52 @@ const CourseHeader = ({ Heading, subHeading }) => {
             }
             value={value}
           >
+
             <MenuItem
               className="selectDesign hoverrr"
               value={"Profile"}
               onClick={toggleDrawer("right", true)}
             >
               <PersonRoundedIcon className="designingIcons" />
-              Profile
+              <span className="ccLogout">Profile</span>
             </MenuItem>
+            <Divider/>
 
             <MenuItem className="selectDesign hoverrr" value={"Profiles"}>
               <CurrencyRupeeIcon className="designingIcons" />
-              Recharge
+              <span className="ccLogout">Recharge</span>
             </MenuItem>
+            <Divider/>
 
             <MenuItem className="selectDesign hoverrr" value={"Profiled"}>
               <SettingsRoundedIcon className="designingIcons" />
-              Settings
+              <span className="ccLogout">Settings</span>
             </MenuItem>
+            <Divider/>
 
             <MenuItem className="selectDesign hoverrr" value={"Profilea"}>
               <QuizRoundedIcon className="designingIcons" />
-              Help and Support
+              <span className="ccLogout">Help and Support</span>
             </MenuItem>
+            <Divider/>
 
-            <Link to="/admin" className="textDecoration">
+            <Link to="/admin" className="textDecorationDD">
               {" "}
               <MenuItem
                 className="selectDesign hoverrr"
-                sx={{ color: "black" }}
                 value={"Profileik"}
                 onClick={handleLogout}
               >
-                <LogoutTwoToneIcon className="designingIcons" />
-                Log Out
+                {/* <Box className="eachBoxLogout"> */}
+                <LogoutTwoToneIcon className="designingIconsLogout" />
+                <span className="ccLogout">Log Out</span>
+                {/* </Box> */}
               </MenuItem>
             </Link>
+
           </Select>
         </FormControl>
+
         <SwipeableDrawer
           anchor={"right"}
           open={state["right"]}
