@@ -46,7 +46,8 @@ body {
   /* overflow-y: auto; */
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
-  margin: 20px;
+  /* margin: 20px; */
+  border: 1px solid #eee;
 }
 #sidebar:hover{
   overflow-y: auto;

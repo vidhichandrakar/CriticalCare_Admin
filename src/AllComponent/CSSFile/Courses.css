@@ -9,8 +9,21 @@
 .HeaderBox{
   display: flex;
   flex-direction: row;
-  margin-left: -2%;
-  width: 100%;
+  /* margin-left: -2%; */
+  background-color: #ffffff;
+  width: 81vw;
+  padding: 1%;
+  border-left: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+.subHeaderMycourses{
+  width: 80vw;
+  padding: 1%;
+  /* margin: 1%; */
+  margin-top: 1%;
+  margin-left: 8px;
+  box-shadow: 1px 1px 2px 0.5px #ededed;
+  background-color: #ffffff;
 }
 .HeaderLeft{
   width:60%;
@@ -38,16 +51,15 @@
 }
 
 .logoDesign{
-   width: 60px;
-   height: 40px;
-   background-color: rgba(224, 184, 24, 0.236);
-  border-radius: 50%;
-  color:rgb(255, 186, 37);
+  font-size: 3rem !important;
   text-align: center;
+  font-weight: 300 !important;
+
 }
 .headerText{
-  font-size: 1.7em !important;
+  font-size: 1.4em !important;
   font-weight: 600 !important;
+  font-family: Arial, Helvetica, sans-serif !important;
 }
 .logoText{
   margin-top: 23% !important;

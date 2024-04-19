@@ -24,7 +24,7 @@ const SearchBar = ({mt, placeholder}) => {
             inputProps={{
               'aria-label': 'weight', 
             }}
-            sx={{ borderRadius: 30 }}
+            // sx={{ borderRadius: 30 }}
             className= "searchBar"
             placeholder= {placeholder}
             onChange={handlechangeSearchbar}
