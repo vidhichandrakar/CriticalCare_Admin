@@ -16,7 +16,7 @@ import { useLocation } from "react-router-dom";
 import {
   deleteCourses,
   getCourseById,
-  publishNotPublishCourse,
+  publishOrEditCourse,
 } from "../../ActionFactory/apiActions";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -56,7 +56,6 @@ const Trics1FreeMockTest = () => {
           },
           error: (error) => {
             toast.error(error.message);
-            console.log(error.message);
           },
         });
       }
@@ -66,7 +65,6 @@ const Trics1FreeMockTest = () => {
   }, []);
   useEffect(() => {
     if (courseId) {
-      console.log("defined", courseId);
       getCourseById({
         courseId,
         callBack: (response) => {
@@ -100,23 +98,18 @@ const Trics1FreeMockTest = () => {
 
   const handlePublish = () => {
     const payload = {
-      "is_publish": courseData?.is_publish==="not published"?"published":"not published",
+      is_publish:
+        courseData?.is_publish === "not published"
+          ? "published"
+          : "not published",
     };
-    publishNotPublishCourse({
+    publishOrEditCourse({
       courseId: courseData?.course_id,
       payload,
       callBack: (response) => {
-        console.log("payload publish",payload);
-        console.log("publish response",response);
         navigate("/YourCourses");
       },
     });
-    // if (courseData?.is_publish === "published") {
-    //   //need to send payload
-    //   console.log("type if part", type);
-    // } else {
-    //   console.log("type", type);
-    // }
   };
   return (
     <div className="grid-container">
@@ -128,9 +121,10 @@ const Trics1FreeMockTest = () => {
               <ArrowBackIosNewIcon />
             </Button>
           </Link>
-          <CourseHeader Heading={capitalizeFirstLetter(courseData?.course_name)} />
+          <CourseHeader
+            Heading={capitalizeFirstLetter(courseData?.course_name)}
+          />
         </div>
-        {console.log("courseData edit page", courseData)}
         <div className="another-main-container">
           <div className="completeTricsBox">
             <div className="leftSideRow">
@@ -251,8 +245,7 @@ const Trics1FreeMockTest = () => {
                     ? "UnPublish"
                     : "Publish"}
                 </MenuItem>
-                <IconButton aria-label="add to favorites">
-                </IconButton>
+                <IconButton aria-label="add to favorites"></IconButton>
               </Popover>
             </div>
           </div>

@@ -4,7 +4,11 @@ import Tracker from "./Tracker";
 import CreateForm from "./CreateCourses.form";
 import EditPrice from "./EditPrice";
 import AddContent from "./AddContent/AddContent";
-import { createCourse, getCourseById } from "../ActionFactory/apiActions";
+import {
+  createCourse,
+  getCourseById,
+  publishOrEditCourse,
+} from "../ActionFactory/apiActions";
 import { ToastContainer, toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
 import LoaderComponent from "../../Util/LoaderComponent";
@@ -55,11 +59,18 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       formData.append("sub_category_id", basicInfo?.subCategory?.category_id);
       formData.append("duration_id", parseInt(editPrice?.duration));
       formData.append("duration_type_id", 91);
-      formData.append(
-        "thumbnail_path",
-        basicInfo?.thumbnailPath,
-        basicInfo?.thumbnailPath?.name
-      );
+      if (typeof basicInfo?.thumbnailPath !== "string") {
+        formData.append(
+          "thumbnail_path",
+          basicInfo?.thumbnailPath,
+          basicInfo?.thumbnailPath?.name
+        );
+      }
+      // formData.append(
+      //   "thumbnail_path",
+      //   basicInfo?.thumbnailPath,
+      //   basicInfo?.thumbnailPath?.name
+      // );
       formData.append("content_type_id", 1);
       formData.append(
         "modified_by",
@@ -69,27 +80,37 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         "created_by",
         JSON.parse(localStorage.getItem("loggedInUser")).user_id
       );
-      formData.append("is_publish", "published");
-      formData.append("end_date","2024-01-24");
-      formData.append("start_date","2024-01-04");
+      formData.append("is_publish", "not published");
+      formData.append("end_date", editPrice?.startDate);
+      formData.append("start_date", editPrice?.endDate);
     } catch (error) {
       console.log(error);
     }
-
-    createCourse({
-      courseData: formData,
-      callBack: (response) => {
-        toast.success("Course added successfully!", {
-          autoClose: 500,
-        });
-        navigate("/YourCourses");
-      },
-      error: () => {
-        toast.error("Something went wrong!", {
-          autoClose: 500,
-        });
-      },
-    });
+    if (courseId) {
+      const payload = formData;
+      publishOrEditCourse({
+        courseId: courseId,
+        payload,
+        callBack: (response) => {
+          navigate("/YourCourses");
+        },
+      });
+    } else {
+      createCourse({
+        courseData: formData,
+        callBack: (response) => {
+          toast.success("Course added successfully!", {
+            autoClose: 500,
+          });
+          navigate("/YourCourses");
+        },
+        error: () => {
+          toast.error("Something went wrong!", {
+            autoClose: 500,
+          });
+        },
+      });
+    }
   };
 
   const handleInputChange = (type, value) => {
@@ -106,7 +127,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         trackerPage={trackerPage}
         handleTrackerPage={handleTrackerPage}
       />
-
       {trackerPage === 0 ? (
         <CreateForm
           handleTrackerPage={handleTrackerPage}
