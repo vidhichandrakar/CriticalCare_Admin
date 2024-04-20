@@ -71,7 +71,7 @@ const YourCourses = () => {
         <SearchBar  placeholder="Search by name" />
         </Box>
         <div className="Add-main-cards">
-          <div className="card">
+          {/* <div className="card">
             <div className="AddCourses">
               <img src={Folder} className="FolderImg" />
               <Link to="/CreateCourses">
@@ -80,7 +80,7 @@ const YourCourses = () => {
                 </Button>
               </Link>
             </div>
-          </div>
+          </div> */}
           <YourCoursesCard
             allCourses={allCourses}
             userData={userData}

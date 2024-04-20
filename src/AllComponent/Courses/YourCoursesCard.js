@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { capitalize } from "@material-ui/core";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import yellowEnvlope from "../../Media/Images/yellowEnvlope.jpeg";
+import { Box, Typography } from "@mui/material";
 
 const YourCoursesCard = ({ allCourses, userData }) => {
   const navigate = useNavigate();
@@ -20,41 +21,18 @@ const YourCoursesCard = ({ allCourses, userData }) => {
             const createdBy = userData.filter(
               (user) => user.user_id === item.created_by
             );
-            console.log("item", item.is_publish);
             return (
-              <div className="card" onClick={() => handleCourse(id)}>
-                <div className="publishBox">
-                  {item.is_publish === "published" ? (
-                    <div className="publish">
-                      <StarRateIcon className="starIcon" />
-                      <p className="/">Publish</p>
-                    </div>
-                  ) : (
-                    <p className="Npublish">Not Publish</p>
-                  )}
-                  <Link
-                    to={{ query: { id: id }, pathname: "/Trics1FreeMockTest" }}
-                  >
-                    {item.thumbnail_path ? (
-                      <img
-                        src={`data:image/png;base64,${item.thumbnail_path}`}
-                        className="cardImage"
-                        height={"auto"}
-                      />
-                    ) : (
-                      <img
-                        src={yellowEnvlope}
-                        className="cardImage"
-                        height={"auto"}
-                      />
-                    )}
-                  </Link>
+              <div className=" container courseCard" onClick={() => handleCourse(id)}>
+                <div className="row">
+                  <div className="col-md-5">
+                  <img src={cardimg} width={200} height={"auto"} style={{marginTop:"3px", marginLeft:"3px", borderRadius:"8px"}}/>
                 </div>
-                <div className="CardData">
-                  <b className="Headp">{capitalize(item.course_name)}</b>
-                  <p className="Namep">Created By: {createdBy[0]?.user_name}</p>
-                  <p className="Yearp">{item.duration_type_id} Year </p>
-                  <b className="Pricep">₹{item.price}</b>
+                <div className="col-md-8 rightCard">
+                  {/* <Typography>hfdghjsdikjhhhhhhhhhhhhhhhhhhhhhhhhhhh</Typography> */}
+                </div>
+                <div className="col-md-2 lastCard">
+                  <Box className="flag"></Box>
+                </div>
                 </div>
               </div>
             );
