@@ -20,7 +20,6 @@ const YourCoursesCard = ({ allCourses, userData }) => {
             const createdBy = userData.filter(
               (user) => user.user_id === item.created_by
             );
-            console.log("item", item.is_publish);
             return (
               <div className="card" onClick={() => handleCourse(id)}>
                 <div className="publishBox">
