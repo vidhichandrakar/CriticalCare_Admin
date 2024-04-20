@@ -21,8 +21,7 @@ import QuizRoundedIcon from "@mui/icons-material/QuizRounded";
 import { Link } from "react-router-dom";
 import { DialogContent } from '@mui/material';
 import Divider from '@mui/material/Divider'; 
-import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined';
-
+import PersonIcon from '@mui/icons-material/Person';
 const Header = ({ Heading, subHeading }) => {
   const [value, setValue] = useState("");
 
@@ -53,7 +52,9 @@ const Header = ({ Heading, subHeading }) => {
         {/* <Typography className="subHeader">{subHeading}</Typography> */}
       </Box>
       <Box className="HeaderRight">
-        <ManageAccountsOutlinedIcon className="logoDesign"/>
+        <Box className="logoCircle">
+        <PersonIcon className="logoDesign"/>
+        </Box>
       </Box>
       {/* <Box className="HeaderRight">
         <FormControl sx={{ m: 1, minWidth: 240 }}>

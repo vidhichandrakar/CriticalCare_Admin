@@ -322,7 +322,7 @@ body {
   align-items: left !important;
 }
 .searchnfilter button {
-  border-radius: 15px !important;
+  /* border-radius: 15px !important; */
   margin-left: 2%;
   padding: 2px 14px;
   border: 0.5px solid grey;
@@ -334,9 +334,20 @@ body {
 }
 .searchBar {
   height: 6vh;
-  background-color: #ffffff !important;
-  border: solid 0px grey;
+  border: 0px !important;
 }
+.searchBar .MuiOutlinedInput-input{
+  
+  border: 0px !important;
+  padding: 8.5px 14px !important;
+  
+}
+.searchBar .MuiOutlinedInput-root{
+  border-radius: 7px !important;
+  border: 0px !important;
+  background-color: #eef4f959 !important;
+}
+
 
 .filterButton {
   display: flex;

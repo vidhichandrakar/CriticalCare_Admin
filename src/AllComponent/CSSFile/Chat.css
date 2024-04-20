@@ -10,7 +10,7 @@ body{
     color: #e4606d
 }
 .container{
-    width: 100% !important;
+    /* width: 100% !important; */
 }
 .chat-messages {
     display: flex;
