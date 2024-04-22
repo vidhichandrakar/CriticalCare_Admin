@@ -229,7 +229,6 @@ const Testimonial = () => {
       author: addTestimonal.AuthorName,
       comment: addTestimonal.Comments,
     };
-    console.log("payloadpayload", payload);
     updateTestimonial({
       payload,
       callBack: (response) => {
@@ -247,7 +246,6 @@ const Testimonial = () => {
           subHeading={"Only published testiimonial are showm here"}
         />
         <LoaderComponent loaderState={loaderState} />
-        {console.log("addTestimonal", addTestimonal)}
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">
             <SearchBar mt="2%" placeholder="Search by name" />

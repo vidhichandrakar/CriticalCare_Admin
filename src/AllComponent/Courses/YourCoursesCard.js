@@ -22,17 +22,29 @@ const YourCoursesCard = ({ allCourses, userData }) => {
               (user) => user.user_id === item.created_by
             );
             return (
-              <div className=" container courseCard" onClick={() => handleCourse(id)}>
+              <div
+                className="container courseCard"
+                onClick={() => handleCourse(id)}
+              >
                 <div className="row">
                   <div className="col-md-5">
-                  <img src={cardimg} width={200} height={"auto"} style={{marginTop:"3px", marginLeft:"3px", borderRadius:"8px"}}/>
-                </div>
-                <div className="col-md-8 rightCard">
-                  {/* <Typography>hfdghjsdikjhhhhhhhhhhhhhhhhhhhhhhhhhhh</Typography> */}
-                </div>
-                <div className="col-md-2 lastCard">
-                  <Box className="flag"></Box>
-                </div>
+                    <img
+                      src={cardimg}
+                      width={200}
+                      height={"auto"}
+                      style={{
+                        marginTop: "3px",
+                        marginLeft: "3px",
+                        borderRadius: "8px",
+                      }}
+                    />
+                  </div>
+                  <div className="col-md-8 rightCard">
+                    {/* <Typography>hfdghjsdikjhhhhhhhhhh/hhhhhhhhhhhhhhhhh</Typography> */}
+                  </div>
+                  <div className="col-md-2 lastCard">
+                    <Box className="flag"></Box>
+                  </div>
                 </div>
               </div>
             );

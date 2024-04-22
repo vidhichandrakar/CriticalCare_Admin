@@ -104,7 +104,6 @@ const LoginEmailandPassword = () => {
         phone_no: phoneNO?.toString(),
         OTP: typedOtp,
       };
-      console.log("payload login", payload);
       verifyOtp({
         payload,
         callBack: (response) => {

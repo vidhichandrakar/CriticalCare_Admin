@@ -34,25 +34,16 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const idss = Courseopen ? "simple-popover" : undefined;
   const [hideSubConfig, setHideSubConfig] = useState(false);
   const [selectedConfigValue, setSelectedConfigValue] = useState("");
-
-
+  const [highlight, setHighlight] = useState(false);
+  const [highlightPeople, setHighlightPeople] = useState(false);
+  const [handleCollapse, setHandleCollapse] = useState();
   const navigate = useNavigate();
-  const handleClickCollapse = () => {
-    setOpenCollapse(!openCollapse);
-    console.log("ol[p",!openCollapse);
-    if(!openCollapse){
-      console.log("condtion wala");
-      localStorage.setItem("activeMenu", "YourCourses");
-      localStorage.setItem("subMenuCourses", true);
-      // setHighlight("YourCourses");
-      localStorage.setItem("subMenuPeople", false);
-      navigate("/YourCourses");
-      // setHighlightPeople("YourCourses");
-    }
-  };
-  const handleClickPeople = () => {
-    setOpenPeople(!openPeople);
-  };
+
+  useEffect(() => {
+    setHighlight(window.location.pathname.replace("/", ""));
+    setHighlightPeople(window.location.pathname.replace("/", ""));
+  }, [localStorage.getItem("activeMenu")]);
+
   const handleCatConfig = (value) => {
     setHideCatConfig(true);
     setSelectedConfigValue(value);
@@ -62,13 +53,23 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
     setHideCatConfig(false);
   };
 
-  const [highlight, setHighlight] = useState(false);
-  const [highlightPeople, setHighlightPeople] = useState(false);
-  useEffect(() => {
-    setHighlight(window.location.pathname.replace("/", ""));
-    setHighlightPeople(window.location.pathname.replace("/", ""));
-    console.log("highlightPeople", highlightPeople);
-  }, [localStorage.getItem("activeMenu")]);
+  const handleClickPeople = () => {
+    setOpenPeople(!openPeople);
+    if (!openPeople) {
+      localStorage.setItem("subMenuPeople", true);
+      setHighlightPeople("User");
+      localStorage.setItem("subMenuCourses", false);
+    }
+  };
+
+  const handleClickCollapse = () => {
+    setOpenCollapse(!openCollapse);
+    if (!openCollapse) {
+      localStorage.setItem("subMenuCourses", true);
+      setHighlightPeople("YourCourses");
+      localStorage.setItem("subMenuPeople", false);
+    }
+  };
 
   const handleHighlight = (type) => {
     localStorage.setItem("activeMenu", type);
@@ -80,7 +81,6 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
       type === "upcoimgCourses" ||
       type === "Testimonial"
     ) {
-      console.log("workingg");
       localStorage.setItem("subMenuCourses", true);
     } else {
       localStorage.setItem("subMenuCourses", false);
@@ -91,8 +91,6 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
     setHighlightPeople(type);
     // setHighlight(null);
     localStorage.setItem("activeMenu", type);
-    localStorage.setItem("subMenuCourses", null);
-    // localStorage.setItem("subMenuPeople", false);
     if (type === "User" || type === "MyTeam") {
       setHighlightPeople(type);
       localStorage.setItem("subMenuPeople", true);
@@ -103,18 +101,20 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
 
   const handleHideSubCat = () => {
     setHideSubConfig(!hideSubConfig);
+    // localStorage.setItem("subMenuCourses", false);
+    // localStorage.setItem("subMenuPeople", false);
+    console.log("comfguraion");
   };
 
   function handleCloseNew() {
     setAnchorE2(null);
   }
- 
+
   return (
     <aside
       id="sidebar"
       className={openSidebarToggle ? "sidebar-responsive" : ""}
     >
-      {console.log("highlight", highlight)}
       <div className="Sider-Box">
         <div className="sidebar-title">
           <div className="sidebar-brand">
@@ -138,7 +138,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
             </Typography>
           </Link>
 
-          <Link>
+          <Link to="/YourCourses">
             <ListItemButton
               onClick={handleClickCollapse}
               className="listButton"
@@ -259,7 +259,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
             </Typography>
           </Link>
 
-          <Link>
+          <Link to="/User">
             <ListItemButton onClick={handleClickPeople} className="listButton">
               <PersonIcon />
               <ListItemText primary="People" className="coursesHead" />
