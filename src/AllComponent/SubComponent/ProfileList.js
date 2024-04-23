@@ -35,7 +35,6 @@ const ProfileList = (anchor) => {
       }}
       role="presentation"
     >
-      {/* {console.log("loggedUserDetails",JSON.parse(loggedUserDetails))} */}
       <Box className="flexrow JustfiSB">
         <h3>My Profile</h3>
         <ClearIcon onClick={handleChange} className="Xicon pointer" />

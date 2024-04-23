@@ -9,8 +9,24 @@
 .HeaderBox{
   display: flex;
   flex-direction: row;
-  margin-left: -2%;
-  width: 100%;
+  /* margin-left: -2%; */
+  background-color: #ffffff;
+  width: 81.5vw;
+  position: fixed;
+  z-index: 11111111111;
+  padding: 7px;
+  border-left: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+.subHeaderMycourses{
+  width: 80vw;
+  padding: 1%;
+  /* margin: 1%; */
+  margin-top: 7%;
+  
+  margin-left: 8px;
+  box-shadow: 1px 1px 2px 0.5px #ededed;
+  background-color: #ffffff;
 }
 .HeaderLeft{
   width:60%;
@@ -36,20 +52,30 @@
 .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root {
   min-height: 42px;
 }
-.designingIcons{
-  margin-right: 7%;
-}
+
 .logoDesign{
-   width: 60px;
-   height: 40px;
-   background-color: rgba(224, 184, 24, 0.236);
+  font-size: 2.4rem !important;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    margin-left: 16%;
+    margin-top: 8%;
+    
+    font-weight: 300 !important;
+}
+.logoCircle{
+  width: 54px;
+  height: 47px;
   border-radius: 50%;
-  color:rgb(255, 186, 37);
-  text-align: center;
+  border:1px solid #18568f;
+  color:  #18568f;
+  background-color: #d8ecffce ;
 }
 .headerText{
-  font-size: 1.7em !important;
-  font-weight: 600 !important;
+  font-size: 1.4em !important;
+  font-weight: 550 !important;
+  font-family: Arial, Helvetica, sans-serif  !important;
 }
 .logoText{
   margin-top: 23% !important;
@@ -64,11 +90,87 @@
   text-align: left !important;
   margin-left: 11%;
 }
-.HeaderRight{
-  width: 60%;
-  justify-content: end;
+/* my course */
+
+.courseCard{
+  background-color: #b22626;
+  /* margin-left:2%; */
+  border-radius: 10px;
+
+  box-shadow: 1px 1px 2px 0.5px #ededed;
+  background-color: #ffffff;
+  width: 98% !important;
+}
+.rightCard{
+  margin-left: 3%;
+  width:100%;
+  margin-top: 3%;
+}
+.courseHeader{
+  font-size: 1.2rem !important;
+  font-family: sans-serif !important;
+  color: #18568f !important;
+}
+.duration{
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
+  text-align: center;
+  /* margin-top: 1%; */
+}
+.clock{
+  font-size: 1.1rem !important;
+  color: #199884;
+  margin-right: 1%;
+  text-align: center;
+  align-items: center;
+  margin-top: 3px;
+}
+.offerPrice{
+  font-size: 1rem !important;
+  margin-left: 1px !important;
+}
+.price{
+  text-decoration: line-through;
+}
+.durationText{
+  margin-left: 2% !important;
+  font-size: 0.9rem !important;
+  margin-top: 2px !important;
+  color: #928b8b;
+}
+.wrap-text-50 {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 40ch;
+  color: #918d8d;
+  font-size: 0.9rem !important;
+}
+.lastCard{
+  width:20%;
+}
+.flag{
+ 
+ 
+  background-color: #0ff55c;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 2px 0px;
+  width: 6%;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  font-size: 0.9rem;
+  color: rgb(255, 255, 255);
+  position: absolute;
+  top: 0;
+  right:0;
+  opacity: 0.8;
+  justify-content: center;
+  height: 15vh;
+  margin-right: 1%;
+  /* margin-left: 3%; */
 }
 .JustfiSB{
   justify-content: space-between;

@@ -15,6 +15,8 @@ import LoaderComponent from "../../Util/LoaderComponent";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { redirectRestriction } from "../../Util/RedirectRestriction";
+import Header from "./Header";
+import { Box } from "@mui/material";
 
 const YourCourses = () => {
   const [allCourses, setAllCourses] = useState([]);
@@ -59,15 +61,17 @@ const YourCourses = () => {
   return (
     <div className="grid-container">
       <SideBar />
-      <div className="main-container margin20">
-        <CourseHeader
-          Heading={"Your Courses (3)"}
+      <div className="main-container">
+        <Header
+          Heading={"My Courses"}
           subHeading={"Add/View courses of your brand"}
         />
         <LoaderComponent loaderState={loaderState} />
-        <SearchBar mt="2%" placeholder="Search by name" />
+        <Box className="subHeaderMycourses">
+        <SearchBar  placeholder="Search by name" />
+        </Box>
         <div className="Add-main-cards">
-          <div className="card">
+          {/* <div className="card">
             <div className="AddCourses">
               <img src={Folder} className="FolderImg" />
               <Link to="/CreateCourses">
@@ -76,7 +80,7 @@ const YourCourses = () => {
                 </Button>
               </Link>
             </div>
-          </div>
+          </div> */}
           <YourCoursesCard
             allCourses={allCourses}
             userData={userData}

@@ -21,9 +21,8 @@ import QuizRoundedIcon from "@mui/icons-material/QuizRounded";
 import { Link } from "react-router-dom";
 import { DialogContent } from '@mui/material';
 import Divider from '@mui/material/Divider'; 
-
-
-const CourseHeader = ({ Heading, subHeading }) => {
+import PersonIcon from '@mui/icons-material/Person';
+const Header = ({ Heading, subHeading }) => {
   const [value, setValue] = useState("");
 
   const [state, setState] = useState({
@@ -50,10 +49,14 @@ const CourseHeader = ({ Heading, subHeading }) => {
     <Box className="HeaderBox">
       <Box className="HeaderLeft">
         <Typography className="headerText">{Heading}</Typography>
-        <Typography className="subHeader">{subHeading}</Typography>
+        {/* <Typography className="subHeader">{subHeading}</Typography> */}
       </Box>
-
       <Box className="HeaderRight">
+        <Box className="logoCircle">
+        <PersonIcon className="logoDesign"/>
+        </Box>
+      </Box>
+      {/* <Box className="HeaderRight">
         <FormControl sx={{ m: 1, minWidth: 240 }}>
           <Select
             className="selectDesign"
@@ -106,16 +109,16 @@ const CourseHeader = ({ Heading, subHeading }) => {
                 onClick={handleLogout}
               >
                 {/* <Box className="eachBoxLogout"> */}
-                <LogoutTwoToneIcon className="designingIconsLogout" />
+                {/* <LogoutTwoToneIcon className="designingIconsLogout" />
                 <span className="ccLogout">Log Out</span>
                 {/* </Box> */}
-              </MenuItem>
-            </Link>
+              {/* </MenuItem>
+            </Link> */}
 
-          </Select>
-        </FormControl>
+          {/* </Select>
+        </FormControl> */}
 
-        <SwipeableDrawer
+        {/* <SwipeableDrawer
           anchor={"right"}
           open={state["right"]}
           onClose={toggleDrawer("right", false)}
@@ -124,9 +127,9 @@ const CourseHeader = ({ Heading, subHeading }) => {
           {ProfileList("right")}
 
           {/* <List /> */}
-        </SwipeableDrawer>
-      </Box>
+        {/* </SwipeableDrawer> */}
+      {/* // </Box> */} 
     </Box>
   );
 };
-export default CourseHeader;
+export default Header;

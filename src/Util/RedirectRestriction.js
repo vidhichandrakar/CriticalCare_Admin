@@ -9,6 +9,5 @@ export const checkAuthentication = () => {
 };
 
 export const redirectRestriction = () => {
-  console.log(checkAuthentication())
   return checkAuthentication() ? true : false;
 };

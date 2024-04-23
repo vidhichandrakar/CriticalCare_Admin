@@ -32,13 +32,10 @@ const Analytics = () => {
     setDefaultValueDate(e.target.value);
 
     if (e.target.value === "Last 7 Days") {
-      console.log(moment().subtract(7, "days").calendar(), "7 din");
       setCustomDate(false);
     } else if (e.target.value === "Last 15 Days") {
       setCustomDate(false);
-      console.log(moment().subtract(15, "days").calendar(), "15 din");
     } else if (e.target.value === "Last 30 Days") {
-      console.log(moment().subtract(1, "months").calendar(), "30 days");
       setCustomDate(false);
     } else if (e.target.value === "Custom Date") {
       setCustomDate(true);

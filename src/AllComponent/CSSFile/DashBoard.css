@@ -48,10 +48,21 @@ body {
   /* overflow-y: auto; */
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
-  margin: 20px;
+  /* margin: 20px; */
+  border: 1px solid #eee;
+  /* position:-webkit-sticky;
+  position: sticky; */
 }
+#sidebar:hover{
+  overflow-y: auto;
+}
+::-webkit-scrollbar { 
+  width: 5px; 
+  height: 30px !important;
+} 
+
 .Sider-Box {
-  /* height: 100%; */
+  height: 100%;
   background-color: white;
   border-radius: 10px;
   position: fixed;
@@ -69,15 +80,12 @@ body {
   display: none;
 }
 
-.textDecoration {
-  text-decoration: none !important;
-  color: rgba(17, 16, 16, 0.662);
-  font-size: 0.9rem !important;
-}
 .sidebar-brand {
   margin-top: 15px;
   font-size: 20px;
   font-weight: 700;
+  /* position: -webkit-sticky; */
+  position: sticky;
 }
 .css-60tve4-MuiList-root {
   margin-left: 0 !important;
@@ -90,11 +98,7 @@ body {
 }
 .sidebar-list-item {
   font-size: 15px;
-  margin-top: -10%;
 }
-/* .BottomLine {
-  margin-left: 20px;
-} */
 #hoverrr {
   padding: 10px 0px ;
   font-size: 15px !important;
@@ -325,7 +329,7 @@ body {
   align-items: left !important;
 }
 .searchnfilter button {
-  border-radius: 15px !important;
+  /* border-radius: 15px !important; */
   margin-left: 2%;
   padding: 2px 14px;
   border: 0.5px solid grey;
@@ -337,9 +341,20 @@ body {
 }
 .searchBar {
   height: 6vh;
-  background-color: #ffffff !important;
-  border: solid 0px grey;
+  border: 0px !important;
 }
+.searchBar .MuiOutlinedInput-input{
+  
+  border: 0px !important;
+  padding: 8.5px 14px !important;
+  
+}
+.searchBar .MuiOutlinedInput-root{
+  border-radius: 7px !important;
+  border: 0px !important;
+  background-color: #eef4f959 !important;
+}
+
 
 .filterButton {
   display: flex;
@@ -352,7 +367,6 @@ body {
   margin-right: 10px;
 }
 .userCompleteTable {
-  /* height: 65vh !important; */
   width: 100%;
   background-color: #ffffff;
   border-radius: 15px;
@@ -391,7 +405,6 @@ body {
 .fullNameHead UserName {
   margin-left: 5% !important;
 }
-
 .userPagination{
   margin-bottom: 10px;
   position: fixed !important;
@@ -628,10 +641,8 @@ body {
   margin-right: 9%;
   position: absolute !important;
   right: 0 !important;
-  /* bottom: 0; */
   bottom: 32px;
- 
-}
+ }
 .testPortalSearchBarSection {
   display: flex !important;
   flex-direction: row !important;
@@ -948,23 +959,73 @@ body {
 .phoneTextField2{
   margin-top: 18% !important;
 }
-/* .BoxWidth{
-  /* max-width: 100% !important;
-  margin-top: 32% !important;
-}  */
 .BoxWidth2{
   max-width: 100% !important;
   margin-top: 28% !important;
 }
-.selectDesign{
-  /* padding: 5% !important; */
-  background-color: red !important;
+.textDecoration {
+  text-decoration: none !important;
+  font-size: 0.9rem !important;
+  padding-bottom: 5px !important;
+}
+.textDecorationDD {
+  text-decoration: none !important;
+  color: red !important;
+  font-size: 0.9rem !important;
+  padding-bottom: 5px !important;
+  font-size: 1.9rem !important;
 }
 .selectDesign hoverrr{
   padding: 5px 5px !important;
   background-color: #0075FF !important;
+  border-radius: 30px !important;
+}
+.designingIcons{
+  margin-right: 7%;
+  color: #199884 !important;    
 }
 .designingIconsLogout{
   margin-right: 7%;
-  color: red;
+  color: red !important;
+  margin-bottom: -5px;
+}
+.eachBox{
+  background-color: #ffffff !important;
+  width: 100%;
+  height: 5vh;
+  border-radius: 15px;
+  padding: 3px 11px;
+  margin: -7px -11px;
+}
+
+.eachBoxLogout{
+  width: 100%;
+  height: 5vh;
+  border-radius: 15px;
+  padding: 3px 11px;
+  margin: -7px -11px;
+}
+.HeaderRight{
+  width: 60%;
+  justify-content: end;
+  display: flex;
+  flex-direction: row-reverse;
+}
+.ccLogout{
+  font-size: 1.2rem;
+}
+.css-6hp17o-MuiList-root-MuiMenu-list {
+  padding: 1px 10px !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+
+
+
+.eachBox:hover{
+}
+
+.eachBox .designingIcons:hover{
+}
+.designingIconsLogout:hover{
 }
