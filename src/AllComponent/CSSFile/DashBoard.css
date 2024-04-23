@@ -48,6 +48,8 @@ body {
   -webkit-transition: all 0.5s;
   /* margin: 20px; */
   border: 1px solid #eee;
+  /* position:-webkit-sticky;
+  position: sticky; */
 }
 #sidebar:hover{
   overflow-y: auto;
@@ -79,6 +81,8 @@ body {
   margin-top: 15px;
   font-size: 20px;
   font-weight: 700;
+  /* position: -webkit-sticky; */
+  position: sticky;
 }
 .css-60tve4-MuiList-root {
   margin-left: 0 !important;
