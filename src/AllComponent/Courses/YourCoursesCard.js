@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { capitalize } from "@material-ui/core";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import yellowEnvlope from "../../Media/Images/yellowEnvlope.jpeg";
-import { Box, Typography } from "@mui/material";
+import { Box, Tooltip, Typography } from "@mui/material";
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
 
 const YourCoursesCard = ({ allCourses, userData }) => {
   const navigate = useNavigate();
@@ -23,12 +24,16 @@ const YourCoursesCard = ({ allCourses, userData }) => {
             );
             return (
               <div className=" container courseCard" onClick={() => handleCourse(id)}>
-                <div className="row">
+                <div className="row" style={{alignItems:"start"}}>
                   <div className="col-md-5">
                   <img src={cardimg} width={200} height={"auto"} style={{marginTop:"3px", marginLeft:"3px", borderRadius:"8px"}}/>
                 </div>
                 <div className="col-md-8 rightCard">
-                  {/* <Typography>hfdghjsdikjhhhhhhhhhhhhhhhhhhhhhhhhhhh</Typography> */}
+                  <Typography className="courseHeader">{item.course_name}</Typography>
+                 <Tooltip title={item.description}> <Typography className="wrap-text-50" >{item.description}</Typography></Tooltip>
+                 <div className="duration"><AccessTimeIcon className="clock"/> <Typography className="durationText">43 hours</Typography></div>
+                 <div className="duration" style={{marginTop:"10%"}}><Typography className="offerPrice"> ₹ {item.offer_price} </Typography><Typography className="durationText price">{item.price}</Typography></div>
+               
                 </div>
                 <div className="col-md-2 lastCard">
                   <Box className="flag"></Box>
