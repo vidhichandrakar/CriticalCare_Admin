@@ -38,6 +38,7 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import "react-toastify/dist/ReactToastify.css";
 import { visuallyHidden } from "@mui/utils";
 import { redirectRestriction } from "../../../Util/RedirectRestriction";
+import Header from "../../Courses/Header";
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -260,12 +261,13 @@ const User = () => {
 
   return (
     <div className="grid-container">
-      <SideBar />
-      <div className=" m20">
-        <CourseHeader
+      <Header
           Heading={"Users (357)"}
           subHeading={"View, Filter & Manage all your users"}
         />
+      <SideBar />
+      <div className="main-container">
+        
         <LoaderComponent loaderState={loaderState} />
         <div className="searchnfilter">
           <SearchBar mt="2%" placeholder="Search by name" />

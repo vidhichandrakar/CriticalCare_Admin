@@ -16,6 +16,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import RajTest from "../../AdminDashboardMain/RajTest";
+import Header from "../../Courses/Header";
 
 const Analytics = () => {
   const [defautlValueDate, setDefaultValueDate] = useState("Last 7 days");
@@ -44,14 +45,15 @@ const Analytics = () => {
   const handleCustumDate = (e) => {};
   return (
     <div className="grid-container">
-      <SideBar />
-      <main className="main-container m20">
-        <CourseHeader
+       <Header
           Heading={"Analytics"}
           subHeading={
             "Analyze your sales and traffic to know your brand’s growth"
           }
         />
+      <SideBar />
+      <main className="main-container">
+       
         <div>
           <div style={{ display: "flex", flexDirection: "row" }}>
             <FormControl

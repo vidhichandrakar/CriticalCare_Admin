@@ -41,6 +41,7 @@ import TableFooter from "@mui/material/TableFooter";
 import TablePagination from "@mui/material/TablePagination";
 import LoaderComponent from "../../../Util/LoaderComponent";
 import { redirectRestriction } from "../../../Util/RedirectRestriction";
+import Header from "../../Courses/Header";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -239,12 +240,13 @@ const Testimonial = () => {
 
   return (
     <div className="grid-container">
-      <SideBar />
-      <div className=" m20">
-        <CourseHeader
+           <Header
           Heading={"Testimonial"}
           subHeading={"Only published testiimonial are showm here"}
         />
+      <SideBar />
+      <div className=" main-container">
+   
         <LoaderComponent loaderState={loaderState} />
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">

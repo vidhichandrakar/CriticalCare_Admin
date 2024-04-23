@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: row;
   /* margin-left: -2%; */
-  background-color: #ffffff;
+  background-color: #c70f0f;
   width: 81.5vw;
   position: fixed;
   z-index: 11111111111;
@@ -18,11 +18,23 @@
   border-left: 1px solid #eee;
   border-bottom: 1px solid #eee;
 }
+.header {
+  grid-area: header;
+  /* height: 76px; */
+  display: flex;
+  align-items: center;
+  width: 93%;
+  justify-content: right;
+  padding: 0 30px 0 30px;
+  background-color: red;
+  margin-left: 1%;
+}
+
 .subHeaderMycourses{
   width: 80vw;
   padding: 1%;
   /* margin: 1%; */
-  margin-top: 7%;
+  margin-top: 1%;
   
   margin-left: 8px;
   box-shadow: 1px 1px 2px 0.5px #ededed;
@@ -171,6 +183,19 @@
   height: 15vh;
   margin-right: 1%;
   /* margin-left: 3%; */
+}
+.vertical{
+  writing-mode:tb-rl;
+  -webkit-transform:rotate(90deg);
+  -moz-transform:rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform:rotate(90deg);
+  transform: rotate(0deg);
+  white-space:nowrap;
+  display:block;
+  bottom:0;
+  width:20px;
+  height:50px;
 }
 .JustfiSB{
   justify-content: space-between;

@@ -36,7 +36,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                
                 </div>
                 <div className="col-md-2 lastCard">
-                  <Box className="flag"></Box>
+                  <Box className="flag vertical"> Publish</Box>
                 </div>
                 </div>
               </div>

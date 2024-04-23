@@ -28,6 +28,7 @@ import { redirectRestriction } from "../../../Util/RedirectRestriction";
 import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
+import Header from "../../Courses/Header";
 
 const Trics1FreeMockTest = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -113,17 +114,18 @@ const Trics1FreeMockTest = () => {
   };
   return (
     <div className="grid-container">
+        <Header
+            Heading={capitalizeFirstLetter(courseData?.course_name)}
+          />
       <SideBar />
-      <div className="mainBox">
+      <div className="main-container ">
         <div className="singleRow">
           <Link to="/YourCourses">
             <Button className="backToCourses">
               <ArrowBackIosNewIcon />
             </Button>
           </Link>
-          <CourseHeader
-            Heading={capitalizeFirstLetter(courseData?.course_name)}
-          />
+        
         </div>
         <div className="another-main-container">
           <div className="completeTricsBox">

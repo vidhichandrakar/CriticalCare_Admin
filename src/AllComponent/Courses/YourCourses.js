@@ -60,12 +60,13 @@ const YourCourses = () => {
 
   return (
     <div className="grid-container">
-      <SideBar />
-      <div className="main-container">
-        <Header
+      <Header
           Heading={"My Courses"}
           subHeading={"Add/View courses of your brand"}
         />
+      <SideBar />
+      <div className="main-container">
+        
         <LoaderComponent loaderState={loaderState} />
         <Box className="subHeaderMycourses">
         <SearchBar  placeholder="Search by name" />

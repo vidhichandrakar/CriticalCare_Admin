@@ -55,6 +55,7 @@ import LoaderComponent from "../../../../Util/LoaderComponent";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { redirectRestriction } from "../../../../Util/RedirectRestriction";
+import Header from "../../../Courses/Header";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -266,12 +267,13 @@ const TestPortal = () => {
   };
   return (
     <div className="grid-container">
-      <SideBar />
-      <div className=" m20">
-        <CourseHeader
+      <Header
           Heading={"Test Portal"}
           subHeading={"Only published test are shown here"}
         />
+      <SideBar />
+      <div className="main-container">
+        
         <LoaderComponent loaderState={loaderState} />
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">
