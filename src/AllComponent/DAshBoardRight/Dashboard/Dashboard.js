@@ -18,12 +18,14 @@ const Dashboard = ({ OpenSidebar }) => {
   return (
     <div className="grid-container">
       <SideBar />
+     
       <main className="mainBox">
-        <div className="DashBoardMAinBox">
-          <Header
+      <Header
             Heading={"Hi 360 Critical Care,"}
             subHeading={"Welcome to your Dashboard"}
           />
+        <div className="DashBoardMAinBox">
+          
           <div className="AdditionalBox ">
             <h1 className="TextHeading">Additional Offerings</h1>
             <div className="Additionalmain-cards">
