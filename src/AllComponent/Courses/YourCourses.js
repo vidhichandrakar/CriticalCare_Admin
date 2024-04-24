@@ -87,8 +87,16 @@ const YourCourses = () => {
             userData={userData}
             Data={YourCoursesCardData}
           />
+         
         </div>
+        <div>
+            <Box sx={{top:"88%", position:"absolute", zIndex:1111111111111, right:0}} className="addCircle" onClick={()=>navigate("/CreateCourses")}>
+             <AddRoundedIcon className="addIcon"/>
+
+            </Box>
+          </div>
       </main>
+     
       <ToastContainer />
     </div>
   );

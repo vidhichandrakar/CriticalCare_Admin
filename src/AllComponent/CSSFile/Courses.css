@@ -84,6 +84,31 @@
   color:  #18568f;
   background-color: #d8ecffce ;
 }
+.addIcon{
+  font-size: 2.8rem !important;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    margin-left: 11%;
+    margin-top: 8%;
+    
+    font-weight: 300 !important;
+}
+.addCircle{
+  width: 58px;
+  height: 52px;
+  border-radius: 50%;
+  border:2px solid #dbfef9;
+  color:  #004e42;
+  background-color: #c9fef6 ;
+  opacity:0.9;
+  margin-right: 3%;
+}
+.addCircle:hover{
+  background-color: #9af1e4 ;
+  cursor: pointer;
+}
 .headerText{
   font-size: 1.4em !important;
   font-weight: 550 !important;
