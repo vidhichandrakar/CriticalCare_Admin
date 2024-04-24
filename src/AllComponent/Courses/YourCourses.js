@@ -65,7 +65,7 @@ const YourCourses = () => {
           subHeading={"Add/View courses of your brand"}
         />
       <SideBar />
-      <div className="main-container">
+      <main className="main-container">
         
         <LoaderComponent loaderState={loaderState} />
         <Box className="subHeaderMycourses">
@@ -87,8 +87,16 @@ const YourCourses = () => {
             userData={userData}
             Data={YourCoursesCardData}
           />
+         
         </div>
-      </div>
+        <div>
+            <Box sx={{top:"88%", position:"absolute", zIndex:1111111111111, right:0}} className="addCircle" onClick={()=>navigate("/CreateCourses")}>
+             <AddRoundedIcon className="addIcon"/>
+
+            </Box>
+          </div>
+      </main>
+     
       <ToastContainer />
     </div>
   );
