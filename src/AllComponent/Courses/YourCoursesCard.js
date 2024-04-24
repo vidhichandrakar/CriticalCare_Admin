@@ -26,8 +26,16 @@ const YourCoursesCard = ({ allCourses, userData }) => {
               <div className=" container courseCard" onClick={() => handleCourse(id)}>
                 <div className="row" style={{alignItems:"start"}}>
                   <div className="col-md-5">
-                  <img src={cardimg} width={200} height={"auto"} style={{marginTop:"3px", marginLeft:"3px", borderRadius:"8px"}}/>
-                </div>
+                  {item.thumbnail_path ? (
+                     
+                      <img src={`data:image/png;base64,${item.thumbnail_path}`} width={180} height={150} style={{marginTop:"3px", marginLeft:"3px", borderRadius:"8px"}}/>
+                
+                    ) : (
+                      <img src={yellowEnvlope} width={180} height={150} style={{marginTop:"3px", marginLeft:"3px", borderRadius:"8px"}}/>
+                
+                    )}
+
+                 </div>
                 <div className="col-md-8 rightCard">
                   <Typography className="courseHeader">{item.course_name}</Typography>
                  <Tooltip title={item.description}> <Typography className="wrap-text-50" >{item.description}</Typography></Tooltip>
@@ -36,7 +44,16 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                
                 </div>
                 <div className="col-md-2 lastCard">
-                  <Box className="flag vertical"> Publish</Box>
+                {item.is_publish === "published" ? (
+                    <div className="flag vertical">
+                      {/* <StarRateIcon className="starIcon" /> */}
+                      Publish
+                    </div>
+                  ) : (
+                    <p className=" flag vertical Npublish">Not Publish</p>
+                  )}
+
+                  {/* <Box className="flag vertical"> Publish</Box> */}
                 </div>
                 </div>
               </div>

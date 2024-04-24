@@ -65,7 +65,7 @@ const YourCourses = () => {
           subHeading={"Add/View courses of your brand"}
         />
       <SideBar />
-      <div className="main-container">
+      <main className="main-container">
         
         <LoaderComponent loaderState={loaderState} />
         <Box className="subHeaderMycourses">
@@ -88,7 +88,7 @@ const YourCourses = () => {
             Data={YourCoursesCardData}
           />
         </div>
-      </div>
+      </main>
       <ToastContainer />
     </div>
   );
