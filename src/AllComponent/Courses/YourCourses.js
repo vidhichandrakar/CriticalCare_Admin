@@ -60,12 +60,13 @@ const YourCourses = () => {
 
   return (
     <div className="grid-container">
-      <SideBar />
-      <div className="main-container">
-        <Header
+      <Header
           Heading={"My Courses"}
           subHeading={"Add/View courses of your brand"}
         />
+      <SideBar />
+      <main className="main-container">
+        
         <LoaderComponent loaderState={loaderState} />
         <Box className="subHeaderMycourses">
         <SearchBar  placeholder="Search by name" />
@@ -86,8 +87,16 @@ const YourCourses = () => {
             userData={userData}
             Data={YourCoursesCardData}
           />
+         
         </div>
-      </div>
+        <div>
+            <Box sx={{top:"88%", position:"absolute", zIndex:1111111111111, right:0}} className="addCircle" onClick={()=>navigate("/CreateCourses")}>
+             <AddRoundedIcon className="addIcon"/>
+
+            </Box>
+          </div>
+      </main>
+     
       <ToastContainer />
     </div>
   );

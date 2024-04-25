@@ -32,9 +32,12 @@ body {
   grid-template-columns: 260px 1fr;
   grid-template-rows: 0.2fr 3fr;
   grid-template-areas:
-    "sidebar main main main"
-    "sidebar main main main";
+    /* "sidebar main main main"
+    "sidebar main main main"; */
+    'sidebar header header header'
+      'sidebar main main main';
   height: 100vh;
+  
 }
 
 /* Sidebar  */
@@ -171,6 +174,8 @@ body {
 }
 .main-container {
   grid-area: main;
+  overflow-y: auto;
+  margin-left: 1%;
 }
 .margin20 {
   margin: 20px;
@@ -317,7 +322,7 @@ body {
 /* START OF USER  */
 
 .m20 {
-  margin: 30px;
+  margin-top: 30px;
 }
 .searchnfilter {
   display: flex;
@@ -1018,11 +1023,11 @@ body {
 }
 
 
-
+/* 
 .eachBox:hover{
 }
 
 .eachBox .designingIcons:hover{
 }
 .designingIconsLogout:hover{
-}
+} */

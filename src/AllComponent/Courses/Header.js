@@ -46,7 +46,8 @@ const Header = ({ Heading, subHeading }) => {
   };
 
   return (
-    <Box className="HeaderBox">
+    // <Box className="HeaderBox">
+    <Box className="header">
       <Box className="HeaderLeft">
         <Typography className="headerText">{Heading}</Typography>
         {/* <Typography className="subHeader">{subHeading}</Typography> */}

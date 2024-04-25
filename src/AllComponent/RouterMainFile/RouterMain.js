@@ -1,6 +1,7 @@
 import React from 'react'
 import {Routes, Route} from 'react-router-dom';
 import Dashboard from '../DAshBoardRight/Dashboard/Dashboard';
+import MainComponent from '../DAshBoardRight/Dashboard/ṂainComponent';
 import User from '../DAshBoardRight/People/User';
 import Transaction from '../DAshBoardRight/Analytics/Transaction';
 import MainCourses from '../Courses/MainCourses.component';
@@ -22,6 +23,7 @@ const RouterMain = () => {
   return (
     <div>
      <Routes>
+            {/* <Route exact path="/Dashboard" element= {<MainComponent />}> </Route> */}
             <Route exact path="/Dashboard" element= {<Dashboard />}> </Route>
             <Route exact path="/admin" element= {<LoginPage/>}> </Route>
             <Route exact path="/CreateCourses" element= {<CreateCourses />}> </Route>

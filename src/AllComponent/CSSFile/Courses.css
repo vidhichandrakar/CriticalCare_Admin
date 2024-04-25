@@ -10,18 +10,33 @@
   display: flex;
   flex-direction: row;
   /* margin-left: -2%; */
-  background-color: #ffffff;
-  width: 81.5vw;
+  background-color: #fff;
+  width: 82.5vw;
+  position: fixed;
+  z-index: 11111111111;
   padding: 7px;
   border-left: 1px solid #eee;
   border-bottom: 1px solid #eee;
 }
+.header {
+  grid-area: header;
+  /* height: 76px; */
+  display: flex;
+  align-items: center;
+  width: 99%;
+  justify-content: right;
+  padding: 7px 12px 7px 0px;
+  background-color: #fff;
+  /* margin-left: 1%; */
+}
+
 .subHeaderMycourses{
   width: 80vw;
   padding: 1%;
   /* margin: 1%; */
   margin-top: 1%;
-  margin-left: 8px;
+  
+  /* margin-left: px; */
   box-shadow: 1px 1px 2px 0.5px #ededed;
   background-color: #ffffff;
 }
@@ -69,6 +84,31 @@
   color:  #18568f;
   background-color: #d8ecffce ;
 }
+.addIcon{
+  font-size: 2.8rem !important;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+    margin-left: 11%;
+    margin-top: 8%;
+    
+    font-weight: 300 !important;
+}
+.addCircle{
+  width: 58px;
+  height: 52px;
+  border-radius: 50%;
+  border:2px solid #dbfef9;
+  color:  #004e42;
+  background-color: #c9fef6 ;
+  opacity:0.9;
+  margin-right: 3%;
+}
+.addCircle:hover{
+  background-color: #9af1e4 ;
+  cursor: pointer;
+}
 .headerText{
   font-size: 1.4em !important;
   font-weight: 550 !important;
@@ -91,18 +131,58 @@
 
 .courseCard{
   background-color: #b22626;
-  /* margin-left:2%; */
+  /* margin-left: 2%; */
   border-radius: 10px;
-
   box-shadow: 1px 1px 2px 0.5px #ededed;
   background-color: #ffffff;
-  width: 98% !important;
+  width: 93% !important;
+  padding: 7px;
 }
 .rightCard{
-  margin: 1%;
+  margin-left: 3%;
   width:100%;
-  /* background-color: red; */
-  padding:15%;
+  margin-top: 3%;
+}
+.courseHeader{
+  font-size: 1.2rem !important;
+  font-family: sans-serif !important;
+  color: #18568f !important;
+}
+.duration{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  /* margin-top: 1%; */
+}
+.clock{
+  font-size: 1.1rem !important;
+  color: #199884;
+  margin-right: 1%;
+  text-align: center;
+  align-items: center;
+  margin-top: 3px;
+}
+.offerPrice{
+  font-size: 1rem !important;
+  margin-left: 1px !important;
+}
+.price{
+  text-decoration: line-through;
+}
+.durationText{
+  margin-left: 2% !important;
+  font-size: 0.9rem !important;
+  margin-top: 2px !important;
+  color: #928b8b;
+}
+.wrap-text-50 {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 19ch;
+  color: #918d8d;
+  font-size: 0.9rem !important;
 }
 .lastCard{
   width:20%;
@@ -110,7 +190,7 @@
 .flag{
  
  
-  background-color: #0ff55c;
+  background-color: #199884;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -128,6 +208,20 @@
   height: 15vh;
   margin-right: 1%;
   /* margin-left: 3%; */
+}
+.vertical{
+  writing-mode:tb-rl;
+  -webkit-transform:rotate(90deg);
+  -moz-transform:rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform:rotate(90deg);
+  transform: rotate(0deg);
+  white-space:nowrap;
+  display:block;
+  bottom:0;
+  width:20px;
+  height: 15vh;
+  text-align: center;
 }
 .JustfiSB{
   justify-content: space-between;

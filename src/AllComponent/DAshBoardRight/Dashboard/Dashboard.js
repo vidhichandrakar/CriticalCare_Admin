@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../../Courses/CoursesHeader";
+// import Header from "../../Courses/CoursesHeader";
+import Header from "../../Courses/Header";
 import { AdditionalData, OfferData } from "../../../Data/JsonData";
 import AdditionalCard from "./AdditionalCard";
 import OfferCard from "./OfferCard";
@@ -17,13 +18,17 @@ const Dashboard = ({ OpenSidebar }) => {
   }, []);
   return (
     <div className="grid-container">
-      <SideBar />
-      <main className="mainBox">
-        <div className="DashBoardMAinBox">
-          <Header
+      <Header
             Heading={"Hi 360 Critical Care,"}
             subHeading={"Welcome to your Dashboard"}
           />
+      <SideBar />
+      
+      <main className="main-container">
+ 
+         
+        <div className="DashBoardMAinBox">
+          
           <div className="AdditionalBox ">
             <h1 className="TextHeading">Additional Offerings</h1>
             <div className="Additionalmain-cards">
