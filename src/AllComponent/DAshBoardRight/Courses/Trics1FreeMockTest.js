@@ -29,10 +29,16 @@ import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
 import Header from "../../Courses/Header";
+import DialogTitle from "@mui/material/DialogTitle";
+import CloseIcon from "@mui/icons-material/Close";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
 
-const Trics1FreeMockTest = () => {
+const Trics1FreeMockTest = ({ onDelete }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [courseData, setCourseData] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
   let location = useLocation();
   const courseId = location.state?.id;
   const open = Boolean(anchorEl);
@@ -40,6 +46,19 @@ const Trics1FreeMockTest = () => {
   const navigate = useNavigate();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleDeleteClick = () => {
+    setIsOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    handleDeleteCourse();
+    setIsOpen(false);
+  };
+
+  const handleCancelDelete = () => {
+    setIsOpen(false);
   };
 
   const handleClose = () => {
@@ -230,7 +249,7 @@ const Trics1FreeMockTest = () => {
                   Edit
                 </MenuItem>
                 <MenuItem
-                  onClick={() => handleDeleteCourse(id)}
+                  onClick={() => handleDeleteClick()}
                   value={20}
                   className="greyPara"
                 >
@@ -247,8 +266,48 @@ const Trics1FreeMockTest = () => {
                     ? "UnPublish"
                     : "Publish"}
                 </MenuItem>
-                <IconButton aria-label="add to favorites"></IconButton>
+              <IconButton aria-label="add to favorites"></IconButton>
               </Popover>
+             
+              {/* {isOpen && ( */}
+     
+        
+           <Dialog
+        open={isOpen}
+        onClose={handleCancelDelete}
+        PaperProps={{
+          component: "form",
+          onSubmit: (event) => {
+            event.preventDefault();
+            const formData = new FormData(event.currentTarget);
+            const formJson = Object.fromEntries(formData.entries());
+            const email = formJson.email;
+            handleCancelDelete();
+          },
+        }}
+        className="configurationDialog"
+      >
+        <DialogTitle style={{ display: "flex", flexDirection: "row" }}>
+          <Typography style={{ width: "100%", fontSize: "1.3rem" }}>
+          Confirm Delete  
+          </Typography>{" "}
+         
+          <CloseIcon className="closeHover" onClick={() => handleCancelDelete()} />
+        </DialogTitle>
+
+        <DialogContent>
+        <Typography style={{ width: "100%", fontSize: "1.3rem" }}>
+        Are you sure you want to delete?
+          </Typography>{" "}
+        
+        </DialogContent>
+        <DialogActions>
+        <Button onClick={handleConfirmDelete} variant="outlined">Yes</Button>
+        <Button onClick={handleCancelDelete} variant="outlined">No</Button>
+        </DialogActions>
+      </Dialog>
+        
+      {/* )} */}
             </div>
           </div>
         </div>
