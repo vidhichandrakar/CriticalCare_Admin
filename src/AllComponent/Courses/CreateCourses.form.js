@@ -19,6 +19,7 @@ import { useDropzone } from "react-dropzone";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
 import { redirectRestriction } from "../../Util/RedirectRestriction";
+import InputLabel from '@mui/material/InputLabel';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -308,6 +309,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
             })
           )}
           <FormControl sx={{ m: 1, minWidth: 240 }} className="categorySelect">
+          <InputLabel >Select Category</InputLabel>
             <Select
               label="Category"
               value={storedBasicInfo?.Category}
@@ -333,6 +335,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
             })
           )}
           <FormControl sx={{ m: 1, minWidth: 240 }} className="categorySelect">
+          <InputLabel >Select Sub Category</InputLabel>
             <Select
               label="Sub Category"
               value={storedBasicInfo?.subCategory}

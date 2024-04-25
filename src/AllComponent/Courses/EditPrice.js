@@ -16,6 +16,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo/DemoContainer";
 import moment from "moment/moment";
+import DurationConfiguration from "./DurationConfiguration";
 
 const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const [editPriceData, setEditPriceData] = useState({
@@ -93,6 +94,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   };
   return (
     <div className="formMain">
+      <DurationConfiguration />
       <Box sx={{ mt: "5%" }} className="editFirstBox">
         <Box>
           {CommonTypography(
