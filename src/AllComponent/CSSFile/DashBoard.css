@@ -111,6 +111,7 @@ body {
   cursor: pointer;
   border-right: 3px solid #0075ff !important;
   color: #0075ff !important;
+  border-radius: 0 !important;
 }
 .hoverrr2{
   background-color: #E5F7FD !important;
@@ -182,6 +183,10 @@ body {
 }
 /*End Main  */
 
+.css-3bmhjh-MuiPaper-root-MuiPopover-paper{
+       overflow-x: visible !important;
+       overflow-y: visible !important;
+}
 /* Start Dashborad */
 
 .Head {
@@ -980,7 +985,7 @@ body {
 .selectDesign hoverrr{
   padding: 5px 5px !important;
   background-color: #0075FF !important;
-  border-radius: 30px !important;
+  /* border-radius: 30px !important; */
 }
 .designingIcons{
   margin-right: 7%;

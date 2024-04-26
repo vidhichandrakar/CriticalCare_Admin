@@ -22,12 +22,27 @@ import { Link } from "react-router-dom";
 import { DialogContent } from '@mui/material';
 import Divider from '@mui/material/Divider'; 
 import PersonIcon from '@mui/icons-material/Person';
+import Popover from "@mui/material/Popover";
+
 const Header = ({ Heading, subHeading }) => {
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const [value, setValue] = useState("");
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+
 
   const [state, setState] = useState({
     left: false,
   });
+  
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -46,35 +61,28 @@ const Header = ({ Heading, subHeading }) => {
   };
 
   return (
-    // <Box className="HeaderBox">
     <Box className="header">
       <Box className="HeaderLeft">
         <Typography className="headerText">{Heading}</Typography>
-        {/* <Typography className="subHeader">{subHeading}</Typography> */}
       </Box>
       <Box className="HeaderRight">
-        <Box className="logoCircle">
+        <Box  onClick={handleClick} className="logoCircle">
         <PersonIcon className="logoDesign"/>
         </Box>
       </Box>
-      {/* <Box className="HeaderRight">
-        <FormControl sx={{ m: 1, minWidth: 240 }}>
-          <Select
-            className="selectDesign"
-            displayEmpty
-            renderValue={() => {
-              return <em className="labelDesign">360 Critcial Care</em>;
-            }}
-            inputProps={{ "aria-label": "Without label" }}
-            startAdornment={
-              <div className="logoDesign">
-                <Typography className="logoText">3CC</Typography>
-              </div>
-            }
-            value={value}
-          >
-
-            <MenuItem
+          <Popover
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                sx={{ mt: "5px" }}
+                value={value}
+              > 
+               <MenuItem
               className="selectDesign hoverrr"
               value={"Profile"}
               onClick={toggleDrawer("right", true)}
@@ -103,23 +111,18 @@ const Header = ({ Heading, subHeading }) => {
             <Divider/>
 
             <Link to="/admin" className="textDecorationDD">
-              {" "}
               <MenuItem
                 className="selectDesign hoverrr"
                 value={"Profileik"}
                 onClick={handleLogout}
               >
-                {/* <Box className="eachBoxLogout"> */}
-                {/* <LogoutTwoToneIcon className="designingIconsLogout" />
+                <Box className="eachBoxLogout">
+                 <LogoutTwoToneIcon className="designingIconsLogout" />
                 <span className="ccLogout">Log Out</span>
-                {/* </Box> */}
-              {/* </MenuItem>
-            </Link> */}
-
-          {/* </Select>
-        </FormControl> */}
-
-        {/* <SwipeableDrawer
+                </Box> 
+              </MenuItem>
+            </Link>
+            <SwipeableDrawer
           anchor={"right"}
           open={state["right"]}
           onClose={toggleDrawer("right", false)}
@@ -127,9 +130,9 @@ const Header = ({ Heading, subHeading }) => {
         >
           {ProfileList("right")}
 
-          {/* <List /> */}
-        {/* </SwipeableDrawer> */}
-      {/* // </Box> */} 
+      {/* <ProfileList /> */}
+        </SwipeableDrawer> 
+              </Popover>
     </Box>
   );
 };

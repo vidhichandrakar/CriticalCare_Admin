@@ -1,7 +1,7 @@
 .selectDesign {
   background-color: white !important;
   text-align: left;
-  border-radius: 15px !important;
+  /* border-radius: 15px !important; */
 }
 .DatePicker{
   display: flex;
