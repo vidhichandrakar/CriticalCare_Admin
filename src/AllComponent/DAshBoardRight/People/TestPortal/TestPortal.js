@@ -56,6 +56,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { redirectRestriction } from "../../../../Util/RedirectRestriction";
 import Header from "../../../Courses/Header";
+import { DailogBox } from "../../../../Util/CommonFields";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -150,6 +151,7 @@ const TestPortal = () => {
     hours: "",
   });
   const [loaderState, setLoaderState] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -175,6 +177,19 @@ const TestPortal = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+  const handleDeleteClick = () => {
+    handleClose();
+    setIsOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    handleDelete();
+    setIsOpen(false);
+  };
+
+  const handleCancelDelete = () => {
+    setIsOpen(false);
   };
 
   const handleDelete = () => {
@@ -446,7 +461,7 @@ const TestPortal = () => {
                 >
                   <Typography
                     className="redDeleteofTestPortal"
-                    onClick={handleDelete}
+                    onClick={handleDeleteClick}
                   >
                     {" "}
                     <DeleteIcon className="deleteIcon" /> Delete{" "}
@@ -487,6 +502,12 @@ const TestPortal = () => {
         </Paper>
       </div>
       <ToastContainer />
+      <DailogBox
+          isOpen={isOpen}
+          handleConfirmDelete={handleConfirmDelete}
+          handleDeleteClick={handleDeleteClick}
+          handleCancelDelete={handleCancelDelete}
+        />
     </div>
   );
 };

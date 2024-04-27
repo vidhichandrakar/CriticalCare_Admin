@@ -1,5 +1,10 @@
 import { Button, MenuItem, Select, TextField, Typography } from "@mui/material";
-import React from "react";
+import React,{useState} from "react";
+import DialogTitle from "@mui/material/DialogTitle";
+import CloseIcon from "@mui/icons-material/Close";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
 
 export const commonTextField = (
   { className, inputClassName, labels },
@@ -80,3 +85,45 @@ export const commonButton = ({ handleTrackerPage, className, label }) => {
     </Button>
   );
 };
+
+export const DailogBox = ({isOpen, handleConfirmDelete, handleDeleteClick, handleCancelDelete}) => {
+  
+  return (
+    <Dialog
+    open={isOpen}
+    onClose={handleCancelDelete}
+    PaperProps={{
+      component: "form",
+      onSubmit: (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        const formJson = Object.fromEntries(formData.entries());
+        const email = formJson.email;
+       handleCancelDelete();
+      },
+    }}
+    className="configurationDialog"
+  >
+    <DialogTitle style={{ display: "flex", flexDirection: "row" }}>
+      <Typography style={{ width: "100%", fontSize: "1.3rem" }}>
+      Confirm Delete  
+      </Typography>{" "}
+     
+      <CloseIcon className="closeHover" onClick={() => handleCancelDelete()} />
+    </DialogTitle>
+
+    <DialogContent>
+    <Typography style={{ width: "100%", fontSize: "1.3rem" }}>
+    Are you sure you want to delete?
+      </Typography>{" "}
+    
+    </DialogContent>
+    <DialogActions>
+    <Button onClick={handleConfirmDelete} variant="outlined">Yes</Button>
+    <Button onClick={handleCancelDelete} variant="outlined">No</Button>
+    </DialogActions>
+  </Dialog>
+  );
+};
+
+
