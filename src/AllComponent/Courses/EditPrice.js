@@ -168,22 +168,21 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
     }
   };
 
-  const handleCancelAccord = ()=>{
-    // let cancelValues = [...editPriceData];
-    // setEditPriceData({
-    //   duration: "399",
-    //   years: { id: 1, label: "Days(s)" },
-    //   regularPrice: "",
-    //   offerPrice: "10245",
-    //   startDate: "",
-    //   endDate: "",
-    // });
-    // setEditPriceData(cancelValues);
-
-  }
-  const handleDelete=()=>{
-    
-  }
+  const handleCancelAccord = (index) => {
+    // console.log(index);
+    if (index === expanded) {
+      setExpanded(null);
+    }
+  };
+  const handleDelete = (index) => {
+    console.log(index);
+    if (index === expanded) {
+      setExpanded(null);
+    }
+    setEditPriceData((prevItems) => {
+      return prevItems.filter((item, indexRemove) => indexRemove !== index);
+    });
+  };
   return (
     <div className="formMain">
       <DurationConfiguration
@@ -200,7 +199,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
             sx={{ mt: 5 }}
             style={{ borderRadius: "15px" }}
             expanded={expanded === index}
-            onChange={() => handleExpanded(index)}
+            // onChange={() => handleExpanded(index)}
           >
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
@@ -218,14 +217,21 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                 {/* <Stack spacing={2} direction="row" sx={{ml:35}}> */}
 
                 <Stack spacing={2} direction="row" sx={{ ml: 35 }}>
-                  {expanded !== null && expanded===index? (
+                  {expanded !== null && expanded === index ? (
                     ""
                   ) : (
                     <>
-                      <Button color="error" onClick={handleDelete} startIcon={<DeleteIcon />}>
+                      <Button
+                        color="error"
+                        onClick={() => handleDelete(index)}
+                        startIcon={<DeleteIcon />}
+                      >
                         Delete
                       </Button>
-                      <Button color="primary">
+                      <Button
+                        color="primary"
+                        onClick={() => handleExpanded(index)}
+                      >
                         <BorderColorIcon /> Edit
                       </Button>
                     </>
@@ -235,7 +241,11 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
             </AccordionSummary>
             <AccordionDetails>
               <div className="accoridanBtn">
-                <Button variant="text" sx={{ mr: 2 }} onClick={handleCancelAccord}>
+                <Button
+                  variant="text"
+                  sx={{ mr: 2 }}
+                  onClick={() => handleCancelAccord(index)}
+                >
                   Cancel
                 </Button>
                 <Button variant="contained">Save</Button>
