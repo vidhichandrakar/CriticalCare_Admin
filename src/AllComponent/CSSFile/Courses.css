@@ -534,3 +534,10 @@
 .closeHover:hover{
   cursor: pointer;
 }
+
+.accoridanBtn{
+  position:absolute;
+  margin-right: 25px;
+  right: 0;
+  margin-bottom: 30px;
+}

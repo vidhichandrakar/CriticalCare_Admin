@@ -5,9 +5,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { CommonTypography } from "../../Util/CommonFields";
-import InputLabel from "@mui/material/InputLabel";
-import { useState } from "react";
 import { Typography } from "@mui/material";
+import "../CSSFile/Duration.css"
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -19,12 +18,7 @@ const MenuProps = {
     },
   },
 };
-const DurationConfiguration = () => {
-  const [selectDurationValue, setSelectedDurationValue] = useState();
-  const handleDuration = (e) => {
-    console.log(e.target.value);
-    setSelectedDurationValue(e.target.value);
-  };
+const DurationConfiguration = ({handleDuration,selectDurationValue}) => {
   return (
     <div>
       <Box>
@@ -34,19 +28,21 @@ const DurationConfiguration = () => {
             className: "editFirstText",
           })
         )}
-        <FormControl sx={{ m: 1, minWidth: 550 }} className="categorySelect">
-          {/* <InputLabel htmlFor="grouped-native-select">Select Duration Type</InputLabel> */}
+        <FormControl sx={{ m: 1, minWidth: 630 }} className="categorySelect">
+          {/* {console.log(
+            "selectDurationValue 44",
+            selectDurationValue !== "",
+            selectDurationValue
+          )} */}
           <Select
-            // displayEmpty
-            value={selectDurationValue}
+            value={
+              selectDurationValue ? selectDurationValue : `Select Duration Type`
+            }
             renderValue={() => {
-              return (
-                <Typography>
-                  {/* {"Select Duration Type"} */}
-                  {selectDurationValue
-                    ? selectDurationValue
-                    : "Select Duration Type"}
-                </Typography>
+              return selectDurationValue !== "" ? (
+                <Typography>{selectDurationValue}</Typography>
+              ) : (
+                <Typography> Select Duration Type </Typography>
               );
             }}
             input={<OutlinedInput />}
@@ -54,6 +50,7 @@ const DurationConfiguration = () => {
             inputProps={{ "aria-label": "Without label" }}
             onChange={handleDuration}
           >
+            {/* {console.log("selectDurationValue 22", selectDurationValue)} */}
             <MenuItem value={"Single Validity"}>Single Validity</MenuItem>
             <MenuItem value={"Multiple Validity"}>Multiple Validity</MenuItem>
             <MenuItem value={"Lifetime Validity"}>Lifetime Validity</MenuItem>
@@ -61,7 +58,17 @@ const DurationConfiguration = () => {
           </Select>
         </FormControl>
       </Box>
-      <div>Error msg</div>
+      <Typography className="ErrorDisplay">
+        {selectDurationValue === "Single Validity"
+          ? "Course will expire after a period of time for all students based on their purchase date"
+          : selectDurationValue === "Multiple Validity"
+          ? "Student will have an option to choose from multiple pricing plans during purchase"
+          : selectDurationValue === "Lifetime Validity"
+          ? "Course will never expire for students"
+          : selectDurationValue === "Course Expiry Date"
+          ? "Course will expire for all students after your selected course expiry date"
+          : null}
+      </Typography>
     </div>
   );
 };

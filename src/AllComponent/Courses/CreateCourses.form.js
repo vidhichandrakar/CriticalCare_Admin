@@ -309,7 +309,6 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
             })
           )}
           <FormControl sx={{ m: 1, minWidth: 240 }} className="categorySelect">
-          <InputLabel >Select Category</InputLabel>
             <Select
               label="Category"
               value={storedBasicInfo?.Category}
