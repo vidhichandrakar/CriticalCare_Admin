@@ -42,6 +42,7 @@ import TablePagination from "@mui/material/TablePagination";
 import LoaderComponent from "../../../Util/LoaderComponent";
 import { redirectRestriction } from "../../../Util/RedirectRestriction";
 import Header from "../../Courses/Header";
+import { DailogBox } from "../../../Util/CommonFields";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -138,6 +139,7 @@ const Testimonial = () => {
   const records = userData.slice(firstIndex, lastIndex);
   const npage = Math.ceil(userData.length / recordsPerPage);
   const numbers = [...Array(npage + 1).keys()].slice(1);
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -178,6 +180,19 @@ const Testimonial = () => {
     setAnchorEl(null);
   };
 
+  const handleDeleteClick = () => {
+    handleClose();
+    setIsOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    handleDelete();
+    setIsOpen(false);
+  };
+
+  const handleCancelDelete = () => {
+    setIsOpen(false);
+  };
   const handleDelete = () => {
     setLoaderState(true);
     const userId = openId;
@@ -394,7 +409,7 @@ const Testimonial = () => {
                 >
                   <Typography
                     className="redDeleteofTestPortal"
-                    onClick={handleDelete}
+                    onClick={handleDeleteClick}
                   >
                     {" "}
                     <DeleteIcon className="deleteIcon" /> Delete{" "}
@@ -428,6 +443,12 @@ const Testimonial = () => {
           </TableContainer>
         </Paper>
       </div>
+      <DailogBox
+          isOpen={isOpen}
+          handleConfirmDelete={handleConfirmDelete}
+          handleDeleteClick={handleDeleteClick}
+          handleCancelDelete={handleCancelDelete}
+        />
     </div>
   );
 };

@@ -23,7 +23,7 @@ import { Link } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { capitalizeFirstLetter } from "../../../Util/CommonFields";
+import { DailogBox, capitalizeFirstLetter } from "../../../Util/CommonFields";
 import { redirectRestriction } from "../../../Util/RedirectRestriction";
 import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -50,6 +50,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
 
   const handleDeleteClick = () => {
     setIsOpen(true);
+    console.log("workingg");
   };
 
   const handleConfirmDelete = () => {
@@ -133,9 +134,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
   };
   return (
     <div className="grid-container">
-        <Header
-            Heading={capitalizeFirstLetter(courseData?.course_name)}
-          />
+      <Header Heading={capitalizeFirstLetter(courseData?.course_name)} />
       <SideBar />
       <div className="main-container ">
         <div className="singleRow">
@@ -144,7 +143,6 @@ const Trics1FreeMockTest = ({ onDelete }) => {
               <ArrowBackIosNewIcon />
             </Button>
           </Link>
-        
         </div>
         <div className="another-main-container">
           <div className="completeTricsBox">
@@ -266,48 +264,16 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                     ? "UnPublish"
                     : "Publish"}
                 </MenuItem>
-              <IconButton aria-label="add to favorites"></IconButton>
+                <IconButton aria-label="add to favorites"></IconButton>
               </Popover>
-             
-              {/* {isOpen && ( */}
-     
-        
-           <Dialog
-        open={isOpen}
-        onClose={handleCancelDelete}
-        PaperProps={{
-          component: "form",
-          onSubmit: (event) => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-            const formJson = Object.fromEntries(formData.entries());
-            const email = formJson.email;
-            handleCancelDelete();
-          },
-        }}
-        className="configurationDialog"
-      >
-        <DialogTitle style={{ display: "flex", flexDirection: "row" }}>
-          <Typography style={{ width: "100%", fontSize: "1.3rem" }}>
-          Confirm Delete  
-          </Typography>{" "}
-         
-          <CloseIcon className="closeHover" onClick={() => handleCancelDelete()} />
-        </DialogTitle>
 
-        <DialogContent>
-        <Typography style={{ width: "100%", fontSize: "1.3rem" }}>
-        Are you sure you want to delete?
-          </Typography>{" "}
-        
-        </DialogContent>
-        <DialogActions>
-        <Button onClick={handleConfirmDelete} variant="outlined">Yes</Button>
-        <Button onClick={handleCancelDelete} variant="outlined">No</Button>
-        </DialogActions>
-      </Dialog>
-        
-      {/* )} */}
+              <DailogBox
+                isOpen={isOpen}
+                handleConfirmDelete={handleConfirmDelete}
+                handleDeleteClick={handleDeleteClick}
+                handleCancelDelete={handleCancelDelete}
+              />
+              
             </div>
           </div>
         </div>

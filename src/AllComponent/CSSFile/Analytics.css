@@ -1,7 +1,7 @@
 .selectDesign {
   background-color: white !important;
   text-align: left;
-  border-radius: 15px !important;
+  /* border-radius: 15px !important; */
 }
 .DatePicker{
   display: flex;
@@ -60,7 +60,7 @@ font-weight: 500;
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 80%;
+    width: 100%;
 }
 .RupeeIcon{
     color: blue;
