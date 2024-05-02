@@ -410,7 +410,7 @@
   flex-direction: row;
 }
 .editFirstText{
-  margin-left: 3% !important;
+  margin-left: 1% !important;
 }
 .marginscndBox{
   margin-left: 9%;
@@ -540,7 +540,7 @@
   position:absolute;
   margin-right: 25px;
   right: 0;
-  margin-bottom: 30px;
+  margin-top: -9% !important;
 }
 .MuiStack-root{
   margin-left: 0px !important;

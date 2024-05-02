@@ -215,6 +215,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                 expanded={expanded === index}
               >
                 <AccordionSummary
+                  style={{marginTop:"7%"}}
                   expandIcon={ <Stack spacing={2} direction="row" sx={{ ml: 35 }}>
                   {expanded !== null && expanded === index ? (
                     ""
@@ -249,7 +250,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                    
                   </div>
                 </AccordionSummary>
-                <AccordionDetails>
+                <AccordionDetails >
                   <div className="accoridanBtn">
                     <Button
                       variant="text"
