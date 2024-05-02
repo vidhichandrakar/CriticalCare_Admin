@@ -541,3 +541,12 @@
   right: 0;
   margin-bottom: 30px;
 }
+.MuiStack-root{
+  margin-left: 0px !important;
+}
+.MuiAccordionSummary-content{
+  min-width: 42% !important;
+}
+.MuiAccordionSummary-expandIconWrapper{
+  min-width: 0% !important;
+}

@@ -215,38 +215,38 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                 expanded={expanded === index}
               >
                 <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
+                  expandIcon={ <Stack spacing={2} direction="row" sx={{ ml: 35 }}>
+                  {expanded !== null && expanded === index ? (
+                    ""
+                  ) : (
+                    <>
+                      <Button
+                        color="error"
+                        onClick={() => handleDelete(index)}
+                        startIcon={<DeleteIcon />}
+                      >
+                        Delete
+                      </Button>
+                      <Button
+                        color="primary"
+                        onClick={() => handleExpanded(index)}
+                      >
+                        <BorderColorIcon /> Edit
+                      </Button>
+                    </>
+                  )}
+                </Stack>}
                   aria-controls="panel1-content"
                   id="panel1-header"
                 >
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <Typography>
-                      {`${item?.duration} ${item?.years?.label}`}{" "}
-                      <FiberManualRecordIcon fontSize="small" />{" "}
-                      <CurrencyRupeeIcon color="primary" />
-                      {`${item?.offerPrice}`}
+                      {`${item?.duration} ${item?.years?.label}  `}{" "}
+                      {/* <FiberManualRecordIcon fontSize="small" />{" "} */}
+                      {/* <CurrencyRupeeIcon color="primary" /> */}
+                     <b style={{color:"#18568f", marginLeft:"10px"}}> {`  ₹ ${item?.offerPrice}`}</b>
                     </Typography>
-                    <Stack spacing={2} direction="row" sx={{ ml: 35 }}>
-                      {expanded !== null && expanded === index ? (
-                        ""
-                      ) : (
-                        <>
-                          <Button
-                            color="error"
-                            onClick={() => handleDelete(index)}
-                            startIcon={<DeleteIcon />}
-                          >
-                            Delete
-                          </Button>
-                          <Button
-                            color="primary"
-                            onClick={() => handleExpanded(index)}
-                          >
-                            <BorderColorIcon /> Edit
-                          </Button>
-                        </>
-                      )}
-                    </Stack>
+                   
                   </div>
                 </AccordionSummary>
                 <AccordionDetails>
@@ -370,9 +370,9 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
               </Accordion>
             </div>
           ))}
-          <div style={{ marginTop: "15px" }}>
-            <Button variant="contained" onClick={() => handleAddDuration()}>
-              Add
+          <div style={{ marginTop: "25px" }}>
+            <Button variant="text" onClick={() => handleAddDuration()} style={{textTransform:"none"}}>
+             + Add Another validity
             </Button>
           </div>
         </div>
