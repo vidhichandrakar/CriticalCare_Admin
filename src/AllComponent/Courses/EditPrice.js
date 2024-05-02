@@ -32,6 +32,41 @@ import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const [selectDurationValue, setSelectedDurationValue] = useState("");
   const [expanded, setExpanded] = useState();
+  const [expiryDate, setExpiryDate] = useState({
+    regularPrice: "10000",
+    offerPrice: "1000",
+    startDate: "",
+  });
+  const [lifetimeValidation, setLifetimeValidation] = useState({
+    regularPrice: "10000",
+    offerPrice: "1000",
+  });
+  const [singleValidity, setSingleValiduty] = useState({
+    duration: "20",
+    years: { id: 1, label: "Month(s)" },
+    regularPrice: "10000",
+    offerPrice: "1000",
+    startDate: "",
+    endDate: "",
+  });
+  const [resetPrice, setResetPrice] = useState([
+    {
+      duration: "20",
+      years: { id: 1, label: "Month(s)" },
+      regularPrice: "10000",
+      offerPrice: "1000",
+      startDate: "",
+      endDate: "",
+    },
+    {
+      duration: "10",
+      years: { id: 1, label: "years" },
+      regularPrice: "4500",
+      offerPrice: "450",
+      startDate: "",
+      endDate: "",
+    },
+  ]);
   const [editPriceData, setEditPriceData] = useState([
     {
       duration: "20",
@@ -62,49 +97,13 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   }, [courseData]);
 
   const handleInpurPrice = (value, type, selectedIndex) => {
-    // let storedValues = Object.assign({}, editPriceData);
-    // let updateValue = {};
-    // let arr = [...editPriceData];
-
-    // editPriceData.map((data, index) => {
-    //   console.log("conditon", index === selectedIndex, index, selectedIndex);
-    //   if (index === selectedIndex) {
-    //     console.log("type", type, index,data);
-    //     let updateValue = Object.assign({}, data);
-
-    //     if (type === "duration") {
-    //       data.duration = value;
-    //       arr.push(data.duration);
-    //     }
-    //   }
-    // });
-
-    setEditPriceData(
-      editPriceData.map((item, idx) =>
+    setResetPrice(
+      resetPrice.map((item, idx) =>
         idx === selectedIndex ? { ...item, [type]: value } : item
       )
     );
-
-    // if (type === "duration") {
-    //   storedValues.duration = value;
-    // } else if (type === "years") {
-    //   storedValues.years = value;
-    // } else if (type === "regularPrice") {
-    //   storedValues.regularPrice = value;
-    // } else if (type === "offerPrice") {
-    //   storedValues.offerPrice = value;
-    // }
-    // console.log("arrr", [arr]);
-    // setEditPriceData(arr);
-    // if (
-    //   storedValues.duration &&
-    //   storedValues.years &&
-    //   storedValues.regularPrice &&
-    //   storedValues.offerPrice
-    // ) {
-    // handleInputChange("editPrice", storedValues);
-    // }
   };
+
   const handlePricePage = () => {
     const storedValues = editPriceData;
     if (
@@ -142,12 +141,12 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   // };
 
   const handleDuration = (e) => {
-    console.log(e.target.value);
+    // console.log(e.target.value);
     setSelectedDurationValue(e.target.value);
   };
 
   const handleAddDuration = () => {
-    let addedValues = [...editPriceData];
+    let addedValues = [...resetPrice];
     addedValues.push({
       duration: "3",
       years: { id: 1, label: "Days(s)" },
@@ -156,11 +155,11 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
       startDate: "",
       endDate: "",
     });
-    setEditPriceData(addedValues);
+    setResetPrice(addedValues);
   };
 
   const handleExpanded = (index) => {
-    console.log("odk", index);
+    // console.log("odk", index);
     if (index === expanded) {
       setExpanded(null);
     } else {
@@ -173,15 +172,28 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
     if (index === expanded) {
       setExpanded(null);
     }
+    let editPrice = editPriceData.filter((item, idx) => index === idx);
+    setResetPrice(
+      resetPrice.map((item, idx) => (idx === index ? editPrice[0] : item))
+    );
   };
+
   const handleDelete = (index) => {
-    console.log(index);
     if (index === expanded) {
       setExpanded(null);
     }
     setEditPriceData((prevItems) => {
       return prevItems.filter((item, indexRemove) => indexRemove !== index);
     });
+  };
+
+  const handleSavePrice = (index) => {
+    let savedPrice = resetPrice.filter((item, idx) => index === idx);
+    setResetPrice(
+      resetPrice.map((item, idx) => (idx === index ? savedPrice[0] : item))
+    );
+
+    // console.log("reset price", resetPrice, savedPrice);
   };
   return (
     <div className="formMain">
@@ -191,171 +203,404 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
       />
       <br />
 
-      {console.log("editPriceData", editPriceData)}
-      {editPriceData?.map((item, index) => (
+      {console.log("selectDurationValue", selectDurationValue)}
+      {selectDurationValue === "Multiple Validity" ? (
         <div>
-          <Accordion
-            defaultExpanded={index === 0}
-            sx={{ mt: 5 }}
-            style={{ borderRadius: "15px" }}
-            expanded={expanded === index}
-            // onChange={() => handleExpanded(index)}
-          >
-            <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              aria-controls="panel1-content"
-              id="panel1-header"
-            >
-              <div style={{ display: "flex", flexDirection: "column" }}>
-                <Typography>
-                  {`${item?.duration} ${item?.years?.label}`}{" "}
-                  <FiberManualRecordIcon fontSize="small" />{" "}
-                  <CurrencyRupeeIcon color="primary" />
-                  {`${item?.offerPrice}`}
-                  {/* </CurrencyRupeeIcon> */}
-                </Typography>
-                {/* <Stack spacing={2} direction="row" sx={{ml:35}}> */}
-
-                <Stack spacing={2} direction="row" sx={{ ml: 35 }}>
-                  {expanded !== null && expanded === index ? (
-                    ""
-                  ) : (
-                    <>
-                      <Button
-                        color="error"
-                        onClick={() => handleDelete(index)}
-                        startIcon={<DeleteIcon />}
-                      >
-                        Delete
-                      </Button>
-                      <Button
-                        color="primary"
-                        onClick={() => handleExpanded(index)}
-                      >
-                        <BorderColorIcon /> Edit
-                      </Button>
-                    </>
-                  )}
-                </Stack>
-              </div>
-            </AccordionSummary>
-            <AccordionDetails>
-              <div className="accoridanBtn">
-                <Button
-                  variant="text"
-                  sx={{ mr: 2 }}
-                  onClick={() => handleCancelAccord(index)}
+          {resetPrice?.map((item, index) => (
+            <div>
+              <Accordion
+                defaultExpanded={index === 0}
+                sx={{ mt: 5 }}
+                style={{ borderRadius: "15px" }}
+                expanded={expanded === index}
+              >
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1-content"
+                  id="panel1-header"
                 >
-                  Cancel
-                </Button>
-                <Button variant="contained">Save</Button>
-              </div>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <Typography>
+                      {`${item?.duration} ${item?.years?.label}`}{" "}
+                      <FiberManualRecordIcon fontSize="small" />{" "}
+                      <CurrencyRupeeIcon color="primary" />
+                      {`${item?.offerPrice}`}
+                    </Typography>
+                    <Stack spacing={2} direction="row" sx={{ ml: 35 }}>
+                      {expanded !== null && expanded === index ? (
+                        ""
+                      ) : (
+                        <>
+                          <Button
+                            color="error"
+                            onClick={() => handleDelete(index)}
+                            startIcon={<DeleteIcon />}
+                          >
+                            Delete
+                          </Button>
+                          <Button
+                            color="primary"
+                            onClick={() => handleExpanded(index)}
+                          >
+                            <BorderColorIcon /> Edit
+                          </Button>
+                        </>
+                      )}
+                    </Stack>
+                  </div>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <div className="accoridanBtn">
+                    <Button
+                      variant="text"
+                      sx={{ mr: 2 }}
+                      onClick={() => handleCancelAccord(index)}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      variant="contained"
+                      onClick={() => handleSavePrice(index)}
+                    >
+                      Save
+                    </Button>
+                  </div>
 
-              <Box sx={{ mt: "5%" }} className="editFirstBox">
-                <Box>
-                  {CommonTypography(
-                    { fontWeight: 600, label: "Duration" },
-                    (Option = {
-                      className: "editFirstText",
-                    })
-                  )}
-                  {commonTextField(
-                    {
-                      id: "fullWidth",
-                      className: "BoxShadow",
-                      inputClassName: "textField",
-                      labels: "1",
-                    },
-                    (Option = {
-                      sx: { width: 240, marginTop: "4% !important" },
-                      handleInput: (event) =>
-                        handleInpurPrice(event, "duration", index),
-                      type: "duration",
-                      value: item.duration,
-                    })
-                  )}
-                </Box>
+                  <Box sx={{ mt: "5%" }} className="editFirstBox">
+                    <Box>
+                      {CommonTypography(
+                        { fontWeight: 600, label: "Duration" },
+                        (Option = {
+                          className: "editFirstText",
+                        })
+                      )}
+                      {commonTextField(
+                        {
+                          id: "fullWidth",
+                          className: "BoxShadow",
+                          inputClassName: "textField",
+                          labels: "1",
+                        },
+                        (Option = {
+                          sx: { width: 240, marginTop: "4% !important" },
+                          handleInput: (event) =>
+                            handleInpurPrice(event, "duration", index),
+                          type: "duration",
+                          value: item.duration,
+                        })
+                      )}
+                    </Box>
 
-                <Box className="marginscndBoxYears">
-                  {CommonTypography(
-                    { fontWeight: 600, label: "Years / Months / Days" },
-                    (Option = {
-                      // className: "editFirstText",
-                      className: "fieldSizeYears",
-                    })
-                  )}
-                  <FormControl sx={{ m: 1, minWidth: 240 }}>
-                    {commonSelect(
-                      {
-                        placeholder: "Year(s)",
-                        menuItemList: years,
-                        className: "categorytext",
-                      },
-                      (Option = {
-                        handleInput: (event) =>
-                          handleInpurPrice(event, "years", index),
+                    <Box className="marginscndBoxYears">
+                      {CommonTypography(
+                        { fontWeight: 600, label: "Years / Months / Days" },
+                        (Option = {
+                          className: "fieldSizeYears",
+                        })
+                      )}
+                      <FormControl sx={{ m: 1, minWidth: 240 }}>
+                        {commonSelect(
+                          {
+                            placeholder: "Year(s)",
+                            menuItemList: years,
+                            className: "categorytext",
+                          },
+                          (Option = {
+                            handleInput: (event) =>
+                              handleInpurPrice(event, "years", index),
 
-                        categoryValue: item?.years,
-                        type: "years",
-                      })
-                    )}
-                  </FormControl>
-                </Box>
-              </Box>
+                            categoryValue: item?.years,
+                            type: "years",
+                          })
+                        )}
+                      </FormControl>
+                    </Box>
+                  </Box>
 
-              <Box sx={{ marginTop: "5%" }} className="editFirstBox">
-                <Box>
-                  {CommonTypography(
-                    { fontWeight: 600, label: "Regular Price" },
-                    (Option = {
-                      className: "editFirstText",
-                    })
-                  )}
-                  {commonTextField(
-                    {
-                      id: "fullWidth",
-                      className: "BoxShadowCourses",
-                      inputClassName: "textField",
-                      labels: "₹ 1000",
-                    },
-                    (Option = {
-                      sx: { width: 240, marginTop: "4% !important" },
-                      handleInput: (event) =>
-                        handleInpurPrice(event, "regularPrice", index),
-                      type: "regularPrice",
-                      value: item.regularPrice,
-                    })
-                  )}
-                </Box>
+                  <Box sx={{ marginTop: "5%" }} className="editFirstBox">
+                    <Box>
+                      {CommonTypography(
+                        { fontWeight: 600, label: "Regular Price" },
+                        (Option = {
+                          className: "editFirstText",
+                        })
+                      )}
+                      {commonTextField(
+                        {
+                          id: "fullWidth",
+                          className: "BoxShadowCourses",
+                          inputClassName: "textField",
+                          labels: "₹ 1000",
+                        },
+                        (Option = {
+                          sx: { width: 240, marginTop: "4% !important" },
+                          handleInput: (event) =>
+                            handleInpurPrice(event, "regularPrice", index),
+                          type: "regularPrice",
+                          value: item.regularPrice,
+                        })
+                      )}
+                    </Box>
 
-                <Box className="marginscndBox">
-                  {CommonTypography(
-                    { fontWeight: 600, label: "Offer Price" },
-                    (Option = {
-                      className: "editFirstText",
-                    })
-                  )}
-                  {commonTextField(
-                    {
-                      id: "fullWidth",
-                      className: "BoxShadow",
-                      inputClassName: "textField",
-                      labels: "₹ 500",
-                    },
-                    (Option = {
-                      sx: { width: 240, marginTop: "4% !important" },
-                      handleInput: (event) =>
-                        handleInpurPrice(event, "offerPrice", index),
-                      type: "offerPrice",
-                      value: item.offerPrice,
-                    })
-                  )}
-                </Box>
-              </Box>
-            </AccordionDetails>
-          </Accordion>
+                    <Box className="marginscndBox">
+                      {CommonTypography(
+                        { fontWeight: 600, label: "Offer Price" },
+                        (Option = {
+                          className: "editFirstText",
+                        })
+                      )}
+                      {commonTextField(
+                        {
+                          id: "fullWidth",
+                          className: "BoxShadow",
+                          inputClassName: "textField",
+                          labels: "₹ 500",
+                        },
+                        (Option = {
+                          sx: { width: 240, marginTop: "4% !important" },
+                          handleInput: (event) =>
+                            handleInpurPrice(event, "offerPrice", index),
+                          type: "offerPrice",
+                          value: item.offerPrice,
+                        })
+                      )}
+                    </Box>
+                  </Box>
+                </AccordionDetails>
+              </Accordion>
+            </div>
+          ))}
+          <div style={{ marginTop: "15px" }}>
+            <Button variant="contained" onClick={() => handleAddDuration()}>
+              Add
+            </Button>
+          </div>
         </div>
-      ))}
+      ) : selectDurationValue === "Single Validity" ? (
+        <div>
+          <Box sx={{ mt: "5%" }} className="editFirstBox">
+            <Box>
+              {CommonTypography(
+                { fontWeight: 600, label: "Duration" },
+                (Option = {
+                  className: "editFirstText",
+                })
+              )}
+              {commonTextField(
+                {
+                  id: "fullWidth",
+                  className: "BoxShadow",
+                  inputClassName: "textField",
+                  labels: "1",
+                },
+                (Option = {
+                  sx: { width: 240, marginTop: "4% !important" },
+                  // handleInput: (event) =>
+                  //   handleInpurPrice(event, "duration", index),
+                  type: "duration",
+                  value: singleValidity.duration,
+                })
+              )}
+            </Box>
+
+            <Box className="marginscndBoxYears">
+              {CommonTypography(
+                { fontWeight: 600, label: "Years / Months / Days" },
+                (Option = {
+                  className: "fieldSizeYears",
+                })
+              )}
+              <FormControl sx={{ m: 1, minWidth: 240 }}>
+                {commonSelect(
+                  {
+                    placeholder: "Year(s)",
+                    menuItemList: years,
+                    className: "categorytext",
+                  },
+                  (Option = {
+                    // handleInput: (event) =>
+                    //   handleInpurPrice(event, "years", index),
+
+                    categoryValue: singleValidity?.years,
+                    type: "years",
+                  })
+                )}
+              </FormControl>
+            </Box>
+          </Box>
+          <Box sx={{ marginTop: "5%" }} className="editFirstBox">
+            <Box>
+              {CommonTypography(
+                { fontWeight: 600, label: "Regular Price" },
+                (Option = {
+                  className: "editFirstText",
+                })
+              )}
+              {commonTextField(
+                {
+                  id: "fullWidth",
+                  className: "BoxShadowCourses",
+                  inputClassName: "textField",
+                  labels: "₹ 1000",
+                },
+                (Option = {
+                  sx: { width: 240, marginTop: "4% !important" },
+                  // handleInput: (event) =>
+                  //   handleInpurPrice(event, "regularPrice", index),
+                  type: "regularPrice",
+                  value: singleValidity.regularPrice,
+                })
+              )}
+            </Box>
+
+            <Box className="marginscndBox">
+              {CommonTypography(
+                { fontWeight: 600, label: "Offer Price" },
+                (Option = {
+                  className: "editFirstText",
+                })
+              )}
+              {commonTextField(
+                {
+                  id: "fullWidth",
+                  className: "BoxShadow",
+                  inputClassName: "textField",
+                  labels: "₹ 500",
+                },
+                (Option = {
+                  sx: { width: 240, marginTop: "4% !important" },
+                  // handleInput: (event) =>
+                  //   handleInpurPrice(event, "offerPrice", index),
+                  type: "offerPrice",
+                  value: singleValidity.offerPrice,
+                })
+              )}
+            </Box>
+          </Box>
+        </div>
+      ) : selectDurationValue === "Lifetime Validity" ? (
+        <div>
+          <Box sx={{ marginTop: "5%" }} className="editFirstBox">
+            <Box>
+              {CommonTypography(
+                { fontWeight: 600, label: "Regular Price" },
+                (Option = {
+                  className: "editFirstText",
+                })
+              )}
+              {commonTextField(
+                {
+                  id: "fullWidth",
+                  className: "BoxShadowCourses",
+                  inputClassName: "textField",
+                  labels: "₹ 1000",
+                },
+                (Option = {
+                  sx: { width: 240, marginTop: "4% !important" },
+                  // handleInput: (event) =>
+                  //   handleInpurPrice(event, "regularPrice", index),
+                  type: "regularPrice",
+                  value: lifetimeValidation.regularPrice,
+                })
+              )}
+            </Box>
+
+            <Box className="marginscndBox">
+              {CommonTypography(
+                { fontWeight: 600, label: "Offer Price" },
+                (Option = {
+                  className: "editFirstText",
+                })
+              )}
+              {commonTextField(
+                {
+                  id: "fullWidth",
+                  className: "BoxShadow",
+                  inputClassName: "textField",
+                  labels: "₹ 500",
+                },
+                (Option = {
+                  sx: { width: 240, marginTop: "4% !important" },
+                  // handleInput: (event) =>
+                  //   handleInpurPrice(event, "offerPrice", index),
+                  type: "offerPrice",
+                  value: lifetimeValidation.offerPrice,
+                })
+              )}
+            </Box>
+          </Box>
+        </div>
+      ) : selectDurationValue === "Course Expiry Date" ? (
+        <div>
+          <Box sx={{ marginTop: "5%" }} className="editFirstBox">
+            <Box>
+              {CommonTypography(
+                { fontWeight: 600, label: "Regular Price" },
+                (Option = {
+                  className: "editFirstText",
+                })
+              )}
+              {commonTextField(
+                {
+                  id: "fullWidth",
+                  className: "BoxShadowCourses",
+                  inputClassName: "textField",
+                  labels: "₹ 1000",
+                },
+                (Option = {
+                  sx: { width: 240, marginTop: "4% !important" },
+                  // handleInput: (event) =>
+                  //   handleInpurPrice(event, "regularPrice", index),
+                  type: "regularPrice",
+                  value: expiryDate.regularPrice,
+                })
+              )}
+            </Box>
+
+            <Box className="marginscndBox">
+              {CommonTypography(
+                { fontWeight: 600, label: "Offer Price" },
+                (Option = {
+                  className: "editFirstText",
+                })
+              )}
+              {commonTextField(
+                {
+                  id: "fullWidth",
+                  className: "BoxShadow",
+                  inputClassName: "textField",
+                  labels: "₹ 500",
+                },
+                (Option = {
+                  sx: { width: 240, marginTop: "4% !important" },
+                  // handleInput: (event) =>
+                  //   handleInpurPrice(event, "offerPrice", index),
+                  type: "offerPrice",
+                  value: expiryDate.offerPrice,
+                })
+              )}
+            </Box>
+            <div>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={["DatePicker"]}>
+                  <DatePicker
+                    className="BoxShadowCourses"
+                    renderInput={(params) => (
+                      <TextField
+                        size="small"
+                        {...params}
+                        sx={{ m: 0.5, mt: 0.7, background: "#fff" }}
+                      />
+                    )}
+                    // onChange={(e) => handleCustumDate(e, "Sdate")}
+                    label="Select Start Date"
+                  />
+                </DemoContainer>
+              </LocalizationProvider>
+            </div>
+          </Box>
+        </div>
+      ) : null}
       {/* <Box className="editFirstBox" style={{ marginTop: "10%" }}>
         <div>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -393,11 +638,6 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
           </LocalizationProvider>
         </div>
       </Box> */}
-      <div style={{ marginTop: "15px" }}>
-        <Button variant="contained" onClick={() => handleAddDuration()}>
-          Add
-        </Button>
-      </div>
 
       <Box className="divider"></Box>
       {commonButton({

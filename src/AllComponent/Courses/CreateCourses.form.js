@@ -70,7 +70,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   });
 
   useEffect(() => {
-    if (redirectRestriction()) {
+    // if (redirectRestriction()) {
       getCategory({
         callBack: (response) => {
           const userCallBack = response?.data;
@@ -80,9 +80,9 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           toast.error(error.message);
         },
       });
-    } else {
-      navigate("/admin");
-    }
+    // } else {
+    //   navigate("/admin");
+    // }
   }, []);
 
   useEffect(() => {
