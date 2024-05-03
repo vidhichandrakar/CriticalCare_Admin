@@ -15,6 +15,8 @@ import LoaderComponent from "../../Util/LoaderComponent";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { redirectRestriction } from "../../Util/RedirectRestriction";
+import Header from "./Header";
+import { Box } from "@mui/material";
 
 const YourCourses = () => {
   const [allCourses, setAllCourses] = useState([]);
@@ -58,16 +60,19 @@ const YourCourses = () => {
 
   return (
     <div className="grid-container">
-      <SideBar />
-      <div className="main-container margin20">
-        <CourseHeader
-          Heading={"Your Courses (3)"}
+      <Header
+          Heading={"My Courses"}
           subHeading={"Add/View courses of your brand"}
         />
+      <SideBar />
+      <main className="main-container">
+        
         <LoaderComponent loaderState={loaderState} />
-        <SearchBar mt="2%" placeholder="Search by name" />
+        <Box className="subHeaderMycourses">
+        <SearchBar  placeholder="Search by name" />
+        </Box>
         <div className="Add-main-cards">
-          <div className="card">
+          {/* <div className="card">
             <div className="AddCourses">
               <img src={Folder} className="FolderImg" />
               <Link to="/CreateCourses">
@@ -76,14 +81,22 @@ const YourCourses = () => {
                 </Button>
               </Link>
             </div>
-          </div>
+          </div> */}
           <YourCoursesCard
             allCourses={allCourses}
             userData={userData}
             Data={YourCoursesCardData}
           />
+         
         </div>
-      </div>
+        <div>
+            <Box sx={{top:"88%", position:"absolute", zIndex:1111111111111, right:0}} className="addCircle" onClick={()=>navigate("/CreateCourses")}>
+             <AddRoundedIcon className="addIcon"/>
+
+            </Box>
+          </div>
+      </main>
+     
       <ToastContainer />
     </div>
   );

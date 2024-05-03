@@ -43,6 +43,8 @@ import LoaderComponent from "../../../Util/LoaderComponent";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { redirectRestriction } from "../../../Util/RedirectRestriction";
+import Header from "../../Courses/Header";
+import { DailogBox } from "../../../Util/CommonFields";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -138,6 +140,8 @@ const MyTeam = () => {
     PhoneNo: "",
   });
   const [loaderState, setLoaderState] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -185,6 +189,20 @@ const MyTeam = () => {
       },
     });
   };
+  const handleDeleteClick = () => {
+    handleClose();
+    setIsOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    handleDelete();
+    setIsOpen(false);
+  };
+
+  const handleCancelDelete = () => {
+    setIsOpen(false);
+  };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -255,12 +273,13 @@ const MyTeam = () => {
 
   return (
     <div className="grid-container">
-      <SideBar />
-      <div className=" m20">
-        <CourseHeader
+      <Header
           Heading={"My Team"}
           subHeading={"View, Filter & Manage all your users"}
         />
+      <SideBar />
+      <div className=" main-container">
+        
         <LoaderComponent loaderState={loaderState} />
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">
@@ -426,7 +445,7 @@ const MyTeam = () => {
                 >
                   <Typography
                     className="redDeleteofTestPortal"
-                    onClick={handleDelete}
+                    onClick={handleDeleteClick}
                   >
                     {" "}
                     <DeleteIcon className="deleteIcon" /> Delete{" "}
@@ -468,6 +487,12 @@ const MyTeam = () => {
         </Paper>
       </div>
       <ToastContainer />
+      <DailogBox
+          isOpen={isOpen}
+          handleConfirmDelete={handleConfirmDelete}
+          handleDeleteClick={handleDeleteClick}
+          handleCancelDelete={handleCancelDelete}
+        />
     </div>
   );
 };

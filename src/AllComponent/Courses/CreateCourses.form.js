@@ -53,7 +53,6 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     storedValues.thumbnailPath = files[0];
     await getBase64(files) // `file` your img file
       .then((res) => {
-        console.log("abc", res.split(",")[1]);
         setImageWhileUpload(res.split(",")[1]);
       }) // `res` base64 of img file
       .catch((err) => console.log(err));
@@ -99,7 +98,6 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       cat.map((item) => {
         if (item.category_id === courseData?.category_id) {
           storedValues.Category = item;
-          console.log("category", item);
         }
       });
       if (courseData?.category_id) {
@@ -158,7 +156,6 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   };
 
   const handleEditPrice = () => {
-    console.log("edit", storedBasicInfo);
     if (
       storedBasicInfo.Name?.length <= 3 &&
       storedBasicInfo.Description?.length <= 3 &&

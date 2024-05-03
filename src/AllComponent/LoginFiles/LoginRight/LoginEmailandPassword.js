@@ -104,7 +104,6 @@ const LoginEmailandPassword = () => {
         phone_no: phoneNO?.toString(),
         OTP: typedOtp,
       };
-      console.log("payload login", payload);
       verifyOtp({
         payload,
         callBack: (response) => {
@@ -113,8 +112,8 @@ const LoginEmailandPassword = () => {
             userName: response.data.user_name,
             user_photo: response.data.user_photo,
           });
-          localStorage.setItem("loggedInUser", JSON.stringify(response?.data));
           navigation("/DashBoard");
+          localStorage.setItem("loggedInUser", JSON.stringify(response?.data));
         },
         error: (error) => {
           toast.error(error.response.data.message);

@@ -194,3 +194,10 @@ export const getSubcategoryList = ({callBack, mainCatID})=>{
     callBack(response);
   })
 }
+
+export const publishOrEditCourse = ({callBack, courseId, payload})=>{
+  const url = APIS.allCourses + "/" + courseId;
+  axios.put(url, payload).then((response)=>{
+    callBack(response);
+  })
+}

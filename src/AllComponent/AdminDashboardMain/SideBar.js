@@ -21,8 +21,6 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const [anchorE2, setAnchorE2] = useState(null);
   const [anchorE3, setAnchorE3] = useState(null);
   const opens = Boolean(anchorE2);
-  const ids = opens ? "simple-popover" : undefined;
-  let currentlyHovering = false;
   const [openCollapse, setOpenCollapse] = useState(
     localStorage.getItem("subMenuCourses") === "true" ? true : false
   );
@@ -34,18 +32,18 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const id = open ? "simple-popover" : undefined;
   const Courseopen = Boolean(anchorE3);
   const idss = Courseopen ? "simple-popover" : undefined;
-  const [hideUnHide, setHideUnHide] = useState(false);
   const [hideSubConfig, setHideSubConfig] = useState(false);
   const [selectedConfigValue, setSelectedConfigValue] = useState("");
-
-  // collapse
+  const [highlight, setHighlight] = useState(false);
+  const [highlightPeople, setHighlightPeople] = useState(false);
+  const [handleCollapse, setHandleCollapse] = useState();
   const navigate = useNavigate();
-  const handleClickCollapse = () => {
-    setOpenCollapse(!openCollapse);
-  };
-  const handleClickPeople = () => {
-    setOpenPeople(!openPeople);
-  };
+
+  useEffect(() => {
+    setHighlight(window.location.pathname.replace("/", ""));
+    setHighlightPeople(window.location.pathname.replace("/", ""));
+  }, [localStorage.getItem("activeMenu")]);
+
   const handleCatConfig = (value) => {
     setHideCatConfig(true);
     setSelectedConfigValue(value);
@@ -54,31 +52,34 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const handleCloseCat = () => {
     setHideCatConfig(false);
   };
-  const handleCoursesSubMenu = (type) => {
-    switch (type) {
-      case "coupons": {
-        navigate("/CreateCoupon");
-      }
+
+  const handleClickPeople = () => {
+    setOpenPeople(!openPeople);
+    if (!openPeople) {
+      localStorage.setItem("subMenuPeople", true);
+      setHighlightPeople("User");
+      localStorage.setItem("subMenuCourses", false);
     }
   };
 
-  const [highlight, setHighlight] = useState(false);
-  const [highlightPeople, setHighlightPeople] = useState(false);
-  useEffect(() => {
-    setHighlight(window.location.pathname.replace("/", ""));
-    setHighlightPeople(window.location.pathname.replace("/", ""));
-  }, [localStorage.getItem("activeMenu")]);
+  const handleClickCollapse = () => {
+    setOpenCollapse(!openCollapse);
+    if (!openCollapse) {
+      localStorage.setItem("subMenuCourses", true);
+      setHighlightPeople("YourCourses");
+      localStorage.setItem("subMenuPeople", false);
+    }
+  };
 
   const handleHighlight = (type) => {
-    // console.log("type",type)
-    setHighlight(type);
     localStorage.setItem("activeMenu", type);
     localStorage.setItem("subMenuPeople", false);
     if (
-      type === "myCourses" ||
-      type === "manageCoupons" ||
+      type === "YourCourses" ||
+      type === "CreateCoupon" ||
       type === "catagory" ||
-      type === "upcoimgCourses"
+      type === "upcoimgCourses" ||
+      type === "Testimonial"
     ) {
       localStorage.setItem("subMenuCourses", true);
     } else {
@@ -88,9 +89,9 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
 
   const handleHighlightPeople = (type) => {
     setHighlightPeople(type);
+    // setHighlight(null);
     localStorage.setItem("activeMenu", type);
-    localStorage.setItem("subMenuCourses", false);
-    if (type === "peopleUser" || type === "peopleMyTeam") {
+    if (type === "User" || type === "MyTeam") {
       setHighlightPeople(type);
       localStorage.setItem("subMenuPeople", true);
     } else {
@@ -100,25 +101,13 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
 
   const handleHideSubCat = () => {
     setHideSubConfig(!hideSubConfig);
+    // localStorage.setItem("subMenuCourses", false);
+    // localStorage.setItem("subMenuPeople", false);
+    console.log("comfguraion");
   };
-  function handleClickNew(event) {
-    if (anchorE2 !== event.currentTarget) {
-      setAnchorE2(event.currentTarget);
-    }
-  }
-  function handleHover() {
-    currentlyHovering = true;
-  }
+
   function handleCloseNew() {
     setAnchorE2(null);
-  }
-  function handleCloseHover() {
-    currentlyHovering = false;
-    setTimeout(() => {
-      if (!currentlyHovering) {
-        handleCloseNew();
-      }
-    }, 50);
   }
 
   return (
@@ -149,7 +138,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
             </Typography>
           </Link>
 
-          <Link>
+          <Link to="/YourCourses">
             <ListItemButton
               onClick={handleClickCollapse}
               className="listButton"
@@ -171,12 +160,12 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                       <Typography
                         id="hoverrr"
                         className={
-                          highlight === "myCourses"
+                          highlight === "YourCourses"
                             ? "hoverrr2 paddingD"
                             : "paddingD"
                         }
-                        sx={{ mt: 1, color: "grey"}}
-                        onClick={() => handleHighlight("myCourses")}
+                        sx={{ mt: 1, color: "grey" }}
+                        onClick={() => handleHighlight("YourCourses")}
                       >
                         My Courses
                       </Typography>
@@ -187,12 +176,12 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                       <Typography
                         id="hoverrr"
                         className={
-                          highlight === "manageCoupons"
+                          highlight === "CreateCoupon"
                             ? "hoverrr2 paddingD"
                             : "paddingD"
                         }
                         sx={{ mt: 1, color: "grey" }}
-                        onClick={() => handleHighlight("manageCoupons")}
+                        onClick={() => handleHighlight("CreateCoupon")}
                       >
                         Manage Coupons
                       </Typography>
@@ -207,7 +196,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                             ? "hoverrr2 paddingD"
                             : "paddingD"
                         }
-                        sx={{ mt: 1, color: "grey"}}
+                        sx={{ mt: 1, color: "grey" }}
                         onClick={() => handleHighlight("catagory")}
                       >
                         Category / Sub Category
@@ -237,9 +226,9 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
           <Link to="/TestPortal">
             <Typography
               id="hoverrr"
-              className={highlight === "testPortal" ? "hoverrr2" : ""}
+              className={highlight === "TestPortal" ? "hoverrr2" : ""}
               sx={{ mt: -2 }}
-              onClick={() => handleHighlight("testPortal")}
+              onClick={() => handleHighlight("TestPortal")}
             >
               <AssignmentIcon className="icon" />
               Test Portal
@@ -261,16 +250,16 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
           <Link to="/Analytics">
             <Typography
               id="hoverrr"
-              className={highlight === "analytics" ? "hoverrr2" : ""}
+              className={highlight === "Analytics" ? "hoverrr2" : ""}
               sx={{ mt: -2 }}
-              onClick={() => handleHighlight("analytics")}
+              onClick={() => handleHighlight("Analytics")}
             >
               <SignalCellularAltIcon className="icon" />
               Analytics
             </Typography>
           </Link>
 
-          <Link>
+          <Link to="/User">
             <ListItemButton onClick={handleClickPeople} className="listButton">
               <PersonIcon />
               <ListItemText primary="People" className="coursesHead" />
@@ -289,12 +278,12 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                       <Typography
                         id="hoverrr"
                         className={
-                          highlightPeople === "peopleUser"
+                          highlightPeople === "User"
                             ? "hoverrr2 paddingD"
                             : "paddingD"
                         }
                         sx={{ textDecoration: "none", color: "grey" }}
-                        onClick={() => handleHighlightPeople("peopleUser")}
+                        onClick={() => handleHighlightPeople("User")}
                       >
                         User
                       </Typography>
@@ -305,12 +294,12 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                       <Typography
                         id="hoverrr"
                         className={
-                          highlightPeople === "peopleMyTeam"
+                          highlightPeople === "MyTeam"
                             ? "hoverrr2 paddingD"
                             : "paddingD"
                         }
                         sx={{ textDecoration: "none", color: "grey" }}
-                        onClick={() => handleHighlightPeople("peopleMyTeam")}
+                        onClick={() => handleHighlightPeople("MyTeam")}
                       >
                         My Team
                       </Typography>
@@ -324,9 +313,9 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
           <Link to="/Testimonial">
             <Typography
               id="hoverrr"
-              className={highlight === "testimonials" ? "hoverrr2" : ""}
+              className={highlight === "Testimonial" ? "hoverrr2" : ""}
               sx={{ mt: -2 }}
-              onClick={() => handleHighlight("testimonials")}
+              onClick={() => handleHighlight("Testimonial")}
             >
               <PersonIcon className="icon" />
               Testimonial
@@ -361,8 +350,9 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                   >
                     <Link className="textDecoration">
                       <Typography
-                      sx={{ textDecoration: "none", color: "grey" }}
-                       className="textDecoration">
+                        sx={{ textDecoration: "none", color: "grey" }}
+                        className="textDecoration"
+                      >
                         Sub Category
                       </Typography>
                     </Link>
@@ -372,9 +362,10 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                     onClick={() => handleCatConfig("Duration")}
                   >
                     <Link className="textDecoration">
-                      <Typography 
-                      sx={{ textDecoration: "none", color: "grey" }}
-                      className="textDecoration">
+                      <Typography
+                        sx={{ textDecoration: "none", color: "grey" }}
+                        className="textDecoration"
+                      >
                         Duration
                       </Typography>
                     </Link>
@@ -384,9 +375,10 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                       className="textDecoration"
                       onClick={() => handleCatConfig("Team Member")}
                     >
-                      <Typography 
-                      sx={{ textDecoration: "none", color: "grey" }}
-                      className="textDecoration">
+                      <Typography
+                        sx={{ textDecoration: "none", color: "grey" }}
+                        className="textDecoration"
+                      >
                         Team Member
                       </Typography>
                     </Link>

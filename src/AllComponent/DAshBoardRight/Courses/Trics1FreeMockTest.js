@@ -13,21 +13,32 @@ import CourseHeader from "../../Courses/CoursesHeader";
 import SideBar from "../../AdminDashboardMain/SideBar";
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { deleteCourses, getCourseById } from "../../ActionFactory/apiActions";
+import {
+  deleteCourses,
+  getCourseById,
+  publishOrEditCourse,
+} from "../../ActionFactory/apiActions";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { capitalizeFirstLetter } from "../../../Util/CommonFields";
+import { DailogBox, capitalizeFirstLetter } from "../../../Util/CommonFields";
 import { redirectRestriction } from "../../../Util/RedirectRestriction";
 import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
+import Header from "../../Courses/Header";
+import DialogTitle from "@mui/material/DialogTitle";
+import CloseIcon from "@mui/icons-material/Close";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
 
-const Trics1FreeMockTest = () => {
+const Trics1FreeMockTest = ({ onDelete }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [courseData, setCourseData] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
   let location = useLocation();
   const courseId = location.state?.id;
   const open = Boolean(anchorEl);
@@ -35,6 +46,20 @@ const Trics1FreeMockTest = () => {
   const navigate = useNavigate();
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+
+  const handleDeleteClick = () => {
+    setIsOpen(true);
+    console.log("workingg");
+  };
+
+  const handleConfirmDelete = () => {
+    handleDeleteCourse();
+    setIsOpen(false);
+  };
+
+  const handleCancelDelete = () => {
+    setIsOpen(false);
   };
 
   const handleClose = () => {
@@ -52,7 +77,6 @@ const Trics1FreeMockTest = () => {
           },
           error: (error) => {
             toast.error(error.message);
-            console.log(error.message);
           },
         });
       }
@@ -62,7 +86,6 @@ const Trics1FreeMockTest = () => {
   }, []);
   useEffect(() => {
     if (courseId) {
-      console.log("defined", courseId);
       getCourseById({
         courseId,
         callBack: (response) => {
@@ -94,27 +117,33 @@ const Trics1FreeMockTest = () => {
     navigate("/CreateCourses", { state: { id: courseId } });
   };
 
-  const handlePublish = (type) => {
-    if (courseData?.is_publish === "published") {
-      //need to send payload
-      console.log("type if part", type);
-    } else {
-      console.log("type", type);
-    }
+  const handlePublish = () => {
+    const payload = {
+      is_publish:
+        courseData?.is_publish === "not published"
+          ? "published"
+          : "not published",
+    };
+    publishOrEditCourse({
+      courseId: courseData?.course_id,
+      payload,
+      callBack: (response) => {
+        navigate("/YourCourses");
+      },
+    });
   };
   return (
     <div className="grid-container">
+      <Header Heading={capitalizeFirstLetter(courseData?.course_name)} />
       <SideBar />
-      <div className="mainBox">
+      <div className="main-container ">
         <div className="singleRow">
           <Link to="/YourCourses">
             <Button className="backToCourses">
               <ArrowBackIosNewIcon />
             </Button>
           </Link>
-          <CourseHeader Heading={capitalizeFirstLetter(courseData?.course_name)} />
         </div>
-        {console.log("courseData edit page", courseData)}
         <div className="another-main-container">
           <div className="completeTricsBox">
             <div className="leftSideRow">
@@ -218,7 +247,7 @@ const Trics1FreeMockTest = () => {
                   Edit
                 </MenuItem>
                 <MenuItem
-                  onClick={() => handleDeleteCourse(id)}
+                  onClick={() => handleDeleteClick()}
                   value={20}
                   className="greyPara"
                 >
@@ -235,9 +264,16 @@ const Trics1FreeMockTest = () => {
                     ? "UnPublish"
                     : "Publish"}
                 </MenuItem>
-                <IconButton aria-label="add to favorites">
-                </IconButton>
+                <IconButton aria-label="add to favorites"></IconButton>
               </Popover>
+
+              <DailogBox
+                isOpen={isOpen}
+                handleConfirmDelete={handleConfirmDelete}
+                handleDeleteClick={handleDeleteClick}
+                handleCancelDelete={handleCancelDelete}
+              />
+              
             </div>
           </div>
         </div>

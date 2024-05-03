@@ -6,17 +6,19 @@ import BannerCard from "./BannerCard";
 import { BannerData } from "../../../Data/JsonData";
 import { Fragment } from "react";
 import SideBar from "../../AdminDashboardMain/SideBar";
+import Header from "../../Courses/Header";
 
 const Banner = () => {
   return (
     <Fragment>
       <div className='grid-container'>
-      <SideBar />
-      <div className="BannerMain main-container">
-        <CourseHeader
+      <Header
           Heading="Manage Banners"
           subHeading="Show banners to users"
         />
+      <SideBar />
+      <div className="main-container">
+        
         <div className="BannerBox">
           <div className="HeadText">
             <h2>Your Banner (3)</h2>

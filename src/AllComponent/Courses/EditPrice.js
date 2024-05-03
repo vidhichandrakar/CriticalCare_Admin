@@ -1,5 +1,6 @@
-import { Box } from "@mui/material";
+import { Box, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
+// import "../CSSFile/Analytics.css";
 import FormControl from "@mui/material/FormControl";
 import {
   CommonTypography,
@@ -10,7 +11,11 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { years } from "../../Util/masterFile";
-import { Link } from "react-router-dom";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo/DemoContainer";
+import moment from "moment/moment";
 
 const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const [editPriceData, setEditPriceData] = useState({
@@ -18,6 +23,8 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
     years: "",
     regularPrice: "",
     offerPrice: "",
+    startDate: "",
+    endDate: "",
   });
 
   useEffect(() => {
@@ -27,6 +34,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
     storedValues.offerPrice = courseData.offer_price;
     setEditPriceData(storedValues);
   }, [courseData]);
+
   const handleInpurPrice = (value, type) => {
     let storedValues = Object.assign({}, editPriceData);
     if (type === "duration") {
@@ -56,7 +64,9 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
       storedValues.regularPrice &&
       storedValues.offerPrice
     ) {
-      if (parseInt(storedValues.regularPrice) > parseInt(storedValues.offerPrice)) {
+      if (
+        parseInt(storedValues.regularPrice) > parseInt(storedValues.offerPrice)
+      ) {
         handleInputChange("editPrice", storedValues);
 
         handleTrackerPage(2);
@@ -71,9 +81,18 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
       });
     }
   };
+  const handleCustumDate = (e, type) => {
+    let storedValues = Object.assign({}, editPriceData);
+    if (type === "Sdate") {
+      storedValues.startDate = moment(e).format("YYYY-MM-DD");
+    } else {
+      storedValues.endDate = moment(e).format("YYYY-MM-DD");
+    }
+    setEditPriceData(storedValues);
+    handleInputChange("editPrice", storedValues);
+  };
   return (
     <div className="formMain">
-      {console.log("storedValuesstoredValues,",editPriceData)}
       <Box sx={{ mt: "5%" }} className="editFirstBox">
         <Box>
           {CommonTypography(
@@ -103,7 +122,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
             { fontWeight: 600, label: "Years / Months / Days" },
             (Option = {
               // className: "editFirstText",
-              className : "fieldSizeYears"
+              className: "fieldSizeYears",
             })
           )}
           <FormControl sx={{ m: 1, minWidth: 240 }}>
@@ -122,7 +141,6 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
           </FormControl>
         </Box>
       </Box>
-
 
       <Box sx={{ marginTop: "5%" }} className="editFirstBox">
         <Box>
@@ -171,9 +189,46 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
           )}
         </Box>
       </Box>
+      <Box className="editFirstBox" style={{ marginTop: "10%" }}>
+        <div>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DemoContainer components={["DatePicker"]}>
+              <DatePicker
+                className="BoxShadowCourses"
+                renderInput={(params) => (
+                  <TextField
+                    size="small"
+                    {...params}
+                    sx={{ m: 0.5, mt: 0.7, background: "#fff" }}
+                  />
+                )}
+                onChange={(e) => handleCustumDate(e, "Sdate")}
+                label="Select Start Date"
+              />
+            </DemoContainer>
+          </LocalizationProvider>
+        </div>
+
+        <div className="marginscndBox">
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              className="BoxShadowCourses"
+              renderInput={(params) => (
+                <TextField
+                  size="small"
+                  {...params}
+                  sx={{ m: 0.5, mt: 0.8, background: "#fff" }}
+                />
+              )}
+              onChange={(e) => handleCustumDate(e, "Edate")}
+              label="Select End Date"
+            />
+          </LocalizationProvider>
+        </div>
+      </Box>
 
       <Box className="divider"></Box>
-     {commonButton({
+      {commonButton({
         handleTrackerPage: () => handlePricePage(),
         className: "coursesButton",
         label: "Add Content",

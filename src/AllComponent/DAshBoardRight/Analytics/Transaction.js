@@ -26,6 +26,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Popover from "@mui/material/Popover";
 import SideBar from '../../AdminDashboardMain/SideBar';
+import Header from '../../Courses/Header';
 
 const Transaction = () => {
     const columns = [
@@ -98,11 +99,11 @@ const Transaction = () => {
     
     return (
       <div className='grid-container'>
+      <Header Heading={"Transaction Dashboard"} />      
       <SideBar />
     <div className='main-container'>
     <div className=' m20'>
-        <CourseHeader Heading={"Transaction Dashboard"} />
-        <SearchBar mt = "-15px" placeholder="Search by name"/>
+      <SearchBar mt = "-15px" placeholder="Search by name"/>
 
        <div className='transactionCards'> 
             <TransactionCard  Data = {TranscationCardData}/>

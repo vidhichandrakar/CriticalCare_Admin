@@ -1,8 +1,9 @@
 .Add-main-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    row-gap: 30px;
-    margin: 28px 0px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 10px;
+  margin: 25px 0px;
+  justify-items: center;
   }
   .cardImage{
    border-top-right-radius: 15px;
@@ -14,16 +15,16 @@
   
   .card {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-around;
     border-radius: 15px;
     background-color: white;
     color: black;
     padding-bottom: 0;
-    width: 90%;
+    width: 100%;
     box-shadow: 2px 2px 2px 0.5px #ededed;
     margin-bottom: 25px;
-    padding-bottom: 5%;
+    /* padding-bottom: 5%; */
   }
   .AddCourses{
     display: flex;
@@ -44,6 +45,7 @@
     text-align: left;
     cursor: pointer;
     margin-top: 18px;
+   width:80%;
   }
   .Namep{
     color: grey;
@@ -69,7 +71,7 @@
   }
   @media screen and (max-width: 962px) {
     .Add-main-cards {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr ;
       }
   }
   @media screen and (max-width: 562px) {
@@ -99,16 +101,9 @@
     margin-top: 28px;
   }
   .Npublish{ 
-    padding: 4px 2px;
-    width: 60%;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    font-size: 0.8rem;
-    color: rgb(255, 255, 255);
-    position: absolute;
+   
     background-color: rgb(255, 2, 2);
-    opacity: 0.8;
-    margin-top: 28px;
+    
   }
   .publishBox{
     position: relative;

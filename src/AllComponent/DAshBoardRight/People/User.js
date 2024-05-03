@@ -38,6 +38,14 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import "react-toastify/dist/ReactToastify.css";
 import { visuallyHidden } from "@mui/utils";
 import { redirectRestriction } from "../../../Util/RedirectRestriction";
+import Header from "../../Courses/Header";
+
+import DialogTitle from "@mui/material/DialogTitle";
+import CloseIcon from "@mui/icons-material/Close";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import { DailogBox } from "../../../Util/CommonFields";
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -121,6 +129,8 @@ const User = () => {
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("user_name");
   const authorized = JSON.parse(localStorage.getItem("loggedInUser"));
+  const [isOpen, setIsOpen] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -179,6 +189,23 @@ const User = () => {
       },
     });
   };
+
+  const handleDeleteClick = () => {
+    console.log("Workinggggg");
+    handleClose();
+    setIsOpen(true);
+  };
+
+  const handleConfirmDelete = () => {
+    deleteSelectedItem();
+    handleDelete();
+    setIsOpen(false);
+  };
+
+  const handleCancelDelete = () => {
+    setIsOpen(false);
+  };
+  
 
   const deleteSelectedItem = () => {
     setLoaderState(true);
@@ -260,12 +287,12 @@ const User = () => {
 
   return (
     <div className="grid-container">
+      <Header
+        Heading={"Users (357)"}
+        subHeading={"View, Filter & Manage all your users"}
+      />
       <SideBar />
-      <div className=" m20">
-        <CourseHeader
-          Heading={"Users (357)"}
-          subHeading={"View, Filter & Manage all your users"}
-        />
+      <div className="main-container">
         <LoaderComponent loaderState={loaderState} />
         <div className="searchnfilter">
           <SearchBar mt="2%" placeholder="Search by name" />
@@ -280,7 +307,7 @@ const User = () => {
             </Button>
             <Button
               className="deleteButton"
-              onClick={deleteSelectedItem}
+              onClick={handleDeleteClick}
               variant="outlined"
               color="error"
             >
@@ -288,6 +315,12 @@ const User = () => {
             </Button>
           </div>
         ) : null}
+        <DailogBox
+          isOpen={isOpen}
+          handleConfirmDelete={handleConfirmDelete}
+          handleDeleteClick={handleDeleteClick}
+          handleCancelDelete={handleCancelDelete}
+        />
 
         <Paper
           sx={{ width: "100%", overflow: "hidden" }}
@@ -296,7 +329,7 @@ const User = () => {
           <TableContainer sx={{ maxHeight: 540 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
-                <TableRow >
+                <TableRow>
                   {columns.map((column) => (
                     <TableCell
                       key={column.id}
@@ -346,11 +379,9 @@ const User = () => {
                               (value) => row.user_id === value
                             ).length
                           }
-                          sx={
-                            {
-                               color:"rgb(216, 224, 240)"
-                            }
-                          }
+                          sx={{
+                            color: "rgb(216, 224, 240)",
+                          }}
                           onChange={(event) =>
                             handleChangeOnCheckBox(event, row.user_id)
                           }
@@ -391,7 +422,7 @@ const User = () => {
                 >
                   <Typography
                     className="redDeleteofTestPortal"
-                    onClick={handleDelete}
+                    onClick={handleDeleteClick}
                   >
                     {" "}
                     <DeleteIcon className="deleteIcon" /> Delete{" "}
@@ -402,27 +433,34 @@ const User = () => {
                   </Typography>
                 </Popover>
               </TableBody>
-              {userData?.length > 5 && <TableFooter>
-                <TablePagination
-                  rowsPerPageOptions={[4, 10, 25, { label: "All", value: -1 }]}
-                  // colSpan={3}
-                  count={userData.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  slotProps={{
-                    select: {
-                      inputProps: {
-                        "aria-label": "rows per page",
+              {userData?.length > 5 && (
+                <TableFooter>
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      4,
+                      10,
+                      25,
+                      { label: "All", value: -1 },
+                    ]}
+                    // colSpan={3}
+                    count={userData.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    slotProps={{
+                      select: {
+                        inputProps: {
+                          "aria-label": "rows per page",
+                        },
+                        native: true,
                       },
-                      native: true,
-                    },
-                  }}
-                  onPageChange={handleChangePage}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-                  ActionsComponent={TablePaginationActions}
-                // className="Pagination"
-                />
-              </TableFooter>}
+                    }}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                    ActionsComponent={TablePaginationActions}
+                    // className="Pagination"
+                  />
+                </TableFooter>
+              )}
             </Table>
           </TableContainer>
         </Paper>

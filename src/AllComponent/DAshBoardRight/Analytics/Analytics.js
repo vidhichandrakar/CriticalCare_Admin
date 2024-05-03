@@ -16,6 +16,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import RajTest from "../../AdminDashboardMain/RajTest";
+import Header from "../../Courses/Header";
 
 const Analytics = () => {
   const [defautlValueDate, setDefaultValueDate] = useState("Last 7 days");
@@ -32,13 +33,10 @@ const Analytics = () => {
     setDefaultValueDate(e.target.value);
 
     if (e.target.value === "Last 7 Days") {
-      console.log(moment().subtract(7, "days").calendar(), "7 din");
       setCustomDate(false);
     } else if (e.target.value === "Last 15 Days") {
       setCustomDate(false);
-      console.log(moment().subtract(15, "days").calendar(), "15 din");
     } else if (e.target.value === "Last 30 Days") {
-      console.log(moment().subtract(1, "months").calendar(), "30 days");
       setCustomDate(false);
     } else if (e.target.value === "Custom Date") {
       setCustomDate(true);
@@ -47,14 +45,15 @@ const Analytics = () => {
   const handleCustumDate = (e) => {};
   return (
     <div className="grid-container">
-      <SideBar />
-      <main className="main-container m20">
-        <CourseHeader
+       <Header
           Heading={"Analytics"}
           subHeading={
             "Analyze your sales and traffic to know your brand’s growth"
           }
         />
+      <SideBar />
+      <main className="main-container">
+       
         <div>
           <div style={{ display: "flex", flexDirection: "row" }}>
             <FormControl

@@ -3,6 +3,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
+import { TextField } from "@mui/material";
 
 const SearchBar = ({mt, placeholder}) => {
   const [searchBarValue, setSearchBarValue] = useState("")
@@ -17,14 +18,16 @@ const SearchBar = ({mt, placeholder}) => {
     
       
      <FormControl sx={{width: '23%', mt: mt,}} variant="outlined">
-          <OutlinedInput
+          <TextField
             id="outlined-adornment-weight"
-            startAdornment={<InputAdornment sx={{mr:1}}><SearchIcon/></InputAdornment>}
+            
             aria-describedby="outlined-weight-helper-text"
-            inputProps={{
+            InputProps={{
               'aria-label': 'weight', 
+              
+              startAdornment:<InputAdornment sx={{mr:1}}><SearchIcon/></InputAdornment>
             }}
-            sx={{ borderRadius: 30 }}
+            // sx={{ borderRadius: 30 }}
             className= "searchBar"
             placeholder= {placeholder}
             onChange={handlechangeSearchbar}
