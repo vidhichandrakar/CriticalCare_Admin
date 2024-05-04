@@ -41,28 +41,30 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
     regularPrice: "10000",
     offerPrice: "1000",
   });
-  const [singleValidity, setSingleValiduty] = useState({
+  const [singleValidity, setSingleValidity] = useState({
     duration: "20",
     years: { id: 1, label: "Month(s)" },
     regularPrice: "10000",
     offerPrice: "1000",
     startDate: "",
     endDate: "",
+    durationType: "",
+    date: "",
   });
   const [resetPrice, setResetPrice] = useState([
     {
       duration: "20",
       years: { id: 1, label: "Month(s)" },
-      regularPrice: "10000",
+      regularPrice: "400",
       offerPrice: "1000",
       startDate: "",
       endDate: "",
     },
     {
-      duration: "10",
+      duration: "40",
       years: { id: 1, label: "years" },
-      regularPrice: "4500",
-      offerPrice: "450",
+      regularPrice: "200",
+      offerPrice: "50",
       startDate: "",
       endDate: "",
     },
@@ -79,8 +81,8 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
     {
       duration: "10",
       years: { id: 1, label: "years" },
-      regularPrice: "4500",
-      offerPrice: "450",
+      regularPrice: "8020",
+      offerPrice: "520",
       startDate: "",
       endDate: "",
     },
@@ -97,15 +99,21 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   }, [courseData]);
 
   const handleInpurPrice = (value, type, selectedIndex) => {
+    // let storedValues = Object.assign({}, resetPrice);
     setResetPrice(
       resetPrice.map((item, idx) =>
         idx === selectedIndex ? { ...item, [type]: value } : item
       )
     );
+    // handleInputChange("editPrice", editPriceData);
   };
 
   const handlePricePage = () => {
-    const storedValues = editPriceData;
+    if (selectDurationValue === "Multiple Validity") {
+      handleInputChange("resetPrice", resetPrice);
+    }
+
+    const storedValues = singleValidity;
     if (
       storedValues.duration &&
       storedValues.years &&
@@ -142,7 +150,10 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
 
   const handleDuration = (e) => {
     // console.log(e.target.value);
+    let storedValues = Object.assign({}, singleValidity);
     setSelectedDurationValue(e.target.value);
+    storedValues.durationType = e.target.value;
+    setSingleValidity(storedValues);
   };
 
   const handleAddDuration = () => {
@@ -182,7 +193,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
     if (index === expanded) {
       setExpanded(null);
     }
-    setEditPriceData((prevItems) => {
+    setResetPrice((prevItems) => {
       return prevItems.filter((item, indexRemove) => indexRemove !== index);
     });
   };
@@ -195,6 +206,30 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
 
     // console.log("reset price", resetPrice, savedPrice);
   };
+
+  const handleValidityChange = (value, type) => {
+    let storedValues = Object.assign({}, singleValidity);
+    if (type === "duration") {
+      storedValues.duration = value;
+    } else if (type === "years") {
+      storedValues.years = value;
+    } else if (type === "regularPrice") {
+      storedValues.regularPrice = value;
+    } else if (type === "offerPrice") {
+      storedValues.offerPrice = value;
+    } else if (type === "date") {
+      storedValues.date = moment(new Date(value)).format("YYYY-MM-DD");
+    }
+    setSingleValidity(storedValues);
+    if (
+      storedValues.duration &&
+      storedValues.years &&
+      storedValues.regularPrice &&
+      storedValues.offerPrice
+    ) {
+      handleInputChange("editPrice", storedValues);
+    }
+  };
   return (
     <div className="formMain">
       <DurationConfiguration
@@ -202,7 +237,8 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
         selectDurationValue={selectDurationValue}
       />
       <br />
-
+      {console.log("resst", resetPrice)}
+      {console.log("edit Price", editPriceData)}
       {console.log("selectDurationValue", selectDurationValue)}
       {selectDurationValue === "Multiple Validity" ? (
         <div>
@@ -215,28 +251,30 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                 expanded={expanded === index}
               >
                 <AccordionSummary
-                  style={{marginTop:"7%"}}
-                  expandIcon={ <Stack spacing={2} direction="row" sx={{ ml: 35 }}>
-                  {expanded !== null && expanded === index ? (
-                    ""
-                  ) : (
-                    <>
-                      <Button
-                        color="error"
-                        onClick={() => handleDelete(index)}
-                        startIcon={<DeleteIcon />}
-                      >
-                        Delete
-                      </Button>
-                      <Button
-                        color="primary"
-                        onClick={() => handleExpanded(index)}
-                      >
-                        <BorderColorIcon /> Edit
-                      </Button>
-                    </>
-                  )}
-                </Stack>}
+                  style={{ marginTop: "7%" }}
+                  expandIcon={
+                    <Stack spacing={2} direction="row" sx={{ ml: 35 }}>
+                      {expanded !== null && expanded === index ? (
+                        ""
+                      ) : (
+                        <>
+                          <Button
+                            color="error"
+                            onClick={() => handleDelete(index)}
+                            startIcon={<DeleteIcon />}
+                          >
+                            Delete
+                          </Button>
+                          <Button
+                            color="primary"
+                            onClick={() => handleExpanded(index)}
+                          >
+                            <BorderColorIcon /> Edit
+                          </Button>
+                        </>
+                      )}
+                    </Stack>
+                  }
                   aria-controls="panel1-content"
                   id="panel1-header"
                 >
@@ -245,12 +283,14 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                       {`${item?.duration} ${item?.years?.label}  `}{" "}
                       {/* <FiberManualRecordIcon fontSize="small" />{" "} */}
                       {/* <CurrencyRupeeIcon color="primary" /> */}
-                     <b style={{color:"#18568f", marginLeft:"10px"}}> {`  ₹ ${item?.offerPrice}`}</b>
+                      <b style={{ color: "#18568f", marginLeft: "10px" }}>
+                        {" "}
+                        {`  ₹ ${item?.offerPrice}`}
+                      </b>
                     </Typography>
-                   
                   </div>
                 </AccordionSummary>
-                <AccordionDetails >
+                <AccordionDetails>
                   <div className="accoridanBtn">
                     <Button
                       variant="text"
@@ -372,8 +412,12 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
             </div>
           ))}
           <div style={{ marginTop: "25px" }}>
-            <Button variant="text" onClick={() => handleAddDuration()} style={{textTransform:"none"}}>
-             + Add Another validity
+            <Button
+              variant="text"
+              onClick={() => handleAddDuration()}
+              style={{ textTransform: "none" }}
+            >
+              + Add Another validity
             </Button>
           </div>
         </div>
@@ -396,8 +440,8 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                 },
                 (Option = {
                   sx: { width: 240, marginTop: "4% !important" },
-                  // handleInput: (event) =>
-                  //   handleInpurPrice(event, "duration", index),
+                  handleInput: (event) =>
+                    handleValidityChange(event, "duration"),
                   type: "duration",
                   value: singleValidity.duration,
                 })
@@ -419,8 +463,8 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                     className: "categorytext",
                   },
                   (Option = {
-                    // handleInput: (event) =>
-                    //   handleInpurPrice(event, "years", index),
+                    handleInput: (event) =>
+                      handleValidityChange(event, "years"),
 
                     categoryValue: singleValidity?.years,
                     type: "years",
@@ -446,8 +490,8 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                 },
                 (Option = {
                   sx: { width: 240, marginTop: "4% !important" },
-                  // handleInput: (event) =>
-                  //   handleInpurPrice(event, "regularPrice", index),
+                  handleInput: (event) =>
+                    handleValidityChange(event, "regularPrice"),
                   type: "regularPrice",
                   value: singleValidity.regularPrice,
                 })
@@ -470,8 +514,8 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                 },
                 (Option = {
                   sx: { width: 240, marginTop: "4% !important" },
-                  // handleInput: (event) =>
-                  //   handleInpurPrice(event, "offerPrice", index),
+                  handleInput: (event) =>
+                    handleValidityChange(event, "offerPrice"),
                   type: "offerPrice",
                   value: singleValidity.offerPrice,
                 })
@@ -498,10 +542,10 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                 },
                 (Option = {
                   sx: { width: 240, marginTop: "4% !important" },
-                  // handleInput: (event) =>
-                  //   handleInpurPrice(event, "regularPrice", index),
+                  handleInput: (event) =>
+                    handleValidityChange(event, "regularPrice"),
                   type: "regularPrice",
-                  value: lifetimeValidation.regularPrice,
+                  value: singleValidity.regularPrice,
                 })
               )}
             </Box>
@@ -522,10 +566,10 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                 },
                 (Option = {
                   sx: { width: 240, marginTop: "4% !important" },
-                  // handleInput: (event) =>
-                  //   handleInpurPrice(event, "offerPrice", index),
+                  handleInput: (event) =>
+                    handleValidityChange(event, "offerPrice"),
                   type: "offerPrice",
-                  value: lifetimeValidation.offerPrice,
+                  value: singleValidity.offerPrice,
                 })
               )}
             </Box>
@@ -550,10 +594,10 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                 },
                 (Option = {
                   sx: { width: 240, marginTop: "4% !important" },
-                  // handleInput: (event) =>
-                  //   handleInpurPrice(event, "regularPrice", index),
+                  handleInput: (event) =>
+                    handleValidityChange(event, "regularPrice"),
                   type: "regularPrice",
-                  value: expiryDate.regularPrice,
+                  value: singleValidity.regularPrice,
                 })
               )}
             </Box>
@@ -574,10 +618,10 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                 },
                 (Option = {
                   sx: { width: 240, marginTop: "4% !important" },
-                  // handleInput: (event) =>
-                  //   handleInpurPrice(event, "offerPrice", index),
+                  handleInput: (event) =>
+                    handleValidityChange(event, "offerPrice"),
                   type: "offerPrice",
-                  value: expiryDate.offerPrice,
+                  value: singleValidity.offerPrice,
                 })
               )}
             </Box>
@@ -593,7 +637,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                         sx={{ m: 0.5, mt: 0.7, background: "#fff" }}
                       />
                     )}
-                    // onChange={(e) => handleCustumDate(e, "Sdate")}
+                    onChange={(event) => handleValidityChange(event, "date")}
                     label="Select Start Date"
                   />
                 </DemoContainer>
