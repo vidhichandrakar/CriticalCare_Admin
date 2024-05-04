@@ -133,7 +133,8 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         trackerPage={trackerPage}
         handleTrackerPage={handleTrackerPage}
       />
-      {console.log("Create COurse", resetPrice)}
+      {console.log("Create other", editPrice)}
+      {console.log("Create Multiple", resetPrice)}
       {trackerPage === 0 ? (
         <CreateForm
           handleTrackerPage={handleTrackerPage}

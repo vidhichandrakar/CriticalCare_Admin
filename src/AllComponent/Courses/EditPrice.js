@@ -33,13 +33,13 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const [selectDurationValue, setSelectedDurationValue] = useState("");
   const [expanded, setExpanded] = useState();
   const [expiryDate, setExpiryDate] = useState({
-    regularPrice: "10000",
-    offerPrice: "1000",
+    regularPrice: "235980",
+    offerPrice: "789",
     startDate: "",
   });
   const [lifetimeValidation, setLifetimeValidation] = useState({
-    regularPrice: "10000",
-    offerPrice: "1000",
+    regularPrice: "8502",
+    offerPrice: "520",
   });
   const [singleValidity, setSingleValidity] = useState({
     duration: "20",
@@ -111,30 +111,37 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const handlePricePage = () => {
     if (selectDurationValue === "Multiple Validity") {
       handleInputChange("resetPrice", resetPrice);
-    }
-
-    const storedValues = singleValidity;
-    if (
-      storedValues.duration &&
-      storedValues.years &&
-      storedValues.regularPrice &&
-      storedValues.offerPrice
-    ) {
+    } else if (selectDurationValue === "Single Validity") {
+      const storedValues = singleValidity;
       if (
-        parseInt(storedValues.regularPrice) > parseInt(storedValues.offerPrice)
+        storedValues.duration &&
+        storedValues.years &&
+        storedValues.regularPrice &&
+        storedValues.offerPrice
       ) {
-        handleInputChange("editPrice", storedValues);
+        if (
+          parseInt(storedValues.regularPrice) >
+          parseInt(storedValues.offerPrice)
+        ) {
+          handleInputChange("editPrice", storedValues);
 
-        handleTrackerPage(2);
+          handleTrackerPage(2);
+        } else {
+          toast.error("Offer Price Must Be Less Then Regular Price", {
+            autoClose: 500,
+          });
+        }
       } else {
-        toast.error("Offer Price Must Be Less Then Regular Price", {
+        toast.error("Required fields cannot be empty!", {
           autoClose: 500,
         });
       }
-    } else {
-      toast.error("Required fields cannot be empty!", {
-        autoClose: 500,
-      });
+    } else if (selectDurationValue === "Lifetime Validity") {
+      const storedValues = lifetimeValidation;
+      handleInputChange("editPrice", storedValues);
+    } else if (selectDurationValue === "Course Expiry Date") {
+      const storedValues = expiryDate;
+      handleInputChange("editPrice", storedValues);
     }
   };
   // const handleCustumDate = (e, type) => {
@@ -545,7 +552,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                   handleInput: (event) =>
                     handleValidityChange(event, "regularPrice"),
                   type: "regularPrice",
-                  value: singleValidity.regularPrice,
+                  value: lifetimeValidation.regularPrice,
                 })
               )}
             </Box>
@@ -569,7 +576,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                   handleInput: (event) =>
                     handleValidityChange(event, "offerPrice"),
                   type: "offerPrice",
-                  value: singleValidity.offerPrice,
+                  value: lifetimeValidation.offerPrice,
                 })
               )}
             </Box>
@@ -597,7 +604,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                   handleInput: (event) =>
                     handleValidityChange(event, "regularPrice"),
                   type: "regularPrice",
-                  value: singleValidity.regularPrice,
+                  value: expiryDate.regularPrice,
                 })
               )}
             </Box>
@@ -621,7 +628,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                   handleInput: (event) =>
                     handleValidityChange(event, "offerPrice"),
                   type: "offerPrice",
-                  value: singleValidity.offerPrice,
+                  value: expiryDate.offerPrice,
                 })
               )}
             </Box>
