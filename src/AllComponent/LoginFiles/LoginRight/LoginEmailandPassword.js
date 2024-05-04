@@ -71,6 +71,12 @@ const LoginEmailandPassword = () => {
     return () => clearInterval(interval);
   }, [isActive]);
 
+  useEffect(() => {
+    if (textField1Ref.current) {
+      textField1Ref?.current?.focus();
+    }
+  }, []);
+
   const handleUserLogin = () => {
     let typedOtp = parseInt(
       otpValue.otp1 + otpValue.otp2 + otpValue.otp3 + otpValue.otp4
@@ -177,7 +183,8 @@ const LoginEmailandPassword = () => {
   const textField2Ref = useRef(null);
   const textField3Ref = useRef(null);
   const textField4Ref = useRef(null);
-  const handleLoginByOTP = ({ value, type }) => {
+
+  const handleLoginByOTP = ({ value, type, event }) => {
     let prevOtp = { ...otpValue };
     prevOtp[type] = value;
     if (
@@ -194,11 +201,11 @@ const LoginEmailandPassword = () => {
     setOtp(prevOtp);
     setDisableLogiBtn(false);
 
-    if (type === "otp1") {
+    if (type === "otp1" && prevOtp.otp1 != "") {
       textField2Ref.current.focus();
-    } else if (type === "otp2") {
+    } else if (type === "otp2" && prevOtp.otp2 != "") {
       textField3Ref.current.focus();
-    } else if (type === "otp3") {
+    } else if (type === "otp3" && prevOtp.otp3 != "") {
       textField4Ref.current.focus();
     }
   };
@@ -210,7 +217,8 @@ const LoginEmailandPassword = () => {
     }
   };
 
-  const handleKeyDown = (event, value, originalNum) => {
+  const handleKeyDown = (event, type, originalNum) => {
+    console.log(event, "backspaceOTP");
     let prevOtp = { ...otpValue };
     if (typeof phoneNO !== "undefined" && phoneNO?.length) {
       if (phoneNO?.length === 10 && event.keyCode === 13) {
@@ -227,6 +235,17 @@ const LoginEmailandPassword = () => {
       ) {
         prevOtp.disable = false;
         handleUserLogin();
+      } else if (event.keyCode === 8) {
+        if (type === "otp2") {
+          console.log("2nd otp");
+          let prevOtp = { ...otpValue };
+          prevOtp[type] = "";
+          setOtp(prevOtp);
+          setTimeout(() => {
+            textField1Ref?.current?.focus();
+          }, 100);
+        }
+        console.log(type, event.target.value);
       }
     }
   };
@@ -259,13 +278,14 @@ const LoginEmailandPassword = () => {
 
         <Box sx={{ mt: 2 }} className="phNoBox">
           <TextField
+            autoFocus
             id="fullWidth"
             placeholder="Mobile Number"
             className="phoneTextField
               BoxShadowLogin"
             sx={{ color: "#000" }}
             variant="outlined"
-            inputProps={{ maxLength: 10 }}
+            inputProps={{ maxLength: 10, tabIndex: 1 }}
             disabled={phoneNO?.length === 10 && getOTP !== ""}
             type="number"
             value={phoneNO}
@@ -291,6 +311,7 @@ const LoginEmailandPassword = () => {
         {getOTP !== "" && (
           <Box sx={{ mt: 2 }} className="OTPMainBox">
             <TextField
+              autoFocus
               variant="standard"
               className="OTPBox"
               onChange={(event) =>
@@ -301,6 +322,7 @@ const LoginEmailandPassword = () => {
               inputProps={{
                 maxLength: 1,
                 className: "boxOtpWidth",
+                tabIndex: 1,
               }}
             />
             <TextField
