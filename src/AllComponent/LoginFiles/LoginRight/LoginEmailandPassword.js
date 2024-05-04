@@ -237,12 +237,27 @@ const LoginEmailandPassword = () => {
         handleUserLogin();
       } else if (event.keyCode === 8) {
         if (type === "otp2") {
-          console.log("2nd otp");
           let prevOtp = { ...otpValue };
           prevOtp[type] = "";
           setOtp(prevOtp);
           setTimeout(() => {
             textField1Ref?.current?.focus();
+          }, 100);
+        }
+         else if (type === "otp3") {
+          let prevOtp = { ...otpValue };
+          prevOtp[type] = "";
+          setOtp(prevOtp);
+          setTimeout(() => {
+            textField2Ref?.current?.focus();
+          }, 100);
+        }
+       else if (type === "otp4") {
+          let prevOtp = { ...otpValue };
+          prevOtp[type] = "";
+          setOtp(prevOtp);
+          setTimeout(() => {
+            textField3Ref?.current?.focus();
           }, 100);
         }
         console.log(type, event.target.value);
