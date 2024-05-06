@@ -584,6 +584,22 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
         </div>
       ) : selectDurationValue === "Course Expiry Date" ? (
         <div>
+             <LocalizationProvider dateAdapter={AdapterDayjs} >
+                <DemoContainer components={["DatePicker"]} >
+                  <DatePicker
+                    className="BoxShadowCourses"
+                    sx={{width:700}}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        sx={{ m: 0.5, mt: 0.7, background: "#fff" }}
+                      />
+                    )}
+                    onChange={(event) => handleValidityChange(event, "date")}
+                    label="Select Expiry Date"
+                  />
+                </DemoContainer>
+              </LocalizationProvider>
           <Box sx={{ marginTop: "5%" }} className="editFirstBox">
             <Box>
               {CommonTypography(
@@ -632,25 +648,11 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                 })
               )}
             </Box>
-            <div>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DemoContainer components={["DatePicker"]}>
-                  <DatePicker
-                    className="BoxShadowCourses"
-                    renderInput={(params) => (
-                      <TextField
-                        size="small"
-                        {...params}
-                        sx={{ m: 0.5, mt: 0.7, background: "#fff" }}
-                      />
-                    )}
-                    onChange={(event) => handleValidityChange(event, "date")}
-                    label="Select Start Date"
-                  />
-                </DemoContainer>
-              </LocalizationProvider>
-            </div>
+        
           </Box>
+          
+           
+         
         </div>
       ) : null}
       {/* <Box className="editFirstBox" style={{ marginTop: "10%" }}>

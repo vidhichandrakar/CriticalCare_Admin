@@ -67,11 +67,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           basicInfo?.thumbnailPath?.name
         );
       }
-      // formData.append(
-      //   "thumbnail_path",
-      //   basicInfo?.thumbnailPath,
-      //   basicInfo?.thumbnailPath?.name
-      // );
       formData.append("content_type_id", 1);
       formData.append(
         "modified_by",
