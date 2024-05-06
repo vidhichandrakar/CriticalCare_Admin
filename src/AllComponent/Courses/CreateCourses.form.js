@@ -19,6 +19,7 @@ import { useDropzone } from "react-dropzone";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
 import { redirectRestriction } from "../../Util/RedirectRestriction";
+import InputLabel from '@mui/material/InputLabel';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -69,7 +70,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   });
 
   useEffect(() => {
-    if (redirectRestriction()) {
+    // if (redirectRestriction()) {
       getCategory({
         callBack: (response) => {
           const userCallBack = response?.data;
@@ -79,9 +80,9 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           toast.error(error.message);
         },
       });
-    } else {
-      navigate("/admin");
-    }
+    // } else {
+    //   navigate("/admin");
+    // }
   }, []);
 
   useEffect(() => {
@@ -333,6 +334,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
             })
           )}
           <FormControl sx={{ m: 1, minWidth: 240 }} className="categorySelect">
+          <InputLabel >Select Sub Category</InputLabel>
             <Select
               label="Sub Category"
               value={storedBasicInfo?.subCategory}

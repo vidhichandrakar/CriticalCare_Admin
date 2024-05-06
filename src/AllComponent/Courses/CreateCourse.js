@@ -18,6 +18,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   const [trackerPage, setTackerPage] = useState(0);
   const [basicInfo, setBasicInfo] = useState({});
   const [editPrice, setEditPrice] = useState({});
+  const [resetPrice, setRestPrice] = useState([{}]);
   const [courseData, setCourseData] = useState([]);
   const [loaderState, setLoaderState] = useState(false);
 
@@ -81,8 +82,11 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         JSON.parse(localStorage.getItem("loggedInUser")).user_id
       );
       formData.append("is_publish", "not published");
-      formData.append("end_date", editPrice?.startDate);
-      formData.append("start_date", editPrice?.endDate);
+      // formData.append("end_date", editPrice?.startDate);
+      // formData.append("start_date", editPrice?.endDate);
+      formData.append("end_date", "20/02/2024");
+      formData.append("start_date", editPrice?.date);
+      formData.append("duration_type", editPrice?.durationType);
     } catch (error) {
       console.log(error);
     }
@@ -118,6 +122,8 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       setBasicInfo(value);
     } else if (type === "editPrice") {
       setEditPrice(value);
+    } else if (type === "resetPrice") {
+      setRestPrice(value);
     }
   };
 
@@ -127,6 +133,8 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         trackerPage={trackerPage}
         handleTrackerPage={handleTrackerPage}
       />
+      {console.log("Create other", editPrice)}
+      {console.log("Create Multiple", resetPrice)}
       {trackerPage === 0 ? (
         <CreateForm
           handleTrackerPage={handleTrackerPage}
