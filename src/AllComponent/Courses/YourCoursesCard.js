@@ -1,12 +1,7 @@
-import moment from "moment/moment";
 import React, { useState } from "react";
-import cardimg from "../../Media/Images/db7187e8-b7cf-47ed-8900-6de89dabde06.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { capitalize } from "@material-ui/core";
-import StarRateIcon from "@mui/icons-material/StarRate";
 import yellowEnvlope from "../../Media/Images/yellowEnvlope.jpeg";
-
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { Box, Tooltip, Typography } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
@@ -24,6 +19,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
             const createdBy = userData.filter(
               (user) => user.user_id === item.created_by
             );
+            console.log(item, "itemline22")
             return (
               <div
                 className=" container courseCard"

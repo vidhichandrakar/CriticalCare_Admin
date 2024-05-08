@@ -412,7 +412,7 @@ const Testimonial = () => {
                     onClick={handleDeleteClick}
                   >
                     {" "}
-                    <DeleteIcon className="deleteIcon" /> Delete{" "}
+                    <DeleteIcon className="deleteIcon" /> Delete
                   </Typography>
                   <Typography className="redDeleteofTestPortal blueBlockUser">
                     <BlockIcon className="deleteIcon" /> Block User

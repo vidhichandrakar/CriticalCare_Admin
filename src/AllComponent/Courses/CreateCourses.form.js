@@ -245,7 +245,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           label: "Description",
         })}
 
-        {hideValidationTickDesc && <DoneIcon className="RightTick" />}
+        {hideValidationTickDesc && <CheckCircleRoundedIcon className="RightTick" />}
       </div>
       <TextField
         inputProps={{ className: "textField" }}
