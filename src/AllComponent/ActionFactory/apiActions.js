@@ -3,20 +3,26 @@ import { APIS } from "./apiConstants";
 
 export const getAllUsersApi = ({ callBack, error }) => {
   const url = APIS.getAllUsers;
-  axios.get(url).then((response) => {
-    callBack(response);
-  }).catch((errorMessage) => {
-    error(errorMessage);
-  });
+  axios
+    .get(url)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
 };
 
 export const getAllCourses = ({ callBack, error }) => {
   const url = APIS.allCourses;
-  axios.get(url).then((response) => {
-    callBack(response);
-  }).catch((errorMessage) => {
-    error(errorMessage);
-  });
+  axios
+    .get(url)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
 };
 
 export const deleteUser = ({ userId, callBack }) => {
@@ -79,21 +85,27 @@ export const updateMemberDetails = ({ payload, callBack }) => {
     callBack(response);
   });
 };
-export const createTestPortal = ({ payload, callBack, error}) => {
+export const createTestPortal = ({ payload, callBack, error }) => {
   const url = APIS.getTest;
-  axios.post(url, payload).then((response) => {
-    callBack(response);
-  }).catch((errorMessage) => {
-    error(errorMessage);
-  });
+  axios
+    .post(url, payload)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
 };
-export const getTeam = ({ callBack,error }) => {
+export const getTeam = ({ callBack, error }) => {
   const url = APIS.updateMember;
-  axios.get(url).then((response) => {
-    callBack(response);
-  }).catch((errorMessage) => {
-    error(errorMessage);
-  });
+  axios
+    .get(url)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
 };
 
 export const getTeamByID = ({ teamId, callBack }) => {
@@ -105,19 +117,25 @@ export const getTeamByID = ({ teamId, callBack }) => {
 
 export const deleteMember = ({ userId, callBack, error }) => {
   const url = APIS.updateMember + "/" + userId;
-  axios.delete(url).then((response) => {
-    callBack(response);
-  }).catch((errorMessage) => {
-    error(errorMessage);
-  });
+  axios
+    .delete(url)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
 };
 export const deleteTestPortal = ({ userId, callBack, error }) => {
   const url = APIS.getTest + "/" + userId;
-  axios.delete(url).then((response) => {
-    callBack(response);
-  }).catch((errorMessage) => {
-    error(errorMessage);
-  });
+  axios
+    .delete(url)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
 };
 
 export const updateTeam = ({ payload, callBack }) => {
@@ -162,42 +180,61 @@ export const getTestByID = ({ testId, callBack }) => {
   });
 };
 
-
-export const login =({payload, callBack,error})=>{
+export const login = ({ payload, callBack, error }) => {
   const url = APIS.login;
-  axios.post(url,payload).then((response)=>{
-    callBack(response);
-  }).catch((errorMessage) => {
-    error(errorMessage);
-  });
-}
+  axios
+    .post(url, payload)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
 
-export const verifyOtp =({payload, callBack,error})=>{
+export const verifyOtp = ({ payload, callBack, error }) => {
   const url = APIS.verifyLogin;
-  axios.post(url,payload).then((response)=>{
+  axios
+    .post(url, payload)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
+
+export const createSubCategory = ({ payload, callBack }) => {
+  const url = APIS.getCategory;
+  axios.post(url, payload).then((response) => {
     callBack(response);
-  }).catch((errorMessage) => {
-    error(errorMessage);
   });
-}
+};
 
-export const createSubCategory=({payload,callBack})=>{
-  const url= APIS.getCategory;
-  axios.post(url,payload).then((response)=>{
-    callBack(response);
-  })
-}
-
-export const getSubcategoryList = ({callBack, mainCatID})=>{
+export const getSubcategoryList = ({ callBack, mainCatID }) => {
   const url = APIS.getSubCategory + "/" + mainCatID;
-  axios.get(url).then((response)=>{
+  axios.get(url).then((response) => {
     callBack(response);
-  })
-}
+  });
+};
 
-export const publishOrEditCourse = ({callBack, courseId, payload})=>{
+export const publishOrEditCourse = ({ callBack, courseId, payload }) => {
   const url = APIS.allCourses + "/" + courseId;
-  axios.put(url, payload).then((response)=>{
+  axios.put(url, payload).then((response) => {
     callBack(response);
-  })
-}
+  });
+};
+
+export const getCourseDuration = ({ callBack }) => {
+  const url = APIS.getCourseDuration;
+  axios.get(url).then((response) => {
+    callBack(response);
+  });
+};
+
+export const getDuration = ({ callBack }) => {
+  const url = APIS.getDuration;
+  axios.get(url).then((response) => {
+    callBack(response);
+  });
+};

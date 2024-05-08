@@ -17,7 +17,7 @@ import { Link, useNavigate } from "react-router-dom";
 const CreateCourses = ({ handleHeaderLabels }) => {
   const [trackerPage, setTackerPage] = useState(0);
   const [basicInfo, setBasicInfo] = useState({});
-  const [editPrice, setEditPrice] = useState({});
+  const [editPrice, setEditPrice] = useState([{}]);
   const [resetPrice, setRestPrice] = useState([{}]);
   const [courseData, setCourseData] = useState([]);
   const [loaderState, setLoaderState] = useState(false);
@@ -97,7 +97,9 @@ const CreateCourses = ({ handleHeaderLabels }) => {
     } else {
       createCourse({
         courseData: formData,
+
         callBack: (response) => {
+          console.log("ALL response", formData);
           toast.success("Course added successfully!", {
             autoClose: 500,
           });
@@ -128,8 +130,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         trackerPage={trackerPage}
         handleTrackerPage={handleTrackerPage}
       />
-      {console.log("Create other", editPrice)}
-      {console.log("Create Multiple", resetPrice)}
       {trackerPage === 0 ? (
         <CreateForm
           handleTrackerPage={handleTrackerPage}

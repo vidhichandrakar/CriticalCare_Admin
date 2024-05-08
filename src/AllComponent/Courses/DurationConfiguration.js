@@ -6,7 +6,10 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { CommonTypography } from "../../Util/CommonFields";
 import { Typography } from "@mui/material";
-import "../CSSFile/Duration.css"
+import "../CSSFile/Duration.css";
+import { useEffect } from "react";
+import { getCourseDuration } from "../ActionFactory/apiActions";
+import { useState } from "react";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -18,7 +21,18 @@ const MenuProps = {
     },
   },
 };
-const DurationConfiguration = ({handleDuration,selectDurationValue}) => {
+
+const DurationConfiguration = ({ handleDuration, selectDurationValue }) => {
+  const [courseDurationType, setCourseDurationType] = useState([{}]);
+
+  useEffect(() => {
+    getCourseDuration({
+      callBack: (response) => {
+        setCourseDurationType(response.data);
+      },
+    });
+  }, []);
+
   return (
     <div>
       <Box>
@@ -29,14 +43,9 @@ const DurationConfiguration = ({handleDuration,selectDurationValue}) => {
           })
         )}
         <FormControl sx={{ m: 1, minWidth: 630 }} className="categorySelect">
-          {/* {console.log(
-            "selectDurationValue 44",
-            selectDurationValue !== "",
-            selectDurationValue
-          )} */}
           <Select
             value={
-              selectDurationValue ? selectDurationValue : `Select Duration Type`
+              selectDurationValue?.duration_type_name ? selectDurationValue : `Select Duration Type`
             }
             renderValue={() => {
               return selectDurationValue !== "" ? (
@@ -50,11 +59,14 @@ const DurationConfiguration = ({handleDuration,selectDurationValue}) => {
             inputProps={{ "aria-label": "Without label" }}
             onChange={handleDuration}
           >
-            {/* {console.log("selectDurationValue 22", selectDurationValue)} */}
-            <MenuItem value={"Single Validity"}>Single Validity</MenuItem>
-            <MenuItem value={"Multiple Validity"}>Multiple Validity</MenuItem>
-            <MenuItem value={"Lifetime Validity"}>Lifetime Validity</MenuItem>
-            <MenuItem value={"Course Expiry Date"}>Course Expiry Date</MenuItem>
+            {courseDurationType.map((item) => (
+              <MenuItem
+                key={item.duration_type_id}
+                value={item}
+              >
+                {item.duration_type_name}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </Box>
