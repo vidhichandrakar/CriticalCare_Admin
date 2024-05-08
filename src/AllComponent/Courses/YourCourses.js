@@ -33,6 +33,18 @@ const YourCourses = () => {
         callBack: (response) => {
           const userCallBack = response?.data;
           setAllCourses(userCallBack);
+          getAllUsersApi({
+            callBack: (response) => {
+              const userCallBack = response?.data;
+              setUserData(userCallBack);
+              setLoaderState(false);
+            },
+            error: (error) => {
+              toast.error(error.message);
+              console.log(error.message);
+              setLoaderState(false);
+            },
+          });
           setLoaderState(false);
         },
         error: (error) => {
@@ -41,18 +53,7 @@ const YourCourses = () => {
           setLoaderState(false);
         },
       });
-      getAllUsersApi({
-        callBack: (response) => {
-          const userCallBack = response?.data;
-          setUserData(userCallBack);
-          setLoaderState(false);
-        },
-        error: (error) => {
-          toast.error(error.message);
-          console.log(error.message);
-          setLoaderState(false);
-        },
-      });
+    
     } else {
       navigate("/admin");
     }
@@ -72,16 +73,7 @@ const YourCourses = () => {
         <SearchBar  placeholder="Search by name" />
         </Box>
         <div className="Add-main-cards">
-          {/* <div className="card">
-            <div className="AddCourses">
-              <img src={Folder} className="FolderImg" />
-              <Link to="/CreateCourses">
-                <Button variant="contained" className="AddBtn">
-                  Add New Courses <AddRoundedIcon />
-                </Button>
-              </Link>
-            </div>
-          </div> */}
+         
           <YourCoursesCard
             allCourses={allCourses}
             userData={userData}

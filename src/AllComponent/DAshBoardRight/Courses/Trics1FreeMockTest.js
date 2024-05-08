@@ -17,6 +17,7 @@ import {
   deleteCourses,
   getCourseById,
   publishOrEditCourse,
+  getDuration
 } from "../../ActionFactory/apiActions";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -39,6 +40,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [courseData, setCourseData] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [durationData, setDuration] = useState([]);
   let location = useLocation();
   const courseId = location.state?.id;
   const open = Boolean(anchorEl);
@@ -94,7 +96,21 @@ const Trics1FreeMockTest = ({ onDelete }) => {
         },
       });
     }
+    getDuration({
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setDuration(userCallBack);
+        console.log(response,"kjhgfxdgchj")
+      },
+      error: (error) => {
+        // toast.error(error.message);
+        // console.log(error.message);
+      },
+    });
   }, [courseId]);
+ 
+  const durationName = durationData?.filter( (duraData) => duraData?.duration_id == courseData?.durations?.length && courseData?.durations[0]?.duration_id)
+             
 
   const handleDeleteCourse = () => {
     deleteCourses({
@@ -160,11 +176,13 @@ const Trics1FreeMockTest = ({ onDelete }) => {
               <div className="PricenOfferPrice">
                 <div>
                   <p className="blackPara">Price</p>
-                  <p className="greyPara">{courseData.price}</p>
+                  {/* <p className="greyPara">{courseData.durations[0]?.price}</p> */}
+                  <p className="greyPara">₹{courseData?.durations?.length &&  courseData?.durations[0]?.offer_price}</p>
                 </div>
                 <div className="offerPrice">
                   <p className="blackPara">Offer Price</p>
-                  <p className="greyPara">{courseData.offer_price}</p>
+                  {/* <p className="greyPara">{courseData.durations[0]?.offer_price}</p> */}
+                  <p className="greyPara">{courseData?.durations?.length && courseData?.durations[0]?.price}</p>
                 </div>
               </div>
               <hr />
@@ -181,7 +199,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
               <hr />
 
               <p className="blackPara">Course Duration</p>
-              <p className="greyPara">1 year</p>
+              <p className="greyPara">{courseData?.durations?.length && courseData?.durations[0]?.duration} {durationName?.length && durationName[0]?.duration_name}</p>
               <hr />
 
               <div className="StuEnrViewAll">

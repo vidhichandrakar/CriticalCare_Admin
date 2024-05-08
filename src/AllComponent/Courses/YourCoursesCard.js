@@ -1,16 +1,33 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import yellowEnvlope from "../../Media/Images/yellowEnvlope.jpeg";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { Box, Tooltip, Typography } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import { getDuration } from "../ActionFactory/apiActions";
 
 const YourCoursesCard = ({ allCourses, userData }) => {
+  
+  const [durationData, setDuration] = useState([]);
   const navigate = useNavigate();
+  useEffect(() => {
+    getDuration({
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setDuration(userCallBack);
+        console.log(response,"kjhgfxdgchj")
+      },
+      error: (error) => {
+        // toast.error(error.message);
+        // console.log(error.message);
+      },
+    });
+  }, []);
   const handleCourse = (id) => {
     navigate("/Trics1FreeMockTest", { state: { id: id } });
   };
+
   return (
     <>
       {allCourses.length
@@ -19,6 +36,8 @@ const YourCoursesCard = ({ allCourses, userData }) => {
             const createdBy = userData.filter(
               (user) => user.user_id === item.created_by
             );
+            const durationName = durationData?.filter( (duraData) => duraData?.duration_id == item?.durations[0]?.duration_id)
+              
             console.log(item, "itemline22")
             return (
               <div
@@ -63,15 +82,15 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                     </Tooltip>
                     <div className="duration">
                       <AccessTimeIcon className="clock" />{" "}
-                      <Typography className="durationText">43 hours</Typography>
+                      <Typography className="durationText">{item?.durations[0]?.duration_id} {durationName[0]?.duration_name}</Typography>
                     </div>
                     <div className="duration" style={{ marginTop: "10%" }}>
                       <Typography className="offerPrice">
                         {" "}
-                        ₹ {item.offer_price}{" "}
+                        ₹ {item.durations[0]?.offer_price}{" "}
                       </Typography>
                       <Typography className="durationText price">
-                        {item.price}
+                      ₹{item.durations[0]?.price}
                       </Typography>
                     </div>
                   </div>
