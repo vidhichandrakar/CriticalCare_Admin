@@ -35,7 +35,6 @@ function TestFirstPage() {
             </div>
 
             <div className='testRightSection'>
-              {/* <h1>hey</h1> */}
               <Box className="stickyTopBox">
                 <div><h4>Test Details<EditIcon className='blueEdit'/></h4></div>
                 <div><span><AccessTimeIcon className='testDurationLogo'/>Test Duration: <b>3hrs30mins</b></span>
