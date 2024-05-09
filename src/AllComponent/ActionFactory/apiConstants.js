@@ -11,4 +11,6 @@ export const APIS = {
   login: REACT_APP_API + "/login",
   verifyLogin: REACT_APP_API + "/login/verify-otp",
   getSubCategory: REACT_APP_API + "/category/subCategory",
+  getCourseDuration: REACT_APP_API + "/durationType",
+  getDuration: REACT_APP_API + "/duration",
 };
