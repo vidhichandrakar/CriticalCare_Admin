@@ -1,0 +1,15 @@
+.BulbBox {
+    display: flex;
+    align-items: center;
+    background-color: #c0dfed4a;
+    margin: 13px 0px;
+    padding: 6px 6px;
+    border-radius: 6px;
+}
+.BulbBox p{
+    margin-left: 2%;
+    font-size: 0.9rem;
+}
+.bulbIcon{
+    color: #c8c803;
+}

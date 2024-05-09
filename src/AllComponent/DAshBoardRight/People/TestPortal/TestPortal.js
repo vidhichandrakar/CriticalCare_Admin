@@ -57,6 +57,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { redirectRestriction } from "../../../../Util/RedirectRestriction";
 import Header from "../../../Courses/Header";
 import { DailogBox } from "../../../../Util/CommonFields";
+import TipsAndUpdatesTwoToneIcon from '@mui/icons-material/TipsAndUpdatesTwoTone';
+import "../../../CSSFile/testPortal.css"
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -145,6 +147,7 @@ const TestPortal = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const id = open ? "simple-popover" : undefined;
   const [opened, setOpen] = useState(false);
+  const [mcqopened, setMcqopen] = useState(false);
   const [addTest, setAddTest] = useState({
     testName: "",
     testDuration: "",
@@ -214,6 +217,9 @@ const TestPortal = () => {
   const handleClickOpen = () => {
     setOpen(true);
   };
+  const handleClickOpenMCQ = () => {
+    setMcqopen(true);
+  };
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -228,6 +234,9 @@ const TestPortal = () => {
   };
   const handleCloseDialog = () => {
     setOpen(false);
+  };
+  const handleCloseDialogMCQ = () => {
+    setMcqopen(false);
   };
   const handleInput = (value, type) => {
     let storedValues = Object.assign({}, addTest);
@@ -298,6 +307,75 @@ const TestPortal = () => {
               <FilterAltIcon /> Filter
             </Button>
           </div>
+          <Button className="addTestimonialButton" onClick={handleClickOpenMCQ}>
+            {" "}
+            Multipulcoice Qns{" "}
+          </Button>
+          <BootstrapDialog
+            className="PopUP"
+            onClose={handleCloseDialogMCQ}
+            aria-labelledby="customized-dialog-title"
+            open={mcqopened}
+          >
+            <DialogTitle
+              sx={{ m: 0, p: 2, fontSize: "1rem" }}
+              id="customized-dialog-title"
+            >
+              Add New Section
+            </DialogTitle>
+            <IconButton
+              aria-label="close"
+              onClick={handleCloseDialogMCQ}
+              sx={{
+                position: "absolute",
+                right: 8,
+                top: 8,
+                color: (theme) => theme.palette.grey[500],
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+
+            <DialogContent dividers>
+              <Typography gutterBottom>Section Name</Typography>
+              <TextField
+                inputProps={{ className: "textField" }}
+                fullWidth
+                size="small"
+                placeholder="Enter the Section Name"
+                id="fullWidth"
+                className="BoxShadowInputField"
+                type="TestName"
+                value={addTest?.testName}
+                onChange={(e) => handleInput(e.target.value, "TestName")}
+              />
+              <Typography gutterBottom>Section Instructions</Typography>
+              <TextField
+          id="fullWidth"
+          // label="Multiline"
+          multiline
+          rows={3}
+          // defaultValue=""
+          sx={{width: "100%"}}
+        />
+              <Box className="BulbBox">
+                <TipsAndUpdatesTwoToneIcon className="bulbIcon"/> 
+                <Typography>
+                  You can give students choice of which questions to Attempt in the section by editing section details after Adding Questions. <span>View Example</span>
+                </Typography>
+              </Box>
+            
+            </DialogContent>
+            <DialogActions>
+              <Button
+                variant="contained"
+                className="CreateBtn"
+                onClick={handleCreateTeam}
+              >
+                Add Section
+              </Button>
+            </DialogActions>
+          </BootstrapDialog>
           <Button className="addTestimonialButton" onClick={handleClickOpen}>
             {" "}
             + Add Test{" "}
