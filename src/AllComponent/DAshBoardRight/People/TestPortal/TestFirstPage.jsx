@@ -29,10 +29,10 @@ import FormLabel from "@mui/material/FormLabel";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Stack from "@mui/material/Stack";
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
 function TestFirstPage() {
   const [expanded, setExpanded] = React.useState(false);
@@ -41,7 +41,7 @@ function TestFirstPage() {
     setExpanded((prevExpanded) => !prevExpanded);
   };
 
-  const [age, setAge] = React.useState('');
+  const [age, setAge] = React.useState("");
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -93,19 +93,27 @@ function TestFirstPage() {
                   <EditIcon className="blueEdit" />
                 </h4>
               </div>
-              <div>
-                <span>
-                  <AccessTimeIcon className="testDurationLogo" />
-                  Test Duration: <b>3hrs30mins</b>
-                </span>
-                <span>
-                  <LocalOfferIcon className="tagLogo" />
-                  Tags:<b>TEST MODULE X</b>
-                </span>
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                {" "}
+                <AccessTimeIcon className="testDurationLogo" />
+                <Typography style={{ color: "rgb(146 130 130)" }}>
+                  Test Duration :{" "}
+                  <span className="textColorBold">3hrs30mins</span>
+                </Typography>
+                <LocalOfferIcon
+                  className="testDurationLogo"
+                  style={{ marginLeft: "2%" }}
+                />
+                <Typography style={{ color: "rgb(146 130 130)" }}>
+                  Tags :<span className="textColorBold"> TEST MODULE X</span>
+                </Typography>
               </div>
               <Box className="testInstructionsBtn">
                 <p>
-                  <b>Test Instructions:</b>Test Instructions: Click here to add
+                  <b>Test Instructions:</b>{" "}
+                  <span style={{ color: "#000" }}>
+                    Test Instructions: Click here to add
+                  </span>
                 </p>
               </Box>
             </Box>
@@ -118,10 +126,11 @@ function TestFirstPage() {
                 className="gradingImage"
               />
               <p className="toAddNewSectionHead">Start by adding a section</p>
-              <p>
-                You can add & manage sections from the <b>'Test Sections'</b>
+              <p className="textColorLight">
+                You can add & manage sections from the{" "}
+                <span className="textColorBold">'Test Sections'</span>
               </p>
-              <p>panel on left</p>
+              <p className="textColorLight">panel on left</p>
               <Button className="addNewSection" onClick={handleClickOpen}>
                 Add new section
               </Button>
@@ -217,22 +226,24 @@ function TestFirstPage() {
                         </Accordion> */}
 
                         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-      <InputLabel id="demo-select-small-label">Add difficulty level</InputLabel>
-      <Select
-        labelId="demo-select-small-label"
-        id="demo-select-small"
-        value={age}
-        label="Age"
-        onChange={handleChange}
-      >
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
-      </Select>
-    </FormControl>
+                          <InputLabel id="demo-select-small-label">
+                            Add difficulty level
+                          </InputLabel>
+                          <Select
+                            labelId="demo-select-small-label"
+                            id="demo-select-small"
+                            value={age}
+                            label="Age"
+                            onChange={handleChange}
+                          >
+                            <MenuItem value="">
+                              <em>None</em>
+                            </MenuItem>
+                            <MenuItem value={10}>Ten</MenuItem>
+                            <MenuItem value={20}>Twenty</MenuItem>
+                            <MenuItem value={30}>Thirty</MenuItem>
+                          </Select>
+                        </FormControl>
                       </div>
                     </div>
                   </div>
@@ -263,23 +274,25 @@ function TestFirstPage() {
                           leo lobortis eget.
                         </AccordionDetails>
                       </Accordion> */}
-                        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-      <InputLabel id="demo-select-small-label">Single</InputLabel>
-      <Select
-        labelId="demo-select-small-label"
-        id="demo-select-small"
-        value={age}
-        label="Age"
-        onChange={handleChange}
-      >
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
-      </Select>
-    </FormControl>
+                      <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                        <InputLabel id="demo-select-small-label">
+                          Single
+                        </InputLabel>
+                        <Select
+                          labelId="demo-select-small-label"
+                          id="demo-select-small"
+                          value={age}
+                          label="Age"
+                          onChange={handleChange}
+                        >
+                          <MenuItem value="">
+                            <em>None</em>
+                          </MenuItem>
+                          <MenuItem value={10}>Ten</MenuItem>
+                          <MenuItem value={20}>Twenty</MenuItem>
+                          <MenuItem value={30}>Thirty</MenuItem>
+                        </Select>
+                      </FormControl>
                     </div>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
@@ -334,7 +347,7 @@ function TestFirstPage() {
                   </FormControl>
 
                   <Button className="addNewOptionDotted">
-                    <AddCircleOutlineIcon sx={{marginRight: "12px"}}/>
+                    <AddCircleOutlineIcon sx={{ marginRight: "12px" }} />
                     Add new option
                   </Button>
 
