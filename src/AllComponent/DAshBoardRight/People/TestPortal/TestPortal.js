@@ -58,7 +58,9 @@ import { redirectRestriction } from "../../../../Util/RedirectRestriction";
 import Header from "../../../Courses/Header";
 import { DailogBox } from "../../../../Util/CommonFields";
 import TipsAndUpdatesTwoToneIcon from '@mui/icons-material/TipsAndUpdatesTwoTone';
-import "../../../CSSFile/testPortal.css"
+import "../../../CSSFile/testPortal.css";
+import { Link } from "react-router-dom";
+import TestFirstPage from "./TestFirstPage";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -456,6 +458,7 @@ const TestPortal = () => {
               </Box>
             </DialogContent>
             <DialogActions>
+              <Link to="/TestFirstPage">
               <Button
                 variant="contained"
                 className="CreateBtn"
@@ -463,6 +466,7 @@ const TestPortal = () => {
               >
                 Create
               </Button>
+              </Link>
             </DialogActions>
           </BootstrapDialog>
         </div>{" "}

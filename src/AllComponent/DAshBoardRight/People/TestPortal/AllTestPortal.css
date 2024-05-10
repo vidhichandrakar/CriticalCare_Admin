@@ -1,0 +1,96 @@
+
+/* LEFT SECTION OF TEST */
+
+.completeLeftBox{
+    background-color: rgb(240 240 240);
+    /* margin: 14px !important; */
+    /* width: 49% !important; */
+    /* height: 91vh; */
+}
+.createQuestions{
+    margin: 20px !important;
+    margin-top: 8px !important;
+}
+.circleQuestion{
+    color: #0075FF;
+    margin-right: 11px !important;
+    /* margin-top: 3px !important; */
+    font-size: 1.4rem !important;
+}
+.testOptions{
+  padding: 18px 18px;
+}
+.grading{
+    margin: 20px !important;
+    margin-top: 8px !important;
+}
+.gradingLogo{
+    color: #0075FF;
+    margin-right: 11px !important;
+    font-size: 1.4rem !important;
+}
+
+
+
+
+/* RIGHT SECTION OF TEST */
+.testRightSection{
+    /* width: 51% !important; */
+    background-color: aquamarine;
+}
+.mainFirstPage{
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+}
+.testContent{
+ display: flex !important;
+ flex-direction: row !important;
+}
+
+.stickyTopBox{
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: left;
+    padding-left: 21px;
+    border-bottom: 0.2px solid grey;
+    color: grey;
+}
+.blueEdit{
+    color: #0075FF;
+    margin-left: 10px;
+    /* margin-bottom: -5px; */
+    font-size: 0.9rem !important;
+}
+.testDurationLogo{
+    font-size: 0.9rem !important;
+    margin-right: 6px;
+}
+.tagLogo{
+    font-size: 0.9rem !important;
+    margin: 0px 12px;
+}
+.testInstructionsBtn{
+    padding: 0px 37px;
+    margin: 19px 0px;
+    border: 0.5px solid grey;
+    border-radius: 6px;
+    width: 100%;
+}
+.toAddNewSection{
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+
+}
+.toAddNewSectionHead{
+    font-size: 1.4rem;
+}
+.addNewSection{
+    background-color: #0075FF !important;
+    color: #ffffff !important;
+    padding: 20px 2px;
+    border-radius: 5px;
+    text-transform: none !important;
+    width: 201px;
+}

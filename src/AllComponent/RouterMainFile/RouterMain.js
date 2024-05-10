@@ -18,6 +18,8 @@ import CreateCourses from '../Courses/MainCourses.component';
 import Banner from '../DAshBoardRight/Banner/Banner';
 import Chat from '../DAshBoardRight/Chat';
 import LoginPage from '../LoginFiles/LoginPage';
+import TestFirstPage from '../DAshBoardRight/People/TestPortal/TestFirstPage';
+import TestPortalMain from '../DAshBoardRight/People/TestPortal/TestPortalMain';
 
 const RouterMain = () => {
   return (
@@ -41,6 +43,9 @@ const RouterMain = () => {
             <Route exact path="/CouponMain" element= {<CouponMain />}> </Route>
             <Route exact path="/Banner" element= {<Banner/>}> </Route>
             <Route exact path="/chat" element= {<Chat />}> </Route>
+            {/* <Route exact path="/TestFirstPage" element= {<TestFirstPage />}> </Route> */}
+            <Route exact path="/TestFirstPage" element= {<TestPortalMain />}> </Route>
+
     </Routes>
     </div>
   )
