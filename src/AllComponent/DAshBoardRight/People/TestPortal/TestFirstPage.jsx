@@ -86,9 +86,12 @@ function TestFirstPage() {
             <div className='testRightSection'>
               <Box className="stickyTopBox">
                 <div><h4>Test Details<EditIcon className='blueEdit'/></h4></div>
-                <div><span><AccessTimeIcon className='testDurationLogo'/>Test Duration: <b>3hrs30mins</b></span>
-                <span><LocalOfferIcon className='tagLogo'/>Tags:<b>TEST MODULE X</b></span></div>
-                <Box className="testInstructionsBtn"><p><b>Test Instructions:</b>Test Instructions: Click here to add</p></Box>
+                <div style={{display:"flex", flexDirection:"row"}}> <AccessTimeIcon className='testDurationLogo'/>
+                <Typography style={{color:"rgb(146 130 130)"}}>
+                  Test Duration : <b style={{color:"#000"}}>3hrs30mins</b></Typography>
+                  <LocalOfferIcon className='testDurationLogo' style={{marginLeft:"2%"}}/>
+                  <Typography style={{color:"rgb(146 130 130)"}}>Tags :<b style={{color:"#000"}}> TEST MODULE X</b></Typography></div>
+                <Box className="testInstructionsBtn"><p><b>Test Instructions:</b> <span style={{color:"rgb(146 130 130)"}}>Test Instructions: Click here to add</span></p></Box>
               </Box>
               
               <Box className="toAddNewSection">

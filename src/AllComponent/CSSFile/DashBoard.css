@@ -602,6 +602,7 @@ body {
 }
 .PopUP .MuiDialog-paper {
   border-radius: 10px !important;
+  overflow-y: unset !important;
 }
 .CreateBtn {
   padding: 5px 25px !important;

@@ -10,6 +10,18 @@
     margin: 11px !important;
     margin-top: 8px !important;
 }
+.createQuestions.MuiPaper-root.MuiAccordion-root{
+    border: 2px solid #eee !important;
+    box-shadow: none !important;
+    padding: 2% !important;
+    /* background-color: red !important; */
+}
+.grading.MuiPaper-root.MuiAccordion-root{
+    border: 2px solid #eee !important;
+    box-shadow: none !important;
+    padding: 2% !important;
+    /* background-color: red !important; */
+}
 .circleQuestion{
     color: #0075FF;
     margin-right: 11px !important;
@@ -73,7 +85,7 @@
 
 .testRightSection{
     /* width: 51% !important; */
-    /* background-color: aquamarine; */
+    background-color: white;
     width: 158vw !important;
 }
 .mainFirstPage{
@@ -85,14 +97,16 @@
  display: flex !important;
  flex-direction: row !important;
 }
-
+.testLeftSection{
+    background-color: rgb(240 240 240) !important;
+}
 .stickyTopBox{
     display: flex !important;
     flex-direction: column !important;
     justify-content: left;
     padding-left: 21px;
     border-bottom: 0.2px solid grey;
-    color: grey;
+    color: black;
 }
 .blueEdit{
     color: #0075FF;
@@ -100,8 +114,10 @@
     font-size: 0.9rem !important;
 }
 .testDurationLogo{
-    font-size: 0.9rem !important;
+    font-size: 1.1rem !important;
     margin-right: 6px;
+    color: rgb(146 130 130) !important;
+    margin-top: 4px !important;
 }
 .tagLogo{
     font-size: 0.9rem !important;
