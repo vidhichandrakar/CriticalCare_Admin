@@ -146,6 +146,14 @@
     display: flex;
     flex-direction: row;
 }
+.plusFourGreenBG{
+    background-color: #dafdda !important;
+    color: #23a28d !important;
+    /* width: 27px !important; */
+    /* height: 28px !important; */
+    margin-left: 11px !important; 
+    padding: -2px -2px !important;
+}
 .mcqbuttons{
     margin: 0px 60px;
 }
@@ -177,13 +185,28 @@
     flex-direction: row;
     justify-content: space-between !important;
 }
-.thisIsMCQBtn{
-    border: 0.5px solid lightgray !important;
+.addDiffLevelDropDown{
+    border-radius: 1px !important;
+    padding: -1px -1px !important;
+    /* height: 10% !important; */
+    font-weight: bolder !important;
+}
+#demo-select-small-label{
+    font-size: 1rem !important;
+    padding: -10px -10px !important;
+    /* height: 20% !important; */
+    letter-spacing: -1px !important;
+    /* line-height: 1.5; */
+}
+.thisIsMCQBtn .MuiOutlinedInput-root{
+    border: 0.5px solid snow !important;
     text-transform: none !important;
-    color: gray !important;
-    width: 100%;
+    /* color: gray !important; */
+    width: 80vw;
+    height: 39px;
     justify-content: left !important;
     margin: 16px 0px !important;
+    border-radius: 4px !important
 }
 .answersAndSingle{
     display: flex;
@@ -194,13 +217,29 @@
     display: flex;
     flex-direction: row;
 }
+.optionsFeid .MuiOutlinedInput-root{
+    border-radius: 4px !important;
+    /* width: 73vw !important; */
+    width: 70vw;
+    height: 39px;
+    margin-top: 14px;
+}
+.deleteComponent{
+    /* margin-left: 12px; */
+}
+.deleteIconSixthPage{
+    font-size: 1rem !important;
+    margin-bottom: -3px;
+    margin-left: 41px;
+}
 .borderingOptions{
     width: 77vw;
 }
 .addNewOptionDotted{
     border: 3px dotted #0075FF !important;
-    width: 100%;
+    width: 97%;
     color: #0075FF !important;
     text-transform: none !important;
     justify-content: center;
+    margin: 19px 18px !important;
 }
