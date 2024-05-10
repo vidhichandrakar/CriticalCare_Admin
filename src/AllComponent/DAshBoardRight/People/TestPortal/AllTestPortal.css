@@ -3,40 +3,74 @@
 
 .completeLeftBox{
     background-color: rgb(240 240 240);
-    /* margin: 14px !important; */
-    /* width: 49% !important; */
-    /* height: 91vh; */
+    height: 91vh;
 }
 .createQuestions{
-    margin: 20px !important;
+    margin: 11px !important;
     margin-top: 8px !important;
 }
 .circleQuestion{
     color: #0075FF;
     margin-right: 11px !important;
-    /* margin-top: 3px !important; */
     font-size: 1.4rem !important;
+    margin-bottom: -5px;
 }
 .testOptions{
   padding: 18px 18px;
 }
 .grading{
-    margin: 20px !important;
+    margin: 11px !important;
     margin-top: 8px !important;
 }
 .gradingLogo{
     color: #0075FF;
     margin-right: 11px !important;
     font-size: 1.4rem !important;
+    margin-bottom: -5px;
 }
 
 
 
 
 /* RIGHT SECTION OF TEST */
+.testNavBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 0.5px solid lightgrey;
+}
+
+.abcdText{
+    margin-top: 17px;
+}
+.abcdBackLogo{
+    margin: -5px 22px;
+}
+.previewnsaveBtn{
+   display: flex;
+   flex-direction: row;
+}
+.previewNavBtn{
+    background-color: lightgray !important;
+    color: #ffffff !important;
+    width: 129px;
+    height: 40px;
+    margin: 9px -8px !important;
+    text-transform: none;
+}
+.saveTestNavBtn{
+    background-color: lightgray !important;
+    color: #ffffff !important;
+    width: 129px;
+    height: 40px;
+    margin: 9px 21px !important;
+    text-transform: none;
+}
+
+
+
 .testRightSection{
-    /* width: 51% !important; */
-    background-color: aquamarine;
+    width: 158vw !important;
 }
 .mainFirstPage{
     display: flex !important;
@@ -59,7 +93,6 @@
 .blueEdit{
     color: #0075FF;
     margin-left: 10px;
-    /* margin-bottom: -5px; */
     font-size: 0.9rem !important;
 }
 .testDurationLogo{
@@ -75,13 +108,16 @@
     margin: 19px 0px;
     border: 0.5px solid grey;
     border-radius: 6px;
-    width: 100%;
+    margin-right: 20px;
 }
 .toAddNewSection{
     align-items: center !important;
     justify-content: center !important;
     text-align: center !important;
-
+    margin-top: 49px;
+}
+.gradingImage{
+    border-radius: 50%;
 }
 .toAddNewSectionHead{
     font-size: 1.4rem;
@@ -89,8 +125,82 @@
 .addNewSection{
     background-color: #0075FF !important;
     color: #ffffff !important;
-    padding: 20px 2px;
     border-radius: 5px;
     text-transform: none !important;
     width: 201px;
+}
+
+
+
+/* SIXTH PAGE- DAILOG BOX */
+.completeDailogBox .MuiPaper-root.MuiDialog-paper{
+    max-width: 1268px !important;
+    max-height: auto !important;
+}
+.multipleChoiceHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.multipleChoiceAndMarks{
+    display: flex;
+    flex-direction: row;
+}
+.mcqbuttons{
+    margin: 0px 60px;
+}
+.previousMCQBtn{
+    background-color: #57a2fb !important;
+    color: #ffffff !important;
+    text-transform: none !important;
+    padding: 5px 26px !important;
+}
+.saveMCQBtn{
+    background-color: #19588f !important;
+    color: #ffffff !important;
+    text-transform: none !important; 
+    padding: 5px 36px !important;
+}
+.nextMCQBtn{
+    background-color: #57a2fb !important;
+    color: #ffffff !important;
+    text-transform: none !important;
+    padding: 5px 35px !important;  
+}
+.addDifficultyLvlSection{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.twoDifficultyLvlBtns{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between !important;
+}
+.thisIsMCQBtn{
+    border: 0.5px solid lightgray !important;
+    text-transform: none !important;
+    color: gray !important;
+    width: 100%;
+    justify-content: left !important;
+    margin: 16px 0px !important;
+}
+.answersAndSingle{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.addingDeleteOptions{
+    display: flex;
+    flex-direction: row;
+}
+.borderingOptions{
+    width: 77vw;
+}
+.addNewOptionDotted{
+    border: 3px dotted #0075FF !important;
+    width: 100%;
+    color: #0075FF !important;
+    text-transform: none !important;
+    justify-content: center;
 }
