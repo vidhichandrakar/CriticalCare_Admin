@@ -63,16 +63,16 @@
    flex-direction: row;
 }
 .previewNavBtn{
-    background-color: lightgray !important;
-    color: #ffffff !important;
+    /* background-color: #19588f !important; */
+    color: #19588f !important;
     width: 129px;
     height: 40px;
     margin: 9px -8px !important;
     text-transform: none;
 }
 .saveTestNavBtn{
-    background-color: lightgray !important;
-    color: #ffffff !important;
+    background-color: #19588f !important;
+    color: #fff !important;
     width: 129px;
     height: 40px;
     margin: 9px 21px !important;
