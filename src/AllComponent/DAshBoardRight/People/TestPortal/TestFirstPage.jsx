@@ -75,8 +75,8 @@ function TestFirstPage() {
             <b>abcd</b>
           </div>
           <div className="previewnsaveBtn">
-            <Button className="previewNavBtn">Preview</Button>
-            <Button className="saveTestNavBtn">Save Test</Button>
+            <Button className="previewNavBtn" variant="outlined">Preview</Button>
+            <Button className="saveTestNavBtn" variant="outlined" disabled>Save Test</Button>
           </div>
         </div>
 
