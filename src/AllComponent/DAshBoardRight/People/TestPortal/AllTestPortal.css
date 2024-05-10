@@ -3,7 +3,6 @@
 
 .completeLeftBox{
     background-color: rgb(240 240 240);
-    /* width: 49% !important; */
     height: 91vh;
 }
 .createQuestions{
@@ -52,13 +51,12 @@
     justify-content: space-between;
     border-bottom: 0.5px solid lightgrey;
 }
-/* .testNavBar p{
-} */
+
 .abcdText{
     margin-top: 17px;
 }
 .abcdBackLogo{
-    margin: -5px 22px;
+    margin: -8px 22px;
 }
 .previewnsaveBtn{
    display: flex;
@@ -105,8 +103,9 @@
     flex-direction: column !important;
     justify-content: left;
     padding-left: 21px;
-    border-bottom: 0.2px solid grey;
+    border-bottom: 0.2px solid #eee;
     color: black;
+    box-shadow: 0 0 3px 0 #d3d3d3;
 }
 .blueEdit{
     color: #0075FF;
@@ -126,9 +125,8 @@
 .testInstructionsBtn{
     padding: 0px 37px;
     margin: 19px 0px;
-    border: 0.5px solid grey;
+    border: 0.5px solid #e6e3e3;
     border-radius: 6px;
-    /* width: 100%; */
     margin-right: 20px;
 }
 .toAddNewSection{
@@ -144,12 +142,18 @@
     font-size: 1.4rem;
 }
 .addNewSection{
-    background-color: #0075FF !important;
+    background-color: #19588f !important;
     color: #ffffff !important;
-    /* padding: 20px 2px; */
     border-radius: 5px;
     text-transform: none !important;
     width: 201px;
+}
+.textColorLight{
+    color:  rgb(146, 130, 130) !important;
+}
+.textColorBold{
+    font-weight: 400 !important;
+    color: #000 !important;
 }
 
 
@@ -181,7 +185,6 @@
     background-color: #19588f !important;
     color: #ffffff !important;
     text-transform: none !important; 
-    /* margin: 0px 10px !important; */
     padding: 5px 36px !important;
 }
 .nextMCQBtn{
@@ -205,8 +208,6 @@
     text-transform: none !important;
     color: gray !important;
     width: 100%;
-    /* text-align: left; */
-    /* align-items: left; */
     justify-content: left !important;
     margin: 16px 0px !important;
 }
@@ -220,12 +221,10 @@
     flex-direction: row;
 }
 .borderingOptions{
-    /* border: 0.5px solid lightgrey; */
     width: 77vw;
 }
 .addNewOptionDotted{
     border: 3px dotted #0075FF !important;
-    /* border-style: dotted !important; */
     width: 100%;
     color: #0075FF !important;
     text-transform: none !important;
