@@ -189,7 +189,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       });
     } else {
       handleInputChange("basicInfo", storedBasicInfo);
-      console.log("storedBasicInfostoredBasicInfo", storedBasicInfo);
+      // console.log("storedBasicInfostoredBasicInfo", storedBasicInfo);
       handleTrackerPage(1);
     }
   };

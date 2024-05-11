@@ -93,19 +93,25 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const [editPriceData, setEditPriceData] = useState([
     {
       duration: "20",
-      years: { id: 1, label: "Month(s)" },
-      regularPrice: "10000",
+      years: "",
+      regularPrice: "400",
       offerPrice: "1000",
       startDate: "",
       endDate: "",
+      duration_type_name: "",
+      duration_type_id: "",
+      duration_id: "",
     },
     {
-      duration: "10",
-      years: { id: 1, label: "years" },
-      regularPrice: "8020",
-      offerPrice: "520",
+      duration: "20",
+      years: "",
+      regularPrice: "400",
+      offerPrice: "1000",
       startDate: "",
       endDate: "",
+      duration_type_name: "",
+      duration_type_id: "",
+      duration_id: "",
     },
   ]);
 
@@ -143,7 +149,9 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
 
   const handlePricePage = () => {
     if (selectDurationValue === "Multiple Validity") {
-      handleInputChange("resetPrice", resetPrice);
+      // handleInputChange("resetPrice", resetPrice);
+      handleInputChange("editPrice", resetPrice);
+      handleTrackerPage(2);
     } else if (selectDurationValue === "Single Validity") {
       const storedValues = singleValidity;
       if (
@@ -156,7 +164,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
           parseInt(storedValues.regularPrice) >
           parseInt(storedValues.offerPrice)
         ) {
-          handleInputChange("editPrice", storedValues);
+          handleInputChange("editPrice", [storedValues]);
 
           handleTrackerPage(2);
         } else {
@@ -171,10 +179,12 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
       }
     } else if (selectDurationValue === "Lifetime Validity") {
       const storedValues = lifetimeValidation;
-      handleInputChange("editPrice", storedValues);
+      handleInputChange("editPrice", [storedValues]);
+      handleTrackerPage(2);
     } else if (selectDurationValue === "Course Expiry Date") {
       const storedValues = expiryDate;
-      handleInputChange("editPrice", storedValues);
+      handleInputChange("editPrice", [storedValues]);
+      handleTrackerPage(2);
     }
   };
   // const handleCustumDate = (e, type) => {
