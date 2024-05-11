@@ -19,7 +19,8 @@ function TestNavAndLeft() {
   };
 
   return (
-    <div>
+    <aside
+    id="sidePart">
       <Box className="completeLeftBox">
         <Accordion
           className="createQuestions"
@@ -127,7 +128,7 @@ function TestNavAndLeft() {
           </AccordionDetails>
         </Accordion>
       </Box>
-    </div>
+    </aside>
   );
 }
 

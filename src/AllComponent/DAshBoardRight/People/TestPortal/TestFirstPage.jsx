@@ -83,8 +83,8 @@ function TestFirstPage() {
             <b>abcd</b>
           </div>
           <div className="previewnsaveBtn">
-            <Button className="previewNavBtn">Preview</Button>
-            <Button className="saveTestNavBtn">Save Test</Button>
+            <Button className="previewNavBtn" variant="outlined">Preview</Button>
+            <Button className="saveTestNavBtn" variant="outlined" disabled>Save Test</Button>
           </div>
         </div>
 
@@ -101,19 +101,27 @@ function TestFirstPage() {
                   <EditIcon className="blueEdit" />
                 </h4>
               </div>
-              <div>
-                <span>
-                  <AccessTimeIcon className="testDurationLogo" />
-                  Test Duration: <b>3hrs30mins</b>
-                </span>
-                <span>
-                  <LocalOfferIcon className="tagLogo" />
-                  Tags:<b>TEST MODULE X</b>
-                </span>
+              <div style={{ display: "flex", flexDirection: "row" }}>
+                {" "}
+                <AccessTimeIcon className="testDurationLogo" />
+                <Typography style={{ color: "rgb(146 130 130)" }}>
+                  Test Duration :{" "}
+                  <span className="textColorBold">3hrs30mins</span>
+                </Typography>
+                <LocalOfferIcon
+                  className="testDurationLogo"
+                  style={{ marginLeft: "2%" }}
+                />
+                <Typography style={{ color: "rgb(146 130 130)" }}>
+                  Tags :<span className="textColorBold"> TEST MODULE X</span>
+                </Typography>
               </div>
               <Box className="testInstructionsBtn">
                 <p>
-                  <b>Test Instructions:</b>Test Instructions: Click here to add
+                  <b>Test Instructions:</b>{" "}
+                  <span style={{ color: "#000" }}>
+                    Test Instructions: Click here to add
+                  </span>
                 </p>
               </Box>
             </Box>
@@ -126,10 +134,11 @@ function TestFirstPage() {
                 className="gradingImage"
               />
               <p className="toAddNewSectionHead">Start by adding a section</p>
-              <p>
-                You can add & manage sections from the <b>'Test Sections'</b>
+              <p className="textColorLight">
+                You can add & manage sections from the{" "}
+                <span className="textColorBold">'Test Sections'</span>
               </p>
-              <p>panel on left</p>
+              <p className="textColorLight">panel on left</p>
               <Button className="addNewSection" onClick={handleClickOpen}>
                 Add new section
               </Button>

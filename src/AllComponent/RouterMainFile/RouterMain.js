@@ -19,6 +19,7 @@ import Banner from '../DAshBoardRight/Banner/Banner';
 import Chat from '../DAshBoardRight/Chat';
 import LoginPage from '../LoginFiles/LoginPage';
 import TestFirstPage from '../DAshBoardRight/People/TestPortal/TestFirstPage';
+import TestPortalMain from '../DAshBoardRight/People/TestPortal/TestPortalMain';
 import TestSixthPage from '../DAshBoardRight/People/TestPortal/TestFirstPage';
 
 const RouterMain = () => {
@@ -43,6 +44,8 @@ const RouterMain = () => {
             <Route exact path="/CouponMain" element= {<CouponMain />}> </Route>
             <Route exact path="/Banner" element= {<Banner/>}> </Route>
             <Route exact path="/chat" element= {<Chat />}> </Route>
+            {/* <Route exact path="/TestFirstPage" element= {<TestFirstPage />}> </Route> */}
+            {/* <Route exact path="/TestFirstPage" element= {<TestPortalMain />}> </Route> */}
             <Route exact path="/TestFirstPage" element= {<TestFirstPage />}> </Route>
             <Route exact path="/TestSixthPage" element= {<TestSixthPage />}> </Route>
 
