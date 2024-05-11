@@ -50,43 +50,49 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   }, [courseId]);
 
   const handleCreateCourse = () => {
-    let formData = new FormData();
+    let payload;
     try {
-      formData.append("course_name", basicInfo?.Name);
-      formData.append("description", basicInfo?.Description);
-      formData.append("price", parseInt(editPrice?.regularPrice));
-      formData.append("offer_price", parseInt(editPrice?.offerPrice));
-      formData.append("category_id", basicInfo?.Category?.category_id);
-      formData.append("sub_category_id", basicInfo?.subCategory?.category_id);
-      formData.append("duration_id", parseInt(editPrice?.duration));
-      formData.append("duration_type_id", 91);
-      if (typeof basicInfo?.thumbnailPath !== "string") {
-        formData.append(
-          "thumbnail_path",
-          basicInfo?.thumbnailPath,
-          basicInfo?.thumbnailPath?.name
-        );
-      }
-      formData.append("content_type_id", 1);
-      formData.append(
-        "modified_by",
-        JSON.parse(localStorage.getItem("loggedInUser")).user_id
-      );
-      formData.append(
-        "created_by",
-        JSON.parse(localStorage.getItem("loggedInUser")).user_id
-      );
-      formData.append("is_publish", "not published");
-      // formData.append("end_date", editPrice?.startDate);
-      // formData.append("start_date", editPrice?.endDate);
-      formData.append("end_date", "20/02/2024");
-      formData.append("start_date", editPrice?.date);
-      formData.append("duration_type", editPrice?.durationType);
+      const courseDetails = {
+        course_name: basicInfo?.Name,
+        description: basicInfo?.Description,
+        about_course: basicInfo?.Description,
+        team_member_id: 5,
+        category_id: basicInfo?.Category?.category_id,
+        sub_category_id: basicInfo?.subCategory?.category_id,
+        thumbnail_path: "https://example.com/thumbnail.jpg",
+        created_by: 1,
+        start_date: "2024-04-30",
+        end_date: "2024-05-30",
+        is_publish: "Not published",
+      };
+      const courseAttachments = [
+        {
+          content_type_id: 1,
+          content_url: "https://example.com/content1.mp4",
+        },
+        {
+          content_type_id: 1,
+          content_url: "https://example.com/content3.mp4",
+        },
+        {
+          content_type_id: 2,
+          content_url: "https://example.com/content2.pdf",
+        },
+      ];
+      // formData.append("courseDetails", JSON.stringify(courseDetails));
+      // formData.append("courseDurations", JSON.stringify(editPrice));
+      // formData.append("courseAttachments", JSON.stringify(courseAttachments));
+      payload = {
+        courseDetails: courseDetails,
+        courseDurations: editPrice,
+        courseAttachments: courseAttachments,
+      };
+      console.log("patload", payload)
     } catch (error) {
       console.log(error);
     }
     if (courseId) {
-      const payload = formData;
+      // const payload = formData;
       publishOrEditCourse({
         courseId: courseId,
         payload,
@@ -96,10 +102,10 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       });
     } else {
       createCourse({
-        courseData: formData,
+        courseData: payload,
 
         callBack: (response) => {
-          console.log("ALL response", formData);
+          console.log("ALL response", payload);
           toast.success("Course added successfully!", {
             autoClose: 500,
           });
@@ -119,9 +125,10 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       setBasicInfo(value);
     } else if (type === "editPrice") {
       setEditPrice(value);
-    } else if (type === "resetPrice") {
-      setRestPrice(value);
     }
+    //  else if (type === "resetPrice") {
+    //   setRestPrice(value);
+    // }
   };
 
   return (
@@ -130,6 +137,9 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         trackerPage={trackerPage}
         handleTrackerPage={handleTrackerPage}
       />
+      {/* {console.log("create course==basicInfo",basicInfo)} */}
+      {console.log("create course==edit price ", editPrice)}
+      {/* {console.log("create course==edit price ",resetPrice)} */}
       {trackerPage === 0 ? (
         <CreateForm
           handleTrackerPage={handleTrackerPage}
