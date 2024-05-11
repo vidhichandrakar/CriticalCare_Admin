@@ -338,9 +338,9 @@
    font-size: 0.9rem !important;
    color:#202020 !important;
 }
-.MuiOutlinedInput-root{
+/* .MuiOutlinedInput-root{
   border-radius: 15px !important;
-}
+} */
 .DescBoxShadow{
   font-size: 0.7rem !important;
   margin-top: 3% !important;

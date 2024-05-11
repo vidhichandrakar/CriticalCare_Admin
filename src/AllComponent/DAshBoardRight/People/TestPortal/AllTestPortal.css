@@ -1,0 +1,232 @@
+
+/* LEFT SECTION OF TEST */
+
+.completeLeftBox{
+    background-color: rgb(240 240 240);
+    height: 91vh;
+}
+.createQuestions{
+    margin: 11px !important;
+    margin-top: 8px !important;
+}
+.createQuestions.MuiPaper-root.MuiAccordion-root{
+    border: 2px solid #eee !important;
+    box-shadow: none !important;
+    padding: 2% !important;
+    /* background-color: red !important; */
+}
+.grading.MuiPaper-root.MuiAccordion-root{
+    border: 2px solid #eee !important;
+    box-shadow: none !important;
+    padding: 2% !important;
+    /* background-color: red !important; */
+}
+.circleQuestion{
+    color: #0075FF;
+    margin-right: 11px !important;
+    font-size: 1.4rem !important;
+    margin-bottom: -5px;
+}
+.testOptions{
+  padding: 18px 18px;
+}
+.grading{
+    margin: 11px !important;
+    margin-top: 8px !important;
+}
+.gradingLogo{
+    color: #0075FF;
+    margin-right: 11px !important;
+    font-size: 1.4rem !important;
+    margin-bottom: -5px;
+}
+
+
+
+
+/* RIGHT SECTION OF TEST */
+.testNavBar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 0.5px solid lightgrey;
+}
+
+.abcdText{
+    margin-top: 17px;
+}
+.abcdBackLogo{
+    margin: -8px 22px;
+}
+.previewnsaveBtn{
+   display: flex;
+   flex-direction: row;
+}
+.previewNavBtn{
+    /* background-color: #19588f !important; */
+    color: #19588f !important;
+    width: 129px;
+    height: 40px;
+    margin: 9px -8px !important;
+    text-transform: none;
+}
+.saveTestNavBtn{
+    background-color: #19588f !important;
+    color: #fff !important;
+    width: 129px;
+    height: 40px;
+    margin: 9px 21px !important;
+    text-transform: none;
+}
+
+
+
+.testRightSection{
+    /* width: 51% !important; */
+    background-color: white;
+    width: 158vw !important;
+}
+.mainFirstPage{
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+}
+.testContent{
+ display: flex !important;
+ flex-direction: row !important;
+}
+.testLeftSection{
+    background-color: rgb(240 240 240) !important;
+}
+.stickyTopBox{
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: left;
+    padding-left: 21px;
+    border-bottom: 0.2px solid #eee;
+    color: black;
+    box-shadow: 0 0 3px 0 #d3d3d3;
+}
+.blueEdit{
+    color: #0075FF;
+    margin-left: 10px;
+    font-size: 0.9rem !important;
+}
+.testDurationLogo{
+    font-size: 1.1rem !important;
+    margin-right: 6px;
+    color: rgb(146 130 130) !important;
+    margin-top: 4px !important;
+}
+.tagLogo{
+    font-size: 0.9rem !important;
+    margin: 0px 12px;
+}
+.testInstructionsBtn{
+    padding: 0px 37px;
+    margin: 19px 0px;
+    border: 0.5px solid #e6e3e3;
+    border-radius: 6px;
+    margin-right: 20px;
+}
+.toAddNewSection{
+    align-items: center !important;
+    justify-content: center !important;
+    text-align: center !important;
+    margin-top: 49px;
+}
+.gradingImage{
+    border-radius: 50%;
+}
+.toAddNewSectionHead{
+    font-size: 1.4rem;
+}
+.addNewSection{
+    background-color: #19588f !important;
+    color: #ffffff !important;
+    border-radius: 5px;
+    text-transform: none !important;
+    width: 201px;
+}
+.textColorLight{
+    color:  rgb(146, 130, 130) !important;
+}
+.textColorBold{
+    font-weight: 400 !important;
+    color: #000 !important;
+}
+
+
+
+/* SIXTH PAGE- DAILOG BOX */
+.completeDailogBox .MuiPaper-root.MuiDialog-paper{
+    max-width: 1268px !important;
+    max-height: auto !important;
+}
+.multipleChoiceHeader{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.multipleChoiceAndMarks{
+    display: flex;
+    flex-direction: row;
+}
+.mcqbuttons{
+    margin: 0px 60px;
+}
+.previousMCQBtn{
+    background-color: #57a2fb !important;
+    color: #ffffff !important;
+    text-transform: none !important;
+    padding: 5px 26px !important;
+}
+.saveMCQBtn{
+    background-color: #19588f !important;
+    color: #ffffff !important;
+    text-transform: none !important; 
+    padding: 5px 36px !important;
+}
+.nextMCQBtn{
+    background-color: #57a2fb !important;
+    color: #ffffff !important;
+    text-transform: none !important;
+    padding: 5px 35px !important;  
+}
+.addDifficultyLvlSection{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.twoDifficultyLvlBtns{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between !important;
+}
+.thisIsMCQBtn{
+    border: 0.5px solid lightgray !important;
+    text-transform: none !important;
+    color: gray !important;
+    width: 100%;
+    justify-content: left !important;
+    margin: 16px 0px !important;
+}
+.answersAndSingle{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.addingDeleteOptions{
+    display: flex;
+    flex-direction: row;
+}
+.borderingOptions{
+    width: 77vw;
+}
+.addNewOptionDotted{
+    border: 3px dotted #0075FF !important;
+    width: 100%;
+    color: #0075FF !important;
+    text-transform: none !important;
+    justify-content: center;
+}
