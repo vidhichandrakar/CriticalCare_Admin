@@ -33,8 +33,16 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+// import Radio from '@mui/material/Radio';
+import TextField from "@mui/material/TextField";
 
 function TestFirstPage() {
+  const [selectedValue, setSelectedValue] = React.useState("a");
+
+  const handleChangeOption = (event) => {
+    setSelectedValue(event.target.value);
+  };
+
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpansion = () => {
@@ -148,17 +156,7 @@ function TestFirstPage() {
                         <b>1. </b> Multiple Choice{" "}
                       </span>
                       <span>
-                        <Box
-                          sx={{
-                            backgroundColor: "#dafdda",
-                            color: "#23a28d",
-                            width: "27px",
-                            height: "28px",
-                            ml: "5px",
-                          }}
-                        >
-                          +4
-                        </Box>
+                        <Box className="plusFourGreenBG">+4</Box>
                       </span>
                     </div>
 
@@ -184,7 +182,7 @@ function TestFirstPage() {
                         >
                           Next
                         </Button>
-                      </Stack>
+                      </Stack >
                     </div>
                   </div>
                 </DialogTitle>
@@ -203,31 +201,23 @@ function TestFirstPage() {
                 <DialogContent dividers>
                   <div className="addDifficultyLvlSection">
                     <div>
-                      <p>Question</p>
+                      <p><b>Question</b></p>
                     </div>
                     <div className="twoDifficultyLvlBtns">
                       <div>
-                        <p>Difficulty Level</p>
+                        <p><h5>Difficulty Level</h5></p>
                       </div>
                       <div>
-                        {/* <Accordion>
-                          <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1-content"
-                            id="panel1-header"
-                          >
-                            Add difficulty level
-                          </AccordionSummary>
-                          <AccordionDetails>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Suspendisse malesuada lacus ex, sit amet
-                            blandit leo lobortis eget.
-                          </AccordionDetails>
-                        </Accordion> */}
 
-                        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                          <InputLabel id="demo-select-small-label">
-                            Add difficulty level
+                        {/* <FormControl
+                          className="addDiffLevelDropDown"
+                          sx={{ m: 1, minWidth: 200 }}
+                          size="small"
+                        >
+                          <InputLabel id="demo-select-small-label"
+                            // sx={{height: -50}}
+                          >
+                            <b>Add difficulty level</b>
                           </InputLabel>
                           <Select
                             labelId="demo-select-small-label"
@@ -243,14 +233,27 @@ function TestFirstPage() {
                             <MenuItem value={20}>Twenty</MenuItem>
                             <MenuItem value={30}>Thirty</MenuItem>
                           </Select>
-                        </FormControl>
+                        </FormControl> */}
+                 <label for="difficulty"></label>
+                        <select name="Add difficulty level" id="Add difficulty level" className="addDiffLevelDropDown">
+  <option value="javascript">JavaScript</option>
+  <option value="python">Python</option>
+  <option value="c++" disabled>C++</option>
+  <option value="java" selected>Add difficulty level</option>
+</select>
                       </div>
                     </div>
                   </div>
 
-                  <Button className="thisIsMCQBtn">
-                    This is an MCQ question
-                  </Button>
+
+                  <TextField
+                  className="thisIsMCQBtn"
+                        // className="optionsFeid"
+                          id="outlined-helperText"
+                          // label="Helper text"
+                          defaultValue="This is an MCQ question"
+                          // helperText="Some important text"
+                        />
 
                   <FormControl>
                     <div className="answersAndSingle">
@@ -258,25 +261,12 @@ function TestFirstPage() {
                         id="demo-radio-buttons-group-label"
                         sx={{ lineHeight: "2.5rem" }}
                       >
-                        Answers
+                        <b>Answers</b>
                       </FormLabel>
-                      {/* <Accordion>
-                        <AccordionSummary
-                          expandIcon={<ExpandMoreIcon />}
-                          aria-controls="panel1-content"
-                          id="panel1-header"
-                        >
-                          Single
-                        </AccordionSummary>
-                        <AccordionDetails>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit. Suspendisse malesuada lacus ex, sit amet blandit
-                          leo lobortis eget.
-                        </AccordionDetails>
-                      </Accordion> */}
-                      <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+
+                      {/* <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                         <InputLabel id="demo-select-small-label">
-                          Single
+                          <b>Single</b>
                         </InputLabel>
                         <Select
                           labelId="demo-select-small-label"
@@ -292,7 +282,14 @@ function TestFirstPage() {
                           <MenuItem value={20}>Twenty</MenuItem>
                           <MenuItem value={30}>Thirty</MenuItem>
                         </Select>
-                      </FormControl>
+                      </FormControl> */}
+
+                      <select name="Add difficulty level" id="Add difficulty level" className="singleDropDown">
+  <option value="javascript">JavaScript</option>
+  <option value="python">Python</option>
+  <option value="c++" disabled>C++</option>
+  <option value="java" selected>Single</option>
+</select> 
                     </div>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
@@ -300,47 +297,91 @@ function TestFirstPage() {
                       name="radio-buttons-group"
                     >
                       <div className="addingDeleteOptions">
-                        <FormControlLabel
-                          className="borderingOptions"
-                          value="opOne"
-                          control={<Radio />}
-                          label="Option 1"
+                        <Radio
+                          checked={selectedValue === "a"}
+                          onChange={handleChangeOption}
+                          value="a"
+                          name="radio-buttons"
+                          inputProps={{ "aria-label": "A" }}
                         />
-                        <div>
-                          <h5>Delete</h5>
+                        <TextField
+                        className="optionsFeid"
+                          id="outlined-helperText"
+                          // label="Helper text"
+                          defaultValue="Option 1"
+                          // helperText="Some important text"
+                        />
+
+                        <div className="deleteComponent">
+                          <h5>
+                            <DeleteIcon 
+                            // sx={{fontSize: "1rem"}}
+                            className="deleteIconSixthPage"/>
+                            Delete
+                          </h5>
                         </div>
                       </div>
+
                       <div className="addingDeleteOptions">
-                        <FormControlLabel
-                          className="borderingOptions"
-                          value="opTwo"
-                          control={<Radio />}
-                          label="Option 2"
+                        <Radio
+                          checked={selectedValue === "b"}
+                          onChange={handleChangeOption}
+                          value="b"
+                          name="radio-buttons"
+                          inputProps={{ "aria-label": "A" }}
+                        />
+                        <TextField
+                        className="optionsFeid"
+                          id="outlined-helperText"
+                          defaultValue="Option 2"
                         />
                         <div>
-                          <h5>Delete</h5>
+                          <h5>
+                            <DeleteIcon className="deleteIconSixthPage"/>
+                            Delete
+                          </h5>
                         </div>
                       </div>
+
                       <div className="addingDeleteOptions">
-                        <FormControlLabel
-                          className="borderingOptions"
-                          value="opThree"
-                          control={<Radio />}
-                          label="Option 3"
+                        <Radio
+                          checked={selectedValue === "c"}
+                          onChange={handleChangeOption}
+                          value="c"
+                          name="radio-buttons"
+                          inputProps={{ "aria-label": "A" }}
+                        />
+                        <TextField
+                        className="optionsFeid"
+                          id="outlined-helperText"
+                          defaultValue="Option 3"
                         />
                         <div>
-                          <h5>Delete</h5>
+                          <h5>
+                            <DeleteIcon className="deleteIconSixthPage"/>
+                            Delete
+                          </h5>
                         </div>
                       </div>
+
                       <div className="addingDeleteOptions">
-                        <FormControlLabel
-                          className="borderingOptions"
-                          value="opFour"
-                          control={<Radio />}
-                          label="Option 4"
+                        <Radio
+                          checked={selectedValue === "d"}
+                          onChange={handleChangeOption}
+                          value="d"
+                          name="radio-buttons"
+                          inputProps={{ "aria-label": "A" }}
+                        />
+                        <TextField
+                        className="optionsFeid"
+                          id="outlined-helperText"
+                          defaultValue="Option 4"
                         />
                         <div>
-                          <h5>Delete</h5>
+                          <h5>
+                            <DeleteIcon className="deleteIconSixthPage"/>
+                            Delete
+                          </h5>
                         </div>
                       </div>
                     </RadioGroup>
@@ -352,9 +393,14 @@ function TestFirstPage() {
                   </Button>
 
                   <p>Solution</p>
-                  <Box sx={{ border: "0.5px solid lightgrey" }}>
+                  {/* <Box sx={{ border: "0.5px solid lightgrey" }}>
                     Enter detailed solution for your students
-                  </Box>
+                  </Box> */}
+                  <TextField
+                  className="thisIsMCQBtn"
+                          id="outlined-helperText"
+                          defaultValue="Enter detailed solution for your students"
+                        />
                 </DialogContent>
               </BootstrapDialog>
             </Box>
