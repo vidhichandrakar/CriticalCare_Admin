@@ -59,6 +59,11 @@
     flex-direction: row;
     justify-content: space-between;
     border-bottom: 0.5px solid lightgrey;
+
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 0.5px solid lightgrey; */
 }
 
 .abcdText{

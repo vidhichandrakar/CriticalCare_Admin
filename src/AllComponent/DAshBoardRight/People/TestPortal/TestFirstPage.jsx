@@ -34,8 +34,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import DialogContent from '@mui/material/DialogContent';
-
-
+import CreateQNS from "./CreateQNS";
 
 
 function TestFirstPage() {
@@ -87,25 +86,6 @@ function TestFirstPage() {
      
       
           <div className="testRightSection">
-            {/* // <div className="mainFirstPage"> */}
-         {/* <div className="testNavBar">
-          <div className="abcdText">
-            <Link to="/TestPortal">
-              <WestIcon className="abcdBackLogo" />
-            </Link>
-            <b>abcd</b>
-          </div>
-          <div className="previewnsaveBtn">
-            <Button className="previewNavBtn" variant="outlined">Preview</Button>
-            <Button className="saveTestNavBtn" variant="outlined" disabled>Save Test</Button>
-          </div>
-        </div> */}
-        {/* <div className="testLeftSection">
-            <TestNavAndLeft />
-          </div> */}
-        {/* <div className="testContent"> */}
-       
-
             <Box className="stickyTopBox">
               <div>
                 <h4>
@@ -162,7 +142,7 @@ function TestFirstPage() {
                 </p>
               </Box>
             </Box>
-
+              {/* <CreateQNS /> */}
             <Box className="toAddNewSection">
               <img
                 src="https://www.turnitin.com/assets/images/resources/intro-images/what-is-the-difference-between-assessment-and-grading.png"
@@ -245,44 +225,14 @@ function TestFirstPage() {
                         <p>Difficulty Level</p>
                       </div>
                       <div>
-                        {/* <Accordion>
-                          <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1-content"
-                            id="panel1-header"
-                          >
-                            Add difficulty level
-                          </AccordionSummary>
-                          <AccordionDetails>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Suspendisse malesuada lacus ex, sit amet
-                            blandit leo lobortis eget.
-                          </AccordionDetails>
-                        </Accordion> */}
 
-                        <FormControl
-                          className="addDiffLevelDropDown"
-                          sx={{ m: 1, minWidth: 200 }}
-                          size="small"
-                        >
-                          <InputLabel id="demo-select-small-label">
-                            <b>Add difficulty level</b>
-                          </InputLabel>
-                          <Select
-                            labelId="demo-select-small-label"
-                            id="demo-select-small"
-                            value={age}
-                            label="Age"
-                            onChange={handleChange}
-                          >
-                            <MenuItem value="">
-                              <em>None</em>
-                            </MenuItem>
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
-                          </Select>
-                        </FormControl>
+                        <label for="difficulty"></label>
+                        <select name="Add difficulty level" id="Add difficulty level" className="addDiffLevelDropDown">
+  <option value="javascript">JavaScript</option>
+  <option value="python">Python</option>
+  <option value="c++" disabled>C++</option>
+  <option value="java" selected>Add difficulty level</option>
+</select>
                       </div>
                     </div>
                   </div>
@@ -293,7 +243,6 @@ function TestFirstPage() {
                   className="thisIsMCQBtn"
                           id="outlined-helperText"
                           defaultValue="This is an MCQ question"
-                          // helperText="Some important text"
                         />
 
                   <FormControl>
@@ -305,25 +254,12 @@ function TestFirstPage() {
                         <b>Answers</b>
                       </FormLabel>
 
-                      <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                        <InputLabel id="demo-select-small-label">
-                          <b>Single</b>
-                        </InputLabel>
-                        <Select
-                          labelId="demo-select-small-label"
-                          id="demo-select-small"
-                          value={age}
-                          label="Age"
-                          onChange={handleChange}
-                        >
-                          <MenuItem value="">
-                            <em>None</em>
-                          </MenuItem>
-                          <MenuItem value={10}>Ten</MenuItem>
-                          <MenuItem value={20}>Twenty</MenuItem>
-                          <MenuItem value={30}>Thirty</MenuItem>
-                        </Select>
-                      </FormControl>
+                      <select name="Add difficulty level" id="Add difficulty level" className="singleDropDown">
+  <option value="javascript">JavaScript</option>
+  <option value="python">Python</option>
+  <option value="c++" disabled>C++</option>
+  <option value="java" selected>Single</option>
+</select>  
                     </div>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
@@ -431,6 +367,9 @@ function TestFirstPage() {
                         />
                 </DialogContent>
               </BootstrapDialog>
+            </Box>
+            <Box className="toAddNewSection">
+
             </Box>
           </div>
         
