@@ -35,6 +35,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 // import Radio from '@mui/material/Radio';
 import TextField from "@mui/material/TextField";
+import CreateQNS from "./CreateQNS";
 
 function TestFirstPage() {
   const [selectedValue, setSelectedValue] = React.useState("a");
@@ -77,25 +78,6 @@ function TestFirstPage() {
      
       
           <div className="testRightSection">
-            {/* // <div className="mainFirstPage"> */}
-         {/* <div className="testNavBar">
-          <div className="abcdText">
-            <Link to="/TestPortal">
-              <WestIcon className="abcdBackLogo" />
-            </Link>
-            <b>abcd</b>
-          </div>
-          <div className="previewnsaveBtn">
-            <Button className="previewNavBtn" variant="outlined">Preview</Button>
-            <Button className="saveTestNavBtn" variant="outlined" disabled>Save Test</Button>
-          </div>
-        </div> */}
-        {/* <div className="testLeftSection">
-            <TestNavAndLeft />
-          </div> */}
-        {/* <div className="testContent"> */}
-       
-
             <Box className="stickyTopBox">
               <div>
                 <h4>
@@ -127,8 +109,8 @@ function TestFirstPage() {
                 </p>
               </Box>
             </Box>
-
-            <Box className="toAddNewSection">
+              <CreateQNS />
+            {/* <Box className="toAddNewSection">
               <img
                 src="https://www.turnitin.com/assets/images/resources/intro-images/what-is-the-difference-between-assessment-and-grading.png"
                 width={100}
@@ -210,21 +192,6 @@ function TestFirstPage() {
                         <p>Difficulty Level</p>
                       </div>
                       <div>
-                        {/* <Accordion>
-                          <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1-content"
-                            id="panel1-header"
-                          >
-                            Add difficulty level
-                          </AccordionSummary>
-                          <AccordionDetails>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Suspendisse malesuada lacus ex, sit amet
-                            blandit leo lobortis eget.
-                          </AccordionDetails>
-                        </Accordion> */}
-
                         <FormControl
                           className="addDiffLevelDropDown"
                           sx={{ m: 1, minWidth: 200 }}
@@ -256,11 +223,8 @@ function TestFirstPage() {
 
                   <TextField
                   className="thisIsMCQBtn"
-                        // className="optionsFeid"
                           id="outlined-helperText"
-                          // label="Helper text"
                           defaultValue="This is an MCQ question"
-                          // helperText="Some important text"
                         />
 
                   <FormControl>
@@ -308,15 +272,12 @@ function TestFirstPage() {
                         <TextField
                         className="optionsFeid"
                           id="outlined-helperText"
-                          // label="Helper text"
                           defaultValue="Option 1"
-                          // helperText="Some important text"
                         />
 
                         <div className="deleteComponent">
                           <h5>
                             <DeleteIcon 
-                            // sx={{fontSize: "1rem"}}
                             className="deleteIconSixthPage"/>
                             Delete
                           </h5>
@@ -394,9 +355,7 @@ function TestFirstPage() {
                   </Button>
 
                   <p>Solution</p>
-                  {/* <Box sx={{ border: "0.5px solid lightgrey" }}>
-                    Enter detailed solution for your students
-                  </Box> */}
+                  
                   <TextField
                   className="thisIsMCQBtn"
                           id="outlined-helperText"
@@ -404,6 +363,9 @@ function TestFirstPage() {
                         />
                 </DialogContent>
               </BootstrapDialog>
+            </Box> */}
+            <Box className="toAddNewSection">
+
             </Box>
           </div>
         
