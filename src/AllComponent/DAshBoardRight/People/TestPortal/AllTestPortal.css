@@ -314,3 +314,24 @@
 }
 
 
+
+
+/* TEST INSTRUCTIONS  */
+.testInstTextField{
+    width: 37vw !important;
+    height: 17vh !important;
+}
+.doneBtnInstPage{
+    text-transform: none !important;
+    background-color: #0075FF !important;
+    color: #ffffff !important;
+    padding: 3px 43px !important;
+}
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline{
+    position: absolute;
+    right: -340px !important;
+    left: -8px !important;
+    bottom: -50px !important;
+
+}
+
