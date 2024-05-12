@@ -14,7 +14,7 @@ function CreateQNS() {
                 <Typography>Max. Section MArks: 4.00</Typography>
             </div>
             < Box Divider />
-            <div>
+            <div className='MCQBox'>
                 <Typography>1. This is an MCQ question</Typography>
                 <ul>
                     <li>Option 1</li>

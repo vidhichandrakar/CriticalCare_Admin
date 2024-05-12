@@ -6,9 +6,8 @@ import TestFirstPage from './TestFirstPage'
 function TestPortalMain() {
   return (
     <div className="grid-container-TestPortal ">
-            <TestProtalHeader />
+        <TestProtalHeader />
         <TestNavAndLeft />
-    
         <TestFirstPage />
       
     </div>
