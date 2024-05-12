@@ -314,9 +314,9 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
         storedValues.offerPrice = value;
       }
       setLifetimeValidation(storedValues);
-      if (storedValues.regularPrice && storedValues.offerPrice) {
+      // if (storedValues.regularPrice && storedValues.offerPrice) {
         handleInputChange("editPrice", storedValues);
-      }
+      // }
     } else if (selectDurationValue === "Course Expiry Date") {
       let storedValues = Object.assign({}, expiryDate);
       if (type === "regularPrice") {
@@ -325,9 +325,9 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
         storedValues.offerPrice = value;
       }
       setExpiryDate(storedValues);
-      if (storedValues.regularPrice && storedValues.offerPrice) {
+      // if (storedValues.regularPrice && storedValues.offerPrice) {
         handleInputChange("editPrice", storedValues);
-      }
+      // }
     }
   };
   return (
