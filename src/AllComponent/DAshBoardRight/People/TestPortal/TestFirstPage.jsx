@@ -73,9 +73,12 @@ function TestFirstPage() {
   };
 
   return (
-    <div>
-      <div className="mainFirstPage">
-        <div className="testNavBar">
+  
+     
+      
+          <div className="testRightSection">
+            {/* // <div className="mainFirstPage"> */}
+         {/* <div className="testNavBar">
           <div className="abcdText">
             <Link to="/TestPortal">
               <WestIcon className="abcdBackLogo" />
@@ -86,14 +89,13 @@ function TestFirstPage() {
             <Button className="previewNavBtn" variant="outlined">Preview</Button>
             <Button className="saveTestNavBtn" variant="outlined" disabled>Save Test</Button>
           </div>
-        </div>
-
-        <div className="testContent">
-          <div className="testLeftSection">
+        </div> */}
+        {/* <div className="testLeftSection">
             <TestNavAndLeft />
-          </div>
+          </div> */}
+        {/* <div className="testContent"> */}
+       
 
-          <div className="testRightSection">
             <Box className="stickyTopBox">
               <div>
                 <h4>
@@ -406,9 +408,7 @@ function TestFirstPage() {
               </BootstrapDialog>
             </Box>
           </div>
-        </div>
-      </div>
-    </div>
+        
   );
 }
 
