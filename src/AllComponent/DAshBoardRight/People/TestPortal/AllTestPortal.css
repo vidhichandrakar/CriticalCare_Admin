@@ -41,6 +41,16 @@
     font-size: 1.4rem !important;
     margin-bottom: -5px;
 }
+.gradingContent{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    margin: 12px 2px !important;
+}
+.fourOneBox{
+    display: flex !important;
+    flex-direction: row !important;
+}
 
 
 

@@ -5,7 +5,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Fade from "@mui/material/Fade";
-import { Box, Divider } from "@mui/material";
+import { Box, Button, Divider } from "@mui/material";
 import "./AllTestPortal.css";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import FormatColorTextIcon from "@mui/icons-material/FormatColorText";
@@ -82,11 +82,37 @@ function TestNavAndLeft() {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
+            <Divider/>
+            <Typography className="gradingContent">
+              <b>Multiple Choice</b>
+              <div className="fourOneBox">
+                <Box>4</Box>
+                <Box>1</Box>
+              </div>
             </Typography>
+            <Typography className="gradingContent">
+            <b>True/False</b>
+              <div className="fourOneBox">
+                <Box>4</Box>
+                <Box>1</Box>
+              </div>
+            </Typography>
+            <Typography className="gradingContent">
+            <b>Fill In The Blanks</b>
+              <div className="fourOneBox">
+                <Box>4</Box>
+                <Box>1</Box>
+              </div>
+            </Typography>
+            <Typography className="gradingContent">
+            <b>Integer Type</b>
+              <div className="fourOneBox">
+                <Box>4</Box>
+                <Box>1</Box>
+              </div>
+            </Typography>
+            <Divider/>
+            <Button sx={{backgroundColor: "#0075FF", color: "#ffffff"}}>Submit</Button>
           </AccordionDetails>
         </Accordion>
 
