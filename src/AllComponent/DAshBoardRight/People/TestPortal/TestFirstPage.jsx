@@ -184,7 +184,7 @@ function TestFirstPage() {
                         >
                           Next
                         </Button>
-                      </Stack>
+                      </Stack >
                     </div>
                   </div>
                 </DialogTitle>
@@ -207,30 +207,18 @@ function TestFirstPage() {
                     </div>
                     <div className="twoDifficultyLvlBtns">
                       <div>
-                        <p>Difficulty Level</p>
+                        <p><h5>Difficulty Level</h5></p>
                       </div>
                       <div>
-                        {/* <Accordion>
-                          <AccordionSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1-content"
-                            id="panel1-header"
-                          >
-                            Add difficulty level
-                          </AccordionSummary>
-                          <AccordionDetails>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Suspendisse malesuada lacus ex, sit amet
-                            blandit leo lobortis eget.
-                          </AccordionDetails>
-                        </Accordion> */}
 
-                        <FormControl
+                        {/* <FormControl
                           className="addDiffLevelDropDown"
                           sx={{ m: 1, minWidth: 200 }}
                           size="small"
                         >
-                          <InputLabel id="demo-select-small-label">
+                          <InputLabel id="demo-select-small-label"
+                            // sx={{height: -50}}
+                          >
                             <b>Add difficulty level</b>
                           </InputLabel>
                           <Select
@@ -247,14 +235,18 @@ function TestFirstPage() {
                             <MenuItem value={20}>Twenty</MenuItem>
                             <MenuItem value={30}>Thirty</MenuItem>
                           </Select>
-                        </FormControl>
+                        </FormControl> */}
+                 <label for="difficulty"></label>
+                        <select name="Add difficulty level" id="Add difficulty level" className="addDiffLevelDropDown">
+  <option value="javascript">JavaScript</option>
+  <option value="python">Python</option>
+  <option value="c++" disabled>C++</option>
+  <option value="java" selected>Add difficulty level</option>
+</select>
                       </div>
                     </div>
                   </div>
 
-                  {/* <Button className="thisIsMCQBtn">
-                    This is an MCQ question
-                  </Button> */}
 
                   <TextField
                   className="thisIsMCQBtn"
@@ -274,7 +266,7 @@ function TestFirstPage() {
                         <b>Answers</b>
                       </FormLabel>
 
-                      <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                      {/* <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                         <InputLabel id="demo-select-small-label">
                           <b>Single</b>
                         </InputLabel>
@@ -292,7 +284,14 @@ function TestFirstPage() {
                           <MenuItem value={20}>Twenty</MenuItem>
                           <MenuItem value={30}>Thirty</MenuItem>
                         </Select>
-                      </FormControl>
+                      </FormControl> */}
+
+                      <select name="Add difficulty level" id="Add difficulty level" className="singleDropDown">
+  <option value="javascript">JavaScript</option>
+  <option value="python">Python</option>
+  <option value="c++" disabled>C++</option>
+  <option value="java" selected>Single</option>
+</select> 
                     </div>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
