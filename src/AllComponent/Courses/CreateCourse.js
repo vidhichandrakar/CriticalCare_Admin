@@ -17,7 +17,30 @@ import { Link, useNavigate } from "react-router-dom";
 const CreateCourses = ({ handleHeaderLabels }) => {
   const [trackerPage, setTackerPage] = useState(0);
   const [basicInfo, setBasicInfo] = useState({});
-  const [editPrice, setEditPrice] = useState([{}]);
+  const [editPrice, setEditPrice] = useState([
+    {
+      duration: "20",
+      years: "",
+      regularPrice: "400",
+      offerPrice: "1000",
+      startDate: "",
+      endDate: "",
+      duration_type_name: "",
+      duration_type_id: "",
+      duration_id: "",
+    },
+    {
+      duration: "20",
+      years: "",
+      regularPrice: "400",
+      offerPrice: "1000",
+      startDate: "",
+      endDate: "",
+      duration_type_name: "",
+      duration_type_id: "",
+      duration_id: "",
+    },
+  ]);
   const [resetPrice, setRestPrice] = useState([{}]);
   const [courseData, setCourseData] = useState([]);
   const [loaderState, setLoaderState] = useState(false);
@@ -26,14 +49,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   const courseId = location.state?.id;
   const navigate = useNavigate();
 
-  const handleTrackerPage = (page) => {
-    if (page === 2) {
-      handleCreateCourse();
-    } else {
-      setTackerPage(page);
-      handleHeaderLabels(basicInfo.Name);
-    }
-  };
+  
 
   useEffect(() => {
     if (courseId) {
@@ -49,6 +65,25 @@ const CreateCourses = ({ handleHeaderLabels }) => {
     }
   }, [courseId]);
 
+  const handleInputChange = (type, value) => {
+    if (type === "basicInfo") {
+      setBasicInfo(value);
+    } else if (type === "editPrice") {
+      setEditPrice(value);
+    }
+    //  else if (type === "resetPrice") {
+    //   setRestPrice(value);
+    // }
+  };
+  const handleTrackerPage = (page) => {
+    if (page === 2) {
+      console.log("edit tracker", editPrice)
+      handleCreateCourse();
+    } else {
+      setTackerPage(page);
+      handleHeaderLabels(basicInfo.Name);
+    }
+  };
   const handleCreateCourse = () => {
     let payload;
     try {
@@ -79,14 +114,14 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           content_url: "https://example.com/content2.pdf",
         },
       ];
-      // formData.append("courseDetails", JSON.stringify(courseDetails));
-      // formData.append("courseDurations", JSON.stringify(editPrice));
-      // formData.append("courseAttachments", JSON.stringify(courseAttachments));
+      const courseDurations=editPrice
       payload = {
         courseDetails: courseDetails,
         courseDurations: editPrice,
         courseAttachments: courseAttachments,
+        
       };
+      // console.log("courseDurations",courseDurations)
       console.log("patload", payload)
     } catch (error) {
       console.log(error);
@@ -120,16 +155,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
     }
   };
 
-  const handleInputChange = (type, value) => {
-    if (type === "basicInfo") {
-      setBasicInfo(value);
-    } else if (type === "editPrice") {
-      setEditPrice(value);
-    }
-    //  else if (type === "resetPrice") {
-    //   setRestPrice(value);
-    // }
-  };
+ 
 
   return (
     <Box className="courseMainTrack">
@@ -139,7 +165,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       />
       {/* {console.log("create course==basicInfo",basicInfo)} */}
       {console.log("create course==edit price ", editPrice)}
-      {/* {console.log("create course==edit price ",resetPrice)} */}
       {trackerPage === 0 ? (
         <CreateForm
           handleTrackerPage={handleTrackerPage}
