@@ -176,11 +176,8 @@
     background-color: #dafdda !important;
     color: #23a28d !important;
     margin-left: 11px !important;
-    /* padding: -2px -2px !important; */
     font-size: 0.9rem;
     margin-top: 6px;
-    /* padding-left: 5px; */
-    /* padding-right: 5px; */
     padding: 0px 5px;
 }
 .mcqbuttons{
@@ -215,9 +212,7 @@
     justify-content: space-between !important;
 }
 .addDiffLevelDropDown{
-    border-radius: 1px !important;
-    padding: -1px -1px !important;
-    font-weight: bolder !important;
+    /* font-weight: bolder !important; */
     position: relative !important;
     top: 10px !important;
     padding: 9px;
@@ -249,9 +244,8 @@
     margin-bottom: 17px;
 }
 .singleDropDown{
-    /* border-radius: 1px !important; */
     padding: -1px -1px !important;
-    font-weight: bolder !important;
+    /* font-weight: bolder !important; */
     position: relative !important;
     top: 2px !important;
     padding: 0px 44px;
@@ -298,13 +292,11 @@
     padding: 0px 0px !important;
 }
 .css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
-    /* padding: 15.5px 14px !important; */
     padding: -1px 0px !important;
     border: 0.5px solid black !important;
 }
 .css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
     padding: 4.4px 14px;
-    /* margin-left: 12px !important; */
 }
 
 

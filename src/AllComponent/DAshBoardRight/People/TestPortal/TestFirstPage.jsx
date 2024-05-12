@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
+// import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
@@ -24,7 +24,6 @@ import AccordionActions from "@mui/material/AccordionActions";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-// import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -33,10 +32,21 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-// import Radio from '@mui/material/Radio';
 import TextField from "@mui/material/TextField";
+import DialogContent from '@mui/material/DialogContent';
+
+
+
 
 function TestFirstPage() {
+  const [instructions, setInstructions] = React.useState(false);
+  const handleClickInstruction = () => {
+    setInstructions(true);
+  };
+  const handleClickClose = () => {
+    setInstructions(false);
+  };
+
   const [selectedValue, setSelectedValue] = React.useState("a");
 
   const handleChangeOption = (event) => {
@@ -120,8 +130,33 @@ function TestFirstPage() {
                 <p>
                   <b>Test Instructions:</b>{" "}
                   <span style={{ color: "#000" }}>
-                    Test Instructions: Click here to add
-                  </span>
+                    Test Instructions: <Button onClick={handleClickInstruction}>Click here to add </Button>
+                   {/* </span> */}
+                   
+                  <Dialog
+        instructions={instructions}
+        onClose={handleClickClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Use Google's location service?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContent id="alert-dialog-description">
+            Let Google help apps determine location. This means sending anonymous
+            location data to Google, even when no apps are running.
+          </DialogContent>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClickClose}>Disagree</Button>
+          <Button onClick={handleClickClose} autoFocus>
+            Agree
+          </Button>
+        </DialogActions>
+      </Dialog>
+      </span>
+
                 </p>
               </Box>
             </Box>
@@ -209,31 +244,6 @@ function TestFirstPage() {
                       </div>
                       <div>
 
-                        {/* <FormControl
-                          className="addDiffLevelDropDown"
-                          sx={{ m: 1, minWidth: 200 }}
-                          size="small"
-                        >
-                          <InputLabel id="demo-select-small-label"
-                            // sx={{height: -50}}
-                          >
-                            <b>Add difficulty level</b>
-                          </InputLabel>
-                          <Select
-                            labelId="demo-select-small-label"
-                            id="demo-select-small"
-                            value={age}
-                            label="Age"
-                            onChange={handleChange}
-                          >
-                            <MenuItem value="">
-                              <em>None</em>
-                            </MenuItem>
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
-                          </Select>
-                        </FormControl> */}
                  <label for="difficulty"></label>
                         <select name="Add difficulty level" id="Add difficulty level" className="addDiffLevelDropDown">
   <option value="javascript">JavaScript</option>
@@ -248,9 +258,7 @@ function TestFirstPage() {
 
                   <TextField
                   className="thisIsMCQBtn"
-                        // className="optionsFeid"
                           id="outlined-helperText"
-                          // label="Helper text"
                           defaultValue="This is an MCQ question"
                           // helperText="Some important text"
                         />
@@ -263,26 +271,6 @@ function TestFirstPage() {
                       >
                         <b>Answers</b>
                       </FormLabel>
-
-                      {/* <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-                        <InputLabel id="demo-select-small-label">
-                          <b>Single</b>
-                        </InputLabel>
-                        <Select
-                          labelId="demo-select-small-label"
-                          id="demo-select-small"
-                          value={age}
-                          label="Age"
-                          onChange={handleChange}
-                        >
-                          <MenuItem value="">
-                            <em>None</em>
-                          </MenuItem>
-                          <MenuItem value={10}>Ten</MenuItem>
-                          <MenuItem value={20}>Twenty</MenuItem>
-                          <MenuItem value={30}>Thirty</MenuItem>
-                        </Select>
-                      </FormControl> */}
 
                       <select name="Add difficulty level" id="Add difficulty level" className="singleDropDown">
   <option value="javascript">JavaScript</option>
@@ -307,15 +295,12 @@ function TestFirstPage() {
                         <TextField
                         className="optionsFeid"
                           id="outlined-helperText"
-                          // label="Helper text"
                           defaultValue="Option 1"
-                          // helperText="Some important text"
                         />
 
                         <div className="deleteComponent">
                           <h5>
                             <DeleteIcon 
-                            // sx={{fontSize: "1rem"}}
                             className="deleteIconSixthPage"/>
                             Delete
                           </h5>
@@ -393,9 +378,6 @@ function TestFirstPage() {
                   </Button>
 
                   <p>Solution</p>
-                  {/* <Box sx={{ border: "0.5px solid lightgrey" }}>
-                    Enter detailed solution for your students
-                  </Box> */}
                   <TextField
                   className="thisIsMCQBtn"
                           id="outlined-helperText"
