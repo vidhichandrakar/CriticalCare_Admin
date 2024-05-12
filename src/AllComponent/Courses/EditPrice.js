@@ -136,8 +136,8 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const handleInputPrice = (value, type, selectedIndex) => {
     // let storedValues = Object.assign({}, resetPrice);
 
-    setResetPrice(
-      resetPrice.map((item, idx) =>
+    setEditPriceData(
+      editPriceData.map((item, idx) =>
         idx === selectedIndex ? { ...item, [type]: value } : item
       )
     );
@@ -150,8 +150,8 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const handlePricePage = () => {
     if (selectDurationValue === "Multiple Validity") {
       // handleInputChange("resetPrice", resetPrice);
-      handleInputChange("editPrice", resetPrice);
-      handleTrackerPage(2);
+      handleInputChange("editPrice", editPriceData);
+      handleTrackerPage(2)
     } else if (selectDurationValue === "Single Validity") {
       const storedValues = singleValidity;
       if (
@@ -231,19 +231,20 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   };
 
   const handleAddDuration = () => {
-    let addedValues = [...resetPrice];
+    let addedValues = [...editPriceData];
     addedValues.push({
-      duration: "3",
-      years: { id: 1, label: "Days(s)" },
-      regularPrice: "",
-      offerPrice: "10",
+      duration: "20",
+      years: "",
+      regularPrice: "400",
+      offerPrice: "1000",
       startDate: "",
       endDate: "",
       duration_type_name: "",
       duration_type_id: "",
       duration_id: "",
     });
-    setResetPrice(addedValues);
+    setEditPriceData(addedValues);
+    handleInputChange("editPrice", addedValues);
   };
 
   const handleExpanded = (index) => {
@@ -313,9 +314,9 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
         storedValues.offerPrice = value;
       }
       setLifetimeValidation(storedValues);
-      if (storedValues.regularPrice && storedValues.offerPrice) {
+      // if (storedValues.regularPrice && storedValues.offerPrice) {
         handleInputChange("editPrice", storedValues);
-      }
+      // }
     } else if (selectDurationValue === "Course Expiry Date") {
       let storedValues = Object.assign({}, expiryDate);
       if (type === "regularPrice") {
@@ -324,9 +325,9 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
         storedValues.offerPrice = value;
       }
       setExpiryDate(storedValues);
-      if (storedValues.regularPrice && storedValues.offerPrice) {
+      // if (storedValues.regularPrice && storedValues.offerPrice) {
         handleInputChange("editPrice", storedValues);
-      }
+      // }
     }
   };
   return (
@@ -338,7 +339,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
       <br />
       {selectDurationValue === "Multiple Validity" ? (
         <div>
-          {resetPrice?.map((item, index) => (
+          {editPriceData?.map((item, index) => (
             <div>
               <Accordion
                 defaultExpanded={index === 0}

@@ -83,9 +83,12 @@ function TestFirstPage() {
   };
 
   return (
-    <div>
-      <div className="mainFirstPage">
-        <div className="testNavBar">
+  
+     
+      
+          <div className="testRightSection">
+            {/* // <div className="mainFirstPage"> */}
+         {/* <div className="testNavBar">
           <div className="abcdText">
             <Link to="/TestPortal">
               <WestIcon className="abcdBackLogo" />
@@ -96,14 +99,13 @@ function TestFirstPage() {
             <Button className="previewNavBtn" variant="outlined">Preview</Button>
             <Button className="saveTestNavBtn" variant="outlined" disabled>Save Test</Button>
           </div>
-        </div>
-
-        <div className="testContent">
-          <div className="testLeftSection">
+        </div> */}
+        {/* <div className="testLeftSection">
             <TestNavAndLeft />
-          </div>
+          </div> */}
+        {/* <div className="testContent"> */}
+       
 
-          <div className="testRightSection">
             <Box className="stickyTopBox">
               <div>
                 <h4>
@@ -217,7 +219,7 @@ function TestFirstPage() {
                         >
                           Next
                         </Button>
-                      </Stack >
+                      </Stack>
                     </div>
                   </div>
                 </DialogTitle>
@@ -240,21 +242,52 @@ function TestFirstPage() {
                     </div>
                     <div className="twoDifficultyLvlBtns">
                       <div>
-                        <p><h5>Difficulty Level</h5></p>
+                        <p>Difficulty Level</p>
                       </div>
                       <div>
+                        {/* <Accordion>
+                          <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1-content"
+                            id="panel1-header"
+                          >
+                            Add difficulty level
+                          </AccordionSummary>
+                          <AccordionDetails>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing
+                            elit. Suspendisse malesuada lacus ex, sit amet
+                            blandit leo lobortis eget.
+                          </AccordionDetails>
+                        </Accordion> */}
 
-                 <label for="difficulty"></label>
-                        <select name="Add difficulty level" id="Add difficulty level" className="addDiffLevelDropDown">
-  <option value="javascript">JavaScript</option>
-  <option value="python">Python</option>
-  <option value="c++" disabled>C++</option>
-  <option value="java" selected>Add difficulty level</option>
-</select>
+                        <FormControl
+                          className="addDiffLevelDropDown"
+                          sx={{ m: 1, minWidth: 200 }}
+                          size="small"
+                        >
+                          <InputLabel id="demo-select-small-label">
+                            <b>Add difficulty level</b>
+                          </InputLabel>
+                          <Select
+                            labelId="demo-select-small-label"
+                            id="demo-select-small"
+                            value={age}
+                            label="Age"
+                            onChange={handleChange}
+                          >
+                            <MenuItem value="">
+                              <em>None</em>
+                            </MenuItem>
+                            <MenuItem value={10}>Ten</MenuItem>
+                            <MenuItem value={20}>Twenty</MenuItem>
+                            <MenuItem value={30}>Thirty</MenuItem>
+                          </Select>
+                        </FormControl>
                       </div>
                     </div>
                   </div>
 
+               
 
                   <TextField
                   className="thisIsMCQBtn"
@@ -272,12 +305,25 @@ function TestFirstPage() {
                         <b>Answers</b>
                       </FormLabel>
 
-                      <select name="Add difficulty level" id="Add difficulty level" className="singleDropDown">
-  <option value="javascript">JavaScript</option>
-  <option value="python">Python</option>
-  <option value="c++" disabled>C++</option>
-  <option value="java" selected>Single</option>
-</select> 
+                      <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+                        <InputLabel id="demo-select-small-label">
+                          <b>Single</b>
+                        </InputLabel>
+                        <Select
+                          labelId="demo-select-small-label"
+                          id="demo-select-small"
+                          value={age}
+                          label="Age"
+                          onChange={handleChange}
+                        >
+                          <MenuItem value="">
+                            <em>None</em>
+                          </MenuItem>
+                          <MenuItem value={10}>Ten</MenuItem>
+                          <MenuItem value={20}>Twenty</MenuItem>
+                          <MenuItem value={30}>Thirty</MenuItem>
+                        </Select>
+                      </FormControl>
                     </div>
                     <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
@@ -387,9 +433,7 @@ function TestFirstPage() {
               </BootstrapDialog>
             </Box>
           </div>
-        </div>
-      </div>
-    </div>
+        
   );
 }
 
