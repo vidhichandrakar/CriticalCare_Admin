@@ -10,6 +10,13 @@ import "./AllTestPortal.css";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import FormatColorTextIcon from "@mui/icons-material/FormatColorText";
 import HdrAutoIcon from "@mui/icons-material/HdrAuto";
+import Checkbox from '@mui/material/Checkbox';
+import FlipToFrontIcon from '@mui/icons-material/FlipToFront';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+
+
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
 
 function TestNavAndLeft() {
   const [expanded, setExpanded] = React.useState(false);
@@ -84,35 +91,47 @@ function TestNavAndLeft() {
           <AccordionDetails>
             <Divider/>
             <Typography className="gradingContent">
-              <b>Multiple Choice</b>
+            <div className="checkboxAndText">
+            <input type="checkbox"/>
+            <b>Multiple Choice</b>
+            </div>
               <div className="fourOneBox">
-                <Box>4</Box>
-                <Box>1</Box>
+                <Box className="boxFour">4</Box>
+                <Box className="boxOne">1</Box>
               </div>
             </Typography>
             <Typography className="gradingContent">
+            <div className="checkboxAndText">
+            <input type="checkbox"/>
             <b>True/False</b>
+            </div>
               <div className="fourOneBox">
-                <Box>4</Box>
-                <Box>1</Box>
+                <Box className="boxFour">4</Box>
+                <Box className="boxOne">1</Box>
               </div>
             </Typography>
             <Typography className="gradingContent">
+            <div className="checkboxAndText">
+            <input type="checkbox"/>
             <b>Fill In The Blanks</b>
+            </div>
               <div className="fourOneBox">
-                <Box>4</Box>
-                <Box>1</Box>
+                <Box className="boxFour">4</Box>
+                <Box className="boxOne">1</Box>
               </div>
             </Typography>
             <Typography className="gradingContent">
+            <div className="checkboxAndText">
+            <input type="checkbox"/>
             <b>Integer Type</b>
+            </div>
               <div className="fourOneBox">
-                <Box>4</Box>
-                <Box>1</Box>
+                <Box className="boxFour">4</Box>
+                <Box className="boxOne">1</Box>
               </div>
             </Typography>
             <Divider/>
-            <Button sx={{backgroundColor: "#0075FF", color: "#ffffff"}}>Submit</Button>
+            <Button className="gradingSubmitBtn">Submit</Button>
           </AccordionDetails>
         </Accordion>
 
@@ -123,6 +142,7 @@ function TestNavAndLeft() {
             id="panel2-header"
           >
             <Typography>
+              <FlipToFrontIcon className="gradingLogo"/>
               <b>Test Sections</b>
             </Typography>
           </AccordionSummary>
@@ -142,6 +162,7 @@ function TestNavAndLeft() {
             id="panel2-header"
           >
             <Typography>
+              <FileDownloadOutlinedIcon className="gradingLogo"/>
               <b>Import Questions</b>
             </Typography>
           </AccordionSummary>

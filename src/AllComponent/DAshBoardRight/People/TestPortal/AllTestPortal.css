@@ -41,15 +41,39 @@
     font-size: 1.4rem !important;
     margin-bottom: -5px;
 }
+.checkboxAndText{
+    justify-content: safe;
+}
 .gradingContent{
     display: flex !important;
     flex-direction: row !important;
     justify-content: space-between !important;
-    margin: 12px 2px !important;
+    margin: 19px 2px !important;
 }
 .fourOneBox{
     display: flex !important;
     flex-direction: row !important;
+}
+.boxFour{
+    background-color: #e7e7e7;
+    border: 0.3px solid grey;
+    padding: 2px 20px;
+    border-radius: 5px;
+    position: relative;
+    right: 21px;
+}
+.boxOne{
+    background-color: #e7e7e7;
+    border: 0.3px solid grey;
+    padding: 2px 20px;
+    border-radius: 5px;
+}
+.gradingSubmitBtn{
+    background-color: #0075FF !important;
+    color: #ffffff !important;
+    margin: 16px 94px !important;
+    padding: 3px 34px !important;
+    text-transform: none !important;
 }
 
 
