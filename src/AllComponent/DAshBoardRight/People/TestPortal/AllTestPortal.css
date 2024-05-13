@@ -156,6 +156,36 @@
     border-radius: 4px;
     padding: 5px 0px;
 }
+.doNothingDropDown {
+    position: relative !important;
+    top: -9px !important;
+    /* padding: 7px 112px; */
+    padding: 7px;
+    left: -20px;
+    margin-left: 21px !important;
+    border-radius: 5px !important;
+    width: 100%;
+}
+.offOnSwitchWithHead{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.offOnSwitch{
+    display: flex;
+    flex-direction: row;
+}
+.exportTestSettings {
+    color: #0075FF !important;
+    font-size: 0.9rem !important;
+    text-align: center !important;
+    width: 73%;
+    position: relative;
+    left: 38px;
+    top: 11px;
+    border-radius: 4px;
+    padding: 5px 0px;
+}
 
 
 

@@ -18,6 +18,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import SettingsIcon from '@mui/icons-material/Settings';
+import Switch from '@mui/material/Switch';
+import Radio from '@mui/material/Radio';
+import LaunchIcon from '@mui/icons-material/Launch';
+
+
+// const label = { inputProps: { 'aria-label': 'Switch demo' } };
 
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -29,6 +35,13 @@ function TestNavAndLeft() {
   const handleExpansion = () => {
     setExpanded((prevExpanded) => !prevExpanded);
   };
+
+  const [selectedValue, setSelectedValue] = React.useState('a');
+
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
+  };
+
 
   return (
     <aside
@@ -214,18 +227,81 @@ function TestNavAndLeft() {
           <AccordionDetails>
             <Divider/>
             <Typography>
-            <Box className="addNreScsnImportQues">
-              From My library<ChevronRightIcon className="leftIconImportQues"/>
-              </Box>
-              {/* <p sx={{marginLeft: "30px", color: "grey"}}>OR</p> */}
-              <Box className="ORImportQues">
-              OR
-              </Box>
-              <Box className="uploadWordFileImportQues">
-              Upload Word File
-              </Box>
-              <Box className="downloadSampleImportQues">
-                <p>Download Sample Word File Format</p>
+               <p>Order Of Questions</p>
+               {/* <Box className="addNreScsnImportQues">
+                Do Nothing<ChevronRightIcon className="leftIconImportQues"/>
+              </Box> */}
+                <label for="difficulty"></label>
+                        <select name="Do Nothing" id="Do Nothing" 
+                        className="doNothingDropDown">
+  <option value="javascript">JavaScript</option>
+  <option value="python">Python</option>
+  <option value="c++" disabled>C++</option>
+  <option value="java" selected>Do Nothing</option>
+</select>
+
+<div className="offOnSwitchWithHead">
+  <div>
+    <h5>Enable Solutions</h5>
+    <p sx={{color: "grey", fontSize: "0.5rem", padding: "-2px"}}>Allow students to view the test solutions</p>
+  </div>
+  <div className="offOnSwitch">
+    <h5>Off</h5> <Switch {...label} defaultChecked sx={{mt: "13px"}}/><h5>On</h5>
+  </div>
+</div>
+
+<p sx={{color: "grey"}}>Reveal Correct Answers</p>
+
+<label for="difficulty"></label>
+                        <select name="Do Nothing" id="Do Nothing" 
+                        className="doNothingDropDown">
+  <option value="javascript">JavaScript</option>
+  <option value="python">Python</option>
+  <option value="c++" disabled>C++</option>
+  <option value="java" selected>All Questions</option>
+</select>
+
+<p sx={{color: "grey"}}>
+  <Radio
+        checked={selectedValue === 'a'}
+        onChange={handleChange}
+        value="a"
+        name="radio-buttons"
+        inputProps={{ 'aria-label': 'A' }}
+      />
+Immediately after test completion</p>
+<label for="difficulty"></label>
+                        <select name="Do Nothing" id="Do Nothing" 
+                        className="doNothingDropDown">
+  <option value="javascript">JavaScript</option>
+  <option value="python">Python</option>
+  <option value="c++" disabled>C++</option>
+  <option value="java" selected>Always Show Solution</option>
+</select>
+
+<p sx={{color: "grey"}}>
+<Radio
+        onChange={handleChange}
+        value="a"
+        name="radio-buttons"
+        inputProps={{ 'aria-label': 'A' }}
+      />
+After deadline is over</p>
+
+<div className="offOnSwitchWithHead">
+  <div>
+    <h5>Allow Section Switching</h5>
+    <p sx={{color: "grey", fontSize: "0.2rem"}}>Student can switch sections during the course of the test when you create more 
+    than one section.</p>
+  </div>
+  <div className="offOnSwitch">
+    <h5>Off</h5> <Switch {...label} defaultChecked sx={{mt: "13px"}}/><h5>On</h5>
+  </div>
+</div>
+<Divider/>
+
+<Box className="exportTestSettings">
+                <p><LaunchIcon sx={{fontSize: "1.1rem", mr: "10px"}}/>Export test as PDF</p>
               </Box>
             </Typography>
           </AccordionDetails>
