@@ -41,6 +41,12 @@
     font-size: 1.4rem !important;
     margin-bottom: -5px;
 }
+.sectionOneFourQues{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: grey;
+}
 .checkboxAndText{
     justify-content: safe;
 }
@@ -74,6 +80,31 @@
     margin: 16px 94px !important;
     padding: 3px 34px !important;
     text-transform: none !important;
+}
+.editIconTestSection{
+    font-size: 1rem !important;
+    margin-bottom: -18px;
+    margin-left: 41px;
+    margin-right: -32px; 
+}
+.deleteIconTestSection {
+    font-size: 1rem !important;
+    margin-bottom: -18px;
+    margin-left: 41px;
+    margin-right: 7px;
+}
+.addNreScsnTestSection{
+    color: #0075FF !important;
+    border: 0.2px solid lightgray;
+    font-size: 0.9rem !important;
+    /* align-items: center !important; */
+    text-align: center !important;
+    /* justify-content: center !important; */
+    width: 73%;
+    position: relative;
+    left: 38px;
+    top: -18px;
+    border-radius: 4px;
 }
 
 

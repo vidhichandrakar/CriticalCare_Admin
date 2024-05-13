@@ -13,6 +13,9 @@ import HdrAutoIcon from "@mui/icons-material/HdrAuto";
 import Checkbox from '@mui/material/Checkbox';
 import FlipToFrontIcon from '@mui/icons-material/FlipToFront';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -147,10 +150,19 @@ function TestNavAndLeft() {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
+            <Divider/>
             <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
+              <div className="sectionOneFourQues">
+                <h5>Section1 - 4 Questions</h5>
+                <div><EditIcon className="editIconTestSection"/><DeleteIcon className="deleteIconTestSection"/></div>
+              </div>
+              <Box sx={{backgroundColor: "#e6f9ff",
+               padding: "5px 17px", borderRadius: "5px", marginTop: "-13px", marginBottom: "61px"}}>abcd</Box>
+            </Typography>
+            <Typography>
+              <Box className="addNreScsnTestSection">
+                <AddCircleOutlineIcon/>Add New Section
+              </Box>
             </Typography>
           </AccordionDetails>
         </Accordion>
