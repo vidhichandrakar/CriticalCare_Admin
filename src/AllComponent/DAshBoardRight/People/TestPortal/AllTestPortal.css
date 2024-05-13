@@ -41,6 +41,121 @@
     font-size: 1.4rem !important;
     margin-bottom: -5px;
 }
+.sectionOneFourQues{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: grey;
+}
+.checkboxAndText{
+    justify-content: safe;
+}
+.gradingContent{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    margin: 19px 2px !important;
+}
+.fourOneBox{
+    display: flex !important;
+    flex-direction: row !important;
+}
+.boxFour{
+    background-color: #e7e7e7;
+    border: 0.3px solid grey;
+    padding: 2px 20px;
+    border-radius: 5px;
+    position: relative;
+    right: 21px;
+}
+.boxOne{
+    background-color: #e7e7e7;
+    border: 0.3px solid grey;
+    padding: 2px 20px;
+    border-radius: 5px;
+}
+.gradingSubmitBtn{
+    background-color: #0075FF !important;
+    color: #ffffff !important;
+    margin: 16px 94px !important;
+    padding: 3px 34px !important;
+    text-transform: none !important;
+}
+.editIconTestSection{
+    font-size: 1rem !important;
+    margin-bottom: -18px;
+    margin-left: 41px;
+    margin-right: -32px; 
+}
+.deleteIconTestSection {
+    font-size: 1rem !important;
+    margin-bottom: -18px;
+    margin-left: 41px;
+    margin-right: 7px;
+}
+.addNreScsnTestSection{
+    color: #0075FF !important;
+    border: 0.2px solid lightgray;
+    font-size: 0.9rem !important;
+    text-align: center !important;
+    width: 73%;
+    position: relative;
+    left: 38px;
+    top: -18px;
+    border-radius: 4px;
+}
+.addNreScsnImportQues{
+    color: #0075FF !important;
+    border: 0.2px solid lightgray;
+    font-size: 0.9rem !important;
+    text-align: center !important;
+    width: 73%;
+    position: relative;
+    left: 38px;
+    top: 26px;
+    border-radius: 4px;
+}
+.leftIconImportQues{
+    position: relative;
+    top: 3px;
+    right: -47px;
+    color: lightgrey;
+}
+.ORImportQues{
+    color: grey !important;
+    font-size: 0.9rem !important;
+    text-align: center !important;
+    width: 73%;
+    position: relative;
+    left: 38px;
+    top: 27px;
+    border-radius: 4px;
+    padding: 15px 0px; 
+}
+.uploadWordFileImportQues {
+    color: #0075FF !important;
+    border: 0.2px solid lightgray;
+    font-size: 0.9rem !important;
+    text-align: center !important;
+    width: 73%;
+    position: relative;
+    left: 38px;
+    top: 24px;
+    border-radius: 4px;
+    padding: 5px 0px;
+}
+.downloadSampleImportQues {
+    color: #0075FF !important;
+    /* border: 0.2px solid lightgray; */
+    font-size: 0.8rem !important;
+    text-align: center !important;
+    width: 73%;
+    position: relative;
+    left: 38px;
+    top: 24px;
+    border-radius: 4px;
+    padding: 5px 0px;
+}
 
 
 
@@ -320,3 +435,25 @@
 }
 
 
+
+
+/* TEST INSTRUCTIONS  */
+.testInstTextField{
+    width: 37vw !important;
+    height: 17vh !important;
+}
+.doneBtnInstPage{
+    text-transform: none !important;
+    background-color: #0075FF !important;
+    color: #ffffff !important;
+    padding: 3px 43px !important;
+}
+
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+    padding: 44.5px 14px !important;
+    width: 50% !important;
+}
+.css-xn6ruc>:not(style) {
+    margin: 8px;
+    width: 62ch !important;
+}

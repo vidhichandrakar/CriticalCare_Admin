@@ -5,11 +5,23 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Fade from "@mui/material/Fade";
-import { Box, Divider } from "@mui/material";
+import { Box, Button, Divider } from "@mui/material";
 import "./AllTestPortal.css";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import FormatColorTextIcon from "@mui/icons-material/FormatColorText";
 import HdrAutoIcon from "@mui/icons-material/HdrAuto";
+import Checkbox from '@mui/material/Checkbox';
+import FlipToFrontIcon from '@mui/icons-material/FlipToFront';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import SettingsIcon from '@mui/icons-material/Settings';
+
+
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+
 
 function TestNavAndLeft() {
   const [expanded, setExpanded] = React.useState(false);
@@ -82,11 +94,49 @@ function TestNavAndLeft() {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
+            <Divider/>
+            <Typography className="gradingContent">
+            <div className="checkboxAndText">
+            <input type="checkbox"/>
+            <b>Multiple Choice</b>
+            </div>
+              <div className="fourOneBox">
+                <Box className="boxFour">4</Box>
+                <Box className="boxOne">1</Box>
+              </div>
             </Typography>
+            <Typography className="gradingContent">
+            <div className="checkboxAndText">
+            <input type="checkbox"/>
+            <b>True/False</b>
+            </div>
+              <div className="fourOneBox">
+                <Box className="boxFour">4</Box>
+                <Box className="boxOne">1</Box>
+              </div>
+            </Typography>
+            <Typography className="gradingContent">
+            <div className="checkboxAndText">
+            <input type="checkbox"/>
+            <b>Fill In The Blanks</b>
+            </div>
+              <div className="fourOneBox">
+                <Box className="boxFour">4</Box>
+                <Box className="boxOne">1</Box>
+              </div>
+            </Typography>
+            <Typography className="gradingContent">
+            <div className="checkboxAndText">
+            <input type="checkbox"/>
+            <b>Integer Type</b>
+            </div>
+              <div className="fourOneBox">
+                <Box className="boxFour">4</Box>
+                <Box className="boxOne">1</Box>
+              </div>
+            </Typography>
+            <Divider/>
+            <Button className="gradingSubmitBtn">Submit</Button>
           </AccordionDetails>
         </Accordion>
 
@@ -97,14 +147,24 @@ function TestNavAndLeft() {
             id="panel2-header"
           >
             <Typography>
+              <FlipToFrontIcon className="gradingLogo"/>
               <b>Test Sections</b>
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
+            <Divider/>
             <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
+              <div className="sectionOneFourQues">
+                <h5>Section1 - 4 Questions</h5>
+                <div><EditIcon className="editIconTestSection"/><DeleteIcon className="deleteIconTestSection"/></div>
+              </div>
+              <Box sx={{backgroundColor: "#e6f9ff",
+               padding: "5px 17px", borderRadius: "5px", marginTop: "-13px", marginBottom: "61px"}}>abcd</Box>
+            </Typography>
+            <Typography>
+              <Box className="addNreScsnTestSection">
+                <AddCircleOutlineIcon/>Add New Section
+              </Box>
             </Typography>
           </AccordionDetails>
         </Accordion>
@@ -116,14 +176,57 @@ function TestNavAndLeft() {
             id="panel2-header"
           >
             <Typography>
+              <FileDownloadOutlinedIcon className="gradingLogo"/>
               <b>Import Questions</b>
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
+            <Divider/>
             <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
+            <Box className="addNreScsnImportQues">
+              From My library<ChevronRightIcon className="leftIconImportQues"/>
+              </Box>
+              {/* <p sx={{marginLeft: "30px", color: "grey"}}>OR</p> */}
+              <Box className="ORImportQues">
+              OR
+              </Box>
+              <Box className="uploadWordFileImportQues">
+              Upload Word File
+              </Box>
+              <Box className="downloadSampleImportQues">
+                <p>Download Sample Word File Format</p>
+              </Box>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+
+        <Accordion className="grading">
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2-content"
+            id="panel2-header"
+          >
+            <Typography>
+              <SettingsIcon className="gradingLogo"/>
+              <b>Test Settings</b>
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Divider/>
+            <Typography>
+            <Box className="addNreScsnImportQues">
+              From My library<ChevronRightIcon className="leftIconImportQues"/>
+              </Box>
+              {/* <p sx={{marginLeft: "30px", color: "grey"}}>OR</p> */}
+              <Box className="ORImportQues">
+              OR
+              </Box>
+              <Box className="uploadWordFileImportQues">
+              Upload Word File
+              </Box>
+              <Box className="downloadSampleImportQues">
+                <p>Download Sample Word File Format</p>
+              </Box>
             </Typography>
           </AccordionDetails>
         </Accordion>

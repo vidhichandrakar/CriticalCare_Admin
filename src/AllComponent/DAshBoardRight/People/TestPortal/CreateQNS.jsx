@@ -28,7 +28,7 @@ function CreateQNS() {
                 <StarBorderOutlinedIcon className='starIconss'/> 
                 <Typography>Max. Section Marks: 4.00</Typography>
             </div>
-            {/* <div className='MCQBox'>
+            <div className='MCQBox'>
                 <Typography sx={{color : "rgba(0, 0, 0, 0.685)"}}>1. This is an MCQ question</Typography>
                 <RadioGroup
                       aria-labelledby="demo-radio-buttons-group-label"
@@ -87,8 +87,8 @@ function CreateQNS() {
                     <Box><TextIncreaseRoundedIcon /> <Typography>Edit MArks</Typography></Box>
                     <Box><DeleteOutlineRoundedIcon /><Typography>Delete</Typography></Box>
                 </div>
-            </div> */}
-            <div className='CReateBox'>
+            </div>
+            {/* <div className='CReateBox'>
             <img
                 style={{marginTop: "2%"}}
                 src="https://cms.classplusapp.com/static/media/questionMark.fb6054ee.svg"
@@ -106,7 +106,7 @@ function CreateQNS() {
                     <Typography style={{color: "rgba(71, 71, 71, 0.685)", fontSize: "0.9rem"}}>OR</Typography>
                     <Typography className='btnqns'>Import Questions</Typography>
                 </Box>
-            </div>
+            </div> */}
             
     </div>
   )
