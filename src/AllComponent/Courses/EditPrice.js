@@ -43,23 +43,23 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const [durationType, setDurationType] = useState([{}]);
   const [durationSelectedValue, setDurationSelectedValue] = useState("");
   const [expiryDate, setExpiryDate] = useState({
-    regularPrice: "235980",
-    offerPrice: "789",
+    price: "",
+    offer_price: "",
     startDate: "",
     duration_id: "",
     duration_type_name: "",
   });
   const [lifetimeValidation, setLifetimeValidation] = useState({
-    regularPrice: "8502",
-    offerPrice: "520",
+    price: "",
+    offer_price: "",
     duration_type_id: "",
     duration_type_name: "",
   });
   const [singleValidity, setSingleValidity] = useState({
     duration: "",
     duration_type_id: "",
-    regularPrice: "",
-    offerPrice: "",
+    price: "",
+    offer_price: "",
     startDate: "",
     endDate: "",
     duration_id: "",
@@ -70,8 +70,8 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
     {
       duration: "20",
       years: "",
-      regularPrice: "400",
-      offerPrice: "1000",
+      price: "400",
+      offer_price: "1000",
       startDate: "",
       endDate: "",
       duration_type_name: "",
@@ -81,8 +81,8 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
     {
       duration: "40",
       years: "",
-      regularPrice: "200",
-      offerPrice: "50",
+      price: "200",
+      offer_price: "50",
       startDate: "",
       endDate: "",
       duration_type_name: "",
@@ -94,24 +94,26 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
     {
       duration: "20",
       years: "",
-      regularPrice: "400",
-      offerPrice: "1000",
+      price: "400",
+      offer_price: "1000",
       startDate: "",
       endDate: "",
       duration_type_name: "",
       duration_type_id: "",
       duration_id: "",
+      duration_name: "",
     },
     {
       duration: "20",
       years: "",
-      regularPrice: "400",
-      offerPrice: "1000",
+      price: "400",
+      offer_price: "1000",
       startDate: "",
       endDate: "",
       duration_type_name: "",
       duration_type_id: "",
       duration_id: "",
+      duration_name: "",
     },
   ]);
 
@@ -122,27 +124,37 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
       },
     });
   }, []);
-
+  // console.log("TEdit prie floe", courseData, editPriceData);
   useEffect(() => {
-    if (courseData?.length) {
-      let storedValues = Object.assign({}, editPriceData);
-      storedValues.duration = courseData.duration_id;
-      storedValues.regularPrice = courseData.price;
-      storedValues.offerPrice = courseData.offer_price;
-      setEditPriceData(storedValues);
+    if (courseData) {
+      let storedValues = Object.assign({}, singleValidity);
+      storedValues.duration = courseData?.durations[0]?.duration_id;
+      storedValues.price = courseData?.durations[0]?.price;
+      storedValues.offer_price = courseData?.durations[0]?.offer_price;
+      // storedValues.duration_type_id =courseData.duration_type_id
+      // console.log("storedValuesstoredValues", storedValues);
+      let getDurationType = durationType.filter((item)=>item?.duration_id===courseData?.durations[0]?.duration_id);
+      setDurationSelectedValue(getDurationType[0]?.duration_name);
+      // console.log("getDurationTypegetDurationType",getDurationType)
+      setSingleValidity(storedValues);
     }
-  }, [courseData]);
+  }, [courseData,durationType]);
 
   const handleInputPrice = (value, type, selectedIndex) => {
-    // let storedValues = Object.assign({}, resetPrice);
+    let storedValues = Object.assign({}, editPriceData);
 
     setEditPriceData(
       editPriceData.map((item, idx) =>
         idx === selectedIndex ? { ...item, [type]: value } : item
       )
     );
+
+    // console.log("valuevalue",value)
     if (type === "years") {
+      // console.log("typeeee",type)
       setDurationSelectedValue(value.duration_name);
+      storedValues.duration_id = value.duration_id;
+      storedValues.duration_name = value.duration_name;
     }
     // handleInputChange("editPrice", editPriceData);
   };
@@ -151,21 +163,20 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
     if (selectDurationValue === "Multiple Validity") {
       // handleInputChange("resetPrice", resetPrice);
       handleInputChange("editPrice", editPriceData);
-      handleTrackerPage(2)
+      handleTrackerPage(2);
     } else if (selectDurationValue === "Single Validity") {
       const storedValues = singleValidity;
       if (
         storedValues.duration &&
         storedValues.year &&
-        storedValues.regularPrice &&
-        storedValues.offerPrice
+        storedValues.price &&
+        storedValues.offer_price
       ) {
-        if (
-          parseInt(storedValues.regularPrice) >
-          parseInt(storedValues.offerPrice)
-        ) {
-          handleInputChange("editPrice", [storedValues]);
-
+        if (parseInt(storedValues.price) > parseInt(storedValues.offer_price)) {
+          let copyArr = [];
+          copyArr.push(storedValues);
+          // console.log("array", copyArr);
+          handleInputChange("editPrice", copyArr);
           handleTrackerPage(2);
         } else {
           toast.error("Offer Price Must Be Less Then Regular Price", {
@@ -179,6 +190,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
       }
     } else if (selectDurationValue === "Lifetime Validity") {
       const storedValues = lifetimeValidation;
+      // console.log("kife time",storedValues)
       handleInputChange("editPrice", [storedValues]);
       handleTrackerPage(2);
     } else if (selectDurationValue === "Course Expiry Date") {
@@ -235,8 +247,8 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
     addedValues.push({
       duration: "20",
       years: "",
-      regularPrice: "400",
-      offerPrice: "1000",
+      price: "400",
+      offer_price: "1000",
       startDate: "",
       endDate: "",
       duration_type_name: "",
@@ -290,10 +302,10 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
         setDurationSelectedValue(value.target.value.duration_name);
         storedValues.year = value?.target?.value;
         storedValues.duration_id = value?.target?.value?.duration_id;
-      } else if (type === "regularPrice") {
-        storedValues.regularPrice = value;
-      } else if (type === "offerPrice") {
-        storedValues.offerPrice = value;
+      } else if (type === "price") {
+        storedValues.price = value;
+      } else if (type === "offer_price") {
+        storedValues.offer_price = value;
       } else if (type === "date") {
         storedValues.date = moment(new Date(value)).format("YYYY-MM-DD");
       }
@@ -301,41 +313,49 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
       if (
         storedValues.duration &&
         storedValues.year &&
-        storedValues.regularPrice &&
-        storedValues.offerPrice
+        storedValues.price &&
+        storedValues.offer_price
       ) {
         handleInputChange("editPrice", storedValues);
       }
     } else if (selectDurationValue === "Lifetime Validity") {
       let storedValues = Object.assign({}, lifetimeValidation);
-      if (type === "regularPrice") {
-        storedValues.regularPrice = value;
-      } else if (type === "offerPrice") {
-        storedValues.offerPrice = value;
+      if (type === "price") {
+        storedValues.price = value;
+      } else if (type === "offer_price") {
+        storedValues.offer_price = value;
       }
       setLifetimeValidation(storedValues);
-      // if (storedValues.regularPrice && storedValues.offerPrice) {
-        handleInputChange("editPrice", storedValues);
+      // if (storedValues.price && storedValues.offer_price) {
+      handleInputChange("editPrice", storedValues);
       // }
     } else if (selectDurationValue === "Course Expiry Date") {
       let storedValues = Object.assign({}, expiryDate);
-      if (type === "regularPrice") {
-        storedValues.regularPrice = value;
-      } else if (type === "offerPrice") {
-        storedValues.offerPrice = value;
+      if (type === "price") {
+        storedValues.price = value;
+      } else if (type === "offer_price") {
+        storedValues.offer_price = value;
       }
       setExpiryDate(storedValues);
-      // if (storedValues.regularPrice && storedValues.offerPrice) {
-        handleInputChange("editPrice", storedValues);
+      // if (storedValues.price && storedValues.offer_price) {
+      handleInputChange("editPrice", storedValues);
       // }
     }
+  };
+
+  const handleSelectedDuration = (value) => {
+    setSelectedDurationValue(value);
   };
   return (
     <div className="formMain">
       <DurationConfiguration
         handleDuration={handleDuration}
         selectDurationValue={selectDurationValue}
+        courseData={courseData}
+        handleSelectedDuration={handleSelectedDuration}
       />
+      {console.log("courseDatacourseData", courseData)}
+      {console.log("durationType", durationType)}
       <br />
       {selectDurationValue === "Multiple Validity" ? (
         <div>
@@ -380,7 +400,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                       {`${item?.duration} ${item?.years?.duration_name}  `}{" "}
                       <b style={{ color: "#18568f", marginLeft: "10px" }}>
                         {" "}
-                        {`  ₹ ${item?.offerPrice}`}
+                        {`  ₹ ${item?.offer_price}`}
                       </b>
                     </Typography>
                   </div>
@@ -484,9 +504,9 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                         (Option = {
                           sx: { width: 240, marginTop: "4% !important" },
                           handleInput: (event) =>
-                            handleInputPrice(event, "regularPrice", index),
-                          type: "regularPrice",
-                          value: item.regularPrice,
+                            handleInputPrice(event, "price", index),
+                          type: "price",
+                          value: item.price,
                         })
                       )}
                     </Box>
@@ -508,9 +528,9 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                         (Option = {
                           sx: { width: 240, marginTop: "4% !important" },
                           handleInput: (event) =>
-                            handleInputPrice(event, "offerPrice", index),
-                          type: "offerPrice",
-                          value: item.offerPrice,
+                            handleInputPrice(event, "offer_price", index),
+                          type: "offer_price",
+                          value: item.offer_price,
                         })
                       )}
                     </Box>
@@ -609,10 +629,9 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                 },
                 (Option = {
                   sx: { width: 240, marginTop: "4% !important" },
-                  handleInput: (event) =>
-                    handleValidityChange(event, "regularPrice"),
-                  type: "regularPrice",
-                  value: singleValidity.regularPrice,
+                  handleInput: (event) => handleValidityChange(event, "price"),
+                  type: "price",
+                  value: singleValidity.price,
                 })
               )}
             </Box>
@@ -634,9 +653,9 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                 (Option = {
                   sx: { width: 240, marginTop: "4% !important" },
                   handleInput: (event) =>
-                    handleValidityChange(event, "offerPrice"),
-                  type: "offerPrice",
-                  value: singleValidity.offerPrice,
+                    handleValidityChange(event, "offer_price"),
+                  type: "offer_price",
+                  value: singleValidity.offer_price,
                 })
               )}
             </Box>
@@ -661,10 +680,9 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                 },
                 (Option = {
                   sx: { width: 240, marginTop: "4% !important" },
-                  handleInput: (event) =>
-                    handleValidityChange(event, "regularPrice"),
-                  type: "regularPrice",
-                  value: lifetimeValidation.regularPrice,
+                  handleInput: (event) => handleValidityChange(event, "price"),
+                  type: "price",
+                  value: lifetimeValidation.price,
                 })
               )}
             </Box>
@@ -686,9 +704,9 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                 (Option = {
                   sx: { width: 240, marginTop: "4% !important" },
                   handleInput: (event) =>
-                    handleValidityChange(event, "offerPrice"),
-                  type: "offerPrice",
-                  value: lifetimeValidation.offerPrice,
+                    handleValidityChange(event, "offer_price"),
+                  type: "offer_price",
+                  value: lifetimeValidation.offer_price,
                 })
               )}
             </Box>
@@ -729,10 +747,9 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                 },
                 (Option = {
                   sx: { width: 240, marginTop: "4% !important" },
-                  handleInput: (event) =>
-                    handleValidityChange(event, "regularPrice"),
-                  type: "regularPrice",
-                  value: expiryDate.regularPrice,
+                  handleInput: (event) => handleValidityChange(event, "price"),
+                  type: "price",
+                  value: expiryDate.price,
                 })
               )}
             </Box>
@@ -754,9 +771,9 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                 (Option = {
                   sx: { width: 240, marginTop: "4% !important" },
                   handleInput: (event) =>
-                    handleValidityChange(event, "offerPrice"),
-                  type: "offerPrice",
-                  value: expiryDate.offerPrice,
+                    handleValidityChange(event, "offer_price"),
+                  type: "offer_price",
+                  value: expiryDate.offer_price,
                 })
               )}
             </Box>

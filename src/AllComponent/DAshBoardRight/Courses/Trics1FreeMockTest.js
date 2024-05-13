@@ -17,7 +17,7 @@ import {
   deleteCourses,
   getCourseById,
   publishOrEditCourse,
-  getDuration
+  getDuration,
 } from "../../ActionFactory/apiActions";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -52,7 +52,6 @@ const Trics1FreeMockTest = ({ onDelete }) => {
 
   const handleDeleteClick = () => {
     setIsOpen(true);
-    console.log("workingg");
   };
 
   const handleConfirmDelete = () => {
@@ -68,6 +67,24 @@ const Trics1FreeMockTest = ({ onDelete }) => {
     setAnchorEl(null);
   };
 
+  // useEffect(() => {
+  //   if (redirectRestriction()) {
+  //     if (courseId) {
+  //       getCourseById({
+  //         courseId,
+  //         callBack: (response) => {
+  //           const userCallBack = response?.data;
+  //           setCourseData(userCallBack);
+  //         },
+  //         error: (error) => {
+  //           toast.error(error.message);
+  //         },
+  //       });
+  //     }
+  //   } else {
+  //     navigate("/admin");
+  //   }
+  // }, []);
   useEffect(() => {
     if (redirectRestriction()) {
       if (courseId) {
@@ -77,40 +94,27 @@ const Trics1FreeMockTest = ({ onDelete }) => {
             const userCallBack = response?.data;
             setCourseData(userCallBack);
           },
-          error: (error) => {
-            toast.error(error.message);
-          },
         });
       }
+      getDuration({
+        callBack: (response) => {
+          const userCallBack = response?.data;
+          setDuration(userCallBack);
+        },
+        error: (error) => {
+          // toast.error(error.message);
+        },
+      });
     } else {
       navigate("/admin");
     }
-  }, []);
-  useEffect(() => {
-    if (courseId) {
-      getCourseById({
-        courseId,
-        callBack: (response) => {
-          const userCallBack = response?.data;
-          setCourseData(userCallBack);
-        },
-      });
-    }
-    getDuration({
-      callBack: (response) => {
-        const userCallBack = response?.data;
-        setDuration(userCallBack);
-        console.log(response,"kjhgfxdgchj")
-      },
-      error: (error) => {
-        // toast.error(error.message);
-        // console.log(error.message);
-      },
-    });
   }, [courseId]);
- 
-  const durationName = durationData?.filter( (duraData) => duraData?.duration_id == courseData?.durations?.length && courseData?.durations[0]?.duration_id)
-             
+
+  const durationName = durationData?.filter(
+    (duraData) =>
+      duraData?.duration_id == courseData?.durations?.length &&
+      courseData?.durations[0]?.duration_id
+  );
 
   const handleDeleteCourse = () => {
     deleteCourses({
@@ -150,7 +154,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
   };
   return (
     <div className="grid-container">
-      <Header Heading={capitalizeFirstLetter(courseData?.course_name)} />
+      {/* <Header Heading={capitalizeFirstLetter(courseData?.course_name)} /> */}
       <SideBar />
       <div className="main-container ">
         <div className="singleRow">
@@ -177,12 +181,19 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                 <div>
                   <p className="blackPara">Price</p>
                   {/* <p className="greyPara">{courseData.durations[0]?.price}</p> */}
-                  <p className="greyPara">₹{courseData?.durations?.length &&  courseData?.durations[0]?.offer_price}</p>
+                  <p className="greyPara">
+                    ₹
+                    {courseData?.durations?.length &&
+                      courseData?.durations[0]?.offer_price}
+                  </p>
                 </div>
                 <div className="offerPrice">
                   <p className="blackPara">Offer Price</p>
                   {/* <p className="greyPara">{courseData.durations[0]?.offer_price}</p> */}
-                  <p className="greyPara">{courseData?.durations?.length && courseData?.durations[0]?.price}</p>
+                  <p className="greyPara">
+                    {courseData?.durations?.length &&
+                      courseData?.durations[0]?.price}
+                  </p>
                 </div>
               </div>
               <hr />
@@ -190,16 +201,21 @@ const Trics1FreeMockTest = ({ onDelete }) => {
               <div className="CatagorynSubCatagory">
                 <div>
                   <p className="blackPara">Catagory</p>
-                  <p className="greyPara">OTHERS</p>
+                  <p className="greyPara">{courseData.main_category}</p>
                 </div>
                 <div className="subCatagory">
                   <p className="blackPara">Sub Catagory</p>
+                  <p className="greyPara">{courseData.sub_category}</p>
                 </div>
               </div>
               <hr />
 
               <p className="blackPara">Course Duration</p>
-              <p className="greyPara">{courseData?.durations?.length && courseData?.durations[0]?.duration} {durationName?.length && durationName[0]?.duration_name}</p>
+              <p className="greyPara">
+                {courseData?.durations?.length &&
+                  courseData?.durations[0]?.duration}{" "}
+                {durationName?.length && durationName[0]?.duration_name}
+              </p>
               <hr />
 
               <div className="StuEnrViewAll">
@@ -291,7 +307,6 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                 handleDeleteClick={handleDeleteClick}
                 handleCancelDelete={handleCancelDelete}
               />
-              
             </div>
           </div>
         </div>

@@ -22,8 +22,25 @@ const MenuProps = {
   },
 };
 
-const DurationConfiguration = ({ handleDuration, selectDurationValue }) => {
+const DurationConfiguration = ({
+  handleDuration,
+  selectDurationValue,
+  courseData,
+  handleSelectedDuration,
+}) => {
   const [courseDurationType, setCourseDurationType] = useState([{}]);
+
+  useEffect(() => {
+    // console.log("courseDurationTypecourseDurationType", courseData)
+    if (courseData?.durations?.length) {
+      // console.log("courseDurationTypecourseDurationType", courseDurationType)
+      let selectedDuration = courseDurationType.filter(
+        (item) =>
+          item?.duration_type_id === courseData?.durations[0]?.duration_type_id
+      );
+      handleSelectedDuration(selectedDuration[0]?.duration_type_name);
+    }
+  }, [courseData,courseDurationType]);
 
   useEffect(() => {
     getCourseDuration({
@@ -35,6 +52,8 @@ const DurationConfiguration = ({ handleDuration, selectDurationValue }) => {
 
   return (
     <div>
+      {/* {console.log("courseDurationTypecourseDurationType", courseDurationType)} */}
+
       <Box>
         {CommonTypography(
           { fontWeight: 600, label: "Course Duration Type" },
@@ -45,7 +64,9 @@ const DurationConfiguration = ({ handleDuration, selectDurationValue }) => {
         <FormControl sx={{ m: 1, minWidth: 630 }} className="categorySelect">
           <Select
             value={
-              selectDurationValue?.duration_type_name ? selectDurationValue : `Select Duration Type`
+              selectDurationValue?.duration_type_name
+                ? selectDurationValue
+                : `Select Duration Type`
             }
             renderValue={() => {
               return selectDurationValue !== "" ? (
@@ -60,10 +81,7 @@ const DurationConfiguration = ({ handleDuration, selectDurationValue }) => {
             onChange={handleDuration}
           >
             {courseDurationType.map((item) => (
-              <MenuItem
-                key={item.duration_type_id}
-                value={item}
-              >
+              <MenuItem key={item.duration_type_id} value={item}>
                 {item.duration_type_name}
               </MenuItem>
             ))}
