@@ -3,6 +3,7 @@ import { Box, Button, Divider } from "@mui/material";
 import "./AllTestPortal.css";
 import AddASection from "./AddASection";
 import TestInstructions from "./TestInstructions";
+import CreateQNS from "./CreateQNS";
 
 
 function TestFirstPage() {
@@ -11,7 +12,8 @@ function TestFirstPage() {
          <div className="testRightSection">
 
             <TestInstructions/>
-            <AddASection/>
+            {/* <AddASection/> */}
+            <CreateQNS />
           </div>
         
   );

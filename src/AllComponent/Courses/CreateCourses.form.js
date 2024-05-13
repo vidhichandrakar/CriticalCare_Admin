@@ -46,19 +46,19 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const [cat, setCat] = useState([]);
   const [subCategoryList, setSubCategoryList] = useState([]);
   const [selectedCategoryList, setSelectedcategoryList] = useState("");
-  const [categoryLabel, setCategoryLabel] = useState("");
+  const [categoryLabel, setCategoryLabel] = useState("Select Category");
   const [subCategoryLabel, setSubCategoryLabel] = useState("");
   const navigate = useNavigate();
 
   const onInroVideoDrop = async (files) => {
-    console.log(files);
+     // console.log(files);
     let storedValues = Object.assign({}, storedBasicInfo);
     storedValues.thumbnailPath = files[0];
     await getBase64(files) // `file` your img file
       .then((res) => {
         setImageWhileUpload(res.split(",")[1]);
       }) // `res` base64 of img file
-      .catch((err) => console.log(err));
+      .catch((err) =>  console.log(err));
     setStoredBasicInfo(storedValues);
   };
 
@@ -67,7 +67,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     getInputProps: getIntroVideoInputProps,
   } = useDropzone({
     onDrop: onInroVideoDrop,
-    onChange: (event) => console.log(event),
+    onChange: (event) =>  console.log(event),
     accept: "image/jpeg, image/png, image/jpg, application/pdf",
   });
 
@@ -82,13 +82,11 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
         toast.error(error.message);
       },
     });
-    // } else {
-    //   navigate("/admin");
-    // }
   }, []);
 
   useEffect(() => {
     if (courseData !== "") {
+       // console.log("course data edit flow", courseData);
       let storedValues = Object.assign({}, storedBasicInfo);
       storedValues.Name = courseData?.course_name;
       if (storedValues.Name?.length >= 4) {
@@ -98,11 +96,37 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       if (storedValues.Description?.length >= 4) {
         sethideValidationTickDesc(true);
       }
-      cat.map((item) => {
-        if (item.category_id === courseData?.category_id) {
-          storedValues.Category = item;
-        }
-      });
+
+      // setCategoryLabel(courseData?.Category?.category_name);
+      // if (courseData?.Category?.category_name) {
+        setCategoryLabel(courseData?.Category?.category_name);
+      // } else {
+        cat.map((item) => {
+          if (item.category_id === courseData?.category_id) {
+            storedValues.Category = item;
+          }
+        });
+      // }
+      // if(courseData?.subCategory?.category_name){
+      //   setSubCategoryList(courseData?.subCategory?.category_name);
+      //    // console.log("iuhgvhji",courseData?.subCategory?.category_name)
+      // }
+      // else{
+      //   getSubcategoryList({
+      //     mainCatID: courseData.category_id,
+      //     callBack: (response) => {
+      //       setSubCategoryList(response.data);
+      //       setSelectedcategoryList(24); //added to enable sub category
+      //       response.data.map((item) => {
+      //         if (item.category_id === courseData?.sub_category_id) {
+      //           storedValues.subCategory = item;
+      //         }
+      //       });
+      //     },
+      //   });
+      // }
+      setSubCategoryLabel(courseData?.sub_category);
+       // console.log("oij djh",courseData)
       if (courseData?.category_id) {
         getSubcategoryList({
           mainCatID: courseData.category_id,
@@ -189,7 +213,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       });
     } else {
       handleInputChange("basicInfo", storedBasicInfo);
-      // console.log("storedBasicInfostoredBasicInfo", storedBasicInfo);
+      //  // console.log("storedBasicInfostoredBasicInfo", storedBasicInfo);
       handleTrackerPage(1);
     }
   };
@@ -226,6 +250,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   return (
     <div className="formMain">
       <div className="FlexRow">
+        {/* { // console.log("storedBasicInfo edti flow", storedBasicInfo)} */}
         {CommonTypography({ fontWeight: 600, label: "Name" })}
         {hideValidationTickName && (
           <CheckCircleRoundedIcon className="RightTick" />
@@ -251,7 +276,9 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           label: "Description",
         })}
 
-        {hideValidationTickDesc && <CheckCircleRoundedIcon className="RightTick" />}
+        {hideValidationTickDesc && (
+          <CheckCircleRoundedIcon className="RightTick" />
+        )}
       </div>
       <TextField
         inputProps={{ className: "textField" }}
@@ -316,13 +343,17 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           <FormControl sx={{ m: 1, minWidth: 240 }} className="categorySelect">
             <Select
               value={
-                storedBasicInfo?.Category
-                  ? storedBasicInfo?.Category
+                storedBasicInfo?.Category?.category_name
+                  ? storedBasicInfo?.Category?.category_name
                   : `Select Category Type`
               }
               renderValue={() => {
                 return categoryLabel !== "" ? (
-                  <Typography>{categoryLabel}</Typography>
+                  <Typography>
+                    {categoryLabel
+                      ? categoryLabel
+                      : storedBasicInfo?.Category?.category_name}
+                  </Typography>
                 ) : (
                   <Typography> Select Category</Typography>
                 );
@@ -360,7 +391,11 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
               }
               renderValue={() => {
                 return subCategoryLabel !== "" ? (
-                  <Typography>{subCategoryLabel}</Typography>
+                  <Typography>
+                    {subCategoryLabel
+                      ? subCategoryLabel
+                      : storedBasicInfo?.subCategory?.category_name}
+                  </Typography>
                 ) : (
                   <Typography> Select Sub Category</Typography>
                 );

@@ -285,7 +285,7 @@
 }
 .testInstructionsBtn{
     padding: 0px 37px;
-    margin: 19px 0px;
+    margin: 9px 0px;
     border: 0.5px solid #e6e3e3;
     border-radius: 6px;
     margin-right: 20px;
@@ -417,6 +417,12 @@
 .addingDeleteOptions{
     display: flex;
     flex-direction: row;
+    align-items: center;
+    /* margin-top: 1%; */
+}
+
+.mt1{
+    margin-top: 1%;
 }
 .optionsFeid .MuiOutlinedInput-root{
     border-radius: 4px !important;
@@ -472,13 +478,7 @@
     color: #ffffff !important;
     padding: 3px 43px !important;
 }
-.css-1d3z3hw-MuiOutlinedInput-notchedOutline{
-    /* position: absolute; */
-    /* right: -340px !important; */
-    /* left: -8px !important; */
-    /* bottom: -50px !important; */
 
-}
 .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
     padding: 44.5px 14px !important;
     width: 50% !important;

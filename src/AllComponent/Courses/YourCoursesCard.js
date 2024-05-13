@@ -8,7 +8,6 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { getDuration } from "../ActionFactory/apiActions";
 
 const YourCoursesCard = ({ allCourses, userData }) => {
-  
   const [durationData, setDuration] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -16,7 +15,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
       callBack: (response) => {
         const userCallBack = response?.data;
         setDuration(userCallBack);
-        console.log(response,"kjhgfxdgchj")
+        // console.log(response,"kjhgfxdgchj")
       },
       error: (error) => {
         // toast.error(error.message);
@@ -36,9 +35,12 @@ const YourCoursesCard = ({ allCourses, userData }) => {
             const createdBy = userData.filter(
               (user) => user.user_id === item.created_by
             );
-            const durationName = durationData?.filter( (duraData) => duraData?.duration_id == item?.durations[0]?.duration_id)
-              
-            console.log(item, "itemline22")
+            const durationName = durationData?.filter(
+              (duraData) =>
+                duraData?.duration_id == item?.durations[0]?.duration_id
+            );
+
+            // console.log(item, "itemline22")
             return (
               <div
                 className=" container courseCard"
@@ -82,7 +84,10 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                     </Tooltip>
                     <div className="duration">
                       <AccessTimeIcon className="clock" />{" "}
-                      <Typography className="durationText">{item?.durations[0]?.duration_id} {durationName[0]?.duration_name}</Typography>
+                      <Typography className="durationText">
+                        {item?.durations[0]?.duration_id}{" "}
+                        {durationName[0]?.duration_name}
+                      </Typography>
                     </div>
                     <div className="duration" style={{ marginTop: "10%" }}>
                       <Typography className="offerPrice">
@@ -90,7 +95,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                         ₹ {item.durations[0]?.offer_price}{" "}
                       </Typography>
                       <Typography className="durationText price">
-                      ₹{item.durations[0]?.price}
+                        ₹{item.durations[0]?.price}
                       </Typography>
                     </div>
                   </div>
@@ -111,7 +116,6 @@ const YourCoursesCard = ({ allCourses, userData }) => {
             );
           })
         : null}
-       
     </>
   );
 };
