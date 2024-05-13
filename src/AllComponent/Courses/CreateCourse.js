@@ -41,10 +41,9 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       duration_id: "",
     },
   ]);
-  const [resetPrice, setRestPrice] = useState([{}]);
   const [courseData, setCourseData] = useState([]);
   const [loaderState, setLoaderState] = useState(false);
-
+const [validity ,setValidity]= useState([{}])
   let location = useLocation();
   const courseId = location.state?.id;
   const navigate = useNavigate();
@@ -68,16 +67,17 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   const handleInputChange = (type, value) => {
     if (type === "basicInfo") {
       setBasicInfo(value);
+
     } else if (type === "editPrice") {
-      setEditPrice(value);
+      // console.log("oihvdhjs",value)
+      setEditPrice([value]);
+      setValidity([value])
+      // setNewtest(value)
     }
-    //  else if (type === "resetPrice") {
-    //   setRestPrice(value);
-    // }
   };
   const handleTrackerPage = (page) => {
     if (page === 2) {
-      console.log("edit tracker", editPrice)
+      // console.log("edit tracker", editPrice)
       handleCreateCourse();
     } else {
       setTackerPage(page);
@@ -86,7 +86,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   };
   const handleCreateCourse = () => {
     let payload;
-    try {
+    // try {
       const courseDetails = {
         course_name: basicInfo?.Name,
         description: basicInfo?.Description,
@@ -114,18 +114,18 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           content_url: "https://example.com/content2.pdf",
         },
       ];
-      const courseDurations=editPrice
+      const courseDurations=validity
       payload = {
         courseDetails: courseDetails,
-        courseDurations: editPrice,
+        courseDurations: courseDurations,
         courseAttachments: courseAttachments,
         
       };
       // console.log("courseDurations",courseDurations)
-      console.log("patload", payload)
-    } catch (error) {
-      console.log(error);
-    }
+      // console.log("patload", payload)
+    // } catch (error) {
+    //   console.log(error);
+    // }
     if (courseId) {
       // const payload = formData;
       publishOrEditCourse({
@@ -140,7 +140,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         courseData: payload,
 
         callBack: (response) => {
-          console.log("ALL response", payload);
+          // console.log("ALL response", payload);
           toast.success("Course added successfully!", {
             autoClose: 500,
           });
@@ -164,7 +164,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         handleTrackerPage={handleTrackerPage}
       />
       {/* {console.log("create course==basicInfo",basicInfo)} */}
-      {console.log("create course==edit price ", editPrice)}
+      {/* {console.log("create course==validity flow", validity)} */}
       {trackerPage === 0 ? (
         <CreateForm
           handleTrackerPage={handleTrackerPage}
