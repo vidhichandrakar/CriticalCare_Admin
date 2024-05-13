@@ -338,10 +338,17 @@
     padding: 3px 43px !important;
 }
 .css-1d3z3hw-MuiOutlinedInput-notchedOutline{
-    position: absolute;
-    right: -340px !important;
-    left: -8px !important;
-    bottom: -50px !important;
+    /* position: absolute; */
+    /* right: -340px !important; */
+    /* left: -8px !important; */
+    /* bottom: -50px !important; */
 
 }
-
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+    padding: 44.5px 14px !important;
+    width: 50% !important;
+}
+.css-xn6ruc>:not(style) {
+    margin: 8px;
+    width: 62ch !important;
+}
