@@ -3,7 +3,8 @@
 
 .completeLeftBox{
     background-color: rgb(240 240 240);
-    height: 91vh;
+    /* height: 91vh; */
+   
 }
 .createQuestions{
     margin: 11px !important;
@@ -40,16 +41,144 @@
     font-size: 1.4rem !important;
     margin-bottom: -5px;
 }
+.sectionOneFourQues{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: grey;
+}
+.checkboxAndText{
+    justify-content: safe;
+}
+.gradingContent{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    margin: 19px 2px !important;
+}
+.fourOneBox{
+    display: flex !important;
+    flex-direction: row !important;
+}
+.boxFour{
+    background-color: #e7e7e7;
+    border: 0.3px solid grey;
+    padding: 2px 20px;
+    border-radius: 5px;
+    position: relative;
+    right: 21px;
+}
+.boxOne{
+    background-color: #e7e7e7;
+    border: 0.3px solid grey;
+    padding: 2px 20px;
+    border-radius: 5px;
+}
+.gradingSubmitBtn{
+    background-color: #0075FF !important;
+    color: #ffffff !important;
+    margin: 16px 94px !important;
+    padding: 3px 34px !important;
+    text-transform: none !important;
+}
+.editIconTestSection{
+    font-size: 1rem !important;
+    margin-bottom: -18px;
+    margin-left: 41px;
+    margin-right: -32px; 
+}
+.deleteIconTestSection {
+    font-size: 1rem !important;
+    margin-bottom: -18px;
+    margin-left: 41px;
+    margin-right: 7px;
+}
+.addNreScsnTestSection{
+    color: #0075FF !important;
+    border: 0.2px solid lightgray;
+    font-size: 0.9rem !important;
+    text-align: center !important;
+    width: 73%;
+    position: relative;
+    left: 38px;
+    top: -18px;
+    border-radius: 4px;
+}
+.addNreScsnImportQues{
+    color: #0075FF !important;
+    border: 0.2px solid lightgray;
+    font-size: 0.9rem !important;
+    text-align: center !important;
+    width: 73%;
+    position: relative;
+    left: 38px;
+    top: 26px;
+    border-radius: 4px;
+}
+.leftIconImportQues{
+    position: relative;
+    top: 3px;
+    right: -47px;
+    color: lightgrey;
+}
+.ORImportQues{
+    color: grey !important;
+    font-size: 0.9rem !important;
+    text-align: center !important;
+    width: 73%;
+    position: relative;
+    left: 38px;
+    top: 27px;
+    border-radius: 4px;
+    padding: 15px 0px; 
+}
+.uploadWordFileImportQues {
+    color: #0075FF !important;
+    border: 0.2px solid lightgray;
+    font-size: 0.9rem !important;
+    text-align: center !important;
+    width: 73%;
+    position: relative;
+    left: 38px;
+    top: 24px;
+    border-radius: 4px;
+    padding: 5px 0px;
+}
+.downloadSampleImportQues {
+    color: #0075FF !important;
+    /* border: 0.2px solid lightgray; */
+    font-size: 0.8rem !important;
+    text-align: center !important;
+    width: 73%;
+    position: relative;
+    left: 38px;
+    top: 24px;
+    border-radius: 4px;
+    padding: 5px 0px;
+}
 
 
 
 
 /* RIGHT SECTION OF TEST */
 .testNavBar{
+    grid-area: header;
+    /* height: 76px; */
+    display: flex;
+    align-items: center;
+    width: 99%;
+    justify-content: right;
+    padding: 7px 12px 7px 0px;
+    background-color: #fff;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     border-bottom: 0.5px solid lightgrey;
+
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 0.5px solid lightgrey; */
 }
 
 .abcdText{
@@ -84,12 +213,12 @@
 .testRightSection{
     /* width: 51% !important; */
     background-color: white;
-    width: 158vw !important;
+    /* width: 69% !important; */
 }
 .mainFirstPage{
     display: flex !important;
-    flex-direction: column !important;
-    width: 100% !important;
+    flex-direction: row !important;
+    /* width: 100% !important; */
 }
 .testContent{
  display: flex !important;
@@ -97,6 +226,8 @@
 }
 .testLeftSection{
     background-color: rgb(240 240 240) !important;
+    width: 26%;
+    height: 89vh;
 }
 .stickyTopBox{
     display: flex !important;
@@ -124,7 +255,7 @@
 }
 .testInstructionsBtn{
     padding: 0px 37px;
-    margin: 19px 0px;
+    margin: 9px 0px;
     border: 0.5px solid #e6e3e3;
     border-radius: 6px;
     margin-right: 20px;
@@ -176,11 +307,8 @@
     background-color: #dafdda !important;
     color: #23a28d !important;
     margin-left: 11px !important;
-    /* padding: -2px -2px !important; */
     font-size: 0.9rem;
     margin-top: 6px;
-    /* padding-left: 5px; */
-    /* padding-right: 5px; */
     padding: 0px 5px;
 }
 .mcqbuttons{
@@ -215,9 +343,7 @@
     justify-content: space-between !important;
 }
 .addDiffLevelDropDown{
-    border-radius: 1px !important;
-    padding: -1px -1px !important;
-    font-weight: bolder !important;
+    /* font-weight: bolder !important; */
     position: relative !important;
     top: 10px !important;
     padding: 9px;
@@ -249,9 +375,8 @@
     margin-bottom: 17px;
 }
 .singleDropDown{
-    /* border-radius: 1px !important; */
     padding: -1px -1px !important;
-    font-weight: bolder !important;
+    /* font-weight: bolder !important; */
     position: relative !important;
     top: 2px !important;
     padding: 0px 44px;
@@ -262,6 +387,12 @@
 .addingDeleteOptions{
     display: flex;
     flex-direction: row;
+    align-items: center;
+    /* margin-top: 1%; */
+}
+
+.mt1{
+    margin-top: 1%;
 }
 .optionsFeid .MuiOutlinedInput-root{
     border-radius: 4px !important;
@@ -269,9 +400,7 @@
     height: 39px;
     margin-top: 14px;
 }
-.deleteComponent{
-    /* margin-left: 12px; */
-}
+
 .deleteIconSixthPage{
     font-size: 1rem !important;
     margin-bottom: -3px;
@@ -298,13 +427,33 @@
     padding: 0px 0px !important;
 }
 .css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
-    /* padding: 15.5px 14px !important; */
     padding: -1px 0px !important;
     border: 0.5px solid black !important;
 }
 .css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
     padding: 4.4px 14px;
-    /* margin-left: 12px !important; */
 }
 
 
+
+
+/* TEST INSTRUCTIONS  */
+.testInstTextField{
+    width: 37vw !important;
+    height: 17vh !important;
+}
+.doneBtnInstPage{
+    text-transform: none !important;
+    background-color: #0075FF !important;
+    color: #ffffff !important;
+    padding: 3px 43px !important;
+}
+
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+    padding: 44.5px 14px !important;
+    width: 50% !important;
+}
+.css-xn6ruc>:not(style) {
+    margin: 8px;
+    width: 62ch !important;
+}
