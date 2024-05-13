@@ -16,6 +16,8 @@ import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -179,10 +181,52 @@ function TestNavAndLeft() {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
+            <Divider/>
             <Typography>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              Suspendisse malesuada lacus ex, sit amet blandit leo lobortis
-              eget.
+            <Box className="addNreScsnImportQues">
+              From My library<ChevronRightIcon className="leftIconImportQues"/>
+              </Box>
+              {/* <p sx={{marginLeft: "30px", color: "grey"}}>OR</p> */}
+              <Box className="ORImportQues">
+              OR
+              </Box>
+              <Box className="uploadWordFileImportQues">
+              Upload Word File
+              </Box>
+              <Box className="downloadSampleImportQues">
+                <p>Download Sample Word File Format</p>
+              </Box>
+            </Typography>
+          </AccordionDetails>
+        </Accordion>
+
+        <Accordion className="grading">
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel2-content"
+            id="panel2-header"
+          >
+            <Typography>
+              <SettingsIcon className="gradingLogo"/>
+              <b>Test Settings</b>
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <Divider/>
+            <Typography>
+            <Box className="addNreScsnImportQues">
+              From My library<ChevronRightIcon className="leftIconImportQues"/>
+              </Box>
+              {/* <p sx={{marginLeft: "30px", color: "grey"}}>OR</p> */}
+              <Box className="ORImportQues">
+              OR
+              </Box>
+              <Box className="uploadWordFileImportQues">
+              Upload Word File
+              </Box>
+              <Box className="downloadSampleImportQues">
+                <p>Download Sample Word File Format</p>
+              </Box>
             </Typography>
           </AccordionDetails>
         </Accordion>

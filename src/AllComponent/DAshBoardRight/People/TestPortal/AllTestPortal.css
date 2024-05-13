@@ -97,14 +97,64 @@
     color: #0075FF !important;
     border: 0.2px solid lightgray;
     font-size: 0.9rem !important;
-    /* align-items: center !important; */
     text-align: center !important;
-    /* justify-content: center !important; */
     width: 73%;
     position: relative;
     left: 38px;
     top: -18px;
     border-radius: 4px;
+}
+.addNreScsnImportQues{
+    color: #0075FF !important;
+    border: 0.2px solid lightgray;
+    font-size: 0.9rem !important;
+    text-align: center !important;
+    width: 73%;
+    position: relative;
+    left: 38px;
+    top: 26px;
+    border-radius: 4px;
+}
+.leftIconImportQues{
+    position: relative;
+    top: 3px;
+    right: -47px;
+    color: lightgrey;
+}
+.ORImportQues{
+    color: grey !important;
+    font-size: 0.9rem !important;
+    text-align: center !important;
+    width: 73%;
+    position: relative;
+    left: 38px;
+    top: 27px;
+    border-radius: 4px;
+    padding: 15px 0px; 
+}
+.uploadWordFileImportQues {
+    color: #0075FF !important;
+    border: 0.2px solid lightgray;
+    font-size: 0.9rem !important;
+    text-align: center !important;
+    width: 73%;
+    position: relative;
+    left: 38px;
+    top: 24px;
+    border-radius: 4px;
+    padding: 5px 0px;
+}
+.downloadSampleImportQues {
+    color: #0075FF !important;
+    /* border: 0.2px solid lightgray; */
+    font-size: 0.8rem !important;
+    text-align: center !important;
+    width: 73%;
+    position: relative;
+    left: 38px;
+    top: 24px;
+    border-radius: 4px;
+    padding: 5px 0px;
 }
 
 
