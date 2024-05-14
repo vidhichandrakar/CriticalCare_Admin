@@ -146,13 +146,41 @@
 }
 .downloadSampleImportQues {
     color: #0075FF !important;
-    /* border: 0.2px solid lightgray; */
     font-size: 0.8rem !important;
     text-align: center !important;
     width: 73%;
     position: relative;
     left: 38px;
     top: 24px;
+    border-radius: 4px;
+    padding: 5px 0px;
+}
+.doNothingDropDown {
+    position: relative !important;
+    top: -9px !important;
+    padding: 7px;
+    left: -20px;
+    margin-left: 21px !important;
+    border-radius: 5px !important;
+    width: 100%;
+}
+.offOnSwitchWithHead{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.offOnSwitch{
+    display: flex;
+    flex-direction: row;
+}
+.exportTestSettings {
+    color: #0075FF !important;
+    font-size: 0.9rem !important;
+    text-align: center !important;
+    width: 73%;
+    position: relative;
+    left: 38px;
+    top: 11px;
     border-radius: 4px;
     padding: 5px 0px;
 }
@@ -163,7 +191,6 @@
 /* RIGHT SECTION OF TEST */
 .testNavBar{
     grid-area: header;
-    /* height: 76px; */
     display: flex;
     align-items: center;
     width: 99%;
@@ -174,11 +201,6 @@
     flex-direction: row;
     justify-content: space-between;
     border-bottom: 0.5px solid lightgrey;
-
-    /* display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border-bottom: 0.5px solid lightgrey; */
 }
 
 .abcdText{
@@ -192,7 +214,6 @@
    flex-direction: row;
 }
 .previewNavBtn{
-    /* background-color: #19588f !important; */
     color: #19588f !important;
     width: 129px;
     height: 40px;
@@ -211,14 +232,11 @@
 
 
 .testRightSection{
-    /* width: 51% !important; */
     background-color: white;
-    /* width: 69% !important; */
 }
 .mainFirstPage{
     display: flex !important;
     flex-direction: row !important;
-    /* width: 100% !important; */
 }
 .testContent{
  display: flex !important;
@@ -343,7 +361,6 @@
     justify-content: space-between !important;
 }
 .addDiffLevelDropDown{
-    /* font-weight: bolder !important; */
     position: relative !important;
     top: 10px !important;
     padding: 9px;
@@ -376,7 +393,6 @@
 }
 .singleDropDown{
     padding: -1px -1px !important;
-    /* font-weight: bolder !important; */
     position: relative !important;
     top: 2px !important;
     padding: 0px 44px;
@@ -388,7 +404,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    /* margin-top: 1%; */
 }
 
 .mt1{

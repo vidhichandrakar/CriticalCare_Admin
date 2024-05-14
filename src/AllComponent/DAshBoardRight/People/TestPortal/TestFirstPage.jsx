@@ -13,9 +13,7 @@ function TestFirstPage() {
 
             <TestInstructions/>
             {/* <AddASection/> */}
-            <div className="QnsBoxs">
-              <CreateQNS />
-            </div>
+            <CreateQNS />
           </div>
         
   );
