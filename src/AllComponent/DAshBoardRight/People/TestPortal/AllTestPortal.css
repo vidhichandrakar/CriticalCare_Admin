@@ -381,6 +381,7 @@
     border-radius: 4px !important;
     position: relative;
     bottom: 13px;
+    color: #b1abab;
 }
 .answersAndSingle{
     display: flex;
@@ -405,7 +406,7 @@
 }
 
 .mt1{
-    margin-top: 1%;
+    /* margin-top: 1%; */
 }
 .optionsFeid .MuiOutlinedInput-root{
     border-radius: 4px !important;
@@ -439,14 +440,6 @@
     margin: 8px !important;
     padding: 0px 0px !important;
 }
-.css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
-    padding: -1px 0px !important;
-    border: 0.5px solid black !important;
-}
-.css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
-    padding: 4.4px 14px;
-}
-
 
 
 
