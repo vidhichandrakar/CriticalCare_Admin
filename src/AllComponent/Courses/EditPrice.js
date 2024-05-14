@@ -124,18 +124,15 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
       },
     });
   }, []);
-  // console.log("TEdit prie floe", courseData, editPriceData);
+
   useEffect(() => {
-    if (courseData) {
+    if (courseData?.durations?.length) {
       let storedValues = Object.assign({}, singleValidity);
       storedValues.duration = courseData?.durations[0]?.duration_id;
       storedValues.price = courseData?.durations[0]?.price;
       storedValues.offer_price = courseData?.durations[0]?.offer_price;
-      // storedValues.duration_type_id =courseData.duration_type_id
-      // console.log("storedValuesstoredValues", storedValues);
       let getDurationType = durationType.filter((item)=>item?.duration_id===courseData?.durations[0]?.duration_id);
       setDurationSelectedValue(getDurationType[0]?.duration_name);
-      // console.log("getDurationTypegetDurationType",getDurationType)
       setSingleValidity(storedValues);
     }
   }, [courseData,durationType]);
