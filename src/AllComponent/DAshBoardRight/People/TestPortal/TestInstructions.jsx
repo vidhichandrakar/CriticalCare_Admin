@@ -72,6 +72,7 @@ function TestInstructions() {
             <span style={{ color: "#000" }}>Test Instructions: </span>
             <span>
               <Button
+              sx={{textTransform: "none", color:"black", ml:"-8px", fontSize:"medium"}}
                 onClick={handleClickOpen}
               >
                 Click here to add{" "}
