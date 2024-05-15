@@ -72,19 +72,17 @@ const YourCourses = () => {
         <Box className="subHeaderMycourses">
         <SearchBar  placeholder="Search by name" />
         </Box>
-        <div className="Add-main-cards">
-         
+        <Box className="Add-main-cards">
           <YourCoursesCard
             allCourses={allCourses}
             userData={userData}
             Data={YourCoursesCardData}
-          />
-         
-        </div>
+          /> 
+          
+        </Box>
         <div>
             <Box sx={{top:"88%", position:"absolute", zIndex:1111111111111, right:0}} className="addCircle" onClick={()=>navigate("/CreateCourses")}>
              <AddRoundedIcon className="addIcon"/>
-
             </Box>
           </div>
       </main>
