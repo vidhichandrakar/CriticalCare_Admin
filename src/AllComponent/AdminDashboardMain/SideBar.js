@@ -234,7 +234,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
             </Typography>
           </Link>
 
-          <Link to="/Chat">
+          {/* <Link to="/Chat">
             <Typography
               id="hoverrr"
               className={highlight === "chats" ? "hoverrr2" : ""}
@@ -244,7 +244,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               <ForumIcon className="icon" />
               Chats
             </Typography>
-          </Link>
+          </Link> */}
 
           <Link to="/Analytics">
             <Typography

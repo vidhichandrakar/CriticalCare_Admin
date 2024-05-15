@@ -53,10 +53,42 @@ const CourseHeader = ({ Heading, subHeading }) => {
         <Typography className="subHeader">{subHeading}</Typography>
       </Box>
 
+      {/* autoclose start */}
+     {/* <button
+      type="button"
+      data-bs-toggle="dropdown"
+      data-bs-auto-close="true"
+      aria-expanded="false">
+        Logo
+     </button>
+     <ul>
+      <li> <a href="#">Profile</a></li>
+      <li> <a href="#">python</a></li>
+      <li> <a href="#">Pro</a></li>
+      <li> <a href="#">ddddd</a></li>
+     </ul> */}
+
+{/* <button
+type="button"
+data-bs-toggle="dropdown"
+data-bs-auto-close="inside"
+aria-expanded="false">
+Logo
+</button>
+<ul>
+      <li> <a href="#">Profile</a></li>
+      <li> <a href="#">python</a></li>
+      <li> <a href="#">Pro</a></li>
+      <li> <a href="#">ddddd</a></li>
+     </ul> */}
+
+      {/* autoclose end  */}
+
       <Box className="HeaderRight">
         <FormControl sx={{ m: 1, minWidth: 240 }}>
           <Select
             className="selectDesign"
+            // data-bs-auto-close="true"
             displayEmpty
             renderValue={() => {
               return <em className="labelDesign">360 Critcial Care</em>;
@@ -105,10 +137,8 @@ const CourseHeader = ({ Heading, subHeading }) => {
                 value={"Profileik"}
                 onClick={handleLogout}
               >
-                {/* <Box className="eachBoxLogout"> */}
                 <LogoutTwoToneIcon className="designingIconsLogout" />
                 <span className="ccLogout">Log Out</span>
-                {/* </Box> */}
               </MenuItem>
             </Link>
 
