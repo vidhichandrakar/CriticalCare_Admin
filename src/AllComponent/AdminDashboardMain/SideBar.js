@@ -150,7 +150,6 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
 
             <Collapse
               in={openCollapse}
-              // timeout="auto"
               unmountOnExit
             >
               <List component="div" sx={{ marginLeft: "1%" }}>
@@ -187,7 +186,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                       </Typography>
                     </Link>
                   </li>
-                  <li className="listDesign">
+                  {/* <li className="listDesign">
                     <Link to="/User" className="textDecoration">
                       <Typography
                         id="hoverrr"
@@ -202,8 +201,8 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                         Category / Sub Category
                       </Typography>
                     </Link>
-                  </li>
-                  <li className="listDesign">
+                  </li> */}
+                  {/* <li className="listDesign">
                     <Link to="/YourCourses" className="textDecoration">
                       <Typography
                         id="hoverrr"
@@ -218,7 +217,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                         Upcoming Course / Blogs
                       </Typography>
                     </Link>
-                  </li>
+                  </li> */}
                 </ul>
               </List>
             </Collapse>

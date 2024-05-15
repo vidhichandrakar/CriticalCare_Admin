@@ -40,7 +40,6 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                 duraData?.duration_id == item?.durations[0]?.duration_id
             );
 
-            // console.log(item, "itemline22")
             return (
               <div
                 className="container courseCard"
