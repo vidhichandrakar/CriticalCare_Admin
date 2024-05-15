@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Select, Box, Typography, TextField, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import UnpublishedIcon from "@mui/icons-material/Unpublished";
 import FolderIcon from "@mui/icons-material/Folder";
 import Popover from "@mui/material/Popover";
-import DoctorsImage from "../../../Media/Images/db7187e8-b7cf-47ed-8900-6de89dabde06.png";
-import CourseHeader from "../../Courses/CoursesHeader";
 import SideBar from "../../AdminDashboardMain/SideBar";
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -22,19 +18,12 @@ import {
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { DailogBox, capitalizeFirstLetter } from "../../../Util/CommonFields";
 import { redirectRestriction } from "../../../Util/RedirectRestriction";
 import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import IconButton from "@mui/material/IconButton";
-import Header from "../../Courses/Header";
-import DialogTitle from "@mui/material/DialogTitle";
-import CloseIcon from "@mui/icons-material/Close";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
 
 const Trics1FreeMockTest = ({ onDelete }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -85,6 +74,13 @@ const Trics1FreeMockTest = ({ onDelete }) => {
   //     navigate("/admin");
   //   }
   // }, []);
+
+  const isNotEmptyObject = (obj) => {
+    return obj && typeof obj === "object" && Object.keys(obj).length;
+  };
+  const isNotEmptyArray = (arr) => {
+    return Array.isArray(arr) && arr.length >= 1;
+  };
   useEffect(() => {
     if (redirectRestriction()) {
       if (courseId) {
@@ -154,7 +150,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
   };
   return (
     <div className="grid-container">
-      {/* <Header Heading={capitalizeFirstLetter(courseData?.course_name)} /> */}
+      {/* {console.log("TRICSFrEE", courseData)} */}
       <SideBar />
       <div className="main-container ">
         <div className="singleRow">
@@ -174,13 +170,12 @@ const Trics1FreeMockTest = ({ onDelete }) => {
               <hr />
 
               <p className="blackPara">Description</p>
-              <p className="greyPara">{courseData.description}</p>
+              <p className="greyPara">{courseData?.description}</p>
               <hr />
 
               <div className="PricenOfferPrice">
                 <div>
                   <p className="blackPara">Price</p>
-                  {/* <p className="greyPara">{courseData.durations[0]?.price}</p> */}
                   <p className="greyPara">
                     ₹
                     {courseData?.durations?.length &&
@@ -189,7 +184,6 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                 </div>
                 <div className="offerPrice">
                   <p className="blackPara">Offer Price</p>
-                  {/* <p className="greyPara">{courseData.durations[0]?.offer_price}</p> */}
                   <p className="greyPara">
                     {courseData?.durations?.length &&
                       courseData?.durations[0]?.price}
@@ -197,27 +191,33 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                 </div>
               </div>
               <hr />
+              {isNotEmptyObject(courseData) || isNotEmptyArray(courseData) ? (
+                courseData?.durations[0]?.duration_type_id === 3 ||
+                courseData?.durations[0]?.duration_type_id === 4 ? null : (
+                  <>
+                    <div className="CatagorynSubCatagory">
+                      <div>
+                        <p className="blackPara">Catagory</p>
+                        <p className="greyPara">{courseData?.main_category}</p>
+                      </div>
+                      <div className="subCatagory">
+                        <p className="blackPara">Sub Catagory</p>
+                        <p className="greyPara">{courseData?.sub_category}</p>
+                      </div>
+                    </div>
+                    <hr />
 
-              <div className="CatagorynSubCatagory">
-                <div>
-                  <p className="blackPara">Catagory</p>
-                  <p className="greyPara">{courseData.main_category}</p>
-                </div>
-                <div className="subCatagory">
-                  <p className="blackPara">Sub Catagory</p>
-                  <p className="greyPara">{courseData.sub_category}</p>
-                </div>
-              </div>
-              <hr />
-
-              <p className="blackPara">Course Duration</p>
-              <p className="greyPara">
-                {courseData?.durations?.length &&
-                  courseData?.durations[0]?.duration}{" "}
-                {durationName?.length && durationName[0]?.duration_name}
-              </p>
-              <hr />
-
+                    <p className="blackPara">Course Duration</p>
+                    <p className="greyPara">
+                      {courseData?.durations?.length &&
+                        courseData?.durations[0]?.duration}{" "}
+                      {durationName?.length && durationName[0]?.duration_name}
+                    </p>
+                    <hr />
+                  </>
+                )
+              ) : null}
+        
               <div className="StuEnrViewAll">
                 <div>
                   <p className="blackPara">Student Enrolled</p>
@@ -255,7 +255,6 @@ const Trics1FreeMockTest = ({ onDelete }) => {
               onClick={handleClick}
               className="catagorytextofTrics"
             >
-              {/* <MoreHorizIcon className="threeDotsIcon"/> */}
               More Options
               <MoreHorizIcon className="threeDotsIcon" />
             </Button>
