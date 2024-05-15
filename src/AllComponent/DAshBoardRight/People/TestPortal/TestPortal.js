@@ -195,8 +195,6 @@ const TestPortal = () => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const id = open ? "simple-popover" : undefined;
   const [opened, setOpen] = useState(false);
-  const [mcqopened, setMcqopen] = useState(false);
-  const [cqopened, setCqopen] = useState(false);
   const [addTest, setAddTest] = useState({
     testName: "",
     testDuration: "",
@@ -266,12 +264,8 @@ const TestPortal = () => {
   const handleClickOpen = () => {
     setOpen(true);
   };
-  const handleClickOpenMCQ = () => {
-    setMcqopen(true);
-  };
-  const handleClickOpenCQ = () => {
-    setCqopen(true);
-  };
+  
+
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -287,12 +281,8 @@ const TestPortal = () => {
   const handleCloseDialog = () => {
     setOpen(false);
   };
-  const handleCloseDialogMCQ = () => {
-    setMcqopen(false);
-  };
-  const handleCloseDialogCQ = () => {
-    setCqopen(false);
-  };
+  
+  
   const handleInput = (value, type) => {
     let storedValues = Object.assign({}, addTest);
     if (type === "TestName") {
@@ -362,164 +352,7 @@ const TestPortal = () => {
               <FilterAltIcon /> Filter
             </Button>
           </div>
-          <Button className="addTestimonialButton" onClick={handleClickOpenCQ}>
-            {" "}
-           Create Quenstion
-          </Button>
-          <BootstrapDialog
-            className="PopUP"
-            onClose={handleCloseDialogCQ}
-            aria-labelledby="customized-dialog-title"
-            open={cqopened}
-          >
-            <DialogTitle
-              sx={{ m: 0, p: 2, fontSize: "1rem" }}
-              id="customized-dialog-title"
-            >
-           
-            </DialogTitle>
-            <IconButton
-              aria-label="close"
-              onClick={handleCloseDialogCQ}
-              sx={{
-                position: "absolute",
-                right: 8,
-                top: 8,
-                color: (theme) => theme.palette.grey[500],
-              }}
-            >
-              <CloseIcon />
-            </IconButton>
-
-            <DialogContent dividers>
-              <Box className="NumberBOx">
-        <Box>
-          <Typography>No of Questions</Typography>
-        <TextField
-          id="outlined-size-small"
-          defaultValue="1"
-          size="small"
-        />
-        </Box>
-        <Box>
-          <Typography>marks of Question</Typography>
-        <TextField
-          id="outlined-size-small"
-          defaultValue="4"
-          size="small"
-        />
-        </Box>
-        </Box>
-        
-        <Box className="CheckBOx">
-      <Checkbox {...label} />
-      <Typography>Negative Marks</Typography>
-        </Box>
-
-              <Box className="PartialBOx">
-                  <Typography>Partial Marking <span className="red">New</span></Typography>
-                  <Stack direction="row" spacing={1} alignItems="center">
-        <Typography>Off</Typography>
-        <AntSwitch defaultChecked inputProps={{ 'aria-label': 'ant design' }} />
-        <Typography>On</Typography>
-      </Stack>
-              </Box>
-              
-
-              <Box className="BulbBox"> 
-                <Typography>
-                  Now give  mark to your students even if they are partially correct!
-                </Typography>
-                <a href="#" style={{textDecoration: "none"}}>View Example</a>
-              </Box>
-            
-            </DialogContent>
-            <DialogActions>
-              <Button
-                variant="contained"
-                className="AddSectionBtn"
-                onClick={handleCreateTeam}
-              >
-                Create Qns
-              </Button>
-            </DialogActions>
-          </BootstrapDialog>
-
-          <Button className="addTestimonialButton" onClick={handleClickOpenMCQ}>
-            {" "}
-            Multipulcoice Qns{" "}
-          </Button>
-          <BootstrapDialog
-            className="PopUP"
-            onClose={handleCloseDialogMCQ}
-            aria-labelledby="customized-dialog-title"
-            open={mcqopened}
-          >
-            <DialogTitle
-              sx={{ m: 0, p: 2, fontSize: "1rem" }}
-              id="customized-dialog-title"
-            >
-              Add New Section
-            </DialogTitle>
-            <IconButton
-              aria-label="close"
-              onClick={handleCloseDialogMCQ}
-              sx={{
-                position: "absolute",
-                right: 8,
-                top: 8,
-                color: (theme) => theme.palette.grey[500],
-              }}
-            >
-              <CloseIcon />
-            </IconButton>
-
-            <DialogContent dividers>
-              <Typography gutterBottom><b>Section Name</b></Typography>
-              <TextField
-                inputProps={{ className: "textField" }}
-                fullWidth
-                size="small"
-                placeholder="Enter the Section Name"
-                id="fullWidth"
-                className="BoxShadowInputField"
-                type="TestName"
-                value={addTest?.testName}
-                onChange={(e) => handleInput(e.target.value, "TestName")}
-              />
-              <Typography gutterBottom sx={{mt : 3}}><b>Section Instructions</b></Typography>
-              <TextField
-          id="fullWidth"
-          // label="Multiline"
-          multiline
-          rows={3}
-          // defaultValue=""
-          sx={{width: "100%"}}
-        />
-              <Box className="BulbBox">
-                <TipsAndUpdatesTwoToneIcon className="bulbIcon"/> 
-                <Typography>
-                  You can give students choice of which questions to Attempt in the section by editing section details after Adding Questions. <a href="#" style={{textDecoration: "none"}}>View Example</a>
-                </Typography>
-              </Box>
-            
-            </DialogContent>
-            <DialogActions>
-              <Button
-                variant="contained"
-                className="AddSectionBtn"
-                onClick={handleCreateTeam}
-              >
-                Add Section
-              </Button>
-            </DialogActions>
-          </BootstrapDialog>
-
-
-
-
-
-
+          
           <Button className="addTestimonialButton" onClick={handleClickOpen}>
             {" "}
             + Add Test{" "}

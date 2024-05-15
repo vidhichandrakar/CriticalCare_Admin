@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -21,11 +21,37 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import Switch from "@mui/material/Switch";
 import Radio from "@mui/material/Radio";
 import LaunchIcon from "@mui/icons-material/Launch";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import { styled } from "@mui/material/styles";
+import Dialog from "@mui/material/Dialog";
+import {TextField } from "@mui/material";
+import TipsAndUpdatesTwoToneIcon from '@mui/icons-material/TipsAndUpdatesTwoTone';
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  "& .MuiDialogContent-root": {
+    padding: theme.spacing(2),
+  },
+  "& .MuiDialogActions-root": {
+    padding: theme.spacing(1),
+  },
+}));
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function TestNavAndLeft() {
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [mcqopened, setMcqopen] = useState(false);
+
+  const handleClickOpenMCQ = () => {
+    setMcqopen(true);
+  };
+  const handleCloseDialogMCQ = () => {
+    setMcqopen(false);
+  };
 
   const handleExpansion = () => {
     setExpanded((prevExpanded) => !prevExpanded);
@@ -66,7 +92,7 @@ function TestNavAndLeft() {
 
           <AccordionDetails>
             <Divider />
-            <Typography className="testOptions">
+            <Typography className="testOptions" onClick={handleClickOpenMCQ}> 
               <b>Multiple Choice Questions</b>
             </Typography>
             <Divider />
@@ -341,6 +367,71 @@ function TestNavAndLeft() {
             </Typography>
           </AccordionDetails>
         </Accordion>
+        <BootstrapDialog
+            className="PopUP"
+            onClose={handleCloseDialogMCQ}
+            aria-labelledby="customized-dialog-title"
+            open={mcqopened}
+          >
+            <DialogTitle
+              sx={{ m: 0, p: 2, fontSize: "1rem" }}
+              id="customized-dialog-title"
+            >
+              Add New Section
+            </DialogTitle>
+            <IconButton
+              aria-label="close"
+              onClick={handleCloseDialogMCQ}
+              sx={{
+                position: "absolute",
+                right: 8,
+                top: 8,
+                color: (theme) => theme.palette.grey[500],
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+
+            <DialogContent dividers>
+              <Typography gutterBottom><b>Section Name</b></Typography>
+              <TextField
+                inputProps={{ className: "textField" }}
+                fullWidth
+                size="small"
+                placeholder="Enter the Section Name"
+                id="fullWidth"
+                className="BoxShadowInputField"
+                type="TestName"
+                // value={addTest?.testName}
+                // onChange={(e) => handleInput(e.target.value, "TestName")}
+              />
+              <Typography gutterBottom sx={{mt : 3}}><b>Section Instructions</b></Typography>
+              <TextField
+          id="fullWidth"
+          // label="Multiline"
+          multiline
+          rows={3}
+          // defaultValue=""
+          sx={{width: "100%"}}
+        />
+              <Box className="BulbBox">
+                <TipsAndUpdatesTwoToneIcon className="bulbIcon"/> 
+                <Typography>
+                  You can give students choice of which questions to Attempt in the section by editing section details after Adding Questions. <a href="#" style={{textDecoration: "none"}}>View Example</a>
+                </Typography>
+              </Box>
+            
+            </DialogContent>
+            <DialogActions>
+              <Button
+                variant="contained"
+                className="AddSectionBtn"
+                // onClick={handleCreateTeam}
+              >
+                Add Section
+              </Button>
+            </DialogActions>
+          </BootstrapDialog>
       </Box>
     </aside>
   );

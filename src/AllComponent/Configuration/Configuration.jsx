@@ -241,8 +241,8 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   {commonTextField(
                     {
                       id: "fullWidth",
-                      className: "BoxShadow-ACat addCatTextField",
-                      inputClassName: "textField",
+                      className: "BoxShadow-ACat addCatTextField ",
+                      inputClassName: "textField PaddingOnly",
                       labels: "Sub Category",
                     },
                     (Option = {
