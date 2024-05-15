@@ -221,7 +221,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                 )}
                 <FormControl sx={{ width: 540 }}>
                   <Select
-                    label="Category"
+                    // label="Category"
                     value={cat.category_name}
                     onChange={(e) => handleChange(e)}
                     className="addCatTextField"
