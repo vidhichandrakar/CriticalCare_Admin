@@ -42,6 +42,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const [expanded, setExpanded] = useState();
   const [durationType, setDurationType] = useState([{}]);
   const [durationSelectedValue, setDurationSelectedValue] = useState("");
+  const [selectedDuration, setSelectedDuration] = useState("");
   const [expiryDate, setExpiryDate] = useState({
     price: "",
     offer_price: "",
@@ -92,10 +93,10 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   ]);
   const [editPriceData, setEditPriceData] = useState([
     {
-      duration: "20",
+      duration: "",
       years: "",
-      price: "400",
-      offer_price: "1000",
+      price: "",
+      offer_price: "",
       startDate: "",
       endDate: "",
       duration_type_name: "",
@@ -104,10 +105,10 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
       duration_name: "",
     },
     {
-      duration: "20",
+      duration: "",
       years: "",
-      price: "400",
-      offer_price: "1000",
+      price: "",
+      offer_price: "",
       startDate: "",
       endDate: "",
       duration_type_name: "",
@@ -131,36 +132,44 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
       storedValues.duration = courseData?.durations[0]?.duration_id;
       storedValues.price = courseData?.durations[0]?.price;
       storedValues.offer_price = courseData?.durations[0]?.offer_price;
-      let getDurationType = durationType.filter((item)=>item?.duration_id===courseData?.durations[0]?.duration_id);
+      let getDurationType = durationType.filter(
+        (item) => item?.duration_id === courseData?.durations[0]?.duration_id
+      );
       setDurationSelectedValue(getDurationType[0]?.duration_name);
       setSingleValidity(storedValues);
     }
-  }, [courseData,durationType]);
+  }, [courseData, durationType]);
 
   const handleInputPrice = (value, type, selectedIndex) => {
     let storedValues = Object.assign({}, editPriceData);
-
+    if (type === "duration_name") {
+      storedValues.duration_id = value.duration_id;
+      storedValues.duration_name = value.duration_name;
+    }
+    let temp = [];
     setEditPriceData(
       editPriceData.map((item, idx) =>
         idx === selectedIndex ? { ...item, [type]: value } : item
       )
     );
-
-    // console.log("valuevalue",value)
-    if (type === "years") {
-      // console.log("typeeee",type)
-      setDurationSelectedValue(value.duration_name);
-      storedValues.duration_id = value.duration_id;
-      storedValues.duration_name = value.duration_name;
-    }
-    // handleInputChange("editPrice", editPriceData);
+    temp = editPriceData.map((item, idx) =>
+      idx === selectedIndex ? { ...item, [type]: value } : item
+    );
+    handleInputChange("editPrice", temp);
   };
 
   const handlePricePage = () => {
     if (selectDurationValue === "Multiple Validity") {
-      // handleInputChange("resetPrice", resetPrice);
-      handleInputChange("editPrice", editPriceData);
-      handleTrackerPage(2);
+      let temp = [];
+      editPriceData.map((item) => {
+        let storedValues = Object.assign({}, item);
+        storedValues.duration_type_id = selectedDuration.duration_type_id;
+        storedValues.duration_type_name = selectedDuration.duration_type_name;
+        temp.push(storedValues);
+      });
+      setEditPriceData(temp);
+      handleInputChange("editPrice", temp, selectedDuration);
+      handleTrackerPage(2, temp);
     } else if (selectDurationValue === "Single Validity") {
       const storedValues = singleValidity;
       if (
@@ -172,7 +181,6 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
         if (parseInt(storedValues.price) > parseInt(storedValues.offer_price)) {
           let copyArr = [];
           copyArr.push(storedValues);
-          // console.log("array", copyArr);
           handleInputChange("editPrice", copyArr);
           handleTrackerPage(2);
         } else {
@@ -187,7 +195,6 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
       }
     } else if (selectDurationValue === "Lifetime Validity") {
       const storedValues = lifetimeValidation;
-      // console.log("kife time",storedValues)
       handleInputChange("editPrice", [storedValues]);
       handleTrackerPage(2);
     } else if (selectDurationValue === "Course Expiry Date") {
@@ -207,34 +214,34 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   //   handleInputChange("editPrice", storedValues);
   // };
 
-  const handleDuration = (e) => {
-    if (e.target.value.duration_type_name === "Multiple Validity") {
-      setSelectedDurationValue(e?.target?.value?.duration_type_name);
+  const handleDuration = (value) => {
+    if (value.duration_type_name === "Multiple Validity") {
+      setSelectedDurationValue(value?.duration_type_name);
       let arr = [];
       resetPrice.map((item) => {
         let storedValues1 = Object.assign({}, item);
-        storedValues1.duration_type_name = e?.target?.value?.duration_type_name;
-        storedValues1.duration_type_id = e?.target?.value?.duration_type_id;
+        storedValues1.duration_type_name = value?.duration_type_name;
+        storedValues1.duration_type_id = value?.duration_type_id;
         arr.push(storedValues1);
       });
       setResetPrice(arr);
-    } else if (e.target.value.duration_type_name === "Single Validity") {
+    } else if (value.duration_type_name === "Single Validity") {
       let storedValues = Object.assign({}, singleValidity);
-      setSelectedDurationValue(e?.target?.value?.duration_type_name);
-      storedValues.duration_type_name = e?.target?.value?.duration_type_name;
-      storedValues.duration_type_id = e?.target?.value?.duration_type_id;
+      setSelectedDurationValue(value?.duration_type_name);
+      storedValues.duration_type_name = value?.duration_type_name;
+      storedValues.duration_type_id = value?.duration_type_id;
       setSingleValidity(storedValues);
-    } else if (e.target.value.duration_type_name === "Lifetime Validity") {
+    } else if (value.duration_type_name === "Lifetime Validity") {
       let storedValues = Object.assign({}, lifetimeValidation);
-      setSelectedDurationValue(e?.target?.value?.duration_type_name);
-      storedValues.duration_type_name = e?.target?.value?.duration_type_name;
-      storedValues.duration_type_id = e?.target?.value?.duration_type_id;
+      setSelectedDurationValue(value?.duration_type_name);
+      storedValues.duration_type_name = value?.duration_type_name;
+      storedValues.duration_type_id = value?.duration_type_id;
       setLifetimeValidation(storedValues);
     } else {
       let storedValues = Object.assign({}, expiryDate);
-      setSelectedDurationValue(e?.target?.value?.duration_type_name);
-      storedValues.duration_type_name = e?.target?.value?.duration_type_name;
-      storedValues.duration_type_id = e?.target?.value?.duration_type_id;
+      setSelectedDurationValue(value?.duration_type_name);
+      storedValues.duration_type_name = value?.duration_type_name;
+      storedValues.duration_type_id = value?.duration_type_id;
       setExpiryDate(storedValues);
     }
   };
@@ -242,16 +249,17 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const handleAddDuration = () => {
     let addedValues = [...editPriceData];
     addedValues.push({
-      duration: "20",
+      duration: "",
       years: "",
-      price: "400",
-      offer_price: "1000",
+      price: "",
+      offer_price: "",
       startDate: "",
       endDate: "",
       duration_type_name: "",
       duration_type_id: "",
       duration_id: "",
     });
+    // setResetPrice(addedValues)
     setEditPriceData(addedValues);
     handleInputChange("editPrice", addedValues);
   };
@@ -278,7 +286,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
     if (index === expanded) {
       setExpanded(null);
     }
-    setResetPrice((prevItems) => {
+    setEditPriceData((prevItems) => {
       return prevItems.filter((item, indexRemove) => indexRemove !== index);
     });
   };
@@ -340,8 +348,12 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
     }
   };
 
-  const handleSelectedDuration = (value) => {
+  const handleSelectedDuration = (value, item) => {
     setSelectedDurationValue(value);
+    setSelectedDuration(item);
+  };
+  const isNotEmptyObject = (obj) => {
+    return obj && typeof obj === "object" && Object.keys(obj).length;
   };
   return (
     <div className="formMain">
@@ -351,8 +363,6 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
         courseData={courseData}
         handleSelectedDuration={handleSelectedDuration}
       />
-      {console.log("courseDatacourseData", courseData)}
-      {console.log("durationType", durationType)}
       <br />
       {selectDurationValue === "Multiple Validity" ? (
         <div>
@@ -394,10 +404,13 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                 >
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <Typography>
-                      {`${item?.duration} ${item?.years?.duration_name}  `}{" "}
+                      {item?.duration ? `${item?.duration}` : "Duration"} &nbsp;
+                      {item?.duration_name?.duration_name
+                        ? `${item?.duration_name?.duration_name}`
+                        : "Valid Till"}
                       <b style={{ color: "#18568f", marginLeft: "10px" }}>
                         {" "}
-                        {`  ₹ ${item?.offer_price}`}
+                        {item?.offer_price ? `₹ ${item?.offer_price}` : "Price"}
                       </b>
                     </Typography>
                   </div>
@@ -454,23 +467,28 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                       <FormControl sx={{ m: 1, minWidth: 240 }}>
                         <Select
                           value={
-                            durationSelectedValue
-                              ? durationSelectedValue
+                            item?.duration_name
+                              ? item?.duration_name
                               : `Select Duration Type`
                           }
-                          renderValue={() => {
-                            return durationSelectedValue !== "" ? (
-                              <Typography>{durationSelectedValue}</Typography>
-                            ) : (
-                              <Typography> Select Duration Type </Typography>
+                          renderValue={(value) => {
+                            return (
+                              <Typography>
+                                {isNotEmptyObject(value)
+                                  ? value.duration_name
+                                  : value}
+                              </Typography>
                             );
                           }}
-                          // defaultValue="Years(s)"
                           input={<OutlinedInput />}
                           MenuProps={MenuProps}
                           inputProps={{ "aria-label": "Without label" }}
                           onChange={(event) =>
-                            handleInputPrice(event.target.value, "years", index)
+                            handleInputPrice(
+                              event.target.value,
+                              "duration_name",
+                              index
+                            )
                           }
                         >
                           {durationType.map((item) => (

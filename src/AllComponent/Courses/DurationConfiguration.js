@@ -31,16 +31,17 @@ const DurationConfiguration = ({
   const [courseDurationType, setCourseDurationType] = useState([{}]);
 
   useEffect(() => {
-    // console.log("courseDurationTypecourseDurationType", courseData)
     if (courseData?.durations?.length) {
-      // console.log("courseDurationTypecourseDurationType", courseDurationType)
       let selectedDuration = courseDurationType.filter(
         (item) =>
           item?.duration_type_id === courseData?.durations[0]?.duration_type_id
       );
-      handleSelectedDuration(selectedDuration[0]?.duration_type_name);
+      handleSelectedDuration(
+        selectedDuration[0]?.duration_type_name,
+        selectedDuration[0]
+      );
     }
-  }, [courseData,courseDurationType]);
+  }, [courseData, courseDurationType]);
 
   useEffect(() => {
     getCourseDuration({
@@ -50,10 +51,20 @@ const DurationConfiguration = ({
     });
   }, []);
 
+  const multipleEditFlow = (e) => {
+    let courseData = e.target.value;
+    let selectedDuration = courseDurationType.filter(
+      (item) => item?.duration_type_id === courseData?.duration_type_id
+    );
+    handleSelectedDuration(
+      selectedDuration[0]?.duration_type_name,
+      selectedDuration[0]
+    );
+    handleDuration(selectedDuration[0]);
+  };
+
   return (
     <div>
-      {/* {console.log("courseDurationTypecourseDurationType", courseDurationType)} */}
-
       <Box>
         {CommonTypography(
           { fontWeight: 600, label: "Course Duration Type" },
@@ -78,7 +89,7 @@ const DurationConfiguration = ({
             input={<OutlinedInput />}
             MenuProps={MenuProps}
             inputProps={{ "aria-label": "Without label" }}
-            onChange={handleDuration}
+            onChange={multipleEditFlow}
           >
             {courseDurationType.map((item) => (
               <MenuItem key={item.duration_type_id} value={item}>
