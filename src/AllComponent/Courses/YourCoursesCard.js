@@ -40,17 +40,17 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                 duraData?.duration_id == item?.durations[0]?.duration_id
             );
 
-            // console.log(item, "itemline22")
             return (
               <div
-                className=" container courseCard"
+                className="container courseCard"
                 onClick={() => handleCourse(id)}
               >
                 <div className="row" style={{ alignItems: "start" }}>
                   <div className="col-md-5">
                     {item.thumbnail_path ? (
                       <img
-                        src={`data:image/png;base64,${item.thumbnail_path}`}
+                        // src={`data:image/png;base64,${item.thumbnail_path}`}
+                        src={item.thumbnail_path}
                         width={180}
                         height={150}
                         style={{
@@ -73,7 +73,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                     )}
                   </div>
                   <div className="col-md-8 rightCard">
-                    <Typography className="courseHeader">
+                    <Typography className="courseHeader wrap-text-50">
                       {item.course_name}
                     </Typography>
                     <Tooltip title={item.description}>
@@ -108,8 +108,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                     ) : (
                       <p className=" flag vertical Npublish">Not Publish</p>
                     )}
-
-                    {/* <Box className="flag vertical"> Publish</Box> */}
+                  {/* <Box className="flag vertical"> Publish</Box> */}
                   </div>
                 </div>
               </div>

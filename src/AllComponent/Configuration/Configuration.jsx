@@ -125,10 +125,12 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
     const payload = {
       category_name: subCategory,
       sub_category_type: "Y",
-      created_by: userId.user_id,
+      created_by: userId,
       main_categoty_id: selectedValue,
     };
-    createSubCategory({ payload, callBack: (response) => {} });
+    createSubCategory({ payload, callBack: (response) => {
+      toast.success("Sub Category created successfully!")
+    } });
   };
   const handleChange = (e) => {
     setSelectedCategory(e.target.value);

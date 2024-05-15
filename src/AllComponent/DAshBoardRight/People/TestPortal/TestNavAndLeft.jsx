@@ -181,7 +181,7 @@ function TestNavAndLeft() {
             </Typography>
             <Typography>
               <Box className="addNreScsnTestSection">
-                <AddCircleOutlineIcon />
+                <AddCircleOutlineIcon sx={{position: "relative", top:"5px", right:"5px"}}/>
                 Add New Section
               </Box>
             </Typography>
@@ -306,7 +306,7 @@ function TestNavAndLeft() {
                 </option>
               </select>
 
-              <p sx={{ color: "grey" }}>
+              <p sx={{ color: "lightgrey" }}>
                 <Radio
                   onChange={handleChange}
                   value="a"
@@ -334,7 +334,7 @@ function TestNavAndLeft() {
 
               <Box className="exportTestSettings">
                 <p>
-                  <LaunchIcon sx={{ fontSize: "1.1rem", mr: "10px" }} />
+                  <LaunchIcon sx={{ fontSize: "1.1rem", mr: "10px", position:"relative", top: "3px" }} />
                   Export test as PDF
                 </p>
               </Box>

@@ -12,8 +12,8 @@ function TestFirstPage() {
          <div className="testRightSection">
 
             <TestInstructions/>
-            {/* <AddASection/> */}
-            <CreateQNS />
+            <AddASection/>
+            {/* <CreateQNS /> */}
           </div>
         
   );
