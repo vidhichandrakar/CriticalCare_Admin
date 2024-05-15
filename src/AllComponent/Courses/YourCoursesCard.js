@@ -43,7 +43,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
             // console.log(item, "itemline22")
             return (
               <div
-                className=" container courseCard"
+                className="container courseCard"
                 onClick={() => handleCourse(id)}
               >
                 <div className="row" style={{ alignItems: "start" }}>
@@ -73,7 +73,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                     )}
                   </div>
                   <div className="col-md-8 rightCard">
-                    <Typography className="courseHeader">
+                    <Typography className="courseHeader wrap-text-50">
                       {item.course_name}
                     </Typography>
                     <Tooltip title={item.description}>
@@ -108,8 +108,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                     ) : (
                       <p className=" flag vertical Npublish">Not Publish</p>
                     )}
-
-                    {/* <Box className="flag vertical"> Publish</Box> */}
+                  {/* <Box className="flag vertical"> Publish</Box> */}
                   </div>
                 </div>
               </div>
