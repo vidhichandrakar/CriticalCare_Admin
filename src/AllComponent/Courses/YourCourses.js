@@ -17,7 +17,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { redirectRestriction } from "../../Util/RedirectRestriction";
 import Header from "./Header";
 import { Box } from "@mui/material";
-import YoursCardDemo from "./YoursCardDemo";
 
 const YourCourses = () => {
   const [allCourses, setAllCourses] = useState([]);
@@ -79,11 +78,7 @@ const YourCourses = () => {
             userData={userData}
             Data={YourCoursesCardData}
           /> 
-          {/* <YoursCardDemo
-            allCourses={allCourses}
-            userData={userData}
-            Data={YourCoursesCardData}
-          />  */}
+          
         </Box>
         <div>
             <Box sx={{top:"88%", position:"absolute", zIndex:1111111111111, right:0}} className="addCircle" onClick={()=>navigate("/CreateCourses")}>
