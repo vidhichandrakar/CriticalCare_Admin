@@ -259,9 +259,10 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       {commonTextField(
         {
           id: "fullWidth",
-          className: "BoxShadow",
-          inputClassName: "textField",
+          className: "BoxShadow mt2",
+          inputClassName: "textField PaddingOnly",
           labels: "Enter course name",
+          
         },
         (Option = {
           handleInput: handleInput,

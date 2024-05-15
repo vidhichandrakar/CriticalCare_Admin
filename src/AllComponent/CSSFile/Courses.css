@@ -334,7 +334,11 @@
   border: #0ff55c !important;
   border-radius: 100%;
 }
+.PaddingOnly{
+  padding: 14px 10px !important;
+}
 .textField{
+  /* padding: 14px 10px !important; */
    font-size: 0.9rem !important;
    color:#202020 !important;
 }
@@ -343,6 +347,9 @@
 } */
 .DescBoxShadow{
   font-size: 0.7rem !important;
+  margin-top: 3% !important;
+}
+.mt2{
   margin-top: 3% !important;
 }
 .BoxShadowCourses{

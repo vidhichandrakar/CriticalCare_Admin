@@ -125,10 +125,12 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
     const payload = {
       category_name: subCategory,
       sub_category_type: "Y",
-      created_by: userId.user_id,
+      created_by: userId,
       main_categoty_id: selectedValue,
     };
-    createSubCategory({ payload, callBack: (response) => {} });
+    createSubCategory({ payload, callBack: (response) => {
+      toast.success("Sub Category created successfully!")
+    } });
   };
   const handleChange = (e) => {
     setSelectedCategory(e.target.value);
@@ -221,7 +223,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                 )}
                 <FormControl sx={{ width: 540 }}>
                   <Select
-                    label="Category"
+                    // label="Category"
                     value={cat.category_name}
                     onChange={(e) => handleChange(e)}
                     className="addCatTextField"
@@ -241,8 +243,8 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   {commonTextField(
                     {
                       id: "fullWidth",
-                      className: "BoxShadow-ACat addCatTextField",
-                      inputClassName: "textField",
+                      className: "BoxShadow-ACat addCatTextField ",
+                      inputClassName: "textField PaddingOnly",
                       labels: "Sub Category",
                     },
                     (Option = {

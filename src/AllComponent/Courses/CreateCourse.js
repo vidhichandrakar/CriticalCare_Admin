@@ -43,12 +43,10 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   ]);
   const [courseData, setCourseData] = useState([]);
   const [loaderState, setLoaderState] = useState(false);
-const [validity ,setValidity]= useState([{}])
+  const [validity, setValidity] = useState([{}]);
   let location = useLocation();
   const courseId = location.state?.id;
   const navigate = useNavigate();
-
-  
 
   useEffect(() => {
     if (courseId) {
@@ -67,26 +65,24 @@ const [validity ,setValidity]= useState([{}])
   const handleInputChange = (type, value) => {
     if (type === "basicInfo") {
       setBasicInfo(value);
-
     } else if (type === "editPrice") {
-      // console.log("oihvdhjs",value)
       setEditPrice([value]);
-      setValidity([value])
+      setValidity([value]);
       // setNewtest(value)
     }
   };
-  const handleTrackerPage = (page) => {
+  const handleTrackerPage = (page, value) => {
     if (page === 2) {
-      // console.log("edit tracker", editPrice)
-      handleCreateCourse();
+      handleCreateCourse(value);
     } else {
       setTackerPage(page);
       handleHeaderLabels(basicInfo.Name);
     }
   };
-  const handleCreateCourse = () => {
+
+  const handleCreateCourse = (value) => {
     let payload;
-    // try {
+    try {
       const courseDetails = {
         course_name: basicInfo?.Name,
         description: basicInfo?.Description,
@@ -114,18 +110,16 @@ const [validity ,setValidity]= useState([{}])
           content_url: "https://example.com/content2.pdf",
         },
       ];
-      const courseDurations=validity
+      const courseDurations = value === undefined ? validity : value;
       payload = {
         courseDetails: courseDetails,
         courseDurations: courseDurations,
         courseAttachments: courseAttachments,
-        
       };
-      // console.log("courseDurations",courseDurations)
-      // console.log("patload", payload)
-    // } catch (error) {
-    //   console.log(error);
-    // }
+      console.log("patload", payload);
+    } catch (error) {
+      console.log(error);
+    }
     if (courseId) {
       // const payload = formData;
       publishOrEditCourse({
@@ -140,7 +134,6 @@ const [validity ,setValidity]= useState([{}])
         courseData: payload,
 
         callBack: (response) => {
-          // console.log("ALL response", payload);
           toast.success("Course added successfully!", {
             autoClose: 500,
           });
@@ -155,16 +148,12 @@ const [validity ,setValidity]= useState([{}])
     }
   };
 
- 
-
   return (
     <Box className="courseMainTrack">
       <Tracker
         trackerPage={trackerPage}
         handleTrackerPage={handleTrackerPage}
       />
-      {/* {console.log("create course==basicInfo",basicInfo)} */}
-      {/* {console.log("create course==validity flow", validity)} */}
       {trackerPage === 0 ? (
         <CreateForm
           handleTrackerPage={handleTrackerPage}
