@@ -49,7 +49,8 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                   <div className="col-md-5">
                     {item.thumbnail_path ? (
                       <img
-                        src={`data:image/png;base64,${item.thumbnail_path}`}
+                        // src={`data:image/png;base64,${item.thumbnail_path}`}
+                        src={item.thumbnail_path}
                         width={180}
                         height={150}
                         style={{
