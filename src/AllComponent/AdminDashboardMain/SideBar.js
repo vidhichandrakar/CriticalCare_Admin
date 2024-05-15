@@ -163,7 +163,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                             ? "hoverrr2 paddingD"
                             : "paddingD"
                         }
-                        sx={{ mt: 1, color: "grey" }}
+                        sx={{ mt: -1, color: "grey" }}
                         onClick={() => handleHighlight("YourCourses")}
                       >
                         My Courses
@@ -179,7 +179,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                             ? "hoverrr2 paddingD"
                             : "paddingD"
                         }
-                        sx={{ mt: 1, color: "grey" }}
+                        sx={{ mt: -2.5, color: "grey" }}
                         onClick={() => handleHighlight("CreateCoupon")}
                       >
                         Manage Coupons
@@ -281,7 +281,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                             ? "hoverrr2 paddingD"
                             : "paddingD"
                         }
-                        sx={{ textDecoration: "none", color: "grey" }}
+                        sx={{ textDecoration: "none", color: "grey", mt: -1 }}
                         onClick={() => handleHighlightPeople("User")}
                       >
                         User
@@ -297,7 +297,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                             ? "hoverrr2 paddingD"
                             : "paddingD"
                         }
-                        sx={{ textDecoration: "none", color: "grey" }}
+                        sx={{ textDecoration: "none", color: "grey", mt: -2.5 }}
                         onClick={() => handleHighlightPeople("MyTeam")}
                       >
                         My Team
