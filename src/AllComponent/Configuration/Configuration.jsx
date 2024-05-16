@@ -223,7 +223,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                 )}
                 <FormControl sx={{ width: 540 }}>
                   <Select
-                    label="Category"
+                    // label="Category"
                     value={cat.category_name}
                     onChange={(e) => handleChange(e)}
                     className="addCatTextField"
@@ -243,8 +243,8 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   {commonTextField(
                     {
                       id: "fullWidth",
-                      className: "BoxShadow-ACat addCatTextField",
-                      inputClassName: "textField",
+                      className: "BoxShadow-ACat addCatTextField ",
+                      inputClassName: "textField PaddingOnly",
                       labels: "Sub Category",
                     },
                     (Option = {
