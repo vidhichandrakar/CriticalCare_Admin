@@ -5,7 +5,6 @@ import UploadIcon from "@mui/icons-material/Upload";
 import { ToastContainer, toast } from "react-toastify";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import DoneIcon from "@mui/icons-material/Done";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,8 +17,6 @@ import { getCategory, getSubcategoryList } from "../ActionFactory/apiActions";
 import { useDropzone } from "react-dropzone";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
-import { redirectRestriction } from "../../Util/RedirectRestriction";
-import InputLabel from "@mui/material/InputLabel";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -46,9 +43,6 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const [cat, setCat] = useState([]);
   const [subCategoryList, setSubCategoryList] = useState([]);
   const [selectedCategoryList, setSelectedcategoryList] = useState("");
-  const [categoryLabel, setCategoryLabel] = useState("Select Category");
-  const [subCategoryLabel, setSubCategoryLabel] = useState("");
-  const navigate = useNavigate();
 
   const onInroVideoDrop = async (files) => {
      // console.log(files);
@@ -72,7 +66,6 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   });
 
   useEffect(() => {
-    // if (redirectRestriction()) {
     getCategory({
       callBack: (response) => {
         const userCallBack = response?.data;
@@ -86,7 +79,6 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
 
   useEffect(() => {
     if (courseData !== "") {
-       // console.log("course data edit flow", courseData);
       let storedValues = Object.assign({}, storedBasicInfo);
       storedValues.Name = courseData?.course_name;
       if (storedValues.Name?.length >= 4) {
@@ -96,37 +88,11 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       if (storedValues.Description?.length >= 4) {
         sethideValidationTickDesc(true);
       }
-
-      // setCategoryLabel(courseData?.Category?.category_name);
-      // if (courseData?.Category?.category_name) {
-        setCategoryLabel(courseData?.Category?.category_name);
-      // } else {
         cat.map((item) => {
           if (item.category_id === courseData?.category_id) {
             storedValues.Category = item;
           }
         });
-      // }
-      // if(courseData?.subCategory?.category_name){
-      //   setSubCategoryList(courseData?.subCategory?.category_name);
-      //    // console.log("iuhgvhji",courseData?.subCategory?.category_name)
-      // }
-      // else{
-      //   getSubcategoryList({
-      //     mainCatID: courseData.category_id,
-      //     callBack: (response) => {
-      //       setSubCategoryList(response.data);
-      //       setSelectedcategoryList(24); //added to enable sub category
-      //       response.data.map((item) => {
-      //         if (item.category_id === courseData?.sub_category_id) {
-      //           storedValues.subCategory = item;
-      //         }
-      //       });
-      //     },
-      //   });
-      // }
-      setSubCategoryLabel(courseData?.sub_category);
-       // console.log("oij djh",courseData)
       if (courseData?.category_id) {
         getSubcategoryList({
           mainCatID: courseData.category_id,
@@ -213,14 +179,12 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       });
     } else {
       handleInputChange("basicInfo", storedBasicInfo);
-      //  // console.log("storedBasicInfostoredBasicInfo", storedBasicInfo);
       handleTrackerPage(1);
     }
   };
 
   const handleChangeOnCat = (e) => {
     let mainCatID = e?.target?.value?.category_id;
-    setCategoryLabel(e?.target?.value.category_name);
     handleInput(e?.target?.value, "category");
     getSubcategoryList({
       mainCatID,
@@ -243,14 +207,12 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
 
   const handleChangeOnSubCat = (e) => {
     let mainSubCatID = e?.target?.value;
-    setSubCategoryLabel(e?.target?.value?.category_name);
     handleInput(mainSubCatID, "subCategory");
   };
 
   return (
     <div className="formMain">
       <div className="FlexRow">
-        {/* { // console.log("storedBasicInfo edti flow", storedBasicInfo)} */}
         {CommonTypography({ fontWeight: 600, label: "Name" })}
         {hideValidationTickName && (
           <CheckCircleRoundedIcon className="RightTick" />
@@ -349,17 +311,14 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
                   : `Select Category Type`
               }
               renderValue={() => {
-                return categoryLabel !== "" ? (
+                return storedBasicInfo?.Category !== "" ? (
                   <Typography>
-                    {categoryLabel
-                      ? categoryLabel
-                      : storedBasicInfo?.Category?.category_name}
+                    {storedBasicInfo?.Category?.category_name}
                   </Typography>
                 ) : (
                   <Typography> Select Category</Typography>
                 );
               }}
-              // value={storedBasicInfo?.Category}
               onChange={(e) => handleChangeOnCat(e)}
               input={<OutlinedInput />}
               MenuProps={MenuProps}
@@ -382,26 +341,21 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
             })
           )}
           <FormControl sx={{ m: 1, minWidth: 240 }} className="categorySelect">
-            {/* <InputLabel >Select Sub Category</InputLabel> */}
             <Select
-              // label="Sub Category" subCategoryLabel
               value={
                 storedBasicInfo?.subCategory
                   ? storedBasicInfo?.subCategory
                   : `Select Sub Category`
               }
               renderValue={() => {
-                return subCategoryLabel !== "" ? (
+                return storedBasicInfo.subCategory !== "" ? (
                   <Typography>
-                    {subCategoryLabel
-                      ? subCategoryLabel
-                      : storedBasicInfo?.subCategory?.category_name}
+                    {storedBasicInfo?.subCategory?.category_name}
                   </Typography>
                 ) : (
                   <Typography> Select Sub Category</Typography>
                 );
               }}
-              // value={storedBasicInfo?.subCategory}
               onChange={(e) => handleChangeOnSubCat(e)}
               input={<OutlinedInput />}
               MenuProps={MenuProps}
