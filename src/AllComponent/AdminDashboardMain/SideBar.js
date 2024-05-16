@@ -15,6 +15,7 @@ import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Configuration from "../Configuration/Configuration";
+import { Height } from "@mui/icons-material";
 
 function SideBar({ openSidebarToggle, OpenSidebar }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -329,7 +330,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
 
             <Collapse in={hideSubConfig} timeout="auto" unmountOnExit>
               <List component="div">
-                <ul>
+                <ul sx={{Height:"100%"}}>
                   <li
                     className="myCourses"
                     onClick={() => handleCatConfig("Category")}
