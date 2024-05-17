@@ -16,6 +16,8 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Configuration from "../Configuration/Configuration";
 import { Height } from "@mui/icons-material";
+import DescriptionIcon from '@mui/icons-material/Description';
+import SortIcon from '@mui/icons-material/Sort';
 
 function SideBar({ openSidebarToggle, OpenSidebar }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -268,7 +270,6 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
 
             <Collapse
               in={openPeople}
-              // timeout="auto"
               unmountOnExit
             >
               <List component="div">
@@ -317,13 +318,13 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               sx={{ mt: -2 }}
               onClick={() => handleHighlight("Testimonial")}
             >
-              <PersonIcon className="icon" />
+              <DescriptionIcon className="icon" sx={{fontSize:"1.4em"}}/>
               Testimonial
             </Typography>
           </Link>
           <Link>
             <ListItemButton onClick={handleHideSubCat} className="listButton">
-              <PersonIcon />
+              <SortIcon />
               <ListItemText primary="Configuration" className="coursesHead" />
               {hideSubConfig ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
