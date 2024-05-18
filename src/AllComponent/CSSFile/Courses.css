@@ -132,7 +132,6 @@
 
 .courseCard{
   background-color: #b22626;
-  /* margin-left: 2%; */
   border-radius: 10px;
   box-shadow: 1px 1px 2px 0.5px #ededed;
   background-color: #ffffff;
@@ -153,7 +152,6 @@
   display: flex;
   flex-direction: row;
   text-align: center;
-  /* margin-top: 1%; */
 }
 .clock{
   font-size: 1.1rem !important;
@@ -165,7 +163,7 @@
 }
 .offerPrice{
   font-size: 1rem !important;
-  margin-left: 1px !important;
+  /* margin-left: 1px !important; */
 }
 .price{
   text-decoration: line-through;
@@ -208,7 +206,6 @@
   justify-content: center;
   height: 15vh;
   margin-right: 1%;
-  /* margin-left: 3%; */
 }
 .vertical{
   writing-mode:tb-rl;
