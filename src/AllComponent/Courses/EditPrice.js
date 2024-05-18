@@ -207,18 +207,56 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
 
   const handlePricePage = () => {
     if (selectDurationValue === "Multiple Validity") {
+      let validate = false;
+      let emptyString = "";
       let temp = [];
       editPriceData.map((item) => {
         let storedValues = Object.assign({}, item);
-        storedValues.duration_type_id = selectedDuration.duration_type_id;
-        storedValues.duration_type_name = selectedDuration.duration_type_name;
+        storedValues.duration_type_id = selectedDuration?.duration_type_id;
+        storedValues.duration_type_name = selectedDuration?.duration_type_name;
         storedValues.duration_id = item.duration_name.duration_id;
         storedValues.duration_name = item.duration_name.duration_name;
+        console.log(
+          "condition",
+          storedValues.duration === "" ||
+            storedValues.price === "" ||
+            storedValues.offer_price === ""
+        );
+        if (
+          storedValues.duration &&
+          storedValues.price &&
+          storedValues.offer_price
+        ) {
+          if (
+            parseInt(storedValues.price) < parseInt(storedValues.offer_price)
+          ) {
+            emptyString =
+              "Offer Price Must multiple Be Less Then Regular Price!";
+            validate = true;
+          }
+        } else if (
+          storedValues.duration === "" ||
+          storedValues.price === "" ||
+          storedValues.offer_price === ""
+        ) {
+          emptyString = "Required fields cannot be empty!";
+          validate = true;
+        }
+
         temp.push(storedValues);
       });
-      setEditPriceData(temp);
-      handleInputChange("editPrice", temp, selectedDuration);
-      handleTrackerPage(2, temp);
+
+      if (validate === true) {
+        toast.error(emptyString, {
+          autoClose: 500,
+        });
+        validate = false;
+      } else {
+        setEditPriceData(temp);
+        handleInputChange("editPrice", temp, selectedDuration);
+        handleTrackerPage(2, temp);
+        validate = false;
+      }
     } else if (selectDurationValue === "Single Validity") {
       const storedValues = singleValidity;
       if (
@@ -255,11 +293,19 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
             autoClose: 500,
           });
         }
+      } else {
+        toast.error("Required fields cannot be empty!", {
+          autoClose: 500,
+        });
       }
     } else if (selectDurationValue === "Course Expiry Date") {
       const storedValues = expiryDate;
       handleInputChange("editPrice", [storedValues]);
-      if (storedValues.price && storedValues.offer_price && storedValues.startDate) {
+      if (
+        storedValues.price &&
+        storedValues.offer_price &&
+        storedValues.startDate
+      ) {
         if (parseInt(storedValues.price) > parseInt(storedValues.offer_price)) {
           let copyArr = [];
           copyArr.push(storedValues);
@@ -270,6 +316,10 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
             autoClose: 500,
           });
         }
+      } else {
+        toast.error("Required fields cannot be empty!", {
+          autoClose: 500,
+        });
       }
     }
   };
