@@ -402,7 +402,7 @@ const LoginEmailandPassword = () => {
                 onClick={() => handleResendOTP()}
                 disabled={seconds}
               >
-                <p className="resendOTP">RESEND OTP ( {seconds} sec )</p>
+                <p className="resendOTP">{seconds > 0 ? `RESEND OTP ( ${seconds} sec)` : `RESEND OTP `}</p>
               </Button>
             </Box>
 
