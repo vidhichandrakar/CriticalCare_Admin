@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import EditIcon from "@mui/icons-material/Edit";
@@ -150,7 +150,6 @@ const Trics1FreeMockTest = ({ onDelete }) => {
   };
   return (
     <div className="grid-container">
-      {/* {console.log("TRICSFrEE", courseData)} */}
       <SideBar />
       <div className="main-container ">
         <div className="singleRow">
