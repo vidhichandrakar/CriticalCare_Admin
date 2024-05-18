@@ -23,6 +23,7 @@ import { DialogContent } from '@mui/material';
 import Divider from '@mui/material/Divider'; 
 import PersonIcon from '@mui/icons-material/Person';
 import Popover from "@mui/material/Popover";
+import Logo from "../../Media/Logo.png";
 
 const Header = ({ Heading, subHeading }) => {
   const handleClick = (event) => {
@@ -69,7 +70,7 @@ const Header = ({ Heading, subHeading }) => {
         <Box  onClick={handleClick} className="logoCircle">
         <PersonIcon className="logoDesign"/>
         </Box>
-      </Box>
+        </Box>
           <Popover
                 id={id}
                 open={open}
