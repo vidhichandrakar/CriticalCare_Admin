@@ -25,6 +25,7 @@ import { getDuration } from "../ActionFactory/apiActions";
 import Select from "@mui/material/Select";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -449,17 +450,20 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                       ) : (
                         <>
                           <Button
+                          className="editPriceDeleteBtn"
                             color="error"
                             onClick={() => handleDelete(index)}
-                            startIcon={<DeleteIcon />}
+                            // startIcon={<DeleteIcon sx={{fontSize:"1.5rem"}} />}
                           >
-                            Delete
+                           <DeleteIcon sx={{fontSize:"0.9rem"}} /> Delete
                           </Button>
+
                           <Button
+                            className="editPriceEditBtn"
                             color="primary"
                             onClick={() => handleExpanded(index)}
                           >
-                            <BorderColorIcon /> Edit
+                            <ModeEditIcon sx={{fontSize:"1.1rem"}} /> Edit
                           </Button>
                         </>
                       )}
@@ -475,7 +479,6 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                         ? `${item?.duration_name?.duration_name}`
                         : "Valid Till"}
                       <b style={{ color: "#18568f", marginLeft: "10px" }}>
-                        {" "}
                         {item?.offer_price ? `₹ ${item?.offer_price}` : "Price"}
                       </b>
                     </Typography>
@@ -485,12 +488,13 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                   <div className="accoridanBtn">
                     <Button
                       variant="text"
-                      sx={{ mr: 2 }}
+                      sx={{ mr: "28px", textTransform:"none", border:"0.5px solid #1976d2", padding:"4px 18px" }}
                       onClick={() => handleCancelAccord(index)}
                     >
                       Cancel
                     </Button>
                     <Button
+                    sx={{textTransform:"none", padding:"4px 26px"}}
                       variant="contained"
                       onClick={() => handleSavePrice(index)}
                     >
