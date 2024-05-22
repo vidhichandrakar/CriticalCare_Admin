@@ -253,7 +253,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
         id="outlined-multiline-static"
         multiline
         rows={4}
-        placeholder="Enter course description area"
+        placeholder="Enter course description"
         className="DescBoxShadow"
         value={storedBasicInfo.Description}
         onChange={(event) => handleInput(event.target.value, "description")}

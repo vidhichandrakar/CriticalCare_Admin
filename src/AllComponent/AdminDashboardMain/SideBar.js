@@ -189,38 +189,6 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                       </Typography>
                     </Link>
                   </li>
-                  {/* <li className="listDesign">
-                    <Link to="/User" className="textDecoration">
-                      <Typography
-                        id="hoverrr"
-                        className={
-                          highlight === "catagory"
-                            ? "hoverrr2 paddingD"
-                            : "paddingD"
-                        }
-                        sx={{ mt: 1, color: "grey" }}
-                        onClick={() => handleHighlight("catagory")}
-                      >
-                        Category / Sub Category
-                      </Typography>
-                    </Link>
-                  </li> */}
-                  {/* <li className="listDesign">
-                    <Link to="/YourCourses" className="textDecoration">
-                      <Typography
-                        id="hoverrr"
-                        className={
-                          highlight === "upcomingCourses"
-                            ? "hoverrr2 paddingD"
-                            : "paddingD"
-                        }
-                        sx={{ mt: 1, color: "grey" }}
-                        onClick={() => handleHighlight("upcomingCourses")}
-                      >
-                        Upcoming Course / Blogs
-                      </Typography>
-                    </Link>
-                  </li> */}
                 </ul>
               </List>
             </Collapse>
@@ -236,7 +204,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               Test Portal
             </Typography>
           </Link>
-
+         
           {/* <Link to="/Chat">
             <Typography
               id="hoverrr"
