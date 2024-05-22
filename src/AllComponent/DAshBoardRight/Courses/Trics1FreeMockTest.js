@@ -56,24 +56,6 @@ const Trics1FreeMockTest = ({ onDelete }) => {
     setAnchorEl(null);
   };
 
-  // useEffect(() => {
-  //   if (redirectRestriction()) {
-  //     if (courseId) {
-  //       getCourseById({
-  //         courseId,
-  //         callBack: (response) => {
-  //           const userCallBack = response?.data;
-  //           setCourseData(userCallBack);
-  //         },
-  //         error: (error) => {
-  //           toast.error(error.message);
-  //         },
-  //       });
-  //     }
-  //   } else {
-  //     navigate("/admin");
-  //   }
-  // }, []);
 
   const isNotEmptyObject = (obj) => {
     return obj && typeof obj === "object" && Object.keys(obj).length;

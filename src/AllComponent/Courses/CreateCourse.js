@@ -94,7 +94,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         created_by: 1,
         start_date: "2024-04-30",
         end_date: "2024-05-30",
-        is_publish: "Not published",
+        is_publish: "not published",
       };
       const courseAttachments = [
         {
