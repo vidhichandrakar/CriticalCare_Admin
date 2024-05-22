@@ -238,3 +238,10 @@ export const getDuration = ({ callBack }) => {
     callBack(response);
   });
 };
+
+export const uploadFile = ({payload, callBack }) => {
+  const url = APIS.fileUpload;
+  axios.post(url,payload).then((response) => {
+    callBack(response);
+  });
+};

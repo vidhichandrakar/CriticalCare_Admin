@@ -24,6 +24,8 @@ import { DailogBox, capitalizeFirstLetter } from "../../../Util/CommonFields";
 import { redirectRestriction } from "../../../Util/RedirectRestriction";
 import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 import IconButton from "@mui/material/IconButton";
+// import yellowEnvlope from "../../Media/Images/yellowEnvlope.jpeg";
+import yellowEnvlope from "../../../Media/Images/yellowEnvlope.jpeg";
 
 const Trics1FreeMockTest = ({ onDelete }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -57,24 +59,6 @@ const Trics1FreeMockTest = ({ onDelete }) => {
     setAnchorEl(null);
   };
 
-  // useEffect(() => {
-  //   if (redirectRestriction()) {
-  //     if (courseId) {
-  //       getCourseById({
-  //         courseId,
-  //         callBack: (response) => {
-  //           const userCallBack = response?.data;
-  //           setCourseData(userCallBack);
-  //         },
-  //         error: (error) => {
-  //           toast.error(error.message);
-  //         },
-  //       });
-  //     }
-  //   } else {
-  //     navigate("/admin");
-  //   }
-  // }, []);
 
   const isNotEmptyObject = (obj) => {
     return obj && typeof obj === "object" && Object.keys(obj).length;
@@ -232,10 +216,14 @@ const Trics1FreeMockTest = ({ onDelete }) => {
             </div>
 
             <div>
-              <img
-                src={`data:image/png;base64,${courseData?.thumbnail_path}`}
+              {courseData?.thumbnail_path?<img
+                src={courseData?.thumbnail_path}
                 className="rightSideRow"
-              />
+              />:<img
+              src={yellowEnvlope}
+              className="rightSideRow"
+            />}
+              
             </div>
           </div>
 

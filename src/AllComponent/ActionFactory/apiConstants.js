@@ -13,4 +13,5 @@ export const APIS = {
   getSubCategory: REACT_APP_API + "/category/subCategory",
   getCourseDuration: REACT_APP_API + "/durationType",
   getDuration: REACT_APP_API + "/duration",
+  fileUpload: REACT_APP_API + "/fileupload",
 };

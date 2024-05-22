@@ -126,7 +126,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
       category_name: subCategory,
       sub_category_type: "Y",
       created_by: userId,
-      main_categoty_id: selectedValue,
+      main_category_id: selectedValue,
     };
     createSubCategory({ payload, callBack: (response) => {
       toast.success("Sub Category created successfully!")
@@ -285,7 +285,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   )}
                   {commonTextField(
                     {
-                      id: "fullWidth",
+                      // id: "fullWidth",
                       className: "BoxShadow addCatTextField",
                       inputClassName: "textField",
                       labels: "Enter Email name",
@@ -306,7 +306,8 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   {commonTextField(
                     {
                       id: "fullWidth",
-                      className: "BoxShadow addCatTextField",
+                      // fullWidth,
+                      className: "BoxShadow addCatTextField width100",
                       inputClassName: "textField",
                       labels: "Enter Phone No.",
                     },

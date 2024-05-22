@@ -13,7 +13,11 @@ import {
   commonButton,
   commonTextField,
 } from "../../Util/CommonFields";
-import { getCategory, getSubcategoryList } from "../ActionFactory/apiActions";
+import {
+  getCategory,
+  getSubcategoryList,
+  uploadFile,
+} from "../ActionFactory/apiActions";
 import { useDropzone } from "react-dropzone";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
@@ -45,14 +49,19 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const [selectedCategoryList, setSelectedcategoryList] = useState("");
 
   const onInroVideoDrop = async (files) => {
-     // console.log(files);
+    let payload = new FormData();
+    payload.append(
+      "file",
+      files[0],files[0]?.name
+    );
     let storedValues = Object.assign({}, storedBasicInfo);
-    storedValues.thumbnailPath = files[0];
-    await getBase64(files) // `file` your img file
-      .then((res) => {
-        setImageWhileUpload(res.split(",")[1]);
-      }) // `res` base64 of img file
-      .catch((err) =>  console.log(err));
+    uploadFile({
+      payload,
+      callBack: (response) => {
+        storedValues.thumbnailPath = response?.data?.path;
+        setStoredBasicInfo(storedValues);
+      },
+    });
     setStoredBasicInfo(storedValues);
   };
 
@@ -61,7 +70,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     getInputProps: getIntroVideoInputProps,
   } = useDropzone({
     onDrop: onInroVideoDrop,
-    onChange: (event) =>  console.log(event),
+    onChange: (event) => console.log(event),
     accept: "image/jpeg, image/png, image/jpg, application/pdf",
   });
 
@@ -88,11 +97,11 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       if (storedValues.Description?.length >= 4) {
         sethideValidationTickDesc(true);
       }
-        cat.map((item) => {
-          if (item.category_id === courseData?.category_id) {
-            storedValues.Category = item;
-          }
-        });
+      cat.map((item) => {
+        if (item.category_id === courseData?.category_id) {
+          storedValues.Category = item;
+        }
+      });
       if (courseData?.category_id) {
         getSubcategoryList({
           mainCatID: courseData.category_id,
@@ -139,6 +148,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       storedValues.thumbnailPath = value[0];
     }
     setStoredBasicInfo(storedValues);
+
     if (
       hideValidationTickDesc &&
       hideValidationTickName &&
@@ -186,6 +196,11 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const handleChangeOnCat = (e) => {
     let mainCatID = e?.target?.value?.category_id;
     handleInput(e?.target?.value, "category");
+    let updatedSubValue = Object.assign({}, storedBasicInfo);
+    updatedSubValue.subCategory = "";
+    updatedSubValue.Category = e?.target?.value;
+
+    setStoredBasicInfo(updatedSubValue);
     getSubcategoryList({
       mainCatID,
       callBack: (response) => {
@@ -194,16 +209,6 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       },
     });
   };
-  async function getBase64(file) {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(new Blob(file));
-      reader.onload = () => {
-        resolve(reader.result);
-      };
-      reader.onerror = reject;
-    });
-  }
 
   const handleChangeOnSubCat = (e) => {
     let mainSubCatID = e?.target?.value;
@@ -224,7 +229,6 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           className: "BoxShadow mt2",
           inputClassName: "textField PaddingOnly",
           labels: "Enter course name",
-          
         },
         (Option = {
           handleInput: handleInput,
@@ -274,19 +278,16 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
             Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
           </Typography>
-          <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
-            {storedBasicInfo?.thumbnailPath?.name}
-          </Typography>
           {imgUpload === "" && storedBasicInfo?.thumbnailPath && (
             <img
-              src={`data:image/png;base64,${storedBasicInfo?.thumbnailPath}`}
+              src={storedBasicInfo?.thumbnailPath}
               width={140}
               height={"auto"}
             />
           )}
           {imgUpload != "" && (
             <img
-              src={`data:image/png;base64,${imgUpload}`}
+              src={storedBasicInfo?.thumbnailPath}
               width={140}
               height={"auto"}
             />
