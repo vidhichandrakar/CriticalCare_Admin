@@ -2,7 +2,7 @@
 /* LEFT SECTION OF TEST */
 
 .completeLeftBox{
-    background-color: rgb(240 240 240);
+    /* background-color: rgb(240 240 240); */
    
 }
 .createQuestions{
@@ -258,7 +258,7 @@
 .blueEdit{
     color: #0075FF;
     margin-left: 10px;
-    font-size: 0.9rem !important;
+    font-size: 1.1rem !important;
 }
 .testDurationLogo{
     font-size: 1.1rem !important;
