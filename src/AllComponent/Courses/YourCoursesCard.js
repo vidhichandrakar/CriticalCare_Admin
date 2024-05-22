@@ -60,7 +60,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                       />
                     ) : (
                       <img
-                        src={item.thumbnail_path}
+                        src={yellowEnvlope}
                         width={180}
                         height={150}
                         style={{
