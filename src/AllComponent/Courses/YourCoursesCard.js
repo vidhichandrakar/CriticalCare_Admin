@@ -39,7 +39,6 @@ const YourCoursesCard = ({ allCourses, userData }) => {
               (duraData) =>
                 duraData?.duration_id == item?.durations[0]?.duration_id
             );
-
             return (
               <div
                 className="container courseCard"
@@ -61,7 +60,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                       />
                     ) : (
                       <img
-                        src={yellowEnvlope}
+                        src={item.thumbnail_path}
                         width={180}
                         height={150}
                         style={{

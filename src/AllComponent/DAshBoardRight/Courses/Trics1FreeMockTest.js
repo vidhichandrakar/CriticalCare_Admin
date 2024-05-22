@@ -232,7 +232,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
 
             <div>
               <img
-                src={`data:image/png;base64,${courseData?.thumbnail_path}`}
+                src={courseData?.thumbnail_path}
                 className="rightSideRow"
               />
             </div>

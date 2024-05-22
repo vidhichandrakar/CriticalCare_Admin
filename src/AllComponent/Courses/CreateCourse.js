@@ -90,7 +90,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         team_member_id: 5,
         category_id: basicInfo?.Category?.category_id,
         sub_category_id: basicInfo?.subCategory?.category_id,
-        thumbnail_path: "https://example.com/thumbnail.jpg",
+        thumbnail_path: basicInfo?.thumbnailPath,
         created_by: 1,
         start_date: "2024-04-30",
         end_date: "2024-05-30",
@@ -116,7 +116,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         courseDurations: courseDurations,
         courseAttachments: courseAttachments,
       };
-      console.log("patload", payload);
+      // console.log("patload", payload);
     } catch (error) {
       console.log(error);
     }
