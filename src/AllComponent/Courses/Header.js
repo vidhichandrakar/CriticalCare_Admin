@@ -70,7 +70,7 @@ const Header = ({ Heading, subHeading }) => {
         <Box  onClick={handleClick} className="logoCircle">
         <PersonIcon className="logoDesign"/>
         </Box>
-        </Box>
+      </Box>
           <Popover
                 id={id}
                 open={open}
