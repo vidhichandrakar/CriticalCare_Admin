@@ -285,7 +285,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   )}
                   {commonTextField(
                     {
-                      id: "fullWidth",
+                      // id: "fullWidth",
                       className: "BoxShadow addCatTextField",
                       inputClassName: "textField",
                       labels: "Enter Email name",
@@ -306,7 +306,8 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   {commonTextField(
                     {
                       id: "fullWidth",
-                      className: "BoxShadow addCatTextField",
+                      // fullWidth,
+                      className: "BoxShadow addCatTextField width100",
                       inputClassName: "textField",
                       labels: "Enter Phone No.",
                     },
