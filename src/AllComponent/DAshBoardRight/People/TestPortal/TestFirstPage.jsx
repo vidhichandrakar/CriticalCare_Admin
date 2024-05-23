@@ -1,21 +1,17 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Box, Button, Divider } from "@mui/material";
 import "./AllTestPortal.css";
 import AddASection from "./AddASection";
 import TestInstructions from "./TestInstructions";
 import CreateQNS from "./CreateQNS";
 
-
-function TestFirstPage() {
-
+function TestFirstPage({testData}) {
   return (
-         <div className="testRightSection">
-
-            <TestInstructions/>
-            {/* <AddASection/> */}
-            <CreateQNS />
-          </div>
-        
+    <div className="testRightSection">
+      <TestInstructions testData={testData}/>
+      {/* <AddASection/> */}
+      <CreateQNS />
+    </div>
   );
 }
 

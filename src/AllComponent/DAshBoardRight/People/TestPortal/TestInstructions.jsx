@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import { Box, Button, Divider } from "@mui/material";
 import "./AllTestPortal.css";
 import EditIcon from "@mui/icons-material/Edit";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -14,16 +14,16 @@ import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
+import { getTestById } from "../../../ActionFactory/apiActions";
 
-function TestInstructions() {
-  const [instructions, setInstructions] = React.useState(false);
-  const handleClickInstruction = () => {
-    setInstructions(true);
-  };
+function TestInstructions({testData}) {
+  const [instructions, setInstructions] = useState(false);
+  const [open, setOpen] = useState(false);
+
+
   const handleClickClose = () => {
     setInstructions(false);
   };
-
   const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiDialogContent-root": {
       padding: theme.spacing(2),
@@ -32,7 +32,6 @@ function TestInstructions() {
       padding: theme.spacing(1),
     },
   }));
-  const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -45,8 +44,9 @@ function TestInstructions() {
     <div>
       <Box className="stickyTopBox">
         <div>
+          {console.log("testDatatestData",testData)}
           <h4>
-            Test Details
+            {testData.test_name}
             <EditIcon className="blueEdit" />
           </h4>
         </div>
@@ -55,7 +55,9 @@ function TestInstructions() {
           {" "}
           <AccessTimeIcon className="testDurationLogo" />
           <Typography style={{ color: "rgb(146 130 130)" }}>
-            Test Duration : <span className="textColorBold">3hrs30mins</span>
+            Test Duration : <span className="textColorBold">
+              {`${testData.duration_hour}Hours ${testData.duration_minute}Mins`}
+              </span>
           </Typography>
           <LocalOfferIcon
             className="testDurationLogo"
@@ -72,7 +74,12 @@ function TestInstructions() {
             <span style={{ color: "#000" }}>Test Instructions: </span>
             <span>
               <Button
-              sx={{textTransform: "none", color:"black", ml:"-8px", fontSize:"medium"}}
+                sx={{
+                  textTransform: "none",
+                  color: "black",
+                  ml: "-8px",
+                  fontSize: "medium",
+                }}
                 onClick={handleClickOpen}
               >
                 Click here to add{" "}
