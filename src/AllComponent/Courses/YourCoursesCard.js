@@ -15,7 +15,6 @@ const YourCoursesCard = ({ allCourses, userData }) => {
       callBack: (response) => {
         const userCallBack = response?.data;
         setDuration(userCallBack);
-        // console.log(response,"kjhgfxdgchj")
       },
       error: (error) => {
         // toast.error(error.message);

@@ -44,7 +44,6 @@ function TestInstructions({testData}) {
     <div>
       <Box className="stickyTopBox">
         <div>
-          {console.log("testDatatestData",testData)}
           <h4>
             {testData.test_name}
             <EditIcon className="blueEdit" />
