@@ -9,7 +9,6 @@ import LandscapeIcon from "@mui/icons-material/Landscape";
 import FolderZipIcon from "@mui/icons-material/FolderZip";
 import DownloadForOfflineSharpIcon from "@mui/icons-material/DownloadForOfflineSharp";
 import Drawer from '@mui/material/Drawer';
-// import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import AddContentDrawer from "./AddContentDrawer";
 
@@ -20,13 +19,14 @@ const RightBox = () => {
     bottom: false,
     right: false,
   });
+
   const toggleDrawer = (anchor, open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
-
     setState({ ...state, [anchor]: open });
   };
+
   return (
     <Fragment>
       <div className="rightBoxComplete">
@@ -35,10 +35,13 @@ const RightBox = () => {
           <FolderIcon className="folderIconRightBox" />
           Folder
         </Typography>
-        <Typography className="rightBoxTypography ">
+
+        <Typography className="rightBoxTypography "
+        onClick={toggleDrawer("video", true)}>
           <PlayCircleIcon className="folderIconRightBox" />
           Video
         </Typography>
+
         <Typography className="rightBoxTypography ">
           <AssignmentIcon className="folderIconRightBox" />
           Online Test
@@ -75,6 +78,14 @@ const RightBox = () => {
           >
             {AddContentDrawer("right")}
           </Drawer>
+
+           <Drawer
+           anchor={"video"}
+           open={state["video"]}
+           onClose={toggleDrawer("video", false)}
+         >
+           {AddContentDrawer("video")}
+         </Drawer>
     </Fragment>
   );
 };

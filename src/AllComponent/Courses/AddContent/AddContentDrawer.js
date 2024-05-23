@@ -22,6 +22,12 @@ const AddContentDrawer = (anchor) => {
     bottom: false,
     right: false,
   });
+  const [vdo, setVdo] = React.useState({
+    top: false,
+    left: false,
+    bottom: false,
+    right: false,
+  });
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -30,8 +36,13 @@ const AddContentDrawer = (anchor) => {
     ) {
       return;
     }
-
     setState({ ...state, [anchor]: open });
+  };
+  const toggleDrawerVideo = (anchor, open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
+    setVdo({ ...vdo, [anchor]: open });
   };
 
   const [open, setOpen] = React.useState(false);
