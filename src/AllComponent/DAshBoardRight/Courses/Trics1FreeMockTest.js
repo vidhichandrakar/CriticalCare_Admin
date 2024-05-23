@@ -24,6 +24,7 @@ import { DailogBox, capitalizeFirstLetter } from "../../../Util/CommonFields";
 import { redirectRestriction } from "../../../Util/RedirectRestriction";
 import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 import IconButton from "@mui/material/IconButton";
+import yellowEnvlope from "../../../Media/Images/yellowEnvlope.jpeg";
 
 const Trics1FreeMockTest = ({ onDelete }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -35,6 +36,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
   const navigate = useNavigate();
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -213,10 +215,14 @@ const Trics1FreeMockTest = ({ onDelete }) => {
             </div>
 
             <div>
-              <img
+              {courseData?.thumbnail_path?<img
                 src={courseData?.thumbnail_path}
                 className="rightSideRow"
-              />
+              />:<img
+              src={yellowEnvlope}
+              className="rightSideRow"
+            />}
+              
             </div>
           </div>
 
@@ -260,6 +266,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                   <EditIcon className="PoPIcon" />
                   Edit
                 </MenuItem>
+
                 <MenuItem
                   onClick={() => handleDeleteClick()}
                   value={20}
@@ -268,6 +275,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                   <DeleteIcon className="PoPIcon" />
                   Delete
                 </MenuItem>
+                
                 <MenuItem
                   value={30}
                   className="greyPara"

@@ -21,6 +21,7 @@ import {
 import { useDropzone } from "react-dropzone";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
+import LoaderComponent from "../../Util/LoaderComponent";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -47,22 +48,22 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const [cat, setCat] = useState([]);
   const [subCategoryList, setSubCategoryList] = useState([]);
   const [selectedCategoryList, setSelectedcategoryList] = useState("");
+  const [loaderState, setLoaderState] = useState(false);
 
   const onInroVideoDrop = async (files) => {
     let payload = new FormData();
-    payload.append(
-      "file",
-      files[0],files[0]?.name
-    );
+    payload.append("file", files[0], files[0]?.name);
     let storedValues = Object.assign({}, storedBasicInfo);
+    setLoaderState(true);
     uploadFile({
       payload,
       callBack: (response) => {
         storedValues.thumbnailPath = response?.data?.path;
         setStoredBasicInfo(storedValues);
+        setLoaderState(false);
       },
     });
-    setStoredBasicInfo(storedValues);
+    // setStoredBasicInfo(storedValues);
   };
 
   const {
@@ -71,7 +72,11 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   } = useDropzone({
     onDrop: onInroVideoDrop,
     onChange: (event) => console.log(event),
-    accept: "image/jpeg, image/png, image/jpg, application/pdf",
+    accept: {
+      "image/jpeg": [".jpeg"],
+      "image/png": [".png"],
+      "image/jpg": [".jpg"],
+    },
   });
 
   useEffect(() => {
@@ -278,6 +283,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
             Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
           </Typography>
+          <LoaderComponent loaderState={loaderState} />
           {imgUpload === "" && storedBasicInfo?.thumbnailPath && (
             <img
               src={storedBasicInfo?.thumbnailPath}

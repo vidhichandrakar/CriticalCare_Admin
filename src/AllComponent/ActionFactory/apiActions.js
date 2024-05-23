@@ -245,3 +245,10 @@ export const uploadFile = ({payload, callBack }) => {
     callBack(response);
   });
 };
+
+export const getTestById=({callBack,test_id})=>{
+  const url = APIS.getTestById + "/" + test_id
+  axios.get(url).then((response) => {
+    callBack(response);
+  });
+}
