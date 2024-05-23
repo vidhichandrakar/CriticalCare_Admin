@@ -20,6 +20,7 @@ import Dialog from "@mui/material/Dialog";
 import Checkbox from "@mui/material/Checkbox";
 import Stack from "@mui/material/Stack";
 import Switch from '@mui/material/Switch';  
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -93,10 +94,10 @@ function CreateQNS() {
         <Typography>
           <b>abcd - 1Questions</b>
         </Typography>
-        <Button>
-          {" "}
-          <EditIcon />
-          Edit Details{" "}
+        <Button sx={{textTransform:"none"}}>
+          <EditIcon sx={{fontSize:"1.1rem", mr:"4px"}}/>
+          <b>Edit Details</b>
+          <KeyboardArrowUpIcon sx={{ml:"14px", mb:"5px"}}/>
         </Button>
       </div>
       <div className="MarksBox">
@@ -428,7 +429,7 @@ function CreateQNS() {
               />
                 <Typography className='headofbox'>Let's add questions</Typography>
                 <Typography className='paraofbox'>
-                    You can use the <span style={{color: "#1a1a1ae3"}}>'Create Questionbs'</span> & <span style={{color: "#1a1a1ae3"}}>'Import Questions'</span> Panel on
+                    You can use the <span style={{color: "#1a1a1ae3"}}>'Create Questions'</span> & <span style={{color: "#1a1a1ae3"}}>'Import Questions'</span> Panel on
                     left to add questions to a section 
                 </Typography>
                 <Box className="CreateBtnBox">
@@ -463,10 +464,10 @@ function CreateQNS() {
               <CloseIcon />
             </IconButton>
 
-            <DialogContent dividers>
+            <DialogContent dividers sx={{mt:"26px"}}>
               <Box className="NumberBOx">
         <Box>
-          <Typography>No of Questions</Typography>
+          <Typography><b>No. of questions</b></Typography>
         <TextField
           id="outlined-size-small"
           defaultValue="1"
@@ -474,7 +475,7 @@ function CreateQNS() {
         />
         </Box>
         <Box>
-          <Typography>marks of Question</Typography>
+          <Typography><b>Marks per question</b></Typography>
         <TextField
           id="outlined-size-small"
           defaultValue="4"
@@ -502,7 +503,7 @@ function CreateQNS() {
                 <Typography>
                   Now give  mark to your students even if they are partially correct!
                 </Typography>
-                <a href="#" style={{textDecoration: "none"}}>View Example</a>
+                <a href="#" style={{textDecoration: "none", color:"#0075FF"}}><b>View Example</b></a>
               </Box>
             
             </DialogContent>
@@ -511,7 +512,7 @@ function CreateQNS() {
                 variant="contained"
                 className="AddSectionBtn"
               >
-                Create Qns
+                Create Questions
               </Button>
             </DialogActions>
           </BootstrapDialog>

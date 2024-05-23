@@ -580,7 +580,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
 
                     <Box className="marginscndBoxYears">
                       {CommonTypography(
-                        { fontWeight: 600, label: "Years / Months / Days" },
+                        { fontWeight: 600,padding: "12px 12px", label: "Years / Months / Days" },
                         (Option = {
                           className: "fieldSizeYears",
                         })

@@ -33,7 +33,7 @@
 
 
 .AddSectionBtn {
-    padding: 5px 25px !important;
+    padding: 5px 9px !important;
     font-size: 0.8rem !important;
     font-weight: 600 !important;
     text-transform: none !important;
@@ -89,7 +89,7 @@
 .MarksBox{
     display: flex;
     color: rgba(159, 159, 159, 0.886);
-    /* margin-left: 2%; */
+    margin-left: -1%;
     font-size: 0.9rem;
     padding-bottom: 1%;
     border-bottom: 2px solid #eee;
@@ -163,6 +163,7 @@
     padding: 6px;
     border-radius: 3px;
     color: #1a1a1ae3;
+    cursor: pointer;
 }
 .headofbox{
     margin-top: 1% !important;
