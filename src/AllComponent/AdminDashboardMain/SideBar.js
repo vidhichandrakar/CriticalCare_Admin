@@ -16,8 +16,8 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Configuration from "../Configuration/Configuration";
 import { Height } from "@mui/icons-material";
-import DescriptionIcon from '@mui/icons-material/Description';
-import SortIcon from '@mui/icons-material/Sort';
+import DescriptionIcon from "@mui/icons-material/Description";
+import SortIcon from "@mui/icons-material/Sort";
 
 function SideBar({ openSidebarToggle, OpenSidebar }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -106,7 +106,6 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
     setHideSubConfig(!hideSubConfig);
     // localStorage.setItem("subMenuCourses", false);
     // localStorage.setItem("subMenuPeople", false);
-    console.log("comfguraion");
   };
 
   function handleCloseNew() {
@@ -151,10 +150,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               {openCollapse ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
 
-            <Collapse
-              in={openCollapse}
-              unmountOnExit
-            >
+            <Collapse in={openCollapse} unmountOnExit>
               <List component="div" sx={{ marginLeft: "1%" }}>
                 <ul type="disc">
                   <li className="myCourses">
@@ -204,19 +200,6 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               Test Portal
             </Typography>
           </Link>
-         
-          {/* <Link to="/Chat">
-            <Typography
-              id="hoverrr"
-              className={highlight === "chats" ? "hoverrr2" : ""}
-              sx={{ mt: -2 }}
-              onClick={() => handleHighlight("chats")}
-            >
-              <ForumIcon className="icon" />
-              Chats
-            </Typography>
-          </Link> */}
-
           <Link to="/Analytics">
             <Typography
               id="hoverrr"
@@ -236,10 +219,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               {openPeople ? <ExpandLess /> : <ExpandMore />}
             </ListItemButton>
 
-            <Collapse
-              in={openPeople}
-              unmountOnExit
-            >
+            <Collapse in={openPeople} unmountOnExit>
               <List component="div">
                 <ul>
                   <li className="myCourses">
@@ -286,7 +266,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               sx={{ mt: -2 }}
               onClick={() => handleHighlight("Testimonial")}
             >
-              <DescriptionIcon className="icon" sx={{fontSize:"1.4em"}}/>
+              <DescriptionIcon className="icon" sx={{ fontSize: "1.4em" }} />
               Testimonial
             </Typography>
           </Link>
@@ -299,7 +279,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
 
             <Collapse in={hideSubConfig} timeout="auto" unmountOnExit>
               <List component="div">
-                <ul sx={{Height:"100%"}}>
+                <ul sx={{ Height: "100%" }}>
                   <li
                     className="myCourses"
                     onClick={() => handleCatConfig("Category")}

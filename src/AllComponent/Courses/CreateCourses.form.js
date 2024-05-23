@@ -210,7 +210,12 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       mainCatID,
       callBack: (response) => {
         setSubCategoryList(response.data);
-        setSelectedcategoryList(e?.target?.value);
+
+        if (response.data.length === 0) {
+          setSelectedcategoryList("");
+        } else {
+          setSelectedcategoryList(e?.target?.value);
+        }
       },
     });
   };
