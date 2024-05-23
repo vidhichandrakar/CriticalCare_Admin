@@ -22,6 +22,7 @@ import {
 import { toast } from "react-toastify";
 import { Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { validatePhoneNo } from "../../Util/CommonUtils";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -41,6 +42,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
   const [subCategory, setSubCategory] = useState({});
   const [selectedCategory, setSelectedCategory] = useState();
   const [cat, setCat] = useState([]);
+  const [number, setNumber] = useState('');
 
   useEffect(() => {
     if (selectedConfigValue === "SubCategory") {
@@ -56,7 +58,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
     }
   }, []);
 
-  const handleInput = (value, type) => {
+  const handleInput = (value, type, event) => {
     if (
       type === "description" ||
       type === "createdBy" ||
@@ -88,7 +90,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
       } else if (type === "emailId") {
         storedValues.email_id = value;
       } else if (type === "phoneNo") {
-        storedValues.phone_no = value;
+        storedValues.phone_no = validatePhoneNo(value, saveMemberDetails.phone_no);
       }
       setSaveMemberDetails(storedValues);
     } else if (type === "SubCategory") {
@@ -285,7 +287,6 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   )}
                   {commonTextField(
                     {
-                      // id: "fullWidth",
                       className: "BoxShadow addCatTextField",
                       inputClassName: "textField",
                       labels: "Enter Email name",
@@ -306,14 +307,16 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   {commonTextField(
                     {
                       id: "fullWidth",
-                      // fullWidth,
                       className: "BoxShadow addCatTextField width100",
                       inputClassName: "textField",
                       labels: "Enter Phone No.",
+                      
                     },
                     (Option = {
                       handleInput: handleInput,
                       type: "phoneNo",
+                      inputType: "number",
+                      value: saveMemberDetails.phone_no,
                     })
                   )}
                 </div>

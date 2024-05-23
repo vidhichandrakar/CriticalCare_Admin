@@ -7,7 +7,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 
 export const commonTextField = (
-  { className, inputClassName, labels, fullWidth  },
+  { className, inputClassName, labels},
   Option = {
     sx: {},
     handleInput: () => {},
