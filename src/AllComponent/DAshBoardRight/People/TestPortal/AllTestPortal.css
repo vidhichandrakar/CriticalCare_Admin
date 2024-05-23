@@ -1,10 +1,6 @@
 
 /* LEFT SECTION OF TEST */
 
-.completeLeftBox{
-    /* background-color: rgb(240 240 240); */
-   
-}
 .createQuestions{
     margin: 11px !important;
     margin-top: 8px !important;
@@ -406,9 +402,7 @@
     align-items: center;
 }
 
-.mt1{
-    /* margin-top: 1%; */
-}
+
 .optionsFeid .MuiOutlinedInput-root{
     border-radius: 4px !important;
     width: 70vw;
@@ -456,10 +450,10 @@
     padding: 3px 43px !important;
 }
 
-.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+/* .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
     padding: 44.5px 14px !important;
     width: 50% !important;
-}
+} */
 .css-xn6ruc>:not(style) {
     margin: 8px;
     width: 62ch !important;

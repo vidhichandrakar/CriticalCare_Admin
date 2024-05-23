@@ -13,18 +13,12 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import "../../CSSFile/Courses.css"
+import "../../../CSSFile/Courses.css"
 
-const AddContentDrawer = (anchor) => {
+const ImportLive = (anchor) => {
   const [state, setState] = React.useState({
     top: false,
     left: false,  
-    bottom: false,
-    right: false,
-  });
-  const [vdo, setVdo] = React.useState({
-    top: false,
-    left: false,
     bottom: false,
     right: false,
   });
@@ -36,13 +30,8 @@ const AddContentDrawer = (anchor) => {
     ) {
       return;
     }
+
     setState({ ...state, [anchor]: open });
-  };
-  const toggleDrawerVideo = (anchor, open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
-    setVdo({ ...vdo, [anchor]: open });
   };
 
   const [open, setOpen] = React.useState(false);
@@ -63,7 +52,7 @@ const AddContentDrawer = (anchor) => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       {/* <Box className="HeaderBox"> */}
-      <h2 style={{marginLeft: "4%"}}>Add Folder</h2>
+      <h2 style={{marginLeft: "4%"}}>Add ImportLive</h2>
       <IconButton
         aria-label="close"
         onClick={handleClose}
@@ -97,4 +86,4 @@ const AddContentDrawer = (anchor) => {
   );
 };
 
-export default AddContentDrawer;
+export default ImportLive;

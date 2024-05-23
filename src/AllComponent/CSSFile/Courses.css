@@ -576,10 +576,19 @@
 .folderDrawer{
   border-top-left-radius: 10px !important;
   border-bottom-left-radius: 10px !important;
-  background-color: red;
+  /* background-color: red; */
   height: 100%;
-  padding-left: 28px;
+  padding-left: 16px;
   border-bottom: 1px seashell grey;
+}
+.HeaderBox{
+  margin: 4% !important;
+}
+.FolderNameBox{
+  margin: 4% !important;
+}
+.FolderNameBox h4{
+  margin-bottom: 2%;
 }
 .enterFolderNameField{
   border-radius: 9% !important;
@@ -592,5 +601,50 @@
   position: relative;
   left: 82%;
   top: 18px;
+  text-transform: none !important;
+}
+
+
+/* VIDEO DRAWER CSS  */
+.dividingVdoSections{
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+}
+.middleSectionVdo{
+  margin: 2px 29px !important;
+}
+.addDiscriptionuploading{
+  margin-left: -6px;
+}
+.vdoAddDescription{
+  color: #0f7af5;
+  position: relative;
+  bottom: -7px;
+}
+
+
+
+.uploadZeroPerc{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.lastButtons{
+  position: relative !important;
+  top: 12px !important;
+  justify-content: space-between !important;
+}
+.videoDrawerAdvSettBtn{
+  border: 0.4px solid #0f7af5 !important;
+  border-radius: 15px !important;
+  color: #0f7af5 !important;
+  background-color: #ffffff !important;
+  text-transform: none !important;
+}
+.videoDrawerDoneBtn{
+  background-color: #0f7af5 !important;
+  color: #ffffff !important;
+  border-radius: 15px !important;
   text-transform: none !important;
 }
