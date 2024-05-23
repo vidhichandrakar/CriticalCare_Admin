@@ -304,7 +304,6 @@ const TestPortal = () => {
     createTestPortal({
       payload,
       callBack: (response) => {
-        console.log(response);
         toast.success("New Member added!");
         setOpen(false);
         navigate('/TestFirstPage',{ state: { id: response.data.test_id } }); 

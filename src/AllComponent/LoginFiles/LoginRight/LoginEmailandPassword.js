@@ -123,7 +123,6 @@ const LoginEmailandPassword = () => {
         },
         error: (error) => {
           toast.error(error.response.data.message);
-          console.log(error.response.data.message);
           setLoaderState(false);
         },
       });
@@ -218,7 +217,7 @@ const LoginEmailandPassword = () => {
   };
 
   const handleKeyDown = (event, type, originalNum) => {
-    console.log(event, "backspaceOTP");
+    // console.log(event, "backspaceOTP");
     let prevOtp = { ...otpValue };
     if (typeof phoneNO !== "undefined" && phoneNO?.length) {
       if (phoneNO?.length === 10 && event.keyCode === 13) {
@@ -260,7 +259,6 @@ const LoginEmailandPassword = () => {
             textField3Ref?.current?.focus();
           }, 100);
         }
-        console.log(type, event.target.value);
       }
     }
   };

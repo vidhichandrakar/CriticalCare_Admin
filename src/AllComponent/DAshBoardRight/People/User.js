@@ -191,7 +191,6 @@ const User = () => {
   };
 
   const handleDeleteClick = () => {
-    console.log("Workinggggg");
     handleClose();
     setIsOpen(true);
   };

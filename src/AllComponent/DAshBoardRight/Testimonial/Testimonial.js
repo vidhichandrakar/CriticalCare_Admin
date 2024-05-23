@@ -54,7 +54,6 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 function TablePaginationActions(props) {
-  console.log(props, "propsss");
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
 
