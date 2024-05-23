@@ -13,9 +13,9 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import "../../CSSFile/Courses.css"
+import "../../../CSSFile/Courses.css"
 
-const AddContentDrawer = (anchor) => {
+const Image = (anchor) => {
   const [state, setState] = React.useState({
     top: false,
     left: false,  
@@ -86,4 +86,4 @@ const AddContentDrawer = (anchor) => {
   );
 };
 
-export default AddContentDrawer;
+export default Image;

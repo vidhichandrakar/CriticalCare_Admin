@@ -576,10 +576,19 @@
 .folderDrawer{
   border-top-left-radius: 10px !important;
   border-bottom-left-radius: 10px !important;
-  background-color: red;
+  /* background-color: red; */
   height: 100%;
-  padding-left: 28px;
+  /* padding-left: 28px; */
   border-bottom: 1px seashell grey;
+}
+.HeaderBox{
+  margin: 4% !important;
+}
+.FolderNameBox{
+  margin: 4% !important;
+}
+.FolderNameBox h4{
+  margin-bottom: 2%;
 }
 .enterFolderNameField{
   border-radius: 9% !important;
