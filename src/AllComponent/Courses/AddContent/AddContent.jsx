@@ -3,9 +3,19 @@ import React from "react";
 import "../../CSSFile/Content.css";
 import LeftBox from "./LeftBox";
 import RightBox from "./RightBox";
+import Header from "../Header";
+import SideBar from "../../AdminDashboardMain/SideBar";
+import AddContentDrawer from "./AddContentDrawer";
+
 
 const AddContent = ({})=>{
   return(
+    <div className="grid-container">
+      <Header
+            Heading={"Hi 360 Critical Care,"}
+            subHeading={"Welcome to your Dashboard"}
+          />
+      <SideBar />
     <div className="formMain contentDisplay">
 
       <Box className="contentleftBox"> 
@@ -21,7 +31,9 @@ const AddContent = ({})=>{
         <RightBox/>
       </Box>
       </Box>
+      {/* <AddContentDrawer/> */}
 
+    </div>
     </div>
   )
 }

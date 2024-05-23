@@ -568,3 +568,29 @@
   border: 0.5px solid #1976d2 !important;
   padding: 4px 20px !important
 }
+
+
+
+/* ADD CONTENT DRAWER CSS  */
+
+.folderDrawer{
+  border-top-left-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+  background-color: red;
+  height: 100%;
+  padding-left: 28px;
+  border-bottom: 1px seashell grey;
+}
+.enterFolderNameField{
+  border-radius: 9% !important;
+  padding: -20px -2px !important;
+}
+.folderDrawerSaveBtn{
+  background-color: lightblue !important;
+  color: #ffffff !important;
+  border-radius: 12px !important;
+  position: relative;
+  left: 82%;
+  top: 18px;
+  text-transform: none !important;
+}
