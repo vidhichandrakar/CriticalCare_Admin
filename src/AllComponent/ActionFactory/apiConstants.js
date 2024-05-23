@@ -14,4 +14,5 @@ export const APIS = {
   getCourseDuration: REACT_APP_API + "/durationType",
   getDuration: REACT_APP_API + "/duration",
   fileUpload: REACT_APP_API + "/fileupload",
+  getTestById: REACT_APP_API + "/test",
 };

@@ -161,7 +161,6 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
         storedValues.duration_name = getDurationType[0];
       });
       setEditPriceData(multiArr);
-      console.log("multiple", multiArr);
     } else if (
       courseData?.durations?.length &&
       courseData?.durations[0]?.duration_type_id === 3
@@ -174,16 +173,10 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
       courseData?.durations?.length &&
       courseData?.durations[0]?.duration_type_id === 4
     ) {
-      console.log("condition", courseData);
       let storedValues = Object.assign({}, expiryDate);
       storedValues.price = courseData?.durations[0]?.price;
       storedValues.offer_price = courseData?.durations[0]?.offer_price;
       storedValues.startDate = courseData?.durations[0]?.startDate;
-      console.log(
-        "storedValuesstoredValues",
-        storedValues,
-        courseData?.durations[0]?.startDate
-      );
       setExpiryDate(storedValues);
     }
   }, [courseData, durationType]);
@@ -217,12 +210,6 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
         storedValues.duration_type_name = selectedDuration?.duration_type_name;
         storedValues.duration_id = item.duration_name.duration_id;
         storedValues.duration_name = item.duration_name.duration_name;
-        console.log(
-          "condition",
-          storedValues.duration === "" ||
-            storedValues.price === "" ||
-            storedValues.offer_price === ""
-        );
         if (
           storedValues.duration &&
           storedValues.price &&
@@ -445,9 +432,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
         storedValues.offer_price = value;
       }
       setLifetimeValidation(storedValues);
-      // if (storedValues.price && storedValues.offer_price) {
       handleInputChange("editPrice", storedValues);
-      // }
     } else if (selectDurationValue === "Course Expiry Date") {
       let storedValues = Object.assign({}, expiryDate);
       if (type === "price") {
@@ -455,13 +440,10 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
       } else if (type === "offer_price") {
         storedValues.offer_price = value;
       } else if (type === "date") {
-        // console.log("expiry date",moment(value).format("YYYY-MM-DD"),value,type)
         storedValues.startDate = moment(value).format("YYYY-MM-DD");
       }
       setExpiryDate(storedValues);
-      // if (storedValues.price && storedValues.offer_price) {
       handleInputChange("editPrice", storedValues);
-      // }
     }
   };
 
@@ -593,7 +575,6 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                               : `Select Duration Type`
                           }
                           renderValue={(value) => {
-                            // {console.log("valuevaluevaluevaluevaluevaluevalue",value)}
                             return (
                               <Typography>
                                 {isNotEmptyObject(value)

@@ -304,9 +304,9 @@ const TestPortal = () => {
     createTestPortal({
       payload,
       callBack: (response) => {
-        console.log(response);
         toast.success("New Member added!");
         setOpen(false);
+        navigate('/TestFirstPage',{ state: { id: response.data.test_id } }); 
         getTest({
           callBack: (response) => {
             const userCallBack = response?.data;
@@ -433,7 +433,7 @@ const TestPortal = () => {
               </Box>
             </DialogContent>
             <DialogActions>
-              <Link to="/TestFirstPage">
+              {/* <Link to="/TestFirstPage"> */}
               <Button
                 variant="contained"
                 className="CreateBtn"
@@ -441,7 +441,7 @@ const TestPortal = () => {
               >
                 Create
               </Button>
-              </Link>
+              {/* </Link> */}
             </DialogActions>
           </BootstrapDialog>
         </div>{" "}

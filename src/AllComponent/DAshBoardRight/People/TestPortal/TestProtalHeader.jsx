@@ -4,7 +4,7 @@ import WestIcon from '@mui/icons-material/West';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 
-function TestProtalHeader() {
+function TestProtalHeader({testData}) {
   return (
     // <div className="header">
          <div className="testNavBar header">
@@ -12,7 +12,7 @@ function TestProtalHeader() {
             <Link to="/TestPortal">
               <WestIcon className="abcdBackLogo" />
             </Link>
-            <b>abcd</b>
+            <b>{testData.test_name}</b>
           </div>
           <div className="previewnsaveBtn">
             <Button className="previewNavBtn" variant="outlined">Preview</Button>
