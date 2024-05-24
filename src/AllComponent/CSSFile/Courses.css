@@ -702,3 +702,8 @@
 .stylingAutofield{
   border-radius: 21px !important;
 }
+
+.OTLastCheckbox{
+  display: flex;
+  flex-direction: row;
+}

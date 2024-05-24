@@ -125,6 +125,48 @@ const OnlineTest = (anchor) => {
         </Box>
       </Box>
 
+      <Box className="FolderNameBox">
+        <h4>Number of attempts</h4>
+        <Box
+          sx={{
+            width: 500,
+            maxWidth: "100%",
+          }}
+        >
+          <Autocomplete
+            multiple
+            id="checkboxes-tags-demo"
+            options={top100Films}
+            disableCloseOnSelect
+            getOptionLabel={(option) => option.title}
+            renderOption={(props, option, { selected }) => (
+              <li {...props}>
+                <Checkbox
+                  icon={icon}
+                  checkedIcon={checkedIcon}
+                  style={{ marginRight: 8 }}
+                  checked={selected}
+                />
+                {option.title}
+              </li>
+            )}
+            style={{ width: "100%", borderRadius: "10px" }}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                // label="Select tests or folders"
+                placeholder="1"
+                className="stylingAutofield"
+              />
+            )}
+          />
+        </Box>
+      </Box>
+
+      <div className="OTLastCheckbox">
+        <Checkbox {...label} sx={{color:"lightgrey"}}/>
+        <p>Set unlimited attempts</p>
+      </div>
       {/* <Box className="selectTestCompleteBox">
         <DialogTitle
           sx={{ m: "-30px -6px", p: -2 }}
@@ -226,7 +268,7 @@ const OnlineTest = (anchor) => {
         </DialogActions>
       </Box> */}
 
-      <Divider sx={{ mt: "444px" }} />
+      <Divider sx={{ mt: "226px" }} />
       <Button className="OTDrawerAddTestBtn">Add Test</Button>
     </Box>
   );
