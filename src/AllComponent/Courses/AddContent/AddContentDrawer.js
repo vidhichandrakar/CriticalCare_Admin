@@ -13,7 +13,9 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import "../../CSSFile/Courses.css"
+import "../../CSSFile/Courses.css";
+import Paper from "@mui/material/Paper";
+import InputBase from "@mui/material/InputBase";
 
 const AddContentDrawer = (anchor) => {
   const [state, setState] = React.useState({
@@ -62,7 +64,6 @@ const AddContentDrawer = (anchor) => {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      {/* <Box className="HeaderBox"> */}
       <h2 style={{marginLeft: "4%"}}>Add Folder</h2>
       <IconButton
         aria-label="close"
@@ -76,7 +77,6 @@ const AddContentDrawer = (anchor) => {
       >
         <CloseIcon />
       </IconButton>
-      {/* </Box> */}
       <Divider />
 
       <Box className="FolderNameBox">
@@ -87,11 +87,34 @@ const AddContentDrawer = (anchor) => {
             maxWidth: "100%",
           }}
         >
-          <TextField fullWidth label="fullWidth" id="fullWidth" />
+          {/* <TextField 
+          sx={{borderRadius:"10px", padding:"-2px -2px"}}
+          fullWidth
+          label="fullWidth" 
+          /> */}
+          <Paper
+      component="form"
+      sx={{
+        ml: "2px",
+        mt: "12px",
+        mb: "-1px",
+        display: "flex",
+        alignItems: "center",
+        width: "100%",
+        height: "20%",
+        borderRadius: "10px"
+      }}
+    >
+      <InputBase
+        sx={{ ml: 1, flex: 1 }}
+        placeholder="Enter folder name"
+        inputProps={{ 'aria-label': 'search your course by name' }}
+      />
+    </Paper>
         </Box>
       </Box>
 
-      <Divider sx={{ mt: "348px" }} />
+      <Divider sx={{ mt: "444px" }} />
       <Button className="folderDrawerSaveBtn">Save</Button>
     </Box>
   );
