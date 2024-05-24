@@ -907,9 +907,7 @@ body {
   height: 49px;
   margin-left: -30% !important;
 }
-.Widthhh{
-  /* height: 70vh !important; */
-}
+
 
 
 /* END OF COURSE->>TRICS 1 FREE MOCK TEST  */
@@ -1050,3 +1048,36 @@ body {
 }
 .designingIconsLogout:hover{
 } */
+
+.VideoBox{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 8%;
+}
+.VideoIcon{
+  border-radius: 100%;
+  background-color: #b9e0ffde;
+  padding: 2%;
+  color: #077eef;
+  margin-top: -10%;
+  margin-bottom: 6%;
+}
+.UploadDoc{
+  margin-bottom: 4% !important; 
+}
+.VideoPara{
+  color: #7a7a7a;
+  text-align: center;
+  margin-bottom: 4% !important;
+}
+
+.SelectButton{
+    padding: 9px 42px !important;
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    text-transform: none !important;
+    border-radius: 12px !important;
+    margin: 2px !important;
+}

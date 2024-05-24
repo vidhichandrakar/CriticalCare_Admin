@@ -19,6 +19,26 @@ import ImportLive from "./AddContent/ImportLive";
 import OnlineTest from "./AddContent/OnlineTest";
 import SubjectiveTest from "./AddContent/SubjectiveTest";
 import ZipFile from "./AddContent/ZipFile";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogActions from "@mui/material/DialogActions";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import { styled } from "@mui/material/styles";
+import Dialog from "@mui/material/Dialog";
+import {TextField } from "@mui/material";
+import TipsAndUpdatesTwoToneIcon from '@mui/icons-material/TipsAndUpdatesTwoTone';
+import UploadFileRoundedIcon from '@mui/icons-material/UploadFileRounded';
+
+
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  "& .MuiDialogContent-root": {
+    padding: theme.spacing(2),
+  },
+  "& .MuiDialogActions-root": {
+    padding: theme.spacing(1),
+  },
+}));
 
 const RightBox = () => {
   const [state, setState] = React.useState({
@@ -51,6 +71,14 @@ const RightBox = () => {
   const [il, setIL] = React.useState({
     left: false,
   });
+  const [videoopened, setVideoqopen] = useState(false);
+
+  const handleClickOpenVideo = () => {
+    setVideoqopen(true);
+  };
+  const handleCloseDialogVideo = () => {
+    setVideoqopen(false);
+  };
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -144,7 +172,8 @@ const RightBox = () => {
         </Typography>
         <Typography
           className="rightBoxTypography "
-          onClick={toggleDrawervd("right", true)}
+          // onClick={toggleDrawervd("right", true)}
+          onClick={handleClickOpenVideo}
         >
           <PlayCircleIcon className="folderIconRightBox" />
           Video
@@ -262,6 +291,52 @@ const RightBox = () => {
       >
         {ZipFile("right")}
       </Drawer>
+      <BootstrapDialog
+            className="PopUP"
+            onClose={handleCloseDialogVideo}
+            aria-labelledby="customized-dialog-title"
+            open={videoopened}
+          >
+            <DialogTitle
+              sx={{ m: 0, p: 2, fontSize: "1rem" }}
+              id="customized-dialog-title"
+            >
+              
+            </DialogTitle>
+            <IconButton
+              aria-label="close"
+              onClick={handleCloseDialogVideo}
+              sx={{
+                position: "absolute",
+                right: 8,
+                top: 8,
+                color: (theme) => theme.palette.grey[500],
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+
+            <DialogContent >
+              <Box className="VideoBox">
+                <UploadFileRoundedIcon className="VideoIcon" />
+                <Typography gutterBottom className="UploadDoc">
+                 <b> Upload Document(s)</b>
+                </Typography>
+                <Typography className="VideoPara">
+                  You can upload upto 20 files at a time. Maximum file size that can be attached is 40 MB.
+                </Typography>
+                <Button
+                variant="contained"
+                className="SelectButton"
+                // onClick={handleCreateTeam}
+              >
+                Select File(s)
+              </Button>
+              </Box>
+             
+            </DialogContent>
+            
+          </BootstrapDialog>
     </Fragment>
   );
 };
