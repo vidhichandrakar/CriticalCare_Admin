@@ -87,11 +87,6 @@ const AddContentDrawer = (anchor) => {
             maxWidth: "100%",
           }}
         >
-          {/* <TextField 
-          sx={{borderRadius:"10px", padding:"-2px -2px"}}
-          fullWidth
-          label="fullWidth" 
-          /> */}
           <Paper
       component="form"
       sx={{

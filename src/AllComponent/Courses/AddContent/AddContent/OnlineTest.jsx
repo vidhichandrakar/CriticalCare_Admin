@@ -125,7 +125,7 @@ const OnlineTest = (anchor) => {
         </Box>
       </Box>
 
-      <Box className="selectTestCompleteBox">
+      {/* <Box className="selectTestCompleteBox">
         <DialogTitle
           sx={{ m: "-30px -6px", p: -2 }}
           id="customized-dialog-title"
@@ -224,9 +224,9 @@ const OnlineTest = (anchor) => {
             Save
           </Button>
         </DialogActions>
-      </Box>
+      </Box> */}
 
-      <Divider sx={{ mt: "11px" }} />
+      <Divider sx={{ mt: "444px" }} />
       <Button className="OTDrawerAddTestBtn">Add Test</Button>
     </Box>
   );
