@@ -1081,3 +1081,10 @@ body {
     border-radius: 12px !important;
     margin: 2px !important;
 }
+
+.buttonBOx{
+  display: flex;
+  flex-direction: column;
+  align-items: center !important;
+  justify-content: center !important;
+}

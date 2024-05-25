@@ -29,6 +29,13 @@ import Dialog from "@mui/material/Dialog";
 import {TextField } from "@mui/material";
 import TipsAndUpdatesTwoToneIcon from '@mui/icons-material/TipsAndUpdatesTwoTone';
 import UploadFileRoundedIcon from '@mui/icons-material/UploadFileRounded';
+import { useDropzone } from "react-dropzone";
+import UploadIcon from "@mui/icons-material/Upload";
+import LoaderComponent from "../../../Util/LoaderComponent";import {
+  getCategory,
+  getSubcategoryList,
+  uploadFile,
+} from "../../ActionFactory/apiActions";
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -39,6 +46,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     padding: theme.spacing(1),
   },
 }));
+
 
 const RightBox = () => {
   const [state, setState] = React.useState({
@@ -72,6 +80,47 @@ const RightBox = () => {
     left: false,
   });
   const [videoopened, setVideoqopen] = useState(false);
+  const [loaderState, setLoaderState] = useState(false);
+  const [imgUpload, setImageWhileUpload] = useState("");
+  const [storedBasicInfo, setStoredBasicInfo] = useState({
+    Name: "",
+    Description: "",
+    Category: "",
+    subCategory: "",
+    thumbnailPath: null,
+  });
+  const[storeVideo, setStoreVideo] = useState()
+
+  const onInroVideoDrop = async (files) => {
+    // setLoaderState(true);
+    setVideoqopen(false);
+    setStoreVideo(  files[0])
+    setVd({ vd, ["right"]: true });
+    // toggleDrawervd("right", true);
+    // uploadFile({
+    //   payload,
+    //   callBack: (response) => {
+    //     storedValues.thumbnailPath = response?.data?.path;
+    //     setStoredBasicInfo(storedValues);
+    //     setLoaderState(false);
+    //   },
+    // });
+    // setStoredBasicInfo(storedValues);
+  };
+  
+ 
+  
+  const {
+    getRootProps: getIntroVideoRootProps,
+    getInputProps: getIntroVideoInputProps,
+  } = useDropzone({
+    onDrop: onInroVideoDrop,
+    onChange: (event) => console.log(event),
+    accept: {
+      "video/mp4": [".mp4"]
+    },
+  });
+  
 
   const handleClickOpenVideo = () => {
     setVideoqopen(true);
@@ -325,13 +374,38 @@ const RightBox = () => {
                 <Typography className="VideoPara">
                   You can upload upto 20 files at a time. Maximum file size that can be attached is 40 MB.
                 </Typography>
-                <Button
+               
+              <div {...getIntroVideoRootProps({ className: "dropzone" })}>
+        <input {...getIntroVideoInputProps()} />
+        <Box className="thumbnailUpload buttonBOx" >
+         
+          <Button
                 variant="contained"
                 className="SelectButton"
                 // onClick={handleCreateTeam}
               >
                 Select File(s)
               </Button>
+          <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
+            Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
+          </Typography>
+          <LoaderComponent loaderState={loaderState} />
+          {imgUpload === "" && storedBasicInfo?.thumbnailPath && (
+            <img
+              src={storedBasicInfo?.thumbnailPath}
+              width={140}
+              height={"auto"}
+            />
+          )}
+          {imgUpload != "" && (
+            <img
+              src={storedBasicInfo?.thumbnailPath}
+              width={140}
+              height={"auto"}
+            />
+          )}
+        </Box>
+      </div>
               </Box>
              
             </DialogContent>
