@@ -80,6 +80,8 @@ const RightBox = () => {
     left: false,
   });
   const [videoopened, setVideoqopen] = useState(false);
+  const [docopened, setDocopen] = useState(false);
+  const [zipopened, setZipopen] = useState(false);
   const [loaderState, setLoaderState] = useState(false);
   const [imgUpload, setImageWhileUpload] = useState("");
   const [storedBasicInfo, setStoredBasicInfo] = useState({
@@ -96,6 +98,22 @@ const RightBox = () => {
     setVideoqopen(false);
     setStoreVideo(  files[0])
     setVd({ vd, ["right"]: true });
+    // toggleDrawervd("right", true);
+    // uploadFile({
+    //   payload,
+    //   callBack: (response) => {
+    //     storedValues.thumbnailPath = response?.data?.path;
+    //     setStoredBasicInfo(storedValues);
+    //     setLoaderState(false);
+    //   },
+    // });
+    // setStoredBasicInfo(storedValues);
+  };
+  const onInroDocrop = async (files) => {
+    // setLoaderState(true);
+    setDocopen(false);
+    setStoreVideo(  files[0])
+    setDoc({ doc, ["right"]: true });
     // toggleDrawervd("right", true);
     // uploadFile({
     //   payload,
@@ -127,6 +145,18 @@ const RightBox = () => {
   };
   const handleCloseDialogVideo = () => {
     setVideoqopen(false);
+  };
+  const handleClickOpenDoc = () => {
+    setDocopen(true);
+  };
+  const handleCloseDialogDoc = () => {
+    setDocopen(false);
+  };
+  const handleClickOpenZip = () => {
+    setZipopen(true);
+  };
+  const handleCloseDialogZip = () => {
+    setZipopen(false);
   };
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -243,7 +273,8 @@ const RightBox = () => {
         </Typography>
         <Typography
           className="rightBoxTypography "
-          onClick={toggleDrawerD("right", true)}
+          // onClick={toggleDrawerD("right", true)}
+          onClick={handleClickOpenDoc}
         >
           <NoteIcon className="folderIconRightBox" />
           Document
@@ -257,7 +288,8 @@ const RightBox = () => {
         </Typography>
         <Typography
           className="rightBoxTypography "
-          onClick={toggleDrawerZ("right", true)}
+          // onClick={toggleDrawerZ("right", true)}
+          onClick={handleClickOpenZip}
         >
           <FolderZipIcon className="folderIconRightBox" />
           Zip File
@@ -282,7 +314,7 @@ const RightBox = () => {
         open={state["right"]}
         onClose={toggleDrawer("right", false)}
       >
-        {AddContentDrawer("right")}
+        <AddContentDrawer handelclose = {toggleDrawer }/>
       </Drawer>
       <Drawer
         anchor={"right"}
@@ -342,6 +374,148 @@ const RightBox = () => {
       </Drawer>
       <BootstrapDialog
             className="PopUP"
+            onClose={handleCloseDialogZip}
+            aria-labelledby="customized-dialog-title"
+            open={zipopened}
+          >
+            <DialogTitle
+              sx={{ m: 0, p: 2, fontSize: "1rem" }}
+              id="customized-dialog-title"
+            >
+              
+            </DialogTitle>
+            <IconButton
+              aria-label="close"
+              onClick={handleCloseDialogZip}
+              sx={{
+                position: "absolute",
+                right: 8,
+                top: 8,
+                color: (theme) => theme.palette.grey[500],
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+
+            <DialogContent >
+              <Box className="VideoBox">
+                <UploadFileRoundedIcon className="VideoIcon" />
+                <Typography gutterBottom className="UploadDoc">
+                 <b> Upload Zip File(s)</b>
+                </Typography>
+                <Typography className="VideoPara">
+                  You can upload upto 20 files at a time. Maximum file size that can be attached is 40 MB.
+                </Typography>
+               
+              <div {...getIntroVideoRootProps({ className: "dropzone" })}>
+        <input {...getIntroVideoInputProps()} />
+        <Box className="thumbnailUpload buttonBOx" >
+         
+          <Button
+                variant="contained"
+                className="SelectButton"
+                // onClick={handleCreateTeam}
+              >
+                Select File(s)
+              </Button>
+          <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
+            Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
+          </Typography>
+          <LoaderComponent loaderState={loaderState} />
+          {imgUpload === "" && storedBasicInfo?.thumbnailPath && (
+            <img
+              src={storedBasicInfo?.thumbnailPath}
+              width={140}
+              height={"auto"}
+            />
+          )}
+          {imgUpload != "" && (
+            <img
+              src={storedBasicInfo?.thumbnailPath}
+              width={140}
+              height={"auto"}
+            />
+          )}
+        </Box>
+      </div>
+              </Box>
+             
+            </DialogContent>
+            
+          </BootstrapDialog>
+      <BootstrapDialog
+            className="PopUP"
+            onClose={handleCloseDialogDoc}
+            aria-labelledby="customized-dialog-title"
+            open={docopened}
+          >
+            <DialogTitle
+              sx={{ m: 0, p: 2, fontSize: "1rem" }}
+              id="customized-dialog-title"
+            >
+              
+            </DialogTitle>
+            <IconButton
+              aria-label="close"
+              onClick={handleCloseDialogDoc}
+              sx={{
+                position: "absolute",
+                right: 8,
+                top: 8,
+                color: (theme) => theme.palette.grey[500],
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
+
+            <DialogContent >
+              <Box className="VideoBox">
+                <UploadFileRoundedIcon className="VideoIcon" />
+                <Typography gutterBottom className="UploadDoc">
+                 <b> Upload Documents(s)</b>
+                </Typography>
+                <Typography className="VideoPara">
+                  You can upload upto 20 files at a time. Maximum file size that can be attached is 40 MB.
+                </Typography>
+               
+              <div {...getIntroVideoRootProps({ className: "dropzone" })}>
+        <input {...getIntroVideoInputProps()} />
+        <Box className="thumbnailUpload buttonBOx" >
+         
+          <Button
+                variant="contained"
+                className="SelectButton"
+                // onClick={handleCreateTeam}
+              >
+                Select File(s)
+              </Button>
+          <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
+            Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
+          </Typography>
+          <LoaderComponent loaderState={loaderState} />
+          {imgUpload === "" && storedBasicInfo?.thumbnailPath && (
+            <img
+              src={storedBasicInfo?.thumbnailPath}
+              width={140}
+              height={"auto"}
+            />
+          )}
+          {imgUpload != "" && (
+            <img
+              src={storedBasicInfo?.thumbnailPath}
+              width={140}
+              height={"auto"}
+            />
+          )}
+        </Box>
+      </div>
+              </Box>
+             
+            </DialogContent>
+            
+          </BootstrapDialog>
+      <BootstrapDialog
+            className="PopUP"
             onClose={handleCloseDialogVideo}
             aria-labelledby="customized-dialog-title"
             open={videoopened}
@@ -369,7 +543,7 @@ const RightBox = () => {
               <Box className="VideoBox">
                 <UploadFileRoundedIcon className="VideoIcon" />
                 <Typography gutterBottom className="UploadDoc">
-                 <b> Upload Document(s)</b>
+                 <b> Upload Video(s)</b>
                 </Typography>
                 <Typography className="VideoPara">
                   You can upload upto 20 files at a time. Maximum file size that can be attached is 40 MB.

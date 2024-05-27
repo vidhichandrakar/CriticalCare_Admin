@@ -17,19 +17,14 @@ import "../../CSSFile/Courses.css";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 
-const AddContentDrawer = (anchor) => {
+const AddContentDrawer = ({anchor, handelclose}) => {
   const [state, setState] = React.useState({
     top: false,
     left: false,  
     bottom: false,
     right: false,
   });
-  const [vdo, setVdo] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
+  const [open, setOpen] = React.useState(true);
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -40,22 +35,7 @@ const AddContentDrawer = (anchor) => {
     }
     setState({ ...state, [anchor]: open });
   };
-  const toggleDrawerVideo = (anchor, open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-      return;
-    }
-    setVdo({ ...vdo, [anchor]: open });
-  };
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+  
   return (
     <Box
       className="folderDrawer"
@@ -67,7 +47,7 @@ const AddContentDrawer = (anchor) => {
       <h2 style={{marginLeft: "4%"}}>Add Folder</h2>
       <IconButton
         aria-label="close"
-        onClick={handleClose}
+        
         sx={{
           position: "absolute",
           right: 8,
@@ -75,7 +55,8 @@ const AddContentDrawer = (anchor) => {
           color: (theme) => theme.palette.grey[500],
         }}
       >
-        <CloseIcon />
+        <Box onClick= {handelclose("right", false)}>
+          <CloseIcon  /></Box>
       </IconButton>
       <Divider />
 
