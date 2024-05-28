@@ -1088,3 +1088,26 @@ body {
   align-items: center !important;
   justify-content: center !important;
 }
+.ParaBox{
+  margin: 2%;
+  text-align: center;
+  background-color: #e0e8f5;
+  padding: 2%;
+  border-radius: 6px;
+}
+.SearchBox{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.SelectMainBox{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  overflow-y: auto;
+}
+.DataBox{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

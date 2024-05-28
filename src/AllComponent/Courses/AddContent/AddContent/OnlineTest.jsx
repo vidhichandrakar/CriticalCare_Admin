@@ -37,7 +37,7 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-const OnlineTest = (anchor) => {
+const OnlineTest = ({anchor, handelclose}) => {
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -75,7 +75,7 @@ const OnlineTest = (anchor) => {
       <h2 style={{ marginLeft: "4%" }}>Add online test</h2>
       <IconButton
         aria-label="close"
-        onClick={handleClose}
+        onClick= {handelclose("right", false)}
         sx={{
           position: "absolute",
           right: 8,
