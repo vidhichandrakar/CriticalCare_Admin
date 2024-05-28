@@ -576,7 +576,6 @@
 .folderDrawer{
   border-top-left-radius: 10px !important;
   border-bottom-left-radius: 10px !important;
-  /* background-color: red; */
   height: 100%;
   padding-left: 16px;
   border-bottom: 1px seashell grey;
@@ -719,7 +718,7 @@
   position: relative;
   top: 28px;
     left: 34px;
-    width: 82%;
+    width: 88%;
     padding: 1px 24px;
 }
 .createNewTestBtn{
@@ -735,7 +734,7 @@
 .A-searchImageSection{
   /* background-color: orange; */
   height: 42% !important;
-  width: 94% !important;
+  width: 100% !important;
   text-align: center !important;
   position: relative;
   top: 50px;
@@ -744,4 +743,33 @@
   position: relative;
   top: 41px;
   left: 33px;
+}
+
+.folderDrawerSubjTest {
+  border-top-left-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+  height: 100%;
+  width: 95%;
+  /* padding-left: 16px; */
+  border-bottom: 1px seashell grey;
+}
+.subjTestBox{
+  margin: 8% 4% !important;
+}
+.subjTestBox h4{
+  margin-bottom: 2%;
+}
+
+/* .stylingAutofield{
+  border-radius: 21px !important;
+} */
+.subjTestAddTestBtn {
+  background-color: #43c5f0  !important;
+  color: #ffffff !important;
+  border-radius: 12px !important;
+  position: relative;
+  left: 89%;
+  top: 18px;
+  text-transform: none !important;
+  padding: -2px 0px !important;
 }
