@@ -25,7 +25,14 @@ import { getDuration } from "../ActionFactory/apiActions";
 import Select from "@mui/material/Select";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
-import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import ModeEditIcon from "@mui/icons-material/ModeEdit";
+import InputLabel from '@mui/material/InputLabel';
+// import MenuItem from '@mui/material/MenuItem';
+// import FormControl from '@mui/material/FormControl';
+// import Select, { SelectChangeEvent } from '@mui/material/Select';
+
+
+
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -454,6 +461,12 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const isNotEmptyObject = (obj) => {
     return obj && typeof obj === "object" && Object.keys(obj).length;
   };
+
+  const [age, setAge] = useState('');
+
+const handleChange = (event) => {
+  setAge(event.target.value);
+};
   return (
     <div className="formMain">
       <DurationConfiguration
@@ -482,12 +495,12 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                       ) : (
                         <>
                           <Button
-                          className="editPriceDeleteBtn"
+                            className="editPriceDeleteBtn"
                             color="error"
                             onClick={() => handleDelete(index)}
                             // startIcon={<DeleteIcon sx={{fontSize:"1.5rem"}} />}
                           >
-                           <DeleteIcon sx={{fontSize:"0.9rem"}} /> Delete
+                            <DeleteIcon sx={{ fontSize: "0.9rem" }} /> Delete
                           </Button>
 
                           <Button
@@ -495,7 +508,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                             color="primary"
                             onClick={() => handleExpanded(index)}
                           >
-                            <ModeEditIcon sx={{fontSize:"1.1rem"}} /> Edit
+                            <ModeEditIcon sx={{ fontSize: "1.1rem" }} /> Edit
                           </Button>
                         </>
                       )}
@@ -520,13 +533,18 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
                   <div className="accoridanBtn">
                     <Button
                       variant="text"
-                      sx={{ mr: "28px", textTransform:"none", border:"0.5px solid #1976d2", padding:"4px 18px" }}
+                      sx={{
+                        mr: "28px",
+                        textTransform: "none",
+                        border: "0.5px solid #1976d2",
+                        padding: "4px 18px",
+                      }}
                       onClick={() => handleCancelAccord(index)}
                     >
                       Cancel
                     </Button>
                     <Button
-                    sx={{textTransform:"none", padding:"4px 26px"}}
+                      sx={{ textTransform: "none", padding: "4px 26px" }}
                       variant="contained"
                       onClick={() => handleSavePrice(index)}
                     >
@@ -562,7 +580,11 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
 
                     <Box className="marginscndBoxYears">
                       {CommonTypography(
-                        { fontWeight: 600,padding: "12px 12px", label: "Years / Months / Days" },
+                        {
+                          fontWeight: 600,
+                          padding: "12px 12px",
+                          label: "Years / Months / Days",
+                        },
                         (Option = {
                           className: "fieldSizeYears",
                         })
