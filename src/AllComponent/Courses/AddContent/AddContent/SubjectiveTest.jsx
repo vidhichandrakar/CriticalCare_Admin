@@ -28,6 +28,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Autocomplete from "@mui/material/Autocomplete";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import UploadIcon from '@mui/icons-material/Upload';
 
 const top100Films = [
   { title: "The Shawshank Redemption", year: 1994 },
@@ -73,14 +74,14 @@ const SubjectiveTest = (anchor) => {
 
   return (
     <>
-      {newTest ? (
-        // <h1>hey</h1>
         <Box
-          className="folderDrawer"
+          className="subjTestFolderDrawer"
           role="presentation"
           onClick={toggleDrawer(anchor, false)}
           onKeyDown={toggleDrawer(anchor, false)}
         >
+          {newTest ? (
+            <>
           <h2 style={{ marginLeft: "4%" }}>Create New Subjective Test</h2>
           <IconButton
             aria-label="close"
@@ -178,7 +179,6 @@ const SubjectiveTest = (anchor) => {
             renderInput={(params) => (
               <TextField
                 {...params}
-                // label="Select tests or folders"
                 placeholder="Enter Test Name"
                 className="stylingAutofield"
               />
@@ -188,7 +188,7 @@ const SubjectiveTest = (anchor) => {
       </Box>
 
       <Box className="subjTestBox">
-        <h4>Total marks</h4>
+        <h4>Total Marks</h4>
         <Box
           sx={{
             width: 500,
@@ -216,7 +216,6 @@ const SubjectiveTest = (anchor) => {
             renderInput={(params) => (
               <TextField
                 {...params}
-                // label="Select tests or folders"
                 placeholder="Enter marks"
                 className="stylingAutofield"
               />
@@ -224,13 +223,25 @@ const SubjectiveTest = (anchor) => {
           />
         </Box>
       </Box>
+      
+
+      <Box className="subjTestBox">
+        <h4>Attach files</h4>
+        <Box className="subjTestAttachFiles">
+          <UploadIcon sx={{fontSize:"1.2rem", position:"relative", top:"4px", left:"-6px"}}/>Attach files
+        </Box>
+        </Box>
 
           <Divider sx={{ mt: "53px" }} />
           <Button className="subjTestAddTestBtn">Add test</Button>
+          </>
+        ) : (
+          <SubjTestMainPage handleCreateNewTest={handleCreateNewTest}/>
+        )}
         </Box>
-      ) : (
-        <SubjTestMainPage />
-      )}
+       {/* ) : (
+         <SubjTestMainPage />
+       )} */}
     </>
   );
 };

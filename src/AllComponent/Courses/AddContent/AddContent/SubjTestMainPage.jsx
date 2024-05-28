@@ -18,7 +18,7 @@ import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 
-const SubjTestMainPage = (anchor) => {
+const SubjTestMainPage = ({handleCreateNewTest}) => {
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -46,19 +46,11 @@ const SubjTestMainPage = (anchor) => {
     setOpen(false);
   };
 
-  const [newTest, setNewTest] = useState(false);
-  const handleCreateNewTest = () => {
-    setNewTest(true);
-  };
+  
 
 // function SubjTestMainPage() {
   return (
-    <Box
-          className="folderDrawerSubjTest"
-          role="presentation"
-          onClick={toggleDrawer(anchor, false)}
-          onKeyDown={toggleDrawer(anchor, false)}
-        >
+    <>
           <h2 style={{ marginLeft: "4%" }}>Add Subjective Test</h2>
           <IconButton
             aria-label="close"
@@ -129,7 +121,7 @@ const SubjTestMainPage = (anchor) => {
 
           <Divider sx={{ mt: "53px" }} />
           <Button className="subjTestAddTestBtn">Add test</Button>
-        </Box>
+        </>
   )
 }
 
