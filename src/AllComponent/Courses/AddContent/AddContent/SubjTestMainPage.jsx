@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import { TextField } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
@@ -18,7 +18,7 @@ import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 
-const SubjTestMainPage = ({handleCreateNewTest}) => {
+const SubjTestMainPage = ({ handleCreateNewTest }) => {
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -46,83 +46,80 @@ const SubjTestMainPage = ({handleCreateNewTest}) => {
     setOpen(false);
   };
 
-  
-
-// function SubjTestMainPage() {
   return (
     <>
-          <h2 style={{ marginLeft: "4%" }}>Add Subjective Test</h2>
-          <IconButton
-            aria-label="close"
-            onClick={handleClose}
-            sx={{
-              position: "absolute",
-              right: 8,
-              top: 8,
-              color: (theme) => theme.palette.grey[500],
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-          <Divider />
+      <h2 style={{ marginLeft: "4%" }}>Add Subjective Test</h2>
+      <IconButton
+        aria-label="close"
+        onClick={handleClose}
+        sx={{
+          position: "absolute",
+          right: 8,
+          top: 8,
+          color: (theme) => theme.palette.grey[500],
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
+      <Divider />
 
-          <Box className="addSubjUploadBox">
-            <div>
-              <p>
-                Upload your subjective test papers & create a new test within a
-                minute!
-              </p>
-            </div>
-
-            <Button
-              className="createNewTestBtn"
-              onClick={() => handleCreateNewTest()}
-            >
-              Create New Test
-            </Button>
-          </Box>
-
-          <p className="subjBoldPara">
-            <b>You can also select from previously created tests</b>
+      <Box className="addSubjUploadBox">
+        <div>
+          <p>
+            Upload your subjective test papers & create a new test within a
+            minute!
           </p>
+        </div>
 
-          <Paper
-            component="form"
-            sx={{
-              ml: "36px",
-              mt: "56px",
-              mb: "-9px",
-              display: "flex",
-              alignItems: "center",
-              width: "609px",
-              backgroundColor: "#e4e4e459",
-              borderRadius: "10px",
-            }}
-          >
-            <IconButton sx={{ p: "10px" }} aria-label="menu">
-              <SearchIcon />
-            </IconButton>
-            <InputBase
-              sx={{ ml: 1, flex: 1 }}
-              placeholder="Search by name"
-              inputProps={{ "aria-label": "search your course by name" }}
-            />
-          </Paper>
+        <Button
+          className="createNewTestBtn"
+          onClick={() => handleCreateNewTest()}
+        >
+          Create New Test
+        </Button>
+      </Box>
 
-          <Box className="A-searchImageSection">
-            <img
-              src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.iconfinder.com%2Ficons%2F749535%2Fa_document_find_letter_search_icon&psig=AOvVaw3fZLu9FmZUBiiqwVB5lq14&ust=1717010672877000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLDUsNaJsYYDFQAAAAAdAAAAABAE"
-              width={120}
-              height={110}
-              sx={{ borderRadius: "50%" }}
-            />
-            <h3>No Result found</h3>
-          </Box>
+      <p className="subjBoldPara">
+        <b>You can also select from previously created tests</b>
+      </p>
 
-          <Divider sx={{ mt: "53px" }} />
-          <Button className="subjTestAddTestBtn">Add test</Button>
-        </>
-  )
-}
+      <Paper
+        component="form"
+        sx={{
+          ml: "36px",
+          mt: "56px",
+          mb: "-9px",
+          display: "flex",
+          alignItems: "center",
+          width: "609px",
+          backgroundColor: "#e4e4e459",
+          borderRadius: "10px",
+        }}
+      >
+        <IconButton sx={{ p: "10px" }} aria-label="menu">
+          <SearchIcon />
+        </IconButton>
+        <InputBase
+          sx={{ ml: 1, flex: 1 }}
+          placeholder="Search by name"
+          inputProps={{ "aria-label": "search your course by name" }}
+        />
+      </Paper>
+
+      <Box className="A-searchImageSection">
+        <img
+          src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.iconfinder.com%2Ficons%2F749535%2Fa_document_find_letter_search_icon&psig=AOvVaw3fZLu9FmZUBiiqwVB5lq14&ust=1717010672877000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLDUsNaJsYYDFQAAAAAdAAAAABAE"
+          width={120}
+          height={110}
+          sx={{ borderRadius: "50%" }}
+        />
+        <h3>No Result found</h3>
+      </Box>
+
+      <Divider sx={{ mt: "53px" }} />
+      <Button className="subjTestAddTestBtn">Add test</Button>
+    </>
+  );
+};
 
 export default SubjTestMainPage;
