@@ -46,6 +46,11 @@ const SubjTestMainPage = ({ handleCreateNewTest }) => {
     setOpen(false);
   };
 
+  const [subjTestMainPage, setSubjTestMainPage] = useState(false);
+  const handleSubjTestMainPage = () => {
+    setSubjTestMainPage(true);
+  }
+
   return (
     <>
       <h2 style={{ marginLeft: "4%" }}>Add Subjective Test</h2>

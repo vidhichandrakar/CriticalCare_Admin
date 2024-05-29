@@ -755,7 +755,7 @@
   border-bottom: 1px seashell grey;
 }
 .subjTestBox{
-  margin: 8% 4% !important;
+  margin: 4% 3% !important;
 }
 .subjTestBox h4{
   margin-bottom: 2%;
@@ -764,10 +764,10 @@
   background-color: #e2ecf0 !important;
     color: #0f7af5 !important;
     border-radius: 15px !important;
-    padding: 14px 39px;
+    padding: 11px 39px;
     position: relative;
     left: -1px;
-    width: 25%;
+    width: 13%;
 }
 
 /* .stylingAutofield{
@@ -790,4 +790,24 @@
   width: 89%;
   padding-left: 16px;
   border-bottom: 1px seashell grey;
+}
+.addImgPara{
+  display: flex;
+  flex-direction: row;
+  width: 62%;
+  /* padding: 2px 2px; */
+  position: relative;
+  top: -38px;
+  left: 32px;
+  color: grey;
+}
+.yellowBoxDiscription{
+  background-color: #f4f4b7 !important;
+  /* padding: 3px 3px; */
+  width: 54%;
+  position: relative;
+  top: -27px;
+  left: 26px;
+  padding: 18px 26px;
+  border-radius: 15px;
 }

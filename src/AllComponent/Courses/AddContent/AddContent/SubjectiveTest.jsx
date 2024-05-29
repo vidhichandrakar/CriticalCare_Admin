@@ -29,6 +29,9 @@ import Autocomplete from "@mui/material/Autocomplete";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import UploadIcon from "@mui/icons-material/Upload";
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import WestIcon from '@mui/icons-material/West';
+import { Link } from "react-router-dom";
 
 const top100Films = [
   { title: "The Shawshank Redemption", year: 1994 },
@@ -72,6 +75,10 @@ const SubjectiveTest = (anchor) => {
     setNewTest(true);
   };
 
+  const handleSubjTestMainPage = () => {
+    setNewTest(false)
+  }
+
   return (
     <>
       <Box
@@ -82,7 +89,11 @@ const SubjectiveTest = (anchor) => {
       >
         {newTest ? (
           <>
-            <h2 style={{ marginLeft: "4%" }}>Create New Subjective Test</h2>
+            <h2 style={{ marginLeft: "4%" }}>
+              <WestIcon sx={{position:"relative", right:"14px", top:"7px", fontSize:"1.9rem"}} 
+              onClick={handleSubjTestMainPage}/>
+              Create New Subjective Test</h2>
+
             <IconButton
               aria-label="close"
               onClick={handleClose}
@@ -186,8 +197,21 @@ const SubjectiveTest = (anchor) => {
               </Box>
             </Box>
 
-            <Divider sx={{ mt: "53px" }} />
-            <Button className="subjTestAddTestBtn">Add test</Button>
+            <Box className="addImgPara">
+              <div><LightbulbIcon sx={{color:"yellow", position:"relative", top:"21px", right:"5px"}}/></div>
+              <div>
+                <p>Add images or PDFs containing subjective questions. You can attach upto 100 files.
+                   Maximum file size that can be attached is 40 MB.</p>
+              </div>
+            </Box>
+
+            <Box className="yellowBoxDiscription">
+               Your students will be able to upload their answer files.
+                You can evaluate & give feedback on their answer sheet.
+            </Box>
+
+            <Divider sx={{ mt: "26px" }} />
+            <Button className="subjTestAddTestBtn">Create & Add Test</Button>
           </>
         ) : (
           <SubjTestMainPage handleCreateNewTest={handleCreateNewTest} />
