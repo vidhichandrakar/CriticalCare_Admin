@@ -1099,15 +1099,53 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin: 2%;
 }
 .SelectMainBox{
   display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  height: 35vh;
+  margin: 2%;
+}
+.SelectBox{
+  display: flex;
   flex-direction: row;
   align-items: center;
-  overflow-y: auto;
+  margin-top: 1%;
+  padding-bottom: 1%;
+  border-bottom: 1px solid #eee;
 }
 .DataBox{
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 100%;
+}
+.DataBox p{
+  margin-left: 2% !important;
+}
+.DataBox div{
+  width: 70%;
+}
+.CancelBtn{
+  margin-right: 3% !important;
+}
+.IconFolder{
+  color: #077eef;
+  font-size: 3.5rem !important;
+}
+.FilesPara{
+  font-size: 0.7rem !important;
+  font-weight: 800;
+  color: #989898;
+}
+.ButtonBOx{
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+  background-color: #f4f9fd;
+  padding: 2%;
+  border-radius: 5px;
 }

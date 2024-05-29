@@ -380,10 +380,10 @@ const RightBox = () => {
         open={icopened}
       >
         <DialogTitle
-          sx={{ m: 0, p: 2, fontSize: "1rem" }}
+          sx={{ m: 0, p: 2, fontSize: "1rem",ml: 2 }}
           id="customized-dialog-title"
         >
-          Import Content
+         <b> Import Content</b>
         </DialogTitle>
         <IconButton
           aria-label="close"
@@ -398,7 +398,7 @@ const RightBox = () => {
           <CloseIcon />
         </IconButton>
 
-        <DialogContent>
+        <DialogContent dividers>
           <Box>
             <Box className="ParaBox">
               <Typography>
@@ -410,101 +410,144 @@ const RightBox = () => {
               <Typography>
                 Selected(0)
               </Typography>
-              {/* <Paper
-      component="form"
-      sx={{ p: '2px 4px',ml: 2, display: 'flex', alignItems: 'center', width: 250 }}
-    > */}<Box>
-       <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
-        <SearchIcon />
-      </IconButton>
-      <InputBase
-        sx={{ ml: 1, flex: 1 }}
-        placeholder="Search yours courses here"
-        inputProps={{ 'aria-label': 'search google maps' }}
-      /></Box>
-    {/* </Paper> */}
+            <Box>
+              <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+                <SearchIcon />
+              </IconButton>
+                <InputBase
+                  sx={{ ml: 1, flex: 1 }}
+                  placeholder="Search yours courses here"
+                  inputProps={{ 'aria-label': 'search google maps' }}
+                />
+              </Box>
             </Box>
           {/* niche wale box me map lagana hae api ane ke baad */}
-            <Box>
-              <Box className="SelectMainBox">
+            <Box className="SelectMainBox">
+              
+              <Box className="SelectBox">
             <Checkbox {...label} />
               <Box className="DataBox">
-                <FolderIcon />
+                <FolderIcon className="IconFolder"/>
                 <Box>
                     <Typography>
                       TRICS 1 2023 SEASON 1
                     </Typography>
-                    <Box>
-                      2 video(s), 298 File(s), 9 test(s)
-                    </Box>
+                    <Typography className="FilesPara">
+                     <b> 2 video(s), 298 File(s), 9 test(s)</b>
+                    </Typography>
                 </Box>
               </Box>
               </Box>
-              <Box className="SelectMainBox">
+               <Box className="SelectBox">
             <Checkbox {...label} />
               <Box className="DataBox">
-                <FolderIcon />
+                <FolderIcon className="IconFolder"/>
                 <Box>
                     <Typography>
                       TRICS 1 2023 SEASON 1
                     </Typography>
-                    <Box>
-                      2 video(s), 298 File(s), 9 test(s)
-                    </Box>
+                    <Typography className="FilesPara">
+                     <b> 2 video(s), 298 File(s), 9 test(s)</b>
+                    </Typography>
                 </Box>
               </Box>
               </Box>
-              <Box className="SelectMainBox">
+              <Box className="SelectBox">
             <Checkbox {...label} />
               <Box className="DataBox">
-                <FolderIcon />
+                <FolderIcon className="IconFolder"/>
                 <Box>
                     <Typography>
                       TRICS 1 2023 SEASON 1
                     </Typography>
-                    <Box>
-                      2 video(s), 298 File(s), 9 test(s)
-                    </Box>
+                    <Typography className="FilesPara">
+                     <b> 2 video(s), 298 File(s), 9 test(s)</b>
+                    </Typography>
                 </Box>
               </Box>
               </Box>
-              <Box className="SelectMainBox">
+               <Box className="SelectBox">
             <Checkbox {...label} />
               <Box className="DataBox">
-                <FolderIcon />
+                <FolderIcon className="IconFolder"/>
                 <Box>
                     <Typography>
                       TRICS 1 2023 SEASON 1
                     </Typography>
-                    <Box>
-                      2 video(s), 298 File(s), 9 test(s)
-                    </Box>
+                    <Typography className="FilesPara">
+                     <b> 2 video(s), 298 File(s), 9 test(s)</b>
+                    </Typography>
                 </Box>
               </Box>
               </Box>
-              <Box className="SelectMainBox">
+              <Box className="SelectBox">
             <Checkbox {...label} />
               <Box className="DataBox">
-                <FolderIcon />
+                <FolderIcon className="IconFolder"/>
                 <Box>
                     <Typography>
                       TRICS 1 2023 SEASON 1
                     </Typography>
-                    <Box>
-                      2 video(s), 298 File(s), 9 test(s)
-                    </Box>
+                    <Typography className="FilesPara">
+                     <b> 2 video(s), 298 File(s), 9 test(s)</b>
+                    </Typography>
                 </Box>
               </Box>
               </Box>
+               <Box className="SelectBox">
+            <Checkbox {...label} />
+              <Box className="DataBox">
+                <FolderIcon className="IconFolder"/>
+                <Box>
+                    <Typography>
+                      TRICS 1 2023 SEASON 1
+                    </Typography>
+                    <Typography className="FilesPara">
+                     <b> 2 video(s), 298 File(s), 9 test(s)</b>
+                    </Typography>
+                </Box>
+              </Box>
+              </Box>
+              <Box className="SelectBox">
+            <Checkbox {...label} />
+              <Box className="DataBox">
+                <FolderIcon className="IconFolder"/>
+                <Box>
+                    <Typography>
+                      TRICS 1 2023 SEASON 1
+                    </Typography>
+                    <Typography className="FilesPara">
+                     <b> 2 video(s), 298 File(s), 9 test(s)</b>
+                    </Typography>
+                </Box>
+              </Box>
+              </Box>
+               <Box className="SelectBox">
+            <Checkbox {...label} />
+              <Box className="DataBox">
+                <FolderIcon className="IconFolder"/>
+                <Box>
+                    <Typography>
+                      TRICS 1 2023 SEASON 1
+                    </Typography>
+                    <Typography className="FilesPara">
+                     <b> 2 video(s), 298 File(s), 9 test(s)</b>
+                    </Typography>
+                </Box>
+              </Box>
+              </Box>
+           
+            
             </Box>
           </Box>
-          <Box>
-            <Button variant="outlined" disabled> Cancel</Button>
-            <Button variant="contained">
+          
+        </DialogContent>
+        <Box className="ButtonBOx" >
+            <Button variant="outlined" disabled className="CancelBtn"> Cancel</Button>
+            <Button variant="contained" >
               Import Selected
             </Button>
           </Box>
-        </DialogContent>
       </BootstrapDialog>
       <BootstrapDialog
         className="PopUP"
