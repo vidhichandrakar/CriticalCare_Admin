@@ -28,6 +28,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Autocomplete from "@mui/material/Autocomplete";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import UploadIcon from "@mui/icons-material/Upload";
 
 const top100Films = [
   { title: "The Shawshank Redemption", year: 1994 },
@@ -73,164 +74,125 @@ const SubjectiveTest = (anchor) => {
 
   return (
     <>
-      {newTest ? (
-        // <h1>hey</h1>
-        <Box
-          className="folderDrawer"
-          role="presentation"
-          onClick={toggleDrawer(anchor, false)}
-          onKeyDown={toggleDrawer(anchor, false)}
-        >
-          <h2 style={{ marginLeft: "4%" }}>Create New Subjective Test</h2>
-          <IconButton
-            aria-label="close"
-            onClick={handleClose}
-            sx={{
-              position: "absolute",
-              right: 8,
-              top: 8,
-              color: (theme) => theme.palette.grey[500],
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-          <Divider />
-
-          {/* <Box className="addSubjUploadBox">
-            <div>
-              <p>
-                Upload your subjective test papers & create a new test within a
-                minute!
-              </p>
-            </div>
-
-            <Button
-              className="createNewTestBtn"
-              onClick={() => handleCreateNewTest()}
+      <Box
+        className="subjTestFolderDrawer"
+        role="presentation"
+        onClick={toggleDrawer(anchor, false)}
+        onKeyDown={toggleDrawer(anchor, false)}
+      >
+        {newTest ? (
+          <>
+            <h2 style={{ marginLeft: "4%" }}>Create New Subjective Test</h2>
+            <IconButton
+              aria-label="close"
+              onClick={handleClose}
+              sx={{
+                position: "absolute",
+                right: 8,
+                top: 8,
+                color: (theme) => theme.palette.grey[500],
+              }}
             >
-              Create New Test
-            </Button>
-          </Box>
-
-          <p className="subjBoldPara">
-            <b>You can also select from previously created tests</b>
-          </p>
-
-          <Paper
-            component="form"
-            sx={{
-              ml: "36px",
-              mt: "56px",
-              mb: "-9px",
-              display: "flex",
-              alignItems: "center",
-              width: "594px",
-              backgroundColor: "#e4e4e459",
-              borderRadius: "10px",
-            }}
-          >
-            <IconButton sx={{ p: "10px" }} aria-label="menu">
-              <SearchIcon />
+              <CloseIcon />
             </IconButton>
-            <InputBase
-              sx={{ ml: 1, flex: 1 }}
-              placeholder="Search by name"
-              inputProps={{ "aria-label": "search your course by name" }}
-            />
-          </Paper>
+            <Divider />
 
-          <Box className="A-searchImageSection">
-            <img
-              src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.iconfinder.com%2Ficons%2F749535%2Fa_document_find_letter_search_icon&psig=AOvVaw3fZLu9FmZUBiiqwVB5lq14&ust=1717010672877000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLDUsNaJsYYDFQAAAAAdAAAAABAE"
-              width={120}
-              height={110}
-              sx={{ borderRadius: "50%" }}
-            />
-            <h3>No Result found</h3>
-          </Box> */}
-
-<Box className="subjTestBox">
-        <h4>Test name</h4>
-        <Box
-          sx={{
-            width: 500,
-            maxWidth: "100%",
-          }}
-        >
-          <Autocomplete
-            multiple
-            id="checkboxes-tags-demo"
-            options={top100Films}
-            disableCloseOnSelect
-            getOptionLabel={(option) => option.title}
-            renderOption={(props, option, { selected }) => (
-              <li {...props}>
-                <Checkbox
-                  icon={icon}
-                  checkedIcon={checkedIcon}
-                  style={{ marginRight: 8 }}
-                  checked={selected}
+            <Box className="subjTestBox">
+              <h4>Test name</h4>
+              <Box
+                sx={{
+                  width: 500,
+                  maxWidth: "100%",
+                }}
+              >
+                <Autocomplete
+                  multiple
+                  id="checkboxes-tags-demo"
+                  options={top100Films}
+                  disableCloseOnSelect
+                  getOptionLabel={(option) => option.title}
+                  renderOption={(props, option, { selected }) => (
+                    <li {...props}>
+                      <Checkbox
+                        icon={icon}
+                        checkedIcon={checkedIcon}
+                        style={{ marginRight: 8 }}
+                        checked={selected}
+                      />
+                      {option.title}
+                    </li>
+                  )}
+                  style={{ width: "100%", borderRadius: "10px" }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      placeholder="Enter Test Name"
+                      className="stylingAutofield"
+                    />
+                  )}
                 />
-                {option.title}
-              </li>
-            )}
-            style={{ width: "100%", borderRadius: "10px" }}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                // label="Select tests or folders"
-                placeholder="Enter Test Name"
-                className="stylingAutofield"
-              />
-            )}
-          />
-        </Box>
-      </Box>
+              </Box>
+            </Box>
 
-      <Box className="subjTestBox">
-        <h4>Total marks</h4>
-        <Box
-          sx={{
-            width: 500,
-            maxWidth: "100%",
-          }}
-        >
-          <Autocomplete
-            multiple
-            id="checkboxes-tags-demo"
-            options={top100Films}
-            disableCloseOnSelect
-            getOptionLabel={(option) => option.title}
-            renderOption={(props, option, { selected }) => (
-              <li {...props}>
-                <Checkbox
-                  icon={icon}
-                  checkedIcon={checkedIcon}
-                  style={{ marginRight: 8 }}
-                  checked={selected}
+            <Box className="subjTestBox">
+              <h4>Total Marks</h4>
+              <Box
+                sx={{
+                  width: 500,
+                  maxWidth: "100%",
+                }}
+              >
+                <Autocomplete
+                  multiple
+                  id="checkboxes-tags-demo"
+                  options={top100Films}
+                  disableCloseOnSelect
+                  getOptionLabel={(option) => option.title}
+                  renderOption={(props, option, { selected }) => (
+                    <li {...props}>
+                      <Checkbox
+                        icon={icon}
+                        checkedIcon={checkedIcon}
+                        style={{ marginRight: 8 }}
+                        checked={selected}
+                      />
+                      {option.title}
+                    </li>
+                  )}
+                  style={{ width: "100%", borderRadius: "10px" }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      placeholder="Enter marks"
+                      className="stylingAutofield"
+                    />
+                  )}
                 />
-                {option.title}
-              </li>
-            )}
-            style={{ width: "100%", borderRadius: "10px" }}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                // label="Select tests or folders"
-                placeholder="Enter marks"
-                className="stylingAutofield"
-              />
-            )}
-          />
-        </Box>
-      </Box>
+              </Box>
+            </Box>
 
-          <Divider sx={{ mt: "53px" }} />
-          <Button className="subjTestAddTestBtn">Add test</Button>
-        </Box>
-      ) : (
-        <SubjTestMainPage />
-      )}
+            <Box className="subjTestBox">
+              <h4>Attach files</h4>
+              <Box className="subjTestAttachFiles">
+                <UploadIcon
+                  sx={{
+                    fontSize: "1.2rem",
+                    position: "relative",
+                    top: "4px",
+                    left: "-6px",
+                  }}
+                />
+                Attach files
+              </Box>
+            </Box>
+
+            <Divider sx={{ mt: "53px" }} />
+            <Button className="subjTestAddTestBtn">Add test</Button>
+          </>
+        ) : (
+          <SubjTestMainPage handleCreateNewTest={handleCreateNewTest} />
+        )}
+      </Box>
     </>
   );
 };

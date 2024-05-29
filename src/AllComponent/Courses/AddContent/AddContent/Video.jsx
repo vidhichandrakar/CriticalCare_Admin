@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import { TextField, colors } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
@@ -29,7 +29,7 @@ import PauseCircleIcon from "@mui/icons-material/PauseCircle";
 // }
 
 const Video = (anchor) => {
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     top: false,
     left: false,
     bottom: false,
@@ -50,7 +50,7 @@ const Video = (anchor) => {
   
   // const { onClose, value: valueProp, open, ...other } = props;
 
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);

@@ -13,12 +13,12 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import "../../../CSSFile/Courses.css"
+import "../../../CSSFile/Courses.css";
 
 const ZipFile = (anchor) => {
   const [state, setState] = React.useState({
     top: false,
-    left: false,  
+    left: false,
     bottom: false,
     right: false,
   });
@@ -52,7 +52,7 @@ const ZipFile = (anchor) => {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       {/* <Box className="HeaderBox"> */}
-      <h2 style={{marginLeft: "4%"}}>Add ZipFile</h2>
+      <h2 style={{ marginLeft: "4%" }}>Add ZipFile</h2>
       <IconButton
         aria-label="close"
         onClick={handleClose}

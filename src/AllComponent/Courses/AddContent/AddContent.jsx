@@ -7,35 +7,34 @@ import Header from "../Header";
 import SideBar from "../../AdminDashboardMain/SideBar";
 import AddContentDrawer from "./AddContentDrawer";
 
-
-const AddContent = ({})=>{
-  return(
+const AddContent = ({}) => {
+  return (
     <div className="grid-container">
       <Header
-            Heading={"Hi 360 Critical Care,"}
-            subHeading={"Welcome to your Dashboard"}
-          />
+        Heading={"Hi 360 Critical Care,"}
+        subHeading={"Welcome to your Dashboard"}
+      />
       <SideBar />
-    <div className="formMain contentDisplay">
-
-      <Box className="contentleftBox"> 
-        <h2><b>Contents</b></h2>
-        <Box className="contentInnerLeftBox"> 
-         <LeftBox/>
+      <div className="formMain contentDisplay">
+        <Box className="contentleftBox">
+          <h2>
+            <b>Contents</b>
+          </h2>
+          <Box className="contentInnerLeftBox">
+            <LeftBox />
+          </Box>
         </Box>
-      </Box>
-      
-      <Box className="contentRightBox">
-      <Typography className="contentRightHeading"> Add content</Typography>
-      <Box>
-        <RightBox/>
-      </Box>
-      </Box>
-      {/* <AddContentDrawer/> */}
 
+        <Box className="contentRightBox">
+          <Typography className="contentRightHeading"> Add content</Typography>
+          <Box>
+            <RightBox />
+          </Box>
+        </Box>
+        {/* <AddContentDrawer/> */}
+      </div>
     </div>
-    </div>
-  )
-}
+  );
+};
 
 export default AddContent;

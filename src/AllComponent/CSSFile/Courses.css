@@ -577,6 +577,7 @@
   border-top-left-radius: 10px !important;
   border-bottom-left-radius: 10px !important;
   height: 100%;
+  /* width: 89%; */
   padding-left: 16px;
   border-bottom: 1px seashell grey;
 }
@@ -759,6 +760,15 @@
 .subjTestBox h4{
   margin-bottom: 2%;
 }
+.subjTestAttachFiles{
+  background-color: #e2ecf0 !important;
+    color: #0f7af5 !important;
+    border-radius: 15px !important;
+    padding: 14px 39px;
+    position: relative;
+    left: -1px;
+    width: 25%;
+}
 
 /* .stylingAutofield{
   border-radius: 21px !important;
@@ -772,4 +782,12 @@
   top: 18px;
   text-transform: none !important;
   padding: -2px 0px !important;
+}
+.subjTestFolderDrawer {
+  border-top-left-radius: 10px !important;
+  border-bottom-left-radius: 10px !important;
+  height: 100%;
+  width: 89%;
+  padding-left: 16px;
+  border-bottom: 1px seashell grey;
 }
