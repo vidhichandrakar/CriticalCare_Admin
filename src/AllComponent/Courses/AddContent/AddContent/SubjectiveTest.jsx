@@ -80,7 +80,7 @@ const SubjectiveTest = (anchor) => {
   }
 
   return (
-    <>
+    <div sx={{width:"39%"}}>
       <Box
         className="subjTestFolderDrawer"
         role="presentation"
@@ -88,24 +88,29 @@ const SubjectiveTest = (anchor) => {
         onKeyDown={toggleDrawer(anchor, false)}
       >
         {newTest ? (
-          <>
-            <h2 style={{ marginLeft: "4%" }}>
-              <WestIcon sx={{position:"relative", right:"14px", top:"7px", fontSize:"1.9rem"}} 
+          <div >
+            <Box style={{ marginLeft: "4%" }} className="wholeBOxxx">
+              <Box sx={{alignItems:"center", display:"flex", flexDirection:"row"}}>
+              <WestIcon 
+              sx={{marginRight:"12px", marginLeft:"-14px"}}
+              // sx={{position:"relative", right:"14px", top:"7px", fontSize:"1.9rem"}} 
               onClick={handleSubjTestMainPage}/>
-              Create New Subjective Test</h2>
+             <Typography sx={{fontSize:"1.5rem"}}> <b>Create New Subjective Test</b></Typography>
+              </Box>
 
             <IconButton
               aria-label="close"
               onClick={handleClose}
-              sx={{
-                position: "absolute",
-                right: 8,
-                top: 8,
-                color: (theme) => theme.palette.grey[500],
-              }}
+              // sx={{
+              //   position: "absolute",
+              //   right: 8,
+              //   top: 8,
+              //   color: (theme) => theme.palette.grey[500],
+              // }}
             >
               <CloseIcon />
             </IconButton>
+            </Box>
             <Divider />
 
             <Box className="subjTestBox">
@@ -211,13 +216,15 @@ const SubjectiveTest = (anchor) => {
             </Box>
 
             <Divider sx={{ mt: "26px" }} />
+            <Box className="demoClasssss">
             <Button className="subjTestAddTestBtn">Create & Add Test</Button>
-          </>
+            </Box>
+          </div>
         ) : (
           <SubjTestMainPage handleCreateNewTest={handleCreateNewTest} />
         )}
       </Box>
-    </>
+    </div>
   );
 };
 
