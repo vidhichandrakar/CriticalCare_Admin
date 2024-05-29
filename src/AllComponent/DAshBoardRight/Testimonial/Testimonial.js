@@ -271,8 +271,7 @@ const Testimonial = () => {
             </Button>
           </div>
           <Button className="addTestimonialButton" onClick={handleClickOpen}>
-            {" "}
-            + Add Testimonial{" "}
+            + Add Testimonial
           </Button>
           <BootstrapDialog
             className="PopUP"

@@ -15,7 +15,18 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import "../../../CSSFile/Courses.css";
 import { Margin } from "@mui/icons-material";
+import SearchIcon from "@mui/icons-material/Search";
+import Paper from "@mui/material/Paper";
+import InputBase from "@mui/material/InputBase";
 import PauseCircleIcon from "@mui/icons-material/PauseCircle";
+
+// export interface ConfirmationDialogRawProps {
+//   id: string;
+//   keepMounted: boolean;
+//   value: string;
+//   open: boolean;
+//   onClose: (value?: string) => void;
+// }
 
 const Video = (anchor) => {
   const [state, setState] = useState({
@@ -35,29 +46,64 @@ const Video = (anchor) => {
 
     setState({ ...state, [anchor]: open });
   };
+ 
+  
+  // const { onClose, value: valueProp, open, ...other } = props;
 
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
   };
-  const handleClose = () => {
+  const handleClosee = () => {
     setOpen(false);
+    // onClose();
   };
+
+  const [videoDescription, setVideoDescription] = React.useState(false);
+  const handleVideoDescription = () => {
+    setVideoDescription(true);
+    var njk = setVideoDescription ? (
+      <Box className="addDiscriptionuploading">
+        <p className="vdoAddDescription" onClick={handleVideoDescription}>
+          + Add Description
+        </p>
+        <Divider />
+        <div className="uploadZeroPerc">
+          <p>Uploading: 0%</p>
+          <PauseCircleIcon sx={{ mt: "10px", color: "grey" }} />
+        </div>
+      </Box>
+    ) : (
+      <Box className="addDiscriptionuploading">
+        <p className="vdoAddDescription">+ Add Description</p>
+        <Divider />
+        <div className="uploadZeroPerc">
+          <p>Uploading: 0%</p>
+          <PauseCircleIcon sx={{ mt: "10px", color: "grey" }} />
+        </div>
+      </Box>
+    );
+
+    return njk;
+  };
+  // if(setVideoDescription) {
+  //   return({
+
+  //   })
+  // }
 
   return (
     <Box
       className="folderDrawer"
-      //   sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
       role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      {/* <Box className="HeaderBox"> */}
       <h2 style={{ marginLeft: "1%" }}>Upload Videos</h2>
       <IconButton
         aria-label="close"
-        onClick={handleClose}
+        onClick={toggleDrawer(anchor, false)}
         sx={{
           position: "absolute",
           right: 8,
@@ -67,20 +113,8 @@ const Video = (anchor) => {
       >
         <CloseIcon />
       </IconButton>
-      {/* </Box> */}
       <Divider />
 
-      {/* <Box className="FolderNameBox">
-        <h4>Folder name</h4>
-        <Box
-          sx={{
-            width: 500,
-            maxWidth: "100%",
-          }}
-        >
-          <TextField fullWidth label="fullWidth" id="fullWidth" />
-        </Box>
-      </Box> */}
       <div className="dividingVdoSections">
         <div>
           <img
@@ -98,17 +132,31 @@ const Video = (anchor) => {
                 maxWidth: "100%",
               }}
             >
-              <TextField
-                fullWidth
-                label="WhatsApp Video 2024-05 23 at 12.."
-                // id="fullWidth"
-                sx={{ marginLeft: "-6px", width: "80%", padding: "-2px -6px" }}
-              />
+              <Paper
+                component="form"
+                sx={{
+                  ml: "2px",
+                  mt: "12px",
+                  mb: "-1px",
+                  display: "flex",
+                  alignItems: "center",
+                  width: "100%",
+                  borderRadius: "10px",
+                }}
+              >
+                <InputBase
+                  sx={{ ml: 1, flex: 1,marginTop:"-10px", padding:"2px 11px", borderRadius:"9px", boxShadow:"none" }}
+                  placeholder="WhatsApp Video 2024-05 23 at 12.."
+                  inputProps={{ "aria-label": "search your course by name" }}
+                />
+              </Paper>
             </Box>
           </div>
 
           <Box className="addDiscriptionuploading">
-            <p className="vdoAddDescription">+ Add Description</p>
+            <p className="vdoAddDescription" onClick={handleVideoDescription}>
+              + Add Description
+            </p>
             <Divider />
             <div className="uploadZeroPerc">
               <p>Uploading: 0%</p>
@@ -118,7 +166,7 @@ const Video = (anchor) => {
         </div>
 
         <div>
-          <IconButton aria-label="close" onClick={handleClose}>
+          <IconButton aria-label="close" onClick={handleClosee}>
             <CloseIcon />
           </IconButton>
         </div>
