@@ -96,7 +96,8 @@ const SubjTestMainPage = ({ handleCreateNewTest }) => {
           mb: "-9px",
           display: "flex",
           alignItems: "center",
-          width: "609px",
+          // width: "609px",
+          width: "517px",
           backgroundColor: "#e4e4e459",
           borderRadius: "10px",
         }}

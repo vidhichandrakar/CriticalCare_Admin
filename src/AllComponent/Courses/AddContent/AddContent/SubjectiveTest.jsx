@@ -80,20 +80,22 @@ const SubjectiveTest = (anchor) => {
   }
 
   return (
-    <div sx={{width:"39%"}}>
+    <div 
+    className="fixingSubjTestWidth"
+    >
       <Box
+          sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 580 }}
         className="subjTestFolderDrawer"
         role="presentation"
         onClick={toggleDrawer(anchor, false)}
         onKeyDown={toggleDrawer(anchor, false)}
       >
         {newTest ? (
-          <div >
+          <div>
             <Box style={{ marginLeft: "4%" }} className="wholeBOxxx">
               <Box sx={{alignItems:"center", display:"flex", flexDirection:"row"}}>
               <WestIcon 
               sx={{marginRight:"12px", marginLeft:"-14px"}}
-              // sx={{position:"relative", right:"14px", top:"7px", fontSize:"1.9rem"}} 
               onClick={handleSubjTestMainPage}/>
              <Typography sx={{fontSize:"1.5rem"}}> <b>Create New Subjective Test</b></Typography>
               </Box>
@@ -143,6 +145,7 @@ const SubjectiveTest = (anchor) => {
                     <TextField
                       {...params}
                       placeholder="Enter Test Name"
+                      // className="stylingAutofieldSubjTest"
                       className="stylingAutofield"
                     />
                   )}
@@ -215,9 +218,9 @@ const SubjectiveTest = (anchor) => {
                 You can evaluate & give feedback on their answer sheet.
             </Box>
 
-            <Divider sx={{ mt: "26px" }} />
+            <Divider sx={{ mt: "43px" }} />
             <Box className="demoClasssss">
-            <Button className="subjTestAddTestBtn">Create & Add Test</Button>
+            <Button className="createnAddtestbtn">Create & Add Test</Button>
             </Box>
           </div>
         ) : (
