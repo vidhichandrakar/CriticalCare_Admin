@@ -780,6 +780,8 @@
   /* top: 18px; */
   text-transform: none !important;
   padding: -2px 0px !important;
+  margin-left: 87% !important;
+    margin-top: 14px !important;
 }
 .demoClasssss{
   display: flex;

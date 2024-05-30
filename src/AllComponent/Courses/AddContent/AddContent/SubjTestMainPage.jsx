@@ -121,7 +121,7 @@ const SubjTestMainPage = ({ handleCreateNewTest }) => {
         <h3>No Result found</h3>
       </Box>
 
-      <Divider sx={{ mt: "53px" }} />
+      <Divider sx={{ mt: "124px" }} />
       <Button className="subjTestAddTestBtn">Add test</Button>
     </>
   );
