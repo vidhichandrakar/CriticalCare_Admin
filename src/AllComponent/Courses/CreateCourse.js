@@ -96,20 +96,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         end_date: "2024-05-30",
         is_publish: "not published",
       };
-      const courseAttachments = [
-        {
-          content_type_id: 1,
-          content_url: "https://example.com/content1.mp4",
-        },
-        {
-          content_type_id: 1,
-          content_url: "https://example.com/content3.mp4",
-        },
-        {
-          content_type_id: 2,
-          content_url: "https://example.com/content2.pdf",
-        },
-      ];
+      const courseAttachments = [ ]
       const courseDurations = value === undefined ? validity : value;
       payload = {
         courseDetails: courseDetails,
