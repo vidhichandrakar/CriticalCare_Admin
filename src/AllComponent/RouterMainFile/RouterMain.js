@@ -46,8 +46,8 @@ const RouterMain = () => {
             <Route exact path="/Banner" element= {<Banner/>}> </Route>
             <Route exact path="/chat" element= {<Chat />}> </Route>
             {/* <Route exact path="/TestFirstPage" element= {<TestFirstPage />}> </Route> */}
-            <Route exact path="/TestFirstPage222" element= {<TestPortalMain />}> </Route>
-            <Route exact path="/TestFirstPage" element= {<TestFirstPage />}> </Route>
+            <Route exact path="/TestFirstPage" element= {<TestPortalMain />}> </Route>
+            {/* <Route exact path="/TestFirstPage" element= {<TestFirstPage />}> </Route> */}
             <Route exact path="/AddContent" element= {<AddContent />}> </Route>
             
 

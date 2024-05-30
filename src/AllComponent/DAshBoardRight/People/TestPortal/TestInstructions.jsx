@@ -45,7 +45,7 @@ function TestInstructions({testData}) {
       <Box className="stickyTopBox">
         <div>
           <h4>
-            {testData.test_name}
+            {testData?.test_name}
             <EditIcon className="blueEdit" />
           </h4>
         </div>
@@ -55,7 +55,7 @@ function TestInstructions({testData}) {
           <AccessTimeIcon className="testDurationLogo" />
           <Typography style={{ color: "rgb(146 130 130)" }}>
             Test Duration : <span className="textColorBold">
-              {`${testData.duration_hour}Hours ${testData.duration_minute}Mins`}
+              {`${testData?.duration_hour}Hours ${testData?.duration_minute}Mins`}
               </span>
           </Typography>
           <LocalOfferIcon
