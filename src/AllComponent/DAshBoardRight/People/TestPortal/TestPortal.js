@@ -57,56 +57,56 @@ import "react-toastify/dist/ReactToastify.css";
 import { redirectRestriction } from "../../../../Util/RedirectRestriction";
 import Header from "../../../Courses/Header";
 import { DailogBox } from "../../../../Util/CommonFields";
-import TipsAndUpdatesTwoToneIcon from '@mui/icons-material/TipsAndUpdatesTwoTone';
+import TipsAndUpdatesTwoToneIcon from "@mui/icons-material/TipsAndUpdatesTwoTone";
 import "../../../CSSFile/testPortal.css";
 import { Link } from "react-router-dom";
 import TestFirstPage from "./TestFirstPage";
-import Switch from '@mui/material/Switch';    
+import Switch from "@mui/material/Switch";
 
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const AntSwitch = styled(Switch)(({ theme }) => ({
   width: 28,
   height: 16,
   padding: 0,
-  display: 'flex',
-  '&:active': {
-    '& .MuiSwitch-thumb': {
+  display: "flex",
+  "&:active": {
+    "& .MuiSwitch-thumb": {
       width: 15,
     },
-    '& .MuiSwitch-switchBase.Mui-checked': {
-      transform: 'translateX(9px)',
+    "& .MuiSwitch-switchBase.Mui-checked": {
+      transform: "translateX(9px)",
     },
   },
-  '& .MuiSwitch-switchBase': {
+  "& .MuiSwitch-switchBase": {
     padding: 2,
-    '&.Mui-checked': {
-      transform: 'translateX(12px)',
-      color: '#fff',
-      '& + .MuiSwitch-track': {
+    "&.Mui-checked": {
+      transform: "translateX(12px)",
+      color: "#fff",
+      "& + .MuiSwitch-track": {
         opacity: 1,
-        backgroundColor: theme.palette.mode === 'dark' ? '#177ddc' : '#1890ff',
+        backgroundColor: theme.palette.mode === "dark" ? "#177ddc" : "#1890ff",
       },
     },
   },
-  '& .MuiSwitch-thumb': {
-    boxShadow: '0 2px 4px 0 rgb(0 35 11 / 20%)',
+  "& .MuiSwitch-thumb": {
+    boxShadow: "0 2px 4px 0 rgb(0 35 11 / 20%)",
     width: 12,
     height: 12,
     borderRadius: 6,
-    transition: theme.transitions.create(['width'], {
+    transition: theme.transitions.create(["width"], {
       duration: 200,
     }),
   },
-  '& .MuiSwitch-track': {
+  "& .MuiSwitch-track": {
     borderRadius: 16 / 2,
     opacity: 1,
     backgroundColor:
-      theme.palette.mode === 'dark' ? 'rgba(255,255,255,.35)' : 'rgba(0,0,0,.25)',
-    boxSizing: 'border-box',
+      theme.palette.mode === "dark"
+        ? "rgba(255,255,255,.35)"
+        : "rgba(0,0,0,.25)",
+    boxSizing: "border-box",
   },
 }));
-
-
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -214,9 +214,8 @@ const TestPortal = () => {
           setLoaderState(false);
         },
       });
-    }
-    else{
-      navigate("/admin")
+    } else {
+      navigate("/admin");
     }
   }, []);
 
@@ -264,7 +263,6 @@ const TestPortal = () => {
   const handleClickOpen = () => {
     setOpen(true);
   };
-  
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -281,8 +279,7 @@ const TestPortal = () => {
   const handleCloseDialog = () => {
     setOpen(false);
   };
-  
-  
+
   const handleInput = (value, type) => {
     let storedValues = Object.assign({}, addTest);
     if (type === "TestName") {
@@ -296,6 +293,8 @@ const TestPortal = () => {
   };
   const handleCreateTeam = () => {
     const payload = {
+      test_section_Instruction: "test_section_Instruction",
+      test_section_name: "Section Name",
       test_name: addTest.testName,
       created_by: 2,
       duration_hour: parseInt(addTest.testDuration),
@@ -306,7 +305,7 @@ const TestPortal = () => {
       callBack: (response) => {
         toast.success("New Member added!");
         setOpen(false);
-        navigate('/TestFirstPage',{ state: { id: response.data.test_id } }); 
+        navigate("/TestFirstPage", { state: { id: response.data.test_id } });
         getTest({
           callBack: (response) => {
             const userCallBack = response?.data;
@@ -314,6 +313,9 @@ const TestPortal = () => {
             setLoaderState(false);
           },
         });
+      },
+      error: (error) => {
+        console.log(error);
       },
     });
   };
@@ -337,12 +339,11 @@ const TestPortal = () => {
   return (
     <div className="grid-container">
       <Header
-          Heading={"Test Portal"}
-          subHeading={"Only published test are shown here"}
-        />
+        Heading={"Test Portal"}
+        subHeading={"Only published test are shown here"}
+      />
       <SideBar />
       <div className="main-container">
-        
         <LoaderComponent loaderState={loaderState} />
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">
@@ -352,7 +353,7 @@ const TestPortal = () => {
               <FilterAltIcon /> Filter
             </Button>
           </div>
-          
+
           <Button className="addTestimonialButton" onClick={handleClickOpen}>
             {" "}
             + Add Test{" "}
@@ -504,7 +505,7 @@ const TestPortal = () => {
                       );
                     })
                   : null}
-                
+
                 <Popover
                   sx={{ m: -7, mt: 0.2, ml: -15 }}
                   id={openId}
@@ -531,40 +532,46 @@ const TestPortal = () => {
                     Edit
                   </Typography>
                 </Popover>
-               
               </TableBody>
-              {userData?.length > 5 && <TableFooter>
-                <TablePagination
-                  rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                  // colSpan={3}
-                  count={userData.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  slotProps={{
-                    select: {
-                      inputProps: {
-                        "aria-label": "rows per pageeee",
+              {userData?.length > 5 && (
+                <TableFooter>
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      { label: "All", value: -1 },
+                    ]}
+                    // colSpan={3}
+                    count={userData.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    slotProps={{
+                      select: {
+                        inputProps: {
+                          "aria-label": "rows per pageeee",
+                        },
+                        native: true,
                       },
-                      native: true,
-                    },
-                  }}
-                  onPageChange={handleChangePage}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-                  ActionsComponent={TablePaginationActions}
-                // className="Pagination"
-                />
-              </TableFooter>}
+                    }}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                    ActionsComponent={TablePaginationActions}
+                    // className="Pagination"
+                  />
+                </TableFooter>
+              )}
             </Table>
           </TableContainer>
         </Paper>
       </div>
       <ToastContainer />
       <DailogBox
-          isOpen={isOpen}
-          handleConfirmDelete={handleConfirmDelete}
-          handleDeleteClick={handleDeleteClick}
-          handleCancelDelete={handleCancelDelete}
-        />
+        isOpen={isOpen}
+        handleConfirmDelete={handleConfirmDelete}
+        handleDeleteClick={handleDeleteClick}
+        handleCancelDelete={handleCancelDelete}
+      />
     </div>
   );
 };

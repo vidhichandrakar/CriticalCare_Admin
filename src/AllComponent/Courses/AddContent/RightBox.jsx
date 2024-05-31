@@ -58,34 +58,34 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 const RightBox = () => {
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
-  const [vd, setVd] = React.useState({
+  const [vd, setVd] = useState({
     left: false,
   });
-  const [ot, setOt] = React.useState({
+  const [ot, setOt] = useState({
     left: false,
   });
-  const [st, setSt] = React.useState({
+  const [st, setSt] = useState({
     left: false,
   });
-  const [doc, setDoc] = React.useState({
+  const [doc, setDoc] = useState({
     left: false,
   });
-  const [image, setImage] = React.useState({
+  const [image, setImage] = useState({
     left: false,
   });
-  const [zip, setZip] = React.useState({
+  const [zip, setZip] = useState({
     left: false,
   });
-  const [ic, setIc] = React.useState({
+  const [ic, setIc] = useState({
     left: false,
   });
-  const [il, setIL] = React.useState({
+  const [il, setIL] = useState({
     left: false,
   });
   const [videoopened, setVideoqopen] = useState(false);
@@ -108,8 +108,8 @@ const RightBox = () => {
     setVideoqopen(false);
     setStoreVideo(files[0]);
     setVd({ vd, ["right"]: true });
-    setDocopen(false);
-    setDoc({ doc, ["right"]: true });
+    // setDocopen(false);
+    // setDoc({ doc, ["right"]: true });
     // toggleDrawervd("right", true);
     // uploadFile({
     //   payload,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { TextField } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
@@ -14,36 +14,40 @@ import MailIcon from "@mui/icons-material/Mail";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import "../../../CSSFile/Courses.css";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
-import Typography from "@mui/material/Typography";
-import FontDownloadIcon from "@mui/icons-material/FontDownload";
-import SearchIcon from "@mui/icons-material/Search";
-import Paper from "@mui/material/Paper";
-import InputBase from "@mui/material/InputBase";
 import Checkbox from "@mui/material/Checkbox";
 import Autocomplete from "@mui/material/Autocomplete";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import { getOnlineTest } from "../../../ActionFactory/apiActions";
 
-const top100Films = [
-  { title: "The Shawshank Redemption", year: 1994 },
-  { title: "The Godfather", year: 1972 },
-];
+
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-const OnlineTest = ({anchor, handelclose}) => {
+const OnlineTest = ({ anchor, handelclose }) => {
   const [state, setState] = React.useState({
     top: false,
     left: false,
     bottom: false,
     right: false,
   });
+
+  const [testName, setTestName] = useState([])
+  const top100Films = [
+    { title: "The Shawshank Redemption", year: 1994 },
+    { title: "The Godfather", year: 1972 },
+ 
+  ];
+  useEffect(()=>{
+    getOnlineTest({
+      callBack:(response)=>{
+        setTestName(response.data);
+      }
+    })
+
+  },[])
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -72,10 +76,11 @@ const OnlineTest = ({anchor, handelclose}) => {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
+      {console.log("testNametestName",testName)}
       <h2 style={{ marginLeft: "4%" }}>Add online test</h2>
       <IconButton
         aria-label="close"
-        onClick= {handelclose("right", false)}
+        onClick={handelclose("right", false)}
         sx={{
           position: "absolute",
           right: 8,
@@ -98,9 +103,9 @@ const OnlineTest = ({anchor, handelclose}) => {
           <Autocomplete
             multiple
             id="checkboxes-tags-demo"
-            options={top100Films}
+            options={testName}
             disableCloseOnSelect
-            getOptionLabel={(option) => option.title}
+            getOptionLabel={(option) => option.test_name}
             renderOption={(props, option, { selected }) => (
               <li {...props}>
                 <Checkbox
@@ -109,7 +114,7 @@ const OnlineTest = ({anchor, handelclose}) => {
                   style={{ marginRight: 8 }}
                   checked={selected}
                 />
-                {option.title}
+                {option.test_name}
               </li>
             )}
             style={{ width: "100%", borderRadius: "10px" }}
@@ -164,7 +169,7 @@ const OnlineTest = ({anchor, handelclose}) => {
       </Box>
 
       <div className="OTLastCheckbox">
-        <Checkbox {...label} sx={{color:"lightgrey"}}/>
+        <Checkbox {...label} sx={{ color: "lightgrey" }} />
         <p>Set unlimited attempts</p>
       </div>
       {/* <Box className="selectTestCompleteBox">

@@ -252,3 +252,10 @@ export const getTestById=({callBack,test_id})=>{
     callBack(response);
   });
 }
+
+export const getOnlineTest = ({callBack})=>{
+  const url = APIS.getTestById
+  axios.get(url).then((response)=>{
+    callBack(response);
+  })
+}
