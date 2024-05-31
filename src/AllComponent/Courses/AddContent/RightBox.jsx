@@ -91,6 +91,7 @@ const RightBox = () => {
   const [videoopened, setVideoqopen] = useState(false);
   const [docopened, setDocopen] = useState(false);
   const [zipopened, setZipopen] = useState(false);
+  const [imgopened, setImgopen] = useState(false);
   const [icopened, setIcopen] = useState(false);
   const [loaderState, setLoaderState] = useState(false);
   const [imgUpload, setImageWhileUpload] = useState("");
@@ -105,11 +106,11 @@ const RightBox = () => {
 
   const onInroVideoDrop = async (files) => {
     // setLoaderState(true);
-    setVideoqopen(false);
+    // setVideoqopen(false);
     setStoreVideo(files[0]);
-    setVd({ vd, ["right"]: true });
-    setDocopen(false);
-    setDoc({ doc, ["right"]: true });
+    // setVd({ vd, ["right"]: true });
+    // setDocopen(false);
+    // setDoc({ doc, ["right"]: true });
     // toggleDrawervd("right", true);
     // uploadFile({
     //   payload,
@@ -129,6 +130,7 @@ const RightBox = () => {
     onDrop: onInroVideoDrop,
     onChange: (event) => console.log(event),
     accept: {
+
       "video/mp4": [".mp4"],
     },
   });
@@ -150,6 +152,12 @@ const RightBox = () => {
   };
   const handleCloseDialogZip = () => {
     setZipopen(false);
+  };
+  const handleClickOpenImg = () => {
+    setImgopen(true);
+  };
+  const handleCloseDialogImg = () => {
+    setImgopen(false);
   };
   const handleClickOpenIC = () => {
     setIcopen(true);
@@ -280,7 +288,8 @@ const RightBox = () => {
         </Typography>
         <Typography
           className="rightBoxTypography "
-          onClick={toggleDrawerI("right", true)}
+          // onClick={toggleDrawerI("right", true)}
+          onClick={handleClickOpenImg}
         >
           <LandscapeIcon className="folderIconRightBox" />
           Image
@@ -309,14 +318,14 @@ const RightBox = () => {
           Import Live
         </Typography>
       </div>
-      <Drawer
+      {/* <Drawer
         anchor={"right"}
         open={state["right"]}
         onClose={toggleDrawer("right", false)}
       >
         <AddContentDrawer handelclose={toggleDrawer} />
-      </Drawer>
-      <Drawer
+      </Drawer> */}
+      {/*<Drawer
         anchor={"right"}
         open={vd["right"]}
         onClose={toggleDrawervd("right", false)}
@@ -356,8 +365,7 @@ const RightBox = () => {
         open={ot["right"]}
         onClose={toggleDrawerOT("right", false)}
       >
-        {/* {OnlineTest("right")} */}
-        <OnlineTest handelclose={toggleDrawerOT} />
+       <OnlineTest handelclose={toggleDrawerOT} />
       </Drawer>
       <Drawer
         anchor={"right"}
@@ -372,8 +380,8 @@ const RightBox = () => {
         onClose={toggleDrawerZ("right", false)}
       >
         {ZipFile("right")}
-      </Drawer>
-      <BootstrapDialog
+    </Drawer>*/}
+      {/* <BootstrapDialog
         className="PopUP"
         onClose={handleCloseDialogIC}
         aria-labelledby="customized-dialog-title"
@@ -421,7 +429,6 @@ const RightBox = () => {
                 />
               </Box>
             </Box>
-          {/* niche wale box me map lagana hae api ane ke baad */}
             <Box className="SelectMainBox">
               
               <Box className="SelectBox">
@@ -548,6 +555,74 @@ const RightBox = () => {
               Import Selected
             </Button>
           </Box>
+      </BootstrapDialog> */}
+      <BootstrapDialog
+        className="PopUP"
+        onClose={handleCloseDialogImg}
+        aria-labelledby="customized-dialog-title"
+        open={imgopened}
+      >
+        <DialogTitle
+          sx={{ m: 0, p: 2, fontSize: "1rem" }}
+          id="customized-dialog-title"
+        ></DialogTitle>
+        <IconButton
+          aria-label="close"
+          onClick={handleCloseDialogImg}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+
+        <DialogContent>
+          <Box className="VideoBox">
+            <UploadFileRoundedIcon className="VideoIcon" />
+            <Typography gutterBottom className="UploadDoc">
+              <b> Upload Image(s)</b>
+            </Typography>
+            <Typography className="VideoPara">
+              You can upload upto 20 files at a time. Maximum file size that can
+              be attached is 4 MB.
+            </Typography>
+
+            <div {...getIntroVideoRootProps({ className: "dropzone" })}>
+              <input {...getIntroVideoInputProps()} />
+              <Box className="thumbnailUpload buttonBOx">
+                <Button
+                  variant="contained"
+                  className="SelectButton"
+                  // onClick={handleCreateTeam}
+                >
+                  Select File(s)
+                </Button>
+                <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
+                  Recommended Image size :{" "}
+                  <b>800px x 600px, PNG or JPEG file</b>
+                </Typography>
+                <LoaderComponent loaderState={loaderState} />
+                {imgUpload === "" && storedBasicInfo?.thumbnailPath && (
+                  <img
+                    src={storedBasicInfo?.thumbnailPath}
+                    width={140}
+                    height={"auto"}
+                  />
+                )}
+                {imgUpload != "" && (
+                  <img
+                    src={storedBasicInfo?.thumbnailPath}
+                    width={140}
+                    height={"auto"}
+                  />
+                )}
+              </Box>
+            </div>
+          </Box>
+        </DialogContent>
       </BootstrapDialog>
       <BootstrapDialog
         className="PopUP"
