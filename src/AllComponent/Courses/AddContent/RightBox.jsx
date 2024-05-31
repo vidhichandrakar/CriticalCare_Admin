@@ -103,6 +103,7 @@ const RightBox = () => {
     thumbnailPath: null,
   });
   const [storeVideo, setStoreVideo] = useState();
+  const [acceptType, setAcceptType] = useState({});
 
   const onInroVideoDrop = async (files) => {
     // setLoaderState(true);
@@ -129,31 +130,47 @@ const RightBox = () => {
   } = useDropzone({
     onDrop: onInroVideoDrop,
     onChange: (event) => console.log(event),
-    accept: {
-
-      "video/mp4": [".mp4"],
-    },
+    accept: acceptType,
   });
 
   const handleClickOpenVideo = () => {
+    setAcceptType({
+      "video/mp4": [".mp4"],
+    })
     setVideoqopen(true);
   };
   const handleCloseDialogVideo = () => {
     setVideoqopen(false);
   };
   const handleClickOpenDoc = () => {
+    setAcceptType({
+      "document/doc": [".doc"],
+      "document/pdf": [".pdf"],
+      "document/HTML ": [".HTML "],
+      "document/XLS ": [".XLS "],
+      "document/PPT ": [".PPT "],
+      "document/TXT": [".TXT"],
+    })
     setDocopen(true);
   };
   const handleCloseDialogDoc = () => {
     setDocopen(false);
   };
   const handleClickOpenZip = () => {
+    setAcceptType({
+      "zip/zip": [".zip"],
+    })
     setZipopen(true);
   };
   const handleCloseDialogZip = () => {
     setZipopen(false);
   };
   const handleClickOpenImg = () => {
+    setAcceptType({
+      "image/jpeg": [".jpeg"],
+      "image/png": [".png"],
+      "image/jpg": [".jpg"],
+    })
     setImgopen(true);
   };
   const handleCloseDialogImg = () => {
@@ -801,6 +818,7 @@ const RightBox = () => {
                   variant="contained"
                   className="SelectButton"
                   // onClick={handleCreateTeam}
+
                 >
                   Select File(s)
                 </Button>
