@@ -46,6 +46,11 @@ const SubjTestMainPage = ({ handleCreateNewTest }) => {
     setOpen(false);
   };
 
+  const [subjTestMainPage, setSubjTestMainPage] = useState(false);
+  const handleSubjTestMainPage = () => {
+    setSubjTestMainPage(true);
+  }
+
   return (
     <>
       <h2 style={{ marginLeft: "4%" }}>Add Subjective Test</h2>
@@ -91,7 +96,8 @@ const SubjTestMainPage = ({ handleCreateNewTest }) => {
           mb: "-9px",
           display: "flex",
           alignItems: "center",
-          width: "609px",
+          // width: "609px",
+          width: "517px",
           backgroundColor: "#e4e4e459",
           borderRadius: "10px",
         }}
@@ -116,7 +122,7 @@ const SubjTestMainPage = ({ handleCreateNewTest }) => {
         <h3>No Result found</h3>
       </Box>
 
-      <Divider sx={{ mt: "53px" }} />
+      <Divider sx={{ mt: "124px" }} />
       <Button className="subjTestAddTestBtn">Add test</Button>
     </>
   );

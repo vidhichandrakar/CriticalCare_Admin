@@ -709,6 +709,9 @@
 }
 
 /* SUBJECTIVE TEST CSS  */
+/* .fixingSubjTestWidth{ */
+  /* width: 39%; */
+/* } */
 .addSubjUploadBox{
   display: flex;
   flex-direction: row;
@@ -718,9 +721,9 @@
   color:#818181;
   position: relative;
   top: 28px;
-    left: 34px;
-    width: 88%;
-    padding: 1px 24px;
+  left: 34px;
+  width: 83%;
+  padding: 1px 24px;
 }
 .createNewTestBtn{
   background-color: #0f7af5 !important;
@@ -728,12 +731,11 @@
   text-transform: none !important;
   border-radius: 15px !important;
   height: 17%;
-    width: 43%;
-    position: relative;
-    top: 14px;
+  width: 43%;
+  position: relative;
+  top: 14px;
 }
 .A-searchImageSection{
-  /* background-color: orange; */
   height: 42% !important;
   width: 100% !important;
   text-align: center !important;
@@ -741,9 +743,12 @@
   top: 50px;
 }
 .subjBoldPara{
-  position: relative;
-  top: 41px;
-  left: 33px;
+  /* position: relative; */
+  /* top: 41px; */
+  /* left: -1px; */
+  margin-top: 56px;
+  margin-left: 35px;
+  margin-bottom: -42px;
 }
 
 .folderDrawerSubjTest {
@@ -751,11 +756,10 @@
   border-bottom-left-radius: 10px !important;
   height: 100%;
   width: 95%;
-  /* padding-left: 16px; */
   border-bottom: 1px seashell grey;
 }
 .subjTestBox{
-  margin: 8% 4% !important;
+  margin: 4% 3% !important;
 }
 .subjTestBox h4{
   margin-bottom: 2%;
@@ -764,24 +768,39 @@
   background-color: #e2ecf0 !important;
     color: #0f7af5 !important;
     border-radius: 15px !important;
-    padding: 14px 39px;
+    padding: 11px 39px;
     position: relative;
     left: -1px;
-    width: 25%;
+    width: 18%;
 }
 
-/* .stylingAutofield{
+/* .stylingAutofieldSubjTest{
   border-radius: 21px !important;
 } */
 .subjTestAddTestBtn {
   background-color: #43c5f0  !important;
   color: #ffffff !important;
   border-radius: 12px !important;
-  position: relative;
-  left: 89%;
-  top: 18px;
+  /* position: relative; */
+  /* left: 89%; */
+  /* top: 18px; */
   text-transform: none !important;
   padding: -2px 0px !important;
+  /* margin-left: 87% !important; */
+  margin-left: 83% !important;
+  margin-top: 14px !important;
+}
+.demoClasssss{
+  display: flex;
+  justify-content: right;
+  margin: 9px;
+}
+.wholeBOxxx{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 2px;
 }
 .subjTestFolderDrawer {
   border-top-left-radius: 10px !important;
@@ -789,5 +808,36 @@
   height: 100%;
   width: 89%;
   padding-left: 16px;
+  /* padding-left: -3px; */
   border-bottom: 1px seashell grey;
+}
+.addImgPara{
+  display: flex;
+    flex-direction: row;
+    width: 87%;
+    position: relative;
+    top: -27px;
+    left: 17px;
+    color: grey;
+}
+.yellowBoxDiscription{
+  background-color: #f4f4b7 !important;
+  width: 77%;
+  position: relative;
+  top: -27px;
+  left: 20px;
+  padding: 18px 26px;
+  border-radius: 15px;
+}
+.createnAddtestbtn{
+  background-color: #43c5f0  !important;
+  color: #ffffff !important;
+  border-radius: 12px !important;
+  /* position: relative; */
+  /* left: 89%; */
+  /* top: 18px; */
+  text-transform: none !important;
+  padding: -2px 0px !important;
+  margin-left: 75% !important;
+  margin-top: 5px !important;
 }
