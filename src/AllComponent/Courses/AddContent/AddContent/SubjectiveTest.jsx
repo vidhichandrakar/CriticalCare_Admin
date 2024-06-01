@@ -29,6 +29,9 @@ import Autocomplete from "@mui/material/Autocomplete";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import UploadIcon from "@mui/icons-material/Upload";
+import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import WestIcon from '@mui/icons-material/West';
+import { Link } from "react-router-dom";
 
 const top100Films = [
   { title: "The Shawshank Redemption", year: 1994 },
@@ -72,29 +75,44 @@ const SubjectiveTest = (anchor) => {
     setNewTest(true);
   };
 
+  const handleSubjTestMainPage = () => {
+    setNewTest(false)
+  }
+
   return (
-    <>
+    <div 
+    className="fixingSubjTestWidth"
+    >
       <Box
+          sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 580 }}
         className="subjTestFolderDrawer"
         role="presentation"
         onClick={toggleDrawer(anchor, false)}
         onKeyDown={toggleDrawer(anchor, false)}
       >
         {newTest ? (
-          <>
-            <h2 style={{ marginLeft: "4%" }}>Create New Subjective Test</h2>
+          <div>
+            <Box style={{ marginLeft: "4%" }} className="wholeBOxxx">
+              <Box sx={{alignItems:"center", display:"flex", flexDirection:"row"}}>
+              <WestIcon 
+              sx={{marginRight:"12px", marginLeft:"-14px"}}
+              onClick={handleSubjTestMainPage}/>
+             <Typography sx={{fontSize:"1.5rem"}}> <b>Create New Subjective Test</b></Typography>
+              </Box>
+
             <IconButton
               aria-label="close"
               onClick={handleClose}
-              sx={{
-                position: "absolute",
-                right: 8,
-                top: 8,
-                color: (theme) => theme.palette.grey[500],
-              }}
+              // sx={{
+              //   position: "absolute",
+              //   right: 8,
+              //   top: 8,
+              //   color: (theme) => theme.palette.grey[500],
+              // }}
             >
               <CloseIcon />
             </IconButton>
+            </Box>
             <Divider />
 
             <Box className="subjTestBox">
@@ -127,6 +145,7 @@ const SubjectiveTest = (anchor) => {
                     <TextField
                       {...params}
                       placeholder="Enter Test Name"
+                      // className="stylingAutofieldSubjTest"
                       className="stylingAutofield"
                     />
                   )}
@@ -186,14 +205,29 @@ const SubjectiveTest = (anchor) => {
               </Box>
             </Box>
 
-            <Divider sx={{ mt: "53px" }} />
-            <Button className="subjTestAddTestBtn">Add test</Button>
-          </>
+            <Box className="addImgPara">
+              <div><LightbulbIcon sx={{color:"yellow", position:"relative", top:"21px", right:"5px"}}/></div>
+              <div>
+                <p>Add images or PDFs containing subjective questions. You can attach upto 100 files.
+                   Maximum file size that can be attached is 40 MB.</p>
+              </div>
+            </Box>
+
+            <Box className="yellowBoxDiscription">
+               Your students will be able to upload their answer files.
+                You can evaluate & give feedback on their answer sheet.
+            </Box>
+
+            <Divider sx={{ mt: "43px" }} />
+            <Box className="demoClasssss">
+            <Button className="createnAddtestbtn">Create & Add Test</Button>
+            </Box>
+          </div>
         ) : (
           <SubjTestMainPage handleCreateNewTest={handleCreateNewTest} />
         )}
       </Box>
-    </>
+    </div>
   );
 };
 

@@ -299,6 +299,8 @@ const TestPortal = () => {
       created_by: 2,
       duration_hour: parseInt(addTest.testDuration),
       duration_minute: parseInt(addTest.hours),
+      "test_section_name":"test_section_name",
+      "test_section_Instruction":"test section instruction",
     };
     createTestPortal({
       payload,
@@ -314,9 +316,6 @@ const TestPortal = () => {
           },
         });
       },
-      error: (error) => {
-        console.log(error);
-      },
     });
   };
 
@@ -329,9 +328,9 @@ const TestPortal = () => {
         // toast.success("");
         const data = response.data;
         let storedValues = Object.assign({}, addTest);
-        storedValues.testName = data.test_name;
-        storedValues.testDuration = data.duration_minute;
-        storedValues.hours = data.duration_hour;
+        storedValues.testName = data?.test_name;
+        storedValues.testDuration = data?.duration_minute;
+        storedValues.hours = data?.duration_hour;
         setAddTest(storedValues);
       },
     });
@@ -485,19 +484,19 @@ const TestPortal = () => {
                           key={row?.code}
                         >
                           <TableCell className="alignTableBody">
-                            {row.test_name}
+                            {row?.test_name}
                           </TableCell>
                           <TableCell className="alignTableBody">
-                            {`${row.duration_hour}hr : ${row.duration_minute}min`}
+                            {`${row?.duration_hour}hr : ${row?.duration_minute}min`}
                           </TableCell>
                           <TableCell className="alignTableBody">
-                            {moment(row.createdAt).format("MM/DD/YYYY")}
+                            {moment(row?.createdAt).format("MM/DD/YYYY")}
                           </TableCell>
 
                           <TableCell sx={{ textAlign: "center" }}>
                             <MoreVertIcon
                               onClick={(event) =>
-                                handleClick(event, row.test_id)
+                                handleClick(event, row?.test_id)
                               }
                             />
                           </TableCell>

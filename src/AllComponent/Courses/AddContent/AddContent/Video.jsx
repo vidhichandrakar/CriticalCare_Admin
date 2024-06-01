@@ -46,8 +46,7 @@ const Video = (anchor) => {
 
     setState({ ...state, [anchor]: open });
   };
- 
-  
+
   // const { onClose, value: valueProp, open, ...other } = props;
 
   const [open, setOpen] = useState(false);
@@ -145,7 +144,14 @@ const Video = (anchor) => {
                 }}
               >
                 <InputBase
-                  sx={{ ml: 1, flex: 1,marginTop:"-10px", padding:"2px 11px", borderRadius:"9px", boxShadow:"none" }}
+                  sx={{
+                    ml: 1,
+                    flex: 1,
+                    marginTop: "-10px",
+                    padding: "2px 11px",
+                    borderRadius: "9px",
+                    boxShadow: "none",
+                  }}
                   placeholder="WhatsApp Video 2024-05 23 at 12.."
                   inputProps={{ "aria-label": "search your course by name" }}
                 />
