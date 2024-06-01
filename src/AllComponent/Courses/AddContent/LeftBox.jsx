@@ -33,7 +33,7 @@ const LeftBox = () => {
           
         </Box>
       </Box>
-      <Box className="innerTree">
+      {/* <Box className="innerTree">
         <FolderIcon className="folderIconContentTwo" />
         <Box className="innerHeading">
           <Typography sx={{ marginTop: 1 }}>Bank Exams lesson 1</Typography>
@@ -46,7 +46,7 @@ const LeftBox = () => {
            <Typography className="videoText">00:00:00</Typography>
         </Box>
       </Box>
-      <Box className="innerTree">
+        <Box className="innerTree">
         <img src={banner} className="folderIconContentTwo" width={45} height={42} style={{marginLeft:"1%"}} alt="doc"></img>
         <Box className="innerHeading">
           <Typography>Sample</Typography>
@@ -74,7 +74,8 @@ const LeftBox = () => {
       >
         <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
       </Popover>
-      </Box>
+      </Box> */}
+      
     </Fragment>
   );
 };

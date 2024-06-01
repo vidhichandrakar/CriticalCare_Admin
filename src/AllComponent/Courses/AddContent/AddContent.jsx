@@ -21,8 +21,12 @@ const AddContent = ({}) => {
             <b>Contents</b>
           </h2>
           <Box className="contentInnerLeftBox">
-            <LeftBox />
+            {/* <LeftBox /> */}
+            <Typography>
+              Video N?ame
+            </Typography>
           </Box>
+          
         </Box>
 
         <Box className="contentRightBox">
