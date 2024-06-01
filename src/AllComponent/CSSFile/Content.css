@@ -24,6 +24,15 @@
 .contentInnerLeftBox:hover{
  background-color: #eee;
 }
+.typoStyleVideo{
+  margin-top: 6% !important;
+  margin-left: 2% !important;
+}
+.videoBox{
+  display: flex;
+  flex-direction: row;
+  margin: 2%;
+}
 .folderIconContent{
   font-size: 5em !important;
   color: #0075FF !important;

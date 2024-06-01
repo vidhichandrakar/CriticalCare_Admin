@@ -119,10 +119,12 @@ const Trics1FreeMockTest = ({ onDelete }) => {
 
   const handlePublish = () => {
     const payload = {
-      is_publish:
-        courseData?.is_publish === "not published"
-          ? "published"
-          : "not published",
+      "courseDetails": {
+        is_publish:
+          courseData?.is_publish === "not published"
+            ? "published"
+            : "not published",
+      }
     };
     publishOrEditCourse({
       courseId: courseData?.course_id,

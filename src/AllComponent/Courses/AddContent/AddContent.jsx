@@ -33,7 +33,7 @@ const AddContent = ({}) => {
         subHeading={"Welcome to your Dashboard"}
       />
       <SideBar />
-      {console.log("videoDesc,",videoDesc)}
+      {console.log("videoDesc,", videoDesc)}
       <div className="formMain contentDisplay">
         <Box className="contentleftBox">
           <h2>
@@ -41,9 +41,19 @@ const AddContent = ({}) => {
           </h2>
           <Box className="contentInnerLeftBox">
             {/* <LeftBox /> */}
-   
-            {videoDesc?.map((item)=>
-            (<Typography>Video Name : {item?.fileName}</Typography>)
+
+            {videoDesc?.map(
+              (item) =>
+                item.thumbnailPath && (
+                  <Box className="videoBox">
+                    {console.log("dgvfhjsejkfdhns",item.thumbnailPath)}
+                    <video width="120" controls autoplay muted height={"120"}>
+                      <source src={item.thumbnailPath} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                    <Typography className="typoStyleVideo"> {item?.fileName}</Typography>
+                  </Box>
+                )
             )}
           </Box>
         </Box>
@@ -51,7 +61,10 @@ const AddContent = ({}) => {
         <Box className="contentRightBox">
           <Typography className="contentRightHeading"> Add content</Typography>
           <Box>
-            <RightBox contentType={contentType} handleVideoName={handleVideoName} />
+            <RightBox
+              contentType={contentType}
+              handleVideoName={handleVideoName}
+            />
           </Box>
         </Box>
         {/* <AddContentDrawer/> */}
