@@ -37,16 +37,12 @@ import {
   getSubcategoryList,
   uploadFile,
 } from "../../ActionFactory/apiActions";
-import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
-import Checkbox from '@mui/material/Checkbox';
+import Paper from "@mui/material/Paper";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
+import Checkbox from "@mui/material/Checkbox";
 
-
-
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
-
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -57,7 +53,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-const RightBox = () => {
+const RightBox = ({ contentType, handleVideoName }) => {
   const [state, setState] = useState({
     top: false,
     left: false,
@@ -102,26 +98,38 @@ const RightBox = () => {
     subCategory: "",
     thumbnailPath: null,
   });
+  const [uploadedVideo, setUploadedVideo] = useState([]);
   const [storeVideo, setStoreVideo] = useState();
   const [acceptType, setAcceptType] = useState({});
+  const [uploadedFileType,setUploadedFileType] = useState({});
 
   const onInroVideoDrop = async (files) => {
-    // setLoaderState(true);
-    // setVideoqopen(false);
-    setStoreVideo(files[0]);
-    // setVd({ vd, ["right"]: true });
-    // setDocopen(false);
-    // setDoc({ doc, ["right"]: true });
-    // toggleDrawervd("right", true);
-    // uploadFile({
-    //   payload,
-    //   callBack: (response) => {
-    //     storedValues.thumbnailPath = response?.data?.path;
-    //     setStoredBasicInfo(storedValues);
-    //     setLoaderState(false);
-    //   },
-    // });
-    // setStoredBasicInfo(storedValues);
+    let payload = new FormData();
+    payload.append("file", files[0], files[0]?.name);
+    setLoaderState(true);
+    uploadFile({
+      payload,
+      callBack: (response) => {
+        let arr = [...uploadedVideo];
+        let arr2 = {
+          fileName:"",
+          thumbnailPath:"",
+          content_name:"",
+          content_type_id:"",
+        }
+        arr2.fileName=response?.data?.fileName;
+        arr2.thumbnailPath=response?.data?.path;
+        arr2.content_name=uploadedFileType.content_name;
+        arr2.content_type_id=uploadedFileType.content_type_id;
+        arr.push(arr2)
+        console.log("arrarrarrarrarrarr,",arr)
+        setUploadedVideo(arr);
+        handleVideoName(arr);
+        setLoaderState(false);
+        setVideoqopen(false);
+      },
+    });
+    console.log("payload", payload);
   };
 
   const {
@@ -136,8 +144,10 @@ const RightBox = () => {
   const handleClickOpenVideo = () => {
     setAcceptType({
       "video/mp4": [".mp4"],
-    })
+    });
     setVideoqopen(true);
+    let videoType = contentType.filter((item)=>item.content_name==="Video")
+    setUploadedFileType(videoType[0])
   };
   const handleCloseDialogVideo = () => {
     setVideoqopen(false);
@@ -150,7 +160,7 @@ const RightBox = () => {
       "document/XLS ": [".XLS "],
       "document/PPT ": [".PPT "],
       "document/TXT": [".TXT"],
-    })
+    });
     setDocopen(true);
   };
   const handleCloseDialogDoc = () => {
@@ -159,7 +169,7 @@ const RightBox = () => {
   const handleClickOpenZip = () => {
     setAcceptType({
       "zip/zip": [".zip"],
-    })
+    });
     setZipopen(true);
   };
   const handleCloseDialogZip = () => {
@@ -170,7 +180,7 @@ const RightBox = () => {
       "image/jpeg": [".jpeg"],
       "image/png": [".png"],
       "image/jpg": [".jpg"],
-    })
+    });
     setImgopen(true);
   };
   const handleCloseDialogImg = () => {
@@ -263,9 +273,11 @@ const RightBox = () => {
     }
     setIL({ il, [anchor]: open });
   };
+
   return (
     <Fragment>
       <div className="rightBoxComplete">
+        {console.log("uploadedFileType",uploadedFileType)}
         <Typography
           className="rightBoxTypography "
           onClick={toggleDrawer("right", true)}
@@ -818,7 +830,6 @@ const RightBox = () => {
                   variant="contained"
                   className="SelectButton"
                   // onClick={handleCreateTeam}
-
                 >
                   Select File(s)
                 </Button>

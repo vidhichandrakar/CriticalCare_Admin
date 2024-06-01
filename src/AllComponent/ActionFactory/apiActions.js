@@ -259,3 +259,10 @@ export const getOnlineTest = ({callBack})=>{
     callBack(response);
   })
 }
+
+export const getContentType=({callBack})=>{
+  const url = APIS.contentType
+  axios.get(url).then((respose)=>{
+    callBack(respose);
+  })
+}

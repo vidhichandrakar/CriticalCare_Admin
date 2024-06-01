@@ -15,4 +15,5 @@ export const APIS = {
   getDuration: REACT_APP_API + "/duration",
   fileUpload: REACT_APP_API + "/fileupload",
   getTestById: REACT_APP_API + "/test",
+  contentType: REACT_APP_API + "/contentType",
 };
