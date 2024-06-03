@@ -46,7 +46,7 @@ const AddContent = ({}) => {
               (item) =>
                 item.thumbnailPath && (
                   <Box className="videoBox">
-                    {console.log("dgvfhjsejkfdhns",item.thumbnailPath)}
+                    {console.log("dgvfhjsejkfdhns",item.fileName.split(".")[1], "abcdddddd",item.fileName)}
                     <video width="120" controls autoplay muted height={"120"}>
                       <source src={item.thumbnailPath} type="video/mp4" />
                       Your browser does not support the video tag.
