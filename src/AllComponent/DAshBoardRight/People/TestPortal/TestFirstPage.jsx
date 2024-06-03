@@ -9,8 +9,8 @@ function TestFirstPage({testData}) {
   return (
     <div className="testRightSection">
       <TestInstructions testData={testData}/>
-      {/* <AddASection/> */}
-      <CreateQNS />
+      <AddASection/>
+      {/* <CreateQNS /> */}
     </div>
   );
 }

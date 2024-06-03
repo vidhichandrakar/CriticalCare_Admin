@@ -16,6 +16,7 @@ import Stack from "@mui/material/Stack";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import DialogContent from '@mui/material/DialogContent';
+import TextEditor from "../../../../Util/TextEditor";
 
 function AddASection() {
   
@@ -147,6 +148,7 @@ function AddASection() {
                           id="outlined-helperText"
                           defaultValue="This is an MCQ question"
                         />
+                        {/* <TextEditor /> */}
 
                   <FormControl>
                     <div className="answersAndSingle">
