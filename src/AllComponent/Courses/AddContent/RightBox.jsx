@@ -127,6 +127,9 @@ const RightBox = ({ contentType, handleVideoName }) => {
         handleVideoName(arr);
         setLoaderState(false);
         setVideoqopen(false);
+        setImgopen(false);
+        setDocopen(false);
+        setZipopen(false);
       },
     });
     console.log("payload", payload);
@@ -162,6 +165,8 @@ const RightBox = ({ contentType, handleVideoName }) => {
       "document/TXT": [".TXT"],
     });
     setDocopen(true);
+    let docType = contentType.filter((item)=>item.content_name==="Document");
+    setUploadedFileType(docType[0]);
   };
   const handleCloseDialogDoc = () => {
     setDocopen(false);
@@ -171,6 +176,8 @@ const RightBox = ({ contentType, handleVideoName }) => {
       "zip/zip": [".zip"],
     });
     setZipopen(true);
+    let zipType = contentType.filter((item)=>item.content_name==="Zip File")
+    setUploadedFileType(zipType[0])
   };
   const handleCloseDialogZip = () => {
     setZipopen(false);
@@ -182,6 +189,8 @@ const RightBox = ({ contentType, handleVideoName }) => {
       "image/jpg": [".jpg"],
     });
     setImgopen(true);
+    let imgType = contentType.filter((item)=>item.content_name==="Image")
+    setUploadedFileType(imgType[0])
   };
   const handleCloseDialogImg = () => {
     setImgopen(false);
