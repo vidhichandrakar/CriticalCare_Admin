@@ -53,7 +53,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-const RightBox = ({ contentType, handleVideoName }) => {
+const RightBox = ({ contentType, handleVideoName,handleInputChange }) => {
   const [state, setState] = useState({
     top: false,
     left: false,
@@ -112,18 +112,18 @@ const RightBox = ({ contentType, handleVideoName }) => {
       callBack: (response) => {
         let arr = [...uploadedVideo];
         let arr2 = {
-          fileName:"",
-          thumbnailPath:"",
           content_name:"",
+          content_url:"",
+          content_type:"",
           content_type_id:"",
         }
-        arr2.fileName=response?.data?.fileName;
-        arr2.thumbnailPath=response?.data?.path;
-        arr2.content_name=uploadedFileType.content_name;
+        arr2.content_name=response?.data?.fileName;
+        arr2.content_url=response?.data?.path;
+        arr2.content_type=uploadedFileType.content_name;
         arr2.content_type_id=uploadedFileType.content_type_id;
         arr.push(arr2)
-        console.log("arrarrarrarrarrarr,",arr)
         setUploadedVideo(arr);
+        handleInputChange("addContent",arr)
         handleVideoName(arr);
         setLoaderState(false);
         setVideoqopen(false);
@@ -132,7 +132,7 @@ const RightBox = ({ contentType, handleVideoName }) => {
         setZipopen(false);
       },
     });
-    console.log("payload", payload);
+
   };
 
   const {
@@ -286,7 +286,7 @@ const RightBox = ({ contentType, handleVideoName }) => {
   return (
     <Fragment>
       <div className="rightBoxComplete">
-        {console.log("uploadedFileType",uploadedFileType)}
+        {/* {console.log("uploadedFileType",uploadedFileType)} */}
         <Typography
           className="rightBoxTypography "
           onClick={toggleDrawer("right", true)}
