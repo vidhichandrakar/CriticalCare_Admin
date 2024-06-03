@@ -44,6 +44,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   const [courseData, setCourseData] = useState([]);
   const [loaderState, setLoaderState] = useState(false);
   const [validity, setValidity] = useState([{}]);
+  const [mulitiDuration, setMulitiDuration] = useState([{}]);
   let location = useLocation();
   const courseId = location.state?.id;
   const navigate = useNavigate();
@@ -72,15 +73,20 @@ const CreateCourses = ({ handleHeaderLabels }) => {
     }
   };
   const handleTrackerPage = (page, value) => {
+    console.log("okoi", value);
     if (page === 2) {
-      handleCreateCourse(value);
+      console.log("okokokokokoko", value);
+      // handleCreateCourse(value);
+      setMulitiDuration(value);
+
+      setTackerPage(3);
     } else {
       setTackerPage(page);
       handleHeaderLabels(basicInfo.Name);
     }
   };
 
-  const handleCreateCourse = (value) => {
+  const handleCreateCourse = () => {
     let payload;
     try {
       const courseDetails = {
@@ -97,8 +103,9 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         is_publish: "not published",
       };
       const courseAttachments = [];
-      
-      const courseDurations = value === undefined ? validity : value;
+
+      const courseDurations =
+        mulitiDuration === undefined ? validity : mulitiDuration;
       payload = {
         courseDetails: courseDetails,
         courseDurations: courseDurations,
@@ -142,7 +149,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         trackerPage={trackerPage}
         handleTrackerPage={handleTrackerPage}
       />
-      {console.log("courseData",courseData)}
+      {console.log("validityvalidity", validity)}
       {trackerPage === 0 ? (
         <CreateForm
           handleTrackerPage={handleTrackerPage}
@@ -155,9 +162,13 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           handleInputChange={handleInputChange}
           courseData={courseData}
         />
-      ) : (
-        <AddContent />
-      )}
+      ) : trackerPage === 3 ? (
+        <AddContent
+          handleTrackerPage={handleTrackerPage}
+          courseData={courseData}
+          handleInputChange={handleInputChange}
+        />
+      ) : null}
       <ToastContainer />
       <LoaderComponent loaderState={loaderState} />
     </Box>

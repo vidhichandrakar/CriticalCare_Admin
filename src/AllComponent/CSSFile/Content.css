@@ -25,10 +25,11 @@
  background-color: #eee;
 }
 .typoStyleVideo{
-  margin-top: 6% !important;
+  /* margin-top: 6% !important; */
   margin-left: 2% !important;
 }
 .videoBox{
+  align-items: center;
   display: flex;
   flex-direction: row;
   margin: 2%;
@@ -104,4 +105,8 @@
   color: #0075FF !important;
   margin-right: 7%;
   margin-bottom: -2%;
+ }
+
+ .zipFolderPrevIcon{
+  font-size: 7.5rem;
  }
