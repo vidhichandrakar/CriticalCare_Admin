@@ -11,12 +11,15 @@ import NoteIcon from "@mui/icons-material/Note";
 import { getContentType } from "../../ActionFactory/apiActions";
 import { commonButton } from "../../../Util/CommonFields";
 
-const AddContent = ({ handleInputChange, handleTrackerPage }) => {
+const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
   const [contentType, setContentType] = useState([]);
   const [videoDesc, setVideoDesc] = useState([{}]);
 
   useEffect(() => {
-    getContentType({
+    if(courseData){
+      setVideoDesc(courseData.contents);
+    }
+  getContentType({
       callBack: (response) => {
         setContentType(response.data);
       },
@@ -58,14 +61,15 @@ const AddContent = ({ handleInputChange, handleTrackerPage }) => {
   return (
     <div className="formMain contentDisplay">
       <Box className="contentleftBox">
+        {console.log("contentType",contentType)}
         <h2>
           <b>Contents</b>
         </h2>
         <Box className="contentInnerLeftBox">
-          {/* {console.log("dksjdn", videoDesc)} */}
+          {console.log("videoDesc", videoDesc)}
 
           {videoDesc?.map((item) =>
-            item?.content_name?.split(".")[1] === "mp4" ? (
+            item?.content_name?.split(".")[1] === "mp4"? (
               <Box className="videoBox">
                 {/* {console.log("dgvfhjsejkfdhns",item?.content_name?.split('.')[1])} */}
                 <video width="120" controls autoplay muted height={"120"}>
@@ -121,6 +125,7 @@ const AddContent = ({ handleInputChange, handleTrackerPage }) => {
             contentType={contentType}
             handleVideoName={handleVideoName}
             handleInputChange={handleInputChange}
+            courseData={courseData}
           />
         </Box>
       </Box>

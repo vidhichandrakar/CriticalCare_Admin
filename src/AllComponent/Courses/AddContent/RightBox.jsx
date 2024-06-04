@@ -53,7 +53,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-const RightBox = ({ contentType, handleVideoName,handleInputChange }) => {
+const RightBox = ({ contentType, handleVideoName, handleInputChange, courseData }) => {
   const [state, setState] = useState({
     top: false,
     left: false,
@@ -149,7 +149,7 @@ const RightBox = ({ contentType, handleVideoName,handleInputChange }) => {
       "video/mp4": [".mp4"],
     });
     setVideoqopen(true);
-    let videoType = contentType.filter((item)=>item.content_name==="Video")
+    let videoType = contentType.filter((item)=>item.content_type_name==="Video")
     setUploadedFileType(videoType[0])
   };
   const handleCloseDialogVideo = () => {
@@ -165,7 +165,7 @@ const RightBox = ({ contentType, handleVideoName,handleInputChange }) => {
       "document/TXT": [".TXT"],
     });
     setDocopen(true);
-    let docType = contentType.filter((item)=>item.content_name==="Document");
+    let docType = contentType.filter((item)=>item.content_type_name==="Document");
     setUploadedFileType(docType[0]);
   };
   const handleCloseDialogDoc = () => {
@@ -176,7 +176,7 @@ const RightBox = ({ contentType, handleVideoName,handleInputChange }) => {
       "zip/zip": [".zip"],
     });
     setZipopen(true);
-    let zipType = contentType.filter((item)=>item.content_name==="Zip File")
+    let zipType = contentType.filter((item)=>item.content_type_name==="Zip File")
     setUploadedFileType(zipType[0])
   };
   const handleCloseDialogZip = () => {
@@ -189,7 +189,7 @@ const RightBox = ({ contentType, handleVideoName,handleInputChange }) => {
       "image/jpg": [".jpg"],
     });
     setImgopen(true);
-    let imgType = contentType.filter((item)=>item.content_name==="Image")
+    let imgType = contentType.filter((item)=>item.content_type_name==="Image")
     setUploadedFileType(imgType[0])
   };
   const handleCloseDialogImg = () => {
@@ -286,7 +286,7 @@ const RightBox = ({ contentType, handleVideoName,handleInputChange }) => {
   return (
     <Fragment>
       <div className="rightBoxComplete">
-        {/* {console.log("uploadedFileType",uploadedFileType)} */}
+        {console.log("course Data",courseData)}
         <Typography
           className="rightBoxTypography "
           onClick={toggleDrawer("right", true)}
