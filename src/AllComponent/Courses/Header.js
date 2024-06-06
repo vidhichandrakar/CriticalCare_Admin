@@ -25,7 +25,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import Popover from "@mui/material/Popover";
 import Logo from "../../Media/Logo.png";
 
-const Header = ({ Heading, subHeading }) => {
+const Header = ({ Heading, subHeading, OpenSidebar }) => {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -64,6 +64,9 @@ const Header = ({ Heading, subHeading }) => {
   return (
     <Box className="header">
       <Box className="HeaderLeft">
+        <Box onClick={OpenSidebar}>
+          X
+        </Box>
         <Typography className="headerText">{Heading}</Typography>
       </Box>
       <Box className="HeaderRight">

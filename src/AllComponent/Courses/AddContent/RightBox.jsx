@@ -19,6 +19,7 @@ import ImportLive from "./AddContent/ImportLive";
 import OnlineTest from "./AddContent/OnlineTest";
 import SubjectiveTest from "./AddContent/SubjectiveTest";
 import ZipFile from "./AddContent/ZipFile";
+import UrlFile from "./AddContent/Url";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
@@ -41,6 +42,7 @@ import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Checkbox from "@mui/material/Checkbox";
+import Url from "./AddContent/Url";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -82,6 +84,9 @@ const RightBox = ({ contentType, handleVideoName }) => {
     left: false,
   });
   const [il, setIL] = useState({
+    left: false,
+  });
+  const [url , setUrl] = useState({
     left: false,
   });
   const [videoopened, setVideoqopen] = useState(false);
@@ -282,6 +287,15 @@ const RightBox = ({ contentType, handleVideoName }) => {
     }
     setIL({ il, [anchor]: open });
   };
+  const toggleDrawerUrl = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setUrl({ url, [anchor]: open });
+  };
 
   return (
     <Fragment>
@@ -355,15 +369,22 @@ const RightBox = ({ contentType, handleVideoName }) => {
           <DownloadForOfflineSharpIcon className="folderIconRightBox" />
           Import Live
         </Typography>
+        <Typography
+          className="rightBoxTypography "
+          onClick={toggleDrawerUrl("right", true)}
+        >
+          <DownloadForOfflineSharpIcon className="folderIconRightBox" />
+          URL
+        </Typography>
       </div>
-      {/* <Drawer
+    <Drawer
         anchor={"right"}
         open={state["right"]}
         onClose={toggleDrawer("right", false)}
       >
         <AddContentDrawer handelclose={toggleDrawer} />
-      </Drawer> */}
-      {/*<Drawer
+      </Drawer>
+      <Drawer
         anchor={"right"}
         open={vd["right"]}
         onClose={toggleDrawervd("right", false)}
@@ -418,8 +439,15 @@ const RightBox = ({ contentType, handleVideoName }) => {
         onClose={toggleDrawerZ("right", false)}
       >
         {ZipFile("right")}
-    </Drawer>*/}
-      {/* <BootstrapDialog
+    </Drawer>
+      <Drawer
+        anchor={"right"}
+        open={url["right"]}
+        onClose={toggleDrawerUrl("right", false)}
+      >
+        <Url handelclose={toggleDrawerUrl}/>
+    </Drawer>
+    <BootstrapDialog
         className="PopUP"
         onClose={handleCloseDialogIC}
         aria-labelledby="customized-dialog-title"
@@ -593,7 +621,7 @@ const RightBox = ({ contentType, handleVideoName }) => {
               Import Selected
             </Button>
           </Box>
-      </BootstrapDialog> */}
+      </BootstrapDialog>
       <BootstrapDialog
         className="PopUP"
         onClose={handleCloseDialogImg}

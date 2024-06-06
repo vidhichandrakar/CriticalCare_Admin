@@ -18,6 +18,7 @@ import Configuration from "../Configuration/Configuration";
 import { Height } from "@mui/icons-material";
 import DescriptionIcon from "@mui/icons-material/Description";
 import SortIcon from "@mui/icons-material/Sort";
+import { Box } from "@mui/material";
 
 function SideBar({ openSidebarToggle, OpenSidebar }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -129,15 +130,15 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
 
         <div className="sidebar-list sidebar-list-item BottomLine">
           <Link to="/DashBoard">
-            <Typography
+            <Box
               id="hoverrr"
               className={highlight === "DashBoard" ? "hoverrr2" : ""}
               sx={{ mt: 1 }}
               onClick={() => handleHighlight("DashBoard")}
             >
               <DashboardIcon className="icon" />
-              DashBoard
-            </Typography>
+              <Typography>DashBoard</Typography>
+            </Box>
           </Link>
 
           <Link to="/YourCourses">
@@ -190,26 +191,26 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
             </Collapse>
           </Link>
           <Link to="/TestPortal">
-            <Typography
+            <Box
               id="hoverrr"
               className={highlight === "TestPortal" ? "hoverrr2" : ""}
               sx={{ mt: -2 }}
               onClick={() => handleHighlight("TestPortal")}
             >
               <AssignmentIcon className="icon" />
-              Test Portal
-            </Typography>
+              <Typography>Test Portal</Typography>
+            </Box>
           </Link>
           <Link to="/Analytics">
-            <Typography
+            <Box
               id="hoverrr"
               className={highlight === "Analytics" ? "hoverrr2" : ""}
               sx={{ mt: -2 }}
               onClick={() => handleHighlight("Analytics")}
             >
               <SignalCellularAltIcon className="icon" />
-              Analytics
-            </Typography>
+              <Typography>Analytics</Typography>
+            </Box>
           </Link>
 
           <Link to="/User">
@@ -260,15 +261,15 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
           </Link>
 
           <Link to="/Testimonial">
-            <Typography
+            <Box
               id="hoverrr"
               className={highlight === "Testimonial" ? "hoverrr2" : ""}
               sx={{ mt: -2 }}
               onClick={() => handleHighlight("Testimonial")}
             >
               <DescriptionIcon className="icon" sx={{ fontSize: "1.4em" }} />
-              Testimonial
-            </Typography>
+              <Typography>Testimonial</Typography>
+            </Box>
           </Link>
           <Link>
             <ListItemButton onClick={handleHideSubCat} className="listButton">
