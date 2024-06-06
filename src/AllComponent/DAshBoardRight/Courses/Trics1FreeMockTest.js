@@ -58,7 +58,6 @@ const Trics1FreeMockTest = ({ onDelete }) => {
     setAnchorEl(null);
   };
 
-
   const isNotEmptyObject = (obj) => {
     return obj && typeof obj === "object" && Object.keys(obj).length;
   };
@@ -119,12 +118,12 @@ const Trics1FreeMockTest = ({ onDelete }) => {
 
   const handlePublish = () => {
     const payload = {
-      "courseDetails": {
+      courseDetails: {
         is_publish:
           courseData?.is_publish === "not published"
             ? "published"
             : "not published",
-      }
+      },
     };
     publishOrEditCourse({
       courseId: courseData?.course_id,
@@ -164,14 +163,14 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                   <p className="greyPara">
                     ₹
                     {courseData?.durations?.length &&
-                      courseData?.durations[0]?.offer_price}
+                      courseData?.durations[0]?.price}
                   </p>
                 </div>
                 <div className="offerPrice">
                   <p className="blackPara">Offer Price</p>
                   <p className="greyPara">
                     {courseData?.durations?.length &&
-                      courseData?.durations[0]?.price}
+                      courseData?.durations[0]?.offer_price}
                   </p>
                 </div>
               </div>
@@ -202,7 +201,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                   </>
                 )
               ) : null}
-        
+
               <div className="StuEnrViewAll">
                 <div>
                   <p className="blackPara">Student Enrolled</p>
@@ -217,14 +216,14 @@ const Trics1FreeMockTest = ({ onDelete }) => {
             </div>
 
             <div>
-              {courseData?.thumbnail_path?<img
-                src={courseData?.thumbnail_path}
-                className="rightSideRow"
-              />:<img
-              src={yellowEnvlope}
-              className="rightSideRow"
-            />}
-              
+              {courseData?.thumbnail_path ? (
+                <img
+                  src={courseData?.thumbnail_path}
+                  className="rightSideRow"
+                />
+              ) : (
+                <img src={yellowEnvlope} className="rightSideRow" />
+              )}
             </div>
           </div>
 
@@ -277,7 +276,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                   <DeleteIcon className="PoPIcon" />
                   Delete
                 </MenuItem>
-                
+
                 <MenuItem
                   value={30}
                   className="greyPara"

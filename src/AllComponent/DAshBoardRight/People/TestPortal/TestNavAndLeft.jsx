@@ -42,16 +42,16 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-function TestNavAndLeft() {
+function TestNavAndLeft({setMcqopen}) {
   const [expanded, setExpanded] = useState(false);
-  const [mcqopened, setMcqopen] = useState(false);
+  // const [openqns, setOpenqns] = useState(false);
 
   const handleClickOpenMCQ = () => {
     setMcqopen(true);
   };
-  const handleCloseDialogMCQ = () => {
-    setMcqopen(false);
-  };
+  // const handleCloseDialogMCQ = () => {
+  //   setMcqopen(false);
+  // };
 
   const handleExpansion = () => {
     setExpanded((prevExpanded) => !prevExpanded);
@@ -367,7 +367,7 @@ function TestNavAndLeft() {
             </Typography>
           </AccordionDetails>
         </Accordion>
-        <BootstrapDialog
+        {/* <BootstrapDialog
             className="PopUP"
             onClose={handleCloseDialogMCQ}
             aria-labelledby="customized-dialog-title"
@@ -431,7 +431,7 @@ function TestNavAndLeft() {
                 Add Section
               </Button>
             </DialogActions>
-          </BootstrapDialog>
+          </BootstrapDialog> */}
       </Box>
     </aside>
   );

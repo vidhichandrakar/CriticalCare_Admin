@@ -576,9 +576,6 @@
 .folderDrawer{
   border-top-left-radius: 10px !important;
   border-bottom-left-radius: 10px !important;
-  height: 100%;
-  /* width: 89%; */
-  padding-left: 16px;
   border-bottom: 1px seashell grey;
 }
 .HeaderBox{
@@ -598,12 +595,23 @@
   background-color: #43c5f0  !important;
   color: #ffffff !important;
   border-radius: 12px !important;
-  position: relative;
+  /* position: relative;
   left: 82%;
-  top: 18px;
+  top: 18px; */
   text-transform: none !important;
+  font-size: 1.2rem !important ;
+  padding: 2px 31px !important;
+  font-weight: 600 !important;
+
 }
 
+.UploadBtnBox{
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-top: 3%;
+    margin-right: 3%;;
+}
 
 /* VIDEO DRAWER CSS  */
 .dividingVdoSections{

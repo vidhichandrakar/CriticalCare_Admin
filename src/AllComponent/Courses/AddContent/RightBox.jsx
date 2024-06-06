@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import FolderIcon from "@mui/icons-material/Folder";
 import { Box, Button, Typography } from "@mui/material";
 // import FolderIcon from '@mui/icons-material/Folder';
@@ -19,6 +19,7 @@ import ImportLive from "./AddContent/ImportLive";
 import OnlineTest from "./AddContent/OnlineTest";
 import SubjectiveTest from "./AddContent/SubjectiveTest";
 import ZipFile from "./AddContent/ZipFile";
+import UrlFile from "./AddContent/Url";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
@@ -41,7 +42,7 @@ import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Checkbox from "@mui/material/Checkbox";
-import { useEffect } from "react";
+import Url from "./AddContent/Url";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -90,6 +91,9 @@ const RightBox = ({
   const [il, setIL] = useState({
     left: false,
   });
+  const [url , setUrl] = useState({
+    left: false,
+  });
   const [videoopened, setVideoqopen] = useState(false);
   const [docopened, setDocopen] = useState(false);
   const [zipopened, setZipopen] = useState(false);
@@ -110,13 +114,9 @@ const RightBox = ({
   const [uploadedFileType, setUploadedFileType] = useState({});
 
   useEffect(() => {
-    console.log("eoijfdksl ")
-    if (courseData.contents.length) {
-      console.log("owidjhjks ")
+    if (courseData?.contents?.length) {
       setUploadedVideo(courseData.contents);
     }
-    console.log("poijhbv ")
-
   }, []);
 
   const onInroVideoDrop = async (files) => {
@@ -137,7 +137,7 @@ const RightBox = ({
         arr2.content_url = response?.data?.path;
         arr2.content_type = uploadedFileType.content_type_name;
         arr2.content_type_id = uploadedFileType.content_type_id;
-        if(courseData.contents.length){
+        if(courseData?.contents?.length){
           arr2.course_id = courseData.course_id
         }
         arr.push(arr2);
@@ -308,12 +308,19 @@ const RightBox = ({
     }
     setIL({ il, [anchor]: open });
   };
+  const toggleDrawerUrl = (anchor, open) => (event) => {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
+      return;
+    }
+    setUrl({ url, [anchor]: open });
+  };
 
   return (
     <Fragment>
       <div className="rightBoxComplete">
-        {console.log("course Data", courseData)}
-        {console.log("cuploadedFileTypea", uploadedFileType)}
         <Typography
           className="rightBoxTypography "
           onClick={toggleDrawer("right", true)}
@@ -382,15 +389,22 @@ const RightBox = ({
           <DownloadForOfflineSharpIcon className="folderIconRightBox" />
           Import Live
         </Typography>
+        <Typography
+          className="rightBoxTypography "
+          onClick={toggleDrawerUrl("right", true)}
+        >
+          <DownloadForOfflineSharpIcon className="folderIconRightBox" />
+          URL
+        </Typography>
       </div>
-      {/* <Drawer
+    <Drawer
         anchor={"right"}
         open={state["right"]}
         onClose={toggleDrawer("right", false)}
       >
         <AddContentDrawer handelclose={toggleDrawer} />
-      </Drawer> */}
-      {/*<Drawer
+      </Drawer>
+      <Drawer
         anchor={"right"}
         open={vd["right"]}
         onClose={toggleDrawervd("right", false)}
@@ -445,8 +459,15 @@ const RightBox = ({
         onClose={toggleDrawerZ("right", false)}
       >
         {ZipFile("right")}
-    </Drawer>*/}
-      {/* <BootstrapDialog
+    </Drawer>
+      <Drawer
+        anchor={"right"}
+        open={url["right"]}
+        onClose={toggleDrawerUrl("right", false)}
+      >
+        <Url handelclose={toggleDrawerUrl}/>
+    </Drawer>
+    <BootstrapDialog
         className="PopUP"
         onClose={handleCloseDialogIC}
         aria-labelledby="customized-dialog-title"
@@ -620,7 +641,7 @@ const RightBox = ({
               Import Selected
             </Button>
           </Box>
-      </BootstrapDialog> */}
+      </BootstrapDialog>
       <BootstrapDialog
         className="PopUP"
         onClose={handleCloseDialogImg}

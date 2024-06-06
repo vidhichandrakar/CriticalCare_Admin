@@ -5,12 +5,11 @@ import AddASection from "./AddASection";
 import TestInstructions from "./TestInstructions";
 import CreateQNS from "./CreateQNS";
 
-function TestFirstPage({testData}) {
+function TestFirstPage({testData, openqns, setCqopen,opencreaterqns}) {
   return (
     <div className="testRightSection">
       <TestInstructions testData={testData}/>
-      <AddASection/>
-      {/* <CreateQNS /> */}
+      {openqns ?  <CreateQNS setCqopen = {setCqopen} opencreaterqns={opencreaterqns}/> : <AddASection/>  }
     </div>
   );
 }

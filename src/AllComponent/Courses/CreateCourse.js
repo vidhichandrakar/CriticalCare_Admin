@@ -51,6 +51,12 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (courseData?.contents?.length) {
+      setAttachment(courseData?.contents);
+    }
+  });
+  
+  useEffect(() => {
     if (courseId) {
       setLoaderState(true);
       getCourseById({
@@ -61,7 +67,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           setLoaderState(false);
         },
       });
-    }
+    } 
   }, [courseId]);
 
   const handleInputChange = (type, value) => {
@@ -70,23 +76,21 @@ const CreateCourses = ({ handleHeaderLabels }) => {
     } else if (type === "editPrice") {
       setEditPrice([value]);
       setValidity([value]);
-      // setNewtest(value)
     } else if (type === "addContent") {
       setAttachment(value);
     }
   };
   const handleTrackerPage = (page, value) => {
     if (page === 2) {
-      console.log("okokokokokoko", value);
-      // handleCreateCourse(value);
       setMulitiDuration(value);
-
       setTackerPage(3);
-    } 
-    else if(page===3){
-      handleCreateCourse(attachments);
-    }
-    else {
+    } else if (page === 3) {
+      if (courseData?.contents?.length) {
+        handleCreateCourse(attachments);
+      } else {
+        handleCreateCourse(attachments);
+      }
+    } else {
       setTackerPage(page);
       handleHeaderLabels(basicInfo.Name);
     }
@@ -122,7 +126,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       console.log(error);
     }
     if (courseId) {
-      // const payload = formData;
       publishOrEditCourse({
         courseId: courseId,
         payload,
@@ -133,7 +136,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
     } else {
       createCourse({
         courseData: payload,
-
         callBack: (response) => {
           toast.success("Course added successfully!", {
             autoClose: 500,
@@ -155,8 +157,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         trackerPage={trackerPage}
         handleTrackerPage={handleTrackerPage}
       />
-      {console.log("validityvalidity", validity)}
-      {console.log("attachmentsattachments", attachments)}
       {trackerPage === 0 ? (
         <CreateForm
           handleTrackerPage={handleTrackerPage}

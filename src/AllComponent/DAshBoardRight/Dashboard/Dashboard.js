@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 // import Header from "../../Courses/CoursesHeader";
 import Header from "../../Courses/Header";
@@ -9,7 +9,13 @@ import SideBar from "../../AdminDashboardMain/SideBar";
 import { useEffect } from "react";
 import { redirectRestriction } from "../../../Util/RedirectRestriction";
 
-const Dashboard = ({ OpenSidebar }) => {
+const Dashboard = () => {
+  const [openSidebarToggle, setOpenSidebarToggle] = useState(false)
+
+  const OpenSidebar = () => {
+    setOpenSidebarToggle(!openSidebarToggle)
+  }
+
   const navigate = useNavigate();
   useEffect(() => {
     if (!redirectRestriction()) {
@@ -21,8 +27,9 @@ const Dashboard = ({ OpenSidebar }) => {
       <Header
             Heading={"Hi 360 Critical Care,"}
             subHeading={"Welcome to your Dashboard"}
+            OpenSidebar={OpenSidebar}
           />
-      <SideBar />
+      <SideBar openSidebarToggle={openSidebarToggle} OpenSidebar={OpenSidebar}/>
       
       <main className="main-container">
  

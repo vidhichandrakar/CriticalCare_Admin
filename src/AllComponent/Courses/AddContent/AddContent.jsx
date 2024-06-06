@@ -16,10 +16,10 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
   const [videoDesc, setVideoDesc] = useState([{}]);
 
   useEffect(() => {
-    if(courseData){
+    if (courseData) {
       setVideoDesc(courseData.contents);
     }
-  getContentType({
+    getContentType({
       callBack: (response) => {
         setContentType(response.data);
       },
@@ -41,37 +41,29 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
     );
   };
 
-  const handleImageType=(value)=>{
-    return(
-      value === "jpeg" ||
-      value === "png" ||
-      value === "jpg"
-    )
-  }
+  const handleImageType = (value) => {
+    return value === "jpeg" || value === "png" || value === "jpg";
+  };
 
   // const handleZipClick=()=>{
   //   console.log("ijkiuhniuhb")
   // }
 
-  const handleCreateCourse=()=>{
+  const handleCreateCourse = () => {
     let createCourse = 3;
     handleTrackerPage(3, createCourse);
-  }
+  };
 
   return (
     <div className="formMain contentDisplay">
       <Box className="contentleftBox">
-        {console.log("contentType",contentType)}
         <h2>
           <b>Contents</b>
         </h2>
         <Box className="contentInnerLeftBox">
-          {console.log("videoDesc", videoDesc)}
-
           {videoDesc?.map((item) =>
-            item?.content_name?.split(".")[1] === "mp4"? (
+            item?.content_name?.split(".")[1] === "mp4" ? (
               <Box className="videoBox">
-                {/* {console.log("dgvfhjsejkfdhns",item?.content_name?.split('.')[1])} */}
                 <video width="120" controls autoplay muted height={"120"}>
                   <source src={item.content_url} type="video/mp4" />
                   Your browser does not support the video tag.
@@ -82,7 +74,6 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
               </Box>
             ) : handleImageType(item?.content_name?.split(".")[1]) ? (
               <Box className="videoBox">
-                {/* {console.log("dgvfhjsejkfdhns",item.content_url)} */}
                 <img src={item.content_url} height="120px" width="120px" />
                 <Typography className="typoStyleVideo">
                   {item?.content_name}
@@ -90,7 +81,6 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
               </Box>
             ) : item?.content_name?.split(".")[1] === "zip" ? (
               <Box className="videoBox">
-                {console.log("dgvfhjsejkfdhns", item.content_name)}
                 <FolderZipIcon className="zipFolderPrevIcon" />
                 <Typography className="typoStyleVideo">
                   {item.content_name}
@@ -111,12 +101,12 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
           )}
         </Box>
         <Box className="/">
-      {commonButton({
-        handleTrackerPage: () => handleCreateCourse(),
-        className: "coursesButton",
-        label: "Create Course",
-      })}
-      </Box>
+          {commonButton({
+            handleTrackerPage: () => handleCreateCourse(),
+            className: "coursesButton",
+            label: "Create Course",
+          })}
+        </Box>
       </Box>
       <Box className="contentRightBox">
         <Typography className="contentRightHeading"> Add content</Typography>
@@ -129,8 +119,6 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
           />
         </Box>
       </Box>
- 
-      {/* <AddContentDrawer/> */}
     </div>
   );
 };
