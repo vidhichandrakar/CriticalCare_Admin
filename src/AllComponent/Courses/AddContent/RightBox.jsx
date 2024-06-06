@@ -110,13 +110,9 @@ const RightBox = ({
   const [uploadedFileType, setUploadedFileType] = useState({});
 
   useEffect(() => {
-    console.log("eoijfdksl ")
-    if (courseData.contents.length) {
-      console.log("owidjhjks ")
+    if (courseData?.contents?.length) {
       setUploadedVideo(courseData.contents);
     }
-    console.log("poijhbv ")
-
   }, []);
 
   const onInroVideoDrop = async (files) => {
@@ -137,7 +133,7 @@ const RightBox = ({
         arr2.content_url = response?.data?.path;
         arr2.content_type = uploadedFileType.content_type_name;
         arr2.content_type_id = uploadedFileType.content_type_id;
-        if(courseData.contents.length){
+        if(courseData?.contents?.length){
           arr2.course_id = courseData.course_id
         }
         arr.push(arr2);
@@ -312,8 +308,6 @@ const RightBox = ({
   return (
     <Fragment>
       <div className="rightBoxComplete">
-        {console.log("course Data", courseData)}
-        {console.log("cuploadedFileTypea", uploadedFileType)}
         <Typography
           className="rightBoxTypography "
           onClick={toggleDrawer("right", true)}
