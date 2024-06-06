@@ -268,7 +268,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
         if (parseInt(storedValues.price) > parseInt(storedValues.offer_price)) {
           let copyArr = [];
           copyArr.push(storedValues);
-          handleInputChange("editPrice", copyArr);
+          handleInputChange("editPrice", storedValues);
           handleTrackerPage(2);
         } else {
           toast.error("Offer Price Must Be Less Then Regular Price", {
@@ -286,7 +286,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
         if (parseInt(storedValues.price) > parseInt(storedValues.offer_price)) {
           let copyArr = [];
           copyArr.push(storedValues);
-          handleInputChange("editPrice", copyArr);
+          handleInputChange("editPrice", storedValues);
           handleTrackerPage(2);
         } else {
           toast.error("Offer Price Must Be Less Then Regular Price", {
@@ -309,7 +309,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
         if (parseInt(storedValues.price) > parseInt(storedValues.offer_price)) {
           let copyArr = [];
           copyArr.push(storedValues);
-          handleInputChange("editPrice", copyArr);
+          handleInputChange("editPrice", storedValues);
           handleTrackerPage(2);
         } else {
           toast.error("Offer Price Must Be Less Then Regular Price", {

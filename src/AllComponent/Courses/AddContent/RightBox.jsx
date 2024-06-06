@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import FolderIcon from "@mui/icons-material/Folder";
 import { Box, Button, Typography } from "@mui/material";
 // import FolderIcon from '@mui/icons-material/Folder';
@@ -55,7 +55,12 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-const RightBox = ({ contentType, handleVideoName }) => {
+const RightBox = ({
+  contentType,
+  handleVideoName,
+  handleInputChange,
+  courseData,
+}) => {
   const [state, setState] = useState({
     top: false,
     left: false,
@@ -106,7 +111,13 @@ const RightBox = ({ contentType, handleVideoName }) => {
   const [uploadedVideo, setUploadedVideo] = useState([]);
   const [storeVideo, setStoreVideo] = useState();
   const [acceptType, setAcceptType] = useState({});
-  const [uploadedFileType,setUploadedFileType] = useState({});
+  const [uploadedFileType, setUploadedFileType] = useState({});
+
+  useEffect(() => {
+    if (courseData?.contents?.length) {
+      setUploadedVideo(courseData.contents);
+    }
+  }, []);
 
   const onInroVideoDrop = async (files) => {
     let payload = new FormData();
@@ -117,18 +128,21 @@ const RightBox = ({ contentType, handleVideoName }) => {
       callBack: (response) => {
         let arr = [...uploadedVideo];
         let arr2 = {
-          fileName:"",
-          thumbnailPath:"",
-          content_name:"",
-          content_type_id:"",
+          content_name: "",
+          content_url: "",
+          content_type: "",
+          content_type_id: "",
+        };
+        arr2.content_name = response?.data?.fileName;
+        arr2.content_url = response?.data?.path;
+        arr2.content_type = uploadedFileType.content_type_name;
+        arr2.content_type_id = uploadedFileType.content_type_id;
+        if(courseData?.contents?.length){
+          arr2.course_id = courseData.course_id
         }
-        arr2.fileName=response?.data?.fileName;
-        arr2.thumbnailPath=response?.data?.path;
-        arr2.content_name=uploadedFileType.content_name;
-        arr2.content_type_id=uploadedFileType.content_type_id;
-        arr.push(arr2)
-        console.log("arrarrarrarrarrarr,",arr)
+        arr.push(arr2);
         setUploadedVideo(arr);
+        handleInputChange("addContent", arr);
         handleVideoName(arr);
         setLoaderState(false);
         setVideoqopen(false);
@@ -137,7 +151,6 @@ const RightBox = ({ contentType, handleVideoName }) => {
         setZipopen(false);
       },
     });
-    console.log("payload", payload);
   };
 
   const {
@@ -154,8 +167,10 @@ const RightBox = ({ contentType, handleVideoName }) => {
       "video/mp4": [".mp4"],
     });
     setVideoqopen(true);
-    let videoType = contentType.filter((item)=>item.content_name==="Video")
-    setUploadedFileType(videoType[0])
+    let videoType = contentType.filter(
+      (item) => item.content_type_name === "Video"
+    );
+    setUploadedFileType(videoType[0]);
   };
   const handleCloseDialogVideo = () => {
     setVideoqopen(false);
@@ -170,7 +185,9 @@ const RightBox = ({ contentType, handleVideoName }) => {
       "document/TXT": [".TXT"],
     });
     setDocopen(true);
-    let docType = contentType.filter((item)=>item.content_name==="Document");
+    let docType = contentType.filter(
+      (item) => item.content_type_name === "Document"
+    );
     setUploadedFileType(docType[0]);
   };
   const handleCloseDialogDoc = () => {
@@ -181,8 +198,10 @@ const RightBox = ({ contentType, handleVideoName }) => {
       "zip/zip": [".zip"],
     });
     setZipopen(true);
-    let zipType = contentType.filter((item)=>item.content_name==="Zip File")
-    setUploadedFileType(zipType[0])
+    let zipType = contentType.filter(
+      (item) => item.content_type_name === "Zip File"
+    );
+    setUploadedFileType(zipType[0]);
   };
   const handleCloseDialogZip = () => {
     setZipopen(false);
@@ -194,8 +213,10 @@ const RightBox = ({ contentType, handleVideoName }) => {
       "image/jpg": [".jpg"],
     });
     setImgopen(true);
-    let imgType = contentType.filter((item)=>item.content_name==="Image")
-    setUploadedFileType(imgType[0])
+    let imgType = contentType.filter(
+      (item) => item.content_type_name === "Image"
+    );
+    setUploadedFileType(imgType[0]);
   };
   const handleCloseDialogImg = () => {
     setImgopen(false);
@@ -300,7 +321,6 @@ const RightBox = ({ contentType, handleVideoName }) => {
   return (
     <Fragment>
       <div className="rightBoxComplete">
-        {console.log("uploadedFileType",uploadedFileType)}
         <Typography
           className="rightBoxTypography "
           onClick={toggleDrawer("right", true)}
