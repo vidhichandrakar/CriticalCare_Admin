@@ -111,7 +111,7 @@ const RightBox = ({
 
   useEffect(() => {
     console.log("eoijfdksl ")
-    if (courseData.contents.length) {
+    if (courseData?.contents?.length) {
       console.log("owidjhjks ")
       setUploadedVideo(courseData.contents);
     }
@@ -137,7 +137,7 @@ const RightBox = ({
         arr2.content_url = response?.data?.path;
         arr2.content_type = uploadedFileType.content_type_name;
         arr2.content_type_id = uploadedFileType.content_type_id;
-        if(courseData.contents.length){
+        if(courseData?.contents?.length){
           arr2.course_id = courseData.course_id
         }
         arr.push(arr2);
