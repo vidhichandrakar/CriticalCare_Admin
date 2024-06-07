@@ -116,7 +116,7 @@ function TestPortalMain() {
       test_id : test_id,
         callBack: (response) => {
           setTestData(response?.data[0]);
-          console.log("response?.dataresponse?.data",response?.data)
+          console.log("response?.dataresponse?.data",response)
         },
       });
   },[test_id])
