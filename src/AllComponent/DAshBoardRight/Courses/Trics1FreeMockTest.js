@@ -92,7 +92,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
   const durationName = durationData?.filter(
     (duraData) =>
       duraData?.duration_id == courseData?.durations?.length &&
-      courseData?.durations[0]?.duration_id
+      courseData?.durations[courseData?.durations?.length -1]?.duration_id
   );
 
   const handleDeleteCourse = () => {
@@ -163,21 +163,21 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                   <p className="greyPara">
                     ₹
                     {courseData?.durations?.length &&
-                      courseData?.durations[0]?.price}
+                      courseData?.durations[courseData?.durations?.length -1]?.price}
                   </p>
                 </div>
                 <div className="offerPrice">
                   <p className="blackPara">Offer Price</p>
                   <p className="greyPara">
                     {courseData?.durations?.length &&
-                      courseData?.durations[0]?.offer_price}
+                      courseData?.durations[courseData?.durations?.length -1]?.offer_price}
                   </p>
                 </div>
               </div>
               <hr />
               {isNotEmptyObject(courseData) || isNotEmptyArray(courseData) ? (
-                courseData?.durations[0]?.duration_type_id === 3 ||
-                courseData?.durations[0]?.duration_type_id === 4 ? null : (
+                courseData?.durations[courseData?.durations?.length -1]?.duration_type_id === 3 ||
+                courseData?.durations[courseData?.durations?.length -1]?.duration_type_id === 4 ? null : (
                   <>
                     <div className="CatagorynSubCatagory">
                       <div>
@@ -194,7 +194,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                     <p className="blackPara">Course Duration</p>
                     <p className="greyPara">
                       {courseData?.durations?.length &&
-                        courseData?.durations[0]?.duration}{" "}
+                        courseData?.durations[courseData?.durations?.length -1]?.duration}{" "}
                       {durationName?.length && durationName[0]?.duration_name}
                     </p>
                     <hr />

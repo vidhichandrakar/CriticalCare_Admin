@@ -6,6 +6,7 @@ import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { Box, Tooltip, Typography } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { getDuration } from "../ActionFactory/apiActions";
+import DurationConfiguration from "./DurationConfiguration";
 
 const YourCoursesCard = ({ allCourses, userData }) => {
   const [durationData, setDuration] = useState([]);
@@ -36,7 +37,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
             );
             const durationName = durationData?.filter(
               (duraData) =>
-                duraData?.duration_id == item?.durations[0]?.duration_id
+                duraData?.duration_id == item?.durations[item?.durations?.length -1]?.duration_id
             );
             return (
               <div
@@ -75,25 +76,29 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                       {item.course_name}
                     </Typography>
                     <Tooltip title={item.description}>
-                      {" "}
                       <Typography className="wrap-text-50">
                         {item.description}
                       </Typography>
                     </Tooltip>
+
+                    {item?.durations?.length > 1 ?
+                    (<Box className="multiplevalidityAvailBox">
+                       Multiple Validity Available
+                    </Box> ) : null }
                     <div className="duration">
                       <AccessTimeIcon className="clock" />{" "}
                       <Typography className="durationText">
-                        {item?.durations[0]?.duration_id}{" "}
+                        {item?.durations[item?.durations?.length -1]?.duration_id}{" "}
                         {durationName[0]?.duration_name}
                       </Typography>
                     </div>
                     <div className="duration" style={{ marginTop: "10%" }}>
                       <Typography className="offerPrice">
                         {" "}
-                        ₹ {item.durations[0]?.offer_price}{" "}
+                        ₹ {item.durations[item?.durations?.length -1]?.offer_price}{" "}
                       </Typography>
                       <Typography className="durationText price">
-                        ₹{item.durations[0]?.price}
+                        ₹{item.durations[item?.durations?.length -1]?.price}
                       </Typography>
                     </div>
                   </div>
@@ -116,5 +121,6 @@ const YourCoursesCard = ({ allCourses, userData }) => {
     </>
   );
 };
+
 
 export default YourCoursesCard;
