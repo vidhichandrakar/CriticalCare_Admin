@@ -320,20 +320,22 @@ const TestPortal = () => {
   };
 
   const handleEdit = () => {
-    setOpen(true);
+    // setOpen(true);
     const testId = openId;
-    getTestByID({
-      testId,
-      callBack: (response) => {
-        // toast.success("");
-        const data = response.data;
-        let storedValues = Object.assign({}, addTest);
-        storedValues.testName = data?.test_name;
-        storedValues.testDuration = data?.duration_minute;
-        storedValues.hours = data?.duration_hour;
-        setAddTest(storedValues);
-      },
-    });
+    navigate("/TestFirstPage", { state: { id: openId } });
+        
+    // getTestByID({
+    //   testId,
+    //   callBack: (response) => {
+    //     // toast.success("");
+    //     const data = response.data;
+    //     let storedValues = Object.assign({}, addTest);
+    //     storedValues.testName = data?.test_name;
+    //     storedValues.testDuration = data?.duration_minute;
+    //     storedValues.hours = data?.duration_hour;
+    //     setAddTest(storedValues);
+    //   },
+    // });
   };
   return (
     <div className="grid-container">

@@ -13,6 +13,7 @@ function TestProtalHeader({testData}) {
               <WestIcon className="abcdBackLogo" />
             </Link>
             <b>{testData?.test_name}</b>
+            {console.log(testData?.test_name, "Line no 16")}
           </div>
           <div className="previewnsaveBtn">
             <Button className="previewNavBtn" variant="outlined">Preview</Button>

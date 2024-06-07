@@ -93,7 +93,7 @@ export const createTestPortal = ({ payload, callBack, error }) => {
       callBack(response);
     })
     .catch((errorMessage) => {
-      error(errorMessage);
+      // error(errorMessage);
     });
 };
 export const getTeam = ({ callBack, error }) => {
