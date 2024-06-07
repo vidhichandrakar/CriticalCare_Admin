@@ -41,7 +41,6 @@ import {
   getTest,
   getTestByID,
   createTestPortal,
-  getAllCourses,
 } from "../../../ActionFactory/apiActions";
 import { TablePagination } from "@mui/material";
 import Stack from "@mui/material/Stack";
@@ -63,35 +62,6 @@ import "../../../CSSFile/testPortal.css";
 import { Link } from "react-router-dom";
 import TestFirstPage from "./TestFirstPage";
 import Switch from "@mui/material/Switch";
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import OutlinedInput from '@mui/material/OutlinedInput';
-
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
-
-
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
-
-
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const AntSwitch = styled(Switch)(({ theme }) => ({
@@ -216,8 +186,6 @@ TablePaginationActions.propTypes = {
 };
 
 const TestPortal = () => {
-
-  const [age, setAge] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
   const [openId, setOpenId] = useState(0);
   const [openData, setOpenData] = useState("");
@@ -235,21 +203,6 @@ const TestPortal = () => {
   const [loaderState, setLoaderState] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const [allCourses, setAllCourses] = useState([]);
-  const theme = useTheme();
-  const [personName, setPersonName] = useState([]);
-
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    );
-  };
-
-
 
   useEffect(() => {
     if (redirectRestriction()) {
@@ -259,23 +212,11 @@ const TestPortal = () => {
           const userCallBack = response?.data;
           setUserData(userCallBack);
           setLoaderState(false);
-          console.log(setUserData, "line 262 userdata");
         },
       });
     } else {
       navigate("/admin");
     }
-    getAllCourses({
-      callBack: (response) => {
-        const userCallBack = response?.data;
-        setAllCourses(userCallBack);
-      },
-      error: (error) => {
-        toast.error(error.message);
-        console.log(error.message);
-        setLoaderState(false);
-      },
-    });
   }, []);
 
   const handleClick = (event, id) => {
@@ -379,9 +320,8 @@ const TestPortal = () => {
   };
 
   const handleEdit = () => {
-    // setOpen(true);
     const testId = openId;
-    navigate("/TestFirstPage", { state: { id: openId } });
+    navigate("/TestFirstPage", { state: { id: openId }  });
         
     // getTestByID({
     //   testId,
@@ -396,7 +336,6 @@ const TestPortal = () => {
     //   },
     // });
   };
-
   return (
     <div className="grid-container">
       <Header
@@ -493,34 +432,9 @@ const TestPortal = () => {
                   <p className="TimeText">Minute</p>
                 </Typography>
               </Box>
-   
-      <FormControl sx={{ m: 1, width: 300 }} className="addMemberCourseNameDrpDwn">
-        <InputLabel id="demo-multiple-name-label">Course name</InputLabel>
-        <Select
-          labelId="demo-multiple-name-label"
-          id="demo-multiple-name"
-          multiple
-          value={personName}
-          onChange={handleChange}
-          input={<OutlinedInput label="Name" />}
-          MenuProps={MenuProps}
-        >
-          {allCourses.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
-            >
-              {name.course_name}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-    
             </DialogContent>
-
-
             <DialogActions>
+              {/* <Link to="/TestFirstPage"> */}
               <Button
                 variant="contained"
                 className="CreateBtn"
@@ -528,6 +442,7 @@ const TestPortal = () => {
               >
                 Create
               </Button>
+              {/* </Link> */}
             </DialogActions>
           </BootstrapDialog>
         </div>{" "}
@@ -553,7 +468,6 @@ const TestPortal = () => {
               </TableHead>
 
               <TableBody className="parentTable">
-                {console.log(userData, "line 571 userdata")}
                 {userData.length
                   ? (rowsPerPage > 0
                       ? userData.slice(
