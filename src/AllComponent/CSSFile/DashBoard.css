@@ -642,6 +642,13 @@ body {
 .redDeleteofTestPortal:hover {
   cursor: pointer;
 }
+.addMemberCourseNameDrpDwn{
+  padding: -12px -12px !important;
+  width: 100% !important;
+    height: 7vh !important;
+    margin-left: 0px !important;
+    margin-top: 31px !important;
+}
 /* END OF TEST PORTAL  */
 
 /* START OF ADMIN TESTIMONIAL  */
