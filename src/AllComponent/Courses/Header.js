@@ -64,9 +64,9 @@ const Header = ({ Heading, subHeading, OpenSidebar }) => {
   return (
     <Box className="header">
       <Box className="HeaderLeft">
-        <Box onClick={OpenSidebar}>
+        {/* <Box onClick={OpenSidebar}>
           X
-        </Box>
+        </Box> */}
         <Typography className="headerText">{Heading}</Typography>
       </Box>
       <Box className="HeaderRight">
