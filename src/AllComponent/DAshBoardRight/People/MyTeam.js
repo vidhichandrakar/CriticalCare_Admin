@@ -289,7 +289,7 @@ const MyTeam = () => {
               <FilterAltIcon /> Filter
             </Button>
           </div>
-          <Button className="addTestimonialButton" onClick={handleClickOpen}>
+          <Button className="width13 addTestimonialButton" onClick={handleClickOpen}>
             {" "}
             + Add Team{" "}
           </Button>

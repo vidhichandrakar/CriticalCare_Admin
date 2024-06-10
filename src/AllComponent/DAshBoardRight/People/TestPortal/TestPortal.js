@@ -354,7 +354,7 @@ const TestPortal = () => {
             </Button>
           </div>
 
-          <Button className="addTestimonialButton" onClick={handleClickOpen}>
+          <Button className="width13 addTestimonialButton" onClick={handleClickOpen}>
             {" "}
             + Add Test{" "}
           </Button>
