@@ -12,7 +12,7 @@ export const AnalyticsSmallData = [
     Days: "on last 7 days",
   },
   {
-    href: "/Transaction",
+    href: "/admin/Transaction",
     Heading: "Transactions",
     numbers: "2",
     Days: "on last 7 days",
@@ -62,17 +62,17 @@ export const BannerData = [
 
 export const AdditionalData = [
   {
-    href: "/Banner",
+    href: "/admin/Banner",
     icon: <CollectionsIcon />,
     heading: "Banner",
   },
   {
-    href: "/CouponMain",
+    href: "/admin/CouponMain",
     icon: <LoyaltyIcon />,
     heading: "Coupons",
   },
   {
-    href: "/Trics1FreeMockTest",
+    href: "/admin/Trics1FreeMockTest",
     icon: <BookmarkAddedIcon />,
     heading: "Zoom",
   },
@@ -80,7 +80,7 @@ export const AdditionalData = [
 
 export const OfferData = [
   {
-    href: "/CreateCourses",
+    href: "/admin/CreateCourses",
     icon: <CollectionsIcon />,
     head: "Course",
     title: "3 Published Course",
@@ -88,7 +88,7 @@ export const OfferData = [
     arrow: <EastIcon />,
   },
   {
-    href: "/TestPortal",
+    href: "/admin/TestPortal",
     icon: <CollectionsIcon />,
     head: "Test Portal",
     title: "15 Tests Created",
@@ -96,7 +96,7 @@ export const OfferData = [
     arrow: <EastIcon />,
   },
   {
-    href: "/Transaction",
+    href: "/admin/Transaction",
     icon: <CollectionsIcon />,
     head: "Total Transactions",
     title: "30000",

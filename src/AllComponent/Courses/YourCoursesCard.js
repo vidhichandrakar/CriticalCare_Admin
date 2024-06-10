@@ -24,7 +24,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
     });
   }, []);
   const handleCourse = (id) => {
-    navigate("/Trics1FreeMockTest", { state: { id: id } });
+    navigate("/admin/Trics1FreeMockTest", { state: { id: id } });
   };
 
   return (

@@ -102,7 +102,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
         toast.success("Course Deleted successfully!", {
           autoClose: 500,
         });
-        navigate("/YourCourses");
+        navigate("/admin/YourCourses");
       },
       error: () => {
         toast.error("Something went wrong!", {
@@ -113,7 +113,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
   };
 
   const handleEdit = (id) => {
-    navigate("/CreateCourses", { state: { id: courseId } });
+    navigate("/admin/CreateCourses", { state: { id: courseId } });
   };
 
   const handlePublish = () => {
@@ -129,7 +129,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
       courseId: courseData?.course_id,
       payload,
       callBack: (response) => {
-        navigate("/YourCourses");
+        navigate("/admin/YourCourses");
       },
     });
   };
@@ -138,7 +138,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
       <SideBar />
       <div className="main-container ">
         <div className="singleRow">
-          <Link to="/YourCourses">
+          <Link to="/admin/YourCourses">
             <Button className="backToCourses">
               <ArrowBackIosNewIcon />
             </Button>
@@ -207,7 +207,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                   <p className="blackPara">Student Enrolled</p>
                 </div>
                 <span className="blueViewAll pointer">
-                  <Link to="/User" className="viewAllBlue">
+                  <Link to="/admin/User" className="viewAllBlue">
                     View All
                   </Link>
                 </span>

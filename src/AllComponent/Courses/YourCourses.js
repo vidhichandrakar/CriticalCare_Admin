@@ -81,7 +81,7 @@ const YourCourses = () => {
           
         </Box>
         <div>
-            <Box sx={{top:"88%", position:"absolute", zIndex:1111111111111, right:0}} className="addCircle" onClick={()=>navigate("/CreateCourses")}>
+            <Box sx={{top:"88%", position:"absolute", zIndex:1111111111111, right:0}} className="addCircle" onClick={()=>navigate("/admin/CreateCourses")}>
              <AddRoundedIcon className="addIcon"/>
             </Box>
           </div>
