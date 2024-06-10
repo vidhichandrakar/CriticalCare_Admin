@@ -174,13 +174,22 @@
   color: #928b8b;
 }
 .wrap-text-50 {
-  display: inline-block;
+  /* display: inline-block; */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 19ch;
   color: #918d8d;
   font-size: 0.9rem !important;
+}
+.multiplevalidityAvailBox{
+  color: #0f7af5 !important;
+  background-color: #e5f1f5 !important;
+  font-size: 0.8rem !important;
+    width: 90% !important;
+    /* padding-left: 4px; */
+    border-radius: 5px;
+    padding: 6px 6px;
 }
 .lastCard{
   width:20%;

@@ -91,7 +91,7 @@ const RightBox = ({
   const [il, setIL] = useState({
     left: false,
   });
-  const [url , setUrl] = useState({
+  const [url, setUrl] = useState({
     left: false,
   });
   const [videoopened, setVideoqopen] = useState(false);
@@ -112,6 +112,7 @@ const RightBox = ({
   const [storeVideo, setStoreVideo] = useState();
   const [acceptType, setAcceptType] = useState({});
   const [uploadedFileType, setUploadedFileType] = useState({});
+  const [drawerUrl, setDrawerUrl] = useState(false);
 
   useEffect(() => {
     if (courseData?.contents?.length) {
@@ -137,8 +138,8 @@ const RightBox = ({
         arr2.content_url = response?.data?.path;
         arr2.content_type = uploadedFileType.content_type_name;
         arr2.content_type_id = uploadedFileType.content_type_id;
-        if(courseData?.contents?.length){
-          arr2.course_id = courseData.course_id
+        if (courseData?.contents?.length) {
+          arr2.course_id = courseData.course_id;
         }
         arr.push(arr2);
         setUploadedVideo(arr);
@@ -315,7 +316,15 @@ const RightBox = ({
     ) {
       return;
     }
+    setVideoqopen(false);
+    setDocopen(false);
+    setImgopen(false);
+    setZipopen(false);
     setUrl({ url, [anchor]: open });
+  };
+
+  const handleDrawerUrl = () => {
+    setDrawerUrl(true);
   };
 
   return (
@@ -397,7 +406,7 @@ const RightBox = ({
           URL
         </Typography>
       </div>
-    <Drawer
+      <Drawer
         anchor={"right"}
         open={state["right"]}
         onClose={toggleDrawer("right", false)}
@@ -444,7 +453,7 @@ const RightBox = ({
         open={ot["right"]}
         onClose={toggleDrawerOT("right", false)}
       >
-       <OnlineTest handelclose={toggleDrawerOT} />
+        <OnlineTest handelclose={toggleDrawerOT} />
       </Drawer>
       <Drawer
         anchor={"right"}
@@ -459,25 +468,25 @@ const RightBox = ({
         onClose={toggleDrawerZ("right", false)}
       >
         {ZipFile("right")}
-    </Drawer>
+      </Drawer>
       <Drawer
         anchor={"right"}
         open={url["right"]}
         onClose={toggleDrawerUrl("right", false)}
       >
-        <Url handelclose={toggleDrawerUrl}/>
-    </Drawer>
-    <BootstrapDialog
+        <Url handelclose={toggleDrawerUrl} />
+      </Drawer>
+      <BootstrapDialog
         className="PopUP"
         onClose={handleCloseDialogIC}
         aria-labelledby="customized-dialog-title"
         open={icopened}
       >
         <DialogTitle
-          sx={{ m: 0, p: 2, fontSize: "1rem",ml: 2 }}
+          sx={{ m: 0, p: 2, fontSize: "1rem", ml: 2 }}
           id="customized-dialog-title"
         >
-         <b> Import Content</b>
+          <b> Import Content</b>
         </DialogTitle>
         <IconButton
           aria-label="close"
@@ -501,146 +510,129 @@ const RightBox = ({
               </Typography>
             </Box>
             <Box className="SearchBox">
-              <Typography>
-                Selected(0)
-              </Typography>
-            <Box>
-              <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
-                <SearchIcon />
-              </IconButton>
+              <Typography>Selected(0)</Typography>
+              <Box>
+                <IconButton
+                  type="button"
+                  sx={{ p: "10px" }}
+                  aria-label="search"
+                >
+                  <SearchIcon />
+                </IconButton>
                 <InputBase
                   sx={{ ml: 1, flex: 1 }}
                   placeholder="Search yours courses here"
-                  inputProps={{ 'aria-label': 'search google maps' }}
+                  inputProps={{ "aria-label": "search google maps" }}
                 />
               </Box>
             </Box>
             <Box className="SelectMainBox">
-              
               <Box className="SelectBox">
-            <Checkbox {...label} />
-              <Box className="DataBox">
-                <FolderIcon className="IconFolder"/>
-                <Box>
-                    <Typography>
-                      TRICS 1 2023 SEASON 1
-                    </Typography>
+                <Checkbox {...label} />
+                <Box className="DataBox">
+                  <FolderIcon className="IconFolder" />
+                  <Box>
+                    <Typography>TRICS 1 2023 SEASON 1</Typography>
                     <Typography className="FilesPara">
-                     <b> 2 video(s), 298 File(s), 9 test(s)</b>
+                      <b> 2 video(s), 298 File(s), 9 test(s)</b>
                     </Typography>
+                  </Box>
                 </Box>
-              </Box>
-              </Box>
-               <Box className="SelectBox">
-            <Checkbox {...label} />
-              <Box className="DataBox">
-                <FolderIcon className="IconFolder"/>
-                <Box>
-                    <Typography>
-                      TRICS 1 2023 SEASON 1
-                    </Typography>
-                    <Typography className="FilesPara">
-                     <b> 2 video(s), 298 File(s), 9 test(s)</b>
-                    </Typography>
-                </Box>
-              </Box>
               </Box>
               <Box className="SelectBox">
-            <Checkbox {...label} />
-              <Box className="DataBox">
-                <FolderIcon className="IconFolder"/>
-                <Box>
-                    <Typography>
-                      TRICS 1 2023 SEASON 1
-                    </Typography>
+                <Checkbox {...label} />
+                <Box className="DataBox">
+                  <FolderIcon className="IconFolder" />
+                  <Box>
+                    <Typography>TRICS 1 2023 SEASON 1</Typography>
                     <Typography className="FilesPara">
-                     <b> 2 video(s), 298 File(s), 9 test(s)</b>
+                      <b> 2 video(s), 298 File(s), 9 test(s)</b>
                     </Typography>
+                  </Box>
                 </Box>
-              </Box>
-              </Box>
-               <Box className="SelectBox">
-            <Checkbox {...label} />
-              <Box className="DataBox">
-                <FolderIcon className="IconFolder"/>
-                <Box>
-                    <Typography>
-                      TRICS 1 2023 SEASON 1
-                    </Typography>
-                    <Typography className="FilesPara">
-                     <b> 2 video(s), 298 File(s), 9 test(s)</b>
-                    </Typography>
-                </Box>
-              </Box>
               </Box>
               <Box className="SelectBox">
-            <Checkbox {...label} />
-              <Box className="DataBox">
-                <FolderIcon className="IconFolder"/>
-                <Box>
-                    <Typography>
-                      TRICS 1 2023 SEASON 1
-                    </Typography>
+                <Checkbox {...label} />
+                <Box className="DataBox">
+                  <FolderIcon className="IconFolder" />
+                  <Box>
+                    <Typography>TRICS 1 2023 SEASON 1</Typography>
                     <Typography className="FilesPara">
-                     <b> 2 video(s), 298 File(s), 9 test(s)</b>
+                      <b> 2 video(s), 298 File(s), 9 test(s)</b>
                     </Typography>
+                  </Box>
                 </Box>
-              </Box>
-              </Box>
-               <Box className="SelectBox">
-            <Checkbox {...label} />
-              <Box className="DataBox">
-                <FolderIcon className="IconFolder"/>
-                <Box>
-                    <Typography>
-                      TRICS 1 2023 SEASON 1
-                    </Typography>
-                    <Typography className="FilesPara">
-                     <b> 2 video(s), 298 File(s), 9 test(s)</b>
-                    </Typography>
-                </Box>
-              </Box>
               </Box>
               <Box className="SelectBox">
-            <Checkbox {...label} />
-              <Box className="DataBox">
-                <FolderIcon className="IconFolder"/>
-                <Box>
-                    <Typography>
-                      TRICS 1 2023 SEASON 1
-                    </Typography>
+                <Checkbox {...label} />
+                <Box className="DataBox">
+                  <FolderIcon className="IconFolder" />
+                  <Box>
+                    <Typography>TRICS 1 2023 SEASON 1</Typography>
                     <Typography className="FilesPara">
-                     <b> 2 video(s), 298 File(s), 9 test(s)</b>
+                      <b> 2 video(s), 298 File(s), 9 test(s)</b>
                     </Typography>
+                  </Box>
                 </Box>
               </Box>
-              </Box>
-               <Box className="SelectBox">
-            <Checkbox {...label} />
-              <Box className="DataBox">
-                <FolderIcon className="IconFolder"/>
-                <Box>
-                    <Typography>
-                      TRICS 1 2023 SEASON 1
-                    </Typography>
+              <Box className="SelectBox">
+                <Checkbox {...label} />
+                <Box className="DataBox">
+                  <FolderIcon className="IconFolder" />
+                  <Box>
+                    <Typography>TRICS 1 2023 SEASON 1</Typography>
                     <Typography className="FilesPara">
-                     <b> 2 video(s), 298 File(s), 9 test(s)</b>
+                      <b> 2 video(s), 298 File(s), 9 test(s)</b>
                     </Typography>
+                  </Box>
                 </Box>
               </Box>
+              <Box className="SelectBox">
+                <Checkbox {...label} />
+                <Box className="DataBox">
+                  <FolderIcon className="IconFolder" />
+                  <Box>
+                    <Typography>TRICS 1 2023 SEASON 1</Typography>
+                    <Typography className="FilesPara">
+                      <b> 2 video(s), 298 File(s), 9 test(s)</b>
+                    </Typography>
+                  </Box>
+                </Box>
               </Box>
-           
-            
+              <Box className="SelectBox">
+                <Checkbox {...label} />
+                <Box className="DataBox">
+                  <FolderIcon className="IconFolder" />
+                  <Box>
+                    <Typography>TRICS 1 2023 SEASON 1</Typography>
+                    <Typography className="FilesPara">
+                      <b> 2 video(s), 298 File(s), 9 test(s)</b>
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
+              <Box className="SelectBox">
+                <Checkbox {...label} />
+                <Box className="DataBox">
+                  <FolderIcon className="IconFolder" />
+                  <Box>
+                    <Typography>TRICS 1 2023 SEASON 1</Typography>
+                    <Typography className="FilesPara">
+                      <b> 2 video(s), 298 File(s), 9 test(s)</b>
+                    </Typography>
+                  </Box>
+                </Box>
+              </Box>
             </Box>
           </Box>
-          
         </DialogContent>
-        <Box className="ButtonBOx" >
-            <Button variant="outlined" disabled className="CancelBtn"> Cancel</Button>
-            <Button variant="contained" >
-              Import Selected
-            </Button>
-          </Box>
+        <Box className="ButtonBOx">
+          <Button variant="outlined" disabled className="CancelBtn">
+            {" "}
+            Cancel
+          </Button>
+          <Button variant="contained">Import Selected</Button>
+        </Box>
       </BootstrapDialog>
       <BootstrapDialog
         className="PopUP"
@@ -707,6 +699,12 @@ const RightBox = ({
                 )}
               </Box>
             </div>
+            <Typography
+              className="orPasteURL"
+              onClick={toggleDrawerUrl("right", true)}
+            >
+              Or paste URL
+            </Typography>
           </Box>
         </DialogContent>
       </BootstrapDialog>
@@ -775,6 +773,12 @@ const RightBox = ({
                 )}
               </Box>
             </div>
+            <Typography
+              className="orPasteURL"
+              onClick={toggleDrawerUrl("right", true)}
+            >
+              Or paste URL
+            </Typography>
           </Box>
         </DialogContent>
       </BootstrapDialog>
@@ -843,6 +847,12 @@ const RightBox = ({
                 )}
               </Box>
             </div>
+            <Typography
+              className="orPasteURL"
+              onClick={toggleDrawerUrl("right", true)}
+            >
+              Or paste URL
+            </Typography>
           </Box>
         </DialogContent>
       </BootstrapDialog>
@@ -911,6 +921,12 @@ const RightBox = ({
                 )}
               </Box>
             </div>
+            <Typography
+              className="orPasteURL"
+              onClick={toggleDrawerUrl("right", true)}
+            >
+              Or paste URL
+            </Typography>
           </Box>
         </DialogContent>
       </BootstrapDialog>
