@@ -270,7 +270,7 @@ const Testimonial = () => {
               <FilterAltIcon /> Filter
             </Button>
           </div>
-          <Button className="addTestimonialButton" onClick={handleClickOpen}>
+          <Button className="width25 addTestimonialButton" onClick={handleClickOpen}>
             + Add Testimonial
           </Button>
           <BootstrapDialog
