@@ -27,28 +27,25 @@ const RouterMain = () => {
   return (
     <div>
      <Routes>
-            {/* <Route exact path="/Dashboard" element= {<MainComponent />}> </Route> */}
-            <Route exact path="/Dashboard" element= {<Dashboard />}> </Route>
+            <Route exact path="/admin/Dashboard" element= {<Dashboard />}> </Route>
             <Route exact path="/admin" element= {<LoginPage/>}> </Route>
-            <Route exact path="/CreateCourses" element= {<CreateCourses />}> </Route>
-            <Route exact path="/User" element= {< User />}> </Route>
-            <Route exact path="/Transaction" element= {<Transaction />}> </Route>
-            <Route exact path="/MainCourses" element= {<MainCourses />}> </Route>
-            <Route exact path="/MyTeam" element= {<MyTeam />}> </Route>
-            <Route exact path="/TestPortal" element= {<TestPortal />}> </Route>
-            <Route exact path="/Testimonial" element= {<Testimonial />}> </Route>
-            <Route exact path="/Trics1FreeMockTest" element= {<Trics1FreeMockTest />}> </Route>
-            <Route exact path="/CreateCoupon" element= {<CreateCoupon />}> </Route>
-            <Route exact path="/YourCourses" element= {<YourCourses />}> </Route>
-            <Route exact path="/Analytics" element= {<Analytics />}> </Route>
-            <Route exact path="/UpcomingCoursesMain" element= {<UpcomingCoursesMain />}> </Route>
-            <Route exact path="/CouponMain" element= {<CouponMain />}> </Route>
-            <Route exact path="/Banner" element= {<Banner/>}> </Route>
-            <Route exact path="/chat" element= {<Chat />}> </Route>
-            {/* <Route exact path="/TestFirstPage" element= {<TestFirstPage />}> </Route> */}
-            <Route exact path="/TestFirstPage" element= {<TestPortalMain />}> </Route>
-            {/* <Route exact path="/TestFirstPage" element= {<TestFirstPage />}> </Route> */}
-            <Route exact path="/AddContent" element= {<AddContent />}> </Route>
+            <Route exact path="/admin/CreateCourses" element= {<CreateCourses />}> </Route>
+            <Route exact path="/admin/User" element= {< User />}> </Route>
+            <Route exact path="/admin/Transaction" element= {<Transaction />}> </Route>
+            <Route exact path="/admin/MainCourses" element= {<MainCourses />}> </Route>
+            <Route exact path="/admin/MyTeam" element= {<MyTeam />}> </Route>
+            <Route exact path="/admin/TestPortal" element= {<TestPortal />}> </Route>
+            <Route exact path="/admin/Testimonial" element= {<Testimonial />}> </Route>
+            <Route exact path="/admin/Trics1FreeMockTest" element= {<Trics1FreeMockTest />}> </Route>
+            <Route exact path="/admin/CreateCoupon" element= {<CreateCoupon />}> </Route>
+            <Route exact path="/admin/YourCourses" element= {<YourCourses />}> </Route>
+            <Route exact path="/admin/Analytics" element= {<Analytics />}> </Route>
+            <Route exact path="/admin/UpcomingCoursesMain" element= {<UpcomingCoursesMain />}> </Route>
+            <Route exact path="/admin/CouponMain" element= {<CouponMain />}> </Route>
+            <Route exact path="/admin/Banner" element= {<Banner/>}> </Route>
+            <Route exact path="/admin/chat" element= {<Chat />}> </Route>
+            <Route exact path="/admin/TestFirstPage" element= {<TestPortalMain />}> </Route>
+            <Route exact path="/admin/AddContent" element= {<AddContent />}> </Route>
             
 
     </Routes>

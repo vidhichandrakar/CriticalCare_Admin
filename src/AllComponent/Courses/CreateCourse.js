@@ -130,7 +130,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         courseId: courseId,
         payload,
         callBack: (response) => {
-          navigate("/YourCourses");
+          navigate("/admin/YourCourses");
         },
       });
     } else {
@@ -140,7 +140,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           toast.success("Course added successfully!", {
             autoClose: 500,
           });
-          navigate("/YourCourses");
+          navigate("/admin/YourCourses");
         },
         error: () => {
           toast.error("Something went wrong!", {

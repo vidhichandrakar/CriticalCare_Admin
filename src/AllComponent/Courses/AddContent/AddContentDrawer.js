@@ -47,7 +47,6 @@ const AddContentDrawer = ({anchor, handelclose}) => {
       <h2 style={{marginLeft: "4%"}}>Add Folder</h2>
       <IconButton
         aria-label="close"
-        
         sx={{
           position: "absolute",
           right: 8,

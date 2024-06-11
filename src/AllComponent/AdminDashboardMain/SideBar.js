@@ -129,7 +129,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
         </div>
 
         <div className="sidebar-list sidebar-list-item BottomLine">
-          <Link to="/DashBoard">
+          <Link to="/admin/DashBoard">
             <Box
               id="hoverrr"
               className={highlight === "DashBoard" ? "hoverrr2" : ""}
@@ -141,7 +141,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
             </Box>
           </Link>
 
-          <Link to="/YourCourses">
+          <Link to="/admin/YourCourses">
             <ListItemButton
               onClick={handleClickCollapse}
               className="listButton"
@@ -155,7 +155,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               <List component="div" sx={{ marginLeft: "1%" }}>
                 <ul type="disc">
                   <li className="myCourses">
-                    <Link to="/YourCourses" className="textDecoration">
+                    <Link to="/admin/YourCourses" className="textDecoration">
                       <Typography
                         id="hoverrr"
                         className={
@@ -171,7 +171,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                     </Link>
                   </li>
                   <li className="listDesign">
-                    <Link to="/CreateCoupon" className="textDecoration">
+                    <Link to="/admin/CreateCoupon" className="textDecoration">
                       <Typography
                         id="hoverrr"
                         className={
@@ -190,7 +190,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               </List>
             </Collapse>
           </Link>
-          <Link to="/TestPortal">
+          <Link to="/admin/TestPortal">
             <Box
               id="hoverrr"
               className={highlight === "TestPortal" ? "hoverrr2" : ""}
@@ -201,7 +201,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               <Typography>Test Portal</Typography>
             </Box>
           </Link>
-          <Link to="/Analytics">
+          <Link to="/admin/Analytics">
             <Box
               id="hoverrr"
               className={highlight === "Analytics" ? "hoverrr2" : ""}
@@ -213,7 +213,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
             </Box>
           </Link>
 
-          <Link to="/User">
+          <Link to="/admin/User">
             <ListItemButton onClick={handleClickPeople} className="listButton">
               <PersonIcon />
               <ListItemText primary="People" className="coursesHead" />
@@ -224,7 +224,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               <List component="div">
                 <ul>
                   <li className="myCourses">
-                    <Link to="/User" className="textDecoration">
+                    <Link to="/admin/User" className="textDecoration">
                       <Typography
                         id="hoverrr"
                         className={
@@ -240,7 +240,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                     </Link>
                   </li>
                   <li className="listDesign">
-                    <Link to="/MyTeam" className="textDecoration">
+                    <Link to="/admin/MyTeam" className="textDecoration">
                       <Typography
                         id="hoverrr"
                         className={
@@ -260,7 +260,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
             </Collapse>
           </Link>
 
-          <Link to="/Testimonial">
+          <Link to="/admin/Testimonial">
             <Box
               id="hoverrr"
               className={highlight === "Testimonial" ? "hoverrr2" : ""}

@@ -307,7 +307,7 @@ const TestPortal = () => {
       callBack: (response) => {
         toast.success("New Member added!");
         setOpen(false);
-        navigate("/TestFirstPage", { state: { id: response.data.test_id } });
+        navigate("/admin/TestFirstPage", { state: { id: response.data.test_id } });
         getTest({
           callBack: (response) => {
             const userCallBack = response?.data;
@@ -321,7 +321,7 @@ const TestPortal = () => {
 
   const handleEdit = () => {
     const testId = openId;
-    navigate("/TestFirstPage", { state: { id: openId }  });
+    navigate("/admin/TestFirstPage", { state: { id: openId }  });
         
     // getTestByID({
     //   testId,
@@ -434,7 +434,7 @@ const TestPortal = () => {
               </Box>
             </DialogContent>
             <DialogActions>
-              {/* <Link to="/TestFirstPage"> */}
+              {/* <Link to="/admin/TestFirstPage"> */}
               <Button
                 variant="contained"
                 className="CreateBtn"

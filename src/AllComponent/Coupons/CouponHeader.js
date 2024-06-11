@@ -7,7 +7,7 @@ const CouponHeader = ({}) => {
     <Box className="couponHedaerBox">
       <Typography className="couponHeaderText">Coupon Codes</Typography>
       <Box className="couponHeaderButton">
-        <Link to="/CreateCoupon">
+        <Link to="/admin/CreateCoupon">
           <Button variant="contained" className="couponButton">
             Create Coupon
           </Button>

@@ -63,7 +63,7 @@ function SimpleMenu() {
         getContentAnchorEl={null}
         anchorOrigin={{ horizontal: "center", vertical: "top" }}
       >
-         <Link to="/YourCourses" className="textDecoration">
+         <Link to="/admin/YourCourses" className="textDecoration">
             {" "}
             <Typography
               className="textDecoration"
@@ -77,7 +77,7 @@ function SimpleMenu() {
               My Courses
             </Typography>
           </Link>
-          <Link to="/Banner" className="textDecoration">
+          <Link to="/admin/Banner" className="textDecoration">
             {" "}
             <Typography
               className="textDecoration"
@@ -106,20 +106,20 @@ function SimpleMenu() {
               Coupons
             </Typography>
           </Link>
-          <Link to="/CreateCoupon" className="textDecoration">
+          <Link to="/admin/CreateCoupon" className="textDecoration">
             {" "}
             <Typography sx={{ p: 1, textDecoration: "none" }}>
               Manage Coupons
             </Typography>
           </Link>
-         <Link to="/User" className="textDecoration">
+         <Link to="/admin/User" className="textDecoration">
             {" "}
             <Typography sx={{ p: 1, textDecoration: "none" }}>
               Category / Sub Catoggry
             </Typography>
           </Link>
        
-          <Link to="/UpcomingCoursesMain" className="textDecoration">
+          <Link to="/admin/UpcomingCoursesMain" className="textDecoration">
             {" "}
             <Typography sx={{ p: 1, textDecoration: "none" }}>
               Upcoming Course / Blogs{" "}
