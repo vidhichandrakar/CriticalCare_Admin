@@ -10,7 +10,24 @@ import DurationConfiguration from "./DurationConfiguration";
 
 const YourCoursesCard = ({ allCourses, userData }) => {
   const [durationData, setDuration] = useState([]);
+  const [discountPercent, setDiscountPercent] = useState([
+    {
+      price: "",
+      offer_price: "",
+    },
+  ]);
   const navigate = useNavigate();
+
+  const handleDiscountPercent = (price, offer_price) => {
+    console.log(price, offer_price, (price - offer_price) / price);
+    // let offerPercent = [...discountPercent];
+    // offerPercent.push({
+    //   price: "",
+    //   offer_price: "",
+    //   // discount: "",
+    // });
+    return Math.floor(((price - offer_price) / price) * 100) + " %";
+  };
   useEffect(() => {
     getDuration({
       callBack: (response) => {
@@ -19,7 +36,6 @@ const YourCoursesCard = ({ allCourses, userData }) => {
       },
       error: (error) => {
         // toast.error(error.message);
-        // console.log(error.message);
       },
     });
   }, []);
@@ -37,7 +53,8 @@ const YourCoursesCard = ({ allCourses, userData }) => {
             );
             const durationName = durationData?.filter(
               (duraData) =>
-                duraData?.duration_id == item?.durations[item?.durations?.length -1]?.duration_id
+                duraData?.duration_id ==
+                item?.durations[item?.durations?.length - 1]?.duration_id
             );
             return (
               <div
@@ -81,25 +98,56 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                       </Typography>
                     </Tooltip>
 
-                    {item?.durations?.length > 1 ?
-                    (<Box className="multiplevalidityAvailBox">
-                       Multiple Validity Available
-                    </Box> ) : null }
+                    {item?.durations?.length > 1 ? (
+                      <Box className="multiplevalidityAvailBox">
+                        Multiple Validity Available
+                      </Box>
+                    ) : null}
                     <div className="duration">
                       <AccessTimeIcon className="clock" />{" "}
                       <Typography className="durationText">
-                        {item?.durations[item?.durations?.length -1]?.duration_id}{" "}
+                        {
+                          item?.durations[item?.durations?.length - 1]
+                            ?.duration_id
+                        }{" "}
                         {durationName[0]?.duration_name}
                       </Typography>
                     </div>
+
                     <div className="duration" style={{ marginTop: "10%" }}>
+                      <div 
+                      className= {item?.durations?.length > 1 ? "priceAndOfferprice" : "priceAndOfferprice-singleValidity"}
+                      >
                       <Typography className="offerPrice">
-                        {" "}
-                        ₹ {item.durations[item?.durations?.length -1]?.offer_price}{" "}
+                        ₹{" "}
+                        {
+                          item.durations[item?.durations?.length - 1]
+                            ?.offer_price
+                        }{" "}
                       </Typography>
                       <Typography className="durationText price">
-                        ₹{item.durations[item?.durations?.length -1]?.price}
+                        ₹{item.durations[item?.durations?.length - 1]?.price}
                       </Typography>
+                      </div>
+
+                      <div>
+                      <Box 
+                      className= {item?.durations?.length > 1 ? "discountPercentage-multiValidity": "discountPercentage-singleValidity"}
+                      >
+                        <Typography>
+                          {item.durations[item?.durations?.length - 1]
+                            ?.offer_price &&
+                          item.durations[item?.durations?.length - 1]?.price
+                            ? handleDiscountPercent(
+                                item.durations[item?.durations?.length - 1]
+                                  .price,
+                                item.durations[item?.durations?.length - 1]
+                                  .offer_price
+                              )
+                            : null}
+                        </Typography>
+                      </Box>
+                      </div>
                     </div>
                   </div>
                   <div className="col-md-2 lastCard">
@@ -111,7 +159,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                     ) : (
                       <p className=" flag vertical Npublish">Not Publish</p>
                     )}
-                  {/* <Box className="flag vertical"> Publish</Box> */}
+                    {/* <Box className="flag vertical"> Publish</Box> */}
                   </div>
                 </div>
               </div>
@@ -121,6 +169,5 @@ const YourCoursesCard = ({ allCourses, userData }) => {
     </>
   );
 };
-
 
 export default YourCoursesCard;

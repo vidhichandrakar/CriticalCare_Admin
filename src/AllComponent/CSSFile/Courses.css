@@ -150,6 +150,7 @@
 .duration{
   display: flex;
   flex-direction: row;
+  justify-content: space-between !important;
   text-align: center;
 }
 .clock{
@@ -161,7 +162,7 @@
   margin-top: 3px;
 }
 .offerPrice{
-  font-size: 1rem !important;
+  font-size: 0.8rem !important;
   /* margin-left: 1px !important; */
 }
 .price{
@@ -169,9 +170,37 @@
 }
 .durationText{
   margin-left: 2% !important;
-  font-size: 0.9rem !important;
+  font-size: 0.8rem !important;
   margin-top: 2px !important;
   color: #928b8b;
+}
+.discountPercentage-multiValidity{
+  background-color: lightcyan !important;
+  color: #199884 !important;
+  padding: 0px !important;
+    width: 100%;
+    margin-top: 11px;
+    margin-left: 26px;
+}
+.discountPercentage-singleValidity{
+  background-color: lightcyan !important;
+  color: #199884 !important;
+  padding: 0px !important;
+    width: 100%;
+    margin-top: 36px;
+    margin-left: 26px;
+}
+.priceAndOfferprice{
+  display: flex !important;
+  flex-direction: row !important;
+  width: 100%;
+    margin-top: 8%;
+}
+.priceAndOfferprice-singleValidity{
+  display: flex !important;
+  flex-direction: row !important;
+  width: 100%;
+    margin-top: 23%;
 }
 .wrap-text-50 {
   /* display: inline-block; */
