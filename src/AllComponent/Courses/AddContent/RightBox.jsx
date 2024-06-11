@@ -878,7 +878,6 @@ const RightBox = ({
         >
           <CloseIcon />
         </IconButton>
-
         <DialogContent>
           <Box className="VideoBox">
             <UploadFileRoundedIcon className="VideoIcon" />
@@ -896,7 +895,6 @@ const RightBox = ({
                 <Button
                   variant="contained"
                   className="SelectButton"
-                  // onClick={handleCreateTeam}
                 >
                   Select File(s)
                 </Button>
