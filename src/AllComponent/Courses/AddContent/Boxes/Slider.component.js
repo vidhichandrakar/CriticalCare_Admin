@@ -41,7 +41,13 @@ const ContentSlider = ({
         open={state["right"]}
         onClose={toggleDrawer("right", false, state, setState)}
       >
-        <AddContentDrawer handelclose={toggleDrawer} />
+        <AddContentDrawer
+          anchor={"right"}
+          handelclose={toggleDrawer}
+          toggleDrawer={toggleDrawer}
+          state={state}
+          setState={setState}
+        />
       </Drawer>
       <Drawer
         anchor={"right"}
