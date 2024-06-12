@@ -1096,11 +1096,16 @@ body {
 }
 .UploadDoc{
   margin-bottom: 4% !important; 
+  text-align: center;
 }
 .VideoPara{
   color: #7a7a7a;
   text-align: center;
   margin-bottom: 4% !important;
+}
+.videoDottedBorder{
+  border: 3px dotted #d4cdcd !important;
+  padding: 26px 0px;
 }
 
 .SelectButton{

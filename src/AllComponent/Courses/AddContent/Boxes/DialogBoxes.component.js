@@ -232,6 +232,8 @@ const DialogBoxes = ({
         <DialogContent>
           <Box className="VideoBox">
             <UploadFileRoundedIcon className="VideoIcon" />
+
+            <Box className="videoDottedBorder">
             <Typography gutterBottom className="UploadDoc">
               <b> Upload Image(s)</b>
             </Typography>
@@ -271,14 +273,19 @@ const DialogBoxes = ({
                 )}
               </Box>
             </div>
+           </Box>
+
+           <Box sx={{marginTop:"12px"}}>Or</Box>
+
             <Typography
               className="orPasteURL"
               onClick={toggleDrawerUrl("right", true)}
             >
-              Or paste URL
+               Paste URL
             </Typography>
           </Box>
         </DialogContent>
+
       </BootstrapDialog>
       <BootstrapDialog
         className="PopUP"
@@ -304,8 +311,9 @@ const DialogBoxes = ({
         </IconButton>
 
         <DialogContent>
-          <Box className="VideoBox">
+        <Box className="VideoBox">
             <UploadFileRoundedIcon className="VideoIcon" />
+            <Box className="videoDottedBorder">
             <Typography gutterBottom className="UploadDoc">
               <b> Upload Zip File(s)</b>
             </Typography>
@@ -345,14 +353,19 @@ const DialogBoxes = ({
                 )}
               </Box>
             </div>
-            <Typography
+            </Box>
+
+            <Box sx={{marginTop:"12px"}}>Or</Box>
+
+           <Typography
               className="orPasteURL"
               onClick={toggleDrawerUrl("right", true)}
             >
-              Or paste URL
+              Paste URL
             </Typography>
-          </Box>
+            </Box>
         </DialogContent>
+        
       </BootstrapDialog>
       <BootstrapDialog
         className="PopUP"
@@ -380,6 +393,7 @@ const DialogBoxes = ({
         <DialogContent>
           <Box className="VideoBox">
             <UploadFileRoundedIcon className="VideoIcon" />
+            <Box className="videoDottedBorder">
             <Typography gutterBottom className="UploadDoc">
               <b> Upload Documents(s)</b>
             </Typography>
@@ -419,11 +433,15 @@ const DialogBoxes = ({
                 )}
               </Box>
             </div>
+            </Box>
+
+            <Box sx={{marginTop:"12px"}}>Or</Box>
+
             <Typography
               className="orPasteURL"
               onClick={toggleDrawerUrl("right", true)}
             >
-              Or paste URL
+              Paste URL
             </Typography>
           </Box>
         </DialogContent>
@@ -454,6 +472,7 @@ const DialogBoxes = ({
         <DialogContent>
           <Box className="VideoBox">
             <UploadFileRoundedIcon className="VideoIcon" />
+            <Box className="videoDottedBorder">
             <Typography gutterBottom className="UploadDoc">
               <b> Upload Video(s)</b>
             </Typography>
@@ -493,11 +512,14 @@ const DialogBoxes = ({
                 )}
               </Box>
             </div>
+            </Box>
+
+            <Box sx={{marginTop:"12px"}}>Or</Box>
             <Typography
               className="orPasteURL"
               onClick={toggleDrawerUrl("right", true)}
             >
-              Or paste URL
+              Paste URL
             </Typography>
           </Box>
         </DialogContent>
