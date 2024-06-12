@@ -20,7 +20,7 @@ import {
   updateMemberDetails,
 } from "../ActionFactory/apiActions";
 import { toast } from "react-toastify";
-import { Typography } from "@mui/material";
+import { Box, Divider, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { validatePhoneNo } from "../../Util/CommonUtils";
 const ITEM_HEIGHT = 48;
@@ -161,23 +161,23 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
           <CloseIcon className="closeHover" onClick={() => handleCloseCat()} />
         </DialogTitle>
 
-        <DialogContent>
+        <DialogContent className="confiDivider">
           {selectedConfigValue === "Category" ? (
             <>
-              {" "}
+            <DialogContent dividers>
               {CommonTypography(
                 {
                   fontWeight: 600,
                   label: "Category",
                 },
                 (Option = {
-                  className: "addCatHeading",
+                  className: "addCatHeadingCat",
                 })
               )}
               {commonTextField(
                 {
                   id: "fullWidth",
-                  className: "BoxShadow addCatTextField",
+                  className: "BoxShadow addCatTextFieldCat",
                   inputClassName: "textField",
                   labels: "Enter Category Name",
                 },
@@ -186,9 +186,11 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   type: "description",
                 })
               )}
+              </DialogContent>
             </>
           ) : selectedConfigValue === "Duration" ? (
             <>
+            <DialogContent dividers>
               {CommonTypography(
                 {
                   fontWeight: 600,
@@ -210,9 +212,11 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   type: "duration",
                 })
               )}
+              </DialogContent>
             </>
           ) : selectedConfigValue === "SubCategory" ? (
             <>
+            <DialogContent dividers>
               <div>
                 {CommonTypography(
                   {
@@ -255,9 +259,11 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   )}
                 </FormControl>
               </div>
+              </DialogContent>
             </>
           ) : (
             <>
+            <DialogContent dividers>
               {CommonTypography(
                 { fontWeight: 600, label: "Add Member" },
                 (Option = {
@@ -320,6 +326,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   )}
                 </div>
               </div>
+              </DialogContent>
             </>
           )}
         </DialogContent>

@@ -568,8 +568,20 @@
   margin-top: 3% !important;
   margin-left: 1px !important;
 }
+.addCatHeadingCat{
+  margin-top: 3% !important;
+  margin-left: 3px !important;
+}
+.confiDivider .MuiDialogContent-root{
+  padding: 20px 1px !important;
+  /* width: 95% !important; */
+}
 .addCatTextField{
   margin-top: 3% !important;
+}
+.addCatTextFieldCat{
+  margin-top: 3% !important;
+  width: 100% !important;
 }
 .closeHover{
   margin-top: 0.8%;
