@@ -18,7 +18,12 @@ import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 
-const SubjTestMainPage = ({ handleCreateNewTest }) => {
+const SubjTestMainPage = ({ handleCreateNewTest ,
+  handelclose,
+  anchor,
+  st,
+  setSt}
+  ) => {
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -56,7 +61,7 @@ const SubjTestMainPage = ({ handleCreateNewTest }) => {
       <h2 style={{ marginLeft: "4%" }}>Add Subjective Test</h2>
       <IconButton
         aria-label="close"
-        onClick={handleClose}
+        onClick={handelclose("right", false, st , setSt)}
         sx={{
           position: "absolute",
           right: 8,

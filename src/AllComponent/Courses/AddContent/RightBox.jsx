@@ -199,62 +199,64 @@ const RightBox = ({
     setZipopen(false);
     setUrl({ url, [anchor]: open });
   };
+  
   const toggleDrawer =
-    (anchor, open) => (event) => {
+    (anchor, open, stateVariable, setStateVariable) => (event) => {
       if (
         event.type === "keydown" &&
         (event.key === "Tab" || event.key === "Shift")
       ) {
         return;
       }
-      setState({ ...state, [anchor]: open });
+      setStateVariable({ ...stateVariable, [anchor]: open });
     };
+
 
   const addContentList = [
     {
       name: "Folder",
       Component: <FolderIcon className="folderIconRightBox" />,
-      onClickHandler: () => toggleDrawer("right", true)
+      onClickHandler: toggleDrawer("right", true, state, setState),
     },
     {
       name: "Video",
       Component: <AssignmentIcon className="folderIconRightBox" />,
-      onClickHandler: () => handleClickOpenVideo(vd, setVd)
+      onClickHandler: () => handleClickOpenVideo(vd, setVd),
     },
     {
       name: "online Test",
       Component: <AssignmentIcon className="folderIconRightBox" />,
-      onClickHandler: () => toggleDrawer("right", true, ot, setOt)
+      onClickHandler: toggleDrawer("right", true, ot, setOt),
     },
     {
       name: "Subjective Test",
       Component: <AssignmentIcon className="folderIconRightBox" />,
-      onClickHandler: () => toggleDrawer("right", true, st, setSt)
+      onClickHandler:toggleDrawer("right", true, st, setSt),
     },
     {
       name: "Document",
       Component: <NoteIcon className="folderIconRightBox" />,
-      onClickHandler: () => handleClickOpenDoc(doc, setDoc)
+      onClickHandler: () => handleClickOpenDoc(doc, setDoc),
     },
     {
       name: "Image",
       Component: <LandscapeIcon className="folderIconRightBox" />,
-      onClickHandler: () => handleClickOpenImg(image, setImage)
+      onClickHandler: () => handleClickOpenImg(image, setImage),
     },
     {
       name: "Zip File",
       Component: <FolderZipIcon className="folderIconRightBox" />,
-      onClickHandler: () => handleClickOpenZip(zip, setZip)
+      onClickHandler: () => handleClickOpenZip(zip, setZip),
     },
     {
       name: "Import Content",
       Component: <DownloadForOfflineSharpIcon className="folderIconRightBox" />,
-      onClickHandler: () => handleClickOpenIC(ic, setIc)
+      onClickHandler: () => handleClickOpenIC(ic, setIc),
     },
     {
       name: "Import Live",
       Component: <DownloadForOfflineSharpIcon className="folderIconRightBox" />,
-      onClickHandler: () => toggleDrawer("right", true, il, setIL)
+      onClickHandler: toggleDrawer("right", true, il, setIL),
     },
   ];
 

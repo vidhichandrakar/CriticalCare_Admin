@@ -17,34 +17,16 @@ import "../../CSSFile/Courses.css";
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 
-const AddContentDrawer = ({anchor, handelclose}) => {
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,  
-    bottom: false,
-    right: false,
-  });
-  const [open, setOpen] = React.useState(true);
-
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-    setState({ ...state, [anchor]: open });
-  };
-  
+const AddContentDrawer = ({
+  anchor,
+  handelclose,
+  toggleDrawerOT,
+  state,
+  setState,
+}) => {
   return (
-    <Box
-      className="folderDrawer"
-      //   sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <h2 style={{marginLeft: "4%"}}>Add Folder</h2>
+    <Box className="folderDrawer" role="presentation">
+      <h2 style={{ marginLeft: "4%" }}>Add Folder</h2>
       <IconButton
         aria-label="close"
         sx={{
@@ -54,8 +36,9 @@ const AddContentDrawer = ({anchor, handelclose}) => {
           color: (theme) => theme.palette.grey[500],
         }}
       >
-        <Box onClick= {handelclose("right", false)}>
-          <CloseIcon  /></Box>
+        <Box onClick={handelclose("right", false, state, setState)}>
+          <CloseIcon onClick={handelclose("right", false, state, setState)} />
+        </Box>
       </IconButton>
       <Divider />
 
@@ -68,24 +51,24 @@ const AddContentDrawer = ({anchor, handelclose}) => {
           }}
         >
           <Paper
-      component="form"
-      sx={{
-        ml: "2px",
-        mt: "12px",
-        mb: "-1px",
-        display: "flex",
-        alignItems: "center",
-        width: "100%",
-        height: "20%",
-        borderRadius: "10px"
-      }}
-    >
-      <InputBase
-        sx={{ ml: 1, flex: 1 }}
-        placeholder="Enter folder name"
-        inputProps={{ 'aria-label': 'search your course by name' }}
-      />
-    </Paper>
+            component="form"
+            sx={{
+              ml: "2px",
+              mt: "12px",
+              mb: "-1px",
+              display: "flex",
+              alignItems: "center",
+              width: "100%",
+              height: "20%",
+              borderRadius: "10px",
+            }}
+          >
+            <InputBase
+              sx={{ ml: 1, flex: 1 }}
+              placeholder="Enter folder name"
+              inputProps={{ "aria-label": "search your course by name" }}
+            />
+          </Paper>
         </Box>
       </Box>
 

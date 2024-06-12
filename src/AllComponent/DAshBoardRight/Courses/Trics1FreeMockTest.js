@@ -25,6 +25,7 @@ import { redirectRestriction } from "../../../Util/RedirectRestriction";
 import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 import IconButton from "@mui/material/IconButton";
 import yellowEnvlope from "../../../Media/Images/yellowEnvlope.jpeg";
+import Header from "../../Courses/Header";
 
 const Trics1FreeMockTest = ({ onDelete }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -135,14 +136,15 @@ const Trics1FreeMockTest = ({ onDelete }) => {
   };
   return (
     <div className="grid-container">
+      <Header Heading={<ArrowBackIosNewIcon />}  LinkAddress = {"/admin/YourCourses"}/>
       <SideBar />
       <div className="main-container ">
         <div className="singleRow">
-          <Link to="/admin/YourCourses">
+         <Link to="/admin/YourCourses">
             <Button className="backToCourses">
               <ArrowBackIosNewIcon />
             </Button>
-          </Link>
+          </Link> 
         </div>
         <div className="another-main-container">
           <div className="completeTricsBox">

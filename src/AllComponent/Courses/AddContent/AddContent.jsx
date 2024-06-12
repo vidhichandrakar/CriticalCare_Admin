@@ -61,8 +61,12 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
           <b>Contents</b>
         </h2>
         <Box className="contentInnerLeftBox">
+          <Box>
+          
+          </Box>
           {videoDesc?.map((item) =>
-            item?.content_name?.split(".")[1] === "mp4" ? (
+            item?.content_name?.split(".")[1] === "mp4" ?
+             (
               <Box className="videoBox">
                 <video width="120" controls autoplay muted height={"120"}>
                   <source src={item.content_url} type="video/mp4" />
@@ -100,13 +104,13 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
             )
           )}
         </Box>
-        <Box className="/">
+        {/* <Box className="/">
           {commonButton({
             handleTrackerPage: () => handleCreateCourse(),
             className: "coursesButton",
             label: "Create Course",
           })}
-        </Box>
+        </Box> */}
       </Box>
       <Box className="contentRightBox">
         <Typography className="contentRightHeading"> Add content</Typography>

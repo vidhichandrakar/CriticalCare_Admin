@@ -353,6 +353,20 @@ body {
   height: 5vh;
   margin-top: 24px;
 }
+.MyCOurseFilterBtn{
+  margin-left: 2%;
+}
+.MyCOurseFilterBtn button{
+  margin-left: 5%;
+  padding: 2px 14px;
+  border: 0.5px solid grey;
+  background-color: #ffffff;
+  font-size: large;
+  color: grey;
+  height: 5vh;
+  /* margin-top: 2px */
+
+}
 .searchBar {
   height: 6vh;
   border: 0px !important;
@@ -807,6 +821,7 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-top: 1%;
 }
 .completeTricsBox {
   display: flex;

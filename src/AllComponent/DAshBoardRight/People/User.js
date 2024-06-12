@@ -135,7 +135,7 @@ const User = () => {
 
   useEffect(() => {
     if (redirectRestriction()) {
-      setLoaderState(true);
+      // setLoaderState(true);
       getAllUsersApi({
         callBack: (response) => {
           const userCallBack = response?.data;
@@ -207,7 +207,7 @@ const User = () => {
   
 
   const deleteSelectedItem = () => {
-    setLoaderState(true);
+    // setLoaderState(true);
     checkedValue.map((item) => {
       deleteUser({
         userId: item,

@@ -143,7 +143,7 @@ const Testimonial = () => {
 
   useEffect(() => {
     if (redirectRestriction()) {
-      setLoaderState(true);
+      // setLoaderState(true);
       getTestimonal({
         callBack: (response) => {
           const userCallBack = response?.data;
@@ -193,7 +193,7 @@ const Testimonial = () => {
     setIsOpen(false);
   };
   const handleDelete = () => {
-    setLoaderState(true);
+    // setLoaderState(true);
     const userId = openId;
     deleteTestimonial({
       userId,
