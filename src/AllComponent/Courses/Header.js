@@ -25,13 +25,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import Popover from "@mui/material/Popover";
 import Logo from "../../Media/Logo.png";
 
-const Header = ({ Heading, subHeading, OpenSidebar }) => {
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+const Header = ({ Heading, subHeading, LinkAddress, OpenSidebar }) => {
+  
 
   const [value, setValue] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
@@ -44,6 +39,13 @@ const Header = ({ Heading, subHeading, OpenSidebar }) => {
   
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -64,11 +66,12 @@ const Header = ({ Heading, subHeading, OpenSidebar }) => {
   return (
     <Box className="header">
       <Box className="HeaderLeft">
-        <Typography className="headerText">{Heading}</Typography>
+      <Link to={LinkAddress} style={{textDecoration: "none", color: "Black", cursor: "pointer"}}><Typography className="headerText">{Heading}</Typography></Link>
       </Box>
       <Box className="HeaderRight">
         <Box  onClick={handleClick} className="logoCircle">
         <PersonIcon className="logoDesign"/>
+        
         </Box>
       </Box>
           <Popover

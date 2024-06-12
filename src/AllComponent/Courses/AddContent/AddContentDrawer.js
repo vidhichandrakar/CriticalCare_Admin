@@ -20,7 +20,7 @@ import InputBase from "@mui/material/InputBase";
 const AddContentDrawer = ({
   anchor,
   handelclose,
-  toggleDrawer,
+  toggleDrawerOT,
   state,
   setState,
 }) => {

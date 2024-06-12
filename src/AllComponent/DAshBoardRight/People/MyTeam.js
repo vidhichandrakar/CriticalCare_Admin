@@ -146,7 +146,7 @@ const MyTeam = () => {
 
   useEffect(() => {
     if (redirectRestriction()) {
-      setLoaderState(true);
+      // setLoaderState(true);
       getTeam({
         callBack: (response) => {
           const userCallBack = response?.data;

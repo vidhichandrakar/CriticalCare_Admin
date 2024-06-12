@@ -17,14 +17,32 @@ import "react-toastify/dist/ReactToastify.css";
 import { redirectRestriction } from "../../Util/RedirectRestriction";
 import Header from "./Header";
 import { Box } from "@mui/material";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import Divider from '@mui/material/Divider'; 
+import PersonIcon from '@mui/icons-material/Person';
+import Popover from "@mui/material/Popover";
+import MenuItem from "@mui/material/MenuItem";
 
 const YourCourses = () => {
   const [allCourses, setAllCourses] = useState([]);
   const [loaderState, setLoaderState] = useState(false);
   const [userData, setUserData] = useState([]);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [value, setValue] = useState("");
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
 
   const authorized = JSON.parse(localStorage.getItem("loggedInUser"));
   const navigate = useNavigate();
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   useEffect(() => {
     if (redirectRestriction()) {
@@ -70,8 +88,40 @@ const YourCourses = () => {
         
         <LoaderComponent loaderState={loaderState} />
         <Box className="subHeaderMycourses">
+        
         <SearchBar  placeholder="Search by name" />
+       
+    <div className="MyCOurseFilterBtn filterButton">
+    <Button className="filterButton" onClick={handleClick}>
+              <FilterAltIcon /> Filter
+            </Button>
+            </div>
         </Box>
+        <Popover
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+                sx={{ mt: "5px" }}
+                value={value}
+              > 
+               
+
+            <MenuItem sx={{mb: -1}}>
+               <span className="ccLogout">Publish</span>
+            </MenuItem>
+            <Divider />
+
+            <MenuItem sx={{mt: -1}}>
+              <span className="ccLogout">UnPublish</span>
+            </MenuItem>
+           
+        </Popover>
+
         <Box className="Add-main-cards">
           <YourCoursesCard
             allCourses={allCourses}

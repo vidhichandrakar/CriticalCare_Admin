@@ -15,7 +15,10 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import "../../../CSSFile/Courses.css";
 
-const ImportLive = (anchor) => {
+const ImportLive = ({anchor,
+  handelclose,
+il,
+setIl}) => {
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -55,7 +58,7 @@ const ImportLive = (anchor) => {
       <h2 style={{ marginLeft: "4%" }}>Add ImportLive</h2>
       <IconButton
         aria-label="close"
-        onClick={handleClose}
+        onClick={handelclose( "right", false, il, setIl)}
         sx={{
           position: "absolute",
           right: 8,

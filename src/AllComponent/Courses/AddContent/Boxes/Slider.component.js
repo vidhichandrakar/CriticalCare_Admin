@@ -10,6 +10,8 @@ import AddContentDrawer from "../AddContentDrawer";
 import { Drawer } from "@mui/material";
 import Document from "../AddContent/Document";
 
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+
 const ContentSlider = ({
   toggleDrawer,
   setState,
@@ -82,21 +84,37 @@ const ContentSlider = ({
         open={il["right"]}
         onClose={toggleDrawer("right", false, il, setIl)}
       >
-        {ImportLive("right")}
+       <ImportLive 
+       handelclose={toggleDrawer}
+       anchor={"right"}
+       toggleDrawer={toggleDrawer}
+       il={il}
+       setIl={setIl}/>
       </Drawer>
       <Drawer
         anchor={"right"}
         open={ot["right"]}
         onClose={toggleDrawer("right", false, ot, setOt)}
       >
-        <OnlineTest handelclose={toggleDrawer} />
+        <OnlineTest handelclose={toggleDrawer}
+         anchor={"right"}
+         toggleDrawer={toggleDrawer}
+         ot={ot}
+         setOt={setOt} 
+        />
       </Drawer>
       <Drawer
         anchor={"right"}
         open={st["right"]}
         onClose={toggleDrawer("right", false, st, setSt)}
       >
-        {SubjectiveTest("right")}
+        <SubjectiveTest 
+        handelclose={toggleDrawer}
+        anchor={"right"}
+        toggleDrawer={toggleDrawer}
+        st={st}
+        setSt={setSt}
+        />
       </Drawer>
       <Drawer
         anchor={"right"}

@@ -12,6 +12,7 @@ import { useDropzone } from "react-dropzone";
 import { uploadFile } from "../../ActionFactory/apiActions";
 import ContentSlider from "./Boxes/Slider.component";
 import DialogBoxes from "./Boxes/DialogBoxes.component";
+
 const RightBox = ({
   contentType,
   handleVideoName,
@@ -198,16 +199,18 @@ const RightBox = ({
     setZipopen(false);
     setUrl({ url, [anchor]: open });
   };
+  
   const toggleDrawer =
-    (anchor, open, stateVariable, setVariable) => (event) => {
+    (anchor, open, stateVariable, setStateVariable) => (event) => {
       if (
         event.type === "keydown" &&
         (event.key === "Tab" || event.key === "Shift")
       ) {
         return;
       }
-      setVariable({ ...stateVariable, [anchor]: open });
+      setStateVariable({ ...stateVariable, [anchor]: open });
     };
+
 
   const addContentList = [
     {
@@ -223,12 +226,12 @@ const RightBox = ({
     {
       name: "online Test",
       Component: <AssignmentIcon className="folderIconRightBox" />,
-      onClickHandler: () => toggleDrawer("right", true, ot, setOt),
+      onClickHandler: toggleDrawer("right", true, ot, setOt),
     },
     {
       name: "Subjective Test",
       Component: <AssignmentIcon className="folderIconRightBox" />,
-      onClickHandler: () => toggleDrawer("right", true, st, setSt),
+      onClickHandler:toggleDrawer("right", true, st, setSt),
     },
     {
       name: "Document",
@@ -253,7 +256,7 @@ const RightBox = ({
     {
       name: "Import Live",
       Component: <DownloadForOfflineSharpIcon className="folderIconRightBox" />,
-      onClickHandler: () => toggleDrawer("right", true, il, setIL),
+      onClickHandler: toggleDrawer("right", true, il, setIL),
     },
   ];
 

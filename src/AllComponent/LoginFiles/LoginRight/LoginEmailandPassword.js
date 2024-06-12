@@ -118,7 +118,7 @@ const LoginEmailandPassword = () => {
             userName: response.data.user_name,
             user_photo: response.data.user_photo,
           });
-          navigation("/DashBoard");
+          navigation("/admin/DashBoard");
           localStorage.setItem("loggedInUser", JSON.stringify(response?.data));
         },
         error: (error) => {

@@ -26,14 +26,12 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-const OnlineTest = ({ anchor, handelclose }) => {
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
-
+const OnlineTest = ({
+  anchor,
+  handelclose,
+  ot,
+  setOt,}) => {
+  
   const [testName, setTestName] = useState([])
   const top100Films = [
     { title: "The Shawshank Redemption", year: 1994 },
@@ -49,38 +47,19 @@ const OnlineTest = ({ anchor, handelclose }) => {
 
   },[])
 
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setState({ ...state, [anchor]: open });
-  };
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <Box
       className="folderDrawer"
       role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
+      // onClick={toggleDrawer(anchor, false)}
+      // onKeyDown={toggleDrawer(anchor, false)}
     >
       {console.log("testNametestName",testName)}
       <h2 style={{ marginLeft: "4%" }}>Add online test</h2>
       <IconButton
         aria-label="close"
-        onClick={handelclose("right", false)}
+        onClick={handelclose("right", false, ot , setOt)}
         sx={{
           position: "absolute",
           right: 8,

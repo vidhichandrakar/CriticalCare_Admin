@@ -42,35 +42,13 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-const SubjectiveTest = (anchor) => {
-  const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
-  });
-
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setState({ ...state, [anchor]: open });
-  };
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const [newTest, setNewTest] = useState(false);
+const SubjectiveTest = ({
+  anchor,
+  handelclose,
+  st,
+  setSt
+}) => {
+    const [newTest, setNewTest] = useState(false);
   const handleCreateNewTest = () => {
     setNewTest(true);
   };
@@ -84,11 +62,9 @@ const SubjectiveTest = (anchor) => {
     className="fixingSubjTestWidth"
     >
       <Box
-          sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 580 }}
+          // sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 580 }}
         className="subjTestFolderDrawer"
         role="presentation"
-        onClick={toggleDrawer(anchor, false)}
-        onKeyDown={toggleDrawer(anchor, false)}
       >
         {newTest ? (
           <div>
@@ -102,7 +78,7 @@ const SubjectiveTest = (anchor) => {
 
             <IconButton
               aria-label="close"
-              onClick={handleClose}
+              onClick={handelclose("right", false, st , setSt)}
               // sx={{
               //   position: "absolute",
               //   right: 8,
@@ -224,7 +200,11 @@ const SubjectiveTest = (anchor) => {
             </Box>
           </div>
         ) : (
-          <SubjTestMainPage handleCreateNewTest={handleCreateNewTest} />
+          <SubjTestMainPage handleCreateNewTest={handleCreateNewTest}
+          handelclose={handelclose}
+         anchor={"right"}
+         st={st}
+         setSt={setSt} />
         )}
       </Box>
     </div>

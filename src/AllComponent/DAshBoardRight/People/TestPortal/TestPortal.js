@@ -206,12 +206,12 @@ const TestPortal = () => {
 
   useEffect(() => {
     if (redirectRestriction()) {
-      setLoaderState(true);
+      // setLoaderState(true);
       getTest({
         callBack: (response) => {
           const userCallBack = response?.data;
           setUserData(userCallBack);
-          setLoaderState(false);
+          // setLoaderState(false);
         },
       });
     } else {
@@ -312,7 +312,7 @@ const TestPortal = () => {
           callBack: (response) => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
-            setLoaderState(false);
+            // setLoaderState(false);
           },
         });
       },
