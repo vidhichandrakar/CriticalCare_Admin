@@ -870,6 +870,7 @@ const handleChange = (event) => {
             <DemoContainer components={["DatePicker"]}>
               <DatePicker
                 className="BoxShadowCourses"
+                disablePast
                 sx={{ width: 700 }}
                 renderInput={(params) => (
                   <TextField

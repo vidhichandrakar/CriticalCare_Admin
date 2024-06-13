@@ -98,85 +98,89 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                       </Box>
                     ) : null} */}
 
-
                     {item?.durations[0]?.duration_type_id === 2 ? (
-                     <Box>
-                       <Box className="multiplevalidityAvailBox">
-                        Multiple Validity Available
+                      <Box>
+                        <Box className="multiplevalidityAvailBox">
+                          Multiple Validity Available
+                        </Box>
+                        <div className="duration">
+                          <AccessTimeIcon className="clock" />{" "}
+                          <Typography className="durationText">
+                            {
+                              item?.durations[item?.durations?.length - 1]
+                                ?.duration_id
+                            }{" "}
+                            {durationName[0]?.duration_name}
+                          </Typography>
+                        </div>
                       </Box>
-                      <div className="duration">
-                      <AccessTimeIcon className="clock" />{" "}
-                      <Typography className="durationText">
-                        {
-                          item?.durations[item?.durations?.length - 1]
-                            ?.duration_id
-                        }{" "}
-                        {durationName[0]?.duration_name}
-                      </Typography>
-                    </div>
-                     </Box>
-                    ) :  item?.durations[0]?.duration_type_id === 1 ? ( 
-                  <Box>
-                <Box className="multiplevalidityAvailBox">
-                Single Validity
-              </Box>
-              <div className="duration">
-                      <AccessTimeIcon className="clock" />{" "}
-                      <Typography className="durationText">
-                        {
-                          item?.durations[item?.durations?.length - 1]
-                            ?.duration_id
-                        }{" "}
-                        {durationName[0]?.duration_name}
-                      </Typography>
-                    </div>
-                    </Box> 
-            ) :
-            item?.durations[0]?.duration_type_id === 3 ? ( <Box className="multiplevalidityAvailBox">
-                    LifeTime Validity
-                  </Box> 
-                ) :
-                item?.durations[0]?.duration_type_id === 4 ? ( <Box className="multiplevalidityAvailBox">
-                    Course Expire
-                  </Box> 
-                ) : null}
-
-
-                    
+                    ) : item?.durations[0]?.duration_type_id === 1 ? (
+                      <Box>
+                        <Box className="multiplevalidityAvailBox">
+                          Single Validity
+                        </Box>
+                        <div className="duration">
+                          <AccessTimeIcon className="clock" />{" "}
+                          <Typography className="durationText">
+                            {
+                              item?.durations[item?.durations?.length - 1]
+                                ?.duration_id
+                            }{" "}
+                            {durationName[0]?.duration_name}
+                          </Typography>
+                        </div>
+                      </Box>
+                    ) : item?.durations[0]?.duration_type_id === 3 ? (
+                      <Box className="multiplevalidityAvailBox">
+                        LifeTime Validity
+                      </Box>
+                    ) : item?.durations[0]?.duration_type_id === 4 ? (
+                      <Box className="multiplevalidityAvailBox">
+                        Course Expire
+                      </Box>
+                    ) : null}
 
                     <div className="duration" style={{ marginTop: "10%" }}>
-                      <div 
-                      className= {item?.durations?.length > 1 ? "priceAndOfferprice" : "priceAndOfferprice-singleValidity"}
+                      <div
+                        className={
+                          item?.durations?.length > 1
+                            ? "priceAndOfferprice"
+                            : "priceAndOfferprice-singleValidity"
+                        }
                       >
-                      <Typography className="offerPrice">
-                        ₹{" "}
-                        {
-                          item.durations[item?.durations?.length - 1]
-                            ?.offer_price
-                        }{" "}
-                      </Typography>
-                      <Typography className="durationText price">
-                        ₹{item.durations[item?.durations?.length - 1]?.price}
-                      </Typography>
+                        <Typography className="offerPrice">
+                          ₹{" "}
+                          {
+                            item.durations[item?.durations?.length - 1]
+                              ?.offer_price
+                          }{" "}
+                        </Typography>
+                        <Typography className="durationText price">
+                          ₹{item.durations[item?.durations?.length - 1]?.price}
+                        </Typography>
                       </div>
 
                       <div>
-                      <Box 
-                      className= {item?.durations?.length > 1 ? "discountPercentage-multiValidity": "discountPercentage-singleValidity"}
-                      >
-                        <Typography>
-                          {item.durations[item?.durations?.length - 1]
-                            ?.offer_price &&
-                          item.durations[item?.durations?.length - 1]?.price
-                            ? handleDiscountPercent(
-                                item.durations[item?.durations?.length - 1]
-                                  .price,
-                                item.durations[item?.durations?.length - 1]
-                                  .offer_price
-                              )
-                            : null}
-                        </Typography>
-                      </Box>
+                        <Box
+                          className={
+                            item?.durations?.length > 1
+                              ? "discountPercentage-multiValidity"
+                              : "discountPercentage-singleValidity"
+                          }
+                        >
+                          <Typography>
+                            {item.durations[item?.durations?.length - 1]
+                              ?.offer_price &&
+                            item.durations[item?.durations?.length - 1]?.price
+                              ? handleDiscountPercent(
+                                  item.durations[item?.durations?.length - 1]
+                                    .price,
+                                  item.durations[item?.durations?.length - 1]
+                                    .offer_price
+                                )
+                              : null}
+                          </Typography>
+                        </Box>
                       </div>
                     </div>
                   </div>
