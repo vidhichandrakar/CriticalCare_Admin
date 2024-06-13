@@ -83,9 +83,11 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                     )}
                   </div>
                   <div className="col-md-8 rightCard">
+                  <Tooltip title={item.course_name}>
                     <Typography className="courseHeader wrap-text-50">
                       {item.course_name}
                     </Typography>
+                    </Tooltip>
                     <Tooltip title={item.description}>
                       <Typography className="wrap-text-50">
                         {item.description}
@@ -100,10 +102,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                     <div className="duration">
                       <AccessTimeIcon className="clock" />{" "}
                       <Typography className="durationText">
-                        {
-                          item?.durations[item?.durations?.length - 1]
-                            ?.duration_id
-                        }{" "}
+                        {item?.durations[item?.durations?.length - 1]?.duration_id}
                         {durationName[0]?.duration_name}
                       </Typography>
                     </div>
@@ -113,11 +112,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                       className= {item?.durations?.length > 1 ? "priceAndOfferprice" : "priceAndOfferprice-singleValidity"}
                       >
                       <Typography className="offerPrice">
-                        ₹{" "}
-                        {
-                          item.durations[item?.durations?.length - 1]
-                            ?.offer_price
-                        }{" "}
+                        ₹{item.durations[item?.durations?.length - 1]?.offer_price}
                       </Typography>
                       <Typography className="durationText price">
                         ₹{item.durations[item?.durations?.length - 1]?.price}
@@ -142,6 +137,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                         </Typography>
                       </Box>
                       </div>
+
                     </div>
                   </div>
                   <div className="col-md-2 lastCard">

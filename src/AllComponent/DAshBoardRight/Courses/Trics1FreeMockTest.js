@@ -139,13 +139,13 @@ const Trics1FreeMockTest = ({ onDelete }) => {
       <Header Heading={<ArrowBackIosNewIcon />}  LinkAddress = {"/admin/YourCourses"}/>
       <SideBar />
       <div className="main-container ">
-        <div className="singleRow">
+        {/* <div className="singleRow">
          <Link to="/admin/YourCourses">
             <Button className="backToCourses">
               <ArrowBackIosNewIcon />
             </Button>
           </Link> 
-        </div>
+        </div> */}
         <div className="another-main-container">
           <div className="completeTricsBox">
             <div className="leftSideRow">
@@ -235,7 +235,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
 
               <div className="ContentCol">
                 <p className="blackPara">Content</p>
-                <p className="greyPara mt-10px">1 Content</p>
+                <p className="greyPara mt-10px">{courseData?.contents?.length} content(s)</p>
               </div>
             </div>
 

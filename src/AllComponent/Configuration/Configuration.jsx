@@ -331,28 +331,28 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseCat}>Cancel</Button>
+          <Button variant="outlined" onClick={handleCloseCat} sx={{borderColor:"red", color:"red", textTransform:"none", marginRight:"12px", padding:"3px 0px"}}>Cancel</Button>
           {selectedConfigValue === "Category" ? (
             <>
-              <Button onClick={handleConfigChanges} type="submit">
+              <Button sx={{textTransform:"none", padding:"3px 0px", marginRight:"16px"}} variant="outlined" onClick={handleConfigChanges} type="submit">
                 Save
               </Button>
             </>
           ) : selectedConfigValue === "Duration" ? (
             <>
-              <Button onClick={handleDurationChanges} type="submit">
+              <Button sx={{textTransform:"none", padding:"3px 0px", marginRight:"16px"}} variant="outlined" onClick={handleDurationChanges} type="submit">
                 Save
               </Button>
             </>
           ) : selectedConfigValue === "SubCategory" ? (
             <>
-              <Button onClick={handleSubCatChanges} type="submit">
+              <Button sx={{textTransform:"none", padding:"3px 0px", marginRight:"16px"}} variant="outlined" onClick={handleSubCatChanges} type="submit">
                 Save
               </Button>
             </>
           ) : (
             <>
-              <Button onClick={handleMemberChanges} type="submit">
+              <Button sx={{textTransform:"none", padding:"3px 0px", marginRight:"16px"}} variant="outlined" onClick={handleMemberChanges} type="submit">
                 Save
               </Button>
             </>

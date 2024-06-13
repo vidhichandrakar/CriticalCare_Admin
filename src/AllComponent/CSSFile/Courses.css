@@ -165,8 +165,7 @@
   margin-top: 3px;
 }
 .offerPrice{
-  font-size: 0.8rem !important;
-  /* margin-left: 1px !important; */
+  /* font-size: 0.8rem !important; */
 }
 .price{
   text-decoration: line-through;
@@ -347,12 +346,12 @@
   width:50%;
   
 }
-.FlexRow{
+/* .FlexRow{
   display: flex;
   flex-direction: row;
   align-items: left;
   justify-content: space-between;
-}
+} */
 .RightTick{
   color: white;
   background-color: #0ff55c;
@@ -364,6 +363,7 @@
   flex-direction: row;
   align-items: left;
   justify-content: space-between;
+  margin-top: -7px;
 }
 .RightTick{
   color: white;
@@ -568,7 +568,7 @@
     height:auto !important;
 }
 .addCatHeading{
-  margin-top: 3% !important;
+  margin-top: 2% !important;
   margin-left: 1px !important;
 }
 .addCatHeadingCat{
@@ -578,13 +578,16 @@
 .confiDivider .MuiDialogContent-root{
   padding: 20px 1px !important;
   /* width: 95% !important; */
+  margin-bottom: -20px;
 }
 .addCatTextField{
   margin-top: 3% !important;
+  margin-bottom: 4% !important;
 }
 .addCatTextFieldCat{
   margin-top: 3% !important;
   width: 100% !important;
+  margin-bottom: 4% !important;
 }
 .closeHover{
   margin-top: 0.8%;
