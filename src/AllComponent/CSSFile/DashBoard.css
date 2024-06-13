@@ -657,6 +657,13 @@ body {
   margin-right: 10px;
   cursor: pointer;
 }
+.deleteIconContent{
+  color:#ff0000;
+}
+.deleteIconContent:hover{
+  cursor: pointer;
+  color:#fb4e4e;
+}
 .redDeleteofTestPortal:hover {
   cursor: pointer;
 }

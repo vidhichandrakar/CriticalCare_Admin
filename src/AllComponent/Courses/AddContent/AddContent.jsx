@@ -11,7 +11,7 @@ import NoteIcon from "@mui/icons-material/Note";
 import { getContentType } from "../../ActionFactory/apiActions";
 import { commonButton } from "../../../Util/CommonFields";
 import attachmentimgae from "../../../Media/Images/undraw_attached_file_re_0n9b.svg" 
-
+import DeleteIcon from "@mui/icons-material/Delete";
 const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
   const [contentType, setContentType] = useState([]);
   const [videoDesc, setVideoDesc] = useState([{}]);
@@ -62,10 +62,10 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
           <b>Contents</b>
         </h2>
         <Box className="contentInnerLeftBox">
-          <Box>
+         {!videoDesc?.length ? <Box className="noContent">
           <img src={attachmentimgae} height="320px" width="320px" />
-          </Box>
-          {videoDesc?.map((item) =>
+          </Box>:
+          videoDesc?.map((item) =>
             item?.content_name?.split(".")[1] === "mp4" ?
              (
               <Box className="videoBox">
@@ -76,13 +76,19 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
                 <Typography className="typoStyleVideo">
                   {item?.content_name}
                 </Typography>
+                
               </Box>
             ) : handleImageType(item?.content_name?.split(".")[1]) ? (
               <Box className="videoBox">
-                <img src={item.content_url} height="120px" width="120px" />
+                <Box className="leftVideo">
+                  <img src={item.content_url} height="120px" width="120px" />
                 <Typography className="typoStyleVideo">
                   {item?.content_name}
                 </Typography>
+                </Box>
+                <Box>
+                  <DeleteIcon className="deleteIconContent"/>
+                </Box>
               </Box>
             ) : item?.content_name?.split(".")[1] === "zip" ? (
               <Box className="videoBox">
@@ -105,13 +111,13 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
             )
           )}
         </Box>
-        {/* <Box className="/">
+        <Box className="/">
           {commonButton({
             handleTrackerPage: () => handleCreateCourse(),
             className: "coursesButton",
             label: "Create Course",
           })}
-        </Box> */}
+        </Box>
       </Box>
       <Box className="contentRightBox">
         <Typography className="contentRightHeading"> Add content</Typography>

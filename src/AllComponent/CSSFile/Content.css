@@ -20,9 +20,14 @@
 .contentInnerLeftBox{
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center; */
+  /* align-items: center; */
   /* height: 40vh; */
+  /* padding: 4%; */
+}
+.noContent{
+  justify-content: center !important;
+  align-items: center !important;
   padding: 4%;
 }
 .contentInnerLeftBox:hover{
@@ -37,6 +42,12 @@
   display: flex;
   flex-direction: row;
   margin: 2%;
+}
+.leftVideo{
+  flex-direction: row;
+  display: flex;
+  width: 80%;
+  align-items: center;
 }
 .folderIconContent{
   font-size: 5em !important;
