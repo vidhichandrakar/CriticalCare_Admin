@@ -134,7 +134,7 @@ const YourCourses = () => {
           <Divider />
 
           <MenuItem
-            sx={{ mt: -1 }}
+            sx={{ mt: -1, mb : -1 }}
             value={"not published"}
             onClick={() => handleFilterCourse("not published")}
           >
@@ -143,7 +143,7 @@ const YourCourses = () => {
 
           <Divider />
           <MenuItem
-            sx={{ mb: -1 }}
+            sx={{ mt: -1 }}
             value={"published"}
             onClick={() => handleFilterCourse("All Courses")}
           >
