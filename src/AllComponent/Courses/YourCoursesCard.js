@@ -92,12 +92,19 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                       </Typography>
                     </Tooltip>
 
-                    {item?.durations?.length > 1 ? (
+                    {/* {item?.durations?.length === 1 ? (
                       <Box className="multiplevalidityAvailBox">
                         Multiple Validity Available
                       </Box>
-                    ) : null}
-                    <div className="duration">
+                    ) : null} */}
+
+
+                    {item?.durations[0]?.duration_type_id === 2 ? (
+                     <Box>
+                       <Box className="multiplevalidityAvailBox">
+                        Multiple Validity Available
+                      </Box>
+                      <div className="duration">
                       <AccessTimeIcon className="clock" />{" "}
                       <Typography className="durationText">
                         {
@@ -107,6 +114,35 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                         {durationName[0]?.duration_name}
                       </Typography>
                     </div>
+                     </Box>
+                    ) :  item?.durations[0]?.duration_type_id === 1 ? ( 
+                  <Box>
+                <Box className="multiplevalidityAvailBox">
+                Single Validity
+              </Box>
+              <div className="duration">
+                      <AccessTimeIcon className="clock" />{" "}
+                      <Typography className="durationText">
+                        {
+                          item?.durations[item?.durations?.length - 1]
+                            ?.duration_id
+                        }{" "}
+                        {durationName[0]?.duration_name}
+                      </Typography>
+                    </div>
+                    </Box> 
+            ) :
+            item?.durations[0]?.duration_type_id === 3 ? ( <Box className="multiplevalidityAvailBox">
+                    LifeTime Validity
+                  </Box> 
+                ) :
+                item?.durations[0]?.duration_type_id === 4 ? ( <Box className="multiplevalidityAvailBox">
+                    Course Expire
+                  </Box> 
+                ) : null}
+
+
+                    
 
                     <div className="duration" style={{ marginTop: "10%" }}>
                       <div 
