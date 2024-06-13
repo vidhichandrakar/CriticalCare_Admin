@@ -20,12 +20,6 @@ const YourCoursesCard = ({ allCourses, userData }) => {
 
   const handleDiscountPercent = (price, offer_price) => {
     console.log(price, offer_price, (price - offer_price) / price);
-    // let offerPercent = [...discountPercent];
-    // offerPercent.push({
-    //   price: "",
-    //   offer_price: "",
-    //   // discount: "",
-    // });
     return Math.floor(((price - offer_price) / price) * 100) + " %";
   };
   useEffect(() => {
