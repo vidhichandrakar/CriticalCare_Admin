@@ -10,6 +10,7 @@ import FolderZipIcon from "@mui/icons-material/FolderZip";
 import NoteIcon from "@mui/icons-material/Note";
 import { getContentType } from "../../ActionFactory/apiActions";
 import { commonButton } from "../../../Util/CommonFields";
+import attachmentimgae from "../../../Media/Images/undraw_attached_file_re_0n9b.svg" 
 
 const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
   const [contentType, setContentType] = useState([]);
@@ -62,7 +63,7 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
         </h2>
         <Box className="contentInnerLeftBox">
           <Box>
-          
+          <img src={attachmentimgae} height="320px" width="320px" />
           </Box>
           {videoDesc?.map((item) =>
             item?.content_name?.split(".")[1] === "mp4" ?
