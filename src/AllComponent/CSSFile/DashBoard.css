@@ -844,9 +844,23 @@ body {
 .blackPara {
   font-weight: bold;
 }
+
+.YearBox{
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    gap: 20px;
+    margin-bottom: 5% !important;
+}
 .greyPara {
+  display: flex;
+  flex-direction: row;
   color: grey !important;
   font-size: smaller;
+}
+.durationBOx{
+  border: 1px solid grey;
+  padding: 0px 17px;
+  border-radius: 13px
 }
 .PoPIcon {
   margin-right: 10%;
@@ -891,7 +905,7 @@ body {
 .whiteBoxOfContent {
   background-color: #ffffff;
   width: 21%;
-  height: 22vh;
+  height: 30vh;
   margin: 10px;
   border-radius: 10px;
 }
@@ -924,6 +938,21 @@ body {
   flex-direction: row !important;
   background-color: #ffffff !important;
   color: dodgerblue !important;
+  border-radius: 7px !important;
+  border: 1px solid dodgerblue !important;
+  box-shadow: none !important;
+  padding: 10px 30px !important;
+  height: 5vh;
+  margin: 4% !important;
+  margin-top: 8% !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+}
+.Publishbutton {
+  width: 92% !important;
+  display: flex !important;
+  flex-direction: row !important;
   border-radius: 7px !important;
   border: 1px solid dodgerblue !important;
   box-shadow: none !important;

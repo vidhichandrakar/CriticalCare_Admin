@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, TextField } from "@mui/material";
+import {Box, Button, TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import EditIcon from "@mui/icons-material/Edit";
@@ -73,6 +73,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
           callBack: (response) => {
             const userCallBack = response?.data;
             setCourseData(userCallBack);
+            console.log(userCallBack, "LINE76 asdfgh")
           },
         });
       }
@@ -173,6 +174,9 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                   <p className="greyPara">
                     {courseData?.durations?.length &&
                       courseData?.durations[courseData?.durations?.length -1]?.offer_price}
+                      
+                    {console.log(courseData, "Line196 CoursedAta")}
+
                   </p>
                 </div>
               </div>
@@ -194,15 +198,68 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                     <hr />
 
                     <p className="blackPara">Course Duration</p>
-                    <p className="greyPara">
+                    <p> {courseData?.durations[0]?.duration_type_id === 2 ? (
+                     
+                     <Box className="multiplevalidityBox">
+                       Multiple Validity Available
+                     </Box>
+                     
+                 ) : courseData?.durations[0]?.duration_type_id === 1 ? (
+                 
+                     <Box className="multiplevalidityAvailBox">
+                       Single Validity
+                     </Box>
+                 ) : courseData?.durations[0]?.duration_type_id === 3 ? (
+                   <Box className="multiplevalidityAvailBox">
+                     LifeTime Validity
+                   </Box>
+                 ) : courseData?.durations[0]?.duration_type_id === 4 ? (
+                   <Box className="multiplevalidityAvailBox">
+                     Course Expire
+                   </Box>
+                 ) : null}</p>
+                   <Box className="YearBox ">
+
+                    {/* <p>
                       {courseData?.durations?.length &&
                         courseData?.durations[courseData?.durations?.length -1]?.duration}{" "}
                       {durationName?.length && durationName[0]?.duration_name}
-                    </p>
+                      </p>
+                    <p>
+                      {courseData?.durations?.length &&
+                        courseData?.durations[courseData?.durations?.length -1]?.duration}{" "}
+                      {durationName?.length && durationName[0]?.duration_name}
+                      </p> */}
+                      
+                    {courseData?.durations?.map((item) => {
+                         return <Box className="durationBOx"> 
+                         <Box className="greyPara">
+                         <p>{item.duration}
+                         </p>
+                         <p style={{marginLeft: "5px"}}>{item.duration_name}</p>
+                          </Box>
+                          <Box>
+                           <p className="greyPara" style={{marginTop: "-8px"}}>{item.offer_price}</p> 
+                          </Box>
+                         </Box>
+                      })}
+                      {/* <p className="greyPara">
+                    {courseData?.durations?.length &&
+                      courseData?.durations[courseData?.durations?.length -1]?.offer_price}
+                      
+                    {console.log(courseData, "Line196 CoursedAta")}
+
+                  </p> */}
+                       
+                       
+                  
+                    </Box>
+
                     <hr />
                   </>
                 )
               ) : null}
+            
 
               <div className="StuEnrViewAll">
                 <div>
@@ -248,6 +305,13 @@ const Trics1FreeMockTest = ({ onDelete }) => {
               More Options
               <MoreHorizIcon className="threeDotsIcon" />
             </Button>
+            <Button variant="contained"
+            className="Publishbutton"
+                  onClick={() => handlePublish()}
+                  ><PublishedWithChangesIcon className="PoPIcon" />
+                  {courseData?.is_publish == "published"
+                    ? "UnPublish"
+                    : "Publish"}</Button>
             <div className="Widthhh">
               <Popover
                 id={id}
@@ -278,19 +342,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                   <DeleteIcon className="PoPIcon" />
                   Delete
                 </MenuItem>
-
-                <MenuItem
-                  value={30}
-                  className="greyPara"
-                  onClick={() => handlePublish()}
-                >
-                  <PublishedWithChangesIcon className="PoPIcon" />
-                  {courseData?.is_publish == "published"
-                    ? "UnPublish"
-                    : "Publish"}
-                </MenuItem>
-                <IconButton aria-label="add to favorites"></IconButton>
-              </Popover>
+ </Popover>
 
               <DailogBox
                 isOpen={isOpen}

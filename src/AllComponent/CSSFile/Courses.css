@@ -222,6 +222,14 @@
     border-radius: 5px;
     padding: 6px 6px;
 }
+.multiplevalidityBox{
+  color: grey;
+  font-size: 0.8rem !important;
+    width: 90% !important;
+    /* padding-left: 4px; */
+    border-radius: 5px;
+    padding: 6px 6px;
+}
 .lastCard{
   width:20%;
 }
