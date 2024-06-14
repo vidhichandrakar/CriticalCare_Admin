@@ -83,9 +83,11 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                     )}
                   </div>
                   <div className="col-md-8 rightCard">
+                  <Tooltip title={item.course_name}>
                     <Typography className="courseHeader wrap-text-50">
                       {item.course_name}
                     </Typography>
+                    </Tooltip>
                     <Tooltip title={item.description}>
                       <Typography className="wrap-text-50">
                         {item.description}
@@ -148,16 +150,12 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                             : "priceAndOfferprice-singleValidity"
                         }
                       >
-                        <Typography className="offerPrice">
-                          ₹{" "}
-                          {
-                            item.durations[item?.durations?.length - 1]
-                              ?.offer_price
-                          }{" "}
-                        </Typography>
-                        <Typography className="durationText price">
-                          ₹{item.durations[item?.durations?.length - 1]?.price}
-                        </Typography>
+                      <Typography className="offerPrice">
+                        ₹{item.durations[item?.durations?.length - 1]?.offer_price}
+                      </Typography>
+                      <Typography className="durationText price">
+                        ₹{item.durations[item?.durations?.length - 1]?.price}
+                      </Typography>
                       </div>
 
                       <div>
@@ -182,6 +180,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                           </Typography>
                         </Box>
                       </div>
+
                     </div>
                   </div>
                   <div className="col-md-2 lastCard">
