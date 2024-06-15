@@ -30,7 +30,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-function CreateQNS({ setCqopen, opencreaterqns }) {
+function CreateQNS({ setCqopen, opencreaterqns, testData }) {
   const [selectedValue, setSelectedValue] = useState("a");
 
   const handleClickOpenCQ = () => {
