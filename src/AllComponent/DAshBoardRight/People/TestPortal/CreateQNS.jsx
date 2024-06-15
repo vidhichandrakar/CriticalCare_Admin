@@ -18,11 +18,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import Checkbox from "@mui/material/Checkbox";
-import Switch from '@mui/material/Switch';  
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-
-
-
+import Switch from "@mui/material/Switch";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -33,9 +30,9 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-function CreateQNS({setCqopen,opencreaterqns}) {
+function CreateQNS({ setCqopen, opencreaterqns }) {
   const [selectedValue, setSelectedValue] = useState("a");
-  
+
   const handleClickOpenCQ = () => {
     setCqopen(true);
   };
@@ -48,120 +45,127 @@ function CreateQNS({setCqopen,opencreaterqns}) {
         <Typography>
           <b>abcd - 1Questions</b>
         </Typography>
-        <Button sx={{textTransform:"none"}}>
-          <EditIcon sx={{fontSize:"1.1rem", mr:"4px"}}/>
+        <Button sx={{ textTransform: "none" }}>
+          <EditIcon sx={{ fontSize: "1.1rem", mr: "4px" }} />
           <b>Edit Details</b>
-          <KeyboardArrowUpIcon sx={{ml:"14px", mb:"5px"}}/>
+          <KeyboardArrowUpIcon sx={{ ml: "14px", mb: "5px" }} />
         </Button>
       </div>
       <div className="MarksBox">
         <StarBorderOutlinedIcon className="starIconss" />
         <Typography>Max. Section Marks: 4.00</Typography>
       </div>
-      {opencreaterqns ?
-       <div className="QnsBoxs">
-        <div className="MCQBox">
-          <Typography sx={{ color: "rgba(0, 0, 0, 0.685)" }}>
-            1. This is an MCQ question
-          </Typography>
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="female"
-            name="radio-buttons-group"
-          >
-            <div className="addingDeleteOptions mt1">
-              <Radio
-                checked={selectedValue === "a"}
-                onChange={handleChangeOption}
-                value="a"
-                name="radio-buttons"
-                inputProps={{ "aria-label": "A" }}
-              />
-              <Typography>Option 1</Typography>
-            </div>
+      {opencreaterqns ? (
+        <div className="QnsBoxs">
+          <div className="MCQBox">
+            <Typography sx={{ color: "rgba(0, 0, 0, 0.685)" }}>
+              1. This is an MCQ question
+            </Typography>
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="female"
+              name="radio-buttons-group"
+            >
+              <div className="addingDeleteOptions mt1">
+                <Radio
+                  checked={selectedValue === "a"}
+                  onChange={handleChangeOption}
+                  value="a"
+                  name="radio-buttons"
+                  inputProps={{ "aria-label": "A" }}
+                />
+                <Typography>Option 1</Typography>
+              </div>
 
-            <div className="addingDeleteOptions">
-              <Radio
-                checked={selectedValue === "b"}
-                onChange={handleChangeOption}
-                value="b"
-                name="radio-buttons"
-                inputProps={{ "aria-label": "A" }}
-              />
-              <Typography>Option 2</Typography>
-            </div>
+              <div className="addingDeleteOptions">
+                <Radio
+                  checked={selectedValue === "b"}
+                  onChange={handleChangeOption}
+                  value="b"
+                  name="radio-buttons"
+                  inputProps={{ "aria-label": "A" }}
+                />
+                <Typography>Option 2</Typography>
+              </div>
 
-            <div className="addingDeleteOptions">
-              <Radio
-                checked={selectedValue === "c"}
-                onChange={handleChangeOption}
-                value="c"
-                name="radio-buttons"
-                inputProps={{ "aria-label": "A" }}
-              />
-              <Typography>Option 3</Typography>
-            </div>
+              <div className="addingDeleteOptions">
+                <Radio
+                  checked={selectedValue === "c"}
+                  onChange={handleChangeOption}
+                  value="c"
+                  name="radio-buttons"
+                  inputProps={{ "aria-label": "A" }}
+                />
+                <Typography>Option 3</Typography>
+              </div>
 
-            <div className="addingDeleteOptions">
-              <Radio
-                checked={selectedValue === "d"}
-                onChange={handleChangeOption}
-                value="d"
-                name="radio-buttons"
-                inputProps={{ "aria-label": "A" }}
-              />
-              <Typography>Option 4</Typography>
+              <div className="addingDeleteOptions">
+                <Radio
+                  checked={selectedValue === "d"}
+                  onChange={handleChangeOption}
+                  value="d"
+                  name="radio-buttons"
+                  inputProps={{ "aria-label": "A" }}
+                />
+                <Typography>Option 4</Typography>
+              </div>
+            </RadioGroup>
+            <Typography
+              className="noBox"
+              style={{ marginTop: "1%", marginLeft: "1%" }}
+            >
+              +4
+            </Typography>
+            <div className="AllBtnBox">
+              <Box className="mr123">
+                {" "}
+                <EditIcon />
+                <Typography>Edit</Typography>
+              </Box>
+              <Box>
+                <ContentCopyIcon />
+                <Typography>Copy</Typography>
+              </Box>
+              <Box>
+                <TextIncreaseRoundedIcon /> <Typography>Edit MArks</Typography>
+              </Box>
+              <Box>
+                <DeleteOutlineRoundedIcon />
+                <Typography>Delete</Typography>
+              </Box>
             </div>
-          </RadioGroup>
-          <Typography
-            className="noBox"
-            style={{ marginTop: "1%", marginLeft: "1%" }}
-          >
-            +4
-          </Typography>
-          <div className="AllBtnBox">
-            <Box className="mr123">
-              {" "}
-              <EditIcon />
-              <Typography>Edit</Typography>
-            </Box>
-            <Box>
-              <ContentCopyIcon />
-              <Typography>Copy</Typography>
-            </Box>
-            <Box>
-              <TextIncreaseRoundedIcon /> <Typography>Edit MArks</Typography>
-            </Box>
-            <Box>
-              <DeleteOutlineRoundedIcon />
-              <Typography>Delete</Typography>
-            </Box>
           </div>
         </div>
-      </div>:
-      <div className='CReateBox'>
-      <img
-          style={{marginTop: "2%"}}
-          src="https://cms.classplusapp.com/static/media/questionMark.fb6054ee.svg"
-          width={100}
-          height={100}
-          className="gradingImage"
-        />
-          <Typography className='headofbox'>Let's add questions</Typography>
-          <Typography className='paraofbox'>
-              You can use the <span style={{color: "#1a1a1ae3"}}>'Create Questions'</span> & <span style={{color: "#1a1a1ae3"}}>'Import Questions'</span> Panel on
-              left to add questions to a section 
+      ) : (
+        <div className="CReateBox">
+          <img
+            style={{ marginTop: "2%" }}
+            src="https://cms.classplusapp.com/static/media/questionMark.fb6054ee.svg"
+            width={100}
+            height={100}
+            className="gradingImage"
+          />
+          <Typography className="headofbox">Let's add questions</Typography>
+          <Typography className="paraofbox">
+            You can use the{" "}
+            <span style={{ color: "#1a1a1ae3" }}>'Create Questions'</span> &{" "}
+            <span style={{ color: "#1a1a1ae3" }}>'Import Questions'</span> Panel
+            on left to add questions to a section
           </Typography>
           <Box className="CreateBtnBox">
-              <Typography className='btnqns' onClick={handleClickOpenCQ}> Create Question</Typography>
-              <Typography style={{color: "rgba(71, 71, 71, 0.685)", fontSize: "0.9rem"}}>OR</Typography>
-              <Typography className='btnqns'>Import Questions</Typography>
+            <Typography className="btnqns" onClick={handleClickOpenCQ}>
+              {" "}
+              Create Question
+            </Typography>
+            <Typography
+              style={{ color: "rgba(71, 71, 71, 0.685)", fontSize: "0.9rem" }}
+            >
+              OR
+            </Typography>
+            <Typography className="btnqns">Import Questions</Typography>
           </Box>
-      </div> }
-
-      
-           
-
+        </div>
+      )}
     </div>
   );
 }
