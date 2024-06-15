@@ -16,10 +16,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
 import { getTestById } from "../../../ActionFactory/apiActions";
 
-function TestInstructions({testData}) {
+function TestInstructions({ testData }) {
   const [instructions, setInstructions] = useState(false);
   const [open, setOpen] = useState(false);
-
 
   const handleClickClose = () => {
     setInstructions(false);
@@ -54,9 +53,10 @@ function TestInstructions({testData}) {
           {" "}
           <AccessTimeIcon className="testDurationLogo" />
           <Typography style={{ color: "rgb(146 130 130)" }}>
-            Test Duration : <span className="textColorBold">
+            Test Duration :{" "}
+            <span className="textColorBold">
               {`${testData?.duration_hour}Hours ${testData?.duration_minute}Mins`}
-              </span>
+            </span>
           </Typography>
           <LocalOfferIcon
             className="testDurationLogo"
@@ -70,7 +70,13 @@ function TestInstructions({testData}) {
         <Box className="testInstructionsBtn">
           <p>
             <b>Test Instructions:</b>{" "}
-            <span style={{ color: "#000" }}>Test Instructions: </span>
+            <span style={{ color: "#000" }}>
+              {testData?.testInfoDetails?.length
+                ? testData?.testInfoDetails[
+                    testData?.testInfoDetails?.length - 1
+                  ].test_section_Instruction
+                :""}
+            </span>
             <span>
               <Button
                 sx={{

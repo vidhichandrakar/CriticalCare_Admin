@@ -293,14 +293,10 @@ const TestPortal = () => {
   };
   const handleCreateTeam = () => {
     const payload = {
-      test_section_Instruction: "test_section_Instruction",
-      test_section_name: "Section Name",
       test_name: addTest.testName,
       created_by: 2,
       duration_hour: parseInt(addTest.testDuration),
       duration_minute: parseInt(addTest.hours),
-      "test_section_name":"test_section_name",
-      "test_section_Instruction":"test section instruction",
     };
     createTestPortal({
       payload,
