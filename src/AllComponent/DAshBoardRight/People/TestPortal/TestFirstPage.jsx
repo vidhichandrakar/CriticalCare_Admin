@@ -9,7 +9,7 @@ function TestFirstPage({testData, openqns, setCqopen,opencreaterqns}) {
   return (
     <div className="testRightSection">
       <TestInstructions testData={testData}/>
-      {openqns ?  <CreateQNS setCqopen = {setCqopen} opencreaterqns={opencreaterqns}/> : <AddASection/>  }
+      {openqns ?  <CreateQNS setCqopen = {setCqopen} opencreaterqns={opencreaterqns} testData={testData}/> : <AddASection/>  }
     </div>
   );
 }

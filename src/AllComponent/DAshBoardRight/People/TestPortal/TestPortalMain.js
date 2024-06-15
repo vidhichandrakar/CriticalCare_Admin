@@ -95,6 +95,8 @@ function TestPortalMain() {
   const [selectedTestType, setSelectedTestType] = useState({});
   const [sectionName,setSectionName]=useState("");
   const [sectionInstruction, setSectionInstruction] = useState("");
+  const [marksPerQues, setMarksPerQues] = useState("");
+  const [noOfQuestion, setNoOfQuestion] = useState("");
   const handleTestType = (value) => {
     setSelectedTestType(value)
   }
@@ -120,14 +122,30 @@ function TestPortalMain() {
       "marks_per_question":4
       
      }
-     createTestInfo({payload, callBack:res=>console.log(res)})
+     if(sectionName && sectionInstruction){
+     createTestInfo({payload, callBack:res=>{
+      getTestByIdData()
+      console.log(res)}})
+     }
   };
   const handleCreateQns = () => {
     setOpenreateqns(!opencreaterqns);
     setCqopen(false);
+    const payload ={
+      "test_id":test_id,
+      "test_type_id":selectedTestType.test_type_id,
+      "test_section_name":sectionName,
+      "test_section_Instruction":sectionInstruction,
+      "no_of_question":noOfQuestion,
+      "marks_per_question":marksPerQues
+     }
+     if( noOfQuestion && marksPerQues){
+     createTestInfo({payload, callBack:res=>{console.log(res)
+      getTestByIdData();
+     }})
+     }
   };
-
-  useEffect(() => {
+  const getTestByIdData =()=>{
     getTestById({
       test_id: test_id,
       callBack: (response) => {
@@ -135,6 +153,9 @@ function TestPortalMain() {
         console.log("response?.dataresponse?.data", response)
       },
     });
+  }
+  useEffect(() => {
+    getTestByIdData();
     getTestType({
       callBack: (response) => {
         console.log("data", response)
@@ -148,6 +169,12 @@ function TestPortalMain() {
     }
     else if(type==="sectionInstruction"){
      setSectionInstruction(value);
+    }
+    else if(type === "noOfQuestion"){
+      setNoOfQuestion(value)
+    }
+    else if(type === "marksPerQues"){
+      setMarksPerQues(value);
     }
   }
   return (
@@ -257,6 +284,7 @@ function TestPortalMain() {
                 id="outlined-size-small"
                 defaultValue="1"
                 size="small"
+                onChange={(event)=>handleSectionInfo(event.target.value,"noOfQuestion")}
               />
             </Box>
             <Box>
@@ -265,6 +293,7 @@ function TestPortalMain() {
                 id="outlined-size-small"
                 defaultValue="4"
                 size="small"
+                onChange={(event)=>handleSectionInfo(event.target.value,"marksPerQues")}
               />
             </Box>
           </Box>

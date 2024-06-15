@@ -70,7 +70,7 @@ function TestInstructions({testData}) {
         <Box className="testInstructionsBtn">
           <p>
             <b>Test Instructions:</b>{" "}
-            <span style={{ color: "#000" }}>Test Instructions: </span>
+            <span style={{ color: "#000" }}>{testData?.testInfoDetails[testData?.testInfoDetails?.length-1].test_section_Instruction}</span>
             <span>
               <Button
                 sx={{
