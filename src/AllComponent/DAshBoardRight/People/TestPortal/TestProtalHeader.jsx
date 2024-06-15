@@ -9,7 +9,7 @@ function TestProtalHeader({testData}) {
     // <div className="header">
          <div className="testNavBar header">
           <div className="abcdText">
-            <Link to="/TestPortal">
+            <Link to="/admin/TestPortal">
               <WestIcon className="abcdBackLogo" />
             </Link>
             <b>{testData?.test_name}</b>
