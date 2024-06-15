@@ -59,7 +59,7 @@ function TestNavAndLeft({setMcqopen, testType,handleTestType}) {
     setExpanded((prevExpanded) => !prevExpanded);
   };
 
-  const [selectedValue, setSelectedValue] = React.useState("a");
+  const [selectedValue, setSelectedValue] = useState("a");
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);

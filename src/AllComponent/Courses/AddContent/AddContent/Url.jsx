@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import { TextField } from "@mui/material";
 import Drawer from "@mui/material/Drawer";
@@ -19,13 +19,13 @@ import InputBase from "@mui/material/InputBase";
 import { CommonTypography, commonTextField } from "../../../../Util/CommonFields";
 
 const Url = ({anchor, handelclose}) => {
-  const [state, setState] = React.useState({
+  const [state, setState] = useState({
     top: false,
     left: false,  
     bottom: false,
     right: false,
   });
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = useState(true);
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
