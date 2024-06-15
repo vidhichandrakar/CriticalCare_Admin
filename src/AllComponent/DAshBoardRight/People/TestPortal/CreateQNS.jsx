@@ -67,7 +67,7 @@ function CreateQNS({ setCqopen, opencreaterqns, testData }) {
       {opencreaterqns ? (
         
         <Box>
-        {divArray.map((_, index) => (
+        {divArray.map((index) => (
           <div className="QnsBoxs">
           <div className="MCQBox" key={index}>
             <Typography sx={{ color: "rgba(0, 0, 0, 0.685)" }}>
