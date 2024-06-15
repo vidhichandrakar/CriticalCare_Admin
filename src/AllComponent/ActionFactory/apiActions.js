@@ -266,3 +266,16 @@ export const getContentType=({callBack})=>{
     callBack(respose);
   })
 }
+
+export const createTestInfo = ({ payload, callBack }) => {
+  const url = APIS.testInfo;
+  axios.post(url, payload).then((response) => {
+    callBack(response);
+  });
+};
+export const getTestType=({callBack})=>{
+  const url = APIS.testType
+  axios.get(url).then((respose)=>{
+    callBack(respose);
+  })
+}

@@ -16,4 +16,6 @@ export const APIS = {
   fileUpload: REACT_APP_API + "/fileupload",
   getTestById: REACT_APP_API + "/test",
   contentType: REACT_APP_API + "/contentType",
+  testInfo: REACT_APP_API + "/test/testinfo",
+  testType: REACT_APP_API + "/test/testtype",
 };

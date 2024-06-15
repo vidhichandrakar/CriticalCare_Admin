@@ -42,12 +42,14 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-function TestNavAndLeft({setMcqopen}) {
+function TestNavAndLeft({setMcqopen, testType,handleTestType}) {
   const [expanded, setExpanded] = useState(false);
-  // const [openqns, setOpenqns] = useState(false);
 
-  const handleClickOpenMCQ = () => {
+  const handleClickOpenMCQ = (type) => {
+    const selectedOption= testType.filter(test=>test.test_type_name===type);
+    handleTestType(selectedOption[0])
     setMcqopen(true);
+    
   };
   // const handleCloseDialogMCQ = () => {
   //   setMcqopen(false);
@@ -92,7 +94,7 @@ function TestNavAndLeft({setMcqopen}) {
 
           <AccordionDetails>
             <Divider />
-            <Typography className="testOptions" onClick={handleClickOpenMCQ}> 
+            <Typography className="testOptions" onClick={()=>handleClickOpenMCQ("Multiple Choice")}> 
               <b>Multiple Choice Questions</b>
             </Typography>
             <Divider />
