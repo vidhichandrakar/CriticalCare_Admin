@@ -18,6 +18,7 @@ const RightBox = ({
   handleVideoName,
   handleInputChange,
   courseData,
+  handleAddUrl,
 }) => {
   const [state, setState] = useState({
     top: false,
@@ -199,7 +200,7 @@ const RightBox = ({
     setZipopen(false);
     setUrl({ url, [anchor]: open });
   };
-  
+
   const toggleDrawer =
     (anchor, open, stateVariable, setStateVariable) => (event) => {
       if (
@@ -210,7 +211,6 @@ const RightBox = ({
       }
       setStateVariable({ ...stateVariable, [anchor]: open });
     };
-
 
   const addContentList = [
     {
@@ -231,7 +231,7 @@ const RightBox = ({
     {
       name: "Subjective Test",
       Component: <AssignmentIcon className="folderIconRightBox" />,
-      onClickHandler:toggleDrawer("right", true, st, setSt),
+      onClickHandler: toggleDrawer("right", true, st, setSt),
     },
     {
       name: "Document",
@@ -262,7 +262,6 @@ const RightBox = ({
 
   return (
     <Fragment>
-      {console.log("addd", addContentList)}
       <div className="rightBoxComplete">
         {addContentList.map((list) => {
           return (
@@ -299,6 +298,11 @@ const RightBox = ({
         st={st}
         zip={zip}
         url={url}
+        handleAddUrl={handleAddUrl}
+        uploadedFileType={uploadedFileType}
+        uploadedVideo={uploadedVideo}
+        setUploadedVideo={setUploadedVideo}
+        handleInputChange={handleInputChange}
       />
       <DialogBoxes
         handleCloseDialogIC={handleCloseDialogIC}
