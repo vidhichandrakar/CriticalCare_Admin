@@ -150,7 +150,9 @@ function TestPortalMain() {
       test_id: test_id,
       callBack: (response) => {
         setTestData(response?.data[0]);
-        console.log("response?.dataresponse?.data", response)
+        console.log("response?.dataresponse?.data line no 153", response?.data[0])
+        console.log("testData line no 153", testData)
+        // console.log("testData.no of question line no 153", testData?.testInfoDetails[0]?.no_of_question)
       },
     });
   }

@@ -39,6 +39,15 @@ function CreateQNS({ setCqopen, opencreaterqns, testData }) {
   const handleChangeOption = (event) => {
     setSelectedValue(event.target.value);
   };
+
+  const count = testData?.testInfoDetails?.length
+  ? testData?.testInfoDetails[
+      testData?.testInfoDetails?.length - 1
+    ].no_of_question
+  :"" ;
+  
+  const divArray = Array.from({length: count});
+  
   return (
     <div className="MainQnsBox">
       <div className="BoxHead">
@@ -56,8 +65,11 @@ function CreateQNS({ setCqopen, opencreaterqns, testData }) {
         <Typography>Max. Section Marks: 4.00</Typography>
       </div>
       {opencreaterqns ? (
-        <div className="QnsBoxs">
-          <div className="MCQBox">
+        
+        <Box>
+        {divArray.map((index) => (
+          <div className="QnsBoxs">
+          <div className="MCQBox" key={index}>
             <Typography sx={{ color: "rgba(0, 0, 0, 0.685)" }}>
               1. This is an MCQ question
             </Typography>
@@ -136,6 +148,7 @@ function CreateQNS({ setCqopen, opencreaterqns, testData }) {
             </div>
           </div>
         </div>
+        ))}</Box>
       ) : (
         <div className="CReateBox">
           <img
