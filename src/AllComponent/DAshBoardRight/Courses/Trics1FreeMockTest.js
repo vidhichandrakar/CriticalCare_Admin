@@ -73,7 +73,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
           callBack: (response) => {
             const userCallBack = response?.data;
             setCourseData(userCallBack);
-            console.log(userCallBack, "LINE76 asdfgh")
+            // console.log(userCallBack, "LINE76 asdfgh")
           },
         });
       }
@@ -175,7 +175,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                     {courseData?.durations?.length &&
                       courseData?.durations[courseData?.durations?.length -1]?.offer_price}
                       
-                    {console.log(courseData, "Line196 CoursedAta")}
+                    {/* {console.log(courseData, "Line196 CoursedAta")} */}
 
                   </p>
                 </div>

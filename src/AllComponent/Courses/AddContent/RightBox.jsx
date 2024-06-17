@@ -303,6 +303,7 @@ const RightBox = ({
         uploadedVideo={uploadedVideo}
         setUploadedVideo={setUploadedVideo}
         handleInputChange={handleInputChange}
+        courseData={courseData}
       />
       <DialogBoxes
         handleCloseDialogIC={handleCloseDialogIC}

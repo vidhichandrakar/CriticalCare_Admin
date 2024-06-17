@@ -57,12 +57,14 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
     startDate: "",
     duration_id: "",
     duration_type_name: "",
+    duration_type_id:""
   });
   const [lifetimeValidation, setLifetimeValidation] = useState({
     price: "",
     offer_price: "",
     duration_type_id: "",
     duration_type_name: "",
+    duration_type_id:""
   });
   const [singleValidity, setSingleValidity] = useState({
     duration: "",
@@ -179,6 +181,8 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
       storedValues.price = courseData?.durations[0]?.price;
       storedValues.offer_price = courseData?.durations[0]?.offer_price;
       storedValues.course_duration_id = courseData?.durations[0]?.course_duration_id;
+      storedValues.duration_type_id = courseData?.durations[0]?.duration_type_id;
+      storedValues.duration_type_name = selectedDuration?.duration_type_name;
       setLifetimeValidation(storedValues);
     } else if (
       courseData?.durations?.length &&
@@ -189,6 +193,8 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
       storedValues.offer_price = courseData?.durations[0]?.offer_price;
       storedValues.startDate = courseData?.durations[0]?.startDate;
       storedValues.course_duration_id = courseData?.durations[0]?.course_duration_id;
+      storedValues.duration_type_id = courseData?.durations[0]?.duration_type_id;
+      storedValues.duration_type_name = selectedDuration?.duration_type_name;
       setExpiryDate(storedValues);
     }
   }, [courseData, durationType]);
