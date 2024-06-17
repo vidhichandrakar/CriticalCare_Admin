@@ -12,6 +12,8 @@ import { getContentType } from "../../ActionFactory/apiActions";
 import { commonButton } from "../../../Util/CommonFields";
 import attachmentimgae from "../../../Media/Images/undraw_attached_file_re_0n9b.svg";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Divider from '@material-ui/core/Divider';
+
 const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
   const [contentType, setContentType] = useState([]);
   const [videoDesc, setVideoDesc] = useState([{}]);
@@ -97,18 +99,34 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
             videoDesc?.map((item) =>
               item?.content_name?.split(".")[1] === "mp4" ? (
                 <Box className="videoBox">
-                  <video width="350" controls autoplay muted height={"120"}>
+                  <video 
+                  // width="350" controls autoplay muted height={"120"}
+                  className="contentsVideo"
+                  >
                     <source src={item.content_url} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
+                  <Divider orientation="vertical" 
+                  // flexItem
+                  sx={{marginLeft:"36px"}}
+                   />
                   <Typography className="typoStyleVideo">
                     {item?.content_name}
                   </Typography>
+                  <Box>
+                    <DeleteIcon className="deleteIconContent" />
+                  </Box>
                 </Box>
               ) : handleImageType(item?.content_name?.split(".")[1]) ? (
                 <Box className="videoBox">
                   <Box className="leftVideo">
-                    <img src={item.content_url} height="120px" width="350" />
+                    <img src={item.content_url} 
+                    // height="120px" width="350" 
+                    className="contentsImg" />
+                    <Divider orientation="vertical" 
+                  // flexItem
+                  sx={{marginLeft:"36px"}}
+                   />
                     <Typography className="typoStyleVideo">
                       {item?.content_name}
                     </Typography>
@@ -118,20 +136,26 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
                   </Box>
                 </Box>
               ) : item?.content_name?.split(".")[1] === "zip" ? (
-                <Box className="videoBox">
+                <Box className="videoZipAndDoc">
                   <FolderZipIcon className="zipFolderPrevIcon" />
-                  <Typography className="typoStyleVideo">
+                  <Typography className="typoStyleZipAndDoc">
                     {item.content_name}
                   </Typography>
+                  <Box>
+                    <DeleteIcon className="deleteIconContent-zipAndDoc" />
+                  </Box>
                 </Box>
               ) : handleDocumentType(item?.content_name?.split(".")[1]) ? (
-                <Box className="videoBox">
+                <Box className="videoZipAndDoc">
                   <a href={item.content_url} target="_blank">
                     <NoteIcon className="zipFolderPrevIcon" />
                   </a>
-                  <Typography className="typoStyleVideo">
+                  <Typography className="typoStyleZipAndDoc">
                     {item.content_name}
                   </Typography>
+                  <Box>
+                    <DeleteIcon className="deleteIconContent-zipAndDoc" />
+                  </Box>
                 </Box>
               ) : (
                 <>
