@@ -130,6 +130,7 @@ const LoginEmailandPassword = () => {
   };
 
   const handleResendOTP = () => {
+    setOtp("")
     setLoaderState(true);
     const payload = {
       phone_no: phoneNO?.toString(),

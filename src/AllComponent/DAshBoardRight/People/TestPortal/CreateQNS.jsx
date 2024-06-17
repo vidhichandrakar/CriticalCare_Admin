@@ -148,7 +148,7 @@ function CreateQNS({ setCqopen, opencreaterqns, testData }) {
             </div>
           </div>
         </div>
-        ))}</Box>
+        ))}</Box> 
       ) : (
         <div className="CReateBox">
           <img
