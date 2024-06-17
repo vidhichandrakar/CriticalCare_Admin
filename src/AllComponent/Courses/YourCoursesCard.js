@@ -19,7 +19,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
   const navigate = useNavigate();
 
   const handleDiscountPercent = (price, offer_price) => {
-    console.log(price, offer_price, (price - offer_price) / price);
+    // console.log(price, offer_price, (price - offer_price) / price);
     return Math.floor(((price - offer_price) / price) * 100) + " %";
   };
   useEffect(() => {

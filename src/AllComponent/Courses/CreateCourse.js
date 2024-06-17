@@ -51,12 +51,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (courseData?.contents?.length) {
-      setAttachment(courseData?.contents);
-    }
-  });
-  
-  useEffect(() => {
     if (courseId) {
       setLoaderState(true);
       getCourseById({
@@ -65,9 +59,12 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           const userCallBack = response?.data;
           setCourseData(userCallBack);
           setLoaderState(false);
+          if (userCallBack?.contents?.length) {
+            setAttachment(userCallBack?.contents);
+          }
         },
       });
-    } 
+    }
   }, [courseId]);
 
   const handleInputChange = (type, value) => {

@@ -239,43 +239,51 @@ export const getDuration = ({ callBack }) => {
   });
 };
 
-export const uploadFile = ({payload, callBack }) => {
+export const uploadFile = ({ payload, callBack }) => {
   const url = APIS.fileUpload;
-  axios.post(url,payload).then((response) => {
-    callBack(response);
-  });
-};
-
-export const getTestById=({callBack,test_id})=>{
-  const url = APIS.getTestById + "/" + test_id
-  axios.get(url).then((response) => {
-    callBack(response);
-  });
-}
-
-export const getOnlineTest = ({callBack})=>{
-  const url = APIS.getTestById
-  axios.get(url).then((response)=>{
-    callBack(response);
-  })
-}
-
-export const getContentType=({callBack})=>{
-  const url = APIS.contentType
-  axios.get(url).then((respose)=>{
-    callBack(respose);
-  })
-}
-
-export const createTestInfo = ({ payload, callBack }) => {
-  const url = APIS.testInfo;
   axios.post(url, payload).then((response) => {
     callBack(response);
   });
 };
-export const getTestType=({callBack})=>{
-  const url = APIS.testType
-  axios.get(url).then((respose)=>{
+
+export const getTestById = ({ callBack, test_id }) => {
+  const url = APIS.getTestById + "/" + test_id;
+  axios.get(url).then((response) => {
+    callBack(response);
+  });
+};
+
+export const getOnlineTest = ({ callBack }) => {
+  const url = APIS.getTestById;
+  axios.get(url).then((response) => {
+    callBack(response);
+  });
+};
+
+export const getContentType = ({ callBack }) => {
+  const url = APIS.contentType;
+  axios.get(url).then((respose) => {
     callBack(respose);
-  })
-}
+  });
+};
+
+export const createTestInfo = ({ payload, id, callBack }) => {
+  let url = APIS.testInfo;
+  if (id) {
+    url = url + "/" + id;
+    axios.put(url, payload).then((response) => {
+      callBack(response);
+    });
+  } else {
+    axios.post(url, payload).then((response) => {
+      callBack(response);
+    });
+  }
+  console.log("idddd", id);
+};
+export const getTestType = ({ callBack }) => {
+  const url = APIS.testType;
+  axios.get(url).then((respose) => {
+    callBack(respose);
+  });
+};

@@ -40,6 +40,7 @@ const ContentSlider = ({
   uploadedVideo,
   setUploadedVideo,
   handleInputChange,
+  courseData,
 }) => {
   return (
     <>
@@ -143,6 +144,7 @@ const ContentSlider = ({
           uploadedVideo={uploadedVideo}
           setUploadedVideo={setUploadedVideo}
           handleInputChange={handleInputChange}
+          courseData={courseData}
         />
       </Drawer>
     </>
