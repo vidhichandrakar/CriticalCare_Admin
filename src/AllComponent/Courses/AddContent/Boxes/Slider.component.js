@@ -10,7 +10,7 @@ import AddContentDrawer from "../AddContentDrawer";
 import { Drawer } from "@mui/material";
 import Document from "../AddContent/Document";
 
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 
 const ContentSlider = ({
   toggleDrawer,
@@ -35,6 +35,12 @@ const ContentSlider = ({
   setSt,
   setZip,
   url,
+  handleAddUrl,
+  uploadedFileType,
+  uploadedVideo,
+  setUploadedVideo,
+  handleInputChange,
+  courseData,
 }) => {
   return (
     <>
@@ -84,23 +90,25 @@ const ContentSlider = ({
         open={il["right"]}
         onClose={toggleDrawer("right", false, il, setIl)}
       >
-       <ImportLive 
-       handelclose={toggleDrawer}
-       anchor={"right"}
-       toggleDrawer={toggleDrawer}
-       il={il}
-       setIl={setIl}/>
+        <ImportLive
+          handelclose={toggleDrawer}
+          anchor={"right"}
+          toggleDrawer={toggleDrawer}
+          il={il}
+          setIl={setIl}
+        />
       </Drawer>
       <Drawer
         anchor={"right"}
         open={ot["right"]}
         onClose={toggleDrawer("right", false, ot, setOt)}
       >
-        <OnlineTest handelclose={toggleDrawer}
-         anchor={"right"}
-         toggleDrawer={toggleDrawer}
-         ot={ot}
-         setOt={setOt} 
+        <OnlineTest
+          handelclose={toggleDrawer}
+          anchor={"right"}
+          toggleDrawer={toggleDrawer}
+          ot={ot}
+          setOt={setOt}
         />
       </Drawer>
       <Drawer
@@ -108,12 +116,12 @@ const ContentSlider = ({
         open={st["right"]}
         onClose={toggleDrawer("right", false, st, setSt)}
       >
-        <SubjectiveTest 
-        handelclose={toggleDrawer}
-        anchor={"right"}
-        toggleDrawer={toggleDrawer}
-        st={st}
-        setSt={setSt}
+        <SubjectiveTest
+          handelclose={toggleDrawer}
+          anchor={"right"}
+          toggleDrawer={toggleDrawer}
+          st={st}
+          setSt={setSt}
         />
       </Drawer>
       <Drawer
@@ -128,7 +136,16 @@ const ContentSlider = ({
         open={url["right"]}
         onClose={toggleDrawerUrl("right", false)}
       >
-        <Url handelclose={toggleDrawerUrl} anchor={"right"} />
+        <Url
+          handelclose={toggleDrawerUrl}
+          anchor={"right"}
+          handleAddUrl={handleAddUrl}
+          uploadedFileType={uploadedFileType}
+          uploadedVideo={uploadedVideo}
+          setUploadedVideo={setUploadedVideo}
+          handleInputChange={handleInputChange}
+          courseData={courseData}
+        />
       </Drawer>
     </>
   );
