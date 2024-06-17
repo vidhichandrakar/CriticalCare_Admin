@@ -30,7 +30,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-function CreateQNS({ setCqopen, opencreaterqns, testData }) {
+function CreateQNS({ setCqopen, opencreaterqns, testData,handleClickOpen }) {
   const [selectedValue, setSelectedValue] = useState("a");
 
   const handleClickOpenCQ = () => {
@@ -54,7 +54,7 @@ function CreateQNS({ setCqopen, opencreaterqns, testData }) {
         <Typography>
           <b>abcd - 1Questions</b>
         </Typography>
-        <Button sx={{ textTransform: "none" }}>
+        <Button sx={{ textTransform: "none" }} onClick={handleClickOpen}>
           <EditIcon sx={{ fontSize: "1.1rem", mr: "4px" }} />
           <b>Edit Details</b>
           <KeyboardArrowUpIcon sx={{ ml: "14px", mb: "5px" }} />
@@ -129,26 +129,26 @@ function CreateQNS({ setCqopen, opencreaterqns, testData }) {
               +4
             </Typography>
             <div className="AllBtnBox">
-              <Box className="mr123">
+              <Box className="mr123 curseorpointer" onClick={handleClickOpen}>
                 {" "}
                 <EditIcon />
                 <Typography>Edit</Typography>
               </Box>
-              <Box>
+              <Box className="curseorpointer">
                 <ContentCopyIcon />
                 <Typography>Copy</Typography>
               </Box>
-              <Box>
+              <Box className="curseorpointer">
                 <TextIncreaseRoundedIcon /> <Typography>Edit MArks</Typography>
               </Box>
-              <Box>
+              <Box className="curseorpointer">
                 <DeleteOutlineRoundedIcon />
                 <Typography>Delete</Typography>
               </Box>
             </div>
           </div>
         </div>
-        ))}</Box>
+        ))}</Box> 
       ) : (
         <div className="CReateBox">
           <img
