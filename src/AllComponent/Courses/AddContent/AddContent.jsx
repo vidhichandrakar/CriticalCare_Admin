@@ -67,12 +67,16 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
   };
 
   const handleCreateCourse = () => {
+    if (courseData.length!==null) {
+      handleInputChange("addContent",videoDesc);
+    }
     let createCourse = 3;
     handleTrackerPage(3, createCourse);
   };
 
   const handleAddUrl = (type, value) => {
     if (type === "uploadUrl") {
+      console.log("value", value);
       setVideoDesc(value);
     }
   };
@@ -83,6 +87,7 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
         <h2>
           <b>Contents</b>
         </h2>
+        {console.log("courseDatacourseData", courseData, videoDesc, (courseData.length!==null))}
         <Box className="contentInnerLeftBox">
           {!videoDesc?.length ? (
             <Box className="noContent">

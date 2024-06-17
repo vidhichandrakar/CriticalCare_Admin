@@ -22,6 +22,7 @@ const Url = ({
   uploadedVideo,
   setUploadedVideo,
   handleInputChange,
+  courseData
 }) => {
   const [state, setState] = React.useState({
     top: false,
