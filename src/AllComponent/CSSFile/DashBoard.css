@@ -851,6 +851,9 @@ body {
     gap: 20px;
     margin-bottom: 5% !important;
 }
+.curseorpointer{
+  cursor: pointer;
+}
 .greyPara {
   display: flex;
   flex-direction: row;
