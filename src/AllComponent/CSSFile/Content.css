@@ -30,18 +30,49 @@
   align-items: center !important;
   padding: 4%;
 }
-.contentInnerLeftBox:hover{
- background-color: #eee;
-}
+/* .contentInnerLeftBox:hover{ */
+ /* background-color: #eee; */
+/* } */
 .typoStyleVideo{
   /* margin-top: 6% !important; */
+  margin-left: 15% !important;
+}
+.typoStyleZipAndDoc{
   margin-left: 2% !important;
 }
+.contentsImg{
+  width: 48% !important;
+  height: 50% !important;
+  border-radius: 10px;
+}
+.contentsVideo{
+  width: 38% !important;
+  height: 82% !important;
+  /* padding: 20px 2px !important; */
+}
 .videoBox{
+  /* background-color: aquamarine; */
+  box-shadow: 1px 1px 4px 2px #ecebeb !important;
   align-items: center;
   display: flex;
   flex-direction: row;
   margin: 2%;
+  width: 44vw;
+    height: 34vh;
+    padding-left: 57px;
+}
+.videoZipAndDoc{
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  box-shadow: 1px 1px 4px 2px #ecebeb !important;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin: 2%;
+  width: 48vw;
+    height: 34vh;
+    /* padding-left: 57px; */
 }
 .leftVideo{
   flex-direction: row;
@@ -123,5 +154,5 @@
  }
 
  .zipFolderPrevIcon{
-  font-size: 7.5rem;
+  font-size: 1.5rem;
  }

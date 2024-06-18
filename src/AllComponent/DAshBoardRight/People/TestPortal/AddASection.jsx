@@ -10,19 +10,14 @@ import CloseIcon from "@mui/icons-material/Close";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormLabel from "@mui/material/FormLabel";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import DeleteIcon from "@mui/icons-material/Delete";
-import Stack from "@mui/material/Stack";
 import FormControl from "@mui/material/FormControl";
-import TextField from "@mui/material/TextField";
-import DialogContent from "@mui/material/DialogContent";
 
-function AddASection() {
-  const [selectedValue, setSelectedValue] = React.useState("a");
+function AddASection({handleClickOpen}) {
+  // const [selectedValue, setSelectedValue] = React.useState("a");
 
-  const handleChangeOption = (event) => {
-    setSelectedValue(event.target.value);
-  };
+  // const handleChangeOption = (event) => {
+  //   setSelectedValue(event.target.value);
+  // };
 
   const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiDialogContent-root": {
@@ -32,14 +27,14 @@ function AddASection() {
       padding: theme.spacing(1),
     },
   }));
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
   return (
     <div>
       <Box className="toAddNewSection">
@@ -59,7 +54,7 @@ function AddASection() {
           Add new section
         </Button>
 
-        <BootstrapDialog
+        {/* <BootstrapDialog
           className="completeDailogBox"
           onClose={handleClose}
           aria-labelledby="customized-dialog-title"
@@ -273,7 +268,7 @@ function AddASection() {
               defaultValue="Enter detailed solution for your students"
             />
           </DialogContent>
-        </BootstrapDialog>
+        </BootstrapDialog> */}
       </Box>
     </div>
   );

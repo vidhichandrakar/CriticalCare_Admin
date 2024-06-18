@@ -659,8 +659,22 @@ body {
 }
 .deleteIconContent{
   color:#ff0000;
+  font-size: 1.2rem !important;
+    /* justify-content: right; */
+    /* text-align: right !important; */
+    /* align-items: end; */
+    margin-left: 71px !important;
 }
 .deleteIconContent:hover{
+  cursor: pointer;
+  color:#fb4e4e;
+}
+.deleteIconContent-zipAndDoc{
+  color:#ff0000;
+  font-size: 1.2rem !important;
+    margin-left: 71px !important;
+}
+.deleteIconContent-zipAndDoc:hover{
   cursor: pointer;
   color:#fb4e4e;
 }
@@ -850,6 +864,9 @@ body {
     grid-template-columns: 1fr 1fr ;
     gap: 20px;
     margin-bottom: 5% !important;
+}
+.curseorpointer{
+  cursor: pointer;
 }
 .greyPara {
   display: flex;
