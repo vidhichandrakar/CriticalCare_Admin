@@ -658,6 +658,7 @@ body {
   cursor: pointer;
 }
 .deleteIconContent-video{
+  position: sticky !important;
   color: #ff0000;
   font-size: 0.9rem !important;
   margin-left: 130px !important;
@@ -671,6 +672,7 @@ body {
 }
 
 .deleteIconContent{
+  position: sticky !important;
   color: #ff0000;
   font-size: 0.9rem !important;
   margin-left: 31px !important;
@@ -683,6 +685,7 @@ body {
   color:#fb4e4e;
 }
 .deleteIconContent-zipAndDoc{
+  position: sticky !important;
   color: #ff0000;
   font-size: 0.9rem !important;
   margin-left: 317px !important;
