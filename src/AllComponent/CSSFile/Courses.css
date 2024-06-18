@@ -164,9 +164,7 @@
   align-items: center;
   margin-top: 3px;
 }
-.offerPrice{
-  /* font-size: 0.8rem !important; */
-}
+
 .price{
   text-decoration: line-through;
 }
