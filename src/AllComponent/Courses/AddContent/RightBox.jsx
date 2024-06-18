@@ -12,6 +12,12 @@ import { useDropzone } from "react-dropzone";
 import { uploadFile } from "../../ActionFactory/apiActions";
 import ContentSlider from "./Boxes/Slider.component";
 import DialogBoxes from "./Boxes/DialogBoxes.component";
+import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
+import QuizIcon from '@mui/icons-material/Quiz';
+import LiveTvIcon from '@mui/icons-material/LiveTv';
+import VideocamIcon from '@mui/icons-material/Videocam';
+import ImageIcon from '@mui/icons-material/Image';
+
 
 const RightBox = ({
   contentType,
@@ -220,12 +226,12 @@ const RightBox = ({
     },
     {
       name: "Video",
-      Component: <AssignmentIcon className="folderIconRightBox" />,
+      Component: <VideocamIcon className="folderIconRightBox" />,
       onClickHandler: () => handleClickOpenVideo(vd, setVd),
     },
     {
       name: "online Test",
-      Component: <AssignmentIcon className="folderIconRightBox" />,
+      Component: <QuizIcon className="folderIconRightBox" />,
       onClickHandler: toggleDrawer("right", true, ot, setOt),
     },
     {
@@ -240,7 +246,7 @@ const RightBox = ({
     },
     {
       name: "Image",
-      Component: <LandscapeIcon className="folderIconRightBox" />,
+      Component: <ImageIcon className="folderIconRightBox" />,
       onClickHandler: () => handleClickOpenImg(image, setImage),
     },
     {
@@ -255,7 +261,7 @@ const RightBox = ({
     },
     {
       name: "Import Live",
-      Component: <DownloadForOfflineSharpIcon className="folderIconRightBox" />,
+      Component: <LiveTvIcon className="folderIconRightBox" />,
       onClickHandler: toggleDrawer("right", true, il, setIL),
     },
   ];

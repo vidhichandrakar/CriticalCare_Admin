@@ -657,22 +657,38 @@ body {
   margin-right: 10px;
   cursor: pointer;
 }
+.deleteIconContent-video{
+  color: #ff0000;
+  font-size: 0.9rem !important;
+  margin-left: 130px !important;
+  border: 0.3px solid red;
+  padding: 1px 8px;
+  border-radius: 4px;
+}
+.deleteIconContent-video:hover{
+  cursor: pointer;
+  color:#fb4e4e;
+}
+
 .deleteIconContent{
-  color:#ff0000;
-  font-size: 1.2rem !important;
-    /* justify-content: right; */
-    /* text-align: right !important; */
-    /* align-items: end; */
-    margin-left: 71px !important;
+  color: #ff0000;
+  font-size: 0.9rem !important;
+  margin-left: 31px !important;
+  border: 0.3px solid red;
+  padding: 1px 8px;
+  border-radius: 4px;
 }
 .deleteIconContent:hover{
   cursor: pointer;
   color:#fb4e4e;
 }
 .deleteIconContent-zipAndDoc{
-  color:#ff0000;
-  font-size: 1.2rem !important;
-    margin-left: 71px !important;
+  color: #ff0000;
+  font-size: 0.9rem !important;
+  margin-left: 317px !important;
+  border: 0.3px solid red;
+  padding: 1px 8px;
+  border-radius: 4px;
 }
 .deleteIconContent-zipAndDoc:hover{
   cursor: pointer;
