@@ -51,6 +51,11 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log(
+      "courseIdcourseId",
+      courseId,
+      localStorage.getItem("addContent")
+    );
     if (courseId) {
       setLoaderState(true);
       getCourseById({
@@ -61,6 +66,13 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           setLoaderState(false);
           if (userCallBack?.contents?.length) {
             setAttachment(userCallBack?.contents);
+          }
+          if (localStorage.getItem("addContent")==="true") {
+            setTackerPage(3);
+          }
+          else{
+            console.log("oijh")
+            setTackerPage(0);
           }
         },
       });
@@ -77,6 +89,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       setAttachment(value);
     }
   };
+  
   const handleTrackerPage = (page, value) => {
     if (page === 2) {
       setMulitiDuration(value);

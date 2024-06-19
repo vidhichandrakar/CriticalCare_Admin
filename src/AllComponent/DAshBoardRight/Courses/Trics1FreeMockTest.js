@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import EditIcon from "@mui/icons-material/Edit";
@@ -94,7 +94,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
   const durationName = durationData?.filter(
     (duraData) =>
       duraData?.duration_id == courseData?.durations?.length &&
-      courseData?.durations[courseData?.durations?.length -1]?.duration_id
+      courseData?.durations[courseData?.durations?.length - 1]?.duration_id
   );
 
   const handleDeleteCourse = () => {
@@ -115,6 +115,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
   };
 
   const handleEdit = (id) => {
+    localStorage.setItem("addContent", false);
     navigate("/admin/CreateCourses", { state: { id: courseId } });
   };
 
@@ -135,9 +136,19 @@ const Trics1FreeMockTest = ({ onDelete }) => {
       },
     });
   };
+
+
+ const handleContent=()=>{
+  localStorage.setItem("addContent", true);
+  navigate("/admin/CreateCourses", { state: { id: courseId } });
+}
+
   return (
     <div className="grid-container">
-      <Header Heading={<ArrowBackIosNewIcon />}  LinkAddress = {"/admin/YourCourses"}/>
+      <Header
+        Heading={<ArrowBackIosNewIcon />}
+        LinkAddress={"/admin/YourCourses"}
+      />
       <SideBar />
       <div className="main-container ">
         {/* <div className="singleRow">
@@ -166,24 +177,27 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                   <p className="greyPara">
                     ₹
                     {courseData?.durations?.length &&
-                      courseData?.durations[courseData?.durations?.length -1]?.price}
+                      courseData?.durations[courseData?.durations?.length - 1]
+                        ?.price}
                   </p>
                 </div>
                 <div className="offerPrice">
                   <p className="blackPara">Offer Price</p>
                   <p className="greyPara">
                     {courseData?.durations?.length &&
-                      courseData?.durations[courseData?.durations?.length -1]?.offer_price}
-                      
-                    {/* {console.log(courseData, "Line196 CoursedAta")} */}
+                      courseData?.durations[courseData?.durations?.length - 1]
+                        ?.offer_price}
 
+                    {console.log( " CoursedAta",courseData)}
                   </p>
                 </div>
               </div>
               <hr />
               {isNotEmptyObject(courseData) || isNotEmptyArray(courseData) ? (
-                courseData?.durations[courseData?.durations?.length -1]?.duration_type_id === 3 ||
-                courseData?.durations[courseData?.durations?.length -1]?.duration_type_id === 4 ? null : (
+                courseData?.durations[courseData?.durations?.length - 1]
+                  ?.duration_type_id === 3 ||
+                courseData?.durations[courseData?.durations?.length - 1]
+                  ?.duration_type_id === 4 ? null : (
                   <>
                     <div className="CatagorynSubCatagory">
                       <div>
@@ -198,29 +212,28 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                     <hr />
 
                     <p className="blackPara">Course Duration</p>
-                    <p> {courseData?.durations[0]?.duration_type_id === 2 ? (
-                     
-                     <Box className="multiplevalidityBox">
-                       Multiple Validity Available
-                     </Box>
-                     
-                 ) : courseData?.durations[0]?.duration_type_id === 1 ? (
-                 
-                     <Box className="multiplevalidityAvailBox">
-                       Single Validity
-                     </Box>
-                 ) : courseData?.durations[0]?.duration_type_id === 3 ? (
-                   <Box className="multiplevalidityAvailBox">
-                     LifeTime Validity
-                   </Box>
-                 ) : courseData?.durations[0]?.duration_type_id === 4 ? (
-                   <Box className="multiplevalidityAvailBox">
-                     Course Expire
-                   </Box>
-                 ) : null}</p>
-                   <Box className="YearBox ">
-
-                    {/* <p>
+                    <p>
+                      {" "}
+                      {courseData?.durations[0]?.duration_type_id === 2 ? (
+                        <Box className="multiplevalidityBox">
+                          Multiple Validity Available
+                        </Box>
+                      ) : courseData?.durations[0]?.duration_type_id === 1 ? (
+                        <Box className="multiplevalidityAvailBox">
+                          Single Validity
+                        </Box>
+                      ) : courseData?.durations[0]?.duration_type_id === 3 ? (
+                        <Box className="multiplevalidityAvailBox">
+                          LifeTime Validity
+                        </Box>
+                      ) : courseData?.durations[0]?.duration_type_id === 4 ? (
+                        <Box className="multiplevalidityAvailBox">
+                          Course Expire
+                        </Box>
+                      ) : null}
+                    </p>
+                    <Box className="YearBox ">
+                      {/* <p>
                       {courseData?.durations?.length &&
                         courseData?.durations[courseData?.durations?.length -1]?.duration}{" "}
                       {durationName?.length && durationName[0]?.duration_name}
@@ -230,18 +243,26 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                         courseData?.durations[courseData?.durations?.length -1]?.duration}{" "}
                       {durationName?.length && durationName[0]?.duration_name}
                       </p> */}
-                      
-                    {courseData?.durations?.map((item) => {
-                         return <Box className="durationBOx"> 
-                         <Box className="greyPara">
-                         <p>{item.duration}
-                         </p>
-                         <p style={{marginLeft: "5px"}}>{item.duration_name}</p>
+
+                      {courseData?.durations?.map((item) => {
+                        return (
+                          <Box className="durationBOx">
+                            <Box className="greyPara">
+                              <p>{item.duration}</p>
+                              <p style={{ marginLeft: "5px" }}>
+                                {item.duration_name}
+                              </p>
+                            </Box>
+                            <Box>
+                              <p
+                                className="greyPara"
+                                style={{ marginTop: "-8px" }}
+                              >
+                                {item.offer_price}
+                              </p>
+                            </Box>
                           </Box>
-                          <Box>
-                           <p className="greyPara" style={{marginTop: "-8px"}}>{item.offer_price}</p> 
-                          </Box>
-                         </Box>
+                        );
                       })}
                       {/* <p className="greyPara">
                     {courseData?.durations?.length &&
@@ -250,16 +271,12 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                     {console.log(courseData, "Line196 CoursedAta")}
 
                   </p> */}
-                       
-                       
-                  
                     </Box>
 
                     <hr />
                   </>
                 )
               ) : null}
-            
 
               <div className="StuEnrViewAll">
                 <div>
@@ -287,12 +304,14 @@ const Trics1FreeMockTest = ({ onDelete }) => {
           </div>
 
           <div className="whiteBoxOfContent">
-            <div className="contentOneContent">
-              <FolderIcon className="folderIcon" />
+            <div className="contentOneContent" onClick={handleContent}>
+              <FolderIcon className="folderIcon"  />
 
               <div className="ContentCol">
                 <p className="blackPara">Content</p>
-                <p className="greyPara mt-10px">{courseData?.contents?.length} content(s)</p>
+                <p className="greyPara mt-10px">
+                  {courseData?.contents?.length} content(s)
+                </p>
               </div>
             </div>
 
@@ -305,13 +324,14 @@ const Trics1FreeMockTest = ({ onDelete }) => {
               More Options
               <MoreHorizIcon className="threeDotsIcon" />
             </Button>
-            <Button variant="contained"
-            className="Publishbutton"
-                  onClick={() => handlePublish()}
-                  ><PublishedWithChangesIcon className="PoPIcon" />
-                  {courseData?.is_publish == "published"
-                    ? "UnPublish"
-                    : "Publish"}</Button>
+            <Button
+              variant="contained"
+              className="Publishbutton"
+              onClick={() => handlePublish()}
+            >
+              <PublishedWithChangesIcon className="PoPIcon" />
+              {courseData?.is_publish == "published" ? "UnPublish" : "Publish"}
+            </Button>
             <div className="Widthhh">
               <Popover
                 id={id}
@@ -342,7 +362,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                   <DeleteIcon className="PoPIcon" />
                   Delete
                 </MenuItem>
- </Popover>
+              </Popover>
 
               <DailogBox
                 isOpen={isOpen}

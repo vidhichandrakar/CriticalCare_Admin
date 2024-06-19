@@ -919,6 +919,7 @@ body {
   padding: 0px 22px;
   margin: 4%;
   border-radius: 7px !important;
+  cursor: pointer;
 }
 .folderIcon {
   color: grey;

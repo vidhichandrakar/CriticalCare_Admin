@@ -166,6 +166,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
         storedValues.duration_id = item.duration_id;
         storedValues.offer_price = item.offer_price;
         storedValues.price = item.price;
+        storedValues.course_duration_id = item.course_duration_id;
         multiArr.push(storedValues);
         let getDurationType = durationType.filter(
           (data) => data?.duration_id === item?.duration_id

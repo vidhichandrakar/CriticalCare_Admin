@@ -4,7 +4,9 @@ import TestProtalHeader from "./TestProtalHeader";
 import TestFirstPage from "./TestFirstPage";
 import { useLocation } from "react-router-dom";
 import {
+  createNumberOfQuestions,
   createTestInfo,
+  getNumberOfQuestions,
   getTestById,
   getTestType,
 } from "../../../ActionFactory/apiActions";
@@ -174,6 +176,32 @@ function TestPortalMain() {
         callBack: (res) => {
           console.log(res);
           getTestByIdData();
+          const count = noOfQuestion;
+      
+        const divArray = Array.from({ length: count });
+        let arr =[];
+        divArray.map((item)=>{
+          arr.push( {
+            "question_text": "What is the normal range of adult human body temperature?",
+            "question_type": "single-select",
+            "options": [
+              { "option_text": "35.5 - 36.5 °C", "is_correct": false },
+              { "option_text": "36.1 - 37.2 °C", "is_correct": false },
+              { "option_text": "37.5 - 38.5 °C", "is_correct": true },
+              { "option_text": "38.0 - 39.0 °C", "is_correct": false }
+            ]
+          })
+        })
+          const loadPay = {
+            test_id: test_id,
+            questions:arr
+          }
+          createNumberOfQuestions({
+            payload: loadPay,
+            callBack:(res)=>{
+              console.log("number questions",res);
+            }
+          })
         },
       });
     }
@@ -227,6 +255,7 @@ function TestPortalMain() {
         setCqopen={setCqopen}
         opencreaterqns={opencreaterqns}
         handleClickOpen={handleClickOpen}
+        noOfQuestion={noOfQuestion}
       />
 
       <BootstrapDialog
