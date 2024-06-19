@@ -657,10 +657,43 @@ body {
   margin-right: 10px;
   cursor: pointer;
 }
+.deleteIconContent-video{
+  position: sticky !important;
+  color: #ff0000;
+  font-size: 0.9rem !important;
+  margin-left: 130px !important;
+  border: 0.3px solid red;
+  padding: 1px 8px;
+  border-radius: 4px;
+}
+.deleteIconContent-video:hover{
+  cursor: pointer;
+  color:#fb4e4e;
+}
+
 .deleteIconContent{
-  color:#ff0000;
+  position: sticky !important;
+  color: #ff0000;
+  font-size: 0.9rem !important;
+  margin-left: 31px !important;
+  border: 0.3px solid red;
+  padding: 1px 8px;
+  border-radius: 4px;
 }
 .deleteIconContent:hover{
+  cursor: pointer;
+  color:#fb4e4e;
+}
+.deleteIconContent-zipAndDoc{
+  position: sticky !important;
+  color: #ff0000;
+  font-size: 0.9rem !important;
+  margin-left: 317px !important;
+  border: 0.3px solid red;
+  padding: 1px 8px;
+  border-radius: 4px;
+}
+.deleteIconContent-zipAndDoc:hover{
   cursor: pointer;
   color:#fb4e4e;
 }
@@ -859,6 +892,14 @@ body {
   flex-direction: row;
   color: grey !important;
   font-size: smaller;
+  /* word-wrap: break-word; */
+}
+.WordBreak{  
+  color: grey !important;
+  font-size: smaller;
+  word-wrap: break-word !important;
+  overflow-y: auto;
+    height: 20vh;
 }
 .durationBOx{
   border: 1px solid grey;

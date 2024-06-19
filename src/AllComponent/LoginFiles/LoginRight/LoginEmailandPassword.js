@@ -130,7 +130,14 @@ const LoginEmailandPassword = () => {
   };
 
   const handleResendOTP = () => {
-    setOtp("")
+    setOtp({
+    value: "",
+    otp1: "",
+    otp2: "",
+    otp3: "",
+    otp4: "",
+    disable: true,})
+
     setLoaderState(true);
     const payload = {
       phone_no: phoneNO?.toString(),
@@ -201,7 +208,8 @@ const LoginEmailandPassword = () => {
     setOtp(prevOtp);
     setDisableLogiBtn(false);
 
-    if (type === "otp1" && prevOtp.otp1 != "") {
+   
+       if (type === "otp1" && prevOtp.otp1 != "") {
       textField2Ref.current.focus();
     } else if (type === "otp2" && prevOtp.otp2 != "") {
       textField3Ref.current.focus();
@@ -272,8 +280,10 @@ const LoginEmailandPassword = () => {
           getOTP ? "BoxWidth" : "BoxWidth phoneTextField2 initialBoxWidth"
         }
       >
+        {console.log(otpValue, "otpvalue")}
         {isVisible && (
           <Box className="OTPCard">
+
             <Typography sx={{ mt: 1, fontSize: 21, color: "#199884" }}>
               <span className="OTPInTheBox">OTP Recieved:</span>{" "}
               <b className="OTPRecieved"> {getOTP}</b>
@@ -331,6 +341,7 @@ const LoginEmailandPassword = () => {
               onChange={(event) =>
                 handleLoginByOTP({ type: "otp1", value: event.target.value })
               }
+              value={otpValue.otp1}
               onKeyDown={(event) => handleKeyDown(event, "otp1")}
               inputRef={textField1Ref}
               inputProps={{
@@ -345,6 +356,7 @@ const LoginEmailandPassword = () => {
               onChange={(event) =>
                 handleLoginByOTP({ type: "otp2", value: event.target.value })
               }
+              value={otpValue.otp2}
               onKeyDown={(event) => handleKeyDown(event, "otp2")}
               inputRef={textField2Ref}
               inputProps={{
@@ -358,6 +370,7 @@ const LoginEmailandPassword = () => {
               onChange={(event) =>
                 handleLoginByOTP({ type: "otp3", value: event.target.value })
               }
+              value={otpValue.otp3}
               onKeyDown={(event) => handleKeyDown(event, "otp3")}
               inputRef={textField3Ref}
               inputProps={{
@@ -371,6 +384,7 @@ const LoginEmailandPassword = () => {
               onChange={(event) =>
                 handleLoginByOTP({ type: "otp4", value: event.target.value })
               }
+              value={otpValue.otp4}
               onKeyDown={(event) => handleKeyDown(event, "otp4")}
               inputRef={textField4Ref}
               inputProps={{

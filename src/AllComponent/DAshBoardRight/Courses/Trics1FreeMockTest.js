@@ -26,6 +26,7 @@ import PublishedWithChangesIcon from "@mui/icons-material/PublishedWithChanges";
 import IconButton from "@mui/material/IconButton";
 import yellowEnvlope from "../../../Media/Images/yellowEnvlope.jpeg";
 import Header from "../../Courses/Header";
+import { Typography } from "@material-ui/core";
 
 const Trics1FreeMockTest = ({ onDelete }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -73,7 +74,6 @@ const Trics1FreeMockTest = ({ onDelete }) => {
           callBack: (response) => {
             const userCallBack = response?.data;
             setCourseData(userCallBack);
-            // console.log(userCallBack, "LINE76 asdfgh")
           },
         });
       }
@@ -137,11 +137,10 @@ const Trics1FreeMockTest = ({ onDelete }) => {
     });
   };
 
-
- const handleContent=()=>{
-  localStorage.setItem("addContent", true);
-  navigate("/admin/CreateCourses", { state: { id: courseId } });
-}
+  const handleContent = () => {
+    localStorage.setItem("addContent", true);
+    navigate("/admin/CreateCourses", { state: { id: courseId } });
+  };
 
   return (
     <div className="grid-container">
@@ -151,13 +150,6 @@ const Trics1FreeMockTest = ({ onDelete }) => {
       />
       <SideBar />
       <div className="main-container ">
-        {/* <div className="singleRow">
-         <Link to="/admin/YourCourses">
-            <Button className="backToCourses">
-              <ArrowBackIosNewIcon />
-            </Button>
-          </Link> 
-        </div> */}
         <div className="another-main-container">
           <div className="completeTricsBox">
             <div className="leftSideRow">
@@ -168,9 +160,17 @@ const Trics1FreeMockTest = ({ onDelete }) => {
               <hr />
 
               <p className="blackPara">Description</p>
-              <p className="greyPara">{courseData?.description}</p>
-              <hr />
-
+              <TextField
+                sx={{ mt: -2 }}
+                inputProps={{ className: "textField" }}
+                fullWidth
+                id="outlined-multiline-flexible"
+                multiline
+                maxRows={4}
+                className="DescBoxShadow "
+                variant="standard"
+                value={courseData?.description}
+              />
               <div className="PricenOfferPrice">
                 <div>
                   <p className="blackPara">Price</p>
@@ -187,8 +187,6 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                     {courseData?.durations?.length &&
                       courseData?.durations[courseData?.durations?.length - 1]
                         ?.offer_price}
-
-                    {console.log( " CoursedAta",courseData)}
                   </p>
                 </div>
               </div>
@@ -219,31 +217,18 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                           Multiple Validity Available
                         </Box>
                       ) : courseData?.durations[0]?.duration_type_id === 1 ? (
-                        <Box className="multiplevalidityAvailBox">
+                        <Box className="multiplevalidityBox">
                           Single Validity
                         </Box>
                       ) : courseData?.durations[0]?.duration_type_id === 3 ? (
-                        <Box className="multiplevalidityAvailBox">
+                        <Box className="multiplevalidityBox">
                           LifeTime Validity
                         </Box>
                       ) : courseData?.durations[0]?.duration_type_id === 4 ? (
-                        <Box className="multiplevalidityAvailBox">
-                          Course Expire
-                        </Box>
+                        <Box className="multiplevalidityBox">Course Expire</Box>
                       ) : null}
                     </p>
                     <Box className="YearBox ">
-                      {/* <p>
-                      {courseData?.durations?.length &&
-                        courseData?.durations[courseData?.durations?.length -1]?.duration}{" "}
-                      {durationName?.length && durationName[0]?.duration_name}
-                      </p>
-                    <p>
-                      {courseData?.durations?.length &&
-                        courseData?.durations[courseData?.durations?.length -1]?.duration}{" "}
-                      {durationName?.length && durationName[0]?.duration_name}
-                      </p> */}
-
                       {courseData?.durations?.map((item) => {
                         return (
                           <Box className="durationBOx">
@@ -253,31 +238,13 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                                 {item.duration_name}
                               </p>
                             </Box>
-                            <Box>
-                              <p
-                                className="greyPara"
-                                style={{ marginTop: "-8px" }}
-                              >
-                                {item.offer_price}
-                              </p>
-                            </Box>
                           </Box>
                         );
                       })}
-                      {/* <p className="greyPara">
-                    {courseData?.durations?.length &&
-                      courseData?.durations[courseData?.durations?.length -1]?.offer_price}
-                      
-                    {console.log(courseData, "Line196 CoursedAta")}
-
-                  </p> */}
                     </Box>
-
-                    <hr />
                   </>
                 )
               ) : null}
-
               <div className="StuEnrViewAll">
                 <div>
                   <p className="blackPara">Student Enrolled</p>
@@ -289,87 +256,89 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                 </span>
               </div>
               <p className="greyPara">44</p>
-            </div>
 
-            <div>
-              {courseData?.thumbnail_path ? (
-                <img
-                  src={courseData?.thumbnail_path}
-                  className="rightSideRow"
-                />
-              ) : (
-                <img src={yellowEnvlope} className="rightSideRow" />
-              )}
-            </div>
-          </div>
-
-          <div className="whiteBoxOfContent">
-            <div className="contentOneContent" onClick={handleContent}>
-              <FolderIcon className="folderIcon"  />
-
-              <div className="ContentCol">
-                <p className="blackPara">Content</p>
-                <p className="greyPara mt-10px">
-                  {courseData?.contents?.length} content(s)
-                </p>
+              <div>
+                {courseData?.thumbnail_path ? (
+                  <img
+                    src={courseData?.thumbnail_path}
+                    className="rightSideRow"
+                  />
+                ) : (
+                  <img src={yellowEnvlope} className="rightSideRow" />
+                )}
               </div>
             </div>
 
-            <Button
-              aria-describedby={id}
-              variant="contained"
-              onClick={handleClick}
-              className="catagorytextofTrics"
-            >
-              More Options
-              <MoreHorizIcon className="threeDotsIcon" />
-            </Button>
-            <Button
-              variant="contained"
-              className="Publishbutton"
-              onClick={() => handlePublish()}
-            >
-              <PublishedWithChangesIcon className="PoPIcon" />
-              {courseData?.is_publish == "published" ? "UnPublish" : "Publish"}
-            </Button>
-            <div className="Widthhh">
-              <Popover
-                id={id}
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                sx={{ mt: "5px" }}
+            <div className="whiteBoxOfContent">
+              <div className="contentOneContent" onClick={handleContent}>
+                <FolderIcon className="folderIcon" />
+
+                <div className="ContentCol">
+                  <p className="blackPara">Content</p>
+                  <p className="greyPara mt-10px">
+                    {courseData?.contents?.length} content(s)
+                  </p>
+                </div>
+              </div>
+
+              <Button
+                aria-describedby={id}
+                variant="contained"
+                onClick={handleClick}
+                className="catagorytextofTrics"
               >
-                <MenuItem
-                  sx={{ width: "230px" }}
-                  value={10}
-                  className="greyPara"
-                  onClick={handleEdit}
+                More Options
+                <MoreHorizIcon className="threeDotsIcon" />
+              </Button>
+              <Button
+                variant="contained"
+                className="Publishbutton"
+                onClick={() => handlePublish()}
+              >
+                <PublishedWithChangesIcon className="PoPIcon" />
+                {courseData?.is_publish == "published"
+                  ? "UnPublish"
+                  : "Publish"}
+              </Button>
+              <div className="Widthhh">
+                <Popover
+                  id={id}
+                  open={open}
+                  anchorEl={anchorEl}
+                  onClose={handleClose}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                  }}
+                  sx={{ mt: "5px" }}
                 >
-                  <EditIcon className="PoPIcon" />
-                  Edit
-                </MenuItem>
+                  <MenuItem
+                    sx={{ width: "230px" }}
+                    value={10}
+                    className="greyPara"
+                    onClick={handleEdit}
+                  >
+                    <EditIcon className="PoPIcon" />
+                    Edit
+                  </MenuItem>
 
-                <MenuItem
-                  onClick={() => handleDeleteClick()}
-                  value={20}
-                  className="greyPara"
-                >
-                  <DeleteIcon className="PoPIcon" />
-                  Delete
-                </MenuItem>
-              </Popover>
+                  <MenuItem
+                    onClick={() => handleDeleteClick()}
+                    value={20}
+                    className="greyPara"
+                  >
+                    <DeleteIcon className="PoPIcon" />
+                    Delete
+                  </MenuItem>
+                </Popover>
 
-              <DailogBox
-                isOpen={isOpen}
-                handleConfirmDelete={handleConfirmDelete}
-                handleDeleteClick={handleDeleteClick}
-                handleCancelDelete={handleCancelDelete}
-              />
+                <DailogBox
+                  isOpen={isOpen}
+                  handleConfirmDelete={handleConfirmDelete}
+                  handleDeleteClick={handleDeleteClick}
+                  handleCancelDelete={handleCancelDelete}
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -1,13 +1,11 @@
 .contentDisplay{
   display: flex;
   flex-direction: row;
-  /* background-color: RED; */
   width:94%;
   
 }
 .contentleftBox{
   width:70%;
-  /* border: 2px solid #eee; */
   padding: 1%;
   height: 50%;
 }
@@ -16,32 +14,57 @@
   width:30%;
    border: 2px solid #eee;
    border-radius: 3% !important;
+   height: fit-content;
 }
 .contentInnerLeftBox{
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* height: 40vh; */
-  /* padding: 4%; */
 }
 .noContent{
   justify-content: center !important;
   align-items: center !important;
-  padding: 4%;
+  text-align: center;
 }
-.contentInnerLeftBox:hover{
- background-color: #eee;
-}
+
 .typoStyleVideo{
-  /* margin-top: 6% !important; */
+  margin-top: 0% !important;
+  margin-left: 5% !important;
+}
+.typoStyleZipAndDoc{
   margin-left: 2% !important;
 }
+.contentsImg{
+  width: 48% !important;
+  height: 50% !important;
+  border-radius: 10px;
+}
+.contentsVideo{
+  width: 38% !important;
+  height: 82% !important;
+}
 .videoBox{
+  /* background-color: aquamarine; */
+  box-shadow: 1px 1px 4px 2px #ecebeb !important;
   align-items: center;
   display: flex;
   flex-direction: row;
   margin: 2%;
+  width: 44vw;
+    height: 29vh;
+    padding-left: 57px;
+}
+.videoZipAndDoc{
+  align-items: center;
+  text-align: center;
+  /* justify-content: center; */
+  justify-content: space-around !important;
+  box-shadow: 1px 1px 4px 2px #ecebeb !important;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin: 2%;
+  width: 48vw;
+    height: 29vh;
 }
 .leftVideo{
   flex-direction: row;
@@ -123,5 +146,12 @@
  }
 
  .zipFolderPrevIcon{
-  font-size: 7.5rem;
+  /* display: flex; */
+  /* flex-direction:row; */
+  /* justify-content: space-between !important; */
+  font-size: 1.5rem;
  }
+ .zipAndDoc{
+  display: flex;
+  flex-direction: row;
+}
