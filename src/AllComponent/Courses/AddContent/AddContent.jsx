@@ -12,7 +12,7 @@ import { getContentType } from "../../ActionFactory/apiActions";
 import { commonButton } from "../../../Util/CommonFields";
 import attachmentimgae from "../../../Media/Images/undraw_attached_file_re_0n9b.svg";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Divider from '@material-ui/core/Divider';
+import Divider from "@material-ui/core/Divider";
 
 const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
   const [contentType, setContentType] = useState([]);
@@ -69,8 +69,8 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
   };
 
   const handleCreateCourse = () => {
-    if (courseData.length!==null) {
-      handleInputChange("addContent",videoDesc);
+    if (courseData.length !== null) {
+      handleInputChange("addContent", videoDesc);
     }
     let createCourse = 3;
     handleTrackerPage(3, createCourse);
@@ -89,72 +89,87 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
         <h2>
           <b>Contents</b>
         </h2>
-        {console.log("courseDatacourseData", courseData, videoDesc, (courseData.length!==null))}
+        {console.log(
+          "courseDatacourseData",
+          courseData,
+          videoDesc,
+          courseData.length !== null
+        )}
         <Box className="contentInnerLeftBox">
           {!videoDesc?.length ? (
             <Box className="noContent">
-              <img src={attachmentimgae} height="320px" width="320px" />
+              <img src={attachmentimgae} height="290px" width="320px" />
             </Box>
           ) : (
             videoDesc?.map((item) =>
               item?.content_name?.split(".")[1] === "mp4" ? (
                 <Box className="videoBox">
-                  <video 
-                  // width="350" controls autoplay muted height={"120"}
-                  className="contentsVideo"
-                  >
+                  <video className="contentsVideo">
                     <source src={item.content_url} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
-                  <Divider orientation="vertical" 
-                  // flexItem
-                  sx={{marginLeft:"36px"}}
-                   />
+
+                  {/* <Divider orientation="vertical" sx={{marginLeft:"36px"}}/> */}
                   <Typography className="typoStyleVideo">
                     {item?.content_name}
                   </Typography>
+
                   <Box>
-                    <DeleteIcon className="deleteIconContent" />
+                    <Typography className="deleteIconContent-video">
+                      Delete
+                    </Typography>
                   </Box>
                 </Box>
               ) : handleImageType(item?.content_name?.split(".")[1]) ? (
                 <Box className="videoBox">
                   <Box className="leftVideo">
-                    <img src={item.content_url} 
-                    // height="120px" width="350" 
-                    className="contentsImg" />
-                    <Divider orientation="vertical" 
-                  // flexItem
-                  sx={{marginLeft:"36px"}}
-                   />
+                    <img src={item.content_url} className="contentsImg" />
+                    <Divider
+                      orientation="vertical"
+                      sx={{ marginLeft: "36px" }}
+                    />
+
                     <Typography className="typoStyleVideo">
                       {item?.content_name}
                     </Typography>
                   </Box>
+
                   <Box>
-                    <DeleteIcon className="deleteIconContent" />
+                    <Typography className="deleteIconContent">
+                      Delete
+                    </Typography>
                   </Box>
                 </Box>
               ) : item?.content_name?.split(".")[1] === "zip" ? (
                 <Box className="videoZipAndDoc">
-                  <FolderZipIcon className="zipFolderPrevIcon" />
-                  <Typography className="typoStyleZipAndDoc">
-                    {item.content_name}
-                  </Typography>
+                  <Box className="zipAndDoc">
+                    <FolderZipIcon className="zipFolderPrevIcon" />
+                    <Typography className="typoStyleZipAndDoc">
+                      {item.content_name}
+                    </Typography>
+                  </Box>
+
                   <Box>
-                    <DeleteIcon className="deleteIconContent-zipAndDoc" />
+                    <Typography className="deleteIconContent-zipAndDoc">
+                      Delete
+                    </Typography>
                   </Box>
                 </Box>
               ) : handleDocumentType(item?.content_name?.split(".")[1]) ? (
                 <Box className="videoZipAndDoc">
-                  <a href={item.content_url} target="_blank">
-                    <NoteIcon className="zipFolderPrevIcon" />
-                  </a>
-                  <Typography className="typoStyleZipAndDoc">
-                    {item.content_name}
-                  </Typography>
+                  <Box className="zipAndDoc">
+                    <a href={item.content_url} target="_blank">
+                      <NoteIcon className="zipFolderPrevIcon" />
+                    </a>
+                    <Typography className="typoStyleZipAndDoc">
+                      {item.content_name}
+                    </Typography>
+                  </Box>
+
                   <Box>
-                    <DeleteIcon className="deleteIconContent-zipAndDoc" />
+                    <Typography className="deleteIconContent-zipAndDoc">
+                      Delete
+                    </Typography>
                   </Box>
                 </Box>
               ) : (
@@ -178,7 +193,9 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
           )}
         </Box>
 
-        <Box className="/">
+        <Box
+        // className="/"
+        >
           {commonButton({
             handleTrackerPage: () => handleCreateCourse(),
             className: "coursesButton",
