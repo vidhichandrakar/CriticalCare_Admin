@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import EditIcon from "@mui/icons-material/Edit";
@@ -74,7 +74,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
           callBack: (response) => {
             const userCallBack = response?.data;
             setCourseData(userCallBack);
-            },
+          },
         });
       }
       getDuration({
@@ -94,7 +94,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
   const durationName = durationData?.filter(
     (duraData) =>
       duraData?.duration_id == courseData?.durations?.length &&
-      courseData?.durations[courseData?.durations?.length -1]?.duration_id
+      courseData?.durations[courseData?.durations?.length - 1]?.duration_id
   );
 
   const handleDeleteCourse = () => {
@@ -115,6 +115,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
   };
 
   const handleEdit = (id) => {
+    localStorage.setItem("addContent", false);
     navigate("/admin/CreateCourses", { state: { id: courseId } });
   };
 
@@ -135,9 +136,18 @@ const Trics1FreeMockTest = ({ onDelete }) => {
       },
     });
   };
+
+  const handleContent = () => {
+    localStorage.setItem("addContent", true);
+    navigate("/admin/CreateCourses", { state: { id: courseId } });
+  };
+
   return (
     <div className="grid-container">
-      <Header Heading={<ArrowBackIosNewIcon />}  LinkAddress = {"/admin/YourCourses"}/>
+      <Header
+        Heading={<ArrowBackIosNewIcon />}
+        LinkAddress={"/admin/YourCourses"}
+      />
       <SideBar />
       <div className="main-container ">
         <div className="another-main-container">
@@ -149,39 +159,43 @@ const Trics1FreeMockTest = ({ onDelete }) => {
               </p>
               <hr />
 
-              <p className="blackPara" >Description</p>
+              <p className="blackPara">Description</p>
               <TextField
-              sx={{mt: -2}}
-        inputProps={{ className: "textField" }}
-        fullWidth
-        id="outlined-multiline-flexible"
-        multiline
-        maxRows={4}
-        className="DescBoxShadow "
-        variant="standard"
-        value={courseData?.description}
-        />
+                sx={{ mt: -2 }}
+                inputProps={{ className: "textField" }}
+                fullWidth
+                id="outlined-multiline-flexible"
+                multiline
+                maxRows={4}
+                className="DescBoxShadow "
+                variant="standard"
+                value={courseData?.description}
+              />
               <div className="PricenOfferPrice">
                 <div>
                   <p className="blackPara">Price</p>
                   <p className="greyPara">
                     ₹
                     {courseData?.durations?.length &&
-                      courseData?.durations[courseData?.durations?.length -1]?.price}
+                      courseData?.durations[courseData?.durations?.length - 1]
+                        ?.price}
                   </p>
                 </div>
                 <div className="offerPrice">
                   <p className="blackPara">Offer Price</p>
                   <p className="greyPara">
                     {courseData?.durations?.length &&
-                      courseData?.durations[courseData?.durations?.length -1]?.offer_price}
+                      courseData?.durations[courseData?.durations?.length - 1]
+                        ?.offer_price}
                   </p>
                 </div>
               </div>
               <hr />
               {isNotEmptyObject(courseData) || isNotEmptyArray(courseData) ? (
-                courseData?.durations[courseData?.durations?.length -1]?.duration_type_id === 3 ||
-                courseData?.durations[courseData?.durations?.length -1]?.duration_type_id === 4 ? null : (
+                courseData?.durations[courseData?.durations?.length - 1]
+                  ?.duration_type_id === 3 ||
+                courseData?.durations[courseData?.durations?.length - 1]
+                  ?.duration_type_id === 4 ? null : (
                   <>
                     <div className="CatagorynSubCatagory">
                       <div>
@@ -196,47 +210,41 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                     <hr />
 
                     <p className="blackPara">Course Duration</p>
-                    <p> {courseData?.durations[0]?.duration_type_id === 2 ? (
-                     
-                     <Box className="multiplevalidityBox">
-                       Multiple Validity Available  
-                     </Box>
-                     
-                 ) : courseData?.durations[0]?.duration_type_id === 1 ? (
-                 
-                     <Box className="multiplevalidityBox">
-                       Single Validity
-                     </Box>
-                 ) : courseData?.durations[0]?.duration_type_id === 3 ? (
-                   <Box className="multiplevalidityBox">
-                     LifeTime Validity
-                   </Box>
-                 ) : courseData?.durations[0]?.duration_type_id === 4 ? (
-                   <Box className="multiplevalidityBox">
-                     Course Expire
-                   </Box>
-                 ) : null}</p>
-                   <Box className="YearBox ">
-                    {courseData?.durations?.map((item) => {
-                         return <Box className="durationBOx"> 
-                         <Box className="greyPara">
-                         <p>{item.duration}
-                         </p>
-                         <p style={{marginLeft: "5px"}}>{item.duration_name}</p>
+                    <p>
+                      {" "}
+                      {courseData?.durations[0]?.duration_type_id === 2 ? (
+                        <Box className="multiplevalidityBox">
+                          Multiple Validity Available
+                        </Box>
+                      ) : courseData?.durations[0]?.duration_type_id === 1 ? (
+                        <Box className="multiplevalidityBox">
+                          Single Validity
+                        </Box>
+                      ) : courseData?.durations[0]?.duration_type_id === 3 ? (
+                        <Box className="multiplevalidityBox">
+                          LifeTime Validity
+                        </Box>
+                      ) : courseData?.durations[0]?.duration_type_id === 4 ? (
+                        <Box className="multiplevalidityBox">Course Expire</Box>
+                      ) : null}
+                    </p>
+                    <Box className="YearBox ">
+                      {courseData?.durations?.map((item) => {
+                        return (
+                          <Box className="durationBOx">
+                            <Box className="greyPara">
+                              <p>{item.duration}</p>
+                              <p style={{ marginLeft: "5px" }}>
+                                {item.duration_name}
+                              </p>
+                            </Box>
                           </Box>
-                          <Box>
-                           <p className="greyPara" style={{marginTop: "-8px"}}>{item.offer_price}</p> 
-                          </Box>
-                         </Box>
+                        );
                       })}
                     </Box>
-
-                    <hr />
                   </>
                 )
               ) : null}
-            
-
               <div className="StuEnrViewAll">
                 <div>
                   <p className="blackPara">Student Enrolled</p>
@@ -248,84 +256,89 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                 </span>
               </div>
               <p className="greyPara">44</p>
-            </div>
 
-            <div>
-              {courseData?.thumbnail_path ? (
-                <img
-                  src={courseData?.thumbnail_path}
-                  className="rightSideRow"
-                />
-              ) : (
-                <img src={yellowEnvlope} className="rightSideRow" />
-              )}
-            </div>
-          </div>
-
-          <div className="whiteBoxOfContent">
-            <div className="contentOneContent">
-              <FolderIcon className="folderIcon" />
-
-              <div className="ContentCol">
-                <p className="blackPara">Content</p>
-                <p className="greyPara mt-10px">{courseData?.contents?.length} content(s)</p>
+              <div>
+                {courseData?.thumbnail_path ? (
+                  <img
+                    src={courseData?.thumbnail_path}
+                    className="rightSideRow"
+                  />
+                ) : (
+                  <img src={yellowEnvlope} className="rightSideRow" />
+                )}
               </div>
             </div>
 
-            <Button
-              aria-describedby={id}
-              variant="contained"
-              onClick={handleClick}
-              className="catagorytextofTrics"
-            >
-              More Options
-              <MoreHorizIcon className="threeDotsIcon" />
-            </Button>
-            <Button variant="contained"
-            className="Publishbutton"
-                  onClick={() => handlePublish()}
-                  ><PublishedWithChangesIcon className="PoPIcon" />
-                  {courseData?.is_publish == "published"
-                    ? "UnPublish"
-                    : "Publish"}</Button>
-            <div className="Widthhh">
-              <Popover
-                id={id}
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                sx={{ mt: "5px" }}
+            <div className="whiteBoxOfContent">
+              <div className="contentOneContent" onClick={handleContent}>
+                <FolderIcon className="folderIcon" />
+
+                <div className="ContentCol">
+                  <p className="blackPara">Content</p>
+                  <p className="greyPara mt-10px">
+                    {courseData?.contents?.length} content(s)
+                  </p>
+                </div>
+              </div>
+
+              <Button
+                aria-describedby={id}
+                variant="contained"
+                onClick={handleClick}
+                className="catagorytextofTrics"
               >
-                <MenuItem
-                  sx={{ width: "230px" }}
-                  value={10}
-                  className="greyPara"
-                  onClick={handleEdit}
+                More Options
+                <MoreHorizIcon className="threeDotsIcon" />
+              </Button>
+              <Button
+                variant="contained"
+                className="Publishbutton"
+                onClick={() => handlePublish()}
+              >
+                <PublishedWithChangesIcon className="PoPIcon" />
+                {courseData?.is_publish == "published"
+                  ? "UnPublish"
+                  : "Publish"}
+              </Button>
+              <div className="Widthhh">
+                <Popover
+                  id={id}
+                  open={open}
+                  anchorEl={anchorEl}
+                  onClose={handleClose}
+                  anchorOrigin={{
+                    vertical: "bottom",
+                    horizontal: "left",
+                  }}
+                  sx={{ mt: "5px" }}
                 >
-                  <EditIcon className="PoPIcon" />
-                  Edit
-                </MenuItem>
+                  <MenuItem
+                    sx={{ width: "230px" }}
+                    value={10}
+                    className="greyPara"
+                    onClick={handleEdit}
+                  >
+                    <EditIcon className="PoPIcon" />
+                    Edit
+                  </MenuItem>
 
-                <MenuItem
-                  onClick={() => handleDeleteClick()}
-                  value={20}
-                  className="greyPara"
-                >
-                  <DeleteIcon className="PoPIcon" />
-                  Delete
-                </MenuItem>
- </Popover>
+                  <MenuItem
+                    onClick={() => handleDeleteClick()}
+                    value={20}
+                    className="greyPara"
+                  >
+                    <DeleteIcon className="PoPIcon" />
+                    Delete
+                  </MenuItem>
+                </Popover>
 
-              <DailogBox
-                isOpen={isOpen}
-                handleConfirmDelete={handleConfirmDelete}
-                handleDeleteClick={handleDeleteClick}
-                handleCancelDelete={handleCancelDelete}
-              />
+                <DailogBox
+                  isOpen={isOpen}
+                  handleConfirmDelete={handleConfirmDelete}
+                  handleDeleteClick={handleDeleteClick}
+                  handleCancelDelete={handleCancelDelete}
+                />
+              </div>
             </div>
           </div>
         </div>

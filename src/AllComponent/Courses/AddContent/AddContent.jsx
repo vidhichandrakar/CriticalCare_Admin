@@ -89,12 +89,6 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
         <h2>
           <b>Contents</b>
         </h2>
-        {console.log(
-          "courseDatacourseData",
-          courseData,
-          videoDesc,
-          courseData.length !== null
-        )}
         <Box className="contentInnerLeftBox">
           {!videoDesc?.length ? (
             <Box className="noContent">
@@ -129,7 +123,7 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
                       sx={{ marginLeft: "36px" }}
                     />
 
-                    <Typography className="typoStyleVideo">
+                    <Typography className="typoStyleImg">
                       {item?.content_name}
                     </Typography>
                   </Box>

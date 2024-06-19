@@ -287,3 +287,10 @@ export const getTestType = ({ callBack }) => {
     callBack(respose);
   });
 };
+
+export const createNumberOfQuestions=({payload, callBack})=>{
+  const url = APIS.testQuestions;
+  axios.post(url,payload).then((response)=>{
+    callBack(response);
+  })
+}

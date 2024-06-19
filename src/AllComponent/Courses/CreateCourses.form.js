@@ -113,7 +113,16 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           mainCatID: courseData.category_id,
           callBack: (response) => {
             setSubCategoryList(response.data);
-            setSelectedcategoryList(24); //added to enable sub category
+            
+            // setSelectedcategoryList(24); //added to enable sub category
+            let subCatLength = response.data.sub_category
+            console.log("jjkm",response.data,subCatLength?.length,subCatLength?.length===undefined)
+            if(subCatLength?.length===undefined){
+              setSelectedcategoryList(); 
+            }
+            else{
+              setSelectedcategoryList(24)//added to enable sub category
+            }
             response.data.map((item) => {
               if (item.category_id === courseData?.sub_category_id) {
                 storedValues.subCategory = item;
