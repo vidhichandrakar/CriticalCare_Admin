@@ -157,7 +157,9 @@ const Trics1FreeMockTest = ({ onDelete }) => {
               <hr />
 
               <p className="blackPara">Description</p>
+              <Box>
               <p className="greyPara">{courseData?.description}</p>
+              </Box>
               <hr />
 
               <div className="PricenOfferPrice">
