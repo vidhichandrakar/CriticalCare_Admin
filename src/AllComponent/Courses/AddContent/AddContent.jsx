@@ -129,7 +129,7 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
                       sx={{ marginLeft: "36px" }}
                     />
 
-                    <Typography className="typoStyleVideo">
+                    <Typography className="typoStyleImg">
                       {item?.content_name}
                     </Typography>
                   </Box>
