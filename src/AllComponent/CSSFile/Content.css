@@ -19,6 +19,7 @@
 .contentInnerLeftBox{
   display: flex;
   flex-direction: column;
+  margin-left: -13px;
 }
 .noContent{
   justify-content: center !important;
@@ -29,6 +30,10 @@
 .typoStyleVideo{
   margin-top: 0% !important;
   margin-left: 5% !important;
+}
+.typoStyleImg{
+  margin-top: 0% !important;
+  margin-left: -1% !important;
 }
 .typoStyleZipAndDoc{
   margin-left: 2% !important;
@@ -49,7 +54,7 @@
   display: flex;
   flex-direction: row;
   margin: 2%;
-  width: 44vw;
+  width: 45vw;
     height: 29vh;
     padding-left: 57px;
 }
@@ -63,7 +68,7 @@
   display: flex;
   flex-direction: row;
   margin: 2%;
-  width: 48vw;
+  width: 49vw;
     height: 29vh;
 }
 .leftVideo{
@@ -154,4 +159,5 @@
  .zipAndDoc{
   display: flex;
   flex-direction: row;
+  margin-left: 6px;
 }
