@@ -16,6 +16,9 @@ const YourCoursesCard = ({ allCourses, userData }) => {
       offer_price: "",
     },
   ]);
+  
+  
+
   const navigate = useNavigate();
 
   const handleDiscountPercent = (price, offer_price) => {
@@ -199,6 +202,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
             );
           })
         : null}
+     
     </>
   );
 };

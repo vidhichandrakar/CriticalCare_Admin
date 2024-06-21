@@ -878,6 +878,22 @@ body {
   font-weight: bold;
 }
 
+.FilterHead{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px;
+}
+.CategoriesBOx{
+    margin: 20px;
+    background-color: #e2f2ff42;
+    padding: 10px;
+    border-radius: 10px;
+}
+.TrickstextField{
+  color: grey !important;
+  font-size: 0.8rem !important;
+}
 .YearBox{
     display: grid;
     grid-template-columns: 1fr 1fr ;

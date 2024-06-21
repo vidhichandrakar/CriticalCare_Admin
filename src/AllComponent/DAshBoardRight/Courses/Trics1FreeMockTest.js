@@ -73,7 +73,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
           courseId,
           callBack: (response) => {
             const userCallBack = response?.data;
-            setCourseData(userCallBack);
+            setCourseData(userCallBack[0]);
             },
         });
       }
@@ -157,13 +157,13 @@ const handleContent = () => {
 
               <p className="blackPara" >Description</p>
               <TextField
-              sx={{mt: -2}}
-        inputProps={{ className: "textField" }}
+              sx={{mt: -2, color: "grey"}}
+        inputProps={{ className: "TrickstextField" }}
         fullWidth
         id="outlined-multiline-flexible"
         multiline
         maxRows={4}
-        className="DescBoxShadow "
+        // className="DescBoxShadow "
         variant="standard"
         value={courseData?.description}
         />
