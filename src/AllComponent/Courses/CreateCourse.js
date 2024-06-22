@@ -51,11 +51,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(
-      "courseIdcourseId",
-      courseId,
-      localStorage.getItem("addContent")
-    );
     if (courseId) {
       setLoaderState(true);
       getCourseById({
@@ -71,7 +66,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
             setTackerPage(3);
           }
           else{
-            console.log("oijh")
             setTackerPage(0);
           }
         },

@@ -116,7 +116,6 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
             
             // setSelectedcategoryList(24); //added to enable sub category
             let subCatLength = response.data.sub_category
-            console.log("jjkm",response.data,subCatLength?.length,subCatLength?.length===undefined)
             if(subCatLength?.length===undefined){
               setSelectedcategoryList(); 
             }
