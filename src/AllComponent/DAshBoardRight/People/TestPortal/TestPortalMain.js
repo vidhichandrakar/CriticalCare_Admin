@@ -106,11 +106,10 @@ function TestPortalMain() {
   const [sectionInstruction, setSectionInstruction] = useState("");
   const [marksPerQues, setMarksPerQues] = useState("");
   const [noOfQuestion, setNoOfQuestion] = useState("");
-  const [testInfoId,setTestInfoId] = useState();
-  
+  const [testInfoId, setTestInfoId] = useState();
+
   const [selectedValue, setSelectedValue] = useState("a");
   const [open, setOpen] = useState(false);
-
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -168,40 +167,43 @@ function TestPortalMain() {
       no_of_question: noOfQuestion,
       marks_per_question: marksPerQues,
     };
-    {console.log("testInfoIdtestInfoId",testInfoId)}
+    {
+      console.log("testInfoIdtestInfoId", testInfoId);
+    }
     if (noOfQuestion && marksPerQues) {
       createTestInfo({
         id: testInfoId,
         payload,
         callBack: (res) => {
-          console.log(res);
+          // console.log(res);
           getTestByIdData();
           const count = noOfQuestion;
-      
-        const divArray = Array.from({ length: count });
-        let arr =[];
-        divArray.map((item)=>{
-          arr.push( {
-            "question_text": "What is the normal range of adult human body temperature?",
-            "question_type": "single-select",
-            "options": [
-              { "option_text": "35.5 - 36.5 °C", "is_correct": false },
-              { "option_text": "36.1 - 37.2 °C", "is_correct": false },
-              { "option_text": "37.5 - 38.5 °C", "is_correct": true },
-              { "option_text": "38.0 - 39.0 °C", "is_correct": false }
-            ]
-          })
-        })
+
+          const divArray = Array.from({ length: count });
+          let arr = [];
+          divArray.map((item) => {
+            arr.push({
+              question_text:
+                "What is the normal range of adult human body temperature?",
+              question_type: "single-select",
+              options: [
+                { option_text: "35.5 - 36.5 °C", is_correct: false },
+                { option_text: "36.1 - 37.2 °C", is_correct: false },
+                { option_text: "37.5 - 38.5 °C", is_correct: true },
+                { option_text: "38.0 - 39.0 °C", is_correct: false },
+              ],
+            });
+          });
           const loadPay = {
             test_id: test_id,
-            questions:arr
-          }
+            questions: arr,
+          };
           createNumberOfQuestions({
             payload: loadPay,
-            callBack:(res)=>{
-              console.log("number questions",res);
-            }
-          })
+            callBack: (res) => {
+              // console.log("number questions",res);
+            },
+          });
         },
       });
     }
@@ -211,12 +213,7 @@ function TestPortalMain() {
       test_id: test_id,
       callBack: (response) => {
         setTestData(response?.data[0]);
-        console.log(
-          "response?.dataresponse?.data line no 153",
-          response?.data[0]
-        );
         console.log("testData line no 153", testData);
-        // console.log("testData.no of question line no 153", testData?.testInfoDetails[0]?.no_of_question)
       },
     });
   };
@@ -426,104 +423,66 @@ function TestPortalMain() {
         </DialogActions>
       </BootstrapDialog>
       <BootstrapDialog
-          className="completeDailogBox"
-          onClose={handleClose}
-          aria-labelledby="customized-dialog-title"
-          open={open}
+        className="completeDailogBox"
+        onClose={handleClose}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
+          <div className="multipleChoiceHeader">
+            <div className="multipleChoiceAndMarks">
+              <span>
+                <b>1. </b> Multiple Choice{" "}
+              </span>
+              <span>
+                <Box className="plusFourGreenBG">+4</Box>
+              </span>
+            </div>
+
+            <div className="mcqbuttons">
+              <Stack direction="row" spacing={2}>
+                <Button variant="contained" disabled className="previousMCQBtn">
+                  Previous
+                </Button>
+                <Button className="saveMCQBtn" href="#contained-buttons">
+                  Save
+                </Button>
+                <Button variant="contained" disabled className="nextMCQBtn">
+                  Next
+                </Button>
+              </Stack>
+            </div>
+          </div>
+        </DialogTitle>
+        <IconButton
+          aria-label="close"
+          onClick={handleClose}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
         >
-          <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-            <div className="multipleChoiceHeader">
-              <div className="multipleChoiceAndMarks">
-                <span>
-                  <b>1. </b> Multiple Choice{" "}
-                </span>
-                <span>
-                  <Box className="plusFourGreenBG">+4</Box>
-                </span>
-              </div>
-
-              <div className="mcqbuttons">
-                <Stack direction="row" spacing={2}>
-                  <Button
-                    variant="contained"
-                    disabled
-                    className="previousMCQBtn"
-                  >
-                    Previous
-                  </Button>
-                  <Button className="saveMCQBtn" href="#contained-buttons">
-                    Save
-                  </Button>
-                  <Button variant="contained" disabled className="nextMCQBtn">
-                    Next
-                  </Button>
-                </Stack>
-              </div>
+          <CloseIcon />
+        </IconButton>
+        <DialogContent dividers>
+          <div className="addDifficultyLvlSection">
+            <div>
+              <p>
+                <b>Question</b>
+              </p>
             </div>
-          </DialogTitle>
-          <IconButton
-            aria-label="close"
-            onClick={handleClose}
-            sx={{
-              position: "absolute",
-              right: 8,
-              top: 8,
-              color: (theme) => theme.palette.grey[500],
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-          <DialogContent dividers>
-            <div className="addDifficultyLvlSection">
+            <div className="twoDifficultyLvlBtns">
               <div>
-                <p>
-                  <b>Question</b>
-                </p>
+                <p>Difficulty Level</p>
               </div>
-              <div className="twoDifficultyLvlBtns">
-                <div>
-                  <p>Difficulty Level</p>
-                </div>
-                <div>
-                  <label for="difficulty"></label>
-                  <select
-                    name="Add difficulty level"
-                    id="Add difficulty level"
-                    className="addDiffLevelDropDown"
-                  >
-                    <option value="javascript">JavaScript</option>
-                    <option value="python">Python</option>
-                    <option value="c++" disabled>
-                      C++
-                    </option>
-                    <option value="java" selected>
-                      Add difficulty level
-                    </option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <TextField
-              className="thisIsMCQBtn"
-              id="outlined-helperText"
-              defaultValue="This is an MCQ question"
-            />
-            
-
-            <FormControl>
-              <div className="answersAndSingle">
-                <FormLabel
-                  id="demo-radio-buttons-group-label"
-                  sx={{ lineHeight: "2.5rem" }}
-                >
-                  <b>Answers</b>
-                </FormLabel>
-
+              <div>
+                <label for="difficulty"></label>
                 <select
                   name="Add difficulty level"
                   id="Add difficulty level"
-                  className="singleDropDown"
+                  className="addDiffLevelDropDown"
                 >
                   <option value="javascript">JavaScript</option>
                   <option value="python">Python</option>
@@ -531,115 +490,148 @@ function TestPortalMain() {
                     C++
                   </option>
                   <option value="java" selected>
-                    Single
+                    Add difficulty level
                   </option>
                 </select>
               </div>
-              <RadioGroup
-                aria-labelledby="demo-radio-buttons-group-label"
-                defaultValue="female"
-                name="radio-buttons-group"
+            </div>
+          </div>
+
+          <TextField
+            className="thisIsMCQBtn"
+            id="outlined-helperText"
+            defaultValue="This is an MCQ question"
+          />
+
+          <FormControl>
+            <div className="answersAndSingle">
+              <FormLabel
+                id="demo-radio-buttons-group-label"
+                sx={{ lineHeight: "2.5rem" }}
               >
-                <div className="addingDeleteOptions">
-                  <Radio
-                    checked={selectedValue === "a"}
-                    onChange={handleChangeOption}
-                    value="a"
-                    name="radio-buttons"
-                    inputProps={{ "aria-label": "A" }}
-                  />
-                  <TextField
-                    className="optionsFeid"
-                    id="outlined-helperText"
-                    defaultValue="Option 1"
-                  />
+                <b>Answers</b>
+              </FormLabel>
 
-                  <div className="deleteComponent">
-                    <h5>
-                      <DeleteIcon className="deleteIconSixthPage" />
-                      Delete
-                    </h5>
-                  </div>
+              <select
+                name="Add difficulty level"
+                id="Add difficulty level"
+                className="singleDropDown"
+              >
+                <option value="javascript">JavaScript</option>
+                <option value="python">Python</option>
+                <option value="c++" disabled>
+                  C++
+                </option>
+                <option value="java" selected>
+                  Single
+                </option>
+              </select>
+            </div>
+            <RadioGroup
+              aria-labelledby="demo-radio-buttons-group-label"
+              defaultValue="female"
+              name="radio-buttons-group"
+            >
+              <div className="addingDeleteOptions">
+                <Radio
+                  checked={selectedValue === "a"}
+                  onChange={handleChangeOption}
+                  value="a"
+                  name="radio-buttons"
+                  inputProps={{ "aria-label": "A" }}
+                />
+                <TextField
+                  className="optionsFeid"
+                  id="outlined-helperText"
+                  defaultValue="Option 1"
+                />
+
+                <div className="deleteComponent">
+                  <h5>
+                    <DeleteIcon className="deleteIconSixthPage" />
+                    Delete
+                  </h5>
                 </div>
+              </div>
 
-                <div className="addingDeleteOptions">
-                  <Radio
-                    checked={selectedValue === "b"}
-                    onChange={handleChangeOption}
-                    value="b"
-                    name="radio-buttons"
-                    inputProps={{ "aria-label": "A" }}
-                  />
-                  <TextField
-                    className="optionsFeid"
-                    id="outlined-helperText"
-                    defaultValue="Option 2"
-                  />
-                  <div>
-                    <h5>
-                      <DeleteIcon className="deleteIconSixthPage" />
-                      Delete
-                    </h5>
-                  </div>
+              <div className="addingDeleteOptions">
+                <Radio
+                  checked={selectedValue === "b"}
+                  onChange={handleChangeOption}
+                  value="b"
+                  name="radio-buttons"
+                  inputProps={{ "aria-label": "A" }}
+                />
+                <TextField
+                  className="optionsFeid"
+                  id="outlined-helperText"
+                  defaultValue="Option 2"
+                />
+                <div>
+                  <h5>
+                    <DeleteIcon className="deleteIconSixthPage" />
+                    Delete
+                  </h5>
                 </div>
+              </div>
 
-                <div className="addingDeleteOptions">
-                  <Radio
-                    checked={selectedValue === "c"}
-                    onChange={handleChangeOption}
-                    value="c"
-                    name="radio-buttons"
-                    inputProps={{ "aria-label": "A" }}
-                  />
-                  <TextField
-                    className="optionsFeid"
-                    id="outlined-helperText"
-                    defaultValue="Option 3"
-                  />
-                  <div>
-                    <h5>
-                      <DeleteIcon className="deleteIconSixthPage" />
-                      Delete
-                    </h5>
-                  </div>
+              <div className="addingDeleteOptions">
+                <Radio
+                  checked={selectedValue === "c"}
+                  onChange={handleChangeOption}
+                  value="c"
+                  name="radio-buttons"
+                  inputProps={{ "aria-label": "A" }}
+                />
+                <TextField
+                  className="optionsFeid"
+                  id="outlined-helperText"
+                  defaultValue="Option 3"
+                />
+                <div>
+                  <h5>
+                    <DeleteIcon className="deleteIconSixthPage" />
+                    Delete
+                  </h5>
                 </div>
+              </div>
 
-                <div className="addingDeleteOptions">
-                  <Radio
-                    checked={selectedValue === "d"}
-                    onChange={handleChangeOption}
-                    value="d"
-                    name="radio-buttons"
-                    inputProps={{ "aria-label": "A" }}
-                  />
-                  <TextField
-                    className="optionsFeid"
-                    id="outlined-helperText"
-                    defaultValue="Option 4"
-                  />
-                  <div>
-                    <h5>
-                      <DeleteIcon className="deleteIconSixthPage" />
-                      Delete
-                    </h5>
-                  </div>
+              <div className="addingDeleteOptions">
+                <Radio
+                  checked={selectedValue === "d"}
+                  onChange={handleChangeOption}
+                  value="d"
+                  name="radio-buttons"
+                  inputProps={{ "aria-label": "A" }}
+                />
+                <TextField
+                  className="optionsFeid"
+                  id="outlined-helperText"
+                  defaultValue="Option 4"
+                />
+                <div>
+                  <h5>
+                    <DeleteIcon className="deleteIconSixthPage" />
+                    Delete
+                  </h5>
                 </div>
-              </RadioGroup>
-            </FormControl>
+              </div>
+            </RadioGroup>
+          </FormControl>
 
-            <Button className="addNewOptionDotted">
-              <AddCircleOutlineIcon sx={{ marginRight: "12px" }} />
-              Add new option
-            </Button>
+          <Button className="addNewOptionDotted">
+            <AddCircleOutlineIcon sx={{ marginRight: "12px" }} />
+            Add new option
+          </Button>
 
-            <p>Solution</p>
-            <TextField
-              className="thisIsMCQBtn"
-              id="outlined-helperText"
-              defaultValue="Enter detailed solution for your students"
-            />
-          </DialogContent>
-        </BootstrapDialog>
+          <p>Solution</p>
+          <TextField
+            className="thisIsMCQBtn"
+            id="outlined-helperText"
+            defaultValue="Enter detailed solution for your students"
+          />
+        </DialogContent>
+      </BootstrapDialog>
     </div>
   );
 }
