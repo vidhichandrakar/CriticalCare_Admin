@@ -42,7 +42,7 @@ const MenuProps = {
   },
 };
 
-const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
+const EditPrice = ({ handleTrackerPage, handleInputChange, courseData, courseId }) => {
   const [selectDurationValue, setSelectedDurationValue] = useState("");
   const [expanded, setExpanded] = useState();
   const [durationType, setDurationType] = useState([{}]);
@@ -78,7 +78,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
     duration_id: "",
     duration_type_name: "",
     year: "",
-    course_duration_id: "",
+    // course_duration_id: "",
   });
   const [resetPrice, setResetPrice] = useState([
     {
@@ -152,8 +152,10 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
       storedValues.duration = courseData?.durations[0]?.duration_id;
       storedValues.price = courseData?.durations[0]?.price;
       storedValues.offer_price = courseData?.durations[0]?.offer_price;
+      if(courseId){
       storedValues.course_duration_id =
         courseData?.durations[0]?.course_duration_id;
+      }
       storedValues.duration_type_id =
         courseData?.durations[0]?.duration_type_id;
       storedValues.duration_type_name =
