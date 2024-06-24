@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {Box, Button, TextField } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import EditIcon from "@mui/icons-material/Edit";
@@ -72,9 +72,9 @@ const Trics1FreeMockTest = ({ onDelete }) => {
         getCourseById({
           courseId,
           callBack: (response) => {
-            const userCallBack = response?.data;
-            setCourseData(userCallBack[0]);
-            },
+            const userCallBack = response?.data[0];
+            setCourseData(userCallBack);
+          },
         });
       }
       getDuration({
@@ -94,7 +94,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
   const durationName = durationData?.filter(
     (duraData) =>
       duraData?.duration_id == courseData?.durations?.length &&
-      courseData?.durations[courseData?.durations?.length -1]?.duration_id
+      courseData?.durations[courseData?.durations?.length - 1]?.duration_id
   );
 
   const handleDeleteCourse = () => {
@@ -114,12 +114,12 @@ const Trics1FreeMockTest = ({ onDelete }) => {
     });
   };
 
-   const handleEdit = (id) => {
+  const handleEdit = (id) => {
     localStorage.setItem("addContent", false);
     navigate("/admin/CreateCourses", { state: { id: courseId } });
   };
 
-const handleContent = () => {
+  const handleContent = () => {
     localStorage.setItem("addContent", true);
     navigate("/admin/CreateCourses", { state: { id: courseId } });
   };
@@ -143,8 +143,12 @@ const handleContent = () => {
   };
   return (
     <div className="grid-container">
-      <Header Heading={<ArrowBackIosNewIcon />}  LinkAddress = {"/admin/YourCourses"}/>
+      <Header
+        Heading={<ArrowBackIosNewIcon />}
+        LinkAddress={"/admin/YourCourses"}
+      />
       <SideBar />
+      {console.log("courseDatacourseData", courseData)}
       <div className="main-container ">
         <div className="another-main-container">
           <div className="completeTricsBox">
@@ -155,39 +159,43 @@ const handleContent = () => {
               </p>
               <hr />
 
-              <p className="blackPara" >Description</p>
+              <p className="blackPara">Description</p>
               <TextField
-              sx={{mt: -2, color: "grey"}}
-        inputProps={{ className: "TrickstextField" }}
-        fullWidth
-        id="outlined-multiline-flexible"
-        multiline
-        maxRows={4}
-        // className="DescBoxShadow "
-        variant="standard"
-        value={courseData?.description}
-        />
+                sx={{ mt: -2 }}
+                inputProps={{ className: "textField" }}
+                fullWidth
+                id="outlined-multiline-flexible"
+                multiline
+                maxRows={4}
+                className="DescBoxShadow "
+                variant="standard"
+                value={courseData?.description}
+              />
               <div className="PricenOfferPrice">
                 <div>
                   <p className="blackPara">Price</p>
                   <p className="greyPara">
                     ₹
                     {courseData?.durations?.length &&
-                      courseData?.durations[courseData?.durations?.length -1]?.price}
+                      courseData?.durations[courseData?.durations?.length - 1]
+                        ?.price}
                   </p>
                 </div>
                 <div className="offerPrice">
                   <p className="blackPara">Offer Price</p>
                   <p className="greyPara">
                     {courseData?.durations?.length &&
-                      courseData?.durations[courseData?.durations?.length -1]?.offer_price}
+                      courseData?.durations[courseData?.durations?.length - 1]
+                        ?.offer_price}
                   </p>
                 </div>
               </div>
               <hr />
-              {isNotEmptyObject(courseData) || isNotEmptyArray(courseData) ? (
-                courseData?.durations[courseData?.durations?.length -1]?.duration_type_id === 3 ||
-                courseData?.durations[courseData?.durations?.length -1]?.duration_type_id === 4 ? null : (
+              {isNotEmptyArray(courseData) ? (
+                courseData?.durations[courseData?.durations?.length - 1]
+                  ?.duration_type_id === 3 ||
+                courseData?.durations[courseData?.durations?.length - 1]
+                  ?.duration_type_id === 4 ? null : (
                   <>
                     <div className="CatagorynSubCatagory">
                       <div>
@@ -202,38 +210,44 @@ const handleContent = () => {
                     <hr />
 
                     <p className="blackPara">Course Duration</p>
-                    <p> {courseData?.durations[0]?.duration_type_id === 2 ? (
-                     
-                     <Box className="multiplevalidityBox">
-                       Multiple Validity Available  
-                     </Box>
-                     
-                 ) : courseData?.durations[0]?.duration_type_id === 1 ? (
-                 
-                     <Box className="multiplevalidityBox">
-                       Single Validity
-                     </Box>
-                 ) : courseData?.durations[0]?.duration_type_id === 3 ? (
-                   <Box className="multiplevalidityBox">
-                     LifeTime Validity
-                   </Box>
-                 ) : courseData?.durations[0]?.duration_type_id === 4 ? (
-                   <Box className="multiplevalidityBox">
-                     Course Expire
-                   </Box>
-                 ) : null}</p>
-                   <Box className="YearBox ">
-                    {courseData?.durations?.map((item) => {
-                         return <Box className="durationBOx"> 
-                         <Box className="greyPara">
-                         <p>{item.duration}
-                         </p>
-                         <p style={{marginLeft: "5px"}}>{item.duration_name}</p>
+                    <p>
+                      {" "}
+                      {courseData?.durations[0]?.duration_type_id === 2 ? (
+                        <Box className="multiplevalidityBox">
+                          Multiple Validity Available
+                        </Box>
+                      ) : courseData?.durations[0]?.duration_type_id === 1 ? (
+                        <Box className="multiplevalidityBox">
+                          Single Validity
+                        </Box>
+                      ) : courseData?.durations[0]?.duration_type_id === 3 ? (
+                        <Box className="multiplevalidityBox">
+                          LifeTime Validity
+                        </Box>
+                      ) : courseData?.durations[0]?.duration_type_id === 4 ? (
+                        <Box className="multiplevalidityBox">Course Expire</Box>
+                      ) : null}
+                    </p>
+                    <Box className="YearBox ">
+                      {courseData?.durations?.map((item) => {
+                        return (
+                          <Box className="durationBOx">
+                            <Box className="greyPara">
+                              <p>{item.duration}</p>
+                              <p style={{ marginLeft: "5px" }}>
+                                {item.duration_name}
+                              </p>
+                            </Box>
+                            <Box>
+                              <p
+                                className="greyPara"
+                                style={{ marginTop: "-8px" }}
+                              >
+                                {item.offer_price}
+                              </p>
+                            </Box>
                           </Box>
-                          <Box>
-                           <p className="greyPara" style={{marginTop: "-8px"}}>{item.offer_price}</p> 
-                          </Box>
-                         </Box>
+                        );
                       })}
                     </Box>
 
@@ -241,7 +255,6 @@ const handleContent = () => {
                   </>
                 )
               ) : null}
-            
 
               <div className="StuEnrViewAll">
                 <div>
@@ -269,12 +282,14 @@ const handleContent = () => {
           </div>
 
           <div className="whiteBoxOfContent">
-            <div className="contentOneContent"  onClick={handleContent}>
+            <div className="contentOneContent" onClick={handleContent}>
               <FolderIcon className="folderIcon" />
 
               <div className="ContentCol">
                 <p className="blackPara">Content</p>
-                <p className="greyPara mt-10px">{courseData?.contents?.length} content(s)</p>
+                <p className="greyPara mt-10px">
+                  {courseData?.contents?.length} content(s)
+                </p>
               </div>
             </div>
 
@@ -287,13 +302,14 @@ const handleContent = () => {
               More Options
               <MoreHorizIcon className="threeDotsIcon" />
             </Button>
-            <Button variant="contained"
-            className="Publishbutton"
-                  onClick={() => handlePublish()}
-                  ><PublishedWithChangesIcon className="PoPIcon" />
-                  {courseData?.is_publish == "published"
-                    ? "UnPublish"
-                    : "Publish"}</Button>
+            <Button
+              variant="contained"
+              className="Publishbutton"
+              onClick={() => handlePublish()}
+            >
+              <PublishedWithChangesIcon className="PoPIcon" />
+              {courseData?.is_publish == "published" ? "UnPublish" : "Publish"}
+            </Button>
             <div className="Widthhh">
               <Popover
                 id={id}
@@ -324,7 +340,7 @@ const handleContent = () => {
                   <DeleteIcon className="PoPIcon" />
                   Delete
                 </MenuItem>
- </Popover>
+              </Popover>
 
               <DailogBox
                 isOpen={isOpen}

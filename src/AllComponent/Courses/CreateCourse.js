@@ -56,16 +56,15 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       getCourseById({
         courseId,
         callBack: (response) => {
-          const userCallBack = response?.data;
+          const userCallBack = response?.data[0];
           setCourseData(userCallBack);
           setLoaderState(false);
           if (userCallBack?.contents?.length) {
             setAttachment(userCallBack?.contents);
           }
-          if (localStorage.getItem("addContent")==="true") {
+          if (localStorage.getItem("addContent") === "true") {
             setTackerPage(3);
-          }
-          else{
+          } else {
             setTackerPage(0);
           }
         },
@@ -83,7 +82,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       setAttachment(value);
     }
   };
-  
+
   const handleTrackerPage = (page, value) => {
     if (page === 2) {
       setMulitiDuration(value);
