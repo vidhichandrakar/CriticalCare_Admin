@@ -381,8 +381,6 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData }) => {
         storedValues.course_duration_id =
           courseData?.durations[0]?.course_duration_id;
       }
-
-      console.log("lifetimeValidation", storedValues, courseData);
       setLifetimeValidation(storedValues);
     } else {
       let storedValues = Object.assign({}, expiryDate);

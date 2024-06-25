@@ -242,7 +242,6 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           <CheckCircleRoundedIcon className="RightTick" />
         )}
       </div>
-      {console.log("course_name",courseData)}
       {commonTextField(
         {
           id: "fullWidth",

@@ -22,7 +22,6 @@ const YourCoursesCard = ({ allCourses, userData }) => {
   const navigate = useNavigate();
 
   const handleDiscountPercent = (price, offer_price) => {
-    // console.log(price, offer_price, (price - offer_price) / price);
     return Math.floor(((price - offer_price) / price) * 100) + " %";
   };
   useEffect(() => {
@@ -32,7 +31,6 @@ const YourCoursesCard = ({ allCourses, userData }) => {
         setDuration(userCallBack);
       },
       error: (error) => {
-        // toast.error(error.message);
       },
     });
   }, []);

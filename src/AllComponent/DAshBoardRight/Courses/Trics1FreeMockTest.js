@@ -148,7 +148,6 @@ const Trics1FreeMockTest = ({ onDelete }) => {
         LinkAddress={"/admin/YourCourses"}
       />
       <SideBar />
-      {console.log("courseDatacourseData", courseData)}
       <div className="main-container ">
         <div className="another-main-container">
           <div className="completeTricsBox">

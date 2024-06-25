@@ -57,7 +57,9 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
     const match = url.match(regExp);
     return match && match[2].length === 11 ? match[2] : null;
   };
-  const handleUploadLink = (url) => {
+  const handleUploadLink = (url, item) => {
+    console.log("item",item)
+    if(item.content_type==="Video"){
     const videoId = url ? extractVideoId(url) : null;
     const embedUrl = `https://www.youtube.com/embed/${videoId}`;
 
@@ -66,6 +68,8 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
     }
     // setData(embedUrl);
     return embedUrl;
+  }
+  else return url;
   };
 
   const handleCreateCourse = () => {
@@ -78,7 +82,7 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
 
   const handleAddUrl = (type, value) => {
     if (type === "uploadUrl") {
-      console.log("value", value);
+      // console.log("value", value);
       setVideoDesc(value);
     }
   };
@@ -172,11 +176,12 @@ const AddContent = ({ handleInputChange, handleTrackerPage, courseData }) => {
                     <iframe
                       width="350"
                       height="120"
-                      src={handleUploadLink(item.content_url)}
+                      src={handleUploadLink(item.content_url, item)}
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
                       title="Embedded YouTube Video"
+                      style={{ border: 'none', overflow: 'hidden' }} 
                     ></iframe>
                     <h4>Name </h4> :{" "}
                     <Typography> {item.content_name}</Typography>
