@@ -36,14 +36,28 @@ function CreateQNS({
   testData,
   handleClickOpen,
   noOfQuestion,
+  numberOfMcqQns,
+  setNumberOfMcqQns,
 }) {
   const [selectedValue, setSelectedValue] = useState("a");
 
   const handleClickOpenCQ = () => {
     setCqopen(true);
   };
-  const handleChangeOption = (event) => {
-    setSelectedValue(event.target.value);
+  const handleChangeOption = (event, option_id, question_id) => {
+    let arr = [...numberOfMcqQns];
+    arr.map((item) => {
+      if (item.question_id === question_id) {
+        item.question_options.map((option) => {
+          if (option.option_id === option_id) {
+            option.is_correct = event.target.checked;
+          } else {
+            option.is_correct = false;
+          }
+        });
+      }
+    });
+    setNumberOfMcqQns(arr);
   };
 
   const count = testData?.testInfoDetails?.length
@@ -71,60 +85,37 @@ function CreateQNS({
       </div>
       {opencreaterqns ? (
         <Box>
-          {divArray.map((index) => (
+          {numberOfMcqQns?.map((item, index) => (
             <div className="QnsBoxs">
               <div className="MCQBox" key={index}>
                 <Typography sx={{ color: "rgba(0, 0, 0, 0.685)" }}>
-                  1. This is an MCQ question
+                  {index + 1}. {item.question_text}
                 </Typography>
                 <RadioGroup
                   aria-labelledby="demo-radio-buttons-group-label"
                   defaultValue="female"
                   name="radio-buttons-group"
                 >
-                  <div className="addingDeleteOptions mt1">
-                    <Radio
-                      checked={selectedValue === "a"}
-                      onChange={handleChangeOption}
-                      value="a"
-                      name="radio-buttons"
-                      inputProps={{ "aria-label": "A" }}
-                    />
-                    <Typography>Option 1</Typography>
-                  </div>
-
-                  <div className="addingDeleteOptions">
-                    <Radio
-                      checked={selectedValue === "b"}
-                      onChange={handleChangeOption}
-                      value="b"
-                      name="radio-buttons"
-                      inputProps={{ "aria-label": "A" }}
-                    />
-                    <Typography>Option 2</Typography>
-                  </div>
-
-                  <div className="addingDeleteOptions">
-                    <Radio
-                      checked={selectedValue === "c"}
-                      onChange={handleChangeOption}
-                      value="c"
-                      name="radio-buttons"
-                      inputProps={{ "aria-label": "A" }}
-                    />
-                    <Typography>Option 3</Typography>
-                  </div>
-
-                  <div className="addingDeleteOptions">
-                    <Radio
-                      checked={selectedValue === "d"}
-                      onChange={handleChangeOption}
-                      value="d"
-                      name="radio-buttons"
-                      inputProps={{ "aria-label": "A" }}
-                    />
-                    <Typography>Option 4</Typography>
-                  </div>
+                  {item.question_options.map((option) => {
+                    return (
+                      <div className="addingDeleteOptions mt1">
+                        <Radio
+                          checked={option.is_correct}
+                          onChange={(e) =>
+                            handleChangeOption(
+                              e,
+                              option.option_id,
+                              item.question_id
+                            )
+                          }
+                          value={option.option_id}
+                          name="radio-buttons"
+                          inputProps={{ "aria-label": "A" }}
+                        />
+                        <Typography>{option.option_text}</Typography>
+                      </div>
+                    );
+                  })}
                 </RadioGroup>
                 <Typography
                   className="noBox"
@@ -135,9 +126,10 @@ function CreateQNS({
                 <div className="AllBtnBox">
                   <Box
                     className="mr123 curseorpointer"
-                    onClick={handleClickOpen}
+                    onClick={(e)=>handleClickOpen(e,item)}
                   >
-                    {" "}
+                    
+                    {console.log("jdksdms", item.question_id,index)}
                     <EditIcon />
                     <Typography>Edit</Typography>
                   </Box>
@@ -147,7 +139,7 @@ function CreateQNS({
                   </Box>
                   <Box className="curseorpointer">
                     <TextIncreaseRoundedIcon />{" "}
-                    <Typography>Edit MArks</Typography>
+                    <Typography>Edit Marks</Typography>
                   </Box>
                   <Box className="curseorpointer">
                     <DeleteOutlineRoundedIcon />
