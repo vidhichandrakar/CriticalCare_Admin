@@ -22,7 +22,6 @@ const YourCoursesCard = ({ allCourses, userData }) => {
   const navigate = useNavigate();
 
   const handleDiscountPercent = (price, offer_price) => {
-    // console.log(price, offer_price, (price - offer_price) / price);
     return Math.floor(((price - offer_price) / price) * 100) + " %";
   };
   useEffect(() => {
@@ -32,7 +31,6 @@ const YourCoursesCard = ({ allCourses, userData }) => {
         setDuration(userCallBack);
       },
       error: (error) => {
-        // toast.error(error.message);
       },
     });
   }, []);
@@ -102,8 +100,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                         Multiple Validity Available
                       </Box>
                     ) : null} */}
-
-                    {item?.durations[0]?.duration_type_id === 2 ? (
+                    {item?.durations[item?.durations?.length - 1]?.duration_type_id === 2 ? (
                       <Box>
                         <Box className="multiplevalidityAvailBox">
                           Multiple Validity Available
@@ -115,11 +112,12 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                               item?.durations[item?.durations?.length - 1]
                                 ?.duration_id
                             }{" "}
-                            {durationName[0]?.duration_name}
+                            {item?.durations[item?.durations?.length - 1]
+                                ?.duration_name}
                           </Typography>
                         </div>
                       </Box>
-                    ) : item?.durations[0]?.duration_type_id === 1 ? (
+                    ) : item?.durations[item?.durations?.length - 1]?.duration_type_id === 1 ? (
                       <Box>
                         <Box className="multiplevalidityAvailBox">
                           Single Validity
@@ -131,15 +129,16 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                               item?.durations[item?.durations?.length - 1]
                                 ?.duration_id
                             }{" "}
-                            {durationName[0]?.duration_name}
+                            {item?.durations[item?.durations?.length - 1]
+                                ?.duration_name}
                           </Typography>
                         </div>
                       </Box>
-                    ) : item?.durations[0]?.duration_type_id === 3 ? (
+                    ) : item?.durations[item?.durations?.length - 1]?.duration_type_id === 3 ? (
                       <Box className="multiplevalidityAvailBox">
                         LifeTime Validity
                       </Box>
-                    ) : item?.durations[0]?.duration_type_id === 4 ? (
+                    ) : item?.durations[item?.durations?.length - 1]?.duration_type_id === 4 ? (
                       <Box className="multiplevalidityAvailBox">
                         Course Expire
                       </Box>

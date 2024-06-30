@@ -12,6 +12,8 @@ function TestFirstPage({
   opencreaterqns,
   handleClickOpen,
   noOfQuestion,
+  numberOfMcqQns,
+  setNumberOfMcqQns,
 }) {
   return (
     <div className="testRightSection">
@@ -22,6 +24,8 @@ function TestFirstPage({
           opencreaterqns={opencreaterqns}
           testData={testData}
           handleClickOpen={handleClickOpen}
+          numberOfMcqQns={numberOfMcqQns}
+          setNumberOfMcqQns={setNumberOfMcqQns}
         />
       ) : (
         <AddASection handleClickOpen={handleClickOpen} />

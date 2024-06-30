@@ -171,6 +171,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           handleTrackerPage={handleTrackerPage}
           handleInputChange={handleInputChange}
           courseData={courseData}
+          courseId={courseId}
         />
       ) : trackerPage === 3 ? (
         <AddContent

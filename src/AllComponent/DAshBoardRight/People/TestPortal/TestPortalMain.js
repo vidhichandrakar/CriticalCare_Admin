@@ -37,6 +37,7 @@ import Stack from "@mui/material/Stack";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
+import LoaderComponent from "../../../../Util/LoaderComponent";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -107,18 +108,34 @@ function TestPortalMain() {
   const [marksPerQues, setMarksPerQues] = useState("");
   const [noOfQuestion, setNoOfQuestion] = useState("");
   const [testInfoId, setTestInfoId] = useState();
-
+  const [numberOfMcqQns, setNumberOfMcqQns] = useState();
+  const [loaderState, setLoaderState] = useState(false);
   const [selectedValue, setSelectedValue] = useState("a");
   const [open, setOpen] = useState(false);
+  const [editedQuestion, setEditedQuestion] = useState({});
+  const [addOption, setaddOption] = useState(false);
+  const [openAddOptions, setAddOptions] = useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (e, item) => {
+    // console.log("e, item", e, item);
+    setEditedQuestion(item);
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
-  const handleChangeOption = (event) => {
-    setSelectedValue(event.target.value);
+  const handleChangeOption = (e, option_id, question_id) => {
+    let selectedOption = Object.assign({}, editedQuestion);
+    if (selectedOption?.question_id === question_id) {
+      selectedOption?.question_options.map((option) => {
+        if (option?.option_id === option_id) {
+          option.is_correct = e.target.checked;
+        } else {
+          option.is_correct = false;
+        }
+      });
+    }
+    setEditedQuestion(selectedOption);
   };
 
   const handleTestType = (value) => {
@@ -150,7 +167,6 @@ function TestPortalMain() {
         payload,
         callBack: (res) => {
           getTestByIdData();
-          // console.log("iuhgfghij",res.data.test_info_id);
           setTestInfoId(res.data.test_info_id);
         },
       });
@@ -167,16 +183,12 @@ function TestPortalMain() {
       no_of_question: noOfQuestion,
       marks_per_question: marksPerQues,
     };
-    {
-      console.log("testInfoIdtestInfoId", testInfoId);
-    }
+
     if (noOfQuestion && marksPerQues) {
       createTestInfo({
         id: testInfoId,
         payload,
         callBack: (res) => {
-          // console.log(res);
-          getTestByIdData();
           const count = noOfQuestion;
 
           const divArray = Array.from({ length: count });
@@ -195,13 +207,15 @@ function TestPortalMain() {
             });
           });
           const loadPay = {
-            test_id: test_id,
+            test_info_id: testInfoId,
             questions: arr,
           };
+          setLoaderState(true);
           createNumberOfQuestions({
             payload: loadPay,
             callBack: (res) => {
-              // console.log("number questions",res);
+              setLoaderState(false);
+              getTestByIdData();
             },
           });
         },
@@ -213,7 +227,9 @@ function TestPortalMain() {
       test_id: test_id,
       callBack: (response) => {
         setTestData(response?.data[0]);
-        console.log("testData line no 153", testData);
+        const numOfQns = response?.data[0]?.testInfoDetails;
+        const numbOfQns = numOfQns[numOfQns.length - 1];
+        setNumberOfMcqQns(numbOfQns.test_questions);
       },
     });
   };
@@ -221,7 +237,6 @@ function TestPortalMain() {
     getTestByIdData();
     getTestType({
       callBack: (response) => {
-        console.log("data", response);
         setTestType(response?.data);
       },
     });
@@ -237,10 +252,49 @@ function TestPortalMain() {
       setMarksPerQues(value);
     }
   };
+
+  const handleEditQestion = (e) => {
+    console.log(e.target.value);
+    let editedTextQuestion = Object.assign({}, editedQuestion);
+    editedTextQuestion.question_text = e.target.value;
+    setEditedQuestion(editedTextQuestion);
+  };
+
+  const handleRadioOptionChanges = (e, option_id) => {
+    let editedOptionText = Object.assign({}, editedQuestion);
+    editedOptionText?.question_options.map((option) => {
+      if (option.option_id === option_id) {
+        option.option_text = e.target.value;
+      }
+    });
+    setEditedQuestion(editedOptionText);
+  };
+
+  const handleDeleteOption = (e, option) => {
+    let deletedOption = Object.assign({}, editedQuestion);
+    const upatedOptions = editedQuestion.question_options.filter(
+      (item) => item.option_id !== option
+    );
+    deletedOption.question_options = upatedOptions;
+    setEditedQuestion(deletedOption);
+  };
+
+  const handleAddOptionPop = (e) => {
+    setAddOptions(true);
+  };
+
+  const handleCloseDialogForAdd = () => {
+    setAddOptions(false);
+  };
+
+  const handleAddOption=(e)=>{
+    console.log("handleAddOption===>", e);
+  }
+
   return (
     <div className="grid-container-TestPortal ">
       <TestProtalHeader testData={testData} />
-      {console.log("test type", selectedTestType)}
+      <LoaderComponent loaderState={loaderState} />
       <TestNavAndLeft
         setMcqopen={setMcqopen}
         testType={testType}
@@ -253,8 +307,10 @@ function TestPortalMain() {
         opencreaterqns={opencreaterqns}
         handleClickOpen={handleClickOpen}
         noOfQuestion={noOfQuestion}
+        numberOfMcqQns={numberOfMcqQns}
+        setNumberOfMcqQns={setNumberOfMcqQns}
       />
-
+      {console.log("sdjhhjskasx", editedQuestion)}
       <BootstrapDialog
         className="PopUP"
         onClose={handleCloseDialogMCQ}
@@ -501,6 +557,8 @@ function TestPortalMain() {
             className="thisIsMCQBtn"
             id="outlined-helperText"
             defaultValue="This is an MCQ question"
+            value={editedQuestion.question_text}
+            onChange={(e) => handleEditQestion(e)}
           />
 
           <FormControl>
@@ -527,102 +585,107 @@ function TestPortalMain() {
                 </option>
               </select>
             </div>
+
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
               defaultValue="female"
               name="radio-buttons-group"
             >
-              <div className="addingDeleteOptions">
-                <Radio
-                  checked={selectedValue === "a"}
-                  onChange={handleChangeOption}
-                  value="a"
-                  name="radio-buttons"
-                  inputProps={{ "aria-label": "A" }}
-                />
-                <TextField
-                  className="optionsFeid"
-                  id="outlined-helperText"
-                  defaultValue="Option 1"
-                />
+              {editedQuestion?.question_options?.map((item) => {
+                return (
+                  <div className="addingDeleteOptions">
+                    <Radio
+                      checked={item.is_correct}
+                      onChange={(e) =>
+                        handleChangeOption(e, item.option_id, item.question_id)
+                      }
+                      value="a"
+                      name="radio-buttons"
+                      inputProps={{ "aria-label": "A" }}
+                    />
+                    <TextField
+                      className="optionsFeid"
+                      id="outlined-helperText"
+                      defaultValue="Option 1"
+                      value={item.option_text}
+                      onChange={(e) =>
+                        handleRadioOptionChanges(e, item.option_id)
+                      }
+                    />
 
-                <div className="deleteComponent">
-                  <h5>
-                    <DeleteIcon className="deleteIconSixthPage" />
-                    Delete
-                  </h5>
-                </div>
-              </div>
-
-              <div className="addingDeleteOptions">
-                <Radio
-                  checked={selectedValue === "b"}
-                  onChange={handleChangeOption}
-                  value="b"
-                  name="radio-buttons"
-                  inputProps={{ "aria-label": "A" }}
-                />
-                <TextField
-                  className="optionsFeid"
-                  id="outlined-helperText"
-                  defaultValue="Option 2"
-                />
-                <div>
-                  <h5>
-                    <DeleteIcon className="deleteIconSixthPage" />
-                    Delete
-                  </h5>
-                </div>
-              </div>
-
-              <div className="addingDeleteOptions">
-                <Radio
-                  checked={selectedValue === "c"}
-                  onChange={handleChangeOption}
-                  value="c"
-                  name="radio-buttons"
-                  inputProps={{ "aria-label": "A" }}
-                />
-                <TextField
-                  className="optionsFeid"
-                  id="outlined-helperText"
-                  defaultValue="Option 3"
-                />
-                <div>
-                  <h5>
-                    <DeleteIcon className="deleteIconSixthPage" />
-                    Delete
-                  </h5>
-                </div>
-              </div>
-
-              <div className="addingDeleteOptions">
-                <Radio
-                  checked={selectedValue === "d"}
-                  onChange={handleChangeOption}
-                  value="d"
-                  name="radio-buttons"
-                  inputProps={{ "aria-label": "A" }}
-                />
-                <TextField
-                  className="optionsFeid"
-                  id="outlined-helperText"
-                  defaultValue="Option 4"
-                />
-                <div>
-                  <h5>
-                    <DeleteIcon className="deleteIconSixthPage" />
-                    Delete
-                  </h5>
-                </div>
-              </div>
+                    <div className="deleteComponent">
+                      <h5
+                        onClick={(e) => handleDeleteOption(e, item.option_id)}
+                        style={{ cursor: "pointer" }}
+                      >
+                        <DeleteIcon className="deleteIconSixthPage" />
+                        Delete
+                      </h5>
+                    </div>
+                  </div>
+                );
+              })}
             </RadioGroup>
           </FormControl>
 
-          <Button className="addNewOptionDotted">
+          <Button
+            onClick={(e) => handleAddOptionPop(e)}
+            className="addNewOptionDotted"
+          >
             <AddCircleOutlineIcon sx={{ marginRight: "12px" }} />
-            Add new option
+            Add New option
           </Button>
+          <div>
+            {" "}
+            <BootstrapDialog
+              className="optionsFeid"
+              onClose={handleCloseDialogForAdd}
+              aria-labelledby="customized-dialog-title"
+              open={openAddOptions}
+            >
+              <DialogTitle
+                sx={{ m: 0, p: 2, fontSize: "1rem" }}
+                id="customized-dialog-title"
+              >
+                Add Option
+              </DialogTitle>
+              <IconButton
+                aria-label="close"
+                onClick={handleCloseDialogForAdd}
+                sx={{
+                  position: "absolute",
+                  right: 8,
+                  top: 8,
+                  color: (theme) => theme.palette.grey[500],
+                }}
+              >
+                <CloseIcon />
+              </IconButton>
+
+              <DialogContent dividers>
+                <TextField
+                  inputProps={{ className: "textField" }}
+                  fullWidth
+                  size="small"
+                  // placeholder="e.g. General Knowledge"
+                  id="fullWidth"
+                  className="optionsFeid"
+                  type="TestName"
+                  // value={addTest?.testName}
+                  onChange={(e) => handleAddOption(e.target.value)}
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  variant="contained"
+                  className="CreateBtn"
+                  // onClick={(e)=>handleAddOption(e)}
+                >
+                  Add
+                </Button>
+              </DialogActions>
+            </BootstrapDialog>
+          </div>
 
           <p>Solution</p>
           <TextField

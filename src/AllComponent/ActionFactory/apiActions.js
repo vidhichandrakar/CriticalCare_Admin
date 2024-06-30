@@ -301,7 +301,6 @@ export const createTestInfo = ({ payload, id, callBack }) => {
       callBack(response);
     });
   }
-  console.log("idddd", id);
 };
 export const getTestType = ({ callBack }) => {
   const url = APIS.testType;

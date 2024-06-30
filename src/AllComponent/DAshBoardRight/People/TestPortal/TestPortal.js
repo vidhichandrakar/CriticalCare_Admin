@@ -294,7 +294,7 @@ const TestPortal = () => {
   const handleCreateTeam = () => {
     const payload = {
       test_name: addTest.testName,
-      created_by: 2,
+      created_by: 12,
       duration_hour: parseInt(addTest.testDuration),
       duration_minute: parseInt(addTest.hours),
     };
