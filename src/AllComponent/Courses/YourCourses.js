@@ -10,7 +10,7 @@ import YourCoursesCard from "./YourCoursesCard";
 import { YourCoursesCardData } from "../../Data/JsonData";
 import SideBar from "../AdminDashboardMain/SideBar";
 import { Link } from "react-router-dom";
-import { getAllCourses, getAllUsersApi, getCategory, getCourseDuration } from "../ActionFactory/apiActions";
+import { getAllCourses, getAllUsersApi, getCategory, getCourseDuration, getAllCoursesFilter } from "../ActionFactory/apiActions";
 import LoaderComponent from "../../Util/LoaderComponent";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -86,12 +86,39 @@ const YourCourses = () => {
     
   }, []);
 
+  const handleFilterChange = () => {
+    getAllCoursesFilter({
+      duration_type_id: durationname?.duration_type_id,
+      category_id: selectedCategory?.category_id,
+      is_publish: filterValue ,
+      callBack: (response) =>{
+        console.log(response, "line95")
+        const userCallBack = response?.data;
+        setAllCourses(userCallBack);
+        setCourseData(userCallBack);
+      },
+      error: () =>{
 
+      }
+    })
+  }
   const handleChange = (e) => {
     setSelectedCategory(e.target.value);
+    setTimeout(() => {
+      handleFilterChange()
+    }, 3000);
+    
   };
+
   const handleDurationChange = (e) => {
-    setDurationname(e.target.value);
+    
+    setDurationname(e.target.value.duration_type_id);
+    setTimeout(() => {
+      handleFilterChange()
+    }, 3000);
+    
+    console.log(e, "line120 handleduratipon")
+   
   };
 
   const handleInput = (value, type, event) => {
@@ -224,6 +251,7 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
           <Typography>Course Type</Typography>
           <FormControl sx={{ width: 540 }}>
                   <Select
+
                     value={durationType.duration_name}
                     onChange={(e) => handleDurationChange(e)}
                     className="addCatTextField"
@@ -346,7 +374,7 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
     //   );
     //   setAllCourses(filterCourseData);
     // }
-  }, [filterValue]);
+  }, [filterValue]); 
 
   const handleFilterCourse = (type) => {
     setFilterValue(type);
