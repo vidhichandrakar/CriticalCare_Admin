@@ -129,7 +129,7 @@ function CreateQNS({
                     onClick={(e)=>handleClickOpen(e,item)}
                   >
                     
-                    {console.log("jdksdms", item.question_id,index)}
+                    {/* {console.log("jdksdms", item.question_id,index)} */}
                     <EditIcon />
                     <Typography>Edit</Typography>
                   </Box>
