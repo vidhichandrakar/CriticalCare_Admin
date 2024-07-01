@@ -317,4 +317,10 @@ export const createNumberOfQuestions=({payload, callBack})=>{
     callBack(response);
   })
 }
- 
+
+export const editQuestions=({payload, callBack, questionId})=>{
+  const url = APIS.editQuestions + "/" + questionId;
+  axios.put(url,payload).then((response)=>{
+    callBack(response);
+  })
+}
