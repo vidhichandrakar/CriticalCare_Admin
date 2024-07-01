@@ -59,6 +59,7 @@
     flex-direction: row;
     justify-content: space-between;
     margin-top: 3%;
+    margin-left: 12px;
 }
 .CheckBOx{
     display: flex;

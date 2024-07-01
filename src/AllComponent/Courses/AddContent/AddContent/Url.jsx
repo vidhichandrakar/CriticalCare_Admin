@@ -129,7 +129,7 @@ const Url = ({
         </Box>
       </Box>
 
-      <Divider sx={{ mt: "370px" }} />
+      <Divider sx={{ mt: "323px" }} />
       <Box className="UploadBtnBox">
         <Button className="folderDrawerSaveBtn" onClick={handleUpload}>
           Upload
