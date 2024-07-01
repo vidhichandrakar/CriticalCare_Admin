@@ -26,7 +26,7 @@ export const getAllCourses = ({callBack, error }) => {
       error(errorMessage);
     });
 };
-export const getAllCoursesFilter = ({is_publish,duration_type_id,category_id, callBack, error }) => {
+export const getAllCoursesFilter = ({is_publish, duration_type_id, category_id, callBack, error }) => {
   let url = new URL(`${APIS.allCoursesFilter}`);
   console.log(is_publish, duration_type_id ,category_id, "lineno31 ApiAction")
   if(is_publish){
