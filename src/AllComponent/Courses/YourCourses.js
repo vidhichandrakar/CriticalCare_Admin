@@ -86,10 +86,12 @@ const YourCourses = () => {
     
   }, []);
 
-  const handleFilterChange = () => {
+  const handleFilterChange = ({duration_type_id = "", category_id = "" , is_publish = ""}) => {
+    console.log(filterValue, durationname ,selectedCategory, "line90 publishdurationcategory")
     getAllCoursesFilter({
-      duration_type_id: durationname?.duration_type_id,
-      category_id: selectedCategory?.category_id,
+
+      duration_type_id: duration_type_id,
+      category_id: category_id,
       is_publish: filterValue ,
       callBack: (response) =>{
         console.log(response, "line95")
@@ -104,20 +106,18 @@ const YourCourses = () => {
   }
   const handleChange = (e) => {
     setSelectedCategory(e.target.value);
-    setTimeout(() => {
-      handleFilterChange()
-    }, 3000);
+    handleFilterChange({category_id: e.target.value})
     
   };
 
   const handleDurationChange = (e) => {
     
     setDurationname(e.target.value.duration_type_id);
-    setTimeout(() => {
-      handleFilterChange()
-    }, 3000);
+    handleFilterChange({duration_type_id : e.target.value.duration_type_id})
     
     console.log(e, "line120 handleduratipon")
+    console.log(e.target.value.duration_type_id, "line121 handleduratipon")
+    console.log(durationname, "line124 handleduratipon")
    
   };
 
@@ -358,23 +358,23 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
     }
   }, []);
 
-  useEffect(() => {
-    if (filterValue == "All Courses") {
-      setAllCourses(courseData);
-    } 
-    else {
-      const filterCourseData = courseData?.filter(
-        (item) => item?.is_publish == filterValue
-      );
-      setAllCourses(filterCourseData);
-    }
-    //  else {
-    //   const filterCourseType = courseData?.filter(
-    //     (item) => item?.is_publish == filterValue
-    //   );
-    //   setAllCourses(filterCourseData);
-    // }
-  }, [filterValue]); 
+  // useEffect(() => {
+  //   if (filterValue == "All Courses") {
+  //     setAllCourses(courseData);
+  //   } 
+  //   else {
+  //     const filterCourseData = courseData?.filter(
+  //       (item) => item?.is_publish == filterValue
+  //     );
+  //     setAllCourses(filterCourseData);
+  //   }
+  //   //  else {
+  //   //   const filterCourseType = courseData?.filter(
+  //   //     (item) => item?.is_publish == filterValue
+  //   //   );
+  //   //   setAllCourses(filterCourseData);
+  //   // }
+  // }, [filterValue]); 
 
   const handleFilterCourse = (type) => {
     setFilterValue(type);

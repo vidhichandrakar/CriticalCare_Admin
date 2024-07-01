@@ -28,6 +28,7 @@ export const getAllCourses = ({callBack, error }) => {
 };
 export const getAllCoursesFilter = ({is_publish,duration_type_id,category_id, callBack, error }) => {
   let url = new URL(`${APIS.allCoursesFilter}`);
+  console.log(is_publish, duration_type_id ,category_id, "lineno31 ApiAction")
   if(is_publish){
     url.searchParams.set("is_publish", is_publish);
   }
@@ -301,6 +302,7 @@ export const createTestInfo = ({ payload, id, callBack }) => {
       callBack(response);
     });
   }
+  console.log("idddd", id);
 };
 export const getTestType = ({ callBack }) => {
   const url = APIS.testType;
@@ -315,3 +317,4 @@ export const createNumberOfQuestions=({payload, callBack})=>{
     callBack(response);
   })
 }
+ 
