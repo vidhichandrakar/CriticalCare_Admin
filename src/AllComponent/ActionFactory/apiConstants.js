@@ -19,4 +19,5 @@ export const APIS = {
   testInfo: REACT_APP_API + "/test/testinfo",
   testType: REACT_APP_API + "/test/testtype",
   testQuestions: REACT_APP_API + "/test/testquestions",
+  editQuestions: REACT_APP_API + "/test/testquestions",
 };
