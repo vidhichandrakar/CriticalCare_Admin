@@ -113,10 +113,11 @@ function TestPortalMain() {
   const [selectedValue, setSelectedValue] = useState("a");
   const [open, setOpen] = useState(false);
   const [editedQuestion, setEditedQuestion] = useState({});
-  const [editedOption, setEditedOption] = useState({});
+  const [addOption, setaddOption] = useState(false);
+  const [openAddOptions, setAddOptions] = useState(false);
 
   const handleClickOpen = (e, item) => {
-    console.log("e, item", e, item);
+    // console.log("e, item", e, item);
     setEditedQuestion(item);
     setOpen(true);
   };
@@ -268,6 +269,28 @@ function TestPortalMain() {
     });
     setEditedQuestion(editedOptionText);
   };
+
+  const handleDeleteOption = (e, option) => {
+    let deletedOption = Object.assign({}, editedQuestion);
+    const upatedOptions = editedQuestion.question_options.filter(
+      (item) => item.option_id !== option
+    );
+    deletedOption.question_options = upatedOptions;
+    setEditedQuestion(deletedOption);
+  };
+
+  const handleAddOptionPop = (e) => {
+    setAddOptions(true);
+  };
+
+  const handleCloseDialogForAdd = () => {
+    setAddOptions(false);
+  };
+
+  const handleAddOption=(e)=>{
+    console.log("handleAddOption===>", e);
+  }
+
   return (
     <div className="grid-container-TestPortal ">
       <TestProtalHeader testData={testData} />
@@ -533,7 +556,7 @@ function TestPortalMain() {
           <TextField
             className="thisIsMCQBtn"
             id="outlined-helperText"
-            defaultValue="This is an MCQ question okokokokook"
+            defaultValue="This is an MCQ question"
             value={editedQuestion.question_text}
             onChange={(e) => handleEditQestion(e)}
           />
@@ -591,7 +614,10 @@ function TestPortalMain() {
                     />
 
                     <div className="deleteComponent">
-                      <h5>
+                      <h5
+                        onClick={(e) => handleDeleteOption(e, item.option_id)}
+                        style={{ cursor: "pointer" }}
+                      >
                         <DeleteIcon className="deleteIconSixthPage" />
                         Delete
                       </h5>
@@ -602,10 +628,64 @@ function TestPortalMain() {
             </RadioGroup>
           </FormControl>
 
-          <Button className="addNewOptionDotted">
+          <Button
+            onClick={(e) => handleAddOptionPop(e)}
+            className="addNewOptionDotted"
+          >
             <AddCircleOutlineIcon sx={{ marginRight: "12px" }} />
-            Add new option
+            Add New option
           </Button>
+          <div>
+            {" "}
+            <BootstrapDialog
+              className="optionsFeid"
+              onClose={handleCloseDialogForAdd}
+              aria-labelledby="customized-dialog-title"
+              open={openAddOptions}
+            >
+              <DialogTitle
+                sx={{ m: 0, p: 2, fontSize: "1rem" }}
+                id="customized-dialog-title"
+              >
+                Add Option
+              </DialogTitle>
+              <IconButton
+                aria-label="close"
+                onClick={handleCloseDialogForAdd}
+                sx={{
+                  position: "absolute",
+                  right: 8,
+                  top: 8,
+                  color: (theme) => theme.palette.grey[500],
+                }}
+              >
+                <CloseIcon />
+              </IconButton>
+
+              <DialogContent dividers>
+                <TextField
+                  inputProps={{ className: "textField" }}
+                  fullWidth
+                  size="small"
+                  // placeholder="e.g. General Knowledge"
+                  id="fullWidth"
+                  className="optionsFeid"
+                  type="TestName"
+                  // value={addTest?.testName}
+                  onChange={(e) => handleAddOption(e.target.value)}
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  variant="contained"
+                  className="CreateBtn"
+                  // onClick={(e)=>handleAddOption(e)}
+                >
+                  Add
+                </Button>
+              </DialogActions>
+            </BootstrapDialog>
+          </div>
 
           <p>Solution</p>
           <TextField

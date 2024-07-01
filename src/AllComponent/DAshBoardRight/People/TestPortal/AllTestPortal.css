@@ -416,6 +416,7 @@
     margin-bottom: -3px;
     margin-left: 41px;
     margin-right: 7px;
+    cursor: pointer;
 }
 .borderingOptions{
     width: 77vw;
