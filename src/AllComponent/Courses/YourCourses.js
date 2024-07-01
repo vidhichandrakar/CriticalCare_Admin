@@ -186,7 +186,7 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
     >
     <Box className="FilterHead">
       <Typography>Filter</Typography>
-      <CloseIcon onClick={toggleDrawer(anchor, false)}/>
+      <CloseIcon onClick={toggleDrawer(anchor, false)} className="Crossicon"/>
     </Box>
       <Divider />
       <Box>
