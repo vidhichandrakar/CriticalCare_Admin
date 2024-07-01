@@ -10,7 +10,7 @@ import YourCoursesCard from "./YourCoursesCard";
 import { YourCoursesCardData } from "../../Data/JsonData";
 import SideBar from "../AdminDashboardMain/SideBar";
 import { Link } from "react-router-dom";
-import { getAllCourses, getAllUsersApi, getCategory, getCourseDuration } from "../ActionFactory/apiActions";
+import { getAllCourses, getAllUsersApi, getCategory, getCourseDuration, getAllCoursesFilter } from "../ActionFactory/apiActions";
 import LoaderComponent from "../../Util/LoaderComponent";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -86,12 +86,39 @@ const YourCourses = () => {
     
   }, []);
 
+  const handleFilterChange = ({duration_type_id = "", category_id = "" , is_publish = ""}) => {
+    console.log(filterValue, durationname ,selectedCategory, "line90 publishdurationcategory")
+    getAllCoursesFilter({
 
+      duration_type_id: duration_type_id,
+      category_id: category_id,
+      is_publish: filterValue ,
+      callBack: (response) =>{
+        console.log(response, "line95")
+        const userCallBack = response?.data;
+        setAllCourses(userCallBack);
+        setCourseData(userCallBack);
+      },
+      error: () =>{
+
+      }
+    })
+  }
   const handleChange = (e) => {
     setSelectedCategory(e.target.value);
+    handleFilterChange({category_id: e.target.value})
+    
   };
+
   const handleDurationChange = (e) => {
-    setDurationname(e.target.value);
+    
+    setDurationname(e.target.value.duration_type_id);
+    handleFilterChange({duration_type_id : e.target.value.duration_type_id})
+    
+    console.log(e, "line120 handleduratipon")
+    console.log(e.target.value.duration_type_id, "line121 handleduratipon")
+    console.log(durationname, "line124 handleduratipon")
+   
   };
 
   const handleInput = (value, type, event) => {
@@ -224,6 +251,7 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
           <Typography>Course Type</Typography>
           <FormControl sx={{ width: 540 }}>
                   <Select
+
                     value={durationType.duration_name}
                     onChange={(e) => handleDurationChange(e)}
                     className="addCatTextField"
@@ -330,23 +358,23 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
     }
   }, []);
 
-  useEffect(() => {
-    if (filterValue == "All Courses") {
-      setAllCourses(courseData);
-    } 
-    else {
-      const filterCourseData = courseData?.filter(
-        (item) => item?.is_publish == filterValue
-      );
-      setAllCourses(filterCourseData);
-    }
-    //  else {
-    //   const filterCourseType = courseData?.filter(
-    //     (item) => item?.is_publish == filterValue
-    //   );
-    //   setAllCourses(filterCourseData);
-    // }
-  }, [filterValue]);
+  // useEffect(() => {
+  //   if (filterValue == "All Courses") {
+  //     setAllCourses(courseData);
+  //   } 
+  //   else {
+  //     const filterCourseData = courseData?.filter(
+  //       (item) => item?.is_publish == filterValue
+  //     );
+  //     setAllCourses(filterCourseData);
+  //   }
+  //   //  else {
+  //   //   const filterCourseType = courseData?.filter(
+  //   //     (item) => item?.is_publish == filterValue
+  //   //   );
+  //   //   setAllCourses(filterCourseData);
+  //   // }
+  // }, [filterValue]); 
 
   const handleFilterCourse = (type) => {
     setFilterValue(type);

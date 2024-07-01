@@ -13,8 +13,31 @@ export const getAllUsersApi = ({ callBack, error }) => {
     });
 };
 
-export const getAllCourses = ({ callBack, error }) => {
+export const getAllCourses = ({callBack, error }) => {
   const url = APIS.allCourses;
+  
+  axios
+    .get(url)
+    .then((response) => {
+
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
+export const getAllCoursesFilter = ({is_publish,duration_type_id,category_id, callBack, error }) => {
+  let url = new URL(`${APIS.allCoursesFilter}`);
+  console.log(is_publish, duration_type_id ,category_id, "lineno31 ApiAction")
+  if(is_publish){
+    url.searchParams.set("is_publish", is_publish);
+  }
+  if(duration_type_id){
+    url.searchParams.set("duration_type_id", duration_type_id);
+  }
+  if(category_id){
+    url.searchParams.set("category_id", category_id);
+  }
   axios
     .get(url)
     .then((response) => {
@@ -279,6 +302,7 @@ export const createTestInfo = ({ payload, id, callBack }) => {
       callBack(response);
     });
   }
+  console.log("idddd", id);
 };
 export const getTestType = ({ callBack }) => {
   const url = APIS.testType;
