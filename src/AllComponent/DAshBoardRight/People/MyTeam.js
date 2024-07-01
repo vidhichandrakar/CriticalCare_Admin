@@ -443,21 +443,22 @@ const MyTeam = () => {
                     horizontal: "right",
                   }}
                 >
-                  <Typography
+                  <Box
                     className="redDeleteofTestPortal"
                     onClick={handleDeleteClick}
+                    sx={{borderBottom: "1px solid #eee"}}
                   >
-                    {" "}
+                    
                     <DeleteIcon className="deleteIcon" /> Delete{" "}
-                  </Typography>
-                  <Typography
+                  </Box>
+                  <Box
                     className="redDeleteofTestPortal blueBlockUser"
                     onClick={handleEdit}
                   >
                     {" "}
                     <EditIcon className="deleteIcon" />
                     Edit
-                  </Typography>
+                  </Box>
                 </Popover>
               </TableBody>
               {userData?.length > 5 && <TableFooter>
