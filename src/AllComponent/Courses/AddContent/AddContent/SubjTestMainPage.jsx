@@ -18,12 +18,13 @@ import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 
-const SubjTestMainPage = ({ handleCreateNewTest ,
+const SubjTestMainPage = ({
+  handleCreateNewTest,
   handelclose,
   anchor,
   st,
-  setSt}
-  ) => {
+  setSt,
+}) => {
   const [state, setState] = React.useState({
     top: false,
     left: false,
@@ -54,14 +55,14 @@ const SubjTestMainPage = ({ handleCreateNewTest ,
   const [subjTestMainPage, setSubjTestMainPage] = useState(false);
   const handleSubjTestMainPage = () => {
     setSubjTestMainPage(true);
-  }
+  };
 
   return (
     <>
       <h2 style={{ marginLeft: "4%" }}>Add Subjective Test</h2>
       <IconButton
         aria-label="close"
-        onClick={handelclose("right", false, st , setSt)}
+        onClick={handelclose("right", false, st, setSt)}
         sx={{
           position: "absolute",
           right: 8,
@@ -93,29 +94,31 @@ const SubjTestMainPage = ({ handleCreateNewTest ,
         <b>You can also select from previously created tests</b>
       </p>
 
-      <Paper
-        component="form"
-        sx={{
-          ml: "36px",
-          mt: "56px",
-          mb: "-9px",
-          display: "flex",
-          alignItems: "center",
-          // width: "609px",
-          width: "556px",
-          backgroundColor: "#e4e4e459",
-          borderRadius: "10px",
-        }}
-      >
-        <IconButton sx={{ p: "10px" }} aria-label="menu">
-          <SearchIcon />
-        </IconButton>
-        <InputBase
-          sx={{ ml: 1, flex: 1 }}
-          placeholder="Search by name"
-          inputProps={{ "aria-label": "search your course by name" }}
-        />
-      </Paper>
+      <div className="wid100">
+        <Paper
+          component="form"
+          sx={{
+            ml: 5,
+            mt: "41px",
+            mb: "-9px",
+            display: "flex",
+            alignItems: "center",
+            width: 1189,
+            backgroundColor: "#e4e4e459",
+            borderRadius: "10px",
+          }}
+        >
+          <IconButton sx={{ p: "10px" }} aria-label="menu">
+            <SearchIcon />
+          </IconButton>
+          <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+          <InputBase
+            sx={{ ml: 1, flex: 1 }}
+            placeholder="Search your course by name"
+            inputProps={{ "aria-label": "search your course by name" }}
+          />
+        </Paper>
+      </div>
 
       <Box className="A-searchImageSection">
         <img

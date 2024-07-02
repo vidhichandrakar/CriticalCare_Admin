@@ -343,16 +343,6 @@ body {
   width: 100%;
   align-items: left !important;
 }
-.searchnfilter button {
-  margin-left: 2%;
-  padding: 2px 14px;
-  border: 0.5px solid grey;
-  background-color: #ffffff;
-  font-size: large;
-  color: grey;
-  height: 5vh;
-  margin-top: 24px;
-}
 .MyCOurseFilterBtn{
   margin-left: 2%;
 }
@@ -383,7 +373,17 @@ body {
   /* background-color: #eef4f959 !important; */
   background-color: #ffffff !important;
 }
-
+.wid100{
+  width: 50%;
+}
+.searchnfilter button {
+  margin-left: 2%;
+  padding: 2px 14px;
+  font-size: large;
+  color: grey;
+  height: 7vh;
+  margin-top: 4px;
+}
 
 .filterButton {
   display: flex;
@@ -391,6 +391,17 @@ body {
   justify-content: center;
   align-items: center;
   text-transform: none !important;
+  border: 1px solid grey !important;
+    margin-top: 43px !important;
+    padding: 0px 20px !important;
+}
+.filterButtonssss {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-transform: none !important;
+  border: none !important;
 }
 .filterIcon {
   margin-right: 10px;
