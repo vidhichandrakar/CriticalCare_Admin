@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import {
   createNumberOfQuestions,
   createTestInfo,
+  editQuestions,
   getNumberOfQuestions,
   getTestById,
   getTestType,
@@ -115,9 +116,10 @@ function TestPortalMain() {
   const [editedQuestion, setEditedQuestion] = useState({});
   const [addOption, setaddOption] = useState(false);
   const [openAddOptions, setAddOptions] = useState(false);
+  const [addOptionText, setAddOptionText] = useState("");
 
   const handleClickOpen = (e, item) => {
-    // console.log("e, item", e, item);
+    console.log("e, item", e, item);
     setEditedQuestion(item);
     setOpen(true);
   };
@@ -270,10 +272,11 @@ function TestPortalMain() {
     setEditedQuestion(editedOptionText);
   };
 
-  const handleDeleteOption = (e, option) => {
+  const handleDeleteOption = (index, option) => {
+    console.log("indexindex", index);
     let deletedOption = Object.assign({}, editedQuestion);
     const upatedOptions = editedQuestion.question_options.filter(
-      (item) => item.option_id !== option
+      (item, insideIndex) => insideIndex !== index
     );
     deletedOption.question_options = upatedOptions;
     setEditedQuestion(deletedOption);
@@ -287,10 +290,38 @@ function TestPortalMain() {
     setAddOptions(false);
   };
 
-  const handleAddOption=(e)=>{
-    console.log("handleAddOption===>", e);
-  }
+  const handleAddOptionText = (e) => {
+    setAddOptionText(e);
+  };
+  const handleAddOption = () => {
+    let addedOptions = [...editedQuestion.question_options];
+    let questionId = editedQuestion?.question_options[0].question_id;
+    addedOptions.push({
+      is_correct: false,
+      // option_id: "",
+      option_text: addOptionText,
+      question_id: questionId,
+    });
+    let addedOptn = Object.assign({}, editedQuestion);
+    addedOptn.question_options = addedOptions;
+    setEditedQuestion(addedOptn);
+    setAddOptions(false);
+  };
 
+  const handelSaveOption = () => {
+    editQuestions({
+      questionId: editedQuestion?.question_id,
+      payload: {
+        test_info_id: testInfoId,
+        questions: [editedQuestion],
+      },
+      callBack: (response) => {
+        console.log("responseeee", response);
+        setOpen(false);
+        getTestByIdData();
+      },
+    });
+  };
   return (
     <div className="grid-container-TestPortal ">
       <TestProtalHeader testData={testData} />
@@ -310,7 +341,12 @@ function TestPortalMain() {
         numberOfMcqQns={numberOfMcqQns}
         setNumberOfMcqQns={setNumberOfMcqQns}
       />
-      {console.log("sdjhhjskasx", editedQuestion)}
+      {console.log(
+        "sdjhhjskasx",
+        editedQuestion,
+        "dssxsx",
+        editedQuestion?.question_options
+      )}
       <BootstrapDialog
         className="PopUP"
         onClose={handleCloseDialogMCQ}
@@ -500,7 +536,7 @@ function TestPortalMain() {
                 <Button variant="contained" disabled className="previousMCQBtn">
                   Previous
                 </Button>
-                <Button className="saveMCQBtn" href="#contained-buttons">
+                <Button onClick={handelSaveOption} className="saveMCQBtn">
                   Save
                 </Button>
                 <Button variant="contained" disabled className="nextMCQBtn">
@@ -557,7 +593,7 @@ function TestPortalMain() {
             className="thisIsMCQBtn"
             id="outlined-helperText"
             defaultValue="This is an MCQ question"
-            value={editedQuestion.question_text}
+            value={editedQuestion?.question_text}
             onChange={(e) => handleEditQestion(e)}
           />
 
@@ -591,7 +627,7 @@ function TestPortalMain() {
               defaultValue="female"
               name="radio-buttons-group"
             >
-              {editedQuestion?.question_options?.map((item) => {
+              {editedQuestion?.question_options?.map((item, index) => {
                 return (
                   <div className="addingDeleteOptions">
                     <Radio
@@ -615,7 +651,9 @@ function TestPortalMain() {
 
                     <div className="deleteComponent">
                       <h5
-                        onClick={(e) => handleDeleteOption(e, item.option_id)}
+                        onClick={(e) =>
+                          handleDeleteOption(index, item.option_id)
+                        }
                         style={{ cursor: "pointer" }}
                       >
                         <DeleteIcon className="deleteIconSixthPage" />
@@ -672,14 +710,14 @@ function TestPortalMain() {
                   className="optionsFeid"
                   type="TestName"
                   // value={addTest?.testName}
-                  onChange={(e) => handleAddOption(e.target.value)}
+                  onChange={(e) => handleAddOptionText(e.target.value)}
                 />
               </DialogContent>
               <DialogActions>
                 <Button
                   variant="contained"
                   className="CreateBtn"
-                  // onClick={(e)=>handleAddOption(e)}
+                  onClick={(e) => handleAddOption(e)}
                 >
                   Add
                 </Button>

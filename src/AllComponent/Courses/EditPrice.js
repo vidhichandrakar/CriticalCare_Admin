@@ -251,6 +251,7 @@ const EditPrice = ({ handleTrackerPage, handleInputChange, courseData, courseId 
         storedValues.duration_type_name = selectedDuration?.duration_type_name;
         storedValues.duration_id = item?.duration_name?.duration_id;
         storedValues.duration_name = item?.duration_name?.duration_name;
+        storedValues.years = item?.duration_name
         if (
           storedValues.duration &&
           storedValues.price &&

@@ -97,7 +97,7 @@ const YourCourses = () => {
 
       duration_type_id: duration_type_id,
       category_id: category_id,
-      is_publish: filterValue ,
+      is_publish: is_publish ,
       callBack: (response) =>{
         console.log(response, "line95")
         const userCallBack = response?.data;
@@ -110,9 +110,15 @@ const YourCourses = () => {
     })
   }
   const handleChange = (e) => {
-    setSelectedCategory(e.target.value);
-    handleFilterChange({category_id: e.target.value})
+    setSelectedCategory(e.target.value.category_name);
+    console.log(e.target.value.category_name, "Lineno109")
+    handleFilterChange({category_id: e.target.value.category_id})
     
+  };
+
+  const handleFilterCourse = (type) => {
+    setFilterValue(type);
+    handleFilterChange({is_publish: type})
   };
 
   const handleDurationChange = (e) => {
@@ -185,7 +191,7 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
     >
     <Box className="FilterHead">
       <Typography>Filter</Typography>
-      <CloseIcon onClick={toggleDrawer(anchor, false)}/>
+      <CloseIcon onClick={toggleDrawer(anchor, false)} className="Crossicon"/>
     </Box>
       <Divider />
       <Box>
@@ -304,7 +310,7 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
           </Button>
           <Button
           variant="outlined"
-            value={"published"}
+            value={"All Courses"}
             sx={{mt: 1}}
             onClick={() => handleFilterCourse("All Courses")}
           >
@@ -381,9 +387,7 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
   //   // }
   // }, [filterValue]); 
 
-  const handleFilterCourse = (type) => {
-    setFilterValue(type);
-  };
+  
 
   return (
     <div className="grid-container">

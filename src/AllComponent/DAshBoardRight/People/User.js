@@ -444,17 +444,18 @@ const User = () => {
                     horizontal: "right",
                   }}
                 >
-                  <Typography
+                  <Box
                     className="redDeleteofTestPortal"
                     onClick={handleDeleteClick}
+                    sx={{borderBottom: "1px solid #eee"}}
                   >
                     {" "}
                     <DeleteIcon className="deleteIcon" /> Delete{" "}
-                  </Typography>
-                  <Typography className="redDeleteofTestPortal blueBlockUser">
+                  </Box>
+                  <Box className="redDeleteofTestPortal blueBlockUser">
                     {" "}
                     <BlockIcon className="deleteIcon" /> Block User
-                  </Typography>
+                  </Box>
                 </Popover>
               </TableBody>
               {userData?.length > 5 && (
