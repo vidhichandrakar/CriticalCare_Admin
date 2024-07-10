@@ -139,6 +139,7 @@
   background-color: #ffffff;
   width: 93% !important;
   padding: 7px;
+  cursor: pointer;
 }
 .rightCard{
   margin-left: 3%;

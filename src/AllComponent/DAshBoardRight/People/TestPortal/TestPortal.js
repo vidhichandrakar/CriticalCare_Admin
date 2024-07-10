@@ -308,6 +308,7 @@ const TestPortal = () => {
           callBack: (response) => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
+            console.log("irhthjn plce")
             // setLoaderState(false);
           },
         });
@@ -364,7 +365,7 @@ const TestPortal = () => {
               sx={{ m: 0, p: 2, fontSize: "1rem" }}
               id="customized-dialog-title"
             >
-              Add New Member
+              Add New Test
             </DialogTitle>
             <IconButton
               aria-label="close"

@@ -127,7 +127,7 @@
 
 .QnsBoxs{
     overflow: auto;
-    height: 43vh;
+    /* height: 43vh; */
 }
 .MCQBox li{
     margin-top: 2%;

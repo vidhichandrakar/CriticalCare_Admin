@@ -38,35 +38,35 @@ function CreateQNS({
   noOfQuestion,
   numberOfMcqQns,
   setNumberOfMcqQns,
+  setQuestionId,
 }) {
   const [selectedValue, setSelectedValue] = useState("a");
-
+  let count = 1;
   const handleClickOpenCQ = () => {
     setCqopen(true);
   };
   const handleChangeOption = (event, option_id, question_id) => {
     let arr = [...numberOfMcqQns];
     arr.map((item) => {
-      if (item.question_id === question_id) {
-        item.question_options.map((option) => {
-          if (option.option_id === option_id) {
-            option.is_correct = event.target.checked;
-          } else {
-            option.is_correct = false;
-          }
-        });
-      }
+      item?.test_questions.map((questionOption) => {
+        if (questionOption.question_id === question_id) {
+          questionOption.question_options.map((option) => {
+            if (option.option_id === option_id) {
+              option.is_correct = event.target.checked;
+            } else {
+              option.is_correct = false;
+            }
+          });
+        }
+      });
     });
     setNumberOfMcqQns(arr);
   };
-
-  const count = testData?.testInfoDetails?.length
-    ? testData?.testInfoDetails[testData?.testInfoDetails?.length - 1]
-        .no_of_question
-    : "";
-
-  const divArray = Array.from({ length: count });
-
+const handleClickOpenA=(e, item,index)=>{
+  const editedQns = item.filter((itm, insideIndex) => insideIndex === index)
+  handleClickOpen(editedQns[index],index);
+}
+  
   return (
     <div className="MainQnsBox">
       <div className="BoxHead">
@@ -83,69 +83,78 @@ function CreateQNS({
         <StarBorderOutlinedIcon className="starIconss" />
         <Typography>Max. Section Marks: 4.00</Typography>
       </div>
-      {opencreaterqns ? (
+      {/* {console.log("numberOfMcqQnsnumberOfMcqQns", numberOfMcqQns)} */}
+      {opencreaterqns || numberOfMcqQns?.length ? (
         <Box>
-          {numberOfMcqQns?.map((item, index) => (
+          {numberOfMcqQns?.map((item, indexSeq) => (
+            // let count = 0
             <div className="QnsBoxs">
-              <div className="MCQBox" key={index}>
-                <Typography sx={{ color: "rgba(0, 0, 0, 0.685)" }}>
-                  {index + 1}. {item.question_text}
-                </Typography>
-                <RadioGroup
-                  aria-labelledby="demo-radio-buttons-group-label"
-                  defaultValue="female"
-                  name="radio-buttons-group"
-                >
-                  {item.question_options.map((option) => {
-                    return (
-                      <div className="addingDeleteOptions mt1">
-                        <Radio
-                          checked={option.is_correct}
-                          onChange={(e) =>
-                            handleChangeOption(
-                              e,
-                              option.option_id,
-                              item.question_id
-                            )
-                          }
-                          value={option.option_id}
-                          name="radio-buttons"
-                          inputProps={{ "aria-label": "A" }}
-                        />
-                        <Typography>{option.option_text}</Typography>
+              <div className="MCQBox" key={indexSeq}>
+                {item.test_questions.map((questionTest, index) => {
+                  return (
+                    <>
+                      <Typography sx={{ color: "rgba(0, 0, 0, 0.685)" }}>
+                        {count++}. {questionTest.question_text}
+                      </Typography>
+
+                      <RadioGroup
+                        aria-labelledby="demo-radio-buttons-group-label"
+                        // defaultValue="female"
+                        name="radio-buttons-group"
+                      >
+                        {questionTest.question_options.map((option) => {
+                          return (
+                            <div className="addingDeleteOptions mt1">
+                              <Radio
+                                checked={option.is_correct}
+                                onChange={(e) =>
+                                  handleChangeOption(
+                                    e,
+                                    option.option_id,
+                                    option.question_id
+                                  )
+                                }
+                                value={option.option_id}
+                                name="radio-buttons"
+                                inputProps={{ "aria-label": "A" }}
+                              />
+                              <Typography>{option.option_text}</Typography>
+                            </div>
+                          );
+                        })}
+                        ;
+                      </RadioGroup>
+                      <Typography
+                        className="noBox"
+                        style={{ marginTop: "1%", marginLeft: "1%" }}
+                      >
+                        +4
+                      </Typography>
+                      <div className="AllBtnBox">
+                        <Box
+                          className="mr123 curseorpointer"
+                          onClick={(e) => handleClickOpenA(e, item.test_questions,index)}
+                        >
+                          {/* {console.log("jdksdms", item,index)} */}
+                          <EditIcon />
+                          <Typography>Edit</Typography>
+                        </Box>
+                        <Box className="curseorpointer">
+                          <ContentCopyIcon />
+                          <Typography>Copy</Typography>
+                        </Box>
+                        <Box className="curseorpointer">
+                          <TextIncreaseRoundedIcon />{" "}
+                          <Typography>Edit Marks</Typography>
+                        </Box>
+                        <Box className="curseorpointer">
+                          <DeleteOutlineRoundedIcon />
+                          <Typography>Delete</Typography>
+                        </Box>
                       </div>
-                    );
-                  })}
-                </RadioGroup>
-                <Typography
-                  className="noBox"
-                  style={{ marginTop: "1%", marginLeft: "1%" }}
-                >
-                  +4
-                </Typography>
-                <div className="AllBtnBox">
-                  <Box
-                    className="mr123 curseorpointer"
-                    onClick={(e)=>handleClickOpen(e,item)}
-                  >
-                    
-                    {/* {console.log("jdksdms", item.question_id,index)} */}
-                    <EditIcon />
-                    <Typography>Edit</Typography>
-                  </Box>
-                  <Box className="curseorpointer">
-                    <ContentCopyIcon />
-                    <Typography>Copy</Typography>
-                  </Box>
-                  <Box className="curseorpointer">
-                    <TextIncreaseRoundedIcon />{" "}
-                    <Typography>Edit Marks</Typography>
-                  </Box>
-                  <Box className="curseorpointer">
-                    <DeleteOutlineRoundedIcon />
-                    <Typography>Delete</Typography>
-                  </Box>
-                </div>
+                    </>
+                  );
+                })}
               </div>
             </div>
           ))}
