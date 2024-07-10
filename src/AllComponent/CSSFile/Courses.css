@@ -141,6 +141,10 @@
   padding: 7px;
   cursor: pointer;
 }
+.courseCard:hover{
+  background-color: #eee ;
+  cursor: pointer;
+}
 .rightCard{
   margin-left: 3%;
   width:100%;
@@ -180,7 +184,7 @@
   color: #199884 !important;
   padding: 0px !important;
     width: 100%;
-    margin-top: 11px;
+    margin-top: 32px;
     margin-left: 26px;
 }
 .discountPercentage-singleValidity{
@@ -201,7 +205,7 @@
   display: flex !important;
   flex-direction: row !important;
   width: 100%;
-    margin-top: 9%;
+    margin-top: 20%;
 }
 .wrap-text-50 {
   /* display: inline-block; */
@@ -664,7 +668,7 @@
   text-transform: none !important;
   font-size: 1.2rem !important ;
   padding: 2px 31px !important;
-  font-weight: 600 !important;
+  /* font-weight: 600 !important; */
 
 }
 
@@ -762,14 +766,15 @@
   left: 12px;
 }
 .OTDrawerAddTestBtn {
-  background-color: #43c5f0  !important;
+  background-color: #43c5f0 !important;
   color: #ffffff !important;
   border-radius: 12px !important;
   position: relative;
-  left: 79%;
-  top: 18px;
+  left: 73%;
+  top: 11px;
   text-transform: none !important;
-  padding: 7px 14px !important;
+  padding: 4px 14px !important;
+  font-size: 1.2rem !important;
 }
 .stylingAutofield{
   border-radius: 21px !important;
@@ -778,6 +783,7 @@
 .OTLastCheckbox{
   display: flex;
   flex-direction: row;
+  margin-left: 10px;
 }
 
 /* SUBJECTIVE TEST CSS  */
@@ -853,14 +859,11 @@
   background-color: #43c5f0  !important;
   color: #ffffff !important;
   border-radius: 12px !important;
-  /* position: relative; */
-  /* left: 89%; */
-  /* top: 18px; */
   text-transform: none !important;
-  padding: -2px 0px !important;
-  /* margin-left: 87% !important; */
-  margin-left: 83% !important;
+  /* padding: -2px 0px !important; */
+  margin-left: 80% !important;
   margin-top: 14px !important;
+  padding: 7px 24px !important;
 }
 .demoClasssss{
   display: flex;
