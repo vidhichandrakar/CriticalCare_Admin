@@ -228,6 +228,7 @@
 
 .testRightSection{
     background-color: white;
+    width: 74vw !important;
 }
 .mainFirstPage{
     display: flex !important;
@@ -449,6 +450,7 @@
     background-color: #0075FF !important;
     color: #ffffff !important;
     padding: 3px 43px !important;
+    margin-right: 16px !important;
 }
 
 /* .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{

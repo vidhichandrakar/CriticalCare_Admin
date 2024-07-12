@@ -56,7 +56,7 @@ const OnlineTest = ({
       // onKeyDown={toggleDrawer(anchor, false)}
     >
       {console.log("testNametestName",testName)}
-      <h2 style={{ marginLeft: "4%" }}>Add online test</h2>
+      <h2 style={{ marginLeft: "4%" }}>Add Online Test</h2>
       <IconButton
         aria-label="close"
         onClick={handelclose("right", false, ot , setOt)}
@@ -72,7 +72,7 @@ const OnlineTest = ({
       <Divider />
 
       <Box className="FolderNameBox">
-        <h4>Test/Folder name</h4>
+        <h4>Test/ Folder name</h4>
         <Box
           sx={{
             width: 500,

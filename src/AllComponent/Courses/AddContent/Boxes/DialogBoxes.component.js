@@ -44,7 +44,7 @@ const DialogBoxes = ({
   getIntroVideoRootProps,
   loaderState,
   storedBasicInfo,
-  toggleDrawerUrl
+  toggleDrawerUrl,
 }) => {
   return (
     <>
@@ -55,7 +55,12 @@ const DialogBoxes = ({
         open={icopened}
       >
         <DialogTitle
-          sx={{ m: 0, p: 2, fontSize: "1rem", ml: 2 }}
+          sx={{
+            m: 0,
+            p: 2,
+            //  fontSize: "1rem",
+            ml: 2,
+          }}
           id="customized-dialog-title"
         >
           <b> Import Content</b>
@@ -200,10 +205,9 @@ const DialogBoxes = ({
         </DialogContent>
         <Box className="ButtonBOx">
           <Button variant="outlined" disabled className="CancelBtn">
-            {" "}
             Cancel
           </Button>
-          <Button variant="contained">Import Selected</Button>
+          <Button variant="contained" sx={{textTransform:"none"}}>Import Selected</Button>
         </Box>
       </BootstrapDialog>
       <BootstrapDialog
@@ -234,58 +238,60 @@ const DialogBoxes = ({
             <UploadFileRoundedIcon className="VideoIcon" />
 
             <Box className="videoDottedBorder">
-            <Typography gutterBottom className="UploadDoc">
-              <b> Upload Image(s)</b>
-            </Typography>
-            <Typography className="VideoPara">
-              You can upload upto 20 files at a time. Maximum file size that can
-              be attached is 4 MB.
-            </Typography>
+              <Typography gutterBottom className="UploadDoc">
+                <b> Upload Image(s)</b>
+              </Typography>
+              <Typography className="VideoPara">
+                You can upload upto 20 files at a time. Maximum file size that
+                can be attached is 4 MB.
+              </Typography>
 
-            <div {...getIntroVideoRootProps({ className: "dropzone" })}>
-              <input {...getIntroVideoInputProps()} />
-              <Box className="thumbnailUpload buttonBOx">
-                <Button
-                  variant="contained"
-                  className="SelectButton"
-                  // onClick={handleCreateTeam}
-                >
-                  Select File(s)
-                </Button>
-                <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
-                  Recommended Image size :{" "}
-                  <b>800px x 600px, PNG or JPEG file</b>
-                </Typography>
-                <LoaderComponent loaderState={loaderState} />
-                {imgUpload === "" && storedBasicInfo?.thumbnailPath && (
-                  <img
-                    src={storedBasicInfo?.thumbnailPath}
-                    width={140}
-                    height={"auto"}
-                  />
-                )}
-                {imgUpload != "" && (
-                  <img
-                    src={storedBasicInfo?.thumbnailPath}
-                    width={140}
-                    height={"auto"}
-                  />
-                )}
-              </Box>
-            </div>
-           </Box>
+              <div {...getIntroVideoRootProps({ className: "dropzone" })}>
+                <input {...getIntroVideoInputProps()} />
+                <Box className="thumbnailUpload buttonBOx">
+                  <Button
+                    variant="contained"
+                    className="SelectButton"
+                    // onClick={handleCreateTeam}
+                  >
+                    Select File(s)
+                  </Button>
+                  <Typography
+                    sx={{ marginTop: "3%" }}
+                    className="fontRecommend"
+                  >
+                    Recommended Image size :{" "}
+                    <b>800px x 600px, PNG or JPEG file</b>
+                  </Typography>
+                  <LoaderComponent loaderState={loaderState} />
+                  {imgUpload === "" && storedBasicInfo?.thumbnailPath && (
+                    <img
+                      src={storedBasicInfo?.thumbnailPath}
+                      width={140}
+                      height={"auto"}
+                    />
+                  )}
+                  {imgUpload != "" && (
+                    <img
+                      src={storedBasicInfo?.thumbnailPath}
+                      width={140}
+                      height={"auto"}
+                    />
+                  )}
+                </Box>
+              </div>
+            </Box>
 
-           <Box sx={{marginTop:"12px"}}>Or</Box>
+            <Box sx={{ marginTop: "12px" }}>Or</Box>
 
             <Typography
               className="orPasteURL"
               onClick={toggleDrawerUrl("right", true)}
             >
-               Paste URL
+              Paste URL
             </Typography>
           </Box>
         </DialogContent>
-
       </BootstrapDialog>
       <BootstrapDialog
         className="PopUP"
@@ -311,61 +317,63 @@ const DialogBoxes = ({
         </IconButton>
 
         <DialogContent>
-        <Box className="VideoBox">
+          <Box className="VideoBox">
             <UploadFileRoundedIcon className="VideoIcon" />
             <Box className="videoDottedBorder">
-            <Typography gutterBottom className="UploadDoc">
-              <b> Upload Zip File(s)</b>
-            </Typography>
-            <Typography className="VideoPara">
-              You can upload upto 20 files at a time. Maximum file size that can
-              be attached is 40 MB.
-            </Typography>
+              <Typography gutterBottom className="UploadDoc">
+                <b> Upload Zip File(s)</b>
+              </Typography>
+              <Typography className="VideoPara">
+                You can upload upto 20 files at a time. Maximum file size that
+                can be attached is 40 MB.
+              </Typography>
 
-            <div {...getIntroVideoRootProps({ className: "dropzone" })}>
-              <input {...getIntroVideoInputProps()} />
-              <Box className="thumbnailUpload buttonBOx">
-                <Button
-                  variant="contained"
-                  className="SelectButton"
-                  // onClick={handleCreateTeam}
-                >
-                  Select File(s)
-                </Button>
-                <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
-                  Recommended Image size :{" "}
-                  <b>800px x 600px, PNG or JPEG file</b>
-                </Typography>
-                <LoaderComponent loaderState={loaderState} />
-                {imgUpload === "" && storedBasicInfo?.thumbnailPath && (
-                  <img
-                    src={storedBasicInfo?.thumbnailPath}
-                    width={140}
-                    height={"auto"}
-                  />
-                )}
-                {imgUpload != "" && (
-                  <img
-                    src={storedBasicInfo?.thumbnailPath}
-                    width={140}
-                    height={"auto"}
-                  />
-                )}
-              </Box>
-            </div>
+              <div {...getIntroVideoRootProps({ className: "dropzone" })}>
+                <input {...getIntroVideoInputProps()} />
+                <Box className="thumbnailUpload buttonBOx">
+                  <Button
+                    variant="contained"
+                    className="SelectButton"
+                    // onClick={handleCreateTeam}
+                  >
+                    Select File(s)
+                  </Button>
+                  <Typography
+                    sx={{ marginTop: "3%" }}
+                    className="fontRecommend"
+                  >
+                    Recommended Image size :{" "}
+                    <b>800px x 600px, PNG or JPEG file</b>
+                  </Typography>
+                  <LoaderComponent loaderState={loaderState} />
+                  {imgUpload === "" && storedBasicInfo?.thumbnailPath && (
+                    <img
+                      src={storedBasicInfo?.thumbnailPath}
+                      width={140}
+                      height={"auto"}
+                    />
+                  )}
+                  {imgUpload != "" && (
+                    <img
+                      src={storedBasicInfo?.thumbnailPath}
+                      width={140}
+                      height={"auto"}
+                    />
+                  )}
+                </Box>
+              </div>
             </Box>
 
-            <Box sx={{marginTop:"12px"}}>Or</Box>
+            <Box sx={{ marginTop: "12px" }}>Or</Box>
 
-           <Typography
+            <Typography
               className="orPasteURL"
               onClick={toggleDrawerUrl("right", true)}
             >
               Paste URL
             </Typography>
-            </Box>
+          </Box>
         </DialogContent>
-        
       </BootstrapDialog>
       <BootstrapDialog
         className="PopUP"
@@ -394,48 +402,51 @@ const DialogBoxes = ({
           <Box className="VideoBox">
             <UploadFileRoundedIcon className="VideoIcon" />
             <Box className="videoDottedBorder">
-            <Typography gutterBottom className="UploadDoc">
-              <b> Upload Documents(s)</b>
-            </Typography>
-            <Typography className="VideoPara">
-              You can upload upto 20 files at a time. Maximum file size that can
-              be attached is 40 MB.
-            </Typography>
+              <Typography gutterBottom className="UploadDoc">
+                <b> Upload Documents(s)</b>
+              </Typography>
+              <Typography className="VideoPara">
+                You can upload upto 20 files at a time. Maximum file size that
+                can be attached is 40 MB.
+              </Typography>
 
-            <div {...getIntroVideoRootProps({ className: "dropzone" })}>
-              <input {...getIntroVideoInputProps()} />
-              <Box className="thumbnailUpload buttonBOx">
-                <Button
-                  variant="contained"
-                  className="SelectButton"
-                  // onClick={handleCreateTeam}
-                >
-                  Select File(s)
-                </Button>
-                <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
-                  Recommended Image size :{" "}
-                  <b>800px x 600px, PNG or JPEG file</b>
-                </Typography>
-                <LoaderComponent loaderState={loaderState} />
-                {imgUpload === "" && storedBasicInfo?.thumbnailPath && (
-                  <img
-                    src={storedBasicInfo?.thumbnailPath}
-                    width={140}
-                    height={"auto"}
-                  />
-                )}
-                {imgUpload != "" && (
-                  <img
-                    src={storedBasicInfo?.thumbnailPath}
-                    width={140}
-                    height={"auto"}
-                  />
-                )}
-              </Box>
-            </div>
+              <div {...getIntroVideoRootProps({ className: "dropzone" })}>
+                <input {...getIntroVideoInputProps()} />
+                <Box className="thumbnailUpload buttonBOx">
+                  <Button
+                    variant="contained"
+                    className="SelectButton"
+                    // onClick={handleCreateTeam}
+                  >
+                    Select File(s)
+                  </Button>
+                  <Typography
+                    sx={{ marginTop: "3%" }}
+                    className="fontRecommend"
+                  >
+                    Recommended Image size :{" "}
+                    <b>800px x 600px, PNG or JPEG file</b>
+                  </Typography>
+                  <LoaderComponent loaderState={loaderState} />
+                  {imgUpload === "" && storedBasicInfo?.thumbnailPath && (
+                    <img
+                      src={storedBasicInfo?.thumbnailPath}
+                      width={140}
+                      height={"auto"}
+                    />
+                  )}
+                  {imgUpload != "" && (
+                    <img
+                      src={storedBasicInfo?.thumbnailPath}
+                      width={140}
+                      height={"auto"}
+                    />
+                  )}
+                </Box>
+              </div>
             </Box>
 
-            <Box sx={{marginTop:"12px"}}>Or</Box>
+            <Box sx={{ marginTop: "12px" }}>Or</Box>
 
             <Typography
               className="orPasteURL"
@@ -473,48 +484,51 @@ const DialogBoxes = ({
           <Box className="VideoBox">
             <UploadFileRoundedIcon className="VideoIcon" />
             <Box className="videoDottedBorder">
-            <Typography gutterBottom className="UploadDoc">
-              <b> Upload Video(s)</b>
-            </Typography>
-            <Typography className="VideoPara">
-              You can upload upto 20 files at a time. Maximum file size that can
-              be attached is 40 MB.
-            </Typography>
+              <Typography gutterBottom className="UploadDoc">
+                <b> Upload Video(s)</b>
+              </Typography>
+              <Typography className="VideoPara">
+                You can upload upto 20 files at a time. Maximum file size that
+                can be attached is 40 MB.
+              </Typography>
 
-            <div {...getIntroVideoRootProps({ className: "dropzone" })}>
-              <input {...getIntroVideoInputProps()} />
-              <Box className="thumbnailUpload buttonBOx">
-                <Button
-                  variant="contained"
-                  className="SelectButton"
-                  // onClick={handleCreateTeam}
-                >
-                  Select File(s)
-                </Button>
-                <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
-                  Recommended Image size :{" "}
-                  <b>800px x 600px, PNG or JPEG file</b>
-                </Typography>
-                <LoaderComponent loaderState={loaderState} />
-                {imgUpload === "" && storedBasicInfo?.thumbnailPath && (
-                  <img
-                    src={storedBasicInfo?.thumbnailPath}
-                    width={140}
-                    height={"auto"}
-                  />
-                )}
-                {imgUpload != "" && (
-                  <img
-                    src={storedBasicInfo?.thumbnailPath}
-                    width={140}
-                    height={"auto"}
-                  />
-                )}
-              </Box>
-            </div>
+              <div {...getIntroVideoRootProps({ className: "dropzone" })}>
+                <input {...getIntroVideoInputProps()} />
+                <Box className="thumbnailUpload buttonBOx">
+                  <Button
+                    variant="contained"
+                    className="SelectButton"
+                    // onClick={handleCreateTeam}
+                  >
+                    Select File(s)
+                  </Button>
+                  <Typography
+                    sx={{ marginTop: "3%" }}
+                    className="fontRecommend"
+                  >
+                    Recommended Image size :{" "}
+                    <b>800px x 600px, PNG or JPEG file</b>
+                  </Typography>
+                  <LoaderComponent loaderState={loaderState} />
+                  {imgUpload === "" && storedBasicInfo?.thumbnailPath && (
+                    <img
+                      src={storedBasicInfo?.thumbnailPath}
+                      width={140}
+                      height={"auto"}
+                    />
+                  )}
+                  {imgUpload != "" && (
+                    <img
+                      src={storedBasicInfo?.thumbnailPath}
+                      width={140}
+                      height={"auto"}
+                    />
+                  )}
+                </Box>
+              </div>
             </Box>
 
-            <Box sx={{marginTop:"12px"}}>Or</Box>
+            <Box sx={{ marginTop: "12px" }}>Or</Box>
             <Typography
               className="orPasteURL"
               onClick={toggleDrawerUrl("right", true)}

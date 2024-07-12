@@ -62,6 +62,9 @@ import "../../../CSSFile/testPortal.css";
 import { Link } from "react-router-dom";
 import TestFirstPage from "./TestFirstPage";
 import Switch from "@mui/material/Switch";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
+import Divider from "@mui/material/Divider";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const AntSwitch = styled(Switch)(({ theme }) => ({
@@ -303,11 +306,14 @@ const TestPortal = () => {
       callBack: (response) => {
         toast.success("New Member added!");
         setOpen(false);
-        navigate("/admin/TestFirstPage", { state: { id: response.data.test_id } });
+        navigate("/admin/TestFirstPage", {
+          state: { id: response.data.test_id },
+        });
         getTest({
           callBack: (response) => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
+            console.log("irhthjn plce")
             // setLoaderState(false);
           },
         });
@@ -317,8 +323,8 @@ const TestPortal = () => {
 
   const handleEdit = () => {
     const testId = openId;
-    navigate("/admin/TestFirstPage", { state: { id: openId }  });
-        
+    navigate("/admin/TestFirstPage", { state: { id: openId } });
+
     // getTestByID({
     //   testId,
     //   callBack: (response) => {
@@ -343,16 +349,41 @@ const TestPortal = () => {
         <LoaderComponent loaderState={loaderState} />
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">
-            <SearchBar mt="2%" placeholder="Search by name" />
+            <div className="wid100">
+              <Paper
+                component="form"
+                sx={{
+                  ml: 0,
+                  mt: "41px",
+                  mb: "15px",
+                  display: "flex",
+                  alignItems: "center",
+                  backgroundColor: "#e4e4e459",
+                  borderRadius: "10px",
+                }}
+              >
+                <IconButton sx={{ p: "10px" }} aria-label="menu">
+                  <SearchIcon />
+                </IconButton>
+                <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+                <InputBase
+                  sx={{ ml: 1, flex: 1 }}
+                  placeholder="Search your course by name"
+                  inputProps={{ "aria-label": "search your course by name" }}
+                />
+              </Paper>
+            </div>
 
             <Button className="filterButton">
               <FilterAltIcon /> Filter
             </Button>
           </div>
 
-          <Button className="width13 addTestimonialButton" onClick={handleClickOpen}>
-            {" "}
-            + Add Test{" "}
+          <Button
+            className="width13 addTestimonialButton"
+            onClick={handleClickOpen}
+          >
+            + Add Test
           </Button>
           <BootstrapDialog
             className="PopUP"
@@ -364,7 +395,7 @@ const TestPortal = () => {
               sx={{ m: 0, p: 2, fontSize: "1rem" }}
               id="customized-dialog-title"
             >
-              Add New Member
+              Add New Test
             </DialogTitle>
             <IconButton
               aria-label="close"

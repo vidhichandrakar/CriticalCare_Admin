@@ -42,18 +42,24 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-function TestNavAndLeft({setMcqopen, testType,handleTestType}) {
+function TestNavAndLeft({setMcqopen, testType,handleTestType, numberOfMcqQns,setCqopen}) {
   const [expanded, setExpanded] = useState(false);
-
   const handleClickOpenMCQ = (type) => {
-    const selectedOption= testType.filter(test=>test.test_type_name===type);
-    handleTestType(selectedOption[0])
-    setMcqopen(true);
+    let condition = numberOfMcqQns[numberOfMcqQns?.length-1]
+    console.log("condition?.test_questions?.length",condition?.test_questions?.length)
+    // if(numberOfMcqQns[0]?.test_questions?.length!==0){
+      if(condition?.test_questions?.length!==0){
+      console.log("true")
+      setCqopen(true)
+    }
+    else{
+      const selectedOption= testType.filter(test=>test.test_type_name===type);
+      handleTestType(selectedOption[0])
+      setMcqopen(true);
+    }
+
     
   };
-  // const handleCloseDialogMCQ = () => {
-  //   setMcqopen(false);
-  // };
 
   const handleExpansion = () => {
     setExpanded((prevExpanded) => !prevExpanded);

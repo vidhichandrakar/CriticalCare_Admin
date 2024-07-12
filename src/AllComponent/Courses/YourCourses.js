@@ -41,6 +41,11 @@ import { CommonTypography, commonTextField } from "../../Util/CommonFields";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { validatePhoneNo } from "../../Util/CommonUtils";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
+// import Divider from "@mui/material/Divider";
+import Paper from "@mui/material/Paper";
+import IconButton from "@mui/material/IconButton";
 
 
 
@@ -394,10 +399,33 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
       <main className="main-container">
         <LoaderComponent loaderState={loaderState} />
         <Box className="subHeaderMycourses">
-          <SearchBar placeholder="Search by name" />
+          <div className="wid100">
+          <Paper
+            component="form"
+            sx={{
+              ml: 0,
+              mt: "41px",
+              mb: "15px",
+              display: "flex",
+              alignItems: "center",
+              backgroundColor: "#e4e4e459",
+              borderRadius: "10px",
+            }}
+          >
+            <IconButton sx={{ p: "10px" }} aria-label="menu">
+              <SearchIcon />
+            </IconButton>
+            <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+            <InputBase
+              sx={{ ml: 1, flex: 1 }}
+              placeholder="Search your course by name"
+              inputProps={{ "aria-label": "search your course by name" }}
+            />
+          </Paper>
+        </div>
 
           <div className="MyCOurseFilterBtn filterButton" onClick={toggleDrawer('right', true)}>
-            <Button className="filterButton" >
+            <Button className="filterButtonssss" >
               <FilterAltIcon /> Filter
             </Button>
           </div>
