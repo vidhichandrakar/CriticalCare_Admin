@@ -12,7 +12,7 @@
 .couponHedaerBox{
   display: flex !important;
   flex-direction: row !important;
-  width:100%;
+  width:98%;
   padding-bottom: 1%;
   border-bottom: 3px solid #b5abab !important;
 }
@@ -76,9 +76,10 @@
  align-items: center;
  display: flex;
  color: #998e8e;
- margin-top: -5% !important;
+ margin-top: -2% !important;
 }
 .DiscountBox{
+  margin-top: 2%;
   margin-left: 2%;
   width: 88%;
 }
@@ -98,15 +99,20 @@
   margin-left: 27px !important;
   font-size:xx-small !important;
 }
+.jcsb{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between !important;
+}
 .courseMainCoupon{
   display: flex !important;
   flex-direction: column !important;
   background-color: #fff !important;
-  width:100% !important;
+  width:98% !important;
   margin-top: 2%;
 }
 .formMainCoupon{
-  padding: 1%;
+  padding: 3px;
   width:100%;
 }
 .yellowBox{
@@ -146,7 +152,7 @@
 }
 .completeCouponInfo{
   background-color:white;
-  width: 98% !important;
+  width: 96.5% !important;
   border-top: 1px solid rgb(224 223 223);
   padding-left: 15px;
 }

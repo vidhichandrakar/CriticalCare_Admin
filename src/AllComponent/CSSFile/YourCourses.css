@@ -77,7 +77,7 @@
       grid-template-areas:
         'sidebar header header header'
           'sidebar main main main';
-      height: 100vh;
+      height: 98vh;
     }
 
     .Add-main-cards {

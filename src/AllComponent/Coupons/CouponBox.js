@@ -121,7 +121,7 @@ const CouponBox = () => {
               </Box>
               <Box className="verticalDividerOne"></Box>
 
-              <Box className="flexcol width60">
+              <Box className="flexcol width60 jcsb">
                 <div className="flexrow">
                   <Box className="DiscountBox">
                     <Typography>DISCOUNT</Typography>
