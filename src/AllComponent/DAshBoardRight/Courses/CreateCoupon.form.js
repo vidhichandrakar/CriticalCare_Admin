@@ -20,6 +20,7 @@ const CreateCouponForm = ({}) => {
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
+            className="SpaceBetween"
           >
             <FormControlLabel
               value="female"
@@ -39,6 +40,7 @@ const CreateCouponForm = ({}) => {
         </Typography>
         <TextField
           inputProps={{ className: "textField" }}
+          sx={{ mt: 1 }}
           fullWidth
           size="small"
           placeholder="Enter discount amount"
@@ -86,6 +88,7 @@ const CreateCouponForm = ({}) => {
         <TextField
           inputProps={{ className: "textField" }}
           fullWidth
+          sx={{ mt: 1 }}
           size="small"
           placeholder="1"
           id="fullWidth"

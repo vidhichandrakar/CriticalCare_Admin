@@ -1,17 +1,33 @@
-
+.coloricon{
+  color: #199884 !important;
+}
+.DeleteRed{
+  color: red !important;
+}
 .radioButtonForm{
+  display: flex;
   margin-top: 3%;
   width:100%;
 }
+/* .SpaceBetween{
+  justify-content: space-between !important;
+} */
 .scndRadioBtn{
-  margin-left:  30%;
+  margin-left:  20% !important;
   }
 .radio-icon{
   color:rgb(132, 189, 246);
 }
+
+.EditButton{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .couponHedaerBox{
   display: flex !important;
   flex-direction: row !important;
+  justify-content: space-between;
   width:98%;
   padding-bottom: 1%;
   border-bottom: 3px solid #b5abab !important;
@@ -54,7 +70,7 @@
 }
 .UsedText{
   color: #0f7af5;
-  margin-left: 5%;
+  margin-left: 5% !important;
 }
 .ShowHideBtn{
   font-size: 0.7rem !important;
@@ -68,7 +84,7 @@
   font-size: 1.15em !important;
 }
 .mt-2{
-  margin-top: -2%;
+  margin-top:  1% !important;
 }
 .couponLastBox{
   margin-right: 1% !important;
@@ -131,7 +147,7 @@
   background-color: #fff;
   color: blue;
   margin-right: 14%;
-  font-size: smaller !important;
+  /* font-size: smaller !important; */
   text-transform: none !important;
 } 
 
