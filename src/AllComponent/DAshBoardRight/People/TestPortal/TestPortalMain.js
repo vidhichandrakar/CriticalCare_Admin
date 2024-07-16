@@ -113,14 +113,14 @@ function TestPortalMain() {
   const [loaderState, setLoaderState] = useState(false);
   const [selectedValue, setSelectedValue] = useState("a");
   const [open, setOpen] = useState(false);
-  const [editedQuestion, setEditedQuestion] = useState({});
+  const [editedQuestion, setEditedQuestion] = useState();
   const [addOption, setaddOption] = useState(false);
   const [openAddOptions, setAddOptions] = useState(false);
   const [addOptionText, setAddOptionText] = useState("");
+  const [questionId, setQuestionId] = useState(0);
 
-  const handleClickOpen = (e, item) => {
-    console.log("e, item", e, item);
-    setEditedQuestion(item);
+  const handleClickOpen = (editedQns, index) => {
+    setEditedQuestion(editedQns);
     setOpen(true);
   };
   const handleClose = () => {
@@ -155,6 +155,7 @@ function TestPortalMain() {
   };
   const handleAddSection = () => {
     setOpenqns(!openqns);
+    setCqopen(true);
     setMcqopen(false);
     const payload = {
       test_id: test_id,
@@ -174,16 +175,32 @@ function TestPortalMain() {
       });
     }
   };
+
+  useEffect(() => {
+    getTestByIdData();
+    getTestType({
+      callBack: (response) => {
+        setTestType(response?.data);
+      },
+    });
+  }, [test_id]);
+
   const handleCreateQns = () => {
     setOpenreateqns(!opencreaterqns);
     setCqopen(false);
     const payload = {
       test_id: test_id,
       test_type_id: selectedTestType.test_type_id,
-      test_section_name: sectionName,
-      test_section_Instruction: sectionInstruction,
-      no_of_question: noOfQuestion,
-      marks_per_question: marksPerQues,
+      test_section_name: numberOfMcqQns[numberOfMcqQns?.length - 1]
+        ?.test_section_name
+        ? numberOfMcqQns[numberOfMcqQns?.length - 1]?.test_section_name
+        : sectionName,
+      test_section_Instruction: numberOfMcqQns[numberOfMcqQns.length - 1]
+        ?.test_section_Instruction
+        ? numberOfMcqQns[numberOfMcqQns.length - 1]?.test_section_Instruction
+        : sectionInstruction,
+      no_of_question: parseInt(noOfQuestion),
+      marks_per_question: parseInt(marksPerQues),
     };
 
     if (noOfQuestion && marksPerQues) {
@@ -230,19 +247,14 @@ function TestPortalMain() {
       callBack: (response) => {
         setTestData(response?.data[0]);
         const numOfQns = response?.data[0]?.testInfoDetails;
-        const numbOfQns = numOfQns[numOfQns.length - 1];
-        setNumberOfMcqQns(numbOfQns.test_questions);
+        setNumberOfMcqQns(numOfQns);
+        if (numOfQns[numOfQns?.length - 1]?.test_info_id) {
+          setTestInfoId(numOfQns[numOfQns?.length - 1]?.test_info_id);
+        }
       },
     });
   };
-  useEffect(() => {
-    getTestByIdData();
-    getTestType({
-      callBack: (response) => {
-        setTestType(response?.data);
-      },
-    });
-  }, [test_id]);
+
   const handleSectionInfo = (value, type) => {
     if (type === "sectionName") {
       setSectionName(value);
@@ -256,7 +268,6 @@ function TestPortalMain() {
   };
 
   const handleEditQestion = (e) => {
-    console.log(e.target.value);
     let editedTextQuestion = Object.assign({}, editedQuestion);
     editedTextQuestion.question_text = e.target.value;
     setEditedQuestion(editedTextQuestion);
@@ -273,7 +284,6 @@ function TestPortalMain() {
   };
 
   const handleDeleteOption = (index, option) => {
-    console.log("indexindex", index);
     let deletedOption = Object.assign({}, editedQuestion);
     const upatedOptions = editedQuestion.question_options.filter(
       (item, insideIndex) => insideIndex !== index
@@ -312,11 +322,11 @@ function TestPortalMain() {
     editQuestions({
       questionId: editedQuestion?.question_id,
       payload: {
-        test_info_id: testInfoId,
-        questions: [editedQuestion],
+        question_text: editedQuestion.question_text,
+        question_type: editedQuestion.question_type,
+        options: editedQuestion.question_options,
       },
       callBack: (response) => {
-        console.log("responseeee", response);
         setOpen(false);
         getTestByIdData();
       },
@@ -330,7 +340,10 @@ function TestPortalMain() {
         setMcqopen={setMcqopen}
         testType={testType}
         handleTestType={handleTestType}
+        setCqopen={setCqopen}
+        numberOfMcqQns={numberOfMcqQns}
       />
+      {/* {console.log("testType",testType)} */}
       <TestFirstPage
         testData={testData}
         openqns={openqns}
@@ -340,13 +353,8 @@ function TestPortalMain() {
         noOfQuestion={noOfQuestion}
         numberOfMcqQns={numberOfMcqQns}
         setNumberOfMcqQns={setNumberOfMcqQns}
+        setQuestionId={setQuestionId}
       />
-      {console.log(
-        "sdjhhjskasx",
-        editedQuestion,
-        "dssxsx",
-        editedQuestion?.question_options
-      )}
       <BootstrapDialog
         className="PopUP"
         onClose={handleCloseDialogMCQ}
@@ -596,7 +604,7 @@ function TestPortalMain() {
             value={editedQuestion?.question_text}
             onChange={(e) => handleEditQestion(e)}
           />
-
+          {/* {console.log("editedQuestion", editedQuestion)} */}
           <FormControl>
             <div className="answersAndSingle">
               <FormLabel

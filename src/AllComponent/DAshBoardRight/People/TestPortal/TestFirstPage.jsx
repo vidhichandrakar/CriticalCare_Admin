@@ -14,11 +14,12 @@ function TestFirstPage({
   noOfQuestion,
   numberOfMcqQns,
   setNumberOfMcqQns,
+  setQuestionId,
 }) {
   return (
     <div className="testRightSection">
       <TestInstructions testData={testData} />
-      {openqns ? (
+      {numberOfMcqQns?.length !== 0 ? (
         <CreateQNS
           setCqopen={setCqopen}
           opencreaterqns={opencreaterqns}
@@ -26,10 +27,11 @@ function TestFirstPage({
           handleClickOpen={handleClickOpen}
           numberOfMcqQns={numberOfMcqQns}
           setNumberOfMcqQns={setNumberOfMcqQns}
+          setQuestionId={setQuestionId}
         />
-      ) : (
+      ) : numberOfMcqQns === 0 ? (
         <AddASection handleClickOpen={handleClickOpen} />
-      )}
+      ) : null}
     </div>
   );
 }
