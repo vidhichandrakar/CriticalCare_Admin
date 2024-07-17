@@ -15,6 +15,8 @@ function TestFirstPage({
   numberOfMcqQns,
   setNumberOfMcqQns,
   setQuestionId,
+  setResetSelectedOptns,
+  typesOfQns
 }) {
   return (
     <div className="testRightSection">
@@ -27,7 +29,8 @@ function TestFirstPage({
           handleClickOpen={handleClickOpen}
           numberOfMcqQns={numberOfMcqQns}
           setNumberOfMcqQns={setNumberOfMcqQns}
-          setQuestionId={setQuestionId}
+          setResetSelectedOptns={setResetSelectedOptns}
+          typesOfQns={typesOfQns}
         />
       ) : numberOfMcqQns === 0 ? (
         <AddASection handleClickOpen={handleClickOpen} />

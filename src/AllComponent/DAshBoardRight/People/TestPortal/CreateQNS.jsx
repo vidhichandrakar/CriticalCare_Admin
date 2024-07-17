@@ -38,7 +38,7 @@ function CreateQNS({
   noOfQuestion,
   numberOfMcqQns,
   setNumberOfMcqQns,
-  setQuestionId,
+  typesOfQns,
 }) {
   const [selectedValue, setSelectedValue] = useState("a");
   let count = 1;
@@ -62,13 +62,16 @@ function CreateQNS({
     });
     setNumberOfMcqQns(arr);
   };
-const handleClickOpenA=(e, item,index)=>{
-  const editedQns = item.filter((itm, insideIndex) => insideIndex === index)
-  handleClickOpen(editedQns[index],index);
-}
-  
+  const handleClickOpenA = (e, item, index) => {
+    const editedQns = item.filter((itm, insideIndex) => insideIndex === index);
+    handleClickOpen(editedQns[0], index);
+    let editedOptions = editedQns[0];
+    localStorage.setItem("editedOptions", JSON.stringify(editedOptions));
+  };
+
   return (
     <div className="MainQnsBox">
+      {console.log("typesOfQns==>>", typesOfQns)}
       <div className="BoxHead">
         <Typography>
           <b>abcd - 1Questions</b>
@@ -83,7 +86,6 @@ const handleClickOpenA=(e, item,index)=>{
         <StarBorderOutlinedIcon className="starIconss" />
         <Typography>Max. Section Marks: 4.00</Typography>
       </div>
-      {/* {console.log("numberOfMcqQnsnumberOfMcqQns", numberOfMcqQns)} */}
       {opencreaterqns || numberOfMcqQns?.length ? (
         <Box>
           {numberOfMcqQns?.map((item, indexSeq) => (
@@ -133,9 +135,10 @@ const handleClickOpenA=(e, item,index)=>{
                       <div className="AllBtnBox">
                         <Box
                           className="mr123 curseorpointer"
-                          onClick={(e) => handleClickOpenA(e, item.test_questions,index)}
+                          onClick={(e) =>
+                            handleClickOpenA(e, item.test_questions, index)
+                          }
                         >
-                          {/* {console.log("jdksdms", item,index)} */}
                           <EditIcon />
                           <Typography>Edit</Typography>
                         </Box>
