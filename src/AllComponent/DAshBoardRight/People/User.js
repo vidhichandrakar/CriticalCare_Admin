@@ -320,7 +320,7 @@ const User = () => {
               />
             </Paper>
           </div>
-          <Button className="filterButton">
+          <Button className="filterButton mt43">
             <FilterAltIcon className="filterIcon" /> Filter
           </Button>
         </div>
@@ -445,14 +445,14 @@ const User = () => {
                   }}
                 >
                   <Box
-                    className="redDeleteofTestPortal"
+                    className="redDeleteofTestPortal redDelete"
                     onClick={handleDeleteClick}
                     sx={{borderBottom: "1px solid #eee"}}
                   >
                     {" "}
                     <DeleteIcon className="deleteIcon" /> Delete{" "}
                   </Box>
-                  <Box className="redDeleteofTestPortal blueBlockUser">
+                  <Box className="redDeleteofTestPortal redDelete ">
                     {" "}
                     <BlockIcon className="deleteIcon" /> Block User
                   </Box>

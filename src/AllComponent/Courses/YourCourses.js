@@ -404,7 +404,6 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
             component="form"
             sx={{
               ml: 0,
-              mt: "41px",
               mb: "15px",
               display: "flex",
               alignItems: "center",

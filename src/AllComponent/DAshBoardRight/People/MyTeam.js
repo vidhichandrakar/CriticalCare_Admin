@@ -312,7 +312,7 @@ const MyTeam = () => {
           </Paper>
         </div>
 
-            <Button className="filterButton">
+            <Button className="filterButton mt43">
               <FilterAltIcon /> Filter
             </Button>
           </div>
@@ -471,9 +471,9 @@ const MyTeam = () => {
                   }}
                 >
                   <Box
-                    className="redDeleteofTestPortal"
+                    className="redDeleteofTestPortal redDelete"
                     onClick={handleDeleteClick}
-                    sx={{borderBottom: "1px solid #eee"}}
+                    sx={{borderBottom: "1px solid #eee", padding: "2%" }}
                   >
                     
                     <DeleteIcon className="deleteIcon" /> Delete{" "}
