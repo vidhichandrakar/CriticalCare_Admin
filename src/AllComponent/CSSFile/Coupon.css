@@ -1,18 +1,34 @@
-
+.coloricon{
+  color: #199884 !important;
+}
+.DeleteRed{
+  color: red !important;
+}
 .radioButtonForm{
+  display: flex;
   margin-top: 3%;
   width:100%;
 }
+/* .SpaceBetween{
+  justify-content: space-between !important;
+} */
 .scndRadioBtn{
-  margin-left:  30%;
+  margin-left:  20% !important;
   }
 .radio-icon{
   color:rgb(132, 189, 246);
 }
+
+.EditButton{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 .couponHedaerBox{
   display: flex !important;
   flex-direction: row !important;
-  width:100%;
+  justify-content: space-between;
+  width:98%;
   padding-bottom: 1%;
   border-bottom: 3px solid #b5abab !important;
 }
@@ -54,7 +70,7 @@
 }
 .UsedText{
   color: #0f7af5;
-  margin-left: 5%;
+  margin-left: 5% !important;
 }
 .ShowHideBtn{
   font-size: 0.7rem !important;
@@ -68,7 +84,7 @@
   font-size: 1.15em !important;
 }
 .mt-2{
-  margin-top: -2%;
+  margin-top:  1% !important;
 }
 .couponLastBox{
   margin-right: 1% !important;
@@ -76,9 +92,10 @@
  align-items: center;
  display: flex;
  color: #998e8e;
- margin-top: -5% !important;
+ margin-top: -2% !important;
 }
 .DiscountBox{
+  margin-top: 2%;
   margin-left: 2%;
   width: 88%;
 }
@@ -98,15 +115,20 @@
   margin-left: 27px !important;
   font-size:xx-small !important;
 }
+.jcsb{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between !important;
+}
 .courseMainCoupon{
   display: flex !important;
   flex-direction: column !important;
   background-color: #fff !important;
-  width:100% !important;
+  width:98% !important;
   margin-top: 2%;
 }
 .formMainCoupon{
-  padding: 1%;
+  padding: 3px;
   width:100%;
 }
 .yellowBox{
@@ -125,7 +147,7 @@
   background-color: #fff;
   color: blue;
   margin-right: 14%;
-  font-size: smaller !important;
+  /* font-size: smaller !important; */
   text-transform: none !important;
 } 
 
@@ -146,7 +168,7 @@
 }
 .completeCouponInfo{
   background-color:white;
-  width: 98% !important;
+  width: 96.5% !important;
   border-top: 1px solid rgb(224 223 223);
   padding-left: 15px;
 }
@@ -172,6 +194,8 @@
   font-size: smaller;
 }
 .couponInfoBoxes h3{
+  font-size: 0.9rem;
+  color: #000000cc;
   font-weight: 500 !important;
 }
 .discount{
@@ -189,6 +213,7 @@ color: blue !important;
   display: flex !important;
   flex-direction: row !important;
   justify-content: space-between !important;
+  margin-top: -10% !important;
 }
 .makeFirstHeadCenter{
   text-align: center;

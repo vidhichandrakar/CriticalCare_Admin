@@ -34,7 +34,7 @@ body {
   grid-template-areas:
     'sidebar header header header'
       'sidebar main main main';
-  height: 100vh;
+  height: 98vh;
 }
 
 /* Sidebar  */
@@ -310,12 +310,12 @@ body {
 
 @media screen and (max-width: 992px) {
   .grid-container{
-    grid-template-columns: 180px 1fr;
+    grid-template-columns: 195px 1fr;
     grid-template-rows: 0.2fr 3fr;
     grid-template-areas:
       'sidebar header header header'
         'sidebar main main main';
-    height: 100vh;
+    height: 99vh;
   }
   .header {
     justify-content: space-between;

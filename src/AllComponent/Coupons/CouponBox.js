@@ -25,6 +25,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
+import Divider from '@mui/material/Divider'; 
+
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -121,16 +123,16 @@ const CouponBox = () => {
               </Box>
               <Box className="verticalDividerOne"></Box>
 
-              <Box className="flexcol width60">
+              <Box className="flexcol width60 jcsb">
                 <div className="flexrow">
                   <Box className="DiscountBox">
                     <Typography>DISCOUNT</Typography>
                     <Box className="flexrow mt-2">
-                      <h6>Created by 360 Critical care</h6>
+                      <Typography sx={{fontSize: "0.9rem"}}>Created by 360 Critical care</Typography>
                       <Box>
                         <CircleIcon className="circleIcon" />
                       </Box>
-                      <h6 className="UsedText">Public Coupon</h6>
+                      <Typography sx={{fontSize: "0.9rem"}} className="UsedText">Public Coupon</Typography>
                     </Box>
                   </Box>
                   <Box className="couponLastBox">
@@ -139,6 +141,7 @@ const CouponBox = () => {
                         color: "white",
                         backgroundColor: "red",
                         padding: 5,
+                        marginRight: "16%",
                       }}
                     >
                       EXPIRED
@@ -154,9 +157,9 @@ const CouponBox = () => {
 
                 <div className="flexrow">
                   <Box className="couponRightBox flexrow">
-                    <h6>2023/08/27, 05:39 am - 2023/08/29, 06:30 pm</h6>
+                    <Typography sx={{fontSize: "0.9rem"}}>2023/08/27, 05:39 am - 2023/08/29, 06:30 pm</Typography>
                     <Box className="verticalDividerTwo"></Box>
-                    <h6 className="UsedText">Used 1 times</h6>
+                    <Typography sx={{fontSize: "0.9rem"}}className="UsedText">Used 1 times</Typography>
                   </Box>
 
                   <Box>
@@ -529,20 +532,27 @@ const CouponBox = () => {
           horizontal: "right",
         }}
       >
-        <Typography sx={{ p: 1, mt: -1, mr: 5 }}>
+        {/* <Box sx={{ p: 1, mt: -1, mr: 5 ,display: "flex" }}> */}
+        <Box  className="EditButton" sx={{ p: 1}}>
+
           {" "}
-          <NoteAltOutlinedIcon />
-          Details
-        </Typography>
-        <Typography sx={{ p: 1, mt: -1, mr: 5 }}>
+          <NoteAltOutlinedIcon className="coloricon"/>
+          <Typography sx={{ml: 1}}> Details</Typography>
+        </Box>
+        <Divider/>
+        <Box className="EditButton" sx={{ p: 1}} >
           {" "}
-          <HistorySharpIcon />
-          View Edit History
-        </Typography>
-        <Typography sx={{ p: 1, mt: -1, mr: 5 }}>
+          <HistorySharpIcon  className="coloricon"/>
+          <Typography sx={{ml: 1}}> View Edit History</Typography>
+        </Box>
+        <Divider/>
+        {/* <Box sx={{ p: 1, mt: -1, mr: 5,display: "flex" }}> */}
+        <Box className="EditButton" sx={{ p: 1}}>
+
           {" "}
-          <RestoreFromTrashSharpIcon /> Delete
-        </Typography>
+          <RestoreFromTrashSharpIcon className="DeleteRed"/> 
+          <Typography sx={{ml: 1}} className="DeleteRed"> Delete</Typography>
+        </Box>
       </Popover>
     </div>
   );

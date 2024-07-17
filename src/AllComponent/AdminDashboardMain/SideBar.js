@@ -171,7 +171,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                     </Link>
                   </li>
                   <li className="listDesign">
-                    <Link to="/admin/CreateCoupon" className="textDecoration">
+                    <Link to="/admin/CouponMain" className="textDecoration">
                       <Typography
                         id="hoverrr"
                         className={

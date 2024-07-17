@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const CouponHeader = ({}) => {
   return (
     <Box className="couponHedaerBox">
-      <Typography className="couponHeaderText">Coupon Codes</Typography>
+      <Typography className="couponHeaderText"></Typography>
       <Box className="couponHeaderButton">
         <Link to="/admin/CreateCoupon">
           <Button variant="contained" className="couponButton">
