@@ -7,24 +7,14 @@ import {
   createNumberOfQuestions,
   createTestInfo,
   editQuestions,
-  getNumberOfQuestions,
   getTestById,
   getTestType,
 } from "../../../ActionFactory/apiActions";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import FormatColorTextIcon from "@mui/icons-material/FormatColorText";
-import HdrAutoIcon from "@mui/icons-material/HdrAuto";
 import Checkbox from "@mui/material/Checkbox";
-import FlipToFrontIcon from "@mui/icons-material/FlipToFront";
-import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import SettingsIcon from "@mui/icons-material/Settings";
 import Switch from "@mui/material/Switch";
 import Radio from "@mui/material/Radio";
-import LaunchIcon from "@mui/icons-material/Launch";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
@@ -39,7 +29,6 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
 import LoaderComponent from "../../../../Util/LoaderComponent";
-// import Checkbox from '@mui/joy/Checkbox';
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -116,30 +105,31 @@ function TestPortalMain() {
   const [editedQuestion, setEditedQuestion] = useState();
   const [openAddOptions, setAddOptions] = useState(false);
   const [addOptionText, setAddOptionText] = useState("");
-  const [typesOfQns, setTypesOfQns] = useState("Single");
-
+  const [typesOfQns, setTypesOfQns] = useState("");
+const [selectedTypeQns, setSelectedTypeQns] = useState("single-select")
   const handleClickOpen = (editedQns, index) => {
     setEditedQuestion(editedQns);
+    setTypesOfQns(editedQns.question_type);
+    // setSelectedTypeQns()
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
   const handleChangeOption = (e, option_id, question_id) => {
-    if (typesOfQns === "Single") {
-    let selectedOption = Object.assign({}, editedQuestion);
-    if (selectedOption?.question_id === question_id) {
-      selectedOption?.question_options.map((option) => {
-        if (option?.option_id === option_id) {
-          option.is_correct = e.target.checked;
-        } else {
-          option.is_correct = false;
-        }
-      });
-    }
-    setEditedQuestion(selectedOption);
-    }
-    else {
+    if (typesOfQns === "single-select") {
+      let selectedOption = Object.assign({}, editedQuestion);
+      if (selectedOption?.question_id === question_id) {
+        selectedOption?.question_options.map((option) => {
+          if (option?.option_id === option_id) {
+            option.is_correct = e.target.checked;
+          } else {
+            option.is_correct = false;
+          }
+        });
+      }
+      setEditedQuestion(selectedOption);
+    } else {
       let selectedOption = Object.assign({}, editedQuestion);
       if (selectedOption?.question_id === question_id) {
         selectedOption?.question_options.map((option) => {
@@ -151,7 +141,7 @@ function TestPortalMain() {
       setEditedQuestion(selectedOption);
     }
   };
-  
+
   const handleTestType = (value) => {
     setSelectedTestType(value);
   };
@@ -330,28 +320,36 @@ function TestPortalMain() {
   };
 
   const handelSaveOption = () => {
-    // if (typesOfQns === "Single") {
-      editQuestions({
-        questionId: editedQuestion?.question_id,
-        payload: {
-          question_text: editedQuestion.question_text,
-          question_type: editedQuestion.question_type,
-          options: editedQuestion.question_options,
-        },
-        callBack: (response) => {
-          setOpen(false);
-          getTestByIdData();
-        },
-      });
-    // } else {
-      // console.log("ldkjjksj");
-    // }
+    // if (typesOfQns === "single-select") {
+    editQuestions({
+      questionId: editedQuestion?.question_id,
+      payload: {
+        question_text: editedQuestion.question_text,
+        question_type: typesOfQns,
+        options: editedQuestion.question_options,
+      },
+      callBack: (response) => {
+        setOpen(false);
+        getTestByIdData();
+      },
+    });
   };
 
   const handleTypeOfQns = (e) => {
     setTypesOfQns(e.target.value);
     const editedOptions = JSON.parse(localStorage.getItem("editedOptions"));
+    if (e.target.value != editedOptions.question_type) {
+      editedOptions?.question_options.map((item, index) => {
+        if (index === 0) {
+          item.is_correct = true;
+        } else {
+          item.is_correct = false;
+        }
+      });
+    }
     setEditedQuestion(editedOptions);
+
+    
   };
   return (
     <div className="grid-container-TestPortal ">
@@ -364,7 +362,6 @@ function TestPortalMain() {
         setCqopen={setCqopen}
         numberOfMcqQns={numberOfMcqQns}
       />
-
       <TestFirstPage
         testData={testData}
         openqns={openqns}
@@ -637,14 +634,15 @@ function TestPortalMain() {
                 id="Add difficulty level"
                 className="singleDropDown"
                 onChange={handleTypeOfQns}
+                value={typesOfQns}
               >
-                <option value="multipleChoice">Multiple Choice</option>
-                <option value="Single" selected>
+                <option value="multi-select">Multiple Choice</option>
+                <option value="single-select" selected>
                   Single
                 </option>
               </select>
             </div>
-            {typesOfQns === "Single" ? (
+            {typesOfQns === "single-select" ? (
               <>
                 <RadioGroup
                   aria-labelledby="demo-radio-buttons-group-label"
@@ -693,7 +691,7 @@ function TestPortalMain() {
                   })}
                 </RadioGroup>
               </>
-            ) : typesOfQns === "multipleChoice" ? (
+            ) : typesOfQns === "multi-select" ? (
               <>
                 {editedQuestion?.question_options?.map((item, index) => {
                   return (

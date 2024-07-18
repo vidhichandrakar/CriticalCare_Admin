@@ -403,6 +403,9 @@
     align-items: center;
 }
 
+.toDefaultPointer{
+    cursor: default;
+}
 
 .optionsFeid .MuiOutlinedInput-root{
     border-radius: 4px !important;

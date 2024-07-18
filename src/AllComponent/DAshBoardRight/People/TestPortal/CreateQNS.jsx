@@ -3,22 +3,13 @@ import React, { useState } from "react";
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
-import DeleteIcon from "@mui/icons-material/Delete";
-import TextField from "@mui/material/TextField";
 import EditIcon from "@mui/icons-material/Edit";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import TextIncreaseRoundedIcon from "@mui/icons-material/TextIncreaseRounded";
 import DeleteOutlineRoundedIcon from "@mui/icons-material/DeleteOutlineRounded";
-import HelpCenterOutlinedIcon from "@mui/icons-material/HelpCenterOutlined";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
 import Checkbox from "@mui/material/Checkbox";
-import Switch from "@mui/material/Switch";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -29,6 +20,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     padding: theme.spacing(1),
   },
 }));
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function CreateQNS({
   setCqopen,
@@ -45,23 +37,7 @@ function CreateQNS({
   const handleClickOpenCQ = () => {
     setCqopen(true);
   };
-  const handleChangeOption = (event, option_id, question_id) => {
-    let arr = [...numberOfMcqQns];
-    arr.map((item) => {
-      item?.test_questions.map((questionOption) => {
-        if (questionOption.question_id === question_id) {
-          questionOption.question_options.map((option) => {
-            if (option.option_id === option_id) {
-              option.is_correct = event.target.checked;
-            } else {
-              option.is_correct = false;
-            }
-          });
-        }
-      });
-    });
-    setNumberOfMcqQns(arr);
-  };
+
   const handleClickOpenA = (e, item, index) => {
     const editedQns = item.filter((itm, insideIndex) => insideIndex === index);
     handleClickOpen(editedQns[0], index);
@@ -71,7 +47,6 @@ function CreateQNS({
 
   return (
     <div className="MainQnsBox">
-      {console.log("typesOfQns==>>", typesOfQns)}
       <div className="BoxHead">
         <Typography>
           <b>abcd - 1Questions</b>
@@ -98,39 +73,65 @@ function CreateQNS({
                       <Typography sx={{ color: "rgba(0, 0, 0, 0.685)" }}>
                         {count++}. {questionTest.question_text}
                       </Typography>
+                      {questionTest.question_type === "single-select" ? (
+                        <>
+                          <RadioGroup
+                            name="radio-buttons-group"
+                          >
+                            {questionTest.question_options.map((option) => {
+                              return (
+                                <div className="addingDeleteOptions mt1">
+                                  <Radio
+                                    checked={option.is_correct}
+                                    className="toDefaultPointer"
+                                    value={option.option_id}
+                                    name="radio-buttons"
+                                    inputProps={{ "aria-label": "A" }}
+                                  />
+                                  <Typography>{option.option_text}</Typography>
+                                </div>
+                              );
+                            })}
+                          </RadioGroup>
+                        </>
+                      ) : (
+                        <div>
+                          <>
+                            <RadioGroup
+                              aria-labelledby="demo-radio-buttons-group-label"
+                              // defaultValue="female"
+                              name="radio-buttons-group"
+                            >
+                              {questionTest.question_options.map((option) => {
+                                return (
+                                  <div className="addingDeleteOptions mt1">
+                                    <Checkbox
+                                      // onChange={(e) =>
+                                      //   handleChangeOption(
+                                      //     e,
+                                      //     option.option_id,
+                                      //     option.question_id
+                                      //   )
+                                      // }
+                                      checked={option.is_correct}
+                                      {...label}
+                                    />
+                                    <Typography>
+                                      {option.option_text}
+                                    </Typography>
+                                  </div>
+                                );
+                              })}
+                            </RadioGroup>
+                          </>
+                        </div>
+                      )}
 
-                      <RadioGroup
-                        aria-labelledby="demo-radio-buttons-group-label"
-                        // defaultValue="female"
-                        name="radio-buttons-group"
-                      >
-                        {questionTest.question_options.map((option) => {
-                          return (
-                            <div className="addingDeleteOptions mt1">
-                              <Radio
-                                checked={option.is_correct}
-                                onChange={(e) =>
-                                  handleChangeOption(
-                                    e,
-                                    option.option_id,
-                                    option.question_id
-                                  )
-                                }
-                                value={option.option_id}
-                                name="radio-buttons"
-                                inputProps={{ "aria-label": "A" }}
-                              />
-                              <Typography>{option.option_text}</Typography>
-                            </div>
-                          );
-                        })}
-                        ;
-                      </RadioGroup>
                       <Typography
                         className="noBox"
                         style={{ marginTop: "1%", marginLeft: "1%" }}
                       >
-                        +4
+                        {"+" + item.marks_per_question}
                       </Typography>
                       <div className="AllBtnBox">
                         <Box
