@@ -195,7 +195,7 @@ const TestPortal = () => {
   const [userData, setUserData] = useState([]);
   const open = Boolean(anchorEl);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
   const id = open ? "simple-popover" : undefined;
   const [opened, setOpen] = useState(false);
   const [addTest, setAddTest] = useState({
@@ -374,7 +374,7 @@ const TestPortal = () => {
               </Paper>
             </div>
 
-            <Button className="filterButton">
+            <Button className="filterButton mt43">
               <FilterAltIcon /> Filter
             </Button>
           </div>
@@ -477,7 +477,7 @@ const TestPortal = () => {
           sx={{ width: "100%", overflow: "hidden" }}
           className="userCompleteTable"
         >
-          <TableContainer sx={{ maxHeight: 540 }}>
+          <TableContainer sx={{ maxHeight: 520 }}>
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
@@ -545,9 +545,10 @@ const TestPortal = () => {
                   }}
                 >
                   <Box
-                    className="redDeleteofTestPortal"
+                    className="redDeleteofTestPortal redDelete"
                     onClick={handleDeleteClick}
-                    sx={{borderBottom: "1px solid #eee"}}
+                    sx={{borderBottom: "1px solid #eee", color: "red"}}
+
                   >
                     {" "}
                     <DeleteIcon className="deleteIcon" /> Delete{" "}

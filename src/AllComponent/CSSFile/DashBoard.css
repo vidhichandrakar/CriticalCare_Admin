@@ -392,9 +392,12 @@ body {
   justify-content: center;
   align-items: center;
   text-transform: none !important;
-  border: 1px solid grey !important;
-    margin-top: 43px !important;
-    padding: 0px 20px !important;
+  border: 1px solid grey !important;  
+  height: 6vh;
+  border-radius: 6px;
+}
+.mt43{
+  margin-top: 43px !important;
 }
 .filterButtonssss {
   display: flex;
@@ -660,8 +663,14 @@ body {
   flex-direction: row !important;
   align-items: center !important;
   text-align: left !important;
-  padding: 3px 9px !important;
+  padding: 9px 14px !important;
   cursor: pointer;
+}
+.redDeleteofTestPortal:hover{
+  background-color: #eee;
+}
+.paddingbox{
+  padding: 14px 14px;
 }
 .blueBlockUser {
   color: #0075ff !important;
