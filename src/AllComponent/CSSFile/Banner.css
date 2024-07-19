@@ -1,12 +1,69 @@
 .BannerMain{
     margin: 30px;
 }
+.flexrow{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.flexCol{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: grey;
+}
+.MainBannerBox{
+    display: flex;
+    flex-direction: row;
+}
 .BannerBox{
+    width: 60%;
     height: 87vh;
     overflow-y: scroll;
     margin-top: 1%;
-    background-color: white;
-    
+    background-color: white;   
+}
+.RemoveButton{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1%;
+    color: gray;
+    font-size: 0.9rem;
+}
+.PreviewBox{
+    width: 38%;
+    height: 87vh;
+    overflow-y: scroll;
+    margin-top: 1%;
+    background-color: white;  
+    padding: 1%; 
+    color: grey;
+}
+.ViewPreviousBox{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    margin-top: 1%;
+}
+.MobilePreviewBox{
+    border: 1px solid #eee;
+    margin-top: 2%;
+    padding: 2%;
+}
+.MobilePreviewHeading{
+    border-bottom: 1px solide #eee;
+}
+.UploadBtton{
+    margin: 20px;
+    border: 2px solid #eee;
+    padding: 2%;
+}
+.UploadBtton button{
+    border: dotted 1px  !important;
+    width: 100%;
+    padding: 2% 1%;
 }
 .BannerMainBox{
     display: grid;
@@ -41,13 +98,18 @@
 }
 .InsideBannerBox{
     margin: 20px;
-    border: 2px solid grey ;
+    border: 2px solid #eee ;
 }
 .InsideMainBox{
     margin: 20px;
 }
+.iconBox{
+    margin: 2%;
+    justify-content: space-between;
+}
+
 .BorderBottom{
-    border: 1px solid gray;
+    border: 2px solid #eee;
     text-align: center;
     align-items: center;
 }
