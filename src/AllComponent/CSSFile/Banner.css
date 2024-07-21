@@ -121,7 +121,12 @@
     padding: 3%;
     justify-content: space-between;
 }
-
+.emptycircle{
+    padding: 30% 50%;
+}
+.emptyrec{
+    padding: 0 50%;
+}
 .BorderBottom{
     border: 2px solid #eee;
     text-align: center;
