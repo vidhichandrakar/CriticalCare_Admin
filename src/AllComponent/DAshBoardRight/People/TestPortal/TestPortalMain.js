@@ -7,24 +7,14 @@ import {
   createNumberOfQuestions,
   createTestInfo,
   editQuestions,
-  getNumberOfQuestions,
   getTestById,
   getTestType,
 } from "../../../ActionFactory/apiActions";
-import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import FormatColorTextIcon from "@mui/icons-material/FormatColorText";
-import HdrAutoIcon from "@mui/icons-material/HdrAuto";
 import Checkbox from "@mui/material/Checkbox";
-import FlipToFrontIcon from "@mui/icons-material/FlipToFront";
-import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
-import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import SettingsIcon from "@mui/icons-material/Settings";
 import Switch from "@mui/material/Switch";
 import Radio from "@mui/material/Radio";
-import LaunchIcon from "@mui/icons-material/Launch";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
@@ -111,33 +101,45 @@ function TestPortalMain() {
   const [testInfoId, setTestInfoId] = useState();
   const [numberOfMcqQns, setNumberOfMcqQns] = useState();
   const [loaderState, setLoaderState] = useState(false);
-  const [selectedValue, setSelectedValue] = useState("a");
   const [open, setOpen] = useState(false);
   const [editedQuestion, setEditedQuestion] = useState();
-  const [addOption, setaddOption] = useState(false);
   const [openAddOptions, setAddOptions] = useState(false);
   const [addOptionText, setAddOptionText] = useState("");
-  const [questionId, setQuestionId] = useState(0);
-
+  const [typesOfQns, setTypesOfQns] = useState("");
+const [selectedTypeQns, setSelectedTypeQns] = useState("single-select")
   const handleClickOpen = (editedQns, index) => {
     setEditedQuestion(editedQns);
+    setTypesOfQns(editedQns.question_type);
+    // setSelectedTypeQns()
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
   const handleChangeOption = (e, option_id, question_id) => {
-    let selectedOption = Object.assign({}, editedQuestion);
-    if (selectedOption?.question_id === question_id) {
-      selectedOption?.question_options.map((option) => {
-        if (option?.option_id === option_id) {
-          option.is_correct = e.target.checked;
-        } else {
-          option.is_correct = false;
-        }
-      });
+    if (typesOfQns === "single-select") {
+      let selectedOption = Object.assign({}, editedQuestion);
+      if (selectedOption?.question_id === question_id) {
+        selectedOption?.question_options.map((option) => {
+          if (option?.option_id === option_id) {
+            option.is_correct = e.target.checked;
+          } else {
+            option.is_correct = false;
+          }
+        });
+      }
+      setEditedQuestion(selectedOption);
+    } else {
+      let selectedOption = Object.assign({}, editedQuestion);
+      if (selectedOption?.question_id === question_id) {
+        selectedOption?.question_options.map((option) => {
+          if (option?.option_id === option_id) {
+            option.is_correct = e.target.checked;
+          }
+        });
+      }
+      setEditedQuestion(selectedOption);
     }
-    setEditedQuestion(selectedOption);
   };
 
   const handleTestType = (value) => {
@@ -308,7 +310,6 @@ function TestPortalMain() {
     let questionId = editedQuestion?.question_options[0].question_id;
     addedOptions.push({
       is_correct: false,
-      // option_id: "",
       option_text: addOptionText,
       question_id: questionId,
     });
@@ -319,11 +320,12 @@ function TestPortalMain() {
   };
 
   const handelSaveOption = () => {
+    // if (typesOfQns === "single-select") {
     editQuestions({
       questionId: editedQuestion?.question_id,
       payload: {
         question_text: editedQuestion.question_text,
-        question_type: editedQuestion.question_type,
+        question_type: typesOfQns,
         options: editedQuestion.question_options,
       },
       callBack: (response) => {
@@ -331,6 +333,23 @@ function TestPortalMain() {
         getTestByIdData();
       },
     });
+  };
+
+  const handleTypeOfQns = (e) => {
+    setTypesOfQns(e.target.value);
+    const editedOptions = JSON.parse(localStorage.getItem("editedOptions"));
+    if (e.target.value != editedOptions.question_type) {
+      editedOptions?.question_options.map((item, index) => {
+        if (index === 0) {
+          item.is_correct = true;
+        } else {
+          item.is_correct = false;
+        }
+      });
+    }
+    setEditedQuestion(editedOptions);
+
+    
   };
   return (
     <div className="grid-container-TestPortal ">
@@ -343,7 +362,6 @@ function TestPortalMain() {
         setCqopen={setCqopen}
         numberOfMcqQns={numberOfMcqQns}
       />
-      {/* {console.log("testType",testType)} */}
       <TestFirstPage
         testData={testData}
         openqns={openqns}
@@ -353,7 +371,7 @@ function TestPortalMain() {
         noOfQuestion={noOfQuestion}
         numberOfMcqQns={numberOfMcqQns}
         setNumberOfMcqQns={setNumberOfMcqQns}
-        setQuestionId={setQuestionId}
+        typesOfQns={typesOfQns}
       />
       <BootstrapDialog
         className="PopUP"
@@ -586,9 +604,6 @@ function TestPortalMain() {
                 >
                   <option value="javascript">JavaScript</option>
                   <option value="python">Python</option>
-                  <option value="c++" disabled>
-                    C++
-                  </option>
                   <option value="java" selected>
                     Add difficulty level
                   </option>
@@ -604,7 +619,7 @@ function TestPortalMain() {
             value={editedQuestion?.question_text}
             onChange={(e) => handleEditQestion(e)}
           />
-          {/* {console.log("editedQuestion", editedQuestion)} */}
+
           <FormControl>
             <div className="answersAndSingle">
               <FormLabel
@@ -618,60 +633,105 @@ function TestPortalMain() {
                 name="Add difficulty level"
                 id="Add difficulty level"
                 className="singleDropDown"
+                onChange={handleTypeOfQns}
+                value={typesOfQns}
               >
-                <option value="javascript">JavaScript</option>
-                <option value="python">Python</option>
-                <option value="c++" disabled>
-                  C++
-                </option>
-                <option value="java" selected>
+                <option value="multi-select">Multiple Choice</option>
+                <option value="single-select" selected>
                   Single
                 </option>
               </select>
             </div>
+            {typesOfQns === "single-select" ? (
+              <>
+                <RadioGroup
+                  aria-labelledby="demo-radio-buttons-group-label"
+                  defaultValue="female"
+                  name="radio-buttons-group"
+                >
+                  {editedQuestion?.question_options?.map((item, index) => {
+                    return (
+                      <div className="addingDeleteOptions">
+                        <Radio
+                          checked={item.is_correct}
+                          onChange={(e) =>
+                            handleChangeOption(
+                              e,
+                              item.option_id,
+                              item.question_id
+                            )
+                          }
+                          value="a"
+                          name="radio-buttons"
+                          inputProps={{ "aria-label": "A" }}
+                        />
+                        <TextField
+                          className="optionsFeid"
+                          id="outlined-helperText"
+                          defaultValue="Option 1"
+                          value={item.option_text}
+                          onChange={(e) =>
+                            handleRadioOptionChanges(e, item.option_id)
+                          }
+                        />
 
-            <RadioGroup
-              aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue="female"
-              name="radio-buttons-group"
-            >
-              {editedQuestion?.question_options?.map((item, index) => {
-                return (
-                  <div className="addingDeleteOptions">
-                    <Radio
-                      checked={item.is_correct}
-                      onChange={(e) =>
-                        handleChangeOption(e, item.option_id, item.question_id)
-                      }
-                      value="a"
-                      name="radio-buttons"
-                      inputProps={{ "aria-label": "A" }}
-                    />
-                    <TextField
-                      className="optionsFeid"
-                      id="outlined-helperText"
-                      defaultValue="Option 1"
-                      value={item.option_text}
-                      onChange={(e) =>
-                        handleRadioOptionChanges(e, item.option_id)
-                      }
-                    />
-
+                        <div className="deleteComponent">
+                          <h5
+                            onClick={(e) =>
+                              handleDeleteOption(index, item.option_id)
+                            }
+                            style={{ cursor: "pointer" }}
+                          >
+                            <DeleteIcon className="deleteIconSixthPage" />
+                            Delete
+                          </h5>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </RadioGroup>
+              </>
+            ) : typesOfQns === "multi-select" ? (
+              <>
+                {editedQuestion?.question_options?.map((item, index) => {
+                  return (
                     <div className="deleteComponent">
-                      <h5
-                        onClick={(e) =>
-                          handleDeleteOption(index, item.option_id)
-                        }
-                        style={{ cursor: "pointer" }}
-                      >
-                        <DeleteIcon className="deleteIconSixthPage" />
-                        Delete
-                      </h5>
+                      <Box className="CheckBOx">
+                        <Checkbox
+                          onChange={(e) =>
+                            handleChangeOption(
+                              e,
+                              item.option_id,
+                              item.question_id
+                            )
+                          }
+                          checked={item.is_correct}
+                          {...label}
+                        />
+                        <TextField
+                          className="optionsFeid"
+                          id="outlined-helperText"
+                          defaultValue="Option 1"
+                          value={item.option_text}
+                          onChange={(e) =>
+                            handleRadioOptionChanges(e, item.option_id)
+                          }
+                        />
+                        <h5
+                          onClick={(e) =>
+                            handleDeleteOption(index, item.option_id)
+                          }
+                          style={{ cursor: "pointer" }}
+                        >
+                          <DeleteIcon className="deleteIconSixthPage" />
+                          Delete
+                        </h5>
+                      </Box>
                     </div>
-                  </div>
-                );
-              })}
-            </RadioGroup>
+                  );
+                })}
+              </>
+            ) : null}
           </FormControl>
 
           <Button

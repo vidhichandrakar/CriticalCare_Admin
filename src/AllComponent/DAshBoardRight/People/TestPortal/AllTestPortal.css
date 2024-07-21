@@ -379,7 +379,7 @@
     border-radius: 4px !important;
     position: relative;
     bottom: 13px;
-    color: #b1abab;
+    color: #020000;
 }
 .answersAndSingle{
     display: flex;
@@ -403,6 +403,9 @@
     align-items: center;
 }
 
+.toDefaultPointer{
+    cursor: default;
+}
 
 .optionsFeid .MuiOutlinedInput-root{
     border-radius: 4px !important;

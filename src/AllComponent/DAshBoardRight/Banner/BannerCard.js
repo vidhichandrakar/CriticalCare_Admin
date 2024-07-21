@@ -7,6 +7,12 @@ import Typography from "@mui/material/Typography";
 import ModeIcon from "@mui/icons-material/Mode";
 import { styled } from "@mui/material/styles";
 import BannerPopUp from "./BannerPopUp";
+import Switch from '@mui/material/Switch';
+
+
+const label = { inputProps: { 'aria-label': 'Switch demo' } };
+
+
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
   clipPath: "inset(50%)",
@@ -96,6 +102,12 @@ const BannerCard = (props) => {
                 <Button className="changeBtn" onClick={handleClickPopUp}>
                   Change
                 </Button>
+              </div>
+              <div className="RemoveButton">
+                <Typography>
+                  Remove banner automatically after fixed date
+                </Typography>
+                <Switch {...label} defaultChecked />
               </div>
             </main>
           </div>

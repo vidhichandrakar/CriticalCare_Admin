@@ -231,7 +231,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   <Select
                     value={cat.category_name}
                     onChange={(e) => handleChange(e)}
-                    className="addCatTextField"
+                    className="addCatTextField paddingbox"
                   >
                     {cat.map((item) => (
                       <MenuItem key={item._id} value={item}>
