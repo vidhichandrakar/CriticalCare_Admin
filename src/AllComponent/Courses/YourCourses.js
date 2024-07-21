@@ -46,6 +46,7 @@ import SearchIcon from "@mui/icons-material/Search";
 // import Divider from "@mui/material/Divider";
 import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
+import { error } from "ajv/dist/vocabularies/applicator/dependencies";
 
 
 
@@ -71,6 +72,8 @@ const YourCourses = () => {
   const [saveMemberDetails, setSaveMemberDetails] = useState({});
   const [subCategory, setSubCategory] = useState({});
   const [durationname, setDurationname] = useState({});
+  const [searchQuery, setSearchQuery] = useState("");
+
 
   useEffect(() => {
      
@@ -336,6 +339,26 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
     setAnchorEl(null);
   };
 
+  // search filter
+  const handleSearchChange = (search) => {
+    const query = search.target.value;
+    setSearchQuery(query);
+
+    getAllCourses({
+      searchString: query,
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setAllCourses(userCallBack);
+        setCourseData(userCallBack);
+        setLoaderState(false);
+      },
+      error: (error) => {
+        // toast.error(error.message);
+        setLoaderState(false);
+      },
+    })
+  }
+
   useEffect(() => {
     if (redirectRestriction()) {
       setLoaderState(true);
@@ -415,11 +438,14 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
               <SearchIcon />
             </IconButton>
             <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+
             <InputBase
               sx={{ ml: 1, flex: 1 }}
               placeholder="Search your course by name"
               inputProps={{ "aria-label": "search your course by name" }}
+              onChange={handleSearchChange}
             />
+
           </Paper>
         </div>
 
