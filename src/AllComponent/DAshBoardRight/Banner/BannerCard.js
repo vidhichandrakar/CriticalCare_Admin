@@ -27,6 +27,7 @@ const VisuallyHiddenInput = styled("input")({
 const BannerCard = (props) => {
   const [storedFilePath, setStoredFilePath] = useState([]);
   const [openPopUp, setOpenPopUp] = useState(false);
+  const [openPopUpPreivous, setOpenPopUpPreivous] = useState(false);
 
   const handleImageUpload = (value, id) => {
     let storedPath = [...storedFilePath];
@@ -53,6 +54,7 @@ const BannerCard = (props) => {
   const handleClickPopUp = () => {
     setOpenPopUp(!openPopUp);
   };
+ 
   return (
     <>
       <BannerPopUp openPopUp={openPopUp} handleClickPopUp={handleClickPopUp} />
@@ -113,6 +115,7 @@ const BannerCard = (props) => {
           </div>
         </div>
       ))}
+      
     </>
   );
 };

@@ -23,6 +23,10 @@
     margin-top: 1%;
     background-color: white;   
 }
+.BannerCArdBox{
+    height: 40vh;
+    overflow-y: scroll;
+}
 .RemoveButton{
     display: flex;
     flex-direction: row;
@@ -46,6 +50,10 @@
     flex-direction: row;
     justify-content: end;
     margin-top: 1%;
+    cursor: pointer;
+}
+.PreviosCardBannerBox{
+    margin: 22px;
 }
 .MobilePreviewBox{
     border: 1px solid #eee;
