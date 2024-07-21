@@ -7,6 +7,12 @@ import Typography from "@mui/material/Typography";
 import ModeIcon from "@mui/icons-material/Mode";
 import { styled } from "@mui/material/styles";
 import BannerPopUp from "./BannerPopUp";
+import Switch from '@mui/material/Switch';
+
+
+const label = { inputProps: { 'aria-label': 'Switch demo' } };
+
+
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
   clipPath: "inset(50%)",
@@ -21,6 +27,7 @@ const VisuallyHiddenInput = styled("input")({
 const BannerCard = (props) => {
   const [storedFilePath, setStoredFilePath] = useState([]);
   const [openPopUp, setOpenPopUp] = useState(false);
+  const [openPopUpPreivous, setOpenPopUpPreivous] = useState(false);
 
   const handleImageUpload = (value, id) => {
     let storedPath = [...storedFilePath];
@@ -47,6 +54,7 @@ const BannerCard = (props) => {
   const handleClickPopUp = () => {
     setOpenPopUp(!openPopUp);
   };
+ 
   return (
     <>
       <BannerPopUp openPopUp={openPopUp} handleClickPopUp={handleClickPopUp} />
@@ -97,10 +105,17 @@ const BannerCard = (props) => {
                   Change
                 </Button>
               </div>
+              <div className="RemoveButton">
+                <Typography>
+                  Remove banner automatically after fixed date
+                </Typography>
+                <Switch {...label} defaultChecked />
+              </div>
             </main>
           </div>
         </div>
       ))}
+      
     </>
   );
 };
