@@ -19,6 +19,7 @@ import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
 import Checkbox from '@mui/material/Checkbox';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import CloseIcon from '@mui/icons-material/Close';
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -96,8 +97,19 @@ function BannerPopUp({openPopUp, handleClickPopUp}) {
               handleClickPopUp();
             },
           }}
+          className="dialogWidth"
         >
-          <DialogTitle className="popUpheader"> <ArrowBackIcon />Selected Course(s) - 1 Selected</DialogTitle>
+          <DialogTitle className="popUpheader">
+            <Box className="flexrow spacebt"> 
+              <Box className="flexrow">
+                <ArrowBackIcon /> 
+                <Typography sx={{ml:1}}>Selected Course(s) - 1 Selected </Typography>
+              </Box> 
+              <Box>
+                 <CloseIcon />
+              </Box>
+
+            </Box></DialogTitle>
           <DialogContent>
             <DialogContentText>
             <div>
@@ -125,6 +137,9 @@ function BannerPopUp({openPopUp, handleClickPopUp}) {
               </Paper>
             </div>
             </DialogContentText>
+            
+          </DialogContent>
+          <Box className="radioText">
             <div>
            <Typography>
             Courses (3)
@@ -172,7 +187,7 @@ function BannerPopUp({openPopUp, handleClickPopUp}) {
           <Typography sx={{ml: 2}}> Trics 1 Free Mock Test For EDIC - 1</Typography>
           </div>
           </Box>
-          </DialogContent>
+            </Box>
           <div className="popUpDoneBtn">
             <Button
               style={{ width: "100px", float: "right" }}
@@ -186,7 +201,10 @@ function BannerPopUp({openPopUp, handleClickPopUp}) {
 
           
         </Dialog>
-             </React.Fragment>:<React.Fragment>
+             </React.Fragment>
+  
+             :
+             <React.Fragment>
         <Dialog
           open={openPopUp}
           onClose={handleClickPopUp}
@@ -264,7 +282,7 @@ function BannerPopUp({openPopUp, handleClickPopUp}) {
             {hideDropDown && (
               <Box sx={{ml:1}}>
             <FormControl
-              sx={{minWidth: 550, mt: -2 }}
+              sx={{minWidth: 550, mt: -1 }}
               className="categorySelect"
             >
               {commonSelect(
@@ -298,7 +316,7 @@ function BannerPopUp({openPopUp, handleClickPopUp}) {
             {hideLinkDropDown && (
               <Box sx={{ml:1}}>
             <FormControl
-              sx={{ m: 1, minWidth: 550, mt: -2 }}
+              sx={{ m: 1, minWidth: 550, mt: -1 }}
               className="categorySelect"
             >
               {commonTextField(
@@ -330,7 +348,7 @@ function BannerPopUp({openPopUp, handleClickPopUp}) {
             {hideYoutubeLinkDropDown && (
               <Box sx={{ml:1}}>
             <FormControl
-              sx={{ m: 1, minWidth: 550, mt: -2 }}
+              sx={{ m: 1, minWidth: 550, mt: -1 }}
               className="categorySelect"
             >
               {commonTextField(

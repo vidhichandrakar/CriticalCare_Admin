@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: grey;
+    /* color: grey; */
 }
 .MainBannerBox{
     display: flex;
@@ -38,7 +38,7 @@
 }
 .PreviewBox{
     width: 38%;
-    height: 87vh;
+    height: 84vh;
     overflow-y: scroll;
     margin-top: 1%;
     background-color: white;  
@@ -56,12 +56,17 @@
     margin: 22px;
 }
 .MobilePreviewBox{
-    border: 1px solid #eee;
+    border: 2px solid #eee;
     margin-top: 2%;
-    padding: 2%;
+    border-radius: 10px;
+    /* padding: 2%; */
+}
+.mobilepreviewbannerbox{
+    padding: 3%;
 }
 .MobilePreviewHeading{
-    border-bottom: 1px solide #eee;
+    border-bottom: 2px solid #eee;
+    padding: 3%;
 }
 .UploadBtton{
     margin: 20px;
@@ -112,7 +117,8 @@
     margin: 20px;
 }
 .iconBox{
-    margin: 2%;
+    border-top: 2px solid #eee;
+    padding: 3%;
     justify-content: space-between;
 }
 

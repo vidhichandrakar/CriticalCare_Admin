@@ -72,8 +72,8 @@ const Banner = () => {
                   <Typography sx={{ ml: 1 }}>360 Critical Care</Typography>
                 </Box>
 
-                <Box>
-                  <Typography>IMPORTANT INFORMATION</Typography>
+                <Box className="mobilepreviewbannerbox">
+                  <Typography sx={{mb: 1}}>IMPORTANT INFORMATION</Typography>
                   {/* <div
                     id="carouselExampleInterval"
                     className="carousel slide"
