@@ -15,17 +15,27 @@
     flex-direction: row;
     justify-content: space-between !important;
     margin: 10px;
-    margin-left: '40px',
+    margin-left: '40px';
+    align-items: center,
 }
 
 .popUpDoneBtn {
     padding: 30px;
     /* width: 100px; */
 }
-
+.CoursePopupMainBox{
+    height: 40vh;
+    overflow-y: scroll;
+}
+.CoursePopupBox{
+    margin-top: 2%;
+    padding-bottom: 2%;
+    border-bottom: 1px solid #eee;
+}
 .radioText {
     margin-left: 15px;
-
+    height: 45vh;
+    overflow-y: scroll;
 }
 
 .popUpheader {

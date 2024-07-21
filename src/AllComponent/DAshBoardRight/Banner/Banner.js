@@ -17,9 +17,15 @@ import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
+import PreviousBannerPopup from "./PreviousBannerPopup";
+// import SwipeableViews from 'react-swipeable-views';
+// import { autoPlay } from 'react-swipeable-views-utils';
+
 
 const Banner = () => {
   const [bannerAPI, setBannerAPI] = useState();
+  const [openPopUp, setOpenPopUp] = useState(false);
+
   useEffect(() => {
     banner({
       callBack: (response) => {
@@ -27,8 +33,13 @@ const Banner = () => {
       },
     });
   }, []);
+
+  const handleClickPopUp = () => {
+    setOpenPopUp(!openPopUp);
+  };
   return (
     <Fragment>
+      
       <div className="grid-container">
         <Header Heading="Manage Banners" subHeading="Show banners to users" />
         <SideBar />
@@ -50,8 +61,8 @@ const Banner = () => {
               </div>
             </div>
             <div className="PreviewBox">
-              <Typography>Preview</Typography>
-              <Typography>
+              <Typography sx={{color: "black"}}>Preview</Typography>
+              <Typography sx={{mt: 1, }}>
                 See how the banners will appear to students using your app. You
                 can add upto 6 banners at a time.
               </Typography>
@@ -63,7 +74,7 @@ const Banner = () => {
 
                 <Box>
                   <Typography>IMPORTANT INFORMATION</Typography>
-                  <div
+                  {/* <div
                     id="carouselExampleInterval"
                     className="carousel slide"
                     data-bs-ride="carousel"
@@ -124,7 +135,14 @@ const Banner = () => {
                       ></span>
                       <span className="visually-hidden">Next</span>
                     </button>
-                  </div>
+                  </div> */}
+                   <img
+                          src={imge}
+                          // className="d-block w-100"
+                          alt="..."
+                          width={250}
+                          height={150}
+                        />
                   <img src="" width={250} height={150} />
                 </Box>
                 <Box className="flexrow iconBox">
@@ -146,13 +164,16 @@ const Banner = () => {
                   </Box>
                 </Box>
               </Box>
-              <Box className="ViewPreviousBox ">
+              <Box className="ViewPreviousBox " onClick={handleClickPopUp}>
                 <AccessTimeOutlinedIcon />
                 <Typography>View previous banners</Typography>
               </Box>
+              
             </div>
           </div>
         </div>
+        <PreviousBannerPopup openPopUp={openPopUp} handleClickPopUp={handleClickPopUp} />
+
       </div>
     </Fragment>
   );
