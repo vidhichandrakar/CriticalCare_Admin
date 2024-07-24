@@ -106,7 +106,11 @@ function TestPortalMain() {
   const [openAddOptions, setAddOptions] = useState(false);
   const [addOptionText, setAddOptionText] = useState("");
   const [typesOfQns, setTypesOfQns] = useState("");
-const [selectedTypeQns, setSelectedTypeQns] = useState("single-select")
+  const [selectedTypeQns, setSelectedTypeQns] = useState("single-select");
+  const [selectedTypeNId, setSelectedTypeNId] = useState();
+  const [testInstructions, setTestInstructions] = useState("");
+    const [openInstruction, setOpenInstruction] = useState(false);
+
   const handleClickOpen = (editedQns, index) => {
     setEditedQuestion(editedQns);
     setTypesOfQns(editedQns.question_type);
@@ -190,9 +194,11 @@ const [selectedTypeQns, setSelectedTypeQns] = useState("single-select")
   const handleCreateQns = () => {
     setOpenreateqns(!opencreaterqns);
     setCqopen(false);
+  
     const payload = {
       test_id: test_id,
-      test_type_id: selectedTestType.test_type_id,
+      test_type_id: selectedTypeNId?.test_type_id,
+      test_type_name: selectedTypeNId?.test_type_name,
       test_section_name: numberOfMcqQns[numberOfMcqQns?.length - 1]
         ?.test_section_name
         ? numberOfMcqQns[numberOfMcqQns?.length - 1]?.test_section_name
@@ -215,17 +221,41 @@ const [selectedTypeQns, setSelectedTypeQns] = useState("single-select")
           const divArray = Array.from({ length: count });
           let arr = [];
           divArray.map((item) => {
-            arr.push({
-              question_text:
-                "What is the normal range of adult human body temperature?",
-              question_type: "single-select",
-              options: [
-                { option_text: "35.5 - 36.5 °C", is_correct: false },
-                { option_text: "36.1 - 37.2 °C", is_correct: false },
-                { option_text: "37.5 - 38.5 °C", is_correct: true },
-                { option_text: "38.0 - 39.0 °C", is_correct: false },
-              ],
-            });
+            if (selectedTypeNId?.test_type_name === "Multiple Choice") {
+              arr.push({
+                question_text:
+                  "What is the normal range of adult human body temperature?",
+                question_type: "single-select",
+                options: [
+                  { option_text: "35.5 - 36.5 °C", is_correct: false },
+                  { option_text: "36.1 - 37.2 °C", is_correct: false },
+                  { option_text: "37.5 - 38.5 °C", is_correct: true },
+                  { option_text: "38.0 - 39.0 °C", is_correct: false },
+                ],
+              });
+            } else if (selectedTypeNId?.test_type_name === "True/False") {
+              arr.push({
+                question_text:
+                  "What is the normal range of adult human body temperature?",
+                question_type: "single-select",
+                options: [
+                  { option_text: "True", is_correct: true },
+                  { option_text: "False", is_correct: false },
+                ],
+              });
+            } else if (selectedTypeNId?.test_type_name === "Fill in the blanks") {
+              arr.push({
+                question_text:
+                  "Our nation bird is ______. Who is very beautifull",
+                question_type: "single-select",
+                options: [
+                  { option_text: "Peacock", is_correct: true },
+                  { option_text: "Sparrow", is_correct: false },
+                  { option_text: "Parrot", is_correct: false },
+                  { option_text: "Crow", is_correct: false },
+                ],
+              });
+            }
           });
           const loadPay = {
             test_info_id: testInfoId,
@@ -348,9 +378,42 @@ const [selectedTypeQns, setSelectedTypeQns] = useState("single-select")
       });
     }
     setEditedQuestion(editedOptions);
-
-    
   };
+
+  const handleOpen = () => {
+    setOpenInstruction(true);
+  };
+
+const handleCloseInstruction=()=>{
+  setOpenInstruction(false);
+}
+
+const handleAddInstruction=()=>{
+  console.log("djfhbjkl")
+  const payload = {
+    test_id: test_id,
+    test_type_id: selectedTestType.test_type_id,
+    test_section_name: "for testing", //need to work on this
+    test_section_Instruction: testInstructions,
+    no_of_question: 5,
+    marks_per_question: 4,
+  };
+  if (testInstructions) {
+    createTestInfo({
+      id: testInfoId,
+      payload,
+      callBack: (res) => {
+        getTestByIdData();
+        // setTestInfoId(res.data.test_info_id);
+        setOpenInstruction(false);
+      },
+    });
+  }
+}
+  const handleAddTestInstruction = (value) => {
+    setTestInstructions(value);
+  };
+
   return (
     <div className="grid-container-TestPortal ">
       <TestProtalHeader testData={testData} />
@@ -361,7 +424,9 @@ const [selectedTypeQns, setSelectedTypeQns] = useState("single-select")
         handleTestType={handleTestType}
         setCqopen={setCqopen}
         numberOfMcqQns={numberOfMcqQns}
+        setSelectedTypeNId={setSelectedTypeNId}
       />
+
       <TestFirstPage
         testData={testData}
         openqns={openqns}
@@ -372,6 +437,8 @@ const [selectedTypeQns, setSelectedTypeQns] = useState("single-select")
         numberOfMcqQns={numberOfMcqQns}
         setNumberOfMcqQns={setNumberOfMcqQns}
         typesOfQns={typesOfQns}
+        selectedTypeNId={selectedTypeNId}
+        handleOpen={handleOpen}
       />
       <BootstrapDialog
         className="PopUP"
@@ -800,6 +867,63 @@ const [selectedTypeQns, setSelectedTypeQns] = useState("single-select")
             defaultValue="Enter detailed solution for your students"
           />
         </DialogContent>
+      </BootstrapDialog>
+      <BootstrapDialog
+        onClose={handleCloseInstruction}
+        aria-labelledby="customized-dialog-title"
+        open={openInstruction}
+      >
+        <DialogTitle
+          sx={{ m: 0, p: 2, alignItems: "center", textAlign: "center" }}
+          id="customized-dialog-title"
+        >
+          Test Instructions
+        </DialogTitle>
+        <IconButton
+          aria-label="close"
+          onClick={handleCloseInstruction}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+
+        <DialogContent dividers>
+          <Typography gutterBottom>
+            <b>Test Instructions</b>
+          </Typography>
+          <Box
+            className="testInstTextField"
+            component="form"
+            sx={{
+              "& > :not(style)": { m: 1, width: "25ch" },
+            }}
+            // noValidate
+            // autoComplete="off"
+          >
+            <TextField
+              id="outlined-basic"
+              variant="outlined"
+              onChange={(e) => handleAddTestInstruction(e.target.value)}
+              value={testInstructions}
+            />
+          </Box>
+          
+        </DialogContent>
+
+        <DialogActions>
+          <Button
+           
+            onClick={handleAddInstruction}
+            className="doneBtnInstPage"
+          >
+            Add
+          </Button>
+        </DialogActions>
       </BootstrapDialog>
     </div>
   );

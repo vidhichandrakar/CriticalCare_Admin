@@ -25,12 +25,9 @@ const label = { inputProps: { "aria-label": "Checkbox demo" } };
 function CreateQNS({
   setCqopen,
   opencreaterqns,
-  testData,
   handleClickOpen,
-  noOfQuestion,
   numberOfMcqQns,
-  setNumberOfMcqQns,
-  typesOfQns,
+  selectedTypeNId,
 }) {
   const [selectedValue, setSelectedValue] = useState("a");
   let count = 1;
@@ -57,6 +54,7 @@ function CreateQNS({
           <KeyboardArrowUpIcon sx={{ ml: "14px", mb: "5px" }} />
         </Button>
       </div>
+      {/* {console.log("selectedTypeNId",selectedTypeNId)} */}
       <div className="MarksBox">
         <StarBorderOutlinedIcon className="starIconss" />
         <Typography>Max. Section Marks: 4.00</Typography>
@@ -106,13 +104,6 @@ function CreateQNS({
                                 return (
                                   <div className="addingDeleteOptions mt1">
                                     <Checkbox
-                                      // onChange={(e) =>
-                                      //   handleChangeOption(
-                                      //     e,
-                                      //     option.option_id,
-                                      //     option.question_id
-                                      //   )
-                                      // }
                                       checked={option.is_correct}
                                       {...label}
                                     />
