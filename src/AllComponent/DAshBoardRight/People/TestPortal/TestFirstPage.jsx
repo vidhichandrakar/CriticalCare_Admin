@@ -16,11 +16,12 @@ function TestFirstPage({
   setNumberOfMcqQns,
   setQuestionId,
   setResetSelectedOptns,
-  typesOfQns
+  typesOfQns,
+  setOpenInstruction
 }) {
   return (
     <div className="testRightSection">
-      <TestInstructions testData={testData} />
+      <TestInstructions testData={testData} setOpenInstruction={setOpenInstruction}/>
       {numberOfMcqQns?.length !== 0 ? (
         <CreateQNS
           setCqopen={setCqopen}

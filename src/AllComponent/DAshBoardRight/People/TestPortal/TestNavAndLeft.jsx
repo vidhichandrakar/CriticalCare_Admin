@@ -53,6 +53,7 @@ function TestNavAndLeft({setMcqopen, testType,handleTestType, numberOfMcqQns,set
       setCqopen(true)
     }
     else{
+      console.log("false")
       const selectedOption= testType.filter(test=>test.test_type_name===type);
       handleTestType(selectedOption[0])
       setMcqopen(true);

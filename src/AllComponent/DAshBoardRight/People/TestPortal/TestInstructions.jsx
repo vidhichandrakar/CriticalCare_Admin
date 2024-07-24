@@ -16,10 +16,9 @@ import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
 import { getTestById } from "../../../ActionFactory/apiActions";
 
-function TestInstructions({ testData }) {
+function TestInstructions({ testData, setOpenInstruction }) {
   const [instructions, setInstructions] = useState(false);
   const [open, setOpen] = useState(false);
-
   const handleClickClose = () => {
     setInstructions(false);
   };
@@ -32,14 +31,17 @@ function TestInstructions({ testData }) {
     },
   }));
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
+  // const handleChange=(event)=>{
+  //   setInstructionsString(event.target.value)
+  // }
   return (
+    <>
     <div>
       <Box className="stickyTopBox">
         <div>
@@ -85,67 +87,19 @@ function TestInstructions({ testData }) {
                   ml: "-8px",
                   fontSize: "medium",
                 }}
-                onClick={handleClickOpen}
+                onClick={()=>setOpenInstruction(true)}
               >
                 Click here to add{" "}
               </Button>
 
-              <BootstrapDialog
-                onClose={handleClose}
-                aria-labelledby="customized-dialog-title"
-                open={open}
-              >
-                <DialogTitle
-                  sx={{ m: 0, p: 2, alignItems: "center", textAlign: "center" }}
-                  id="customized-dialog-title"
-                >
-                  Test Instructions
-                </DialogTitle>
-                <IconButton
-                  aria-label="close"
-                  onClick={handleClose}
-                  sx={{
-                    position: "absolute",
-                    right: 8,
-                    top: 8,
-                    color: (theme) => theme.palette.grey[500],
-                  }}
-                >
-                  <CloseIcon />
-                </IconButton>
-
-                <DialogContent dividers>
-                  <Typography gutterBottom>
-                    <b>Test Instructions</b>
-                  </Typography>
-                  <Box
-                    className="testInstTextField"
-                    component="form"
-                    sx={{
-                      "& > :not(style)": { m: 1, width: "25ch" },
-                    }}
-                    noValidate
-                    autoComplete="off"
-                  >
-                    <TextField id="outlined-basic" variant="outlined" />
-                  </Box>
-                </DialogContent>
-
-                <DialogActions>
-                  <Button
-                    autoFocus
-                    onClick={handleClose}
-                    className="doneBtnInstPage"
-                  >
-                    Done
-                  </Button>
-                </DialogActions>
-              </BootstrapDialog>
+            
             </span>
           </p>
         </Box>
       </Box>
     </div>
+     
+    </>
   );
 }
 
