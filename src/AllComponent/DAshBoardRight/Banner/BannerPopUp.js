@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
@@ -20,10 +20,26 @@ import Divider from "@mui/material/Divider";
 import Checkbox from '@mui/material/Checkbox';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import CloseIcon from '@mui/icons-material/Close';
+import { getSubcategoryList, getCategory } from "../../ActionFactory/apiActions";
+import Select from "@mui/material/Select";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import MenuItem from "@mui/material/MenuItem";
+import attachmentimgae from "../../../Media/Images/undraw_attached_file_re_0n9b.svg";
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
-function BannerPopUp({openPopUp, handleClickPopUp}) {
+function BannerPopUp({openPopUp, handleClickPopUp, bannerAPI}) {
 
   const [selectedValue, setSelectedValue] = useState("");
   const [dropdownValue, setDropdownValue] = useState("");
@@ -33,7 +49,16 @@ function BannerPopUp({openPopUp, handleClickPopUp}) {
   const [hideYoutubeLinkDropDown, setHideYoutubeLinkDropDown] = useState(false);
   const [openSelectPopUp, setOpenSelectPopUp] = useState(false);
   const [openPopUps, setOpenPopUps] = useState(false);
-
+  const [storedBasicInfo, setStoredBasicInfo] = useState({
+    Name: "",
+    Description: "",
+    Category: "",
+    subCategory: "",
+    thumbnailPath: null,
+  });
+  
+  const [cat, setCat] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState();
   const [show, setShow]= useState(false)
 
 
@@ -80,6 +105,26 @@ function BannerPopUp({openPopUp, handleClickPopUp}) {
   const handleClickPopUps = () => {
     setOpenPopUps(!openPopUps);
   };
+
+  
+
+  useEffect(() => {
+     
+    getCategory({
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setCat(userCallBack);
+      },
+    });  
+}, []);
+
+
+
+  const handleChange = (e) => {
+    setSelectedCategory(e.target.value.category_name);
+    console.log(e.target.value.category_name, "Lineno109")    
+  };
+
   return (
     <> <SelectedCoursesPopup openPopUps={openPopUps} handleClickPopUps={handleClickPopUps} />
 {show ? 
@@ -285,22 +330,19 @@ function BannerPopUp({openPopUp, handleClickPopUp}) {
               sx={{minWidth: 550, mt: -1 }}
               className="categorySelect"
             >
-              {commonSelect(
-                {
-                  placeholder: "Select Category",
-                  menuItemList: [
-                    { id: 1, label: "Category 1" },
-                    { id: 2, label: "Category 2" },
-                    { id: 3, label: "Category 3" },
-                  ],
-                  className: "categorytext",
-                },
-                (Option = {
-                  handleInput: handleInput,
-                  categoryValue: dropdownValue,
-                })
-              )}
-               </FormControl></Box>
+            <Select
+                    value={cat.category_name}
+                    onChange={(e) => handleChange(e)}
+                    className="addCatTextField"
+                  >
+                    {cat.map((item) => (
+                      <MenuItem key={item._id} value={item}>
+                        {item.category_name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+               </FormControl>
+               </Box>
           )}
             <Box className="popUpRadioBtn">
               <Typography>External Link</Typography>

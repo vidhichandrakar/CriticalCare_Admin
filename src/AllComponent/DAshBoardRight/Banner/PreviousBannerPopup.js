@@ -10,13 +10,9 @@ import Box from "@mui/material/Box";
 import "./BannerPopUp.css";
 import { Typography } from "@mui/material";
 import { commonSelect } from "../../../Util/CommonFields";
-import Demoimg from "../../../Media/Images/banner3.jpg"
+import Demoimg from "../../../Media/Images/banner3.jpg";
 
-function PreviousBannerPopup({openPopUp, handleClickPopUp}) {
-
-  
- 
-
+function PreviousBannerPopup({ openPopUp, handleClickPopUp, bannerAPI }) {
   return (
     <>
       <React.Fragment>
@@ -44,52 +40,19 @@ function PreviousBannerPopup({openPopUp, handleClickPopUp}) {
             </DialogContentText>
           </DialogContent>
           <Box className="BannerCArdBox">
-          
-        <Box className="flexrow PreviosCardBannerBox">
-            <img src={Demoimg} width={250} height={120} />
-            <Box sx={{ml: 1}}>
-                <Typography>Displayed on:</Typography>
-                <Typography>2023/06/14 - 2024/07/19</Typography>
-                <Typography>Landing Screen:</Typography>
-                <Typography>Specific Course(s) - 1 Selected</Typography>
-            </Box>
-        </Box>
-        <Box className="flexrow PreviosCardBannerBox">
-            <img src={Demoimg} width={250} height={120} />
-            <Box sx={{ml: 1}}>
-                <Typography>Displayed on:</Typography>
-                <Typography>2023/06/14 - 2024/07/19</Typography>
-                <Typography>Landing Screen:</Typography>
-                <Typography>Specific Course(s) - 1 Selected</Typography>
-            </Box>
-        </Box>
-        <Box className="flexrow PreviosCardBannerBox">
-            <img src={Demoimg} width={250} height={120} />
-            <Box sx={{ml: 1}}>
-                <Typography>Displayed on:</Typography>
-                <Typography>2023/06/14 - 2024/07/19</Typography>
-                <Typography>Landing Screen:</Typography>
-                <Typography>Specific Course(s) - 1 Selected</Typography>
-            </Box>
-        </Box>
-        <Box className="flexrow PreviosCardBannerBox">
-            <img src={Demoimg} width={250} height={120} />
-            <Box sx={{ml: 1}}>
-                <Typography>Displayed on:</Typography>
-                <Typography>2023/06/14 - 2024/07/19</Typography>
-                <Typography>Landing Screen:</Typography>
-                <Typography>Specific Course(s) - 1 Selected</Typography>
-            </Box>
-        </Box>
-        <Box className="flexrow PreviosCardBannerBox">
-            <img src={Demoimg} width={250} height={120} />
-            <Box sx={{ml: 1}}>
-                <Typography>Displayed on:</Typography>
-                <Typography>2023/06/14 - 2024/07/19</Typography>
-                <Typography>Landing Screen:</Typography>
-                <Typography>Specific Course(s) - 1 Selected</Typography>
-            </Box>
-        </Box>  
+            {bannerAPI?.map((value, index) => (
+              <Box className="PreviosCardBannerBox flexrow">
+                <img src={Demoimg} width={250} height={120} />
+                <Box sx={{ ml: 1 }}>
+                  <Typography>Displayed on:</Typography>
+                  <Typography>
+                    {value.start_date} - {value.end_date}
+                  </Typography>
+                  <Typography>Landing Screen:</Typography>
+                  <Typography>Specific Course(s) - 1 Selected</Typography>
+                </Box>
+              </Box>
+            ))}
           </Box>
         </Dialog>
       </React.Fragment>
