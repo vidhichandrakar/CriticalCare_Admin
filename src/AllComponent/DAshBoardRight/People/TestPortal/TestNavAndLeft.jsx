@@ -46,12 +46,12 @@ function TestNavAndLeft({
   setMcqopen,
   testType,
   handleTestType,
-  numberOfMcqQns,
   setCqopen,
+  numberOfMcqQns,
   setSelectedTypeNId,
+  setAddNewSectionNav,
 }) {
   const [expanded, setExpanded] = useState(false);
-
 
   const handleClickOpenMCQ = (type) => {
     const testTypeNId = testType.filter((item) => item.test_type_name === type);
@@ -63,15 +63,16 @@ function TestNavAndLeft({
     let condition = numberOfMcqQns[numberOfMcqQns?.length - 1];
     console.log("condition====>",condition)
     if (condition?.test_questions?.length !== 0) {
-      setCqopen(true);
-      console.log("condition====>","true")
-    } else {
-      console.log("condition====>","true")
       const selectedOption = testType.filter(
         (test) => test.test_type_name === type
       );
       handleTestType(selectedOption[0]);
       setMcqopen(true);
+      console.log("condition====>", "true");
+    } else {
+      console.log("condition====>", "flase");
+
+      setCqopen(true);
     }
   };
 
@@ -85,6 +86,13 @@ function TestNavAndLeft({
     setSelectedValue(event.target.value);
   };
 
+  const handleAddSectionNav = (type) => {
+    // console.log("addNewSectionNav",type);
+    setAddNewSectionNav(type)
+    const selectedOption = testType.filter((test) => test.test_type_name);
+    handleTestType(selectedOption[0]);
+    setMcqopen(true);
+  };
   return (
     <aside id="sidePart">
       <Box className="completeLeftBox">
@@ -128,11 +136,17 @@ function TestNavAndLeft({
               <b>True/False Questions</b>
             </Typography>
             <Divider />
-            <Typography className="testOptions" onClick={() => handleClickOpenMCQ("Comprehensive")}>
+            <Typography
+              className="testOptions"
+              onClick={() => handleClickOpenMCQ("Comprehensive")}
+            >
               <b>Comprehension Questions</b>
             </Typography>
             <Divider />
-            <Typography className="testOptions" onClick={() => handleClickOpenMCQ("Fill in the blanks")}>
+            <Typography
+              className="testOptions"
+              onClick={() => handleClickOpenMCQ("Fill in the blanks")}
+            >
               <b>Fill in the Blanks Questions</b>
             </Typography>
             <Divider />
@@ -213,28 +227,35 @@ function TestNavAndLeft({
           </AccordionSummary>
           <AccordionDetails>
             <Divider />
+            {numberOfMcqQns?.map((item) => {
+              return (
+                <Typography>
+                  <div className="sectionOneFourQues">
+                    <h5> {item?.test_section_name}</h5>
+                    <div>
+                      <EditIcon className="editIconTestSection" />
+                      <DeleteIcon className="deleteIconTestSection" />
+                    </div>
+                  </div>
+
+                  <Box
+                    sx={{
+                      backgroundColor: "#e6f9ff",
+                      padding: "5px 17px",
+                      borderRadius: "5px",
+                      marginTop: "-13px",
+                      marginBottom: "61px",
+                    }}
+                  ></Box>
+                </Typography>
+              );
+            })}
+            {console.log("numberOfMcqQns===>", numberOfMcqQns)}
             <Typography>
-              <div className="sectionOneFourQues">
-                <h5>Section1 - 4 Questions</h5>
-                <div>
-                  <EditIcon className="editIconTestSection" />
-                  <DeleteIcon className="deleteIconTestSection" />
-                </div>
-              </div>
               <Box
-                sx={{
-                  backgroundColor: "#e6f9ff",
-                  padding: "5px 17px",
-                  borderRadius: "5px",
-                  marginTop: "-13px",
-                  marginBottom: "61px",
-                }}
+                className="addNreScsnTestSection"
+                onClick={()=>handleAddSectionNav("addNewSectionNav")}
               >
-                abcd
-              </Box>
-            </Typography>
-            <Typography>
-              <Box className="addNreScsnTestSection">
                 <AddCircleOutlineIcon
                   sx={{ position: "relative", top: "5px", right: "5px" }}
                 />

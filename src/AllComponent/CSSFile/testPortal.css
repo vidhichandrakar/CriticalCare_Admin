@@ -83,7 +83,7 @@
 }
 
 .MainQnsBox{
-    border: 2px solid #03A9F4;
+    /* border: 2px solid #03A9F4; */
     margin: 2%;
 }
 
@@ -94,10 +94,12 @@
     font-size: 0.9rem;
     padding-bottom: 1%;
     border-bottom: 2px solid #eee;
+  
 }
 .MarksBox p{
     margin-left: 1%;
     font-size: 0.9rem;
+    /* border: 2px solid #03A9F4; */
 }
 .starIconss{
     margin-left: 2%;
@@ -129,6 +131,10 @@
 .QnsBoxs{
     overflow: auto;
     /* height: 43vh; */
+
+}
+.accordianHighlight{
+    border: 2px solid #03A9F4;
 }
 .MCQBox li{
     margin-top: 2%;

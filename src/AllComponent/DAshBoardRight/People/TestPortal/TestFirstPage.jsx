@@ -27,8 +27,13 @@ function TestFirstPage({
   setResetSelectedOptns,
   typesOfQns,
   selectedTypeNId,
-  // setTestInstructions,
-  handleOpen
+  addNewSectionNav,
+  handleOpen,
+  testType,
+  setSelectedTypeNId,
+  handleTestType,
+  setMcqopen,
+  setTestInfoId
 }) {
 
   // const [testInstructions, setTestInstructions] = useState("");
@@ -76,6 +81,12 @@ function TestFirstPage({
           setResetSelectedOptns={setResetSelectedOptns}
           typesOfQns={typesOfQns}
           selectedTypeNId={selectedTypeNId}
+          addNewSectionNav={addNewSectionNav}
+          testType={testType}
+          setSelectedTypeNId={setSelectedTypeNId}
+          handleTestType={handleTestType}
+          setMcqopen={setMcqopen}
+          setTestInfoId={setTestInfoId}
         />
       ) : numberOfMcqQns === 0 ? (
         <AddASection handleClickOpen={handleClickOpen} />

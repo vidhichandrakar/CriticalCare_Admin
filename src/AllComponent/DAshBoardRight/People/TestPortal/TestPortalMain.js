@@ -109,12 +109,13 @@ function TestPortalMain() {
   const [selectedTypeQns, setSelectedTypeQns] = useState("single-select");
   const [selectedTypeNId, setSelectedTypeNId] = useState();
   const [testInstructions, setTestInstructions] = useState("");
-    const [openInstruction, setOpenInstruction] = useState(false);
+  const [openInstruction, setOpenInstruction] = useState(false);
+  const [addNewSectionNav, setAddNewSectionNav] = useState();
 
   const handleClickOpen = (editedQns, index) => {
     setEditedQuestion(editedQns);
     setTypesOfQns(editedQns.question_type);
-    // setSelectedTypeQns()
+    console.log("dnkdm", index);
     setOpen(true);
   };
   const handleClose = () => {
@@ -160,18 +161,18 @@ function TestPortalMain() {
     setMcqopen(false);
   };
   const handleAddSection = () => {
-    setOpenqns(!openqns);
-    setCqopen(true);
-    setMcqopen(false);
-    const payload = {
-      test_id: test_id,
-      test_type_id: selectedTestType.test_type_id,
-      test_section_name: sectionName,
-      test_section_Instruction: sectionInstruction,
-      no_of_question: 5,
-      marks_per_question: 4,
-    };
-    if (sectionName && sectionInstruction) {
+    if (addNewSectionNav === "addNewSectionNav") {
+      setMcqopen(false);
+      // console.log("right palce");
+      const payload = {
+        test_id: test_id,
+        test_type_id: selectedTestType.test_type_id,
+        test_section_name: sectionName,
+        test_section_Instruction: sectionInstruction,
+        no_of_question: 5,
+        marks_per_question: 4,
+      };
+      // console.log("payload==>", payload);
       createTestInfo({
         payload,
         callBack: (res) => {
@@ -179,6 +180,28 @@ function TestPortalMain() {
           setTestInfoId(res.data.test_info_id);
         },
       });
+    } else {
+      // console.log("else palce");
+      setOpenqns(!openqns);
+      setCqopen(true);
+      setMcqopen(false);
+      const payload = {
+        test_id: test_id,
+        test_type_id: selectedTestType.test_type_id,
+        test_section_name: sectionName,
+        test_section_Instruction: sectionInstruction,
+        no_of_question: 5,
+        marks_per_question: 4,
+      };
+      if (sectionName && sectionInstruction) {
+        createTestInfo({
+          payload,
+          callBack: (res) => {
+            getTestByIdData();
+            setTestInfoId(res.data.test_info_id);
+          },
+        });
+      }
     }
   };
 
@@ -194,7 +217,7 @@ function TestPortalMain() {
   const handleCreateQns = () => {
     setOpenreateqns(!opencreaterqns);
     setCqopen(false);
-  
+
     const payload = {
       test_id: test_id,
       test_type_id: selectedTypeNId?.test_type_id,
@@ -243,7 +266,9 @@ function TestPortalMain() {
                   { option_text: "False", is_correct: false },
                 ],
               });
-            } else if (selectedTypeNId?.test_type_name === "Fill in the blanks") {
+            } else if (
+              selectedTypeNId?.test_type_name === "Fill in the blanks"
+            ) {
               arr.push({
                 question_text:
                   "Our nation bird is ______. Who is very beautifull",
@@ -384,32 +409,32 @@ function TestPortalMain() {
     setOpenInstruction(true);
   };
 
-const handleCloseInstruction=()=>{
-  setOpenInstruction(false);
-}
-
-const handleAddInstruction=()=>{
-  console.log("djfhbjkl")
-  const payload = {
-    test_id: test_id,
-    test_type_id: selectedTestType.test_type_id,
-    test_section_name: "for testing", //need to work on this
-    test_section_Instruction: testInstructions,
-    no_of_question: 5,
-    marks_per_question: 4,
+  const handleCloseInstruction = () => {
+    setOpenInstruction(false);
   };
-  if (testInstructions) {
-    createTestInfo({
-      id: testInfoId,
-      payload,
-      callBack: (res) => {
-        getTestByIdData();
-        // setTestInfoId(res.data.test_info_id);
-        setOpenInstruction(false);
-      },
-    });
-  }
-}
+
+  const handleAddInstruction = () => {
+    // console.log("djfhbjkl");
+    const payload = {
+      test_id: test_id,
+      test_type_id: selectedTestType.test_type_id,
+      test_section_name: "for testing", //need to work on this
+      test_section_Instruction: testInstructions,
+      no_of_question: 5,
+      marks_per_question: 4,
+    };
+    if (testInstructions) {
+      createTestInfo({
+        id: testInfoId,
+        payload,
+        callBack: (res) => {
+          getTestByIdData();
+          // setTestInfoId(res.data.test_info_id);
+          setOpenInstruction(false);
+        },
+      });
+    }
+  };
   const handleAddTestInstruction = (value) => {
     setTestInstructions(value);
   };
@@ -425,6 +450,7 @@ const handleAddInstruction=()=>{
         setCqopen={setCqopen}
         numberOfMcqQns={numberOfMcqQns}
         setSelectedTypeNId={setSelectedTypeNId}
+        setAddNewSectionNav={setAddNewSectionNav}
       />
 
       <TestFirstPage
@@ -439,6 +465,12 @@ const handleAddInstruction=()=>{
         typesOfQns={typesOfQns}
         selectedTypeNId={selectedTypeNId}
         handleOpen={handleOpen}
+        addNewSectionNav={addNewSectionNav}
+        testType={testType}
+        setSelectedTypeNId={setSelectedTypeNId}
+        handleTestType={handleTestType}
+        setMcqopen={setMcqopen}
+        setTestInfoId={setTestInfoId}
       />
       <BootstrapDialog
         className="PopUP"
@@ -912,15 +944,10 @@ const handleAddInstruction=()=>{
               value={testInstructions}
             />
           </Box>
-          
         </DialogContent>
 
         <DialogActions>
-          <Button
-           
-            onClick={handleAddInstruction}
-            className="doneBtnInstPage"
-          >
+          <Button onClick={handleAddInstruction} className="doneBtnInstPage">
             Add
           </Button>
         </DialogActions>
