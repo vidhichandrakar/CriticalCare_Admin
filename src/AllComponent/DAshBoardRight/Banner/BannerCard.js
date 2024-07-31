@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -7,6 +7,15 @@ import Typography from "@mui/material/Typography";
 import ModeIcon from "@mui/icons-material/Mode";
 import { styled } from "@mui/material/styles";
 import BannerPopUp from "./BannerPopUp";
+import Switch from '@mui/material/Switch';
+import attachmentimgae from "../../../Media/Images/undraw_attached_file_re_0n9b.svg";
+import { Box } from "@mui/material";
+import imge from "../../../Media/Images/banner2.jpg";
+
+
+const label = { inputProps: { 'aria-label': 'Switch demo' } };
+
+
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
   clipPath: "inset(50%)",
@@ -18,9 +27,17 @@ const VisuallyHiddenInput = styled("input")({
   whiteSpace: "nowrap",
   width: 1,
 });
-const BannerCard = (props) => {
+const BannerCard = ({Data, bannerAPI}) => {
   const [storedFilePath, setStoredFilePath] = useState([]);
   const [openPopUp, setOpenPopUp] = useState(false);
+  const [openPopUpPreivous, setOpenPopUpPreivous] = useState(false);
+  const [imagebyapi, setImagebyapi] = useState([{}])
+
+  useEffect(() => {
+    if (bannerAPI) {
+      setImagebyapi(bannerAPI);
+    }
+  }, []);
 
   const handleImageUpload = (value, id) => {
     let storedPath = [...storedFilePath];
@@ -47,10 +64,12 @@ const BannerCard = (props) => {
   const handleClickPopUp = () => {
     setOpenPopUp(!openPopUp);
   };
+ 
   return (
     <>
-      <BannerPopUp openPopUp={openPopUp} handleClickPopUp={handleClickPopUp} />
-      {props.Data.map((value, index) => (
+      <BannerPopUp openPopUp={openPopUp} handleClickPopUp={handleClickPopUp} bannerAPI={bannerAPI}/>
+      {/* {Data.map((value, index) => ( */}
+      {bannerAPI?.map((value, index) => (
         <div className="BannerMainBox">
           <div className="InsideBannerBox">
             <main className="InsideMainBox" key={index}>
@@ -63,11 +82,22 @@ const BannerCard = (props) => {
               </CardActions>
 
               <div class="container">
-                <img
-                  src={value.img}
+              {!imagebyapi?.length ? (<img
+          src={value.image_url}
+          alt="Avatar"
+          className="BannerImage image"
+        />) : (
+            // <Box className="noContent">
+              <img src={imge} height="120" width="250" className="BannerImage image"/>
+            // </Box>
+          ) 
+          
+          }
+                {/* <img
+                  src={value.image_url}
                   alt="Avatar"
                   className="BannerImage image"
-                />
+                /> */}
                 <div class="middle">
                   <Button class="text" component="label">
                     {" "}
@@ -89,18 +119,25 @@ const BannerCard = (props) => {
               })}
 
               <CardContent>
-                <p className="fontSize1">{value.title}</p>
+                <p className="fontSize1">{value.description}</p>
               </CardContent>
               <div className="BannerHead BorderBottom">
-                <p>{value.boxtitle}</p>
+                <p>{value.title}</p>
                 <Button className="changeBtn" onClick={handleClickPopUp}>
                   Change
                 </Button>
+              </div>
+              <div className="RemoveButton">
+                <Typography>
+                  Remove banner automatically after fixed date
+                </Typography>
+                <Switch {...label} defaultChecked />
               </div>
             </main>
           </div>
         </div>
       ))}
+      
     </>
   );
 };
