@@ -49,6 +49,7 @@
 
 .popUpheader {
     border-bottom: solid gray 2px;
+    justify-content: space-between;
 }
 
 .innerRdioText {

@@ -11,6 +11,7 @@ import Switch from '@mui/material/Switch';
 import attachmentimgae from "../../../Media/Images/undraw_attached_file_re_0n9b.svg";
 import { Box } from "@mui/material";
 import imge from "../../../Media/Images/banner2.jpg";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
@@ -63,6 +64,7 @@ const BannerCard = ({Data, bannerAPI}) => {
 
   const handleClickPopUp = () => {
     setOpenPopUp(!openPopUp);
+    console.log("workksckdsnckjsdncjds")
   };
  
   return (
@@ -74,23 +76,23 @@ const BannerCard = ({Data, bannerAPI}) => {
           <div className="InsideBannerBox">
             <main className="InsideMainBox" key={index}>
               <CardActions className="BannerHead">
-                <Typography>{value.Head}</Typography>
+                <Typography>Image</Typography>
                 <Button className="Deletebtn">
                   <DeleteIcon className="Deleteicon" />
-                  Delete
+                  Remove
                 </Button>
               </CardActions>
 
-              <div class="container">
-              {!imagebyapi?.length ? (<img
+              <div class="container" style={{marginTop: "2%"}}>
+              {value.image_url != null ? (<img
           src={value.image_url}
           alt="Avatar"
           className="BannerImage image"
+          height="150"
+          width="300"
         />) : (
-            // <Box className="noContent">
               <img src={imge} height="120" width="250" className="BannerImage image"/>
-            // </Box>
-          ) 
+            ) 
           
           }
                 {/* <img
@@ -113,14 +115,17 @@ const BannerCard = ({Data, bannerAPI}) => {
                   </Button>
                 </div>
               </div>
-
+                        <div style={{color: "green"}} className="flexrow">
+                          <CheckCircleIcon />
+                          <p>Image fits perfectly in banner</p>
+                        </div>
               {storedFilePath?.map((row) => {
                 return row.id === value.id ? row.value : null;
               })}
 
-              <CardContent>
-                <p className="fontSize1">{value.description}</p>
-              </CardContent>
+              {/* <CardContent> */}
+                <p className="fontSize1" >{value.description}</p>
+              {/* </CardContent> */}
               <div className="BannerHead BorderBottom">
                 <p>{value.title}</p>
                 <Button className="changeBtn" onClick={handleClickPopUp}>
