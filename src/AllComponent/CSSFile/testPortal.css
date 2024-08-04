@@ -80,10 +80,20 @@
     align-items: center;
     justify-content: space-between;
     margin: 1%;
+    width: 100%;
 }
-
+.testsectionnameMainBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.testsectionname{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+}
 .MainQnsBox{
-    /* border: 2px solid #03A9F4; */
+    /* border: 2px solid red; */
     margin: 2%;
 }
 
@@ -97,11 +107,12 @@
   
 }
 .MarksBox p{
-    margin-left: 1%;
+    margin-left: 5px;
     font-size: 0.9rem;
     /* border: 2px solid #03A9F4; */
 }
 .starIconss{
+    color: #0075FF;
     margin-left: 2%;
     font-size: 0.9rem;
 }
@@ -114,6 +125,7 @@
 .AllBtnBox{
     display: flex;
     flex-direction: row;
+    margin-top: 2%;
 }
 .AllBtnBox div{
     display: flex;
@@ -134,7 +146,8 @@
 
 }
 .accordianHighlight{
-    border: 2px solid #03A9F4;
+    margin-top: -2%;
+    /* border: 2px solid #03A9F4; */
 }
 .MCQBox li{
     margin-top: 2%;

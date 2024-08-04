@@ -225,33 +225,29 @@ function TestNavAndLeft({
               <b>Test Sections</b>
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails sx={{padding: 0}}>
             <Divider />
+            {/* <Box className="testsectionnameMainBox"> */}
+            <Box className="testsectionname">
             {numberOfMcqQns?.map((item) => {
               return (
-                <Typography>
-                  <div className="sectionOneFourQues">
-                    <h5> {item?.test_section_name}</h5>
-                    <div>
-                      <EditIcon className="editIconTestSection" />
-                      <DeleteIcon className="deleteIconTestSection" />
+                 <Box>
+                    <div className="sectionOneFourQues">
+                      <h5> {item?.test_section_name}</h5>
+                      <div style={{marginRight: "3%"}}>
+                        <EditIcon className="editIconTestSection" />
+                        <DeleteIcon className="deleteIconTestSection" />
+                      </div>
+                      
                     </div>
-                  </div>
-
-                  <Box
-                    sx={{
-                      backgroundColor: "#e6f9ff",
-                      padding: "5px 17px",
-                      borderRadius: "5px",
-                      marginTop: "-13px",
-                      marginBottom: "61px",
-                    }}
-                  ></Box>
-                </Typography>
+                    <Divider />
+                  </Box>
+               
               );
             })}
+            </Box>
             {console.log("numberOfMcqQns===>", numberOfMcqQns)}
-            <Typography>
+            <Box>
               <Box
                 className="addNreScsnTestSection"
                 onClick={()=>handleAddSectionNav("addNewSectionNav")}
@@ -259,9 +255,10 @@ function TestNavAndLeft({
                 <AddCircleOutlineIcon
                   sx={{ position: "relative", top: "5px", right: "5px" }}
                 />
-                Add New Section
+              Add New Section
               </Box>
-            </Typography>
+            </Box>
+            {/* </Box> */}
           </AccordionDetails>
         </Accordion>
 

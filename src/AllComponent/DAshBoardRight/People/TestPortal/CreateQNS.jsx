@@ -1,6 +1,7 @@
 import { Box, Button, Typography, Divider } from "@mui/material";
 import React, { useState } from "react";
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
+import StarIcon from '@mui/icons-material/Star';
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import EditIcon from "@mui/icons-material/Edit";
@@ -102,7 +103,7 @@ function CreateQNS({
       {/* {console.log("addNewSectionNav", addNewSectionNav)} */}
 
       {opencreaterqns || numberOfMcqQns?.length !== 0 ? (
-        <Box>
+        <Box >
           {console.log("expanded,", expanded)}
           {numberOfMcqQns?.map((item, indexSeq) => (
             <>
@@ -110,6 +111,7 @@ function CreateQNS({
                 // onClick={() => handleOpenAccordianAtATime(indexSeq)}
                 // expanded={expanded === indexSeq}
                 // expan
+                sx={{border: "2px solid #0075FF", mt: 2}}
               >
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
@@ -117,24 +119,25 @@ function CreateQNS({
                   id="panel1-header"
                   // onClick={()=>handleOpenAccordianAtATime(indexSeq)}
                   // expanded={expanded === indexSeq}
+                  sx
                 >
                   <div className="BoxHead">
-                    <Typography>
+                    <Typography sx={{fontSize: "1.5rem"}}>
                       <b>{item.test_section_name}</b>
                     </Typography>
                     <Button
                       sx={{ textTransform: "none" }}
-                      onClick={handleClickOpen}
+                      // onClick={handleClickOpen}
                     >
                       <EditIcon sx={{ fontSize: "1.1rem", mr: "4px" }} />
                       <b>Edit Details</b>
-                      <KeyboardArrowUpIcon sx={{ ml: "14px", mb: "5px" }} />
+                      {/* <KeyboardArrowUpIcon sx={{ ml: "14px", mb: "5px" }} /> */}
                     </Button>
                   </div>
                 </AccordionSummary>
                 <AccordionDetails className="accordianHighlight">
                   <div className="MarksBox">
-                    <StarBorderOutlinedIcon className="starIconss" />
+                    <StarIcon className="starIconss" />
                     <Typography>
                       Marks Per Questions {item.marks_per_question}
                     </Typography>
@@ -201,14 +204,14 @@ function CreateQNS({
                                   </>
                                 </div>
                               )}
-                              <Typography
+                              {/* <Typography
                                 className="noBox"
                                 style={{ marginTop: "1%", marginLeft: "1%" }}
                               >
                                 {"+" + item.marks_per_question}
-                              </Typography>
+                              </Typography> */}
                               <div className="AllBtnBox">
-                                <Typography
+                                <Box
                                   className="mr123 curseorpointer"
                                   onClick={(e) =>
                                     handleClickOpenA(
@@ -220,21 +223,22 @@ function CreateQNS({
                                   }
                                   key={count}
                                   id={count}
+                                  sx
                                 >
-                                  <EditIcon />
-                                  <Typography>Edit</Typography>
-                                </Typography>
-                                <Box className="curseorpointer">
-                                  <ContentCopyIcon />
-                                  <Typography>Copy</Typography>
+                                  <EditIcon sx={{color: "#5d5a5ae3"}}/>
+                                  <Typography sx={{ml: "8px"}}>Edit</Typography>
+                                </Box>
+                                <Box className="curseorpointer" sx={{marginLeft: "100px"}}>
+                                  <ContentCopyIcon sx={{color: "#5d5a5ae3"}}/>
+                                  <Typography sx={{ml: "8px"}}>Copy</Typography>
                                 </Box>
                                 <Box className="curseorpointer">
-                                  <TextIncreaseRoundedIcon />{" "}
-                                  <Typography>Edit Marks</Typography>
+                                  <TextIncreaseRoundedIcon sx={{color: "#5d5a5ae3"}}/>{" "}
+                                  <Typography sx={{ml: "8px"}}>Edit Marks</Typography>
                                 </Box>
                                 <Box className="curseorpointer">
-                                  <DeleteOutlineRoundedIcon />
-                                  <Typography>Delete</Typography>
+                                  <DeleteOutlineRoundedIcon sx={{color: "#5d5a5ae3"}}/>
+                                  <Typography sx={{ml: "8px"}}>Delete</Typography>
                                 </Box>
                               </div>
                             </div>

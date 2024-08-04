@@ -40,7 +40,14 @@
     flex-direction: row;
     justify-content: space-between;
     color: grey;
-    height: 1px;
+    /* height: 1px; */
+    /* background-color: #eee; */
+    /* margin-top: 2%; */
+    /* border-bottom: solid #eee; */
+}
+
+.sectionOneFourQues h5{
+    margin-left: 5%;
 }
 .checkboxAndText{
     justify-content: safe;
@@ -82,6 +89,7 @@
     margin-left: 41px;
     margin-right: -32px; 
     cursor: pointer;
+    color: #0075FF;
 }
 .deleteIconTestSection {
     font-size: 1rem !important;
@@ -89,18 +97,21 @@
     margin-left: 41px;
     margin-right: 7px;
     cursor: pointer;
+    color: red;
 }
 .addNreScsnTestSection{
     color: #0075FF !important;
     border: 0.2px solid lightgray;
-    font-size: 0.9rem !important;
+    /* font-size: 0.9rem !important; */
     text-align: center !important;
-    width: 73%;
-    position: relative;
+    /* width: 73%; */
+    /* position: relative;
     left: 38px;
-    top: -18px;
+    top: -18px; */
     border-radius: 4px;
     cursor: pointer;
+    /* margin-top: 20%; */
+    padding-bottom: 2%;
 }
 .addNreScsnImportQues{
     color: #0075FF !important;
