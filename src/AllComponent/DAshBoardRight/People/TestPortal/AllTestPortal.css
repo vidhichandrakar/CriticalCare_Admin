@@ -283,9 +283,15 @@
     margin: 0px 12px;
 }
 .testInstructionsBtn{
+    padding: 20px 28px;
+    /* margin: 9px 0px; */
+    border: 0.5px solid #e6e3e3;
+    border-radius: 6px;
+    margin-right: 20px;
+}
+.testInstructions{
     padding: 0px 28px;
     margin: 9px 0px;
-    border: 0.5px solid #e6e3e3;
     border-radius: 6px;
     margin-right: 20px;
 }
@@ -426,7 +432,7 @@
     border-radius: 4px !important;
     width: 70vw;
     height: 39px;
-    margin-top: 14px;
+    /* margin-top: 14px; */
 }
 
 .deleteIconSixthPage{
