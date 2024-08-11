@@ -133,6 +133,8 @@ const User = () => {
   const [orderBy, setOrderBy] = useState("user_name");
   const authorized = JSON.parse(localStorage.getItem("loggedInUser"));
   const [isOpen, setIsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredItems, setFilteredItems] = useState();
 
   const navigate = useNavigate();
 
@@ -286,6 +288,31 @@ const User = () => {
     [order, orderBy, page, rowsPerPage, userData]
   );
 
+  // search filter
+  const handleSearchChange = (search) => {
+    const query = search.target.value;
+    setSearchQuery(query);
+
+    // const filtered = (row.user_name).filter(item =>
+    //   item.toLOwerCase().includes(query.toLOwerCase())
+    // );
+    // setFilteredItems(filtered);
+    getAllUsersApi({
+      searchString: query,
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setUserData(userCallBack);
+        setLoaderState(false);
+      },
+      error: (error) => {
+        toast.error(error.message);
+        setLoaderState(false);
+      },
+    });
+    
+  }
+
+
   return (
     <div className="grid-container">
       <Header
@@ -313,11 +340,14 @@ const User = () => {
                 <SearchIcon />
               </IconButton>
               <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+
               <InputBase
                 sx={{ ml: 1, flex: 1 }}
-                placeholder="Search your course by name"
+                placeholder="Search user by name"
                 inputProps={{ "aria-label": "search your course by name" }}
+                onChange={handleSearchChange}
               />
+
             </Paper>
           </div>
           <Button className="filterButton mt43">
@@ -419,12 +449,15 @@ const User = () => {
                           </Typography>
                         </div>
                       </TableCell>
+
                       <TableCell className="fullNameHead">
                         {row.user_name}
                       </TableCell>
+
                       <TableCell>
                         {moment(row.createdAt).format("MM/DD/YYYY")}
                       </TableCell>
+
                       <TableCell>
                         <MoreVertIcon //need to remove this hardcode this code, more ... three drops in last column
                           onClick={(event) => handleClick(event, row.user_id)}

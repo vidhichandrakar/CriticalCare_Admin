@@ -1,8 +1,11 @@
 import axios from "axios";
 import { APIS } from "./apiConstants";
 
-export const getAllUsersApi = ({ callBack, error }) => {
-  const url = APIS.getAllUsers;
+export const getAllUsersApi = ({ callBack, searchString, error }) => {
+  let url = new URL(`${APIS.getAllUsers}`);
+  if(searchString){
+    url.searchParams.set("user_name", searchString);
+  }
   axios
     .get(url)
     .then((response) => {
@@ -13,9 +16,11 @@ export const getAllUsersApi = ({ callBack, error }) => {
     });
 };
 
-export const getAllCourses = ({callBack, error }) => {
-  const url = APIS.allCourses;
-  
+export const getAllCourses = ({callBack, searchString, error }) => {
+  let url = new URL(`${APIS.allCourses}`);
+  if(searchString){
+    url.searchParams.set("course_name", searchString);
+  }  
   axios
     .get(url)
     .then((response) => {
@@ -26,6 +31,7 @@ export const getAllCourses = ({callBack, error }) => {
       error(errorMessage);
     });
 };
+
 export const getAllCoursesFilter = ({is_publish, duration_type_id, category_id, callBack, error }) => {
   let url = new URL(`${APIS.allCoursesFilter}`);
   console.log(is_publish, duration_type_id ,category_id, "lineno31 ApiAction")
