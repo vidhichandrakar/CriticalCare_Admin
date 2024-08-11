@@ -45,7 +45,7 @@ function PreviousBannerPopup({ openPopUp, handleClickPopUp, bannerAPI }) {
           <Box className="BannerCArdBox">
             {bannerAPI?.map((value, index) => (
               <Box className="PreviosCardBannerBox flexrow">
-                <img src={value.image_url} width={250} height={120} />
+                <img src={value.banner_url} width={250} height={120} />
                 <Box sx={{ ml: 2 }}>
                   <Typography sx={{color: "grey"}}>Displayed on:</Typography>
                   <Typography>

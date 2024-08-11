@@ -136,7 +136,7 @@ const Banner = () => {
     const payload = {
       title: imageTitle,
       description: imageDescription,
-      image_url: storedBasicInfo?.thumbnailPath,
+      banner_url: storedBasicInfo?.thumbnailPath,
       link_url: "https://example.com/sale",
       priority: 1,
       display_locations: "homepage",
@@ -147,7 +147,13 @@ const Banner = () => {
     uploadBanner({payload, callBack: (response) =>{ console.log(response, "resopnseesses")
     toast.success ("Banner Created SuccessFull", {
       autoClose: 500,
-    });}, 
+    }); 
+    banner({
+      callBack: (response) => {
+        setBannerAPI(response.data);
+      },
+    });
+  }, 
     error: (error) => {
       toast.error ("Something went wrong", {
         autoClose: 500,

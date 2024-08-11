@@ -84,8 +84,8 @@ const BannerCard = ({Data, bannerAPI}) => {
               </CardActions>
 
               <div class="container" style={{marginTop: "2%"}}>
-              {value.image_url != null ? (<img
-          src={value.image_url}
+              {value.banner_url != null ? (<img
+          src={value.banner_url}
           alt="Avatar"
           className="BannerImage image"
           height="150"
@@ -96,7 +96,7 @@ const BannerCard = ({Data, bannerAPI}) => {
           
           }
                 {/* <img
-                  src={value.image_url}
+                  src={value.banner_url}
                   alt="Avatar"
                   className="BannerImage image"
                 /> */}
