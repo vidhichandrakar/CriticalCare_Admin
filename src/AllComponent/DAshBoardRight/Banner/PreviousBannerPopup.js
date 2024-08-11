@@ -10,13 +10,11 @@ import Box from "@mui/material/Box";
 import "./BannerPopUp.css";
 import { Typography } from "@mui/material";
 import { commonSelect } from "../../../Util/CommonFields";
-import Demoimg from "../../../Media/Images/banner3.jpg"
+import Demoimg from "../../../Media/Images/banner3.jpg";
+import moment from "moment/moment";
+import CloseIcon from '@mui/icons-material/Close';
 
-function PreviousBannerPopup({openPopUp, handleClickPopUp}) {
-
-  
- 
-
+function PreviousBannerPopup({ openPopUp, handleClickPopUp, bannerAPI }) {
   return (
     <>
       <React.Fragment>
@@ -34,62 +32,30 @@ function PreviousBannerPopup({openPopUp, handleClickPopUp}) {
             },
           }}
         >
-          <DialogTitle className="popUpheader">Previous bannes</DialogTitle>
+          <DialogTitle className="popUpheader flexrow"> <Typography>Previous bannes</Typography>
+          <CloseIcon onClick={handleClickPopUp} sx={{cursor: "pointer"}}/></DialogTitle>
           <DialogContent>
             <DialogContentText className="popUpSubHeader">
               <div className="popUpSubHeaderText">
-                Please select a landing screen where you want your students to
-                be redirected on tapping the banner
+               See the banners you have previously shown to student on your app.
               </div>
+              
             </DialogContentText>
           </DialogContent>
           <Box className="BannerCArdBox">
-          
-        <Box className="flexrow PreviosCardBannerBox">
-            <img src={Demoimg} width={250} height={120} />
-            <Box sx={{ml: 1}}>
-                <Typography>Displayed on:</Typography>
-                <Typography>2023/06/14 - 2024/07/19</Typography>
-                <Typography>Landing Screen:</Typography>
-                <Typography>Specific Course(s) - 1 Selected</Typography>
-            </Box>
-        </Box>
-        <Box className="flexrow PreviosCardBannerBox">
-            <img src={Demoimg} width={250} height={120} />
-            <Box sx={{ml: 1}}>
-                <Typography>Displayed on:</Typography>
-                <Typography>2023/06/14 - 2024/07/19</Typography>
-                <Typography>Landing Screen:</Typography>
-                <Typography>Specific Course(s) - 1 Selected</Typography>
-            </Box>
-        </Box>
-        <Box className="flexrow PreviosCardBannerBox">
-            <img src={Demoimg} width={250} height={120} />
-            <Box sx={{ml: 1}}>
-                <Typography>Displayed on:</Typography>
-                <Typography>2023/06/14 - 2024/07/19</Typography>
-                <Typography>Landing Screen:</Typography>
-                <Typography>Specific Course(s) - 1 Selected</Typography>
-            </Box>
-        </Box>
-        <Box className="flexrow PreviosCardBannerBox">
-            <img src={Demoimg} width={250} height={120} />
-            <Box sx={{ml: 1}}>
-                <Typography>Displayed on:</Typography>
-                <Typography>2023/06/14 - 2024/07/19</Typography>
-                <Typography>Landing Screen:</Typography>
-                <Typography>Specific Course(s) - 1 Selected</Typography>
-            </Box>
-        </Box>
-        <Box className="flexrow PreviosCardBannerBox">
-            <img src={Demoimg} width={250} height={120} />
-            <Box sx={{ml: 1}}>
-                <Typography>Displayed on:</Typography>
-                <Typography>2023/06/14 - 2024/07/19</Typography>
-                <Typography>Landing Screen:</Typography>
-                <Typography>Specific Course(s) - 1 Selected</Typography>
-            </Box>
-        </Box>  
+            {bannerAPI?.map((value, index) => (
+              <Box className="PreviosCardBannerBox flexrow">
+                <img src={value.image_url} width={250} height={120} />
+                <Box sx={{ ml: 2 }}>
+                  <Typography sx={{color: "grey"}}>Displayed on:</Typography>
+                  <Typography>
+                  {moment(value.start_date).format("YYYY-MM-DD") + " - " + moment(value.end_date).format("YYYY-MM-DD")}
+                  </Typography>
+                  <Typography sx={{color: "grey"}}>Title:</Typography>
+                  <Typography>{value.title}</Typography>
+                </Box>
+              </Box>
+            ))}
           </Box>
         </Dialog>
       </React.Fragment>

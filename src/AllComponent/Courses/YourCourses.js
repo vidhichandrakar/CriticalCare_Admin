@@ -257,7 +257,6 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
                       </MenuItem>
                     ))}
                   </Select>
-                  
                 </FormControl>
               </div>
         </Box>

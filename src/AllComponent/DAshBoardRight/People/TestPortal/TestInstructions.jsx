@@ -16,28 +16,30 @@ import CloseIcon from "@mui/icons-material/Close";
 import TextField from "@mui/material/TextField";
 import { getTestById } from "../../../ActionFactory/apiActions";
 
-function TestInstructions({ testData }) {
-  const [instructions, setInstructions] = useState(false);
-  const [open, setOpen] = useState(false);
+function TestInstructions({ testData, setOpen, handleOpen }) {
+  // const [testInstructions, setTestInstructions] = useState("");
+  // const [open, setOpen] = useState(false);
 
-  const handleClickClose = () => {
-    setInstructions(false);
-  };
-  const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-    "& .MuiDialogContent-root": {
-      padding: theme.spacing(2),
-    },
-    "& .MuiDialogActions-root": {
-      padding: theme.spacing(1),
-    },
-  }));
+  // const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  //   "& .MuiDialogContent-root": {
+  //     padding: theme.spacing(2),
+  //   },
+  //   "& .MuiDialogActions-root": {
+  //     padding: theme.spacing(1),
+  //   },
+  // }));
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
+
+  // const handleAddTestInstruction = (e) => {
+  //   console.log(e.target.value);
+  //   setTestInstructions(e.target.value);
+  // };
 
   return (
     <div>
@@ -48,7 +50,7 @@ function TestInstructions({ testData }) {
             <EditIcon className="blueEdit" />
           </h4>
         </div>
-
+        {/* {console.log("testInstructions==>", testInstructions)} */}
         <div style={{ display: "flex", flexDirection: "row" }}>
           {" "}
           <AccessTimeIcon className="testDurationLogo" />
@@ -67,30 +69,31 @@ function TestInstructions({ testData }) {
           </Typography>
         </div>
 
-        <Box className="testInstructionsBtn">
-          <p>
-            <b>Test Instructions:</b>{" "}
-            <span style={{ color: "#000" }}>
+        <Box className="testInstructionsBtn flexrow" sx={{mt: 3,mb:2}}>
+          {/* <Box className="flexrow testInstructions"> */}
+            <Typography><b>Test Instructions:</b></Typography>{" "}
+            <Typography sx={{ color: "#000", ml: "4px" }}>
               {testData?.testInfoDetails?.length
                 ? testData?.testInfoDetails[
                     testData?.testInfoDetails?.length - 1
                   ].test_section_Instruction
-                :""}
-            </span>
+                : ""}
+            </Typography>
             <span>
-              <Button
-                sx={{
+              <Typography
+                sx={{marginLeft: "10px",
                   textTransform: "none",
-                  color: "black",
-                  ml: "-8px",
+                  color: "blue",
+                  // ml: "-8px",
                   fontSize: "medium",
+                  cursor: "pointer"
                 }}
-                onClick={handleClickOpen}
+                onClick={handleOpen}
               >
-                Click here to add{" "}
-              </Button>
+                Click here to add{" "} 
+              </Typography>
 
-              <BootstrapDialog
+              {/* <BootstrapDialog
                 onClose={handleClose}
                 aria-labelledby="customized-dialog-title"
                 open={open}
@@ -125,24 +128,29 @@ function TestInstructions({ testData }) {
                       "& > :not(style)": { m: 1, width: "25ch" },
                     }}
                     noValidate
-                    autoComplete="off"
+                    // autoComplete="off"
                   >
-                    <TextField id="outlined-basic" variant="outlined" />
+                    <TextField
+                      id="outlined-basic"
+                      variant="outlined"
+                      onChange={(e) => handleAddTestInstruction(e)}
+                      value={testInstructions}
+                    />
                   </Box>
                 </DialogContent>
 
                 <DialogActions>
                   <Button
                     autoFocus
-                    onClick={handleClose}
+                    onClick={() => handleClose()}
                     className="doneBtnInstPage"
                   >
-                    Done
+                    Add
                   </Button>
                 </DialogActions>
-              </BootstrapDialog>
+              </BootstrapDialog> */}
             </span>
-          </p>
+          {/* </Box> */}
         </Box>
       </Box>
     </div>

@@ -28,8 +28,8 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
-import {TextField } from "@mui/material";
-import TipsAndUpdatesTwoToneIcon from '@mui/icons-material/TipsAndUpdatesTwoTone';
+import { TextField } from "@mui/material";
+import TipsAndUpdatesTwoToneIcon from "@mui/icons-material/TipsAndUpdatesTwoTone";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -42,23 +42,38 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-function TestNavAndLeft({setMcqopen, testType,handleTestType, numberOfMcqQns,setCqopen}) {
+function TestNavAndLeft({
+  setMcqopen,
+  testType,
+  handleTestType,
+  setCqopen,
+  numberOfMcqQns,
+  setSelectedTypeNId,
+  setAddNewSectionNav,
+}) {
   const [expanded, setExpanded] = useState(false);
-  const handleClickOpenMCQ = (type) => {
-    let condition = numberOfMcqQns[numberOfMcqQns?.length-1]
-    console.log("condition?.test_questions?.length",condition?.test_questions?.length)
-    // if(numberOfMcqQns[0]?.test_questions?.length!==0){
-      if(condition?.test_questions?.length!==0){
-      console.log("true")
-      setCqopen(true)
-    }
-    else{
-      const selectedOption= testType.filter(test=>test.test_type_name===type);
-      handleTestType(selectedOption[0])
-      setMcqopen(true);
-    }
 
-    
+  const handleClickOpenMCQ = (type) => {
+    const testTypeNId = testType.filter((item) => item.test_type_name === type);
+    setSelectedTypeNId({
+      test_type_id: testTypeNId[0].test_type_id,
+      test_type_name: testTypeNId[0].test_type_name,
+    });
+
+    let condition = numberOfMcqQns[numberOfMcqQns?.length - 1];
+    console.log("condition====>",condition)
+    if (condition?.test_questions?.length !== 0) {
+      const selectedOption = testType.filter(
+        (test) => test.test_type_name === type
+      );
+      handleTestType(selectedOption[0]);
+      setMcqopen(true);
+      console.log("condition====>", "true");
+    } else {
+      console.log("condition====>", "flase");
+
+      setCqopen(true);
+    }
   };
 
   const handleExpansion = () => {
@@ -71,6 +86,13 @@ function TestNavAndLeft({setMcqopen, testType,handleTestType, numberOfMcqQns,set
     setSelectedValue(event.target.value);
   };
 
+  const handleAddSectionNav = (type) => {
+    // console.log("addNewSectionNav",type);
+    setAddNewSectionNav(type)
+    const selectedOption = testType.filter((test) => test.test_type_name);
+    handleTestType(selectedOption[0]);
+    setMcqopen(true);
+  };
   return (
     <aside id="sidePart">
       <Box className="completeLeftBox">
@@ -100,19 +122,31 @@ function TestNavAndLeft({setMcqopen, testType,handleTestType, numberOfMcqQns,set
 
           <AccordionDetails>
             <Divider />
-            <Typography className="testOptions" onClick={()=>handleClickOpenMCQ("Multiple Choice")}> 
+            <Typography
+              className="testOptions"
+              onClick={() => handleClickOpenMCQ("Multiple Choice")}
+            >
               <b>Multiple Choice Questions</b>
             </Typography>
             <Divider />
-            <Typography className="testOptions">
+            <Typography
+              className="testOptions"
+              onClick={() => handleClickOpenMCQ("True/False")}
+            >
               <b>True/False Questions</b>
             </Typography>
             <Divider />
-            <Typography className="testOptions">
+            <Typography
+              className="testOptions"
+              onClick={() => handleClickOpenMCQ("Comprehensive")}
+            >
               <b>Comprehension Questions</b>
             </Typography>
             <Divider />
-            <Typography className="testOptions">
+            <Typography
+              className="testOptions"
+              onClick={() => handleClickOpenMCQ("Fill in the blanks")}
+            >
               <b>Fill in the Blanks Questions</b>
             </Typography>
             <Divider />
@@ -191,34 +225,40 @@ function TestNavAndLeft({setMcqopen, testType,handleTestType, numberOfMcqQns,set
               <b>Test Sections</b>
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails sx={{padding: 0}}>
             <Divider />
-            <Typography>
-              <div className="sectionOneFourQues">
-                <h5>Section1 - 4 Questions</h5>
-                <div>
-                  <EditIcon className="editIconTestSection" />
-                  <DeleteIcon className="deleteIconTestSection" />
-                </div>
-              </div>
+            {/* <Box className="testsectionnameMainBox"> */}
+            <Box className="testsectionname">
+            {numberOfMcqQns?.map((item) => {
+              return (
+                 <Box>
+                    <div className="sectionOneFourQues">
+                      <h5> {item?.test_section_name}</h5>
+                      <div style={{marginRight: "3%"}}>
+                        <EditIcon className="editIconTestSection" />
+                        <DeleteIcon className="deleteIconTestSection" />
+                      </div>
+                      
+                    </div>
+                    <Divider />
+                  </Box>
+               
+              );
+            })}
+            </Box>
+            {console.log("numberOfMcqQns===>", numberOfMcqQns)}
+            <Box>
               <Box
-                sx={{
-                  backgroundColor: "#e6f9ff",
-                  padding: "5px 17px",
-                  borderRadius: "5px",
-                  marginTop: "-13px",
-                  marginBottom: "61px",
-                }}
+                className="addNreScsnTestSection"
+                onClick={()=>handleAddSectionNav("addNewSectionNav")}
               >
-                abcd
+                <AddCircleOutlineIcon
+                  sx={{ position: "relative", top: "5px", right: "5px" }}
+                />
+              Add New Section
               </Box>
-            </Typography>
-            <Typography>
-              <Box className="addNreScsnTestSection">
-                <AddCircleOutlineIcon sx={{position: "relative", top:"5px", right:"5px"}}/>
-                Add New Section
-              </Box>
-            </Typography>
+            </Box>
+            {/* </Box> */}
           </AccordionDetails>
         </Accordion>
 
@@ -368,7 +408,14 @@ function TestNavAndLeft({setMcqopen, testType,handleTestType, numberOfMcqQns,set
 
               <Box className="exportTestSettings">
                 <p>
-                  <LaunchIcon sx={{ fontSize: "1.1rem", mr: "10px", position:"relative", top: "3px" }} />
+                  <LaunchIcon
+                    sx={{
+                      fontSize: "1.1rem",
+                      mr: "10px",
+                      position: "relative",
+                      top: "3px",
+                    }}
+                  />
                   Export test as PDF
                 </p>
               </Box>
