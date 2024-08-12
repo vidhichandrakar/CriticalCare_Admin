@@ -108,12 +108,15 @@ function TestPortalMain() {
   const [typesOfQns, setTypesOfQns] = useState("");
 const [selectedTypeQns, setSelectedTypeQns] = useState("single-select");
 const [ openInstruction, setOpenInstruction] = useState(false);
+ const [instructionsString, setInstructionsString]=useState("");
+ const [testInstructions, setTestInstructions] = useState("")
+  const [selectedTypeNId, setSelectedTypeNId] = useState();
+  const [addNewSectionNav, setAddNewSectionNav] = useState();
 
-const [instructionsString, setInstructionsString] = useState("")
   const handleClickOpen = (editedQns, index) => {
     setEditedQuestion(editedQns);
     setTypesOfQns(editedQns.question_type);
-    // setSelectedTypeQns()
+    console.log("dnkdm", index);
     setOpen(true);
   };
   const handleClose = () => {
@@ -159,18 +162,18 @@ const [instructionsString, setInstructionsString] = useState("")
     setMcqopen(false);
   };
   const handleAddSection = () => {
-    setOpenqns(!openqns);
-    setCqopen(true);
-    setMcqopen(false);
-    const payload = {
-      test_id: test_id,
-      test_type_id: selectedTestType.test_type_id,
-      test_section_name: sectionName,
-      test_section_Instruction: sectionInstruction,
-      no_of_question: 5,
-      marks_per_question: 4,
-    };
-    if (sectionName && sectionInstruction) {
+    if (addNewSectionNav === "addNewSectionNav") {
+      setMcqopen(false);
+      // console.log("right palce");
+      const payload = {
+        test_id: test_id,
+        test_type_id: selectedTestType.test_type_id,
+        test_section_name: sectionName,
+        test_section_Instruction: sectionInstruction,
+        no_of_question: 5,
+        marks_per_question: 4,
+      };
+      // console.log("payload==>", payload);
       createTestInfo({
         payload,
         callBack: (res) => {
@@ -178,6 +181,28 @@ const [instructionsString, setInstructionsString] = useState("")
           setTestInfoId(res.data.test_info_id);
         },
       });
+    } else {
+      // console.log("else palce");
+      setOpenqns(!openqns);
+      setCqopen(true);
+      setMcqopen(false);
+      const payload = {
+        test_id: test_id,
+        test_type_id: selectedTestType.test_type_id,
+        test_section_name: sectionName,
+        test_section_Instruction: sectionInstruction,
+        no_of_question: 5,
+        marks_per_question: 4,
+      };
+      if (sectionName && sectionInstruction) {
+        createTestInfo({
+          payload,
+          callBack: (res) => {
+            getTestByIdData();
+            setTestInfoId(res.data.test_info_id);
+          },
+        });
+      }
     }
   };
 
@@ -193,9 +218,11 @@ const [instructionsString, setInstructionsString] = useState("")
   const handleCreateQns = () => {
     setOpenreateqns(!opencreaterqns);
     setCqopen(false);
+
     const payload = {
       test_id: test_id,
-      test_type_id: selectedTestType.test_type_id,
+      test_type_id: selectedTypeNId?.test_type_id,
+      test_type_name: selectedTypeNId?.test_type_name,
       test_section_name: numberOfMcqQns[numberOfMcqQns?.length - 1]
         ?.test_section_name
         ? numberOfMcqQns[numberOfMcqQns?.length - 1]?.test_section_name
@@ -218,17 +245,43 @@ const [instructionsString, setInstructionsString] = useState("")
           const divArray = Array.from({ length: count });
           let arr = [];
           divArray.map((item) => {
-            arr.push({
-              question_text:
-                "What is the normal range of adult human body temperature?",
-              question_type: "single-select",
-              options: [
-                { option_text: "35.5 - 36.5 °C", is_correct: false },
-                { option_text: "36.1 - 37.2 °C", is_correct: false },
-                { option_text: "37.5 - 38.5 °C", is_correct: true },
-                { option_text: "38.0 - 39.0 °C", is_correct: false },
-              ],
-            });
+            if (selectedTypeNId?.test_type_name === "Multiple Choice") {
+              arr.push({
+                question_text:
+                  "What is the normal range of adult human body temperature?",
+                question_type: "single-select",
+                options: [
+                  { option_text: "35.5 - 36.5 °C", is_correct: false },
+                  { option_text: "36.1 - 37.2 °C", is_correct: false },
+                  { option_text: "37.5 - 38.5 °C", is_correct: true },
+                  { option_text: "38.0 - 39.0 °C", is_correct: false },
+                ],
+              });
+            } else if (selectedTypeNId?.test_type_name === "True/False") {
+              arr.push({
+                question_text:
+                  "What is the normal range of adult human body temperature?",
+                question_type: "single-select",
+                options: [
+                  { option_text: "True", is_correct: true },
+                  { option_text: "False", is_correct: false },
+                ],
+              });
+            } else if (
+              selectedTypeNId?.test_type_name === "Fill in the blanks"
+            ) {
+              arr.push({
+                question_text:
+                  "Our nation bird is ______. Who is very beautifull",
+                question_type: "single-select",
+                options: [
+                  { option_text: "Peacock", is_correct: true },
+                  { option_text: "Sparrow", is_correct: false },
+                  { option_text: "Parrot", is_correct: false },
+                  { option_text: "Crow", is_correct: false },
+                ],
+              });
+            }
           });
           const loadPay = {
             test_info_id: testInfoId,
@@ -351,12 +404,45 @@ const [instructionsString, setInstructionsString] = useState("")
       });
     }
     setEditedQuestion(editedOptions);
-
-    
   };
   const handleChange=(event)=>{
     setInstructionsString(event.target.value)
   }
+
+  const handleOpen = () => {
+    setOpenInstruction(true);
+  };
+
+  const handleCloseInstruction = () => {
+    setOpenInstruction(false);
+  };
+
+  const handleAddInstruction = () => {
+    // console.log("djfhbjkl");
+    const payload = {
+      test_id: test_id,
+      test_type_id: selectedTestType.test_type_id,
+      test_section_name: "for testing", //need to work on this
+      test_section_Instruction: testInstructions,
+      no_of_question: 5,
+      marks_per_question: 4,
+    };
+    if (testInstructions) {
+      createTestInfo({
+        id: testInfoId,
+        payload,
+        callBack: (res) => {
+          getTestByIdData();
+          // setTestInfoId(res.data.test_info_id);
+          setOpenInstruction(false);
+        },
+      });
+    }
+  };
+  const handleAddTestInstruction = (value) => {
+    setTestInstructions(value);
+  };
+
   return (
     <div className="grid-container-TestPortal ">
       
@@ -369,7 +455,10 @@ const [instructionsString, setInstructionsString] = useState("")
         handleTestType={handleTestType}
         setCqopen={setCqopen}
         numberOfMcqQns={numberOfMcqQns}
+        setSelectedTypeNId={setSelectedTypeNId}
+        setAddNewSectionNav={setAddNewSectionNav}
       />
+
       <TestFirstPage
         testData={testData}
         openqns={openqns}
@@ -381,6 +470,14 @@ const [instructionsString, setInstructionsString] = useState("")
         setNumberOfMcqQns={setNumberOfMcqQns}
         typesOfQns={typesOfQns}
         setOpenInstruction={setOpenInstruction}
+        selectedTypeNId={selectedTypeNId}
+        handleOpen={handleOpen}
+        addNewSectionNav={addNewSectionNav}
+        testType={testType}
+        setSelectedTypeNId={setSelectedTypeNId}
+        handleTestType={handleTestType}
+        setMcqopen={setMcqopen}
+        setTestInfoId={setTestInfoId}
       />
        <BootstrapDialog
       onClose={()=>setOpenInstruction(false)}
@@ -860,6 +957,58 @@ const [instructionsString, setInstructionsString] = useState("")
             defaultValue="Enter detailed solution for your students"
           />
         </DialogContent>
+      </BootstrapDialog>
+      <BootstrapDialog
+        onClose={handleCloseInstruction}
+        aria-labelledby="customized-dialog-title"
+        open={openInstruction}
+      >
+        <DialogTitle
+          sx={{ m: 0, p: 2, alignItems: "center", textAlign: "center" }}
+          id="customized-dialog-title"
+        >
+          Test Instructions
+        </DialogTitle>
+        <IconButton
+          aria-label="close"
+          onClick={handleCloseInstruction}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+
+        <DialogContent dividers>
+          <Typography gutterBottom>
+            <b>Test Instructions</b>
+          </Typography>
+          <Box
+            className="testInstTextField"
+            component="form"
+            sx={{
+              "& > :not(style)": { m: 1, width: "25ch" },
+            }}
+            // noValidate
+            // autoComplete="off"
+          >
+            <TextField
+              id="outlined-basic"
+              variant="outlined"
+              onChange={(e) => handleAddTestInstruction(e.target.value)}
+              value={testInstructions}
+            />
+          </Box>
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={handleAddInstruction} className="doneBtnInstPage">
+            Add
+          </Button>
+        </DialogActions>
       </BootstrapDialog>
     </div>
   );
