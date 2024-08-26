@@ -42,6 +42,7 @@ function TestInstructions({ testData, setOpen, handleOpen }) {
   // };
 
   return (
+    <>
     <div>
       <Box className="stickyTopBox">
         <div>
@@ -154,6 +155,8 @@ function TestInstructions({ testData, setOpen, handleOpen }) {
         </Box>
       </Box>
     </div>
+     
+    </>
   );
 }
 
