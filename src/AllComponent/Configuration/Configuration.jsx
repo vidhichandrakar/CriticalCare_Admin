@@ -36,11 +36,11 @@ const MenuProps = {
 
 function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
   const theme = useTheme();
-  const [updatedCat, setUpdatedCat] = useState({});
+  const [updatedCat, setUpdatedCat] = useState({category_name:""});
   const [updatedDuration, setUpdatedDuration] = useState({});
   const [saveMemberDetails, setSaveMemberDetails] = useState({});
-  const [subCategory, setSubCategory] = useState({});
-  const [selectedCategory, setSelectedCategory] = useState();
+  const [subCategory, setSubCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState({category_id: ""});
   const [cat, setCat] = useState([]);
   const [number, setNumber] = useState('');
 
@@ -98,13 +98,23 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
     }
   };
   const handleConfigChanges = () => {
+    
+    if(updatedCat.category_name === ""){
+      toast.error("Enter Category");
+    }
+    else{
     const payload = {
       category_name: updatedCat.category_name,
       created_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
       modiefied_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
     };
-    createCategory({ payload, callBack: (response) => {} });
+    createCategory({ payload, callBack: (response) => {
+      toast.success("Category created successfully!")
+      handleCloseCat()
+    } });
+  }
   };
+
   const handleDurationChanges = () => {
     const payload = {
       duration_name: updatedDuration.duration_name,
@@ -122,8 +132,15 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
     updateMemberDetails({ payload, callBack: (response) => {} });
   };
   const handleSubCatChanges = () => {
+    
     const selectedValue = selectedCategory.category_id;
-    const userId = JSON.parse(localStorage.getItem("loggedInUser")).user_id;
+
+    if(subCategory === "" || selectedValue === ""){
+      console.log("cfdvknfdbnfvbfjvnbfjvnfbvjf")
+      toast.error("Its working");
+    }
+    else{
+      const userId = JSON.parse(localStorage.getItem("loggedInUser")).user_id;
     const payload = {
       category_name: subCategory,
       sub_category_type: "Y",
@@ -132,7 +149,9 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
     };
     createSubCategory({ payload, callBack: (response) => {
       toast.success("Sub Category created successfully!")
+      handleCloseCat()
     } });
+    }
   };
   const handleChange = (e) => {
     setSelectedCategory(e.target.value);
@@ -231,7 +250,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   <Select
                     value={cat.category_name}
                     onChange={(e) => handleChange(e)}
-                    className="addCatTextField paddingbox"
+                    className="addCatTextField "
                   >
                     {cat.map((item) => (
                       <MenuItem key={item._id} value={item}>
@@ -250,7 +269,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                       id: "fullWidth",
                       className: "BoxShadow-ACat addCatTextField ",
                       inputClassName: "textField PaddingOnly",
-                      labels: "Sub Category",
+                      // labels: "Sub Category",
                     },
                     (Option = {
                       handleInput: handleInput,
@@ -334,25 +353,25 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
           <Button variant="outlined" onClick={handleCloseCat} sx={{borderColor:"red", color:"red", textTransform:"none", marginRight:"12px", padding:"3px 0px"}}>Cancel</Button>
           {selectedConfigValue === "Category" ? (
             <>
-              <Button sx={{textTransform:"none", padding:"3px 0px", marginRight:"16px"}} variant="outlined" onClick={handleConfigChanges} type="submit">
+              <Button sx={{textTransform:"none", padding:"3px 0px", marginRight:"16px"}} variant="outlined" onClick={handleConfigChanges} >
                 Save
               </Button>
             </>
           ) : selectedConfigValue === "Duration" ? (
             <>
-              <Button sx={{textTransform:"none", padding:"3px 0px", marginRight:"16px"}} variant="outlined" onClick={handleDurationChanges} type="submit">
+              <Button sx={{textTransform:"none", padding:"3px 0px", marginRight:"16px"}} variant="outlined" onClick={handleDurationChanges} >
                 Save
               </Button>
             </>
           ) : selectedConfigValue === "SubCategory" ? (
             <>
-              <Button sx={{textTransform:"none", padding:"3px 0px", marginRight:"16px"}} variant="outlined" onClick={handleSubCatChanges} type="submit">
+              <Button sx={{textTransform:"none", padding:"3px 0px", marginRight:"16px"}} variant="outlined" onClick={handleSubCatChanges} >
                 Save
               </Button>
             </>
           ) : (
             <>
-              <Button sx={{textTransform:"none", padding:"3px 0px", marginRight:"16px"}} variant="outlined" onClick={handleMemberChanges} type="submit">
+              <Button sx={{textTransform:"none", padding:"3px 0px", marginRight:"16px"}} variant="outlined" onClick={handleMemberChanges} >
                 Save
               </Button>
             </>

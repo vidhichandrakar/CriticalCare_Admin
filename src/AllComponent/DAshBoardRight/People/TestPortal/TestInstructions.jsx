@@ -45,7 +45,7 @@ function TestInstructions({ testData, setOpen, handleOpen }) {
     <div>
       <Box className="stickyTopBox">
         <div>
-          <h4>
+          <h4 style={{fontSize: "1.5rem"}}>
             {testData?.test_name}
             <EditIcon className="blueEdit" />
           </h4>
@@ -83,7 +83,7 @@ function TestInstructions({ testData, setOpen, handleOpen }) {
               <Typography
                 sx={{marginLeft: "10px",
                   textTransform: "none",
-                  color: "blue",
+                  color: "#19588f",
                   // ml: "-8px",
                   fontSize: "medium",
                   cursor: "pointer"

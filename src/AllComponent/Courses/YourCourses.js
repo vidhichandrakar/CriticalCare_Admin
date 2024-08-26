@@ -317,7 +317,7 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
             onClick={() => handleFilterCourse("All Courses")}
           >
             All Courses
-          </Button>
+          </Button> 
         </Box>
         </Box>
       </Box>

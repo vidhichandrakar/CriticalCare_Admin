@@ -12,7 +12,7 @@ function TestProtalHeader({testData}) {
             <Link to="/admin/TestPortal">
               <WestIcon className="abcdBackLogo" />
             </Link>
-            <b>{testData?.test_name}</b>
+            <p style={{fontSize: "1.5rem", marginLeft: "5pxb"}}>{testData?.test_name}</p>
           </div>
           <div className="previewnsaveBtn">
             <Button className="previewNavBtn" variant="outlined">Preview</Button>
