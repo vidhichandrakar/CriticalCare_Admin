@@ -93,8 +93,9 @@
     gap: 5px;
 }
 .MainQnsBox{
-    /* border: 2px solid red; */
+    overflow: auto;
     margin: 2%;
+    height: 48vh
 }
 
 .MarksBox{

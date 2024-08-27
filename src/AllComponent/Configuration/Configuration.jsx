@@ -19,7 +19,7 @@ import {
   updateDuration,
   updateMemberDetails,
 } from "../ActionFactory/apiActions";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { Box, Divider, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { validatePhoneNo } from "../../Util/CommonUtils";
@@ -37,8 +37,8 @@ const MenuProps = {
 function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
   const theme = useTheme();
   const [updatedCat, setUpdatedCat] = useState({category_name:""});
-  const [updatedDuration, setUpdatedDuration] = useState({});
-  const [saveMemberDetails, setSaveMemberDetails] = useState({});
+  const [updatedDuration, setUpdatedDuration] = useState({duration_name: ""});
+  const [saveMemberDetails, setSaveMemberDetails] = useState({member_name: "" , email_id: "" , phone_no: ""});
   const [subCategory, setSubCategory] = useState("");
   const [selectedCategory, setSelectedCategory] = useState({category_id: ""});
   const [cat, setCat] = useState([]);
@@ -116,28 +116,42 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
   };
 
   const handleDurationChanges = () => {
+    if(updatedDuration.duration_name === "" ){
+      toast.error("Enter Duration");
+    }
+    else{
     const payload = {
       duration_name: updatedDuration.duration_name,
       created_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
       modiefied_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
     };
-    updateDuration({ payload, callBack: (response) => {} });
+    updateDuration({ payload, callBack: (response) => {
+      toast.success("Successful duration created");
+      handleCloseCat()
+    } });
+  }
   };
+  
   const handleMemberChanges = () => {
-    const payload = {
+    if(saveMemberDetails.member_name === "" || saveMemberDetails.email_id === "" || saveMemberDetails.phone_no === ""){
+      toast.error("There is some empty space")
+    }
+    else{ const payload = {
       member_name: saveMemberDetails.member_name,
       email_id: saveMemberDetails.email_id,
       phone_no: saveMemberDetails.phone_no,
     };
-    updateMemberDetails({ payload, callBack: (response) => {} });
+    updateMemberDetails({ payload, callBack: (response) => {
+      toast.success("Member Successful created")
+      handleCloseCat()
+    } });
+  }
   };
   const handleSubCatChanges = () => {
-    
     const selectedValue = selectedCategory.category_id;
-
     if(subCategory === "" || selectedValue === ""){
       console.log("cfdvknfdbnfvbfjvnbfjvnfbvjf")
-      toast.error("Its working");
+      toast.error("Sub Category not be empty")
     }
     else{
       const userId = JSON.parse(localStorage.getItem("loggedInUser")).user_id;
@@ -148,8 +162,10 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
       main_category_id: selectedValue,
     };
     createSubCategory({ payload, callBack: (response) => {
-      toast.success("Sub Category created successfully!")
+      
+      //  console.log("line150 wale haw hum")
       handleCloseCat()
+      toast.success("Category created successfully!")
     } });
     }
   };
@@ -378,6 +394,8 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
           )}
         </DialogActions>
       </Dialog>
+      
+      {/* <ToastContainer /> */}
     </React.Fragment>
   );
 }

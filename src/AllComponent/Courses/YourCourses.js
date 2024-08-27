@@ -94,7 +94,7 @@ const YourCourses = () => {
     
   }, []);
 
-  const handleFilterChange = ({duration_type_id = "", category_id = "" , is_publish = ""}) => {
+  const handleFilterChange = ({duration_type_id = "", category_id = "" , is_publish = "" }) => {
     console.log(filterValue, durationname ,selectedCategory, "line90 publishdurationcategory")
     getAllCoursesFilter({
 
@@ -113,27 +113,45 @@ const YourCourses = () => {
     })
   }
   const handleChange = (e) => {
-    setSelectedCategory(e.target.value.category_name);
-    console.log(e.target.value.category_name, "Lineno109")
-    handleFilterChange({category_id: e.target.value.category_id})
+    setSelectedCategory(e.target.value.category_id);
+    console.log(e.target.value.category_id, "Lineno109")
+    // handleFilterChange({category_id: e.target.value.category_id})
     
   };
 
   const handleFilterCourse = (type) => {
     setFilterValue(type);
-    handleFilterChange({is_publish: type})
+    // handleFilterChange({is_publish: type})
   };
 
   const handleDurationChange = (e) => {
     
     setDurationname(e.target.value.duration_type_id);
-    handleFilterChange({duration_type_id : e.target.value.duration_type_id})
+    // handleFilterChange({duration_type_id : e.target.value.duration_type_id})
     
     console.log(e, "line120 handleduratipon")
     console.log(e.target.value.duration_type_id, "line121 handleduratipon")
     console.log(durationname, "line124 handleduratipon")
    
-  };
+  }; 
+
+  const handleAllFilterChange = ({duration_type_id = "", category_id = "" , is_publish = ""}) => {
+    getAllCoursesFilter({
+
+      duration_type_id:durationname,
+      category_id: selectedCategory,
+      is_publish: filterValue ,
+      callBack: (response) =>{
+        console.log(response, "line95")
+        const userCallBack = response?.data;
+        setAllCourses(userCallBack);
+        setCourseData(userCallBack);
+      },
+      error: () =>{
+
+      }
+    })
+  }
 
   const handleInput = (value, type, event) => {
     if (
@@ -183,7 +201,7 @@ const YourCourses = () => {
   };
 
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-const checkedIcon = <CheckBoxIcon fontSize="small" />;
+  const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
   const list = (anchor) => (
     <Box
@@ -319,6 +337,11 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
             All Courses
           </Button> 
         </Box>
+        </Box>
+        <Box sx={{ml:2}}>
+          <Button onClick={handleAllFilterChange}>
+            apply
+          </Button>
         </Box>
       </Box>
     </Box>
@@ -516,7 +539,7 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
             sx={{
               top: "88%",
               position: "absolute",
-              zIndex: 1111111111111,
+              zIndex: 1111,
               right: 0,
             }}
             className="addCircle"
