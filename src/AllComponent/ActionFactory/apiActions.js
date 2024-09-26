@@ -62,7 +62,7 @@ export const deleteUser = ({ userId, callBack }) => {
 };
 
 export const banner = ({ callBack, error }) => {
-  const url = APIS.banner;
+  const url = APIS.getBanner;
   axios
     .get(url)
     .then((response) => {

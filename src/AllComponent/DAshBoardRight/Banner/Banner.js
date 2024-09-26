@@ -8,6 +8,9 @@ import { BannerData } from "../../../Data/JsonData";
 import { Fragment } from "react";
 import SideBar from "../../AdminDashboardMain/SideBar";
 import Header from "../../Courses/Header";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 import { banner, uploadBanner, uploadFile } from "../../ActionFactory/apiActions";
 import { Box, Button, Divider, Typography, TextField } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -64,6 +67,8 @@ const Banner = () => {
   const [bannerImage, setBannerImage] = useState('');
   const [imageDescription, setImageDescription] = useState('');
   const [imgUpload, setImageWhileUpload] = useState("");
+  const [bannerType,setBannerType] = useState("");
+  const [bannerPosition, setBannerPosition] = useState("");
 
   // const isFormValid = imageTitle.trim() !== '' && imageDescription.trim() !== '';
   const maxSteps = images.length;
@@ -123,7 +128,9 @@ const Banner = () => {
     if (
       imageTitle == "" ||
       imageDescription == "" ||
-      storedBasicInfo?.thumbnailPath == null
+      storedBasicInfo?.thumbnailPath == null ||
+      bannerType === "" ||
+      bannerPosition === ""
     ) {
       toast.error(
         "All Field are reaquired",
@@ -134,15 +141,14 @@ const Banner = () => {
     } else {
     setImageUpload(!imageUpload);
     const payload = {
-      title: imageTitle,
-      description: imageDescription,
-      banner_url: storedBasicInfo?.thumbnailPath,
-      link_url: "https://example.com/sale",
-      priority: 1,
-      display_locations: "homepage",
-      start_date: "2024-04-01",
-      end_date: "2024-04-10",
-      created_by: 1,
+      "web_banner_title": imageTitle,
+      "web_banner_type":bannerType,
+      "web_banner_position":bannerPosition,
+      "web_banner_links":[
+        {
+          "banner_url":storedBasicInfo?.thumbnailPath,
+        }],
+      
     };
     uploadBanner({payload, callBack: (response) =>{ console.log(response, "resopnseesses")
     toast.success ("Banner Created SuccessFull", {
@@ -161,7 +167,14 @@ const Banner = () => {
     }})
   } 
   };
-
+  const handleBannerChange =(type,value)=>{
+    if(type==="type"){
+      setBannerType(value);
+    }
+    else if(type==="position"){
+      setBannerPosition(value);
+    }
+  }
   useEffect(() => {
     banner({
       callBack: (response) => {
@@ -177,6 +190,9 @@ const Banner = () => {
   const handleStepChange = (step) => {
     setActiveStep(step);
   };
+  const handleClickEdit =()=>{
+    setImageUpload(true)
+  }
   return (
     <Fragment>
       <div className="grid-container">
@@ -191,7 +207,7 @@ const Banner = () => {
               </div>
               {console.log(bannerAPI, "BannerAPI line35")}
 
-              <BannerCard Data={BannerData} bannerAPI={bannerAPI} />
+              <BannerCard Data={BannerData} bannerAPI={bannerAPI} handleClickEdit={handleClickEdit}/>
               <div className="UploadBtton">
                 <Button variant="outlined" onClick={handleUploadImage}>
                   <AddCircleOutlineRoundedIcon /> Upload Banner Image
@@ -389,7 +405,7 @@ const Banner = () => {
               <Box className="flexrow spacebt">
                 <Box className="flexrow">
                   {/* <ArrowBackIcon />  */}
-                  <Typography sx={{ ml: 1 }}>Upload Data & Image</Typography>
+                  <Typography sx={{ ml: 1, mt:1 }}>Upload Banner</Typography>
                   
                 </Box>
                 <CloseIcon onClick={handleUploadImage} sx={{cursor: "pointer"}}/>
@@ -416,50 +432,55 @@ const Banner = () => {
                     fullWidth
                     id="outlined-multiline-static"
                     multiline
-                    rows={4}
+                    rows={2}
                     placeholder="Enter course description"
                     className="DescBoxShadow"
                     value={imageDescription}
                     onChange={handleDescriptionInput}
                   />
                 </Box>
-
+                <Box sx={{ minWidth: 420 }}>
+            <FormControl fullWidth variant="outlined" >
+            <Typography className="addCatHeadingCat">Type</Typography>
+              <Select
+                labelId="demo-simple-select-label"
+                sx={{mt:1}}
+                id="demo-simple-select"
+                value={bannerType}
+                // label="Age"
+                onChange={(event)=>handleBannerChange("type",event.target.value)}
+              >
+                <MenuItem value={"B"}>Banner</MenuItem>
+                <MenuItem value={"S"}>Slider</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+          <Box sx={{ minWidth: 420 }}>
+            <FormControl fullWidth variant="outlined" >
+            <Typography className="addCatHeadingCat">Position</Typography>
+              <Select
+                labelId="demo-simple-select-label"
+                sx={{mt:1}}
+                id="demo-simple-select"
+                value={bannerPosition}
+                // label="Age"
+                onChange={(event)=>handleBannerChange("position",event.target.value)}
+              >
+                <MenuItem value={"Top"}>Top</MenuItem>
+                <MenuItem value={"Middle"}>Middle</MenuItem>
+                <MenuItem value={"Bottom"}>Bottom</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
                 <div {...getIntroVideoRootProps({ className: "dropzone" })}>
                   <input {...getIntroVideoInputProps()} />
-                  {/* <Box className="thumbnailUpload">
-          <Button
-            component="label"
-            variant="outlined-multiline-static"
-            startIcon={<UploadIcon className="iconThumbicon" />}
-            className="iconThumb"
-          >
-            Upload Thumbnail Image
-          </Button>
-          <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
-            Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
-          </Typography>
-          {/* <LoaderComponent loaderState={loaderState} />
-          {imgUpload === "" && storedBasicInfo?.thumbnailPath && (
-            <img
-              src={storedBasicInfo?.thumbnailPath}
-              width={140}
-              height={"auto"}
-            />
-          )}
-          {imgUpload != "" && (
-            <img
-              src={storedBasicInfo?.thumbnailPath}
-              width={140}
-              height={"auto"}
-            />
-          )} */}
-                  {/* </Box> */}
+         
                   <div className="UploadBttons">
                     <Button variant="outlined">
-                      <AddCircleOutlineRoundedIcon /> Upload Banner Image
+                      <AddCircleOutlineRoundedIcon /> <span style={{marginLeft:"1%"}}>Upload Banner Image</span>
                     </Button>
                     <Typography
-                      sx={{ mt: 1, fontSize: "0.7rem", color: "grey" }}
+                      sx={{ mt: 2, fontSize: "0.7rem", color: "grey" }}
                     >
                       *We recommend uploading an image in 942*510 pixels
                       resolution
