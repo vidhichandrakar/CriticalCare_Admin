@@ -11,7 +11,7 @@ import Header from "../../Courses/Header";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { banner, uploadBanner, uploadFile } from "../../ActionFactory/apiActions";
+import { banner, bannerPage, uploadBanner, uploadFile } from "../../ActionFactory/apiActions";
 import { Box, Button, Divider, Typography, TextField } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import imge from "../../../Media/Images/banner2.jpg";
@@ -69,8 +69,8 @@ const Banner = () => {
   const [imgUpload, setImageWhileUpload] = useState("");
   const [bannerType,setBannerType] = useState("");
   const [bannerPosition, setBannerPosition] = useState("");
-
-  // const isFormValid = imageTitle.trim() !== '' && imageDescription.trim() !== '';
+  const [bannerSelectedPage, setBannerPageSelected] = useState("");
+  const [bannerPageData, setBannerPage] = useState([])
   const maxSteps = images.length;
 
   const handleUploadImage = () => {
@@ -121,16 +121,12 @@ const Banner = () => {
   });
 
   const handleUploadBannerImage = () => {
-    console.log(imageTitle, "imageDescription")
-    console.log(imageDescription, "imageDescription")
-    console.log(imageTitle == "" ,
-    imageDescription == "", "imageDescription")
     if (
       imageTitle == "" ||
-      imageDescription == "" ||
       storedBasicInfo?.thumbnailPath == null ||
       bannerType === "" ||
-      bannerPosition === ""
+      bannerPosition === "" ||
+      bannerSelectedPage ===""
     ) {
       toast.error(
         "All Field are reaquired",
@@ -141,6 +137,7 @@ const Banner = () => {
     } else {
     setImageUpload(!imageUpload);
     const payload = {
+      "webpage_id":bannerSelectedPage,
       "web_banner_title": imageTitle,
       "web_banner_type":bannerType,
       "web_banner_position":bannerPosition,
@@ -174,13 +171,20 @@ const Banner = () => {
     else if(type==="position"){
       setBannerPosition(value);
     }
+    else if(type==="bannerPage"){
+      setBannerPageSelected(value);
+    }
   }
   useEffect(() => {
     banner({
       callBack: (response) => {
         setBannerAPI(response.data);
+        
       },
     });
+    bannerPage({
+      callBack:(response)=>setBannerPage(response.data)
+    })
   }, []);
 
   const handleClickPopUp = () => {
@@ -425,20 +429,22 @@ const Banner = () => {
                     onChange={handleTitleInput}
                   />
                 </Box>
-                <Box sx={{ mt: 2 }}>
-                  <Typography>Description</Typography>
-                  <TextField
-                    inputProps={{ className: "textField" }}
-                    fullWidth
-                    id="outlined-multiline-static"
-                    multiline
-                    rows={2}
-                    placeholder="Enter course description"
-                    className="DescBoxShadow"
-                    value={imageDescription}
-                    onChange={handleDescriptionInput}
-                  />
-                </Box>
+                <Box sx={{ minWidth: 420 }}>
+            <FormControl fullWidth variant="outlined" >
+            <Typography className="addCatHeadingCat">Banner Pages</Typography>
+              <Select
+                labelId="demo-simple-select-label"
+                sx={{mt:1}}
+                id="demo-simple-select"
+                value={bannerSelectedPage}
+                // label="Age"
+                onChange={(event)=>handleBannerChange("bannerPage",event.target.value)}
+              >
+                {bannerPageData?.map(banner=><MenuItem value={banner.webpage_id}>{banner.webpage_text}</MenuItem>)}
+                
+              </Select>
+            </FormControl>
+          </Box>
                 <Box sx={{ minWidth: 420 }}>
             <FormControl fullWidth variant="outlined" >
             <Typography className="addCatHeadingCat">Type</Typography>

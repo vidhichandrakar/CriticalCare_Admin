@@ -62,6 +62,17 @@ export const deleteUser = ({ userId, callBack }) => {
 };
 
 export const banner = ({ callBack, error }) => {
+  const url = APIS.banner;
+  axios
+    .get(url)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
+export const bannerPage = ({ callBack, error }) => {
   const url = APIS.getBanner;
   axios
     .get(url)
@@ -72,7 +83,6 @@ export const banner = ({ callBack, error }) => {
       error(errorMessage);
     });
 };
-
 export const uploadBanner = ({payload, callBack, error }) => {
   const url = APIS.banner;
   axios
