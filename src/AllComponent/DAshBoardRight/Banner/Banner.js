@@ -426,34 +426,7 @@ const Banner = () => {
 
                 <div {...getIntroVideoRootProps({ className: "dropzone" })}>
                   <input {...getIntroVideoInputProps()} />
-                  {/* <Box className="thumbnailUpload">
-          <Button
-            component="label"
-            variant="outlined-multiline-static"
-            startIcon={<UploadIcon className="iconThumbicon" />}
-            className="iconThumb"
-          >
-            Upload Thumbnail Image
-          </Button>
-          <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
-            Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
-          </Typography>
-          {/* <LoaderComponent loaderState={loaderState} />
-          {imgUpload === "" && storedBasicInfo?.thumbnailPath && (
-            <img
-              src={storedBasicInfo?.thumbnailPath}
-              width={140}
-              height={"auto"}
-            />
-          )}
-          {imgUpload != "" && (
-            <img
-              src={storedBasicInfo?.thumbnailPath}
-              width={140}
-              height={"auto"}
-            />
-          )} */}
-                  {/* </Box> */}
+      
                   <div className="UploadBttons">
                     <Button variant="outlined">
                       <AddCircleOutlineRoundedIcon /> Upload Banner Image

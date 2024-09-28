@@ -354,3 +354,15 @@ export const editQuestions=({payload, callBack, questionId})=>{
     callBack(response);
   })
 }
+
+export const getBlog = ({ payload, callBack, error }) => {
+  const url = APIS.blog;
+  axios
+    .post(url, payload)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};  
