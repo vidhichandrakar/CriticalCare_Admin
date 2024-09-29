@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import ModeIcon from "@mui/icons-material/Mode";
 import { styled } from "@mui/material/styles";
-import BannerPopUp from "./BannerPopUp";
+import BannerPopUp from "./BannerUpload";
 import Switch from '@mui/material/Switch';
 import attachmentimgae from "../../../Media/Images/undraw_attached_file_re_0n9b.svg";
 import { Box } from "@mui/material";
@@ -28,7 +28,7 @@ const VisuallyHiddenInput = styled("input")({
   whiteSpace: "nowrap",
   width: 1,
 });
-const BannerCard = ({Data, bannerAPI}) => {
+const BannerCard = ({ Data, bannerAPI, handleClickEdit }) => {
   const [storedFilePath, setStoredFilePath] = useState([]);
   const [openPopUp, setOpenPopUp] = useState(false);
   const [openPopUpPreivous, setOpenPopUpPreivous] = useState(false);
@@ -66,10 +66,10 @@ const BannerCard = ({Data, bannerAPI}) => {
     setOpenPopUp(!openPopUp);
     console.log("workksckdsnckjsdncjds")
   };
- 
+
   return (
     <>
-      <BannerPopUp openPopUp={openPopUp} handleClickPopUp={handleClickPopUp} bannerAPI={bannerAPI}/>
+      <BannerPopUp openPopUp={openPopUp} handleClickPopUp={handleClickPopUp} bannerAPI={bannerAPI} />
       {/* {Data.map((value, index) => ( */}
       {bannerAPI?.map((value, index) => (
         <div className="BannerMainBox">
@@ -82,19 +82,18 @@ const BannerCard = ({Data, bannerAPI}) => {
                   Remove
                 </Button>
               </CardActions>
+              <div class="container" style={{ marginTop: "2%" }}>
+                {value.web_banner_links?.length ? (<img
+                  src={value.web_banner_links[0].banner_url}
+                  alt="Avatar"
+                  className="BannerImage image"
+                  height="150"
+                  width="300"
+                />) : (
+                  <img src={imge} height="120" width="250" className="BannerImage image" />
+                )
 
-              <div class="container" style={{marginTop: "2%"}}>
-              {value.banner_url != null ? (<img
-          src={value.banner_url}
-          alt="Avatar"
-          className="BannerImage image"
-          height="150"
-          width="300"
-        />) : (
-              <img src={imge} height="120" width="250" className="BannerImage image"/>
-            ) 
-          
-          }
+                }
                 {/* <img
                   src={value.banner_url}
                   alt="Avatar"
@@ -115,20 +114,20 @@ const BannerCard = ({Data, bannerAPI}) => {
                   </Button>
                 </div>
               </div>
-                        <div style={{color: "green"}} className="flexrow">
-                          <CheckCircleIcon />
-                          <p>Image fits perfectly in banner</p>
-                        </div>
+              <div style={{ color: "green" }} className="flexrow">
+                <CheckCircleIcon />
+                <p>Image fits perfectly in banner</p>
+              </div>
               {storedFilePath?.map((row) => {
                 return row.id === value.id ? row.value : null;
               })}
 
               {/* <CardContent> */}
-                <p className="fontSize1" >{value.description}</p>
+              <p className="fontSize1" >{value.description}</p>
               {/* </CardContent> */}
               <div className="BannerHead BorderBottom">
-                <p>{value.title}</p>
-                <Button className="changeBtn" onClick={handleClickPopUp}>
+                <p>{value.web_banner_title}</p>
+                <Button className="changeBtn" onClick={handleClickEdit}>
                   Change
                 </Button>
               </div>
@@ -142,7 +141,7 @@ const BannerCard = ({Data, bannerAPI}) => {
           </div>
         </div>
       ))}
-      
+
     </>
   );
 };
