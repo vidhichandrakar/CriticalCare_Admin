@@ -33,6 +33,8 @@ import UploadIcon from "@mui/icons-material/Upload";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CloseIcon from '@mui/icons-material/Close';
+import Switch from '@mui/material/Switch';
+
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -51,6 +53,9 @@ const images = [
   },
 ];
 const Banner = () => {
+  const [activeStatus, setActiveStatus] = useState("N"); // Default to inactive
+  const [bannerEnabled, setBannerEnabled] = useState(false);
+
   const [bannerAPI, setBannerAPI] = useState();
   const [openPopUp, setOpenPopUp] = useState(false);
   const theme = useTheme();
@@ -122,13 +127,19 @@ const Banner = () => {
     },
   });
 
+  const handleBannerStatusToggle = () => {
+    setBannerEnabled(!bannerEnabled);
+    setActiveStatus(bannerEnabled ? "N" : "Y"); // Update activeStatus based on toggle
+  };
+
   const handleUploadBannerImage = () => {
     if (
-      imageTitle == "" ||
+      imageTitle === "" ||
       storedBasicInfo?.thumbnailPath == null ||
       bannerType === "" ||
       bannerPosition === "" ||
-      bannerSelectedPage ===""
+      bannerSelectedPage === "" ||
+      !bannerEnabled
     ) {
       toast.error(
         "All Field are reaquired",
@@ -147,10 +158,11 @@ const Banner = () => {
         {
           "banner_url":storedBasicInfo?.thumbnailPath,
         }],
+      "active_status": activeStatus, // Send activeStatus with payload
       
     };
     uploadBanner({payload, callBack: (response) =>{ console.log(response, "resopnseesses")
-    toast.success ("Banner Created SuccessFull"); 
+      toast.success("Banner Created SuccessFully"); 
     banner({
       callBack: (response) => {
         setBannerAPI(response.data);
@@ -482,6 +494,17 @@ const Banner = () => {
               </Select>
             </FormControl>
           </Box>
+                {/* Toggle Switch Below Position Box */}
+                <Box sx={{ mt: 3 }}>
+                  <Typography className="addCatHeadingCat">Enable Banner</Typography>
+                  <Switch
+                    checked={bannerEnabled}
+                    onChange={handleBannerStatusToggle}
+                  />
+                </Box>
+
+                {/* Display active_status for debug */}
+                {/* <Typography>Active Status: {activeStatus}</Typography> */}
                 <div {...getIntroVideoRootProps({ className: "dropzone" })}>
                   <input {...getIntroVideoInputProps()} />
       

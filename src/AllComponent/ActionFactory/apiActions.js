@@ -108,6 +108,8 @@ export const bannerPage = ({ callBack, error }) => {
 
 export const uploadBanner = ({payload, callBack, error }) => {
   const url = APIS.banner;
+  // Log the payload to check if active_status is included
+  // console.log("Payload being sent to upload banner:", payload);
   axios
     .post(url, payload)
     .then((response) => {
