@@ -1,11 +1,14 @@
 import { Box, Typography, TextField, Button } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
 import UploadIcon from "@mui/icons-material/Upload";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { CommonTypography, commonButton, commonTextField } from "../../Util/CommonFields";
+import { getBlog, uploadFile } from "../ActionFactory/apiActions";
+import { useDropzone } from "react-dropzone";
+import { ToastContainer, toast } from "react-toastify";
 const VisuallyHiddenInput = styled("input")({
   clip: "rect(0 0 0 0)",
   clipPath: "inset(50%)",
@@ -43,20 +46,109 @@ const BpCheckedIcon = styled(BpIcon)({
 });
 
 const UpcomingCourseBox = ({}) => {
+  const [blogName, setBlogName] = useState("");
+  const [blogDescription, setBlogDescription] = useState("");
+  const [blogImgUpload, setBlogImageUpload] = useState("");
+  const [imgUpload, setImageWhileUpload] = useState("");
+  const [storedBasicInfo, setStoredBasicInfo] = useState({
+    Name: "",
+    Description: "",
+    Category: "",
+    subCategory: "",
+    thumbnailPath: null,
+  });
+
+ 
+  const handleBlogName = (event) =>{
+    setBlogName(event.target.value)
+  }
+  const handleBlogDescriptionInput = (event) =>{
+    setBlogDescription(event.target.value)
+  }
+
+  const handlePostButton = () => {
+    if (
+      blogName == "" ||
+      blogDescription == "" ||
+      storedBasicInfo?.thumbnailPath == null
+    ) {
+      toast.error(
+        "All Field are reaquired",
+        {
+          autoClose: 500,
+        }
+      );
+    } else {
+    const payload = {
+      title: blogName,
+      description:blogDescription,
+      image_url: storedBasicInfo?.thumbnailPath,
+      display_locations: "display_locations",
+      popular: "N",
+      created_by: 1,
+      createdAt: "2024-09-16T08:10:27.213Z",
+      updatedAt: "2024-09-16T08:10:27.213Z",
+      bloglist_id: 2
+    }
+    getBlog({payload, callBack: (response) =>{ 
+      console.log(response, "BLogresopnseesses")    
+    }, 
+     })
+    } 
+  }
+   
+    const onInroVideoDrop = async (files) => {
+      let payload = new FormData();
+      payload.append("file", files[0], files[0]?.name);
+      let storedValues = Object.assign({}, storedBasicInfo);
+      // setLoaderState(true);
+      uploadFile({
+        payload,
+        callBack: (response) => {
+          storedValues.thumbnailPath = response?.data?.path;
+          setStoredBasicInfo(storedValues);
+          // toast.success ("Banner Image Upload SuccessFull", {
+          //   autoClose: 500,
+          // });
+          // setLoaderState(false);
+        },
+      });
+      setStoredBasicInfo(storedValues);
+    };
+  
+
+    const {
+      getRootProps: getIntroVideoRootProps,
+      getInputProps: getIntroVideoInputProps,
+    } = useDropzone ({
+      onDrop: onInroVideoDrop,
+      onChange: (event) => console.log(event),
+      accept: {
+        "image/jpeg": [".jpeg"],
+        "image/png": [".png"],
+        "image/jpg": [".jpg"],
+        "video/mp4":[".mp4"]
+      },
+    });
+  
   return (
     <Box className="courseMainTrack">
       <div className="formMainUpcoming">
         {CommonTypography({ fontWeight: 600, label: "Name" })}
-        {commonTextField({
-          id: "fullWidth",
-          className: "BoxShadow",
-          inputClassName: "textField",
-          labels: "Enter course name",
-        })}
-        {CommonTypography({
+       
+         <TextField
+          inputProps={{ className: "textField" }}
+          fullWidth
+          id="outlined-multiline-static"
+          multiline
+          placeholder="Enter course name"
+          className="BoxShadowUpcoming"
+          onChange={handleBlogName}
+           />
+         {CommonTypography({
           fontWeight: 600,
           label: "Description",
-          sx: { marginTop: "3%" },
+          sx: { marginTop: "2%" },
         })}
         <TextField
           inputProps={{ className: "textField" }}
@@ -64,17 +156,16 @@ const UpcomingCourseBox = ({}) => {
           id="outlined-multiline-static"
           multiline
           rows={4}
+          onChange={handleBlogDescriptionInput}
           placeholder="Enter course description here"
           className="BoxShadowUpcoming"
-          // onChange={(event) => handleTextChange("emailId", event.target.value)}
         />
-
         {CommonTypography({
           fontWeight: 600,
           label: " Add Thumbnail",
           sx: { marginTop: "3%" },
         })}
-        <Box className="thumbnailUpload">
+        {/* <Box className="thumbnailUpload">
           <Button
             component="label"
             variant="outlined"
@@ -87,7 +178,38 @@ const UpcomingCourseBox = ({}) => {
           <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
             Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
           </Typography>
+        </Box> */}
+          <div {...getIntroVideoRootProps({ className: "dropzone" })}>
+        <input {...getIntroVideoInputProps()} />
+        <Box className="thumbnailUpload">
+          <Button
+            component="label"
+            variant="outlined-multiline-static"
+            startIcon={<UploadIcon className="iconThumbicon" />}
+            className="iconThumb"
+          >
+            Upload Thumbnail Image
+          </Button>
+          <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
+            Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
+          </Typography>
+          {/* <LoaderComponent loaderState={loaderState} /> */}
+          {imgUpload === "" && storedBasicInfo?.thumbnailPath && (
+            <img
+              src={storedBasicInfo?.thumbnailPath}
+              width={140}
+              height={"auto"}
+            />
+          )}
+          {imgUpload != "" && (
+            <img
+              src={storedBasicInfo?.thumbnailPath}
+              width={140}
+              height={"auto"}
+            />
+          )}
         </Box>
+      </div>
         <Box className="divider-upcoming"></Box>
 
         {CommonTypography({
@@ -107,6 +229,7 @@ const UpcomingCourseBox = ({}) => {
                 checkedIcon={<BpCheckedIcon />}
                 icon={<BpIcon />}
                 inputProps={{ "aria-label": "Checkbox demo" }}
+            defaultChecked
               />
             }
             label="Blogs"
@@ -129,8 +252,10 @@ const UpcomingCourseBox = ({}) => {
             className="checkboxDesign"
           />
         </FormGroup>
-        {commonButton({handleTrackerPage:()=>{},className:"coursesButton",label:"Post"})}
-      </div>
+        {/* {commonButton({handleTrackerPage:()=>{},className:"coursesButton",label:"Post"})} */}
+        <Button onClick={handlePostButton} className="coursesButton">Post</Button>
+      </div>      
+      <ToastContainer />
     </Box>
   );
 };

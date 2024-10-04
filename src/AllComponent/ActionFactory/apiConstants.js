@@ -21,6 +21,8 @@ export const APIS = {
   testType: REACT_APP_API + "/test/testtype",
   testQuestions: REACT_APP_API + "/test/testquestions",
   editQuestions: REACT_APP_API + "/test/testquestions",
+  banner: REACT_APP_API + "/banner",
+  blog: REACT_APP_API + "/blog/bloglist",
   banner: REACT_APP_API + "/webbanner",
   getBanner: REACT_APP_API + "/webbanner/webpage"
 };

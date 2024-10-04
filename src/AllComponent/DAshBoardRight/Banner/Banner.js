@@ -11,7 +11,7 @@ import Header from "../../Courses/Header";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { banner, bannerPage, uploadBanner, uploadFile } from "../../ActionFactory/apiActions";
+import { banner, bannerPage, uploadBanner, uploadFile,bannerPosition, bannerType, bannerPositionapi, bannerTypeapi } from "../../ActionFactory/apiActions";
 import { Box, Button, Divider, Typography, TextField } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import imge from "../../../Media/Images/banner2.jpg";
@@ -33,6 +33,8 @@ import UploadIcon from "@mui/icons-material/Upload";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CloseIcon from '@mui/icons-material/Close';
+import Switch from '@mui/material/Switch';
+
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
@@ -51,6 +53,9 @@ const images = [
   },
 ];
 const Banner = () => {
+  const [activeStatus, setActiveStatus] = useState("N"); // Default to inactive
+  const [bannerEnabled, setBannerEnabled] = useState(false);
+
   const [bannerAPI, setBannerAPI] = useState();
   const [openPopUp, setOpenPopUp] = useState(false);
   const theme = useTheme();
@@ -71,6 +76,8 @@ const Banner = () => {
   const [bannerPosition, setBannerPosition] = useState("");
   const [bannerSelectedPage, setBannerPageSelected] = useState("");
   const [bannerPageData, setBannerPage] = useState([])
+  const [bannerTypeData, setBannerTypeData] = useState([])
+  const [bannerPositionData, setBannerPositionData] = useState([])
   const maxSteps = images.length;
 
   const handleUploadImage = () => {
@@ -120,13 +127,19 @@ const Banner = () => {
     },
   });
 
+  const handleBannerStatusToggle = () => {
+    setBannerEnabled(!bannerEnabled);
+    setActiveStatus(bannerEnabled ? "N" : "Y"); // Update activeStatus based on toggle
+  };
+
   const handleUploadBannerImage = () => {
     if (
-      imageTitle == "" ||
+      imageTitle === "" ||
       storedBasicInfo?.thumbnailPath == null ||
       bannerType === "" ||
       bannerPosition === "" ||
-      bannerSelectedPage ===""
+      bannerSelectedPage === "" ||
+      !bannerEnabled
     ) {
       toast.error(
         "All Field are reaquired",
@@ -145,12 +158,11 @@ const Banner = () => {
         {
           "banner_url":storedBasicInfo?.thumbnailPath,
         }],
+      "active_status": activeStatus, // Send activeStatus with payload
       
     };
     uploadBanner({payload, callBack: (response) =>{ console.log(response, "resopnseesses")
-    toast.success ("Banner Created SuccessFull", {
-      autoClose: 500,
-    }); 
+      toast.success("Banner Created SuccessFully"); 
     banner({
       callBack: (response) => {
         setBannerAPI(response.data);
@@ -158,9 +170,7 @@ const Banner = () => {
     });
   }, 
     error: (error) => {
-      toast.error ("Something went wrong", {
-        autoClose: 500,
-      })
+      toast.error ("Something went wrong")
     }})
   } 
   };
@@ -184,7 +194,13 @@ const Banner = () => {
     });
     bannerPage({
       callBack:(response)=>setBannerPage(response.data)
-    })
+    });
+    bannerPositionapi({
+      callBack:(response)=>setBannerPositionData(response.data)
+    });
+    bannerTypeapi({
+      callBack:(response)=>setBannerTypeData(response.data)
+    });
   }, []);
 
   const handleClickPopUp = () => {
@@ -456,8 +472,8 @@ const Banner = () => {
                 // label="Age"
                 onChange={(event)=>handleBannerChange("type",event.target.value)}
               >
-                <MenuItem value={"B"}>Banner</MenuItem>
-                <MenuItem value={"S"}>Slider</MenuItem>
+               {console.log("bannerPositionData", bannerPositionData)}
+               {bannerPositionData?.map(banner=><MenuItem value={banner.web_banner_type_id}>{banner.web_banner_type_text}</MenuItem>)}
               </Select>
             </FormControl>
           </Box>
@@ -472,14 +488,26 @@ const Banner = () => {
                 // label="Age"
                 onChange={(event)=>handleBannerChange("position",event.target.value)}
               >
-                <MenuItem value={"Top"}>Top</MenuItem>
-                <MenuItem value={"Middle"}>Middle</MenuItem>
-                <MenuItem value={"Bottom"}>Bottom</MenuItem>
+                 {console.log("bannerTypeData", bannerTypeData)}
+                 {bannerTypeData?.map(banner=><MenuItem value={banner.web_banner_position_id}>{banner.web_banner_position_text}</MenuItem>)}
+             
               </Select>
             </FormControl>
           </Box>
+                {/* Toggle Switch Below Position Box */}
+                <Box sx={{ mt: 3 }}>
+                  <Typography className="addCatHeadingCat">Enable Banner</Typography>
+                  <Switch
+                    checked={bannerEnabled}
+                    onChange={handleBannerStatusToggle}
+                  />
+                </Box>
+
+                {/* Display active_status for debug */}
+                {/* <Typography>Active Status: {activeStatus}</Typography> */}
                 <div {...getIntroVideoRootProps({ className: "dropzone" })}>
                   <input {...getIntroVideoInputProps()} />
+      
          
                   <div className="UploadBttons">
                     <Button variant="outlined">

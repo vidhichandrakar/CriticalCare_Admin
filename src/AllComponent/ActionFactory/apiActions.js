@@ -72,6 +72,28 @@ export const banner = ({ callBack, error }) => {
       error(errorMessage);
     });
 };
+export const  bannerTypeapi= ({ callBack, error }) => {
+  const url = APIS.banner + "/webbannerposition";
+  axios
+    .get(url)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
+export const bannerPositionapi = ({ callBack, error }) => {
+  const url = APIS.banner + "/webbannertype";
+  axios
+    .get(url)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
 export const bannerPage = ({ callBack, error }) => {
   const url = APIS.getBanner;
   axios
@@ -83,8 +105,11 @@ export const bannerPage = ({ callBack, error }) => {
       error(errorMessage);
     });
 };
+
 export const uploadBanner = ({payload, callBack, error }) => {
   const url = APIS.banner;
+  // Log the payload to check if active_status is included
+  // console.log("Payload being sent to upload banner:", payload);
   axios
     .post(url, payload)
     .then((response) => {
@@ -364,3 +389,15 @@ export const editQuestions=({payload, callBack, questionId})=>{
     callBack(response);
   })
 }
+
+export const getBlog = ({ payload, callBack, error }) => {
+  const url = APIS.blog;
+  axios
+    .post(url, payload)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};  
