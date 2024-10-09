@@ -73,7 +73,7 @@ export const banner = ({ callBack, error }) => {
     });
 };
 export const  bannerTypeapi= ({ callBack, error }) => {
-  const url = APIS.banner + "/webbannerposition";
+  const url = APIS.banner + "/webbannertype";
   axios
     .get(url)
     .then((response) => {
@@ -84,7 +84,7 @@ export const  bannerTypeapi= ({ callBack, error }) => {
     });
 };
 export const bannerPositionapi = ({ callBack, error }) => {
-  const url = APIS.banner + "/webbannertype";
+  const url = APIS.banner + "/webbannerposition";
   axios
     .get(url)
     .then((response) => {
@@ -116,7 +116,9 @@ export const uploadBanner = ({payload, callBack, error }) => {
       callBack(response);
     })
     .catch((errorMessage) => {
-      error(errorMessage);
+      console.error("Error uploading banner:", errorMessage.response?.data || errorMessage.message);
+      error(errorMessage.response?.data || { message: "An unexpected error occurred." });
+      //error(errorMessage);
     });
 };
 
