@@ -214,7 +214,7 @@ const TestPortal = () => {
         callBack: (response) => {
           const userCallBack = response?.data;
           setUserData(userCallBack);
-          // setLoaderState(false);
+          // console.log("userCallBack===>",userCallBack);
         },
       });
     } else {
@@ -259,7 +259,7 @@ const TestPortal = () => {
       },
       error: (error) => {
         toast.error(error.message);
-        console.log(error);
+        // console.log(error);
       },
     });
   };
@@ -313,7 +313,7 @@ const TestPortal = () => {
           callBack: (response) => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
-            console.log("irhthjn plce")
+            // console.log("irhthjn plce")
             // setLoaderState(false);
           },
         });

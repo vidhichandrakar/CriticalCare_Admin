@@ -103,20 +103,14 @@ function CreateQNS({
 
       {opencreaterqns || numberOfMcqQns?.length !== 0 ? (
         <Box>
-          {console.log("expanded,", expanded)}
           {numberOfMcqQns?.map((item, indexSeq) => (
             <>
               <Accordion
-                // onClick={() => handleOpenAccordianAtATime(indexSeq)}
-                // expanded={expanded === indexSeq}
-                // expan
               >
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1-content"
                   id="panel1-header"
-                  // onClick={()=>handleOpenAccordianAtATime(indexSeq)}
-                  // expanded={expanded === indexSeq}
                 >
                   <div className="BoxHead">
                     <Typography>
@@ -179,7 +173,6 @@ function CreateQNS({
                                   <>
                                     <RadioGroup
                                       aria-labelledby="demo-radio-buttons-group-label"
-                                      // defaultValue="female"
                                       name="radio-buttons-group"
                                     >
                                       {questionTest.question_options.map(

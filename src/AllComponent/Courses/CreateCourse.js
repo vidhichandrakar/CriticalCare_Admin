@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import Tracker from "./Tracker";
 import CreateForm from "./CreateCourses.form";
 import EditPrice from "./EditPrice";
-import AddContent from "./AddContent/AddContent";
 import {
   createCourse,
   getCourseById,
@@ -13,6 +12,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useLocation } from "react-router-dom";
 import LoaderComponent from "../../Util/LoaderComponent";
 import { Link, useNavigate } from "react-router-dom";
+import AddContent from "./AddContent/AddContent";
 
 const CreateCourses = ({ handleHeaderLabels }) => {
   const [trackerPage, setTackerPage] = useState(0);
@@ -76,24 +76,29 @@ const CreateCourses = ({ handleHeaderLabels }) => {
     if (type === "basicInfo") {
       setBasicInfo(value);
     } else if (type === "editPrice") {
+      console.log("woejb",value)
       setEditPrice([value]);
       setValidity([value]);
-    } else if (type === "addContent") {
-      setAttachment(value);
+      handleCreateCourse(value);
     }
+    // else if (type === "addContent") {
+    //   setAttachment(value);
+    // }
   };
 
   const handleTrackerPage = (page, value) => {
     if (page === 2) {
       setMulitiDuration(value);
       setTackerPage(3);
-    } else if (page === 3) {
-      if (courseData?.contents?.length) {
-        handleCreateCourse(attachments);
-      } else {
-        handleCreateCourse(attachments);
-      }
-    } else {
+    }
+    // else if (page === 3) {
+    //   if (courseData?.contents?.length) {
+    //     handleCreateCourse(attachments);
+    //   } else {
+    //     handleCreateCourse(attachments);
+    //   }
+    // }
+    else {
       setTackerPage(page);
       handleHeaderLabels(basicInfo.Name);
     }
@@ -115,14 +120,28 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         end_date: "2024-05-30",
         is_publish: "not published",
       };
-      const courseAttachments = attachments;
+      // const courseAttachments = attachments;  //commented to check the new work flow
+      console.log("mulitiDuration==>",mulitiDuration,"kkkkkkk=>",validity)
 
-      const courseDurations =
-        mulitiDuration === undefined ? validity : mulitiDuration;
+      const courseDurations = validity ; //need to work on the multiple selection part
+        // mulitiDuration === undefined ? validity : mulitiDuration;
+       
       payload = {
         courseDetails: courseDetails,
         courseDurations: courseDurations,
-        courseAttachments: courseAttachments,
+        Course_BatchDetails: {
+          type: String,
+          required: true,
+        },
+        course_detail: {
+          type: String,             // hard coded coz of backend ppl asked to put hardcoded value
+          required: true,
+        },
+        course_FAQ: {
+          type: String,
+          required: true,
+        },
+        // courseAttachments: courseAttachments,
       };
       console.log("patload", payload);
     } catch (error) {
@@ -146,9 +165,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           navigate("/admin/YourCourses");
         },
         error: () => {
-          toast.error("Something went wrong!", {
-            autoClose: 500,
-          });
+          console.log("fds")
         },
       });
     }
@@ -174,6 +191,11 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           courseId={courseId}
         />
       ) : trackerPage === 3 ? (
+        // <AddContent
+        //   handleTrackerPage={handleTrackerPage}
+        //   courseData={courseData}
+        //   handleInputChange={handleInputChange}          //commented to add new one
+        // />
         <AddContent
           handleTrackerPage={handleTrackerPage}
           courseData={courseData}

@@ -579,7 +579,7 @@ function TestPortalMain() {
               </Typography>
               <TextField
                 id="outlined-size-small"
-                defaultValue="1"
+                // defaultValue="1"
                 size="small"
                 onChange={(event) =>
                   handleSectionInfo(event.target.value, "noOfQuestion")
@@ -592,7 +592,7 @@ function TestPortalMain() {
               </Typography>
               <TextField
                 id="outlined-size-small"
-                defaultValue="4"
+                // defaultValue="4"
                 size="small"
                 onChange={(event) =>
                   handleSectionInfo(event.target.value, "marksPerQues")

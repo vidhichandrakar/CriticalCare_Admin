@@ -335,3 +335,10 @@ export const editQuestions=({payload, callBack, questionId})=>{
     callBack(response);
   })
 }
+
+export const addContentOnCreateCourse=({payload, callBack})=>{
+  const url = APIS.module;
+  axios.post(url,payload).then((response)=>{
+    callBack(response);
+  })
+}

@@ -59,19 +59,13 @@ function TestNavAndLeft({
       test_type_id: testTypeNId[0].test_type_id,
       test_type_name: testTypeNId[0].test_type_name,
     });
-
-    let condition = numberOfMcqQns[numberOfMcqQns?.length - 1];
-    console.log("condition====>",condition)
-    if (condition?.test_questions?.length !== 0) {
+    if (numberOfMcqQns[0]?.test_questions_count === 0) {
       const selectedOption = testType.filter(
         (test) => test.test_type_name === type
       );
       handleTestType(selectedOption[0]);
       setMcqopen(true);
-      console.log("condition====>", "true");
     } else {
-      console.log("condition====>", "flase");
-
       setCqopen(true);
     }
   };
@@ -88,7 +82,7 @@ function TestNavAndLeft({
 
   const handleAddSectionNav = (type) => {
     // console.log("addNewSectionNav",type);
-    setAddNewSectionNav(type)
+    setAddNewSectionNav(type);
     const selectedOption = testType.filter((test) => test.test_type_name);
     handleTestType(selectedOption[0]);
     setMcqopen(true);
@@ -250,11 +244,11 @@ function TestNavAndLeft({
                 </Typography>
               );
             })}
-            {console.log("numberOfMcqQns===>", numberOfMcqQns)}
+            {/* {console.log("numberOfMcqQns===>", numberOfMcqQns)} */}
             <Typography>
               <Box
                 className="addNreScsnTestSection"
-                onClick={()=>handleAddSectionNav("addNewSectionNav")}
+                onClick={() => handleAddSectionNav("addNewSectionNav")}
               >
                 <AddCircleOutlineIcon
                   sx={{ position: "relative", top: "5px", right: "5px" }}
@@ -425,71 +419,6 @@ function TestNavAndLeft({
             </Typography>
           </AccordionDetails>
         </Accordion>
-        {/* <BootstrapDialog
-            className="PopUP"
-            onClose={handleCloseDialogMCQ}
-            aria-labelledby="customized-dialog-title"
-            open={mcqopened}
-          >
-            <DialogTitle
-              sx={{ m: 0, p: 2, fontSize: "1rem" }}
-              id="customized-dialog-title"
-            >
-              Add New Section
-            </DialogTitle>
-            <IconButton
-              aria-label="close"
-              onClick={handleCloseDialogMCQ}
-              sx={{
-                position: "absolute",
-                right: 8,
-                top: 8,
-                color: (theme) => theme.palette.grey[500],
-              }}
-            >
-              <CloseIcon />
-            </IconButton>
-
-            <DialogContent dividers>
-              <Typography gutterBottom><b>Section Name</b></Typography>
-              <TextField
-                inputProps={{ className: "textField" }}
-                fullWidth
-                size="small"
-                placeholder="Enter the Section Name"
-                id="fullWidth"
-                className="BoxShadowInputField"
-                type="TestName"
-                // value={addTest?.testName}
-                // onChange={(e) => handleInput(e.target.value, "TestName")}
-              />
-              <Typography gutterBottom sx={{mt : 3}}><b>Section Instructions</b></Typography>
-              <TextField
-          id="fullWidth"
-          // label="Multiline"
-          multiline
-          rows={3}
-          // defaultValue=""
-          sx={{width: "100%"}}
-        />
-              <Box className="BulbBox">
-                <TipsAndUpdatesTwoToneIcon className="bulbIcon"/> 
-                <Typography>
-                  You can give students choice of which questions to Attempt in the section by editing section details after Adding Questions. <a href="#" style={{textDecoration: "none"}}>View Example</a>
-                </Typography>
-              </Box>
-            
-            </DialogContent>
-            <DialogActions>
-              <Button
-                variant="contained"
-                className="AddSectionBtn"
-                // onClick={handleCreateTeam}
-              >
-                Add Section
-              </Button>
-            </DialogActions>
-          </BootstrapDialog> */}
       </Box>
     </aside>
   );

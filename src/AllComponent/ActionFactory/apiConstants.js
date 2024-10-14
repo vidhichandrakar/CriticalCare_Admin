@@ -22,4 +22,5 @@ export const APIS = {
   testQuestions: REACT_APP_API + "/test/testquestions",
   editQuestions: REACT_APP_API + "/test/testquestions",
   banner: REACT_APP_API + "/banner",
+  module: REACT_APP_API + "/course/module",
 };
