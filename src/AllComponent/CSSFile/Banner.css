@@ -26,6 +26,7 @@
 .BannerCArdBox{
     height: 40vh;
     overflow-y: scroll;
+    /* padding-bottom: 2%; */
 }
 .RemoveButton{
     display: flex;
@@ -53,7 +54,9 @@
     cursor: pointer;
 }
 .PreviosCardBannerBox{
-    margin: 22px;
+    border-bottom: 2px solid rgba(214, 214, 214, 0.922);
+    padding: 20px;
+    padding-bottom: 2%;
 }
 .MobilePreviewBox{
     border: 2px solid #eee;
@@ -63,6 +66,7 @@
 }
 .mobilepreviewbannerbox{
     padding: 3%;
+    padding-bottom: 6%;
 }
 .MobilePreviewHeading{
     border-bottom: 2px solid #eee;
@@ -74,6 +78,12 @@
     padding: 2%;
 }
 .UploadBtton button{
+    border: dotted 1px  !important;
+    width: 100%;
+    padding: 2% 1%;
+}
+.UploadBttons button{
+    margin-top: 2%;
     border: dotted 1px  !important;
     width: 100%;
     padding: 2% 1%;
@@ -106,8 +116,7 @@
     justify-content: space-between;
 }
 .BannerImage{
-    border-top-right-radius: 15px !important;
-    border-top-left-radius: 15px !important;
+    border-radius: 10px !important;
 }
 .InsideBannerBox{
     margin: 20px;
@@ -119,7 +128,7 @@
 .iconBox{
     border-top: 2px solid #eee;
     padding: 3%;
-    justify-content: space-between;
+    justify-content: space-around;
 }
 .emptycircle{
     padding: 30% 50%;

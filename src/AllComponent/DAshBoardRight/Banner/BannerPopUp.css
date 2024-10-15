@@ -49,9 +49,14 @@
 
 .popUpheader {
     border-bottom: solid gray 2px;
+    justify-content: space-between;
 }
 
 .innerRdioText {
     margin-top: 800px;
 
 }
+
+.MuiSelect-select {
+    padding: 12px !important;
+  }

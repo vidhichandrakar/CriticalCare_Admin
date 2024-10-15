@@ -46,6 +46,7 @@ import SearchIcon from "@mui/icons-material/Search";
 // import Divider from "@mui/material/Divider";
 import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
+import { error } from "ajv/dist/vocabularies/applicator/dependencies";
 
 
 
@@ -71,6 +72,8 @@ const YourCourses = () => {
   const [saveMemberDetails, setSaveMemberDetails] = useState({});
   const [subCategory, setSubCategory] = useState({});
   const [durationname, setDurationname] = useState({});
+  const [searchQuery, setSearchQuery] = useState("");
+
 
   useEffect(() => {
      
@@ -91,7 +94,7 @@ const YourCourses = () => {
     
   }, []);
 
-  const handleFilterChange = ({duration_type_id = "", category_id = "" , is_publish = ""}) => {
+  const handleFilterChange = ({duration_type_id = "", category_id = "" , is_publish = "" }) => {
     console.log(filterValue, durationname ,selectedCategory, "line90 publishdurationcategory")
     getAllCoursesFilter({
 
@@ -110,27 +113,45 @@ const YourCourses = () => {
     })
   }
   const handleChange = (e) => {
-    setSelectedCategory(e.target.value.category_name);
-    console.log(e.target.value.category_name, "Lineno109")
-    handleFilterChange({category_id: e.target.value.category_id})
+    setSelectedCategory(e.target.value.category_id);
+    console.log(e.target.value.category_id, "Lineno109")
+    // handleFilterChange({category_id: e.target.value.category_id})
     
   };
 
   const handleFilterCourse = (type) => {
     setFilterValue(type);
-    handleFilterChange({is_publish: type})
+    // handleFilterChange({is_publish: type})
   };
 
   const handleDurationChange = (e) => {
     
     setDurationname(e.target.value.duration_type_id);
-    handleFilterChange({duration_type_id : e.target.value.duration_type_id})
+    // handleFilterChange({duration_type_id : e.target.value.duration_type_id})
     
     console.log(e, "line120 handleduratipon")
     console.log(e.target.value.duration_type_id, "line121 handleduratipon")
     console.log(durationname, "line124 handleduratipon")
    
-  };
+  }; 
+
+  const handleAllFilterChange = ({duration_type_id = "", category_id = "" , is_publish = ""}) => {
+    getAllCoursesFilter({
+
+      duration_type_id:durationname,
+      category_id: selectedCategory,
+      is_publish: filterValue ,
+      callBack: (response) =>{
+        console.log(response, "line95")
+        const userCallBack = response?.data;
+        setAllCourses(userCallBack);
+        setCourseData(userCallBack);
+      },
+      error: () =>{
+
+      }
+    })
+  }
 
   const handleInput = (value, type, event) => {
     if (
@@ -180,7 +201,7 @@ const YourCourses = () => {
   };
 
   const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
-const checkedIcon = <CheckBoxIcon fontSize="small" />;
+  const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
   const list = (anchor) => (
     <Box
@@ -314,8 +335,13 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
             onClick={() => handleFilterCourse("All Courses")}
           >
             All Courses
-          </Button>
+          </Button> 
         </Box>
+        </Box>
+        <Box sx={{ml:2}}>
+          <Button onClick={handleAllFilterChange}>
+            apply
+          </Button>
         </Box>
       </Box>
     </Box>
@@ -334,6 +360,26 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  // search filter
+  const handleSearchChange = (search) => {
+    const query = search.target.value;
+    setSearchQuery(query);
+
+    getAllCourses({
+      searchString: query,
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setAllCourses(userCallBack);
+        setCourseData(userCallBack);
+        setLoaderState(false);
+      },
+      error: (error) => {
+        // toast.error(error.message);
+        setLoaderState(false);
+      },
+    })
+  }
 
   useEffect(() => {
     if (redirectRestriction()) {
@@ -414,11 +460,14 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
               <SearchIcon />
             </IconButton>
             <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+
             <InputBase
               sx={{ ml: 1, flex: 1 }}
               placeholder="Search your course by name"
               inputProps={{ "aria-label": "search your course by name" }}
+              onChange={handleSearchChange}
             />
+
           </Paper>
         </div>
 
@@ -490,7 +539,7 @@ const checkedIcon = <CheckBoxIcon fontSize="small" />;
             sx={{
               top: "88%",
               position: "absolute",
-              zIndex: 1111111111111,
+              zIndex: 1111,
               right: 0,
             }}
             className="addCircle"

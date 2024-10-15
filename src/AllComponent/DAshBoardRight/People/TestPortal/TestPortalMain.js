@@ -106,10 +106,11 @@ function TestPortalMain() {
   const [openAddOptions, setAddOptions] = useState(false);
   const [addOptionText, setAddOptionText] = useState("");
   const [typesOfQns, setTypesOfQns] = useState("");
-  const [selectedTypeQns, setSelectedTypeQns] = useState("single-select");
+const [selectedTypeQns, setSelectedTypeQns] = useState("single-select");
+const [ openInstruction, setOpenInstruction] = useState(false);
+ const [instructionsString, setInstructionsString]=useState("");
+ const [testInstructions, setTestInstructions] = useState("")
   const [selectedTypeNId, setSelectedTypeNId] = useState();
-  const [testInstructions, setTestInstructions] = useState("");
-  const [openInstruction, setOpenInstruction] = useState(false);
   const [addNewSectionNav, setAddNewSectionNav] = useState();
 
   const handleClickOpen = (editedQns, index) => {
@@ -404,6 +405,9 @@ function TestPortalMain() {
     }
     setEditedQuestion(editedOptions);
   };
+  const handleChange=(event)=>{
+    setInstructionsString(event.target.value)
+  }
 
   const handleOpen = () => {
     setOpenInstruction(true);
@@ -441,6 +445,8 @@ function TestPortalMain() {
 
   return (
     <div className="grid-container-TestPortal ">
+      
+      {console.log("setOpenInstruction",instructionsString)}
       <TestProtalHeader testData={testData} />
       <LoaderComponent loaderState={loaderState} />
       <TestNavAndLeft
@@ -463,6 +469,7 @@ function TestPortalMain() {
         numberOfMcqQns={numberOfMcqQns}
         setNumberOfMcqQns={setNumberOfMcqQns}
         typesOfQns={typesOfQns}
+        setOpenInstruction={setOpenInstruction}
         selectedTypeNId={selectedTypeNId}
         handleOpen={handleOpen}
         addNewSectionNav={addNewSectionNav}
@@ -472,6 +479,57 @@ function TestPortalMain() {
         setMcqopen={setMcqopen}
         setTestInfoId={setTestInfoId}
       />
+       <BootstrapDialog
+      onClose={()=>setOpenInstruction(false)}
+      aria-labelledby="customized-dialog-title"
+      open={openInstruction}
+    >
+      <DialogTitle
+        sx={{ m: 0, p: 2, alignItems: "center", textAlign: "center" }}
+        id="customized-dialog-title"
+      >
+        Test Instructions
+      </DialogTitle>
+      <IconButton
+        aria-label="close"
+        onClick={()=>setOpenInstruction(false)}
+        sx={{
+          position: "absolute",
+          right: 8,
+          top: 8,
+          color: (theme) => theme.palette.grey[500],
+        }}
+      >
+        <CloseIcon />
+      </IconButton>
+
+      <DialogContent dividers>
+        <Typography gutterBottom>
+          <b>Test Instructions</b>
+        </Typography>
+        <Box
+          className="testInstTextField"
+          component="form"
+          sx={{
+            "& > :not(style)": { m: 1, width: "25ch" },
+          }}
+          noValidate
+          autoComplete="off"
+        >
+          <TextField id="outlined-basic" variant="outlined" onChange={handleChange} value={instructionsString}/>
+        </Box>
+      </DialogContent>
+
+      <DialogActions>
+        <Button
+          autoFocus
+          onClick={()=>setOpenInstruction(false)}
+          className="doneBtnInstPage"
+        >
+          Done
+        </Button>
+      </DialogActions>
+    </BootstrapDialog>
       <BootstrapDialog
         className="PopUP"
         onClose={handleCloseDialogMCQ}

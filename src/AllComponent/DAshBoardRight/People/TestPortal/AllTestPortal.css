@@ -40,7 +40,14 @@
     flex-direction: row;
     justify-content: space-between;
     color: grey;
-    height: 1px;
+    /* height: 1px; */
+    /* background-color: #eee; */
+    /* margin-top: 2%; */
+    /* border-bottom: solid #eee; */
+}
+
+.sectionOneFourQues h5{
+    margin-left: 5%;
 }
 .checkboxAndText{
     justify-content: safe;
@@ -82,6 +89,7 @@
     margin-left: 41px;
     margin-right: -32px; 
     cursor: pointer;
+    color: #0075FF;
 }
 .deleteIconTestSection {
     font-size: 1rem !important;
@@ -89,18 +97,21 @@
     margin-left: 41px;
     margin-right: 7px;
     cursor: pointer;
+    color: red;
 }
 .addNreScsnTestSection{
     color: #0075FF !important;
     border: 0.2px solid lightgray;
-    font-size: 0.9rem !important;
+    /* font-size: 0.9rem !important; */
     text-align: center !important;
-    width: 73%;
-    position: relative;
+    /* width: 73%; */
+    /* position: relative;
     left: 38px;
-    top: -18px;
+    top: -18px; */
     border-radius: 4px;
     cursor: pointer;
+    /* margin-top: 20%; */
+    padding-bottom: 2%;
 }
 .addNreScsnImportQues{
     color: #0075FF !important;
@@ -194,7 +205,6 @@
     align-items: center;
     width: 99%;
     justify-content: right;
-    padding: 7px 12px 7px 0px;
     background-color: #fff;
     display: flex;
     flex-direction: row;
@@ -203,10 +213,14 @@
 }
 
 .abcdText{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     margin-top: 17px;
+    margin-left: 2%;
 }
 .abcdBackLogo{
-    margin: -8px 22px;
+    /* margin: -8px 22px; */
 }
 .previewnsaveBtn{
    display: flex;
@@ -272,9 +286,15 @@
     margin: 0px 12px;
 }
 .testInstructionsBtn{
+    padding: 20px 28px;
+    /* margin: 9px 0px; */
+    border: 0.5px solid #e6e3e3;
+    border-radius: 6px;
+    margin-right: 20px;
+}
+.testInstructions{
     padding: 0px 28px;
     margin: 9px 0px;
-    border: 0.5px solid #e6e3e3;
     border-radius: 6px;
     margin-right: 20px;
 }
@@ -415,7 +435,7 @@
     border-radius: 4px !important;
     width: 70vw;
     height: 39px;
-    margin-top: 14px;
+    /* margin-top: 14px; */
 }
 
 .deleteIconSixthPage{

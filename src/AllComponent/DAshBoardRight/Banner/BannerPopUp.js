@@ -24,8 +24,6 @@ import { getSubcategoryList, getCategory } from "../../ActionFactory/apiActions"
 import Select from "@mui/material/Select";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
-import attachmentimgae from "../../../Media/Images/undraw_attached_file_re_0n9b.svg";
-
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -146,12 +144,12 @@ function BannerPopUp({openPopUp, handleClickPopUp, bannerAPI}) {
         >
           <DialogTitle className="popUpheader">
             <Box className="flexrow spacebt"> 
-              <Box className="flexrow">
-                <ArrowBackIcon /> 
+              <Box className="flexrow" >
+                <ArrowBackIcon onClick={handleClickSelected} sx={{cursor: "pointer"}}/> 
                 <Typography sx={{ml:1}}>Selected Course(s) - 1 Selected </Typography>
               </Box> 
-              <Box>
-                 <CloseIcon />
+              <Box  sx={{cursor: "pointer"}}>
+                 <CloseIcon onClick={handleClickPopUp}/>
               </Box>
 
             </Box></DialogTitle>
@@ -264,7 +262,10 @@ function BannerPopUp({openPopUp, handleClickPopUp, bannerAPI}) {
             },
           }}
         >
-          <DialogTitle className="popUpheader">Select Landing Screen</DialogTitle>
+          <DialogTitle className="popUpheader flexrow">Select Landing Screen
+          
+          <CloseIcon onClick={handleClickPopUp} sx={{cursor: "pointer"}}/>
+          </DialogTitle>
           <DialogContent>
             <DialogContentText className="popUpSubHeader">
               <div className="popUpSubHeaderText">

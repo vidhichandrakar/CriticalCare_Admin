@@ -19,7 +19,7 @@ import {
   updateDuration,
   updateMemberDetails,
 } from "../ActionFactory/apiActions";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { Box, Divider, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { validatePhoneNo } from "../../Util/CommonUtils";
@@ -36,11 +36,11 @@ const MenuProps = {
 
 function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
   const theme = useTheme();
-  const [updatedCat, setUpdatedCat] = useState({});
-  const [updatedDuration, setUpdatedDuration] = useState({});
-  const [saveMemberDetails, setSaveMemberDetails] = useState({});
-  const [subCategory, setSubCategory] = useState({});
-  const [selectedCategory, setSelectedCategory] = useState();
+  const [updatedCat, setUpdatedCat] = useState({category_name:""});
+  const [updatedDuration, setUpdatedDuration] = useState({duration_name: ""});
+  const [saveMemberDetails, setSaveMemberDetails] = useState({member_name: "" , email_id: "" , phone_no: ""});
+  const [subCategory, setSubCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState({category_id: ""});
   const [cat, setCat] = useState([]);
   const [number, setNumber] = useState('');
 
@@ -98,32 +98,63 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
     }
   };
   const handleConfigChanges = () => {
+    
+    if(updatedCat.category_name === ""){
+      toast.error("Enter Category");
+    }
+    else{
     const payload = {
       category_name: updatedCat.category_name,
       created_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
       modiefied_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
     };
-    createCategory({ payload, callBack: (response) => {} });
+    createCategory({ payload, callBack: (response) => {
+      toast.success("Category created successfully!")
+      handleCloseCat()
+    } });
+  }
   };
+
   const handleDurationChanges = () => {
+    if(updatedDuration.duration_name === "" ){
+      toast.error("Enter Duration");
+    }
+    else{
     const payload = {
       duration_name: updatedDuration.duration_name,
       created_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
       modiefied_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
     };
-    updateDuration({ payload, callBack: (response) => {} });
+    updateDuration({ payload, callBack: (response) => {
+      toast.success("Successful duration created");
+      handleCloseCat()
+    } });
+  }
   };
+  
   const handleMemberChanges = () => {
-    const payload = {
+    if(saveMemberDetails.member_name === "" || saveMemberDetails.email_id === "" || saveMemberDetails.phone_no === ""){
+      toast.error("There is some empty space")
+    }
+    else{ const payload = {
       member_name: saveMemberDetails.member_name,
       email_id: saveMemberDetails.email_id,
       phone_no: saveMemberDetails.phone_no,
     };
-    updateMemberDetails({ payload, callBack: (response) => {} });
+    updateMemberDetails({ payload, callBack: (response) => {
+      toast.success("Member Successful created")
+      handleCloseCat()
+    } });
+  }
   };
   const handleSubCatChanges = () => {
     const selectedValue = selectedCategory.category_id;
-    const userId = JSON.parse(localStorage.getItem("loggedInUser")).user_id;
+    if(subCategory === "" || selectedValue === ""){
+      console.log("cfdvknfdbnfvbfjvnbfjvnfbvjf")
+      toast.error("Sub Category not be empty")
+    }
+    else{
+      const userId = JSON.parse(localStorage.getItem("loggedInUser")).user_id;
     const payload = {
       category_name: subCategory,
       sub_category_type: "Y",
@@ -131,8 +162,12 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
       main_category_id: selectedValue,
     };
     createSubCategory({ payload, callBack: (response) => {
-      toast.success("Sub Category created successfully!")
+      
+      //  console.log("line150 wale haw hum")
+      handleCloseCat()
+      toast.success("Category created successfully!")
     } });
+    }
   };
   const handleChange = (e) => {
     setSelectedCategory(e.target.value);
@@ -231,7 +266,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   <Select
                     value={cat.category_name}
                     onChange={(e) => handleChange(e)}
-                    className="addCatTextField paddingbox"
+                    className="addCatTextField "
                   >
                     {cat.map((item) => (
                       <MenuItem key={item._id} value={item}>
@@ -250,7 +285,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                       id: "fullWidth",
                       className: "BoxShadow-ACat addCatTextField ",
                       inputClassName: "textField PaddingOnly",
-                      labels: "Sub Category",
+                      // labels: "Sub Category",
                     },
                     (Option = {
                       handleInput: handleInput,
@@ -334,31 +369,33 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
           <Button variant="outlined" onClick={handleCloseCat} sx={{borderColor:"red", color:"red", textTransform:"none", marginRight:"12px", padding:"3px 0px"}}>Cancel</Button>
           {selectedConfigValue === "Category" ? (
             <>
-              <Button sx={{textTransform:"none", padding:"3px 0px", marginRight:"16px"}} variant="outlined" onClick={handleConfigChanges} type="submit">
+              <Button sx={{textTransform:"none", padding:"3px 0px", marginRight:"16px"}} variant="outlined" onClick={handleConfigChanges} >
                 Save
               </Button>
             </>
           ) : selectedConfigValue === "Duration" ? (
             <>
-              <Button sx={{textTransform:"none", padding:"3px 0px", marginRight:"16px"}} variant="outlined" onClick={handleDurationChanges} type="submit">
+              <Button sx={{textTransform:"none", padding:"3px 0px", marginRight:"16px"}} variant="outlined" onClick={handleDurationChanges} >
                 Save
               </Button>
             </>
           ) : selectedConfigValue === "SubCategory" ? (
             <>
-              <Button sx={{textTransform:"none", padding:"3px 0px", marginRight:"16px"}} variant="outlined" onClick={handleSubCatChanges} type="submit">
+              <Button sx={{textTransform:"none", padding:"3px 0px", marginRight:"16px"}} variant="outlined" onClick={handleSubCatChanges} >
                 Save
               </Button>
             </>
           ) : (
             <>
-              <Button sx={{textTransform:"none", padding:"3px 0px", marginRight:"16px"}} variant="outlined" onClick={handleMemberChanges} type="submit">
+              <Button sx={{textTransform:"none", padding:"3px 0px", marginRight:"16px"}} variant="outlined" onClick={handleMemberChanges} >
                 Save
               </Button>
             </>
           )}
         </DialogActions>
       </Dialog>
+      
+      {/* <ToastContainer /> */}
     </React.Fragment>
   );
 }

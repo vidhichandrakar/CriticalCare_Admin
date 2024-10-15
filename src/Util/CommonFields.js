@@ -21,8 +21,8 @@ export const commonTextField = (
     <TextField
       inputProps={{
         className: inputClassName,
-        inputMode: "numeric",
-        pattern: "[0-9]*",
+        // inputMode: "numeric",
+        // pattern: "[0-9]*",
       }}
       fullWidth
       size="small"

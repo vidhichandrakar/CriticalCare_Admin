@@ -23,4 +23,7 @@ export const APIS = {
   editQuestions: REACT_APP_API + "/test/testquestions",
   banner: REACT_APP_API + "/banner",
   module: REACT_APP_API + "/course/module",
+  blog: REACT_APP_API + "/blog/bloglist",
+  banner: REACT_APP_API + "/webbanner",
+  getBanner: REACT_APP_API + "/webbanner/webpage"
 };

@@ -42,10 +42,11 @@ function TestInstructions({ testData, setOpen, handleOpen }) {
   // };
 
   return (
+    <>
     <div>
       <Box className="stickyTopBox">
         <div>
-          <h4>
+          <h4 style={{fontSize: "1.5rem"}}>
             {testData?.test_name}
             <EditIcon className="blueEdit" />
           </h4>
@@ -69,28 +70,29 @@ function TestInstructions({ testData, setOpen, handleOpen }) {
           </Typography>
         </div>
 
-        <Box className="testInstructionsBtn">
-          <p>
-            <b>Test Instructions:</b>{" "}
-            <span style={{ color: "#000" }}>
+        <Box className="testInstructionsBtn flexrow" sx={{mt: 3,mb:2}}>
+          {/* <Box className="flexrow testInstructions"> */}
+            <Typography><b>Test Instructions:</b></Typography>{" "}
+            <Typography sx={{ color: "#000", ml: "4px" }}>
               {testData?.testInfoDetails?.length
                 ? testData?.testInfoDetails[
                     testData?.testInfoDetails?.length - 1
                   ].test_section_Instruction
                 : ""}
-            </span>
+            </Typography>
             <span>
-              <Button
-                sx={{
+              <Typography
+                sx={{marginLeft: "10px",
                   textTransform: "none",
-                  color: "black",
+                  color: "#19588f",
                   // ml: "-8px",
                   fontSize: "medium",
+                  cursor: "pointer"
                 }}
                 onClick={handleOpen}
               >
                 Click here to add{" "} 
-              </Button>
+              </Typography>
 
               {/* <BootstrapDialog
                 onClose={handleClose}
@@ -149,10 +151,12 @@ function TestInstructions({ testData, setOpen, handleOpen }) {
                 </DialogActions>
               </BootstrapDialog> */}
             </span>
-          </p>
+          {/* </Box> */}
         </Box>
       </Box>
     </div>
+     
+    </>
   );
 }
 

@@ -1,8 +1,11 @@
 import axios from "axios";
 import { APIS } from "./apiConstants";
 
-export const getAllUsersApi = ({ callBack, error }) => {
-  const url = APIS.getAllUsers;
+export const getAllUsersApi = ({ callBack, searchString, error }) => {
+  let url = new URL(`${APIS.getAllUsers}`);
+  if(searchString){
+    url.searchParams.set("user_name", searchString);
+  }
   axios
     .get(url)
     .then((response) => {
@@ -13,9 +16,11 @@ export const getAllUsersApi = ({ callBack, error }) => {
     });
 };
 
-export const getAllCourses = ({callBack, error }) => {
-  const url = APIS.allCourses;
-  
+export const getAllCourses = ({callBack, searchString, error }) => {
+  let url = new URL(`${APIS.allCourses}`);
+  if(searchString){
+    url.searchParams.set("course_name", searchString);
+  }  
   axios
     .get(url)
     .then((response) => {
@@ -26,6 +31,7 @@ export const getAllCourses = ({callBack, error }) => {
       error(errorMessage);
     });
 };
+
 export const getAllCoursesFilter = ({is_publish, duration_type_id, category_id, callBack, error }) => {
   let url = new URL(`${APIS.allCoursesFilter}`);
   console.log(is_publish, duration_type_id ,category_id, "lineno31 ApiAction")
@@ -54,6 +60,7 @@ export const deleteUser = ({ userId, callBack }) => {
     callBack(response);
   });
 };
+
 export const banner = ({ callBack, error }) => {
   const url = APIS.banner;
   axios
@@ -63,6 +70,55 @@ export const banner = ({ callBack, error }) => {
     })
     .catch((errorMessage) => {
       error(errorMessage);
+    });
+};
+export const  bannerTypeapi= ({ callBack, error }) => {
+  const url = APIS.banner + "/webbannertype";
+  axios
+    .get(url)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
+export const bannerPositionapi = ({ callBack, error }) => {
+  const url = APIS.banner + "/webbannerposition";
+  axios
+    .get(url)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
+export const bannerPage = ({ callBack, error }) => {
+  const url = APIS.getBanner;
+  axios
+    .get(url)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
+
+export const uploadBanner = ({payload, callBack, error }) => {
+  const url = APIS.banner;
+  // Log the payload to check if active_status is included
+  // console.log("Payload being sent to upload banner:", payload);
+  axios
+    .post(url, payload)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      console.error("Error uploading banner:", errorMessage.response?.data || errorMessage.message);
+      error(errorMessage.response?.data || { message: "An unexpected error occurred." });
+      //error(errorMessage);
     });
 };
 
@@ -342,3 +398,14 @@ export const addContentOnCreateCourse=({payload, callBack})=>{
     callBack(response);
   })
 }
+export const getBlog = ({ payload, callBack, error }) => {
+  const url = APIS.blog;
+  axios
+    .post(url, payload)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};  

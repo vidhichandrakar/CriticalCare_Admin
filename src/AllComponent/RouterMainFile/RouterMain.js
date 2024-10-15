@@ -27,8 +27,8 @@ const RouterMain = () => {
   return (
     <div>
      <Routes>
-            <Route exact path="/admin/Dashboard" element= {<Dashboard />}> </Route>
             <Route exact path="/admin" element= {<LoginPage/>}> </Route>
+            <Route exact path="/admin/Dashboard" element= {<Dashboard />}> </Route>
             <Route exact path="/admin/CreateCourses" element= {<CreateCourses />}> </Route>
             <Route exact path="/admin/User" element= {< User />}> </Route>
             <Route exact path="/admin/Transaction" element= {<Transaction />}> </Route>

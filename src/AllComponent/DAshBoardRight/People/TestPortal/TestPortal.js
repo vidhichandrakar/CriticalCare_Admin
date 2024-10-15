@@ -291,6 +291,10 @@ const TestPortal = () => {
       storedValues.testDuration = value;
     } else if (type === "Hours") {
       storedValues.hours = value;
+    } else if (type === "From") {
+      storedValues.from = value;
+    } else if (type === "To") {
+      storedValues.to = value;
     }
     setAddTest(storedValues);
   };
@@ -300,6 +304,8 @@ const TestPortal = () => {
       created_by: 12,
       duration_hour: parseInt(addTest.testDuration),
       duration_minute: parseInt(addTest.hours),
+      active_duration_from: parseInt(addTest.from),
+      active_duration_to: parseInt(addTest.to)
     };
     createTestPortal({
       payload,
@@ -457,6 +463,45 @@ const TestPortal = () => {
                     onChange={(e) => handleInput(e.target.value, "Hours")}
                   />{" "}
                   <p className="TimeText">Minute</p>
+                </Typography>
+              </Box>
+            </DialogContent>
+            <DialogContent dividers>
+              
+              <Typography gutterBottom sx={{ mt: 2 }}>
+                Active time duration
+              </Typography>
+              <Box className="FlexRow" sx={{ mt: -1 }}>
+                <Box className="FlexRow">
+                  <TextField
+                    inputProps={{ className: "textField" }}
+                    fullWidth
+                    size="small"
+                    placeholder="04/01/2024 11:00"
+                    id="fullWidth"
+                    className="BoxShadowInputField"
+                    type="TestDuration"
+                    value={addTest?.form}
+                    onChange={(e) =>
+                      handleInput(e.target.value, "From")
+                    }
+                  />
+                  <p className="TimeText"> From </p>
+                </Box>
+                <Typography className="FlexRow">
+                  <TextField
+                    inputProps={{ className: "textField" }}
+                    fullWidth
+                    size="small"
+                    placeholder="05/01/2024 11:00"
+                    id="fullWidth"
+                    className="BoxShadowInputField"
+                    sx={{ ml: 4 }}
+                    value={addTest?.to}
+                    type="hours"
+                    onChange={(e) => handleInput(e.target.value, "To")}
+                  />{" "}
+                  <p className="TimeText">To</p>
                 </Typography>
               </Box>
             </DialogContent>
