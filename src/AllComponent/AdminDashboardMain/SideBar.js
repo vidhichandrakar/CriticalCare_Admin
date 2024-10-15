@@ -333,6 +333,19 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                       </Typography>
                     </Link>
                   </li>
+                  <li className="listDesign">
+                    <Link
+                      className="textDecoration"
+                      onClick={() => handleCatConfig("Webinar")}
+                    >
+                      <Typography
+                        sx={{ textDecoration: "none", color: "grey" }}
+                        className="textDecoration"
+                      >
+                        Webinar
+                      </Typography>
+                    </Link>
+                  </li>
                 </ul>
               </List>
             </Collapse>

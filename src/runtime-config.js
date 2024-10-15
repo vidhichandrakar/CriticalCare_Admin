@@ -1,1 +1,1 @@
-export const REACT_APP_API = "http://157.173.221.27";
+export const REACT_APP_API = "https://app.360criticalcare.com";

@@ -117,6 +117,17 @@ export const uploadBanner = ({payload, callBack, error }) => {
       error(errorMessage);
     });
 };
+export const addwebinar = ({payload, callBack, error }) => {
+  const url = APIS.addwebinar;
+  axios
+    .post(url, payload)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
 
 export const createCourse = ({ courseData, callBack, error }) => {
   const url = APIS.allCourses;
