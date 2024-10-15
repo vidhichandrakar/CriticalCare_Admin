@@ -1,53 +1,62 @@
-.contentDisplay{
+.contentDisplay {
   display: flex;
   flex-direction: row;
-  width:94%;
-  
+  width: 94%;
+
 }
-.contentleftBox{
-  width:70%;
+
+.contentleftBox {
+  width: 70%;
   padding: 1%;
   height: 50%;
 }
-.contentRightBox{
-  margin:2%;
-  width:30%;
-   border: 2px solid #eee;
-   border-radius: 3% !important;
-   height: fit-content;
+
+.contentRightBox {
+  margin: 2%;
+  width: 30%;
+  border: 2px solid #eee;
+  border-radius: 3% !important;
+  height: fit-content;
 }
-.contentInnerLeftBox{
+
+.contentInnerLeftBox {
   display: flex;
   flex-direction: column;
   margin-left: -13px;
 }
-.noContent{
+
+.noContent {
   justify-content: center !important;
   align-items: center !important;
   text-align: center;
 }
 
-.typoStyleVideo{
+.typoStyleVideo {
   margin-top: 0% !important;
   margin-left: 5% !important;
 }
-.typoStyleImg{
+
+.typoStyleImg {
   margin-top: 0% !important;
   margin-left: -1% !important;
 }
-.typoStyleZipAndDoc{
+
+.typoStyleZipAndDoc {
   margin-left: 2% !important;
 }
-.contentsImg{
+
+.contentsImg {
   width: 48% !important;
   height: 50% !important;
   border-radius: 10px;
 }
-.contentsVideo{
+
+.contentsVideo {
   width: 38% !important;
   height: 82% !important;
 }
-.videoBox{
+
+.videoBox {
   /* background-color: aquamarine; */
   box-shadow: 1px 1px 4px 2px #ecebeb !important;
   align-items: center;
@@ -55,10 +64,11 @@
   flex-direction: row;
   margin: 2%;
   width: 45vw;
-    height: 29vh;
-    padding-left: 57px;
+  height: 29vh;
+  padding-left: 57px;
 }
-.videoZipAndDoc{
+
+.videoZipAndDoc {
   align-items: center;
   text-align: center;
   /* justify-content: center; */
@@ -69,95 +79,120 @@
   flex-direction: row;
   margin: 2%;
   width: 49vw;
-    height: 29vh;
+  height: 29vh;
 }
-.leftVideo{
+
+.leftVideo {
   flex-direction: row;
   display: flex;
   width: 80%;
   align-items: center;
 }
-.folderIconContent{
+
+.folderIconContent {
   font-size: 5em !important;
   color: #0075FF !important;
 }
-.folderIconContentTwo{
+
+.folderIconContentTwo {
   font-size: 3.5em !important;
   color: #0075FF !important;
   margin-top: 2%;
 }
-.firstTree{
+
+.firstTree {
   display: flex;
   flex-direction: row;
 }
-.innerTree{
+
+.innerTree {
   display: flex;
   flex-direction: row;
   margin-left: 5%;
   margin-top: 2%;
   cursor: pointer;
 }
-.innerHeading{
+
+.innerHeading {
   margin-left: 3%;
   margin-top: 2%;
 }
-.innerHeadingOne{
+
+.innerHeadingOne {
   font-size: 1.2em !important;
 }
 
-.innerHeadingTwo{
+.innerHeadingTwo {
   color: #c9c2c2;
 }
-.videoText{
+
+.videoText {
   color: #a19e9e !important;
   font-size: 0.8em !important;
   margin-top: 1.5% !important;
 }
-.contentButton{
+
+.contentButton {
   text-transform: none !important;
   margin-top: 3%;
   font-size: 1.1em !important;
 }
-.contentRightHeading{
+
+.contentRightHeading {
   margin-left: 10% !important;
   margin-top: 6% !important;
   font-size: 1.6em !important;
   font-weight: 550 !important;
 }
 
- /* RIGHTBOX CSS  */
+/* RIGHTBOX CSS  */
 
 
 
- .rightBoxComplete{
+.rightBoxComplete {
+  width: 26vh;
   padding: 26px 26px;
- }
- .rightBoxTypography{
+}
+
+.rightBoxTypography {
   cursor: pointer;
   color: #8e8383;
   font-size: large !important;
   /* font-weight: 18%; */
   padding: 10px 10px;
- }
- .rightBoxTypography:hover{
+}
+
+.rightBoxTypography:hover {
   background-color: rgba(197, 197, 197, 0.454);
   border-radius: 10px;
 
- }
- .folderIconRightBox{
+}
+
+.folderIconRightBox {
   color: #0075FF !important;
   margin-right: 7%;
   margin-bottom: -2%;
- }
+}
 
- .zipFolderPrevIcon{
+.zipFolderPrevIcon {
   /* display: flex; */
   /* flex-direction:row; */
   /* justify-content: space-between !important; */
   font-size: 1.5rem;
- }
- .zipAndDoc{
+}
+
+.zipAndDocImg {
   display: flex;
-  flex-direction: row;
-  margin-left: 6px;
+  align-items: center;
+  justify-content: center;
+}
+
+.addCatTextFieldCat {
+  /* margin-top: 3% !important; */
+  width: 100% !important;
+  /* margin-bottom: 4% !important; */
+}
+
+.CreateBtn {
+  display: inline;
 }

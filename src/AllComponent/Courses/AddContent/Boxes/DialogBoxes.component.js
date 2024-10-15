@@ -207,7 +207,9 @@ const DialogBoxes = ({
           <Button variant="outlined" disabled className="CancelBtn">
             Cancel
           </Button>
-          <Button variant="contained" sx={{textTransform:"none"}}>Import Selected</Button>
+          <Button variant="contained" sx={{ textTransform: "none" }}>
+            Import Selected
+          </Button>
         </Box>
       </BootstrapDialog>
       <BootstrapDialog

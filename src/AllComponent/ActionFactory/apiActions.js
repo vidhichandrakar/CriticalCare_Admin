@@ -73,7 +73,7 @@ export const banner = ({ callBack, error }) => {
     });
 };
 export const  bannerTypeapi= ({ callBack, error }) => {
-  const url = APIS.banner + "/webbannerposition";
+  const url = APIS.banner + "/webbannertype";
   axios
     .get(url)
     .then((response) => {
@@ -84,7 +84,7 @@ export const  bannerTypeapi= ({ callBack, error }) => {
     });
 };
 export const bannerPositionapi = ({ callBack, error }) => {
-  const url = APIS.banner + "/webbannertype";
+  const url = APIS.banner + "/webbannerposition";
   axios
     .get(url)
     .then((response) => {
@@ -108,13 +108,17 @@ export const bannerPage = ({ callBack, error }) => {
 
 export const uploadBanner = ({payload, callBack, error }) => {
   const url = APIS.banner;
+  // Log the payload to check if active_status is included
+  // console.log("Payload being sent to upload banner:", payload);
   axios
     .post(url, payload)
     .then((response) => {
       callBack(response);
     })
     .catch((errorMessage) => {
-      error(errorMessage);
+      console.error("Error uploading banner:", errorMessage.response?.data || errorMessage.message);
+      error(errorMessage.response?.data || { message: "An unexpected error occurred." });
+      //error(errorMessage);
     });
 };
 export const addwebinar = ({payload, callBack, error }) => {
@@ -399,6 +403,12 @@ export const editQuestions=({payload, callBack, questionId})=>{
   })
 }
 
+export const addContentOnCreateCourse=({payload, callBack})=>{
+  const url = APIS.module;
+  axios.post(url,payload).then((response)=>{
+    callBack(response);
+  })
+}
 export const getBlog = ({ payload, callBack, error }) => {
   const url = APIS.blog;
   axios
