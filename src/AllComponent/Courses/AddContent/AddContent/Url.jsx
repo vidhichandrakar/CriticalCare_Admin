@@ -64,6 +64,7 @@ const Url = ({
     setUploadedVideo(uploadedUrl);
     handleAddUrl("uploadUrl", uploadedUrl);
     handleInputChange("addContent", uploadedUrl);
+    console.log("hvcvbhjkl")
   };
 
   return (
