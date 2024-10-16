@@ -203,7 +203,7 @@ function AddContent({ handleInputChange, handleTrackerPage, courseData }) {
 
   return (
     <>
-      <div style={{ height: "120px" }}>
+      <div style={{ minHeight: "120px" }}>
         {console.log(
           "videoDesc===>",
           videoDesc,
@@ -242,23 +242,35 @@ function AddContent({ handleInputChange, handleTrackerPage, courseData }) {
                   {index + 1}. Add Module
                   {/* Button container */}
                   <Box sx={{ display: "flex", gap: 2 }}>
-                    <Button
+                    <Box
                       color="success"
                       onClick={(event) => handleAddContent(event, index)}
-                      sx={{ position: "relative" }} // Prevents movement
+                      sx={{ position: "relative",
+                        display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    color:  "#0075FF"
+                       }} // Prevents movement
                     >
-                      <PlaylistAddIcon sx={{ fontSize: "0.9rem" }} /> Add
-                      Content
-                    </Button>
+                      <PlaylistAddIcon sx={{ fontSize: "1.1rem", }} /><Typography sx={{ml:"4px"}}> Add
+                      Content</Typography>
+                    </Box>
 
-                    <Button
+                    <Box
                       color="primary"
                       onClick={() => handleSaveModule(index)}
                       // nClick={handleSaveModule}
-                      sx={{ position: "relative" }} // Prevents movement
+                      sx={{ position: "relative",
+                        display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    color:  "#0075FF"
+                       }} // Prevents movement
                     >
-                      <SaveIcon sx={{ fontSize: "1.1rem" }} /> Save
-                    </Button>
+                      <SaveIcon sx={{ fontSize: "1.1rem" }} /> <Typography sx={{ml:"4px"}}>Save</Typography>
+                    </Box>
                   </Box>
                 </Box>
               </AccordionSummary>
@@ -386,6 +398,7 @@ function AddContent({ handleInputChange, handleTrackerPage, courseData }) {
                       vertical: "bottom",
                       horizontal: "left",
                     }}
+                    sx={{mt:1}}
                   >
                     <Box>
                       <RightBox

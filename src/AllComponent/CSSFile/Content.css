@@ -150,16 +150,18 @@
 
 
 .rightBoxComplete {
-  width: 26vh;
-  padding: 26px 26px;
+  width: 13vw;
 }
 
 .rightBoxTypography {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   cursor: pointer;
   color: #8e8383;
   font-size: large !important;
   /* font-weight: 18%; */
-  padding: 10px 10px;
+  padding: 10px 10px !important;
 }
 
 .rightBoxTypography:hover {

@@ -16,6 +16,8 @@ import QuizIcon from '@mui/icons-material/Quiz';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import ImageIcon from '@mui/icons-material/Image';
+import { Box } from "@material-ui/core";
+import "../../CSSFile/Content.css"
 
 
 const RightBox = ({
@@ -275,13 +277,13 @@ const RightBox = ({
       <div className="rightBoxComplete">
         {addContentList.map((list) => {
           return (
-            <Typography
+            <Box
               className="rightBoxTypography "
               onClick={list.onClickHandler}
             >
               {list.Component}
               {list.name}
-            </Typography>
+            </Box>
           );
         })}
       </div>
