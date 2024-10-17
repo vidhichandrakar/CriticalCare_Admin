@@ -21,8 +21,14 @@ import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import SaveIcon from "@mui/icons-material/Save";
+import { useNavigate } from "react-router-dom";
 
-function AddContent({ handleInputChange, handleTrackerPage, courseData }) {
+function AddContent({
+  handleInputChange,
+  handleTrackerPage,
+  courseData,
+  courseIdForContent,
+}) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [contentType, setContentType] = useState([]);
   const open = Boolean(anchorEl);
@@ -31,6 +37,7 @@ function AddContent({ handleInputChange, handleTrackerPage, courseData }) {
   const [clickedModuleIdx, setClickedModuleIdx] = useState();
   const [addModulesText, setAddModulesText] = useState("");
   const [expanded, setExpanded] = useState();
+  const navigate = useNavigate();
   const [payload, setPayload] = useState({
     courseModuleDetails: {
       module_name: "",
@@ -57,7 +64,6 @@ function AddContent({ handleInputChange, handleTrackerPage, courseData }) {
     });
   }, []);
   const handleAddContent = (event, idx) => {
-    console.log("event,", event);
     event.stopPropagation();
     if (idx === expanded) {
       setExpanded(null);
@@ -75,23 +81,19 @@ function AddContent({ handleInputChange, handleTrackerPage, courseData }) {
   const handleVideoName = (value) => {
     let arr = [];
     setVideoDesc(value);
-    let currentIndex = 0;
 
     moduleDescription.map((item, index) => {
       let storedValues = Object.assign({}, item);
-      console.log("item==>", item);
       if (item.id === clickedModuleIdx) {
         storedValues.moduleName = addModulesText;
         storedValues.item = value;
-        // currentIndex+=1;
       }
-      console.log("storedValues===>", storedValues);
       arr.push(storedValues);
     });
-    console.log("value=>", value);
     setModuleDescription(arr);
   };
   const handleCreateCourse = () => {
+    // no use of this before remove double check it
     if (courseData.length !== null) {
       handleInputChange("addContent", videoDesc);
     }
@@ -147,69 +149,67 @@ function AddContent({ handleInputChange, handleTrackerPage, courseData }) {
   };
 
   const handleInputOnAddContent = (e) => {
+    let arr = [];
     setAddModulesText(e);
+    moduleDescription.map((item, index) => {
+      let storedValues = Object.assign({}, item);
+      if (item.id === clickedModuleIdx) {
+        storedValues.moduleName = e;
+      }
+      arr.push(storedValues);
+    });
+    setModuleDescription(arr);
   };
 
   const handleSaveModule = (index) => {
-    //   let addedModule = { ...payload };
-    //  console.log("add module before",addedModule)
-    //   addedModule.courseModuleDetails.module_name =addModulesText;
-    //   addedModule?.courseContents.push({
-    //     content_type_id: videoDesc[0]?.content_type_id,
-    //     content_url: videoDesc[0]?.content_url,
-    //     content_name: videoDesc[0]?.content_name,
-    //   });
-    //   setPayload(addedModule);
-
-    //   console.log("payloadff before", payload);
-
-    // let addedModule = {
-    //   ...payload,
-    //   courseContents: [...payload.courseContents], // Create a copy of the courseContents array
-    // };
-
-    console.log("add moduleDescription before", moduleDescription);
-
-    // addedModule.courseModuleDetails.module_name = addModulesText;
-
     const payload = {
       courseModuleDetails: {
         module_name: addModulesText,
-        course_id: 3,
+        course_id: courseIdForContent.course_id,
       },
       courseAttachments: videoDesc,
     };
 
-    // Set the new state with the updated module
-    // setPayload(addedModule);
-
-    // console.log("payload after update", addedModule);
     addContentOnCreateCourse({
-      moduleId: 3,
       payload: payload,
-      callBack: (response) => {
-        console.log("payload=>", response);
-      },
+      callBack: (response) => {},
     });
   };
 
-  const handleExpanded = (index) => {
-    if (index === expanded) {
-      setExpanded(null);
-    } else {
-      setExpanded(index);
-    }
+  const handleExit = () => {
+    navigate("/admin/YourCourses");
   };
 
+  function sleep(ms) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async function callAttachFilesOneByOne(moduleDescription) {
+    for (const item of moduleDescription) {
+      const payload = {
+        courseModuleDetails: {
+          module_name: item.moduleName,
+          course_id: courseIdForContent.course_id,
+        },
+        courseAttachments: item.item,
+      };
+      try {
+        await addContentOnCreateCourse({
+          payload: payload,
+          callBack: (response) => {},
+        });
+        await sleep(100);
+      } catch (error) {
+        console.error("Error in adding content:", error);
+      }
+    }
+  }
+  const handleSaveAllAttachedModule = () => {
+    callAttachFilesOneByOne(moduleDescription);
+  };
   return (
     <>
       <div style={{ height: "120px" }}>
-        {console.log(
-          "videoDesc===>",
-          videoDesc,
-          "====>payload",
-          moduleDescription
-        )}
         {moduleDescription.map((moduleItem, index) => (
           <div style={{ margin: "20px" }}>
             <Accordion
@@ -279,7 +279,6 @@ function AddContent({ handleInputChange, handleTrackerPage, courseData }) {
 
               <AccordionActions style={{ flexFlow: "column" }}>
                 <Box className="contentInnerLeftBox">
-                  {console.log("dfd", moduleItem)}
                   {!moduleItem?.item?.length ? (
                     <Box className="noContent">
                       <img src={attachmentimgae} height="290px" width="320px" />
@@ -304,7 +303,6 @@ function AddContent({ handleInputChange, handleTrackerPage, courseData }) {
                       ) : handleImageType(item?.content_name?.split(".")[1]) ? (
                         <Box className="videoBox">
                           <Box className="leftVideo">
-                            {console.log("itemitemitem=>", item)}
                             <img
                               src={item.content_url}
                               className="contentsImg"
@@ -413,9 +411,23 @@ function AddContent({ handleInputChange, handleTrackerPage, courseData }) {
         >
           Add Module
         </Button>
+        <Box>
+          <Button
+            onClick={handleSaveAllAttachedModule}
+            sx={{
+              position: "fixed", // Stay at the bottom even when scrolling
+              left: "60%", // Center horizontally
+              bottom: "30px", // Adjust the distance from the bottom
+              transform: "translateX(-50%)", // Offset to truly center the button
+            }}
+            variant="contained"
+          >
+            Save Module
+          </Button>
+        </Box>
 
-        {/* <Button
-          onClick={handleSaveModule}
+        <Button
+          onClick={handleExit}
           sx={{
             position: "absolute",
             bottom: 30,
@@ -423,8 +435,8 @@ function AddContent({ handleInputChange, handleTrackerPage, courseData }) {
           }}
           variant="contained"
         >
-          Save Module
-        </Button> */}
+          Exit
+        </Button>
       </div>
     </>
   );

@@ -17,6 +17,7 @@ import AddContent from "./AddContent/AddContent";
 const CreateCourses = ({ handleHeaderLabels }) => {
   const [trackerPage, setTackerPage] = useState(0);
   const [basicInfo, setBasicInfo] = useState({});
+  const [courseIdForContent , setCourseIdForContent] = useState({});
   const [editPrice, setEditPrice] = useState([
     {
       duration: "20",
@@ -76,7 +77,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
     if (type === "basicInfo") {
       setBasicInfo(value);
     } else if (type === "editPrice") {
-      console.log("woejb",value)
+      console.log("woejb", value);
       setEditPrice([value]);
       setValidity([value]);
       handleCreateCourse(value);
@@ -87,9 +88,10 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   };
 
   const handleTrackerPage = (page, value) => {
+    console.log("tracker", page, value);
     if (page === 2) {
       setMulitiDuration(value);
-      setTackerPage(3);
+      // setTackerPage(3);
     }
     // else if (page === 3) {
     //   if (courseData?.contents?.length) {
@@ -110,8 +112,11 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       const courseDetails = {
         course_name: basicInfo?.Name,
         description: basicInfo?.Description,
+        Course_batchdetails: "passing as static need to change it", //passing as static will imlement once it willl present
+        course_detail: "hello details", //same as above
+        course_FAQ: "This is FAQ", //same as above
         about_course: basicInfo?.Description,
-        team_member_id: 5,
+        team_member_id: 5, ///hardcoded neeed to check
         category_id: basicInfo?.Category?.category_id,
         sub_category_id: basicInfo?.subCategory?.category_id,
         thumbnail_path: basicInfo?.thumbnailPath,
@@ -121,11 +126,11 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         is_publish: "not published",
       };
       // const courseAttachments = attachments;  //commented to check the new work flow
-      console.log("mulitiDuration==>",mulitiDuration,"kkkkkkk=>",validity)
+      console.log("mulitiDuration==>", mulitiDuration, "kkkkkkk=>", validity);
 
-      const courseDurations = validity ; //need to work on the multiple selection part
-        // mulitiDuration === undefined ? validity : mulitiDuration;
-       
+      const courseDurations = validity; //need to work on the multiple selection part
+      // mulitiDuration === undefined ? validity : mulitiDuration;
+
       payload = {
         courseDetails: courseDetails,
         courseDurations: courseDurations,
@@ -134,7 +139,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           required: true,
         },
         course_detail: {
-          type: String,             // hard coded coz of backend ppl asked to put hardcoded value
+          type: String, // hard coded coz of backend ppl asked to put hardcoded value
           required: true,
         },
         course_FAQ: {
@@ -162,10 +167,13 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           toast.success("Course added successfully!", {
             autoClose: 500,
           });
-          navigate("/admin/YourCourses");
+          // navigate("/admin/YourCourses");
+          console.log("hellloo",response)
+          setCourseIdForContent(response.data)
+          setTackerPage(3);
         },
         error: () => {
-          console.log("fds")
+          console.log("fds");
         },
       });
     }
@@ -200,6 +208,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           handleTrackerPage={handleTrackerPage}
           courseData={courseData}
           handleInputChange={handleInputChange}
+          courseIdForContent={courseIdForContent}
         />
       ) : null}
       <ToastContainer />

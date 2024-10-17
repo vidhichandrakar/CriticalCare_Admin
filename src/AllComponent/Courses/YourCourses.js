@@ -95,14 +95,14 @@ const YourCourses = () => {
   }, []);
 
   const handleFilterChange = ({duration_type_id = "", category_id = "" , is_publish = "" }) => {
-    console.log(filterValue, durationname ,selectedCategory, "line90 publishdurationcategory")
+    // console.log(filterValue, durationname ,selectedCategory, "line90 publishdurationcategory")
     getAllCoursesFilter({
 
       duration_type_id: duration_type_id,
       category_id: category_id,
       is_publish: is_publish ,
       callBack: (response) =>{
-        console.log(response, "line95")
+        // console.log(response, "line95")
         const userCallBack = response?.data;
         setAllCourses(userCallBack);
         setCourseData(userCallBack);
@@ -114,7 +114,7 @@ const YourCourses = () => {
   }
   const handleChange = (e) => {
     setSelectedCategory(e.target.value.category_id);
-    console.log(e.target.value.category_id, "Lineno109")
+    // console.log(e.target.value.category_id, "Lineno109")
     // handleFilterChange({category_id: e.target.value.category_id})
     
   };
@@ -129,9 +129,9 @@ const YourCourses = () => {
     setDurationname(e.target.value.duration_type_id);
     // handleFilterChange({duration_type_id : e.target.value.duration_type_id})
     
-    console.log(e, "line120 handleduratipon")
-    console.log(e.target.value.duration_type_id, "line121 handleduratipon")
-    console.log(durationname, "line124 handleduratipon")
+    // console.log(e, "line120 handleduratipon")
+    // console.log(e.target.value.duration_type_id, "line121 handleduratipon")
+    // console.log(durationname, "line124 handleduratipon")
    
   }; 
 
@@ -142,7 +142,7 @@ const YourCourses = () => {
       category_id: selectedCategory,
       is_publish: filterValue ,
       callBack: (response) =>{
-        console.log(response, "line95")
+        // console.log(response, "line95")
         const userCallBack = response?.data;
         setAllCourses(userCallBack);
         setCourseData(userCallBack);
@@ -290,7 +290,7 @@ const YourCourses = () => {
                     {durationType.map((item) => (
                       <MenuItem key={item.duration_id} value={item}>
                         {item.duration_type_name}
-                        {console.log(item, "item line 234")}
+                        {/* {console.log(item, "item line 234")} */}
                       </MenuItem>
                     ))}
                   </Select>
@@ -397,7 +397,7 @@ const YourCourses = () => {
             },
             error: (error) => {
               toast.error(error.message);
-              console.log(error.message);
+              // console.log(error.message);
               setLoaderState(false);
             },
           });
@@ -405,7 +405,7 @@ const YourCourses = () => {
         },
         error: (error) => {
           toast.error(error.message);
-          console.log(error.message);
+          // console.log(error.message);
           setLoaderState(false);
         },
       });

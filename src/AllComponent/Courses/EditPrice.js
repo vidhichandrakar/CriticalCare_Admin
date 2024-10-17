@@ -321,7 +321,6 @@ const EditPrice = ({
         if (parseInt(storedValues.price) > parseInt(storedValues.offer_price)) {
           let copyArr = [];
           copyArr.push(storedValues);
-          console.log("storedValues===>",storedValues)
           handleInputChange("editPrice", storedValues);
           handleTrackerPage(2);
         } else {
@@ -382,7 +381,7 @@ const EditPrice = ({
       }
       setSingleValidity(storedValues);
     } else if (value.duration_type_name === "Lifetime Validity") {
-      console.log("kokokokokokkkok",value,"sssssss+.",courseData)
+      
       let storedValues = Object.assign({}, lifetimeValidation);
       setSelectedDurationValue(value?.duration_type_name);
       storedValues.duration_type_name = value?.duration_type_name;
@@ -391,7 +390,7 @@ const EditPrice = ({
         storedValues.course_duration_id =
           courseData?.durations[0]?.course_duration_id;
       }
-      console.log("storedValues7777777",storedValues)
+     
       setLifetimeValidation(storedValues);
     } else {
       let storedValues = Object.assign({}, expiryDate);
@@ -488,14 +487,14 @@ const EditPrice = ({
         handleInputChange("editPrice", storedValues);
       }
     } else if (selectDurationValue === "Lifetime Validity") {
-      console.log("jfjkds===>",value);
+      // console.log("jfjkds===>",value);
       let storedValues = Object.assign({}, lifetimeValidation);
       if (type === "price") {
         storedValues.price = value;
       } else if (type === "offer_price") {
         storedValues.offer_price = value;
       }
-      console.log("storedValues====>,",storedValues)
+      // console.log("storedValues====>,",storedValues)
       setLifetimeValidation(storedValues);
       // handleInputChange("editPrice", storedValues);    commented to make sure call the api on save n next bttn 
       
