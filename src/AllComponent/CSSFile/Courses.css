@@ -575,7 +575,7 @@
   font-weight: 300 !important;
 }
 .configurationDialog .MuiDialog-paper{
-    width:70% !important;
+   min-width: 40vw!important;
     height:auto !important;
 }
 .addCatHeading{

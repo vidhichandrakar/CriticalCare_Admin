@@ -255,10 +255,10 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           value: storedBasicInfo.Name,
         })
       )}
-      <div className="FlexRow">
+      <div className="FlexRow" style={{marginTop: "30px"}}>
         {CommonTypography({
           fontWeight: 600,
-          sx: { marginTop: "5%" },
+          // sx: { marginTop: "5%" },
           label: "Description",
         })}
 
