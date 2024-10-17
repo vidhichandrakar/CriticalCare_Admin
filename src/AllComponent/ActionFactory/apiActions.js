@@ -121,6 +121,17 @@ export const uploadBanner = ({payload, callBack, error }) => {
       error(errorMessage);
     });
 };
+export const addwebinar = ({payload, callBack, error }) => {
+  const url = APIS.addwebinar;
+  axios
+    .post(url, payload)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
 
 export const createCourse = ({ courseData, callBack, error }) => {
   const url = APIS.allCourses;
@@ -392,6 +403,12 @@ export const editQuestions=({payload, callBack, questionId})=>{
   })
 }
 
+export const addContentOnCreateCourse=({payload, callBack})=>{
+  const url = APIS.module;
+  axios.post(url,payload).then((response)=>{
+    callBack(response);
+  })
+}
 export const getBlog = ({ payload, callBack, error }) => {
   const url = APIS.blog;
   axios

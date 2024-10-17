@@ -12,11 +12,12 @@ import { useDropzone } from "react-dropzone";
 import { uploadFile } from "../../ActionFactory/apiActions";
 import ContentSlider from "./Boxes/Slider.component";
 import DialogBoxes from "./Boxes/DialogBoxes.component";
-import OndemandVideoIcon from '@mui/icons-material/OndemandVideo';
 import QuizIcon from '@mui/icons-material/Quiz';
 import LiveTvIcon from '@mui/icons-material/LiveTv';
 import VideocamIcon from '@mui/icons-material/Videocam';
 import ImageIcon from '@mui/icons-material/Image';
+import { Box } from "@material-ui/core";
+import "../../CSSFile/Content.css"
 
 
 const RightBox = ({
@@ -25,6 +26,7 @@ const RightBox = ({
   handleInputChange,
   courseData,
   handleAddUrl,
+  clickedModuleIdx,
 }) => {
   const [state, setState] = useState({
     top: false,
@@ -85,7 +87,9 @@ const RightBox = ({
     }
   }, []);
 
-  const onInroVideoDrop = async (files) => {
+  //this function is for to add all items
+
+  const onInroVideoDrop = async (files) => {                     
     let payload = new FormData();
     payload.append("file", files[0], files[0]?.name);
     setLoaderState(true);
@@ -107,6 +111,7 @@ const RightBox = ({
           arr2.course_id = courseData.course_id;
         }
         arr.push(arr2);
+        // console.log("jhgcvhjkl;")
         setUploadedVideo(arr);
         handleInputChange("addContent", arr);
         handleVideoName(arr);
@@ -124,7 +129,7 @@ const RightBox = ({
     getInputProps: getIntroVideoInputProps,
   } = useDropzone({
     onDrop: onInroVideoDrop,
-    onChange: (event) => console.log(event),
+    // onChange: (event) => console.log("kokokokok",event),
     accept: acceptType,
   });
 
@@ -183,6 +188,7 @@ const RightBox = ({
       (item) => item.content_type_name === "Image"
     );
     setUploadedFileType(imgType[0]);
+    // console.log("clickedModuleIdx=>",clickedModuleIdx)
   };
   const handleCloseDialogImg = () => {
     setImgopen(false);
@@ -271,13 +277,13 @@ const RightBox = ({
       <div className="rightBoxComplete">
         {addContentList.map((list) => {
           return (
-            <Typography
+            <Box
               className="rightBoxTypography "
               onClick={list.onClickHandler}
             >
               {list.Component}
               {list.name}
-            </Typography>
+            </Box>
           );
         })}
       </div>
