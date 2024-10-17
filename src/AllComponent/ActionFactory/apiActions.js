@@ -116,9 +116,9 @@ export const uploadBanner = ({payload, callBack, error }) => {
       callBack(response);
     })
     .catch((errorMessage) => {
-      console.error("Error uploading banner:", errorMessage.response?.data || errorMessage.message);
-      error(errorMessage.response?.data || { message: "An unexpected error occurred." });
-      //error(errorMessage);
+      // console.error("Error uploading banner:", errorMessage.response?.data || errorMessage.message);
+      // error(errorMessage.response?.data || { message: "An unexpected error occurred." });
+      error(errorMessage);
     });
 };
 

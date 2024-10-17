@@ -205,6 +205,10 @@ const Banner = () => {
   const handleBannerChange = (type, value) => {
     if (type === "type") {
       setBannerType(value);
+      // If bannerType is 2, set bannerPosition to 1 automatically
+      if (value === 2) {
+        setBannerPosition(1);
+      }
     }
     else if (type === "position") {
       setBannerPosition(value);
@@ -531,7 +535,7 @@ const Banner = () => {
                     onChange={handleBannerStatusToggle}
                   />
                 </Box>
-                {/* <Typography>Banner Type: {bannerType}</Typography> */}
+                {/*<Typography>Banner Type: {bannerPosition}</Typography>*/}
 
                 {/* Image Upload and Preview Dialog */}
                 {imageUpload && (
