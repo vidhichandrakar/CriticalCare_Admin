@@ -242,7 +242,7 @@ const EditPrice = ({
     temp = editPriceData.map((item, idx) =>
       idx === selectedIndex ? { ...item, [type]: value } : item
     );
-    handleInputChange("editPrice", temp);
+    // handleInputChange("editPrice", temp); //to stop calling endpoint on on change
   };
 
   const handlePricePage = () => {
@@ -277,8 +277,9 @@ const EditPrice = ({
           emptyString = "Required fields cannot be empty!";
           validate = true;
         }
-
+        
         temp.push(storedValues);
+        // console.log("multiple valyue", temp);
       });
 
       if (validate === true) {
@@ -315,7 +316,7 @@ const EditPrice = ({
         });
       }
     } else if (selectDurationValue === "Lifetime Validity") {
-      console.log("save n next")
+      // console.log("save n next");
       const storedValues = lifetimeValidation;
       if (storedValues.price && storedValues.offer_price) {
         if (parseInt(storedValues.price) > parseInt(storedValues.offer_price)) {
@@ -344,6 +345,7 @@ const EditPrice = ({
         if (parseInt(storedValues.price) > parseInt(storedValues.offer_price)) {
           let copyArr = [];
           copyArr.push(storedValues);
+          // console.log("storedValues====>",storedValues)
           handleInputChange("editPrice", storedValues);
           handleTrackerPage(2);
         } else {
@@ -381,7 +383,6 @@ const EditPrice = ({
       }
       setSingleValidity(storedValues);
     } else if (value.duration_type_name === "Lifetime Validity") {
-      
       let storedValues = Object.assign({}, lifetimeValidation);
       setSelectedDurationValue(value?.duration_type_name);
       storedValues.duration_type_name = value?.duration_type_name;
@@ -390,7 +391,7 @@ const EditPrice = ({
         storedValues.course_duration_id =
           courseData?.durations[0]?.course_duration_id;
       }
-     
+
       setLifetimeValidation(storedValues);
     } else {
       let storedValues = Object.assign({}, expiryDate);
@@ -484,7 +485,7 @@ const EditPrice = ({
         storedValues.price &&
         storedValues.offer_price
       ) {
-        handleInputChange("editPrice", storedValues);
+        // handleInputChange("editPrice", storedValues);  commented to make sure call the api on save n next bttn
       }
     } else if (selectDurationValue === "Lifetime Validity") {
       // console.log("jfjkds===>",value);
@@ -496,8 +497,8 @@ const EditPrice = ({
       }
       // console.log("storedValues====>,",storedValues)
       setLifetimeValidation(storedValues);
-      // handleInputChange("editPrice", storedValues);    commented to make sure call the api on save n next bttn 
-      
+      // handleInputChange("editPrice", storedValues);    commented to make sure call the api on save n next bttn
+
       // handleInputChange("editPrice", lifetimeValidation);
     } else if (selectDurationValue === "Course Expiry Date") {
       let storedValues = Object.assign({}, expiryDate);
@@ -509,12 +510,12 @@ const EditPrice = ({
         storedValues.startDate = moment(value).format("YYYY-MM-DD");
       }
       setExpiryDate(storedValues);
-      handleInputChange("editPrice", storedValues);
+      // handleInputChange("editPrice", storedValues); commented to make sure call the api on save n next bttn
     }
   };
 
   const handleSelectedDuration = (value, item) => {
-    console.log("value, item",value, item)
+    // console.log("value, item", value, item);
     setSelectedDurationValue(value);
     setSelectedDuration(item);
   };

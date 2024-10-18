@@ -77,7 +77,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
     if (type === "basicInfo") {
       setBasicInfo(value);
     } else if (type === "editPrice") {
-      console.log("woejb", value);
+      // console.log("woejb", value);
       setEditPrice([value]);
       setValidity([value]);
       handleCreateCourse(value);
@@ -88,7 +88,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   };
 
   const handleTrackerPage = (page, value) => {
-    console.log("tracker", page, value);
+    // console.log("tracker", page, value);
     if (page === 2) {
       setMulitiDuration(value);
       // setTackerPage(3);
@@ -126,7 +126,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         is_publish: "not published",
       };
       // const courseAttachments = attachments;  //commented to check the new work flow
-      console.log("mulitiDuration==>", mulitiDuration, "kkkkkkk=>", validity);
+      // console.log("mulitiDuration==>", mulitiDuration, "kkkkkkk=>", validity);
 
       const courseDurations = validity; //need to work on the multiple selection part
       // mulitiDuration === undefined ? validity : mulitiDuration;
@@ -148,7 +148,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         },
         // courseAttachments: courseAttachments,
       };
-      console.log("patload", payload);
+      // console.log("patload", payload);
     } catch (error) {
       console.log(error);
     }
@@ -168,7 +168,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
             autoClose: 500,
           });
           // navigate("/admin/YourCourses");
-          console.log("hellloo",response)
+          // console.log("hellloo",response)
           setCourseIdForContent(response.data)
           setTackerPage(3);
         },
