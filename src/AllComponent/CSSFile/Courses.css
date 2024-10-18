@@ -115,6 +115,10 @@
   font-size: 1.4em !important;
   font-weight: 550 !important;
   font-family: Arial, Helvetica, sans-serif  !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 19ch;
 }
 .logoText{
   margin-top: 23% !important;
