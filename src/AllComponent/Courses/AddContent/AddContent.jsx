@@ -37,6 +37,7 @@ function AddContent({
   const [clickedModuleIdx, setClickedModuleIdx] = useState();
   const [addModulesText, setAddModulesText] = useState("");
   const [expanded, setExpanded] = useState();
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
   const [payload, setPayload] = useState({
     courseModuleDetails: {
@@ -149,6 +150,13 @@ function AddContent({
   };
 
   const handleInputOnAddContent = (e) => {
+    // e.preventDefault();
+    if (e === "") {
+      setError(true);
+    } else {
+      setError(false);
+      setAddModulesText(e);
+    }
     let arr = [];
     setAddModulesText(e);
     moduleDescription.map((item, index) => {
@@ -162,18 +170,34 @@ function AddContent({
   };
 
   const handleSaveModule = (index) => {
-    const payload = {
-      courseModuleDetails: {
-        module_name: addModulesText,
-        course_id: courseIdForContent.course_id,
-      },
-      courseAttachments: videoDesc,
-    };
+    if (addModulesText === "") {
+      setError(true);
+    } else {
+      const payload = {
+        courseModuleDetails: {
+          module_name: addModulesText,
+          course_id: courseIdForContent.course_id,
+        },
+        courseAttachments: videoDesc,
+      };
 
-    addContentOnCreateCourse({
-      payload: payload,
-      callBack: (response) => {},
-    });
+      addContentOnCreateCourse({
+        payload: payload,
+        callBack: (response) => {},
+      });
+    }
+    // const payload = {
+    //   courseModuleDetails: {
+    //     module_name: addModulesText,
+    //     course_id: courseIdForContent.course_id,
+    //   },
+    //   courseAttachments: videoDesc,
+    // };
+
+    // addContentOnCreateCourse({
+    //   payload: payload,
+    //   callBack: (response) => {},
+    // });
   };
 
   const handleExit = () => {
@@ -196,7 +220,9 @@ function AddContent({
       try {
         await addContentOnCreateCourse({
           payload: payload,
-          callBack: (response) => {},
+          callBack: (response) => {
+            navigate("/admin/YourCourses");
+          },
         });
         await sleep(100);
       } catch (error) {
@@ -205,7 +231,11 @@ function AddContent({
     }
   }
   const handleSaveAllAttachedModule = () => {
-    callAttachFilesOneByOne(moduleDescription);
+    if (addModulesText === "") {
+      setError(true);
+    } else {
+      callAttachFilesOneByOne(moduleDescription);
+    }
   };
   return (
     <>
@@ -245,37 +275,41 @@ function AddContent({
                     <Box
                       color="success"
                       onClick={(event) => handleAddContent(event, index)}
-                      sx={{ position: "relative",
+                      sx={{
+                        position: "relative",
                         display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    color:  "#0075FF"
-                       }} // Prevents movement
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        color: "#0075FF",
+                      }} // Prevents movement
                     >
-                      <PlaylistAddIcon sx={{ fontSize: "1.1rem", }} /><Typography sx={{ml:"4px"}}> Add
-                      Content</Typography>
+                      <PlaylistAddIcon sx={{ fontSize: "1.1rem" }} />
+                      <Typography sx={{ ml: "4px" }}> Add Content</Typography>
                     </Box>
 
                     <Box
                       color="primary"
                       onClick={() => handleSaveModule(index)}
                       // nClick={handleSaveModule}
-                      sx={{ position: "relative",
+                      sx={{
+                        position: "relative",
                         display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    color:  "#0075FF"
-                       }} // Prevents movement
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        color: "#0075FF",
+                      }} // Prevents movement
                     >
-                      <SaveIcon sx={{ fontSize: "1.1rem" }} /> <Typography sx={{ml:"4px"}}>Save</Typography>
+                      <SaveIcon sx={{ fontSize: "1.1rem" }} />{" "}
+                      <Typography sx={{ ml: "4px" }}>Save</Typography>
                     </Box>
                   </Box>
                 </Box>
               </AccordionSummary>
 
               <AccordionDetails>
+                {/* <form onSubmit={handleSubmit}> */}
                 <TextField
                   inputProps={{ className: "textField" }}
                   fullWidth
@@ -284,9 +318,13 @@ function AddContent({
                   // placeholder="Hello"
                   type="TestName"
                   defaultValue={moduleItem.content}
-                  // value={addTest?.testName}
+                  value={addModulesText}
                   onChange={(e) => handleInputOnAddContent(e.target.value)}
+                  required
+                  error={error}
+                  helperText={error ? "Module name is required" : ""}
                 />
+                {/* </form> */}
               </AccordionDetails>
 
               <AccordionActions style={{ flexFlow: "column" }}>
@@ -396,7 +434,7 @@ function AddContent({
                       vertical: "bottom",
                       horizontal: "left",
                     }}
-                    sx={{mt:1}}
+                    sx={{ mt: 1 }}
                   >
                     <Box>
                       <RightBox
