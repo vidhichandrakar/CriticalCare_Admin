@@ -17,7 +17,7 @@ import AddContent from "./AddContent/AddContent";
 const CreateCourses = ({ handleHeaderLabels }) => {
   const [trackerPage, setTackerPage] = useState(0);
   const [basicInfo, setBasicInfo] = useState({});
-  const [courseIdForContent , setCourseIdForContent] = useState({});
+  const [courseIdForContent, setCourseIdForContent] = useState({});
   const [editPrice, setEditPrice] = useState([
     {
       duration: "20",
@@ -50,6 +50,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   let location = useLocation();
   const courseId = location.state?.id;
   const navigate = useNavigate();
+  const [typeOfCall, setTypeOfCall] = useState("");
 
   useEffect(() => {
     if (courseId) {
@@ -77,30 +78,14 @@ const CreateCourses = ({ handleHeaderLabels }) => {
     if (type === "basicInfo") {
       setBasicInfo(value);
     } else if (type === "editPrice") {
-      // console.log("woejb", value);
-      setEditPrice([value]);
-      setValidity([value]);
       handleCreateCourse(value);
     }
-    // else if (type === "addContent") {
-    //   setAttachment(value);
-    // }
   };
 
   const handleTrackerPage = (page, value) => {
-    // console.log("tracker", page, value);
     if (page === 2) {
       setMulitiDuration(value);
-      // setTackerPage(3);
-    }
-    // else if (page === 3) {
-    //   if (courseData?.contents?.length) {
-    //     handleCreateCourse(attachments);
-    //   } else {
-    //     handleCreateCourse(attachments);
-    //   }
-    // }
-    else {
+    } else {
       setTackerPage(page);
       handleHeaderLabels(basicInfo.Name);
     }
@@ -125,12 +110,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         end_date: "2024-05-30",
         is_publish: "not published",
       };
-      // const courseAttachments = attachments;  //commented to check the new work flow
-      // console.log("mulitiDuration==>", mulitiDuration, "kkkkkkk=>", validity);
-
-      const courseDurations = validity; //need to work on the multiple selection part
-      // mulitiDuration === undefined ? validity : mulitiDuration;
-
+      const courseDurations = value; //need to work on the multiple selection part
       payload = {
         courseDetails: courseDetails,
         courseDurations: courseDurations,
@@ -148,7 +128,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         },
         // courseAttachments: courseAttachments,
       };
-      // console.log("patload", payload);
+      // console.log("payload", payload);
     } catch (error) {
       console.log(error);
     }
@@ -167,9 +147,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           toast.success("Course added successfully!", {
             autoClose: 500,
           });
-          // navigate("/admin/YourCourses");
-          // console.log("hellloo",response)
-          setCourseIdForContent(response.data)
+          setCourseIdForContent(response.data);
           setTackerPage(3);
         },
         error: () => {
