@@ -88,7 +88,6 @@ const Banner = () => {
   const handleTitleInput = (event) => {
     setImageTitle(event.target.value);
     //console.log(event.target.value, "kjgvnhbmvg");
-    console.log(imageTitle);
   };
 
   const handleDescriptionInput = (event) => {
@@ -175,14 +174,14 @@ const Banner = () => {
       const payload = {
         "webpage_id": bannerSelectedPage,
         "web_banner_title": imageTitle,
-        "web_banner_type": bannerType,
-        "web_banner_position": bannerPosition,
+        "web_banner_type_id": bannerType,
+        "web_banner_position_id": bannerPosition,
         "web_banner_links": bannerArray,
         //"web_banner_links": storedBasicInfo?.thumbnailPath,
         "active_status": activeStatus, // Send activeStatus with payload
 
       };
-      console.log("banner_url : ", storedBasicInfo)
+      console.log("banner array : ", bannerArray)
 
       console.log("Payload response : ", payload)
       uploadBanner({
