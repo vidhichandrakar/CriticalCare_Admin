@@ -985,7 +985,7 @@ const EditPrice = ({
       {commonButton({
         handleTrackerPage: () => handlePricePage(),
         className: "coursesButton",
-        label: "Save & Next",
+        label: courseData?.durations?.length?"Save & Exit":"Save & Next",
       })}
       <ToastContainer />
     </div>

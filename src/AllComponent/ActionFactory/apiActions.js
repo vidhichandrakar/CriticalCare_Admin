@@ -3,7 +3,7 @@ import { APIS } from "./apiConstants";
 
 export const getAllUsersApi = ({ callBack, searchString, error }) => {
   let url = new URL(`${APIS.getAllUsers}`);
-  if(searchString){
+  if (searchString) {
     url.searchParams.set("user_name", searchString);
   }
   axios
@@ -16,15 +16,14 @@ export const getAllUsersApi = ({ callBack, searchString, error }) => {
     });
 };
 
-export const getAllCourses = ({callBack, searchString, error }) => {
+export const getAllCourses = ({ callBack, searchString, error }) => {
   let url = new URL(`${APIS.allCourses}`);
-  if(searchString){
+  if (searchString) {
     url.searchParams.set("course_name", searchString);
-  }  
+  }
   axios
     .get(url)
     .then((response) => {
-
       callBack(response);
     })
     .catch((errorMessage) => {
@@ -32,16 +31,22 @@ export const getAllCourses = ({callBack, searchString, error }) => {
     });
 };
 
-export const getAllCoursesFilter = ({is_publish, duration_type_id, category_id, callBack, error }) => {
+export const getAllCoursesFilter = ({
+  is_publish,
+  duration_type_id,
+  category_id,
+  callBack,
+  error,
+}) => {
   let url = new URL(`${APIS.allCoursesFilter}`);
-  console.log(is_publish, duration_type_id ,category_id, "lineno31 ApiAction")
-  if(is_publish){
+  console.log(is_publish, duration_type_id, category_id, "lineno31 ApiAction");
+  if (is_publish) {
     url.searchParams.set("is_publish", is_publish);
   }
-  if(duration_type_id){
+  if (duration_type_id) {
     url.searchParams.set("duration_type_id", duration_type_id);
   }
-  if(category_id){
+  if (category_id) {
     url.searchParams.set("category_id", category_id);
   }
   axios
@@ -72,7 +77,7 @@ export const banner = ({ callBack, error }) => {
       error(errorMessage);
     });
 };
-export const  bannerTypeapi= ({ callBack, error }) => {
+export const bannerTypeapi = ({ callBack, error }) => {
   const url = APIS.banner + "/webbannertype";
   axios
     .get(url)
@@ -106,7 +111,7 @@ export const bannerPage = ({ callBack, error }) => {
     });
 };
 
-export const uploadBanner = ({payload, callBack, error }) => {
+export const uploadBanner = ({ payload, callBack, error }) => {
   const url = APIS.banner;
   // Log the payload to check if active_status is included
   // console.log("Payload being sent to upload banner:", payload);
@@ -116,12 +121,19 @@ export const uploadBanner = ({payload, callBack, error }) => {
       callBack(response);
     })
     .catch((errorMessage) => {
-      console.error("Error uploading banner:", errorMessage.response?.data || errorMessage.message);
-      error(errorMessage.response?.data || { message: "An unexpected error occurred." });
+      console.error(
+        "Error uploading banner:",
+        errorMessage.response?.data || errorMessage.message
+      );
+      error(
+        errorMessage.response?.data || {
+          message: "An unexpected error occurred.",
+        }
+      );
       //error(errorMessage);
     });
 };
-export const addwebinar = ({payload, callBack, error }) => {
+export const addwebinar = ({ payload, callBack, error }) => {
   const url = APIS.addwebinar;
   axios
     .post(url, payload)
@@ -389,26 +401,26 @@ export const getTestType = ({ callBack }) => {
   });
 };
 
-export const createNumberOfQuestions=({payload, callBack})=>{
+export const createNumberOfQuestions = ({ payload, callBack }) => {
   const url = APIS.testQuestions;
-  axios.post(url,payload).then((response)=>{
+  axios.post(url, payload).then((response) => {
     callBack(response);
-  })
-}
+  });
+};
 
-export const editQuestions=({payload, callBack, questionId})=>{
+export const editQuestions = ({ payload, callBack, questionId }) => {
   const url = APIS.editQuestions + "/" + questionId;
-  axios.put(url,payload).then((response)=>{
+  axios.put(url, payload).then((response) => {
     callBack(response);
-  })
-}
+  });
+};
 
-export const addContentOnCreateCourse=({payload, callBack})=>{
+export const addContentOnCreateCourse = ({ payload, callBack }) => {
   const url = APIS.module;
-  axios.post(url,payload).then((response)=>{
+  axios.post(url, payload).then((response) => {
     callBack(response);
-  })
-}
+  });
+};
 export const getBlog = ({ payload, callBack, error }) => {
   const url = APIS.blog;
   axios
@@ -419,4 +431,11 @@ export const getBlog = ({ payload, callBack, error }) => {
     .catch((errorMessage) => {
       error(errorMessage);
     });
-};  
+};
+
+export const getCourseContentById = ({ callBack, courseId }) => {
+  const url = APIS.getCourseContent + "/" + courseId;
+  axios.get(url).then((response) => {
+    callBack(response);
+  });
+};

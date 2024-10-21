@@ -6,6 +6,7 @@ import EditPrice from "./EditPrice";
 import {
   createCourse,
   getCourseById,
+  getCourseContentById,
   publishOrEditCourse,
 } from "../ActionFactory/apiActions";
 import { ToastContainer, toast } from "react-toastify";
@@ -50,7 +51,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   let location = useLocation();
   const courseId = location.state?.id;
   const navigate = useNavigate();
-  const [typeOfCall, setTypeOfCall] = useState("");
 
   useEffect(() => {
     if (courseId) {
@@ -126,9 +126,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           type: String,
           required: true,
         },
-        // courseAttachments: courseAttachments,
       };
-      // console.log("payload", payload);
     } catch (error) {
       console.log(error);
     }
@@ -137,7 +135,11 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         courseId: courseId,
         payload,
         callBack: (response) => {
-          navigate("/admin/YourCourses");
+          if (courseData?.course_id) {
+            navigate("/admin/YourCourses");
+          } else {
+            setTackerPage(3);
+          }
         },
       });
     } else {
@@ -151,7 +153,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           setTackerPage(3);
         },
         error: () => {
-          console.log("fds");
+          console.log("error==>");
         },
       });
     }
@@ -177,11 +179,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           courseId={courseId}
         />
       ) : trackerPage === 3 ? (
-        // <AddContent
-        //   handleTrackerPage={handleTrackerPage}
-        //   courseData={courseData}
-        //   handleInputChange={handleInputChange}          //commented to add new one
-        // />
         <AddContent
           handleTrackerPage={handleTrackerPage}
           courseData={courseData}
