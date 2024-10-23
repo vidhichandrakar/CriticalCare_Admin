@@ -548,7 +548,7 @@ const Banner = () => {
                     <Typography
                       sx={{ mt: 2, fontSize: "0.7rem", color: "grey" }}
                     >
-                      *We recommend uploading an image in 942*510 pixels
+                      *We recommend uploading an image in 848*160 pixels
                       resolution
                     </Typography>
                     {/* Display uploaded image previews */}

@@ -27,6 +27,7 @@ const VisuallyHiddenInput = styled("input")({
   left: 0,
   whiteSpace: "nowrap",
   width: 1,
+  arrow: false
 });
 const BannerCard = ({ Data, bannerAPI, handleClickEdit }) => {
   const [storedFilePath, setStoredFilePath] = useState([]);
