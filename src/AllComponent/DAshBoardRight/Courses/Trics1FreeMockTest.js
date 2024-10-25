@@ -73,6 +73,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
           courseId,
           callBack: (response) => {
             const userCallBack = response?.data[0];
+            console.log("userCallBack---->",userCallBack)
             setCourseData(userCallBack);
           },
         });
