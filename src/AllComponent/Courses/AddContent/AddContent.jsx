@@ -41,6 +41,7 @@ function AddContent({
   const [expanded, setExpanded] = useState();
   const [error, setError] = useState(false);
   const [getAddedContentData, setGetAddedContentData] = useState({});
+  const [uploadPopupOpen, setUploadPopupOpen] = useState(false)
   const navigate = useNavigate();
   const [payload, setPayload] = useState({
     courseModuleDetails: {
@@ -84,11 +85,14 @@ function AddContent({
   }, []);
   const handleAddContent = (event, idx) => {
     event.stopPropagation();
-    if (idx === expanded) {
-      setExpanded(null);
-    } else {
+    // if (idx === expanded) {
+    //   setExpanded(null);
+    // } else {
+    //   setExpanded(idx);
+    // }
+    if (idx !== expanded) {
       setExpanded(idx);
-    }
+    } 
     setAnchorEl(event.currentTarget);
     setClickedModuleIdx(idx);
   };
@@ -243,6 +247,16 @@ function AddContent({
       callAttachFilesOneByOne(moduleDescription);
     }
   };
+
+  const handleOpenNCloseAccordian=(e, index)=>{
+    console.log("eeeeee=>", e, "indexx===>",index)
+    if (index === expanded) {
+      setExpanded(null);
+    } else {
+      setExpanded(index);
+      setUploadPopupOpen(true);
+    }
+  }
   return (
     <>
       <div style={{ height: "120px" }}>
@@ -262,7 +276,10 @@ function AddContent({
                       transform:
                         expanded === index ? "rotate(180deg)" : "rotate(0deg)",
                       transition: "transform 0.3s ease",
+                      ml:2,
+                     
                     }}
+                    onClick={(e)=>handleOpenNCloseAccordian(e, index)}
                   />
                 }
               >
@@ -447,6 +464,7 @@ function AddContent({
                         courseData={courseData}
                         handleAddUrl={handleAddUrl}
                         clickedModuleIdx={clickedModuleIdx}
+                        setUploadPopupOpen={setUploadPopupOpen}
                       />
                     </Box>
                   </Popover>

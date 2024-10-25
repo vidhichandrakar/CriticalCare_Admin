@@ -78,7 +78,11 @@ const CreateCourses = ({ handleHeaderLabels }) => {
     if (type === "basicInfo") {
       setBasicInfo(value);
     } else if (type === "editPrice") {
+      console.log("Value=----->,",value)
       handleCreateCourse(value);
+    }
+    else if(type==="editPriceLifeTime" || type==="editPriceWithExpiryDate" ){
+      handleCreateCourse([value]);
     }
   };
 
@@ -97,7 +101,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       const courseDetails = {
         course_name: basicInfo?.Name,
         description: basicInfo?.Description,
-        Course_batchdetails: "passing as static need to change it", //passing as static will imlement once it willl present
+        course_batchdetails: "passing as static need to change it", //passing as static will imlement once it willl present
         course_detail: "hello details", //same as above
         course_FAQ: "This is FAQ", //same as above
         about_course: basicInfo?.Description,
@@ -114,18 +118,18 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       payload = {
         courseDetails: courseDetails,
         courseDurations: courseDurations,
-        Course_BatchDetails: {
-          type: String,
-          required: true,
-        },
-        course_detail: {
-          type: String, // hard coded coz of backend ppl asked to put hardcoded value
-          required: true,
-        },
-        course_FAQ: {
-          type: String,
-          required: true,
-        },
+        // course_batchDetails: {
+        //   type: String,
+        //   required: true,
+        // },
+        // course_detail: {
+        //   type: String, // hard coded coz of backend ppl asked to put hardcoded value
+        //   required: true,
+        // },
+        // course_FAQ: {
+        //   type: String,
+        //   required: true,
+        // },
       };
     } catch (error) {
       console.log(error);

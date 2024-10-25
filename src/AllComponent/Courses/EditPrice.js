@@ -78,8 +78,8 @@ const EditPrice = ({
     duration_type_id: "",
     price: "",
     offer_price: "",
-    // startDate: "",         //commented coz not sure it is used in single or not
-    // endDate: "",
+    startDate: "",         //commented coz not sure it is used in single or not
+    endDate: "",
     duration_id: "",
     duration_type_name: "",
     year: "",
@@ -158,10 +158,10 @@ const EditPrice = ({
       storedValues.duration = courseData?.durations[0]?.duration;
       storedValues.price = courseData?.durations[0]?.price;
       storedValues.offer_price = courseData?.durations[0]?.offer_price;
-      if (courseId) {
-        storedValues.course_duration_id =
-          courseData?.durations[0]?.course_duration_id;
-      }
+      // if (courseId) {
+      //   storedValues.course_duration_id =
+      //     courseData?.durations[0]?.course_duration_id;
+      // }
       storedValues.duration_type_id =
         courseData?.durations[0]?.duration_type_id;
       storedValues.duration_type_name =
@@ -186,10 +186,10 @@ const EditPrice = ({
         storedValues.offer_price = item.offer_price;
         storedValues.price = item.price;
         storedValues.course_duration_id = item.course_duration_id;
-        if (item?.durations?.length) {
-          storedValues.course_duration_id =
-            item?.durations[0]?.course_duration_id;
-        }
+        // if (item?.durations?.length) {
+        //   storedValues.course_duration_id =
+        //     item?.durations[0]?.course_duration_id;
+        // }
         multiArr.push(storedValues);
         let getDurationType = durationType.filter(
           (data) => data?.duration_id === item?.duration_id
@@ -204,8 +204,8 @@ const EditPrice = ({
       let storedValues = Object.assign({}, lifetimeValidation);
       storedValues.price = courseData?.durations[0]?.price;
       storedValues.offer_price = courseData?.durations[0]?.offer_price;
-      storedValues.course_duration_id =
-        courseData?.durations[0]?.course_duration_id;
+      // storedValues.course_duration_id =
+      //   courseData?.durations[0]?.course_duration_id;
       storedValues.duration_type_id =
         courseData?.durations[0]?.duration_type_id;
       storedValues.duration_type_name = selectedDuration?.duration_type_name;
@@ -218,8 +218,8 @@ const EditPrice = ({
       storedValues.price = courseData?.durations[0]?.price;
       storedValues.offer_price = courseData?.durations[0]?.offer_price;
       storedValues.startDate = courseData?.durations[0]?.startDate;
-      storedValues.course_duration_id =
-        courseData?.durations[0]?.course_duration_id;
+      // storedValues.course_duration_id =
+      //   courseData?.durations[0]?.course_duration_id;
       storedValues.duration_type_id =
         courseData?.durations[0]?.duration_type_id;
       storedValues.duration_type_name = selectedDuration?.duration_type_name;
@@ -302,6 +302,7 @@ const EditPrice = ({
         if (parseInt(storedValues.price) > parseInt(storedValues.offer_price)) {
           let copyArr = [];
           copyArr.push(storedValues);
+          console.log("copyArr==>",copyArr)
           handleInputChange("editPrice", copyArr);
           handleTrackerPage(2);
         } else {
@@ -320,7 +321,8 @@ const EditPrice = ({
         if (parseInt(storedValues.price) > parseInt(storedValues.offer_price)) {
           let copyArr = [];
           copyArr.push(storedValues);
-          handleInputChange("editPrice", storedValues);
+          console.log("copyArr=>",copyArr[0])
+          handleInputChange("editPriceLifeTime", copyArr[0]);
           handleTrackerPage(2);
         } else {
           toast.error("Offer Price Must Be Less Then Regular Price", {
@@ -343,7 +345,7 @@ const EditPrice = ({
         if (parseInt(storedValues.price) > parseInt(storedValues.offer_price)) {
           let copyArr = [];
           copyArr.push(storedValues);
-          handleInputChange("editPrice", storedValues);
+          handleInputChange("editPriceWithExpiryDate", storedValues);
           handleTrackerPage(2);
         } else {
           toast.error("Offer Price Must Be Less Then Regular Price", {
@@ -374,30 +376,30 @@ const EditPrice = ({
       setSelectedDurationValue(value?.duration_type_name);
       storedValues.duration_type_name = value?.duration_type_name;
       storedValues.duration_type_id = value?.duration_type_id;
-      if (courseData?.durations?.length) {
-        storedValues.course_duration_id =
-          courseData?.durations[0]?.course_duration_id;
-      }
+      // if (courseData?.durations?.length) {
+      //   storedValues.course_duration_id =
+      //     courseData?.durations[0]?.course_duration_id;
+      // }
       setSingleValidity(storedValues);
     } else if (value.duration_type_name === "Lifetime Validity") {
       let storedValues = Object.assign({}, lifetimeValidation);
       setSelectedDurationValue(value?.duration_type_name);
       storedValues.duration_type_name = value?.duration_type_name;
       storedValues.duration_type_id = value?.duration_type_id;
-      if (courseData?.durations?.length) {
-        storedValues.course_duration_id =
-          courseData?.durations[0]?.course_duration_id;
-      }
+      // if (courseData?.durations?.length) {
+      //   storedValues.course_duration_id =
+      //     courseData?.durations[0]?.course_duration_id;
+      // }
       setLifetimeValidation(storedValues);
     } else if (value.duration_type_name === "Course Expiry Date") {
       let storedValues = Object.assign({}, expiryDate);
       setSelectedDurationValue(value?.duration_type_name);
       storedValues.duration_type_name = value?.duration_type_name;
       storedValues.duration_type_id = value?.duration_type_id;
-      if (courseData?.durations?.length) {
-        storedValues.course_duration_id =
-          courseData?.durations[0]?.course_duration_id;
-      }
+      // if (courseData?.durations?.length) {
+      //   storedValues.course_duration_id =
+      //     courseData?.durations[0]?.course_duration_id;
+      // }
       setExpiryDate(storedValues);
     }
   };
