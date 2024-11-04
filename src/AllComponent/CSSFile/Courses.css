@@ -23,17 +23,17 @@
   /* height: 76px; */
   display: flex;
   align-items: center;
-  /* width: 99%; */
+  width: 98%;
   justify-content: right;
   padding: 7px 12px 7px 0px;
-  background-color: #fff;
+  background-color: #f4f9fd;
   /* margin-left: 1%; */
 }
 
 .subHeaderMycourses{
   display: flex;
   flex-direction: row;
-  width: 79vw;
+  width: 76vw;
   padding: 1%;
   padding-bottom: 0;
   margin-top: 1%;

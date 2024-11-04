@@ -43,7 +43,7 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="OurOfferBox ">
-            <h1 className="TextHeading">Our Offerings</h1>
+            <h1 className="TextHeading" style={{paddingTop: "10px"}}>Our Offerings</h1>
             <div className="Offer-main-cards">
               <OfferCard Data={OfferData} />
             </div>
