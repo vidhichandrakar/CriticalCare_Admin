@@ -350,6 +350,17 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               </List>
             </Collapse>
           </Link>
+          <Link to="/admin/TestPortal">
+            <Box
+              id="hoverrr"
+              className={highlight === "TestPortal" ? "hoverrr2" : ""}
+              sx={{ mt: -2 }}
+              onClick={() => handleHighlight("TestPortal")}
+            >
+              <AssignmentIcon className="icon" />
+              <Typography>Test Portal</Typography>
+            </Box>
+          </Link>
         </div>
         {hideCatConfig && (
           <Configuration
@@ -359,6 +370,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
           />
         )}
       </div>
+      
     </aside>
   );
 }

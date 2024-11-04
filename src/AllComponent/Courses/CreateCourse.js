@@ -6,6 +6,7 @@ import EditPrice from "./EditPrice";
 import {
   createCourse,
   getCourseById,
+  getCourseContentById,
   publishOrEditCourse,
 } from "../ActionFactory/apiActions";
 import { ToastContainer, toast } from "react-toastify";
@@ -50,7 +51,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   let location = useLocation();
   const courseId = location.state?.id;
   const navigate = useNavigate();
-  const [typeOfCall, setTypeOfCall] = useState("");
 
   useEffect(() => {
     if (courseId) {
@@ -78,7 +78,11 @@ const CreateCourses = ({ handleHeaderLabels }) => {
     if (type === "basicInfo") {
       setBasicInfo(value);
     } else if (type === "editPrice") {
+      console.log("Value=----->,",value)
       handleCreateCourse(value);
+    }
+    else if(type==="editPriceLifeTime" || type==="editPriceWithExpiryDate" ){
+      handleCreateCourse([value]);
     }
   };
 
@@ -97,7 +101,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       const courseDetails = {
         course_name: basicInfo?.Name,
         description: basicInfo?.Description,
-        Course_batchdetails: "passing as static need to change it", //passing as static will imlement once it willl present
+        course_batchdetails: "passing as static need to change it", //passing as static will imlement once it willl present
         course_detail: "hello details", //same as above
         course_FAQ: "This is FAQ", //same as above
         about_course: basicInfo?.Description,
@@ -114,21 +118,19 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       payload = {
         courseDetails: courseDetails,
         courseDurations: courseDurations,
-        Course_BatchDetails: {
-          type: String,
-          required: true,
-        },
-        course_detail: {
-          type: String, // hard coded coz of backend ppl asked to put hardcoded value
-          required: true,
-        },
-        course_FAQ: {
-          type: String,
-          required: true,
-        },
-        // courseAttachments: courseAttachments,
+        // course_batchDetails: {
+        //   type: String,
+        //   required: true,
+        // },
+        // course_detail: {
+        //   type: String, // hard coded coz of backend ppl asked to put hardcoded value
+        //   required: true,
+        // },
+        // course_FAQ: {
+        //   type: String,
+        //   required: true,
+        // },
       };
-      // console.log("payload", payload);
     } catch (error) {
       console.log(error);
     }
@@ -137,7 +139,11 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         courseId: courseId,
         payload,
         callBack: (response) => {
-          navigate("/admin/YourCourses");
+          if (courseData?.course_id) {
+            navigate("/admin/YourCourses");
+          } else {
+            setTackerPage(3);
+          }
         },
       });
     } else {
@@ -151,7 +157,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           setTackerPage(3);
         },
         error: () => {
-          console.log("fds");
+          console.log("error==>");
         },
       });
     }
@@ -177,11 +183,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
           courseId={courseId}
         />
       ) : trackerPage === 3 ? (
-        // <AddContent
-        //   handleTrackerPage={handleTrackerPage}
-        //   courseData={courseData}
-        //   handleInputChange={handleInputChange}          //commented to add new one
-        // />
         <AddContent
           handleTrackerPage={handleTrackerPage}
           courseData={courseData}

@@ -22,12 +22,14 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import SaveIcon from "@mui/icons-material/Save";
 import { useNavigate } from "react-router-dom";
+import { getCourseContentById } from "../../ActionFactory/apiActions";
 
 function AddContent({
   handleInputChange,
   handleTrackerPage,
   courseData,
   courseIdForContent,
+  // getAddedContentData,
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const [contentType, setContentType] = useState([]);
@@ -38,6 +40,8 @@ function AddContent({
   const [addModulesText, setAddModulesText] = useState("");
   const [expanded, setExpanded] = useState();
   const [error, setError] = useState(false);
+  const [getAddedContentData, setGetAddedContentData] = useState({});
+  const [uploadPopupOpen, setUploadPopupOpen] = useState(false)
   const navigate = useNavigate();
   const [payload, setPayload] = useState({
     courseModuleDetails: {
@@ -55,8 +59,23 @@ function AddContent({
   ]);
 
   useEffect(() => {
-    if (courseData) {
-      setVideoDesc(courseData.contents);
+    if (courseData?.course_id) {
+      getCourseContentById({
+        courseId: courseData?.course_id,
+        callBack: (response) => {
+          let arr = [];
+          let arr2 = [];
+          response?.data?.map((item, index) => {
+            let storedValues = Object.assign({}, item);
+            storedValues.moduleName = item.module_name;
+            item.courseContents.map((content) => {
+              storedValues.item = [content];
+            });
+            arr.push(storedValues);
+          });
+          setModuleDescription(arr);
+        },
+      });
     }
     getContentType({
       callBack: (response) => {
@@ -66,11 +85,14 @@ function AddContent({
   }, []);
   const handleAddContent = (event, idx) => {
     event.stopPropagation();
-    if (idx === expanded) {
-      setExpanded(null);
-    } else {
+    // if (idx === expanded) {
+    //   setExpanded(null);
+    // } else {
+    //   setExpanded(idx);
+    // }
+    if (idx !== expanded) {
       setExpanded(idx);
-    }
+    } 
     setAnchorEl(event.currentTarget);
     setClickedModuleIdx(idx);
   };
@@ -186,18 +208,6 @@ function AddContent({
         callBack: (response) => {},
       });
     }
-    // const payload = {
-    //   courseModuleDetails: {
-    //     module_name: addModulesText,
-    //     course_id: courseIdForContent.course_id,
-    //   },
-    //   courseAttachments: videoDesc,
-    // };
-
-    // addContentOnCreateCourse({
-    //   payload: payload,
-    //   callBack: (response) => {},
-    // });
   };
 
   const handleExit = () => {
@@ -237,6 +247,16 @@ function AddContent({
       callAttachFilesOneByOne(moduleDescription);
     }
   };
+
+  const handleOpenNCloseAccordian=(e, index)=>{
+    console.log("eeeeee=>", e, "indexx===>",index)
+    if (index === expanded) {
+      setExpanded(null);
+    } else {
+      setExpanded(index);
+      setUploadPopupOpen(true);
+    }
+  }
   return (
     <>
       <div style={{ height: "120px" }}>
@@ -256,7 +276,10 @@ function AddContent({
                       transform:
                         expanded === index ? "rotate(180deg)" : "rotate(0deg)",
                       transition: "transform 0.3s ease",
+                      ml:2,
+                     
                     }}
+                    onClick={(e)=>handleOpenNCloseAccordian(e, index)}
                   />
                 }
               >
@@ -309,13 +332,11 @@ function AddContent({
               </AccordionSummary>
 
               <AccordionDetails>
-                {/* <form onSubmit={handleSubmit}> */}
                 <TextField
                   inputProps={{ className: "textField" }}
                   fullWidth
                   size="small"
                   id="fullWidth"
-                  // placeholder="Hello"
                   type="TestName"
                   defaultValue={moduleItem.content}
                   value={addModulesText}
@@ -324,7 +345,6 @@ function AddContent({
                   error={error}
                   helperText={error ? "Module name is required" : ""}
                 />
-                {/* </form> */}
               </AccordionDetails>
 
               <AccordionActions style={{ flexFlow: "column" }}>
@@ -444,6 +464,7 @@ function AddContent({
                         courseData={courseData}
                         handleAddUrl={handleAddUrl}
                         clickedModuleIdx={clickedModuleIdx}
+                        setUploadPopupOpen={setUploadPopupOpen}
                       />
                     </Box>
                   </Popover>
