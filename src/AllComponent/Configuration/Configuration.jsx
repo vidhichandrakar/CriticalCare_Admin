@@ -17,6 +17,7 @@ import {
   createCategory,
   createSubCategory,
   getCategory,
+  updateCategory,
   updateDuration,
   updateMemberDetails,
 } from "../ActionFactory/apiActions";
@@ -40,7 +41,7 @@ const MenuProps = {
   },
 };
 
-function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
+function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue, category_id=0 }) {
   const theme = useTheme();
   const [updatedCat, setUpdatedCat] = useState({ category_name: "" });
   const [updatedDuration, setUpdatedDuration] = useState({ duration_name: "" });
@@ -74,6 +75,19 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
         callBack: (response) => {
           const userCallBack = response?.data;
           setCat(userCallBack);
+        },
+        error: (error) => {
+          toast.error(error.message);
+        },
+      });
+    }else if (selectedConfigValue === "Category" &&  category_id != 0) {
+      updateCategory({
+        category_id,
+        callBack: (response) => {
+          let storedValues = Object.assign({}, updatedCat);
+      storedValues.category_name = response?.data?.category_name
+          setUpdatedCat(storedValues);
+          console.log(storedValues,"storedValues")
         },
         error: (error) => {
           toast.error(error.message);
@@ -137,7 +151,9 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
         payload,
         callBack: (response) => {
           toast.success("Category created successfully!");
+          setUpdatedCat({ category_name: "" })
           handleCloseCat();
+
         },
       });
     }
@@ -156,6 +172,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
         payload,
         callBack: (response) => {
           toast.success("Successful duration created");
+          setUpdatedCat({ category_name: "" })
           handleCloseCat();
         },
       });
@@ -179,6 +196,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
         payload,
         callBack: (response) => {
           toast.success("Member Successful created");
+          setUpdatedCat({ category_name: "" })
           handleCloseCat();
         },
       });
@@ -201,6 +219,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
         payload,
         callBack: (response) => {
           //  console.log("line150 wale haw hum")
+          setUpdatedCat({ category_name: "" })
           handleCloseCat();
           toast.success("Category created successfully!");
         },
@@ -224,6 +243,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
   addwebinar({
     payload,
     callBack: (response) => {
+      setUpdatedCat({ category_name: "" })
       handleCloseCat();
       toast.success("Webinar created successfully!");
     },
@@ -237,6 +257,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
 
   return (
     <React.Fragment>
+      {console.log(category_id, "category_id12")}
       <Dialog
         open={hideCatConfig}
         onClose={handleCloseCat}
@@ -247,6 +268,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
             const formData = new FormData(event.currentTarget);
             const formJson = Object.fromEntries(formData.entries());
             const email = formJson.email;
+            setUpdatedCat({ category_name: "" })
             handleCloseCat();
           },
         }}
@@ -257,7 +279,9 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
           <Typography style={{ width: "100%", fontSize: "1.3rem" }}>
             Add {selectedConfigValue}
           </Typography>{" "}
-          <CloseIcon className="closeHover" onClick={() => handleCloseCat()} />
+          <CloseIcon className="closeHover" onClick={() =>{
+            setUpdatedCat({ category_name: "" })
+            handleCloseCat()}} />
         </DialogTitle>
 
         <DialogContent className="confiDivider">
@@ -283,6 +307,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue }) {
                   (Option = {
                     handleInput: handleInput,
                     type: "description",
+                    value: updatedCat.category_name
                   })
                 )}
               </DialogContent>
