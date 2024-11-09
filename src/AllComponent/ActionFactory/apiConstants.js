@@ -28,4 +28,5 @@ export const APIS = {
   getBanner: REACT_APP_API + "/webbanner/webpage",
   addwebinar: REACT_APP_API + "/blog/freewebinar",
   getCourseContent: REACT_APP_API + "/course/modulebycourse",
+  addBlog: REACT_APP_API + "/blog/bloglist",
 };
