@@ -41,7 +41,7 @@ function AddContent({
   const [expanded, setExpanded] = useState();
   const [error, setError] = useState(false);
   const [getAddedContentData, setGetAddedContentData] = useState({});
-  const [uploadPopupOpen, setUploadPopupOpen] = useState(false)
+  const [uploadPopupOpen, setUploadPopupOpen] = useState(false);
   const navigate = useNavigate();
   const [payload, setPayload] = useState({
     courseModuleDetails: {
@@ -64,13 +64,11 @@ function AddContent({
         courseId: courseData?.course_id,
         callBack: (response) => {
           let arr = [];
-          let arr2 = [];
-          response?.data?.map((item, index) => {
-            let storedValues = Object.assign({}, item);
-            storedValues.moduleName = item.module_name;
-            item.courseContents.map((content) => {
-              storedValues.item = [content];
-            });
+          response?.data?.forEach((item) => {
+            let storedValues = {
+              moduleName: item.module_name,
+              item: item.courseContents, // This will be an array of course contents
+            };
             arr.push(storedValues);
           });
           setModuleDescription(arr);
@@ -84,6 +82,7 @@ function AddContent({
     });
   }, []);
   const handleAddContent = (event, idx) => {
+    console.log("event---->",event,"idxx--->",idx)
     event.stopPropagation();
     // if (idx === expanded) {
     //   setExpanded(null);
@@ -92,7 +91,7 @@ function AddContent({
     // }
     if (idx !== expanded) {
       setExpanded(idx);
-    } 
+    }
     setAnchorEl(event.currentTarget);
     setClickedModuleIdx(idx);
   };
@@ -171,19 +170,33 @@ function AddContent({
     return value === "jpeg" || value === "png" || value === "jpg";
   };
 
-  const handleInputOnAddContent = (e) => {
+  const handleInputOnAddContent = (e, index) => {
     // e.preventDefault();
-    if (e === "") {
-      setError(true);
+    console.log("indexxx", index, moduleDescription);
+    if (moduleDescription) {
+      let storedValues = Object.assign({}, moduleDescription);
+      moduleDescription.map((item,idx)=>{
+        if(idx===index){
+          
+          item.moduleName = e;
+           console.log("index///item",idx.moduleName,"item.moduleName",item,"storedValues",storedValues)
+          setModuleDescription(storedValues);
+        }
+      })
     } else {
-      setError(false);
-      setAddModulesText(e);
+      if (e === "") {
+        setError(true);
+      } else {
+        setError(false);
+        setAddModulesText(e);
+      }
     }
+
     let arr = [];
     setAddModulesText(e);
     moduleDescription.map((item, index) => {
       let storedValues = Object.assign({}, item);
-      if (item.id === clickedModuleIdx) {
+      if (item.id === index) {
         storedValues.moduleName = e;
       }
       arr.push(storedValues);
@@ -223,7 +236,9 @@ function AddContent({
       const payload = {
         courseModuleDetails: {
           module_name: item.moduleName,
-          course_id: courseIdForContent.course_id,
+          course_id: courseData?.course_id
+            ? courseData?.course_id
+            : courseIdForContent?.course_id,
         },
         courseAttachments: item.item,
       };
@@ -234,7 +249,7 @@ function AddContent({
             navigate("/admin/YourCourses");
           },
         });
-        await sleep(100);
+        await sleep(500);
       } catch (error) {
         console.error("Error in adding content:", error);
       }
@@ -248,18 +263,19 @@ function AddContent({
     }
   };
 
-  const handleOpenNCloseAccordian=(e, index)=>{
-    console.log("eeeeee=>", e, "indexx===>",index)
+  const handleOpenNCloseAccordian = (e, index) => {
+    console.log("eeeeee=>", e, "indexx===>", index);
     if (index === expanded) {
       setExpanded(null);
     } else {
       setExpanded(index);
       setUploadPopupOpen(true);
     }
-  }
+  };
   return (
     <>
       <div style={{ height: "120px" }}>
+        {console.log("moduleDescription==>", moduleDescription)}
         {moduleDescription.map((moduleItem, index) => (
           <div style={{ margin: "20px" }}>
             <Accordion
@@ -276,10 +292,9 @@ function AddContent({
                       transform:
                         expanded === index ? "rotate(180deg)" : "rotate(0deg)",
                       transition: "transform 0.3s ease",
-                      ml:2,
-                     
+                      ml: 2,
                     }}
-                    onClick={(e)=>handleOpenNCloseAccordian(e, index)}
+                    onClick={(e) => handleOpenNCloseAccordian(e, index)}
                   />
                 }
               >
@@ -291,9 +306,9 @@ function AddContent({
                     width: "100%",
                   }}
                 >
-                  {/* Module title */}
-                  {index + 1}. Add Module
-                  {/* Button container */}
+                  {moduleItem?.moduleName
+                    ? `${index + 1}. ${moduleItem?.moduleName} `
+                    : `${index + 1}. Add Module`}
                   <Box sx={{ display: "flex", gap: 2 }}>
                     <Box
                       color="success"
@@ -314,7 +329,6 @@ function AddContent({
                     <Box
                       color="primary"
                       onClick={() => handleSaveModule(index)}
-                      // nClick={handleSaveModule}
                       sx={{
                         position: "relative",
                         display: "flex",
@@ -340,7 +354,9 @@ function AddContent({
                   type="TestName"
                   defaultValue={moduleItem.content}
                   value={addModulesText}
-                  onChange={(e) => handleInputOnAddContent(e.target.value)}
+                  onChange={(e) =>
+                    handleInputOnAddContent(e.target.value, index)
+                  }
                   required
                   error={error}
                   helperText={error ? "Module name is required" : ""}
@@ -361,8 +377,18 @@ function AddContent({
                             <source src={item.content_url} type="video/mp4" />
                             Your browser does not support the video tag.
                           </video>
-                          <Typography className="typoStyleVideo">
-                            {item?.content_name}
+                          <Typography
+                            style={{
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              maxWidth: "100%", // Adjust as needed
+                            }}
+                            className="typoStyleVideo"
+                          >
+                            {item.content_name.length > 20
+                              ? `${item.content_name.slice(0, 20)}...`
+                              : item.content_name}
                           </Typography>
                           <Box>
                             <Typography className="deleteIconContent-video">
@@ -381,8 +407,18 @@ function AddContent({
                               orientation="vertical"
                               sx={{ marginLeft: "36px" }}
                             />
-                            <Typography className="typoStyleImg">
-                              {item?.content_name}
+                            <Typography
+                              className="typoStyleImg"
+                              style={{
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                maxWidth: "100%", // Adjust as needed
+                              }}
+                            >
+                              {item.content_name.length > 20
+                                ? `${item.content_name.slice(0, 20)}...`
+                                : item.content_name}
                             </Typography>
                           </Box>
                           <Box>
@@ -395,8 +431,18 @@ function AddContent({
                         <Box className="videoZipAndDoc">
                           <Box className="zipAndDoc">
                             <FolderZipIcon className="zipFolderPrevIcon" />
-                            <Typography className="typoStyleZipAndDoc">
-                              {item.content_name}
+                            <Typography
+                              style={{
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                maxWidth: "100%", // Adjust as needed
+                              }}
+                              className="typoStyleZipAndDoc"
+                            >
+                              {item.content_name.length > 20
+                                ? `${item.content_name.slice(0, 20)}...`
+                                : item.content_name}
                             </Typography>
                           </Box>
                           <Box>
@@ -413,8 +459,19 @@ function AddContent({
                             <a href={item.url} target="_blank">
                               <NoteIcon className="zipFolderPrevIcon" />
                             </a>
-                            <Typography className="typoStyleZipAndDoc">
-                              {item.content_name}
+                            <Typography
+                              style={{
+                                whiteSpace: "nowrap",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                maxWidth: "100%", // Adjust as needed
+                              }}
+                              className="typoStyleZipAndDoc"
+                            >
+                              {/* {item.content_name} */}
+                              {item.content_name.length > 20
+                                ? `${item.content_name.slice(0, 20)}...`
+                                : item.content_name}
                             </Typography>
                           </Box>
                           <Box>
@@ -430,7 +487,6 @@ function AddContent({
                               width="350"
                               height="120"
                               src={handleUploadLink(item.url, item)}
-                              frameBorder="0"
                               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                               allowFullScreen
                               title="Embedded YouTube Video"

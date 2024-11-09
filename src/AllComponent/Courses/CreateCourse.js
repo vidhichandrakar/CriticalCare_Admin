@@ -78,10 +78,12 @@ const CreateCourses = ({ handleHeaderLabels }) => {
     if (type === "basicInfo") {
       setBasicInfo(value);
     } else if (type === "editPrice") {
-      console.log("Value=----->,",value)
+      console.log("Value=----->,", value);
       handleCreateCourse(value);
-    }
-    else if(type==="editPriceLifeTime" || type==="editPriceWithExpiryDate" ){
+    } else if (
+      type === "editPriceLifeTime" ||
+      type === "editPriceWithExpiryDate"
+    ) {
       handleCreateCourse([value]);
     }
   };
@@ -105,7 +107,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         course_detail: "hello details", //same as above
         course_FAQ: "This is FAQ", //same as above
         about_course: basicInfo?.Description,
-        team_member_id: 5, ///hardcoded neeed to check
+        team_member_id: basicInfo.team_member_id, 
         category_id: basicInfo?.Category?.category_id,
         sub_category_id: basicInfo?.subCategory?.category_id,
         thumbnail_path: basicInfo?.thumbnailPath,

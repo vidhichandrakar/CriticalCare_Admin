@@ -19,6 +19,7 @@ import { Height } from "@mui/icons-material";
 import DescriptionIcon from "@mui/icons-material/Description";
 import SortIcon from "@mui/icons-material/Sort";
 import { Box } from "@mui/material";
+import AddBlog from "../AddBlog/AddBolg";
 
 function SideBar({ openSidebarToggle, OpenSidebar }) {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -41,6 +42,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const [highlight, setHighlight] = useState(false);
   const [highlightPeople, setHighlightPeople] = useState(false);
   const [handleCollapse, setHandleCollapse] = useState();
+  const [popForBlog, setPopForBlog] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -112,6 +114,10 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   function handleCloseNew() {
     setAnchorE2(null);
   }
+  const handleClickOnBlog = () => {
+    console.log("oijoik");
+    setPopForBlog(!popForBlog);
+  };
 
   return (
     <aside
@@ -350,7 +356,20 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               </List>
             </Collapse>
           </Link>
-          <Link to="/admin/TestPortal">
+          {/* <Link> */}
+          <Link to="/admin/Categores">
+            <Box
+              id="hoverrr"
+              className={highlight === "TestPortal" ? "hoverrr2" : ""}
+              sx={{ mt: -2 }}
+              onClick={() => handleClickOnBlog()}
+            >
+              <AssignmentIcon className="icon" />
+              <Typography>Blog</Typography>
+              <Typography>Categores</Typography>
+            </Box>
+          </Link>
+          <Link to="/admin/Subcategores">
             <Box
               id="hoverrr"
               className={highlight === "TestPortal" ? "hoverrr2" : ""}
@@ -358,10 +377,24 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               onClick={() => handleHighlight("TestPortal")}
             >
               <AssignmentIcon className="icon" />
-              <Typography>Test Portal</Typography>
+              <Typography>Subcategores</Typography>
+            </Box>
+          </Link>
+          <Link to="/admin/TeamMember">
+            <Box
+              id="hoverrr"
+              className={highlight === "TestPortal" ? "hoverrr2" : ""}
+              sx={{ mt: -2 }}
+              onClick={() => handleHighlight("TestPortal")}
+            >
+              <AssignmentIcon className="icon" />
+              <Typography>Team Member</Typography>
             </Box>
           </Link>
         </div>
+        {popForBlog && (
+          <AddBlog popForBlog={popForBlog} setPopForBlog={setPopForBlog} />
+        )}
         {hideCatConfig && (
           <Configuration
             selectedConfigValue={selectedConfigValue}
@@ -370,7 +403,6 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
           />
         )}
       </div>
-      
     </aside>
   );
 }
