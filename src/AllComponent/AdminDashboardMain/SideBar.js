@@ -356,7 +356,8 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               </List>
             </Collapse>
           </Link>
-          <Link>
+          {/* <Link> */}
+          <Link to="/admin/Categores">
             <Box
               id="hoverrr"
               className={highlight === "TestPortal" ? "hoverrr2" : ""}
@@ -365,6 +366,29 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
             >
               <AssignmentIcon className="icon" />
               <Typography>Blog</Typography>
+              <Typography>Categores</Typography>
+            </Box>
+          </Link>
+          <Link to="/admin/Subcategores">
+            <Box
+              id="hoverrr"
+              className={highlight === "TestPortal" ? "hoverrr2" : ""}
+              sx={{ mt: -2 }}
+              onClick={() => handleHighlight("TestPortal")}
+            >
+              <AssignmentIcon className="icon" />
+              <Typography>Subcategores</Typography>
+            </Box>
+          </Link>
+          <Link to="/admin/TeamMember">
+            <Box
+              id="hoverrr"
+              className={highlight === "TestPortal" ? "hoverrr2" : ""}
+              sx={{ mt: -2 }}
+              onClick={() => handleHighlight("TestPortal")}
+            >
+              <AssignmentIcon className="icon" />
+              <Typography>Team Member</Typography>
             </Box>
           </Link>
         </div>

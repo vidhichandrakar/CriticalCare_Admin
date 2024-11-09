@@ -8,7 +8,7 @@ const AdditionalCard = (props) => {
       <Link to={value.href} style={{textDecoration: "none"}}>
         <div className="Addcard">
         <div className="AdditionalIcon">{value.icon}</div>
-        <h1>{value.heading}</h1>
+        <p style={{fontSize: "1.6rem"}}>{value.heading}</p>
       </div>
       </Link>
       ))}

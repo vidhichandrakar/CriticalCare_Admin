@@ -77,6 +77,18 @@ export const banner = ({ callBack, error }) => {
       error(errorMessage);
     });
 };
+export const getCoupon = ({ callBack, error }) => {
+  const url = APIS.getCoupon;
+  axios
+    .get(url)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
+
 export const bannerTypeapi = ({ callBack, error }) => {
   const url = APIS.banner + "/webbannertype";
   axios
@@ -174,6 +186,12 @@ export const deleteCourses = ({ courseId, callBack }) => {
 export const getCategory = ({ callBack }) => {
   const url = APIS.getCategory;
   axios.get(url).then((response) => {
+    callBack(response);
+  });
+};
+export const updateCategory = ({category_id, payload,  callBack }) => {
+  const url = APIS.getCategory + "/" + category_id;
+  axios.put(url, payload).then((response) => {
     callBack(response);
   });
 };
