@@ -27,6 +27,7 @@ const RightBox = ({
   courseData,
   handleAddUrl,
   clickedModuleIdx,
+  setUploadPopupOpen,
 }) => {
   const [state, setState] = useState({
     top: false,
@@ -195,6 +196,7 @@ const RightBox = ({
   };
   const handleClickOpenIC = () => {
     setIcopen(true);
+    setUploadPopupOpen(true)
   };
   const handleCloseDialogIC = () => {
     setIcopen(false);

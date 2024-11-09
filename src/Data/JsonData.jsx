@@ -232,14 +232,6 @@ export const testPortalColumns = [
     label: "Test Name",
   },
   {
-    id: "duration",
-    label: "Duration",
-  },
-  {
-    id: "createdAt",
-    label: "Date",
-  },
-  {
     id: "Actions",
     label: "Actions",
     align: "center",

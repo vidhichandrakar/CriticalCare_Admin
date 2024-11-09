@@ -12,6 +12,8 @@ import attachmentimgae from "../../../Media/Images/undraw_attached_file_re_0n9b.
 import { Box } from "@mui/material";
 import imge from "../../../Media/Images/banner2.jpg";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import { deleteBanner } from '../../ActionFactory/apiActions';
+import { ToastContainer, toast } from "react-toastify";
 
 
 const label = { inputProps: { 'aria-label': 'Switch demo' } };
@@ -34,12 +36,35 @@ const BannerCard = ({ Data, bannerAPI, handleClickEdit }) => {
   const [openPopUp, setOpenPopUp] = useState(false);
   const [openPopUpPreivous, setOpenPopUpPreivous] = useState(false);
   const [imagebyapi, setImagebyapi] = useState([{}])
+  const [imageList, setImageList] = useState([]); // Local state to manage banner list
+
 
   useEffect(() => {
     if (bannerAPI) {
-      setImagebyapi(bannerAPI);
+      setImageList(bannerAPI); // Initialize local state with bannerAPI data
     }
-  }, []);
+  }, [bannerAPI]);
+
+  const handleDelete = (web_banner_id) => {
+    try {
+      deleteBanner({
+        web_banner_id,
+        callBack: (response) => {
+          console.log("Banner deleted successfully:", response);
+          toast.success("Banner Image deleted Successfully!", {
+            autoClose: 500,
+          });
+          setImageList(imageList.filter((banner) => banner.web_banner_id !== web_banner_id)); // Update the list without the deleted banner
+          // Optionally refresh the banner list or update state to remove the deleted banner
+        },
+        error: (error) => {
+          console.error("Error deleting banner:", error);
+        },
+      });
+    } catch (error) {
+      console.error("Error in handleDelete:", error);
+    }
+  };
 
   const handleImageUpload = (value, id) => {
     let storedPath = [...storedFilePath];
@@ -68,33 +93,40 @@ const BannerCard = ({ Data, bannerAPI, handleClickEdit }) => {
     console.log("workksckdsnckjsdncjds")
   };
 
+  console.log("Image List : ", imageList)
+
   return (
     <>
       <BannerPopUp openPopUp={openPopUp} handleClickPopUp={handleClickPopUp} bannerAPI={bannerAPI} />
       {/* {Data.map((value, index) => ( */}
-      {bannerAPI?.map((value, index) => (
+      {imageList?.map((value, index) => (
         <div className="BannerMainBox">
           <div className="InsideBannerBox">
             <main className="InsideMainBox" key={index}>
               <CardActions className="BannerHead">
                 <Typography>Image</Typography>
-                <Button className="Deletebtn">
+                <Button
+                  className="Deletebtn"
+                  onClick={() => value.web_banner_id && handleDelete(value.web_banner_id)}
+                >
                   <DeleteIcon className="Deleteicon" />
                   Remove
                 </Button>
+
               </CardActions>
               <div class="container" style={{ marginTop: "2%" }}>
-                {value.web_banner_links?.length ? (<img
-                  src={value.web_banner_links[0].banner_url}
-                  alt="Avatar"
-                  className="BannerImage image"
-                  height="150"
-                  width="300"
-                />) : (
-                  <img src={imge} height="120" width="250" className="BannerImage image" />
-                )
-
-                }
+                {value.web_banner_links_desktop?.length ? (
+                  <img
+                    src={value.web_banner_links_desktop[0].banner_url} // Use the first desktop banner URL
+                    alt="Desktop Banner"
+                    className="BannerImage image"
+                    height="150"
+                    width="300"
+                  />
+                ) : (
+                  <img src={imge} height="120" width="250" className="BannerImage image" alt="Default Banner" />
+                )}
+                {/* You can similarly handle mobile banners if needed */}
                 {/* <img
                   src={value.banner_url}
                   alt="Avatar"

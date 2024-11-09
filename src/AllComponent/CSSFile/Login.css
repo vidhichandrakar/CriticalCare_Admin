@@ -63,6 +63,7 @@
 .phoneTextFieldStartIcon {
   display: flex;
   flex-direction: row;
+  align-items: center !important;
 }
 .phoneTextField {
   margin-top: 6% !important;

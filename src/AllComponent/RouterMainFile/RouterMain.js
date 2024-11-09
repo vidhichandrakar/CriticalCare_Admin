@@ -22,6 +22,9 @@ import TestFirstPage from '../DAshBoardRight/People/TestPortal/TestFirstPage';
 import TestPortalMain from '../DAshBoardRight/People/TestPortal/TestPortalMain';
 import TestSixthPage from '../DAshBoardRight/People/TestPortal/TestFirstPage';
 import AddContent from '../Courses/AddContent/AddContent';
+import Categores from '../DAshBoardRight/Categores';
+import Subcategores from '../DAshBoardRight/Subcategores';
+import TeamMember from '../DAshBoardRight/TeamMember';
 
 const RouterMain = () => {
   return (
@@ -46,6 +49,9 @@ const RouterMain = () => {
             <Route exact path="/admin/chat" element= {<Chat />}> </Route>
             <Route exact path="/admin/TestFirstPage" element= {<TestPortalMain />}> </Route> 
             <Route exact path="/admin/AddContent" element= {<AddContent />}> </Route>           
+            <Route exact path="/admin/Categores" element= {<Categores />}> </Route>           
+            <Route exact path="/admin/Subcategores" element= {<Subcategores />}> </Route>           
+            <Route exact path="/admin/TeamMember" element= {<TeamMember />}> </Route>           
     </Routes>
     </div>
   )

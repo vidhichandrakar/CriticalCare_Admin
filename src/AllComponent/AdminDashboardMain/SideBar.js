@@ -350,6 +350,39 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               </List>
             </Collapse>
           </Link>
+          <Link to="/admin/Categores">
+            <Box
+              id="hoverrr"
+              className={highlight === "TestPortal" ? "hoverrr2" : ""}
+              sx={{ mt: -2 }}
+              onClick={() => handleHighlight("TestPortal")}
+            >
+              <AssignmentIcon className="icon" />
+              <Typography>Categores</Typography>
+            </Box>
+          </Link>
+          <Link to="/admin/Subcategores">
+            <Box
+              id="hoverrr"
+              className={highlight === "TestPortal" ? "hoverrr2" : ""}
+              sx={{ mt: -2 }}
+              onClick={() => handleHighlight("TestPortal")}
+            >
+              <AssignmentIcon className="icon" />
+              <Typography>Subcategores</Typography>
+            </Box>
+          </Link>
+          <Link to="/admin/TeamMember">
+            <Box
+              id="hoverrr"
+              className={highlight === "TestPortal" ? "hoverrr2" : ""}
+              sx={{ mt: -2 }}
+              onClick={() => handleHighlight("TestPortal")}
+            >
+              <AssignmentIcon className="icon" />
+              <Typography>Team Member</Typography>
+            </Box>
+          </Link>
         </div>
         {hideCatConfig && (
           <Configuration
@@ -359,6 +392,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
           />
         )}
       </div>
+      
     </aside>
   );
 }

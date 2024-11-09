@@ -8,6 +8,7 @@ import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import "../../CSSFile/Coupon.css";
 
 const CreateCouponForm = ({}) => {
+  
   return (
     <Box className="courseMainTrack">
       <div className="formMain">
