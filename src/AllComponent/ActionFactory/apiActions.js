@@ -463,3 +463,15 @@ export const getCourseContentById = ({ callBack, courseId }) => {
     callBack(response);
   });
 };
+
+export const postBlog = ({ payload, callBack, error }) => {
+  const url = APIS.addBlog;
+  axios
+    .post(url, payload)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
