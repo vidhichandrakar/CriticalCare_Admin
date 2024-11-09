@@ -234,7 +234,7 @@ const Banner = () => {
 
       };
       console.log("banner array Desktop: ", bannerArrayDesktop)
-      console.log("banner array Mobile: ", bannerArrayMobile)
+      console.log("banner array : ", bannerArrayMobile)
 
       console.log("Payload response : ", payload)
       uploadBanner({
