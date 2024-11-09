@@ -81,6 +81,12 @@ const Banner = () => {
   const [bannerPositionData, setBannerPositionData] = useState([])
   const maxSteps = images.length;
 
+  const [imagePreviewsMobile, setImagePreviewsMobile] = useState([]);
+  const [storedMobileInfo, setStoredMobileInfo] = useState({
+    thumbnailPath: [], // Store paths for mobile banner images
+  });
+
+
   const handleUploadImage = () => {
     setImageUpload(!imageUpload);
   };
@@ -94,6 +100,37 @@ const Banner = () => {
     setImageDescription(event.target.value);
     console.log(event.target.value, "kjgvnhbmvg");
   };
+
+  const onMobileImageDrop = async (files) => {
+    let storedValues = { ...storedMobileInfo };
+    const newPreviews = [...imagePreviewsMobile];
+
+    for (let i = 0; i < files.length; i++) {
+      let payload = new FormData();
+      payload.append("file", files[i], files[i]?.name);
+
+      await uploadFile({
+        payload,
+        callBack: (response) => {
+          storedValues.thumbnailPath.push(response?.data?.path);
+
+          let reader = new FileReader();
+          reader.onloadend = () => {
+            newPreviews.push(reader.result);
+            setImagePreviewsMobile(newPreviews);
+          };
+          reader.readAsDataURL(files[i]);
+
+          toast.success("Mobile Banner Image Uploaded Successfully!", {
+            autoClose: 500,
+          });
+        },
+      });
+    }
+
+    setStoredMobileInfo(storedValues);
+  };
+
 
   // Updated function using onIntroVideoDrop
   const onIntroVideoDrop = async (files) => {
@@ -131,6 +168,18 @@ const Banner = () => {
     // Update state with the new values
     setStoredBasicInfo(storedValues);
   };
+  const {
+    getRootProps: getMobileImageRootProps,
+    getInputProps: getMobileImageInputProps,
+  } = useDropzone({
+    onDrop: onMobileImageDrop,
+    accept: {
+      "image/jpeg": [".jpeg"],
+      "image/png": [".png"],
+      "image/jpg": [".jpg"],
+    },
+    multiple: true,
+  });
 
   const {
     getRootProps: getIntroVideoRootProps,
@@ -152,13 +201,14 @@ const Banner = () => {
     setActiveStatus(bannerEnabled ? "N" : "Y"); // Update activeStatus based on toggle
   };
 
-  const bannerArray = storedBasicInfo?.thumbnailPath.map(url => ({ banner_url: url }));
+  const bannerArrayDesktop = storedBasicInfo?.thumbnailPath.map(url => ({ banner_url: url }));
+  const bannerArrayMobile = storedMobileInfo.thumbnailPath.map(url => ({ banner_url: url }));
 
   const handleUploadBannerImage = () => {
     console.log("image title : ", imageTitle);
     if (
       imageTitle === "" ||
-      !bannerArray.length ||
+      (!bannerArrayDesktop.length && !bannerArrayMobile.length) || // Check for both arrays
       bannerType === "" ||
       bannerPosition === "" ||
       bannerSelectedPage === "" 
@@ -176,12 +226,15 @@ const Banner = () => {
         "web_banner_title": imageTitle,
         "web_banner_type_id": bannerType,
         "web_banner_position_id": bannerPosition,
-        "web_banner_links": bannerArray,
+        "web_banner_links_desktop": bannerArrayDesktop,
+        "web_banner_links_mobile": bannerArrayMobile,
+        // "web_banner_links": bannerArray,
         //"web_banner_links": storedBasicInfo?.thumbnailPath,
         "active_status": activeStatus, // Send activeStatus with payload
 
       };
-      console.log("banner array : ", bannerArray)
+      console.log("banner array Desktop: ", bannerArrayDesktop)
+      console.log("banner array Mobile: ", bannerArrayMobile)
 
       console.log("Payload response : ", payload)
       uploadBanner({
@@ -542,16 +595,9 @@ const Banner = () => {
                     <div {...getIntroVideoRootProps({ className: "dropzone" })}>
                       <input {...getIntroVideoInputProps()} />
                       <Button variant="outlined">
-                        <AddCircleOutlineRoundedIcon /> <span style={{ marginLeft: "1%" }}>Upload Banner Image</span>
+                        <AddCircleOutlineRoundedIcon /> <span style={{ marginLeft: "1%" }}>Upload Desktop Banner Image</span>
                       </Button>
                     </div>
-                    <Typography
-                      sx={{ mt: 2, fontSize: "0.7rem", color: "grey" }}
-                    >
-                      *We recommend uploading an image in 848*160 pixels
-                      resolution
-                    </Typography>
-                    {/* Display uploaded image previews */}
                     <Box sx={{ display: "flex", flexWrap: "wrap", mt: 2 }}>
                       {imagePreviews.map((src, index) => (
                         <Box key={index} sx={{ position: "relative", mr: 2, mb: 2 }}>
@@ -561,6 +607,29 @@ const Banner = () => {
                     </Box>
                   </div>
                 )}
+
+                <div className="UploadBttons">
+                  <div {...getMobileImageRootProps({ className: "dropzone" })}>
+                    <input {...getMobileImageInputProps()} />
+                    <Button variant="outlined">
+                      <AddCircleOutlineRoundedIcon /> <span style={{ marginLeft: "1%" }}>Upload Mobile Banner Image</span>
+                    </Button>
+                  </div>
+                  <Typography
+                    sx={{ mt: 2, fontSize: "0.7rem", color: "grey" }}
+                  >
+                    *We recommend uploading an image in 942*510 pixels
+                    resolution
+                  </Typography>
+                  <Box sx={{ display: "flex", flexWrap: "wrap", mt: 2 }}>
+                    {imagePreviewsMobile.map((src, index) => (
+                      <Box key={index} sx={{ position: "relative", mr: 2, mb: 2 }}>
+                        <img src={src} alt={`Mobile Preview ${index}`} width="140" height={"auto"} />
+                      </Box>
+                    ))}
+                  </Box>
+                </div>
+
 
               </DialogContentText>
             </DialogContent>
