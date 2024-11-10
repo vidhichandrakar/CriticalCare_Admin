@@ -100,6 +100,7 @@ export const bannerTypeapi = ({ callBack, error }) => {
       error(errorMessage);
     });
 };
+
 export const bannerPositionapi = ({ callBack, error }) => {
   const url = APIS.banner + "/webbannerposition";
   axios
@@ -111,6 +112,7 @@ export const bannerPositionapi = ({ callBack, error }) => {
       error(errorMessage);
     });
 };
+
 export const bannerPage = ({ callBack, error }) => {
   const url = APIS.getBanner;
   axios
@@ -145,6 +147,21 @@ export const uploadBanner = ({ payload, callBack, error }) => {
       //error(errorMessage);
     });
 };
+
+export const deleteBanner = ({ web_banner_id, callBack, error }) => {
+  const url = `${APIS.banner}/${web_banner_id}`;
+  axios
+    .delete(url)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
+
+
+
 export const addwebinar = ({ payload, callBack, error }) => {
   const url = APIS.addwebinar;
   axios
@@ -189,7 +206,7 @@ export const getCategory = ({ callBack }) => {
     callBack(response);
   });
 };
-export const updateCategory = ({category_id, payload,  callBack }) => {
+export const updateCategory = ({ category_id, payload, callBack }) => {
   const url = APIS.getCategory + "/" + category_id;
   axios.put(url, payload).then((response) => {
     callBack(response);
