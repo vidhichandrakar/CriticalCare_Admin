@@ -328,8 +328,7 @@
   border-radius: 15px;
   width:100% !important;
   display: flex;
-  
-  margin-top: 2%;
+  margin-top: 1%;
   flex-direction: column;
 }
 .trackerBox{
@@ -429,6 +428,7 @@
   color: #918e8e;
 }
 .divider{
+  width: 93%;
   background-color: #000;
   margin-top: 4%;
    padding: 0.5px;
@@ -472,7 +472,7 @@
   margin-left: 1% !important;
 }
 .marginscndBox{
-  margin-left: 10%;
+  margin-left: 7%;
 }
 .marginscndBoxYears{
   margin-top: -2%;

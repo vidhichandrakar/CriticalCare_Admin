@@ -93,12 +93,10 @@ const Banner = () => {
 
   const handleTitleInput = (event) => {
     setImageTitle(event.target.value);
-    //console.log(event.target.value, "kjgvnhbmvg");
   };
 
   const handleDescriptionInput = (event) => {
     setImageDescription(event.target.value);
-    console.log(event.target.value, "kjgvnhbmvg");
   };
 
   const onMobileImageDrop = async (files) => {
@@ -205,7 +203,6 @@ const Banner = () => {
   const bannerArrayMobile = storedMobileInfo.thumbnailPath.map(url => ({ banner_url: url }));
 
   const handleUploadBannerImage = () => {
-    console.log("image title : ", imageTitle);
     if (
       imageTitle === "" ||
       (!bannerArrayDesktop.length && !bannerArrayMobile.length) || // Check for both arrays
@@ -233,17 +230,11 @@ const Banner = () => {
         "active_status": activeStatus, // Send activeStatus with payload
 
       };
-      console.log("banner array Desktop: ", bannerArrayDesktop)
-      console.log("banner array : ", bannerArrayMobile)
-
-      console.log("Payload response : ", payload)
       uploadBanner({
         payload, callBack: (response) => {
-          console.log(response, "resopnseesses")
           toast.success("Banner Created SuccessFully");
           banner({
             callBack: (response) => {
-              console.log("API response : ", response.data)
               setBannerAPI(response.data);
             },
           });
@@ -309,7 +300,6 @@ const Banner = () => {
                 <h2>Your Banner (3)</h2>
                 {/* <h2>{bannerAPI.title}</h2> */}
               </div>
-              {console.log(bannerAPI, "BannerAPI line35")}
 
               <BannerCard Data={BannerData} bannerAPI={bannerAPI} handleClickEdit={handleClickEdit} />
               <div className="UploadBtton">
@@ -556,7 +546,6 @@ const Banner = () => {
                       // label="Age"
                       onChange={(event) => handleBannerChange("type", event.target.value)}
                     >
-                      {/* {console.log("bannerTypeData", bannerTypeData)} */}
                       {bannerTypeData?.map(banner => <MenuItem value={banner.web_banner_type_id}>{banner.web_banner_type_text}</MenuItem>)}
 
                     </Select>
@@ -573,7 +562,6 @@ const Banner = () => {
                       // label="Age"
                       onChange={(event) => handleBannerChange("position", event.target.value)}
                     >
-                      {/* {console.log("bannerPositionData", bannerPositionData)} */}
                       {bannerPositionData?.map(banner => <MenuItem value={banner.web_banner_position_id}>{banner.web_banner_position_text}</MenuItem>)}
 
                     </Select>
