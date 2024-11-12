@@ -440,7 +440,7 @@ export const addContentOnCreateCourse = ({ payload, callBack }) => {
   });
 };
 export const getBlog = ({ payload, callBack, error }) => {
-  const url = APIS.blog;
+  const url = APIS.addBlog;
   axios
     .post(url, payload)
     .then((response) => {

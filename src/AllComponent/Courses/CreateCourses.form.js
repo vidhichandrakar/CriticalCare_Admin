@@ -6,7 +6,7 @@ import {
   Dialog,
   IconButton,
 } from "@mui/material";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import Button from "@mui/material/Button";
 import UploadIcon from "@mui/icons-material/Upload";
 import { ToastContainer, toast } from "react-toastify";
@@ -34,6 +34,8 @@ import LoaderComponent from "../../Util/LoaderComponent";
 import DialogContent from "@mui/material/DialogContent";
 import UploadFileRoundedIcon from "@mui/icons-material/UploadFileRounded";
 import CloseIcon from "@mui/icons-material/Close";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -69,7 +71,9 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const [videoopened, setVideoqopen] = useState(false);
   const [url, setUrl] = useState({ left: false });
   const [showVideoDialog, setShowVideoPopUp] = useState(false);
-  let uploadType = "";
+  const [textEditorValue, setTextEditorValue] = useState("");
+
+  let uploadType;
 
   const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiDialogContent-root": {
@@ -81,7 +85,8 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   }));
 
   const onInroVideoDrop = async (files) => {
-    console.log("upload typw====--->", uploadType);
+    // event.preventDefault();
+    console.log("upload preventDefault====--->", uploadType);
     let payload = new FormData();
     payload.append("file", files[0], files[0]?.name);
     let storedValues = Object.assign({}, storedBasicInfo);
@@ -89,6 +94,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     uploadFile({
       payload,
       callBack: (response) => {
+        console.log("response-->", response);
         if (uploadType === "desktop") {
           storedValues.thumbnailPathForDeskTop = response?.data?.path;
         } else if (uploadType === "mobile") {
@@ -102,11 +108,6 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       },
     });
     // setStoredBasicInfo(storedValues);
-  };
-  const handleUploadType = (type) => {
-    console.log("type-->", type);
-    setShowVideoPopUp(true);
-    uploadType = type;
   };
 
   const {
@@ -202,7 +203,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       }
     } else if (type === "description") {
       storedValues.Description = value;
-      if (value.length >= 4) {
+      if (value.length >= 11) {
         sethideValidationTickDesc(true);
       } else {
         sethideValidationTickDesc(false);
@@ -307,7 +308,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     ) {
       return;
     }
-    setVideoqopen(false);
+    // setVideoqopen(false);
     setUrl({ url, [anchor]: open });
   };
 
@@ -315,8 +316,14 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     setShowVideoPopUp(false);
   };
 
+  const handleUpload = (type) => {
+    uploadType = type;
+    // setShowVideoPopUp(true);
+  };
+
   return (
     <div className="formMain">
+      {/* {console.log("uploadType--->", uploadType)} */}
       <div className="FlexRow">
         {CommonTypography({ fontWeight: 600, label: "Name" })}
         {hideValidationTickName && (
@@ -339,7 +346,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       <div className="FlexRow" style={{ marginTop: "30px" }}>
         {CommonTypography({
           fontWeight: 600,
-          // sx: { marginTop: "5%" },
+          sx: { marginTop: "5%" },
           label: "Description",
         })}
 
@@ -347,32 +354,43 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           <CheckCircleRoundedIcon className="RightTick" />
         )}
       </div>
-      <TextField
-        inputProps={{ className: "textField" }}
-        fullWidth
-        id="outlined-multiline-static"
+
+      <ReactQuill
+        value={storedBasicInfo?.Description}
+        onChange={(event) => handleInput(event, "description")}
+        placeholder="Enter course description..."
+        className="custom-editor"
         multiline
         rows={4}
-        placeholder="Enter course description"
-        className="DescBoxShadow"
-        value={storedBasicInfo.Description}
-        onChange={(event) => handleInput(event.target.value, "description")}
+        fullWidth
+        modules={{
+          toolbar: [
+            [{ header: "1" }, { header: "2" }],
+            [{ list: "ordered" }, { list: "bullet" }],
+            ["bold", "italic", "underline", "strike"],
+            [{ color: [] }, { background: [] }],
+            [{ align: [] }],
+          ],
+        }}
       />
       {CommonTypography({
         fontWeight: 600,
         sx: { marginTop: "5%" },
         label: "Add Thumbnail",
       })}
-      <div {...getIntroVideoRootProps({ className: "dropzone" })}>
-        <input {...getIntroVideoInputProps()} />
-        <Box sx={{ marginTop: "5%" }} className="categoryBox">
-          <Box>
+      {/* ///start working on text editior */}
+
+      <Box className="categoryBox">
+        <div {...getIntroVideoRootProps({ className: "dropzone" })}>
+          <input {...getIntroVideoInputProps()} />
+          <Box className="thumbnailUpload">
             <Button
               component="label"
               variant="outlined-multiline-static"
               startIcon={<UploadIcon className="iconThumbicon" />}
               className="iconThumb"
-              onClick={() => handleUploadType("desktop")}
+              // onClick={()=>setUploadedFileType("desktop")}
+              onClick={() => handleUpload("desktop")}
             >
               Upload Desktop Image
             </Button>
@@ -395,55 +413,63 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
               />
             )}
           </Box>
+        </div>
 
-          <Box className="rightCat">
-            <Box>
-              <Button
-                component="label"
-                variant="outlined-multiline-static"
-                startIcon={<UploadIcon className="iconThumbicon" />}
-                className="iconThumb"
-                onClick={() => handleUploadType("mobile")}
-              >
-                Upload Mobile Image
-              </Button>
-              <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
-                Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
-              </Typography>
-              <LoaderComponent loaderState={loaderState} />
-              {imgUpload === "" && storedBasicInfo?.thumbnailPathForMobile && (
-                <img
-                  src={storedBasicInfo?.thumbnailPathForMobile}
-                  width={140}
-                  height={"auto"}
-                />
-              )}
-              {imgUpload != "" && (
-                <img
-                  src={storedBasicInfo?.thumbnailPathForMobile}
-                  width={140}
-                  height={"auto"}
-                />
-              )}
+        <Box>
+          <div {...getIntroVideoRootProps({ className: "dropzone" })}>
+            <input {...getIntroVideoInputProps()} />
+            <Box className="rightCat">
+              <Box>
+                <Button
+                  component="label"
+                  variant="outlined-multiline-static"
+                  startIcon={<UploadIcon className="iconThumbicon" />}
+                  className="iconThumb"
+                  // onClick={()=>setUploadedFileType("mobile")}
+                  onClick={() => handleUpload("mobile")}
+                >
+                  Upload Mobile Image
+                </Button>
+                <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
+                  Recommended Image size :{" "}
+                  <b>800px x 600px, PNG or JPEG file</b>
+                </Typography>
+                <LoaderComponent loaderState={loaderState} />
+                {imgUpload === "" &&
+                  storedBasicInfo?.thumbnailPathForMobile && (
+                    <img
+                      src={storedBasicInfo?.thumbnailPathForMobile}
+                      width={140}
+                      height={"auto"}
+                    />
+                  )}
+                {imgUpload != "" && (
+                  <img
+                    src={storedBasicInfo?.thumbnailPathForMobile}
+                    width={140}
+                    height={"auto"}
+                  />
+                )}
+              </Box>
             </Box>
-          </Box>
+          </div>
         </Box>
-      </div>
-      {console.log(" upload type==>", uploadType)}
-      {/* <Box className="divider"></Box> */}
+      </Box>
+
       {CommonTypography({
         fontWeight: 600,
         sx: { marginTop: "5%" },
         label: "Add Video Description",
       })}
-      <Box sx={{ marginTop: "5%" }} className="categoryBox">
+      <Box sx={{ marginTop: "2%" }} className="categoryBox">
         <Box>
           <Button
             component="label"
             variant="outlined-multiline-static"
             startIcon={<UploadIcon className="iconThumbicon" />}
             className="iconThumb"
-            onClick={() => handleUploadType("video")}
+            // onClick={()=>setUploadedFileType("video")}
+            onClick={() => handleUpload("video")}
           >
             Upload Video
           </Button>
@@ -486,6 +512,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
                           variant="contained"
                           className="SelectButton"
                           // onClick={handleCreateTeam}
+                          // onClick={() => handleUpload("video")}
                         >
                           Select File(s)
                         </Button>
@@ -497,13 +524,14 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
                           <b>800px x 600px, PNG or JPEG file</b>
                         </Typography>
                         <LoaderComponent loaderState={loaderState} />
-                        {imgUpload === "" && storedBasicInfo?.thumbnailPathForVideo && (
-                          <img
-                            src={storedBasicInfo?.thumbnailPathForVideo}
-                            width={140}
-                            height={"auto"}
-                          />
-                        )}
+                        {imgUpload === "" &&
+                          storedBasicInfo?.thumbnailPathForVideo && (
+                            <img
+                              src={storedBasicInfo?.thumbnailPathForVideo}
+                              width={140}
+                              height={"auto"}
+                            />
+                          )}
                         {imgUpload != "" && (
                           <img
                             src={storedBasicInfo?.thumbnailPathForVideo}
@@ -527,9 +555,9 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           </BootstrapDialog>
         </Box>
         <Box className="rightCat">
-          <Box>
-            <p className="iconThumb">Add Video to see the description</p>{" "}
-          </Box>
+          {/* <Box> */}
+          <p className="iconThumb">Add Video to see the description</p>{" "}
+          {/* </Box> */}
         </Box>
       </Box>
       {/* <Box className="divider"></Box> */}
