@@ -26,6 +26,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import Divider from '@mui/material/Divider'; 
+import { getCoupon } from "../ActionFactory/apiActions";
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -45,6 +46,7 @@ const CouponBox = () => {
   const [showDetailFlag, setShowDetailFlag] = useState(false);
   const [openSecond, setOpenSecond] = useState(false);
   const [personName, setPersonName] = useState([]);
+  const [coupondata, setCoupondata] = useState();
 
   const handleShowDetail = (value) => {
     setShowDetail(value);
@@ -103,9 +105,20 @@ const CouponBox = () => {
     setPersonName(typeof value === "string" ? value.split(",") : value);
   };
 
+  useEffect(() => {
+    console.log("check")
+    getCoupon({
+      callBack: (response) => {
+        setCoupondata(response.data);
+      },
+      error: (err) => {
+      }
+    });
+  }, []);
   return (
     <div>
-      {arrayColumn.map((data) => (
+      {console.log(coupondata, "coupondata")}
+      {coupondata?.map((data) => (
         <Box>
           <Box className="courseMainCoupon">
             <div
@@ -113,11 +126,11 @@ const CouponBox = () => {
               style={{ display: "flex", flexDirection: "row" }}
             >
               <Box className="couponLeftBox">
-                <Typography className="discount">₹ 8000 OFF</Typography>
+                <Typography className="discount">₹{data.discount_amount} OFF</Typography>
                 <Box className="yellowBox">
                   {" "}
                   <Typography style={{ marginBottom: "8%" }}>
-                    <b>DISCOUNT10</b>
+                    <b>{data.coupon_code}</b>
                   </Typography>{" "}
                 </Box>
               </Box>
@@ -157,7 +170,7 @@ const CouponBox = () => {
 
                 <div className="flexrow">
                   <Box className="couponRightBox flexrow">
-                    <Typography sx={{fontSize: "0.9rem"}}>2023/08/27, 05:39 am - 2023/08/29, 06:30 pm</Typography>
+                    <Typography sx={{fontSize: "0.9rem"}}>{data.start_date}, {data.end_date}</Typography>
                     <Box className="verticalDividerTwo"></Box>
                     <Typography sx={{fontSize: "0.9rem"}}className="UsedText">Used 1 times</Typography>
                   </Box>
@@ -261,7 +274,7 @@ const CouponBox = () => {
                               }}
                             >
                               <InputLabel id="demo-multiple-name-label">
-                                1
+                                {data.coupon_max_user}
                               </InputLabel>
                               <Select
                                 labelId="demo-multiple-name-label"
@@ -314,7 +327,7 @@ const CouponBox = () => {
                 <Box className="couponInfoBoxes">
                   <p>Usage Per Student</p>
                   <Box className="numberAndButton">
-                    <h3>1</h3>
+                    <h3>{data.coupon_max_user}</h3>
                     <Button
                       className="editButton"
                       variant="text"
@@ -417,7 +430,7 @@ const CouponBox = () => {
                 <Box className="couponInfoBoxes">
                   <p>Min Order value</p>
                   <Box className="numberAndButton">
-                    <h3>₹ 1</h3>
+                    <h3>₹{data.minimum_order}</h3>
                     <Button
                       className="editButton"
                       variant="text"
