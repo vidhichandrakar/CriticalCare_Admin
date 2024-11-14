@@ -148,6 +148,18 @@ export const uploadBanner = ({ payload, callBack, error }) => {
     });
 };
 
+export const updateBanner = ({ web_banner_id, payload, callBack, error }) => {
+  const url = `${APIS.banner}/${web_banner_id}`;
+  axios
+    .put(url, payload)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
+
 export const deleteBanner = ({ web_banner_id, callBack, error }) => {
   const url = `${APIS.banner}/${web_banner_id}`;
   axios
