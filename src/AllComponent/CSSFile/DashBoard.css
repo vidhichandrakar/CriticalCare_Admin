@@ -72,7 +72,7 @@ body {
 }
 .SideBarLogo {
   /* margin-left: 11%; */
-  width: 70%;
+  width: 100%;
   height: 52px;
 }
 .sidebar-title > span {
@@ -103,7 +103,33 @@ body {
   margin-top: 21%;
   margin-left: 3%;
 }
-#hoverrr {
+.hoverrr {
+  padding: 10px 0px;
+  font-size: 15px !important;
+  display: flex;
+  flex-direction: row;
+  color: grey;
+  /* Default color */
+}
+
+.hoverrr2 {
+  background-color: #e5f7fd !important;
+  border-right: 3px solid #0075ff !important;
+  color: #0075ff !important;
+}
+
+.hoverrr:hover {
+  background-color: #e5f7fd !important;
+  cursor: pointer;
+  border-right: 3px solid #0075ff !important;
+  color: #0075ff !important;
+}
+
+.paddingD {
+  padding-left: 5px !important;
+}
+
+/* #hoverrr {
   padding: 10px 0px ;
   font-size: 15px !important;
   display: flex;
@@ -124,6 +150,7 @@ body {
   border-right: 3px solid #0075FF !important;
   color: #0075FF !important;
 }
+*/
 .sidebar-list-item > a {
   text-decoration: none;
   margin-top: 20px;
