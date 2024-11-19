@@ -11,7 +11,7 @@ import Header from "../../Courses/Header";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { banner, bannerPage, uploadBanner, uploadFile, bannerPosition, bannerType, bannerPositionapi, bannerTypeapi } from "../../ActionFactory/apiActions";
+import { banner, bannerPage, uploadBanner, uploadFile, updateBanner, bannerPosition, bannerType, bannerPositionapi, bannerTypeapi } from "../../ActionFactory/apiActions";
 import { Box, Button, Divider, Typography, TextField } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import imge from "../../../Media/Images/banner2.jpg";
@@ -61,7 +61,6 @@ const Banner = () => {
   const [openPopUp, setOpenPopUp] = useState(false);
   const theme = useTheme();
   const [activeStep, setActiveStep] = React.useState(0);
-  const [imageUpload, setImageUpload] = useState(false);
   const [storedBasicInfo, setStoredBasicInfo] = useState({
     Name: "",
     Description: "",
@@ -75,14 +74,35 @@ const Banner = () => {
   const [imgUpload, setImageWhileUpload] = useState("");
   const [bannerType, setBannerType] = useState("");
   const [bannerPosition, setBannerPosition] = useState("");
-  const [bannerSelectedPage, setBannerPageSelected] = useState("");
+  const [bannerSelectedPage, setBannerSelectedPage] = useState("");
   const [bannerPageData, setBannerPage] = useState([])
   const [bannerTypeData, setBannerTypeData] = useState([])
   const [bannerPositionData, setBannerPositionData] = useState([])
   const maxSteps = images.length;
 
+  const [imagePreviewsMobile, setImagePreviewsMobile] = useState([]);
+  const [storedMobileInfo, setStoredMobileInfo] = useState({
+    thumbnailPath: [], // Store paths for mobile banner images
+  });
+
+  const [isEditMode, setIsEditMode] = useState(false); // New state variable to control Add/Edit mode
+  const [imageUpload, setImageUpload] = useState(false);
+  const [selectedBanner, setSelectedBanner] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
+
+
+
   const handleUploadImage = () => {
-    setImageUpload(!imageUpload);
+    setIsEditMode(false); // Set to Add mode
+    setImageTitle('');
+    setBannerSelectedPage('');
+    setBannerType('');
+    setBannerPosition('');
+    setActiveStatus("N");
+    setStoredBasicInfo({ thumbnailPath: [] });
+    setStoredMobileInfo({ thumbnailPath: [] });
+    setImageUpload(true); // Open dialog
+    //setImageUpload(!imageUpload);
   };
 
   const handleTitleInput = (event) => {
@@ -92,6 +112,37 @@ const Banner = () => {
   const handleDescriptionInput = (event) => {
     setImageDescription(event.target.value);
   };
+
+  const onMobileImageDrop = async (files) => {
+    let storedValues = { ...storedMobileInfo };
+    const newPreviews = [...imagePreviewsMobile];
+
+    for (let i = 0; i < files.length; i++) {
+      let payload = new FormData();
+      payload.append("file", files[i], files[i]?.name);
+
+      await uploadFile({
+        payload,
+        callBack: (response) => {
+          storedValues.thumbnailPath.push(response?.data?.path);
+
+          let reader = new FileReader();
+          reader.onloadend = () => {
+            newPreviews.push(reader.result);
+            setImagePreviewsMobile(newPreviews);
+          };
+          reader.readAsDataURL(files[i]);
+
+          toast.success("Mobile Banner Image Uploaded Successfully!", {
+            autoClose: 500,
+          });
+        },
+      });
+    }
+
+    setStoredMobileInfo(storedValues);
+  };
+
 
   // Updated function using onIntroVideoDrop
   const onIntroVideoDrop = async (files) => {
@@ -129,6 +180,18 @@ const Banner = () => {
     // Update state with the new values
     setStoredBasicInfo(storedValues);
   };
+  const {
+    getRootProps: getMobileImageRootProps,
+    getInputProps: getMobileImageInputProps,
+  } = useDropzone({
+    onDrop: onMobileImageDrop,
+    accept: {
+      "image/jpeg": [".jpeg"],
+      "image/png": [".png"],
+      "image/jpg": [".jpg"],
+    },
+    multiple: true,
+  });
 
   const {
     getRootProps: getIntroVideoRootProps,
@@ -150,58 +213,100 @@ const Banner = () => {
     setActiveStatus(bannerEnabled ? "N" : "Y"); // Update activeStatus based on toggle
   };
 
-  const bannerArray = storedBasicInfo?.thumbnailPath.map(url => ({ banner_url: url }));
+  const bannerArrayDesktop = storedBasicInfo?.thumbnailPath.map(url => ({ banner_url: url }));
+  const bannerArrayMobile = storedMobileInfo.thumbnailPath.map(url => ({ banner_url: url }));
 
   const handleUploadBannerImage = () => {
     if (
       imageTitle === "" ||
-      !bannerArray.length ||
+      (!bannerArrayDesktop.length && !bannerArrayMobile.length) || // Check for both arrays
       bannerType === "" ||
       bannerPosition === "" ||
-      bannerSelectedPage === "" 
+      bannerSelectedPage === ""
     ) {
       toast.error(
-        "All Field are required",
+        "All fields are required",
         {
           autoClose: 500,
         }
       );
     } else {
       setImageUpload(!imageUpload);
+      const bannerArrayDesktop = storedBasicInfo.thumbnailPath.map(url => ({
+        banner_url: url,
+        banner_redlink: "#"  // Default link value
+      }));
+      const bannerArrayMobile = storedMobileInfo.thumbnailPath.map(url => ({
+        banner_url: url,
+        banner_redlink: "#"  // Default link value
+      }));
+
       const payload = {
         "webpage_id": bannerSelectedPage,
         "web_banner_title": imageTitle,
-        "web_banner_type": bannerType,
-        "web_banner_position": bannerPosition,
-        "web_banner_links": bannerArray,
-        //"web_banner_links": storedBasicInfo?.thumbnailPath,
+        "web_banner_type_id": bannerType,
+        "web_banner_position_id": bannerPosition,
+        "web_banner_links_desktop": bannerArrayDesktop,
+        "web_banner_links_mobile": bannerArrayMobile,
         "active_status": activeStatus, // Send activeStatus with payload
-
       };
-      uploadBanner({
-        payload, callBack: (response) => {
-          toast.success("Banner Created SuccessFully");
-          banner({
-            callBack: (response) => {
-              setBannerAPI(response.data);
-            },
-          });
-        },
-        error: (error) => {
-          toast.error("Something went wrong")
-        }
-      })
+
+      // Call the appropriate API based on mode
+      if (isEditMode) {
+        // Update existing banner (PUT)
+        updateBanner({
+          payload,
+          callBack: (response) => {
+            console.log("Update response:", response);
+            toast.success("Banner Updated Successfully");
+            // Refresh banner data if necessary
+            banner({
+              callBack: (response) => {
+                console.log("Updated API response:", response.data);
+                setBannerAPI(response.data);
+              },
+            });
+          },
+          error: (error) => {
+            toast.error("Something went wrong");
+          },
+        });
+      } else {
+        // Add new banner (POST)
+        uploadBanner({
+          payload,
+          callBack: (response) => {
+            console.log("Add response:", response);
+            toast.success("Banner Created Successfully");
+            // Refresh banner data if necessary
+            banner({
+              callBack: (response) => {
+                console.log("API response:", response.data);
+                setBannerAPI(response.data);
+              },
+            });
+          },
+          error: (error) => {
+            toast.error("Something went wrong");
+          },
+        });
+      }
     }
   };
+
   const handleBannerChange = (type, value) => {
     if (type === "type") {
       setBannerType(value);
+      // If bannerType is 2, set bannerPosition to 1 automatically
+      if (value === 2) {
+        setBannerPosition(1);
+      }
     }
     else if (type === "position") {
       setBannerPosition(value);
     }
     else if (type === "bannerPage") {
-      setBannerPageSelected(value);
+      setBannerSelectedPage(value);
     }
   }
   useEffect(() => {
@@ -229,9 +334,30 @@ const Banner = () => {
   const handleStepChange = (step) => {
     setActiveStep(step);
   };
-  const handleClickEdit = () => {
-    setImageUpload(true)
+  const handleClickEdit = (banner) => {
+    setIsEditMode(true);
+    setSelectedBanner(banner);
+
+    setImageTitle(banner.web_banner_title);
+    setBannerSelectedPage(banner.webpage_id);
+    setBannerType(banner.web_banner_type_id);
+    setBannerPosition(banner.web_banner_position_id);
+    setActiveStatus(banner.active_status);
+
+    setStoredBasicInfo({ thumbnailPath: banner.web_banner_links_desktop?.map(link => link.banner_url) || [] });
+    setStoredMobileInfo({ thumbnailPath: banner.web_banner_links_mobile?.map(link => link.banner_url) || [] });
+
+    setImageUpload(true); // Open dialog
   }
+
+  const handlePreviewBox = (bannerData) => {
+    // Get the banner_url from the mobile links
+    const mobileBannerUrl = bannerData.web_banner_links_mobile?.[0]?.banner_url;
+
+    // Assuming you have a state to store the preview image URL
+    setPreviewImage(mobileBannerUrl);  // Update preview image state
+  };
+
   return (
     <Fragment>
       <div className="grid-container">
@@ -245,7 +371,8 @@ const Banner = () => {
                 {/* <h2>{bannerAPI.title}</h2> */}
               </div>
 
-              <BannerCard Data={BannerData} bannerAPI={bannerAPI} handleClickEdit={handleClickEdit} />
+              <BannerCard Data={BannerData} bannerAPI={bannerAPI} handleClickEdit={handleClickEdit} handlePreviewBox={handlePreviewBox} />
+
               <div className="UploadBtton">
                 <Button variant="outlined" onClick={handleUploadImage}>
                   <AddCircleOutlineRoundedIcon /> Upload Banner Image
@@ -276,26 +403,43 @@ const Banner = () => {
                     enableMouseEvents
                     autoplay={false}
                   >
-                    {images.map((step, index) => (
+                    {/* Check if previewImage exists, if so show that, else show default images */}
+                    {previewImage ? (
                       <div>
-                        {Math.abs(activeStep - index) <= 2 ? (
-                          <Box
-                            component="img"
-                            sx={{
-                              height: 155,
-                              display: "block",
-                              maxWidth: 300,
-                              overflow: "hidden",
-                              width: "100%",
-                            }}
-                            src={step.imgPath}
-                            alt={step.label}
-                          />
-                        ) : null}
+                        <Box
+                          component="img"
+                          sx={{
+                            height: 155,
+                            display: "block",
+                            maxWidth: 300,
+                            overflow: "hidden",
+                            width: "100%",
+                          }}
+                          src={previewImage} // Display the preview image
+                          alt="Preview Banner"
+                        />
                       </div>
-                    ))}
+                    ) : (
+                      images.map((step, index) => (
+                        <div key={index}>
+                          {Math.abs(activeStep - index) <= 2 ? (
+                            <Box
+                              component="img"
+                              sx={{
+                                height: 155,
+                                display: "block",
+                                maxWidth: 300,
+                                overflow: "hidden",
+                                width: "100%",
+                              }}
+                              src={step.imgPath}
+                              alt={step.label}
+                            />
+                          ) : null}
+                        </div>
+                      ))
+                    )}
                   </AutoPlaySwipeableViews>
-
                   <Box
                     className="flexrow "
                     sx={{ mt: 4, justifyContent: "space-evenly" }}
@@ -389,7 +533,9 @@ const Banner = () => {
                       </Typography>
                     </Box>
                   </Box>
+
                 </Box>
+
                 <Box className="flexrow iconBox">
                   <Box className="flexCol">
                     <HomeIcon />
@@ -426,7 +572,7 @@ const Banner = () => {
         <div>
           <Dialog
             open={imageUpload}
-            onClose={handleUploadImage}
+            onClose={() => setImageUpload(false)}
             PaperProps={{
               component: "form",
               onSubmit: (event) => {
@@ -443,10 +589,10 @@ const Banner = () => {
               <Box className="flexrow spacebt">
                 <Box className="flexrow">
                   {/* <ArrowBackIcon />  */}
-                  <Typography sx={{ ml: 1, mt: 1 }}>Upload Banner</Typography>
+                  <Typography sx={{ ml: 1, mt: 1 }}>{isEditMode ? "Edit Banner" : "Upload Banner"}</Typography>
 
                 </Box>
-                <CloseIcon onClick={handleUploadImage} sx={{ cursor: "pointer" }} />
+                <CloseIcon onClick={() => setImageUpload(false)} sx={{ cursor: "pointer" }} />
               </Box>
             </DialogTitle>
             <DialogContent>
@@ -519,7 +665,7 @@ const Banner = () => {
                     onChange={handleBannerStatusToggle}
                   />
                 </Box>
-                {/* <Typography>Banner Type: {bannerType}</Typography> */}
+                {/*<Typography>Banner Type: {bannerPosition}</Typography>*/}
 
                 {/* Image Upload and Preview Dialog */}
                 {imageUpload && (
@@ -527,16 +673,9 @@ const Banner = () => {
                     <div {...getIntroVideoRootProps({ className: "dropzone" })}>
                       <input {...getIntroVideoInputProps()} />
                       <Button variant="outlined">
-                        <AddCircleOutlineRoundedIcon /> <span style={{ marginLeft: "1%" }}>Upload Banner Image</span>
+                        <AddCircleOutlineRoundedIcon /> <span style={{ marginLeft: "1%" }}>Upload Desktop Banner Image</span>
                       </Button>
                     </div>
-                    <Typography
-                      sx={{ mt: 2, fontSize: "0.7rem", color: "grey" }}
-                    >
-                      *We recommend uploading an image in 942*510 pixels
-                      resolution
-                    </Typography>
-                    {/* Display uploaded image previews */}
                     <Box sx={{ display: "flex", flexWrap: "wrap", mt: 2 }}>
                       {imagePreviews.map((src, index) => (
                         <Box key={index} sx={{ position: "relative", mr: 2, mb: 2 }}>
@@ -546,6 +685,29 @@ const Banner = () => {
                     </Box>
                   </div>
                 )}
+
+                <div className="UploadBttons">
+                  <div {...getMobileImageRootProps({ className: "dropzone" })}>
+                    <input {...getMobileImageInputProps()} />
+                    <Button variant="outlined">
+                      <AddCircleOutlineRoundedIcon /> <span style={{ marginLeft: "1%" }}>Upload Mobile Banner Image</span>
+                    </Button>
+                  </div>
+                  <Typography
+                    sx={{ mt: 2, fontSize: "0.7rem", color: "grey" }}
+                  >
+                    *We recommend uploading an image in 942*510 pixels
+                    resolution
+                  </Typography>
+                  <Box sx={{ display: "flex", flexWrap: "wrap", mt: 2 }}>
+                    {imagePreviewsMobile.map((src, index) => (
+                      <Box key={index} sx={{ position: "relative", mr: 2, mb: 2 }}>
+                        <img src={src} alt={`Mobile Preview ${index}`} width="140" height={"auto"} />
+                      </Box>
+                    ))}
+                  </Box>
+                </div>
+
 
               </DialogContentText>
             </DialogContent>

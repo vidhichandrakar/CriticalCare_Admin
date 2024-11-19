@@ -1,12 +1,13 @@
-.mainBox{
- display: block;
- margin: auto;
- width:96%;
- margin-top:2.5%;
- margin-left: 2%;
- justify-content: center;
+.mainBox {
+  display: block;
+  margin: auto;
+  width: 96%;
+  margin-top: 2.5%;
+  margin-left: 2%;
+  justify-content: center;
 }
-.HeaderBox{
+
+.HeaderBox {
   display: flex;
   flex-direction: row;
   /* margin-left: -2%; */
@@ -18,6 +19,7 @@
   border-left: 1px solid #eee;
   border-bottom: 1px solid #eee;
 }
+
 .header {
   grid-area: header;
   /* height: 76px; */
@@ -30,112 +32,125 @@
   /* margin-left: 1%; */
 }
 
-.subHeaderMycourses{
+.subHeaderMycourses {
   display: flex;
   flex-direction: row;
   width: 76vw;
   padding: 1%;
   padding-bottom: 0;
   margin-top: 1%;
-  
+
   /* margin-left: px; */
   box-shadow: 1px 1px 2px 0.5px #ededed;
   background-color: #ffffff;
 }
-.HeaderLeft{
-  width:60%;
+
+.HeaderLeft {
+  width: 60%;
   margin-top: 5px;
   margin-left: 3%;
 }
-.subHeader{
+
+.subHeader {
   font-size: 0.85em !important;
   color: #7c7a7a;
   font-weight: bold !important;
 }
-.selectDesign{
+
+.selectDesign {
   background-color: #fff;
   text-align: center;
   /* border-radius: 15% !important; */
   margin-top: -3px;
   margin-right: -12%;
 }
-.css-6hp17o-MuiList-root-MuiMenu-list{
+
+.css-6hp17o-MuiList-root-MuiMenu-list {
   padding: 1px 10px !important;
   padding-top: 6px !important;
 }
+
 .css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root {
   min-height: 42px;
 }
 
-.logoDesign{
+.logoDesign {
   font-size: 2.4rem !important;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    margin-left: 16%;
-    margin-top: 8%;
-    font-weight: 300 !important;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  margin-left: 16%;
+  margin-top: 8%;
+  font-weight: 300 !important;
 }
-.logoCircle{
+
+.logoCircle {
   width: 54px;
   height: 47px;
   border-radius: 50%;
-  border:1px solid #18568f;
-  color:  #18568f;
-  background-color: #d8ecffce ;
+  border: 1px solid #18568f;
+  color: #18568f;
+  background-color: #d8ecffce;
   cursor: pointer;
 }
-.addIcon{
+
+.addIcon {
   font-size: 2.8rem !important;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-    margin-left: 11%;
-    margin-top: 8%;
-    
-    font-weight: 300 !important;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  margin-left: 11%;
+  margin-top: 8%;
+
+  font-weight: 300 !important;
 }
-.addCircle{
+
+.addCircle {
   width: 58px;
   height: 52px;
   border-radius: 50%;
-  border:2px solid #dbfef9;
-  color:  #004e42;
-  background-color: #c9fef6 ;
-  opacity:0.9;
+  border: 2px solid #dbfef9;
+  color: #004e42;
+  background-color: #c9fef6;
+  opacity: 0.9;
   margin-right: 3%;
 }
-.addCircle:hover{
-  background-color: #9af1e4 ;
+
+.addCircle:hover {
+  background-color: #9af1e4;
   cursor: pointer;
 }
-.headerText{
+
+.headerText {
   font-size: 1.4em !important;
   font-weight: 550 !important;
-  font-family: Arial, Helvetica, sans-serif  !important;
+  font-family: Arial, Helvetica, sans-serif !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 19ch;
 }
-.logoText{
+
+.logoText {
   margin-top: 23% !important;
   font-size: 0.9em !important;
   font-weight: bold !important;
 
 }
-.labelDesign{
+
+.labelDesign {
   color: #000 !important;
   font-size: 1.25em !important;
   font-weight: bold;
   text-align: left !important;
   margin-left: 11%;
 }
+
 /* my course */
 
-.courseCard{
+.courseCard {
   background-color: #b22626;
   border-radius: 10px;
   box-shadow: 1px 1px 2px 0.5px #ededed;
@@ -144,27 +159,32 @@
   padding: 7px;
   cursor: pointer;
 }
-.courseCard:hover{
-  background-color: #eee ;
+
+.courseCard:hover {
+  background-color: #eee;
   cursor: pointer;
 }
-.rightCard{
+
+.rightCard {
   margin-left: 3%;
-  width:100%;
+  width: 100%;
   margin-top: 3%;
 }
-.courseHeader{
+
+.courseHeader {
   font-size: 1.2rem !important;
   font-family: sans-serif !important;
   color: #18568f !important;
 }
-.duration{
+
+.duration {
   display: flex;
   flex-direction: row;
   /* justify-content: space-between !important; */
   text-align: center;
 }
-.clock{
+
+.clock {
   font-size: 1.1rem !important;
   color: #199884;
   margin-right: 1%;
@@ -173,43 +193,49 @@
   margin-top: 3px;
 }
 
-.price{
+.price {
   text-decoration: line-through;
 }
-.durationText{
+
+.durationText {
   margin-left: 2% !important;
   font-size: 0.8rem !important;
   margin-top: 2px !important;
   color: #928b8b;
 }
-.discountPercentage-multiValidity{
+
+.discountPercentage-multiValidity {
   background-color: lightcyan !important;
   color: #199884 !important;
   padding: 0px !important;
-    width: 100%;
-    margin-top: 32px;
-    margin-left: 26px;
+  width: 100%;
+  margin-top: 32px;
+  margin-left: 26px;
 }
-.discountPercentage-singleValidity{
+
+.discountPercentage-singleValidity {
   background-color: lightcyan !important;
   color: #199884 !important;
   padding: 0px !important;
-    width: 100%;
-    margin-top: 12px;
-    margin-left: 26px;
+  width: 100%;
+  margin-top: 12px;
+  margin-left: 26px;
 }
-.priceAndOfferprice{
+
+.priceAndOfferprice {
   display: flex !important;
   flex-direction: row !important;
   width: 100%;
-    margin-top: 8%;
+  margin-top: 8%;
 }
-.priceAndOfferprice-singleValidity{
+
+.priceAndOfferprice-singleValidity {
   display: flex !important;
   flex-direction: row !important;
   width: 100%;
-    margin-top: 20%;
+  margin-top: 20%;
 }
+
 .wrap-text-50 {
   /* display: inline-block; */
   white-space: nowrap;
@@ -219,29 +245,33 @@
   color: #918d8d;
   font-size: 0.9rem !important;
 }
-.multiplevalidityAvailBox{
+
+.multiplevalidityAvailBox {
   color: #0f7af5 !important;
   background-color: #e5f1f5 !important;
   font-size: 0.8rem !important;
-    width: 90% !important;
-    /* padding-left: 4px; */
-    border-radius: 5px;
-    padding: 6px 6px;
+  width: 90% !important;
+  /* padding-left: 4px; */
+  border-radius: 5px;
+  padding: 6px 6px;
 }
-.multiplevalidityBox{
+
+.multiplevalidityBox {
   color: grey;
   font-size: 0.8rem !important;
-    width: 90% !important;
-    /* padding-left: 4px; */
-    border-radius: 5px;
-    padding: 6px 6px;
+  width: 90% !important;
+  /* padding-left: 4px; */
+  border-radius: 5px;
+  padding: 6px 6px;
 }
-.lastCard{
-  width:20%;
+
+.lastCard {
+  width: 20%;
 }
-.flag{
- 
- 
+
+.flag {
+
+
   background-color: #199884;
   display: flex;
   flex-direction: row;
@@ -254,84 +284,97 @@
   color: rgb(255, 255, 255);
   position: absolute;
   top: 0;
-  right:0;
+  right: 0;
   opacity: 0.8;
   justify-content: center;
   height: 15vh;
   margin-right: 1%;
 }
-.vertical{
-  writing-mode:tb-rl;
-  -webkit-transform:rotate(90deg);
-  -moz-transform:rotate(90deg);
+
+.vertical {
+  writing-mode: tb-rl;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
   -o-transform: rotate(90deg);
-  -ms-transform:rotate(90deg);
+  -ms-transform: rotate(90deg);
   transform: rotate(0deg);
-  white-space:nowrap;
-  display:block;
-  bottom:0;
-  width:20px;
+  white-space: nowrap;
+  display: block;
+  bottom: 0;
+  width: 20px;
   height: 15vh;
   text-align: center;
 }
-.JustfiSB{
+
+.JustfiSB {
   justify-content: space-between;
 }
-.Xicon{
+
+.Xicon {
   border-radius: 5px;
   color: grey;
   background-color: #f4f9fd;
 }
-.BasicInfoBox{
+
+.BasicInfoBox {
   background-color: #f4f9fd;
   border-radius: 5px;
 }
 
-.BasicInfo{
+.BasicInfo {
   margin-top: 18px;
   color: grey;
 }
-.InfoTextLeft{
+
+.InfoTextLeft {
   margin-left: 15% !important;
 }
-.InfoTextRight{
+
+.InfoTextRight {
   margin-left: 8% !important;
 }
-.infoicon{
+
+.infoicon {
   width: 30% !important;
 }
-.margin20{
+
+.margin20 {
   margin: 20px;
 }
-.width80{
+
+.width80 {
   width: 70%;
 }
-.TickIcon{
+
+.TickIcon {
   height: 2vh !important;
   width: 5% !important;
   margin-left: 3%;
   background-color: #0ff55c;
   border-radius: 50%;
-  color:white;
+  color: white;
 }
-.WarningIcon{
+
+.WarningIcon {
   color: yellow;
   margin-left: 2% !important;
 }
 
 /* Create courses Css */
-.createBoxHeader{
+.createBoxHeader {
   padding-top: 2%;
 }
-.courseMainTrack{
+
+.courseMainTrack {
   background-color: #fff !important;
   border-radius: 15px;
-  width:100% !important;
+  width: 100% !important;
   display: flex;
   margin-top: 1%;
   flex-direction: column;
 }
-.trackerBox{
+
+.trackerBox {
   justify-content: left;
   align-items: start;
   float: inline-start;
@@ -339,91 +382,107 @@
   border-bottom: 2px solid #818181;
 
 }
-.trackerStepText{
- text-align: left;
- font-weight: bold !important;
+
+.trackerStepText {
+  text-align: left;
+  font-weight: bold !important;
 }
-.trackerMainBox{
-  width:100%;
-  
+
+.trackerMainBox {
+  width: 100%;
+
   margin-left: -3%;
   padding-bottom: 10px;
 
 }
-.trackerStep{
-  width:60%;
+
+.trackerStep {
+  width: 60%;
 }
 
-.formMain{
+.formMain {
   padding: 3%;
-  width:50%;
-  
+  width: 50%;
+
 }
+
 /* .FlexRow{
   display: flex;
   flex-direction: row;
   align-items: left;
   justify-content: space-between;
 } */
-.RightTick{
+.RightTick {
   color: white;
   background-color: #0ff55c;
   border: #0ff55c !important;
   border-radius: 100%;
 }
-.FlexRow{
+
+.FlexRow {
   display: flex;
   flex-direction: row;
   align-items: left;
   justify-content: space-between;
   margin-top: -7px;
 }
-.RightTick{
+
+.RightTick {
   color: white;
   background-color: #0ff55c;
   border: #0ff55c !important;
   border-radius: 100%;
 }
-.PaddingOnly{
+
+.PaddingOnly {
   padding: 14px 10px !important;
 }
-.textField{
+
+.textField {
   /* padding: 14px 10px !important; */
-   font-size: 0.9rem !important;
-   color:#202020 !important;
+  font-size: 0.9rem !important;
+  color: #202020 !important;
 }
+
 /* .MuiOutlinedInput-root{
   border-radius: 15px !important;
 } */
-.DescBoxShadow{
+.DescBoxShadow {
   font-size: 0.7rem !important;
   margin-top: 3% !important;
 }
-.mt2{
+
+.mt2 {
   margin-top: 3% !important;
 }
-.BoxShadowCourses{
+
+.BoxShadowCourses {
   border-radius: 80px !important;
   font-size: 0.7rem !important;
   margin-top: 3% !important;
 }
+
 /* .css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input{ */
-.fieldSizeYears{
+.fieldSizeYears {
   padding: 7.5px 14px !important;
 }
-.thumbnailUpload{
+
+.thumbnailUpload {
   margin-top: 3%;
 }
-.iconThumbicon{
-  color:#0f7af5 !important;
+
+.iconThumbicon {
+  color: #0f7af5 !important;
   font-size: 1.8em !important;
 }
-.iconThumb{
-  color:#0f7af5 !important;
+
+.iconThumb {
+  color: #0f7af5 !important;
   text-transform: none !important;
   font-size: 0.9em !important;
 }
-.fontRecommend{
+
+.fontRecommend {
   font-size: 0.76em !important;
   color: #918e8e;
 }
@@ -431,54 +490,65 @@
   width: 93%;
   background-color: #000;
   margin-top: 4%;
-   padding: 0.5px;
+  padding: 0.5px;
 }
-.categorytext{
+
+.categorytext {
   font-size: 0.9em !important;
   font-weight: 500;
   color: #8e8888 !important;
   font-family: Arial, Helvetica, sans-serif !important;
   font-style: normal !important;
 }
-.coursesButton{
+
+.coursesButton {
   margin-top: 5% !important;
   width: 156px !important;
-  background-color:#0f7af5 !important;
+  background-color: #0f7af5 !important;
   text-transform: none !important;
   color: white !important;
 }
-.categoryBox{
+
+.categoryBox {
   display: flex;
   flex-direction: row;
 }
-.categorySelect{
+
+.categorySelect {
   margin-left: 0% !important;
   margin-top: 4%
 }
-.Editcategory{
+
+.Editcategory {
   margin-left: -2%;
 }
-.rightCat{
+
+.rightCat {
   margin-left: 8%;
 }
-.rightEditPrice{
+
+.rightEditPrice {
   margin-left: 2%;
 }
-.editFirstBox{
+
+.editFirstBox {
   display: flex;
   flex-direction: row;
 }
-.editFirstText{
+
+.editFirstText {
   margin-left: 1% !important;
 }
 .marginscndBox{
   margin-left: 7%;
 }
-.marginscndBoxYears{
+
+.marginscndBoxYears {
   margin-top: -2%;
   margin-left: 8%;
   /* padding: 0px -24px; */
 }
+
 /* .css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
   padding: 15.5px 14px !important;
 } */
@@ -490,150 +560,180 @@
 
 
 
-@media screen and (max-width: 580px)  {
-  .subHeader{
+@media screen and (max-width: 580px) {
+  .subHeader {
     font-size: 0.8em !important;
     flex-wrap: wrap;
   }
-  .headerText{
+
+  .headerText {
     font-size: 1.3em !important;
   }
-  .HeaderLeft{
+
+  .HeaderLeft {
     margin-left: 2%;
     margin-top: 2% !important;
-    width:35% !important;
+    width: 35% !important;
   }
-  .HeaderRight{
-    width:65%;
+
+  .HeaderRight {
+    width: 65%;
   }
-  .categoryBox{
+
+  .categoryBox {
     display: flex;
     flex-direction: column;
   }
-  .rightCat{
+
+  .rightCat {
     margin-left: 0%;
   }
-  
+
 }
-@media screen and (max-width:992px)  {
-  .formMain{
-    width:90%;
+
+@media screen and (max-width:992px) {
+  .formMain {
+    width: 90%;
   }
-  
-  
+
+
 }
-@media screen and (max-width: 480px)  {
-  .subHeader{
+
+@media screen and (max-width: 480px) {
+  .subHeader {
     font-size: 0.55em !important;
   }
- 
-  .headerText{
+
+  .headerText {
     font-size: 1em !important;
   }
-  .HeaderLeft{
+
+  .HeaderLeft {
     margin-left: 2%;
     margin-top: 2% !important;
   }
-  .HeaderRight{
+
+  .HeaderRight {
     display: block;
   }
-  .selectDesign{
+
+  .selectDesign {
     width: 225px;
     height: 50px;
   }
-  .categoryBox{
+
+  .categoryBox {
     display: flex;
     flex-direction: column;
   }
-  .rightCat{
+
+  .rightCat {
     margin-left: 0%;
   }
 }
+
 @media screen and (max-width: 280px) {
-  .selectDesign{
+  .selectDesign {
     width: 184px;
   }
 }
+
 /* Upcoming Courses CSS */
-.formMainUpcoming{
+.formMainUpcoming {
   padding: 3%;
-  width:90%;
+  width: 90%;
 }
-.BoxShadowUpcoming{
+
+.BoxShadowUpcoming {
   border-radius: 80px !important;
   font-size: 0.7rem !important;
   margin-top: 1% !important;
 
 }
-.divider-upcoming{
+
+.divider-upcoming {
   background-color: #000;
   margin-top: 4%;
   padding: 0.5px;
   width: 50%;
 }
-.checkboxDesign .MuiTypography-root{
+
+.checkboxDesign .MuiTypography-root {
   font-size: 0.85em !important;
   font-weight: 600 !important;
 }
-.checkbox-icon{
+
+.checkbox-icon {
   font-weight: 300 !important;
 }
-.configurationDialog .MuiDialog-paper{
-   min-width: 40vw!important;
-    height:auto !important;
+
+.configurationDialog .MuiDialog-paper {
+  min-width: 40vw !important;
+  height: auto !important;
 }
-.addCatHeading{
+
+.addCatHeading {
   margin-top: 2% !important;
   margin-left: 1px !important;
 }
-.addCatHeadingCat{
+
+.addCatHeadingCat {
   margin-top: 3% !important;
   margin-left: 3px !important;
 }
-.confiDivider .MuiDialogContent-root{
+
+.confiDivider .MuiDialogContent-root {
   padding: 20px 1px !important;
   /* width: 95% !important; */
   margin-bottom: -20px;
 }
-.addCatTextField{
+
+.addCatTextField {
   margin-top: 3% !important;
   margin-bottom: 4% !important;
 }
-.addCatTextFieldCat{
+
+.addCatTextFieldCat {
   margin-top: 3% !important;
   width: 100% !important;
   margin-bottom: 4% !important;
 }
-.closeHover{
+
+.closeHover {
   margin-top: 0.8%;
 }
-.closeHover:hover{
+
+.closeHover:hover {
   cursor: pointer;
 }
 
-.accoridanBtn{
-  position:absolute;
+.accoridanBtn {
+  position: absolute;
   margin-right: 25px;
   right: 0;
   margin-top: -9% !important;
 }
-.MuiStack-root{
+
+.MuiStack-root {
   margin-left: 0px !important;
 }
-.MuiAccordionSummary-content{
+
+.MuiAccordionSummary-content {
   min-width: 42% !important;
 }
-.MuiAccordionSummary-expandIconWrapper{
+
+.MuiAccordionSummary-expandIconWrapper {
   min-width: 0% !important;
 }
 
-.editPriceDeleteBtn{
+.editPriceDeleteBtn {
   margin-right: 12px !important;
   text-transform: none !important;
   border: 0.5px solid red !important;
   padding: 0px 13px !important;
 }
-.editPriceEditBtn{
+
+.editPriceEditBtn {
   margin-right: 7px !important;
   text-transform: none !important;
   border: 0.5px solid #1976d2 !important;
@@ -644,59 +744,68 @@
 
 /* ADD CONTENT DRAWER CSS  */
 
-.folderDrawer{
+.folderDrawer {
   border-top-left-radius: 10px !important;
   border-bottom-left-radius: 10px !important;
   border-bottom: 1px seashell grey;
 }
-.HeaderBox{
+
+.HeaderBox {
   margin: 4% !important;
 }
-.FolderNameBox{
+
+.FolderNameBox {
   margin: 8% 4% !important;
 }
-.FolderNameBox h4{
+
+.FolderNameBox h4 {
   margin-bottom: 2%;
 }
-.enterFolderNameField{
+
+.enterFolderNameField {
   border-radius: 9% !important;
   padding: -20px -2px !important;
 }
-.folderDrawerSaveBtn{
-  background-color: #43c5f0  !important;
+
+.folderDrawerSaveBtn {
+  background-color: #43c5f0 !important;
   color: #ffffff !important;
   border-radius: 12px !important;
   /* position: relative;
   left: 82%;
   top: 18px; */
   text-transform: none !important;
-  font-size: 1.2rem !important ;
+  font-size: 1.2rem !important;
   padding: 2px 31px !important;
   /* font-weight: 600 !important; */
 
 }
 
-.UploadBtnBox{
+.UploadBtnBox {
   display: flex;
   align-items: center;
   justify-content: end;
   margin-top: 3%;
-    margin-right: 3%;;
+  margin-right: 3%;
+  ;
 }
 
 /* VIDEO DRAWER CSS  */
-.dividingVdoSections{
+.dividingVdoSections {
   display: flex;
   flex-direction: row;
   margin-top: 30px;
 }
-.middleSectionVdo{
+
+.middleSectionVdo {
   margin: 2px 29px !important;
 }
-.addDiscriptionuploading{
+
+.addDiscriptionuploading {
   margin-left: -6px;
 }
-.vdoAddDescription{
+
+.vdoAddDescription {
   color: #0f7af5;
   position: relative;
   bottom: -7px;
@@ -705,24 +814,27 @@
 
 
 
-.uploadZeroPerc{
+.uploadZeroPerc {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
-.lastButtons{
+
+.lastButtons {
   position: relative !important;
   top: 21px !important;
   justify-content: space-between !important;
 }
-.videoDrawerAdvSettBtn{
+
+.videoDrawerAdvSettBtn {
   border: 0.4px solid #0f7af5 !important;
   border-radius: 15px !important;
   color: #0f7af5 !important;
   background-color: #ffffff !important;
   text-transform: none !important;
 }
-.videoDrawerDoneBtn{
+
+.videoDrawerDoneBtn {
   background-color: #0f7af5 !important;
   color: #ffffff !important;
   border-radius: 15px !important;
@@ -732,22 +844,23 @@
 }
 
 /* ONLINE TEST CSS  */
-.selectTestCompleteBox{
+.selectTestCompleteBox {
   border: 1px solid grey !important;
   border-radius: 13px !important;
   width: 92%;
-    position: relative;
-    left: 19px;
-    top: -29px;
-    /* box-shadow: 1px 1px 1px 1px #d3d3d3 !important; */
+  position: relative;
+  left: 19px;
+  top: -29px;
+  /* box-shadow: 1px 1px 1px 1px #d3d3d3 !important; */
 
 }
-.selectTestsOptions{
+
+.selectTestsOptions {
   display: flex;
   flex-direction: row;
 }
 
-.realExamTestOne{
+.realExamTestOne {
   background-color: #eeeef4;
   color: #be69be;
   padding: 5px 7px;
@@ -758,7 +871,8 @@
   bottom: -11px;
   left: 12px;
 }
-.realExamTestTwo{
+
+.realExamTestTwo {
   background-color: #eeeef4;
   color: #be69be;
   padding: 5px 7px;
@@ -769,6 +883,7 @@
   bottom: -11px;
   left: 12px;
 }
+
 .OTDrawerAddTestBtn {
   background-color: #43c5f0 !important;
   color: #ffffff !important;
@@ -780,11 +895,12 @@
   padding: 4px 14px !important;
   font-size: 1.2rem !important;
 }
-.stylingAutofield{
+
+.stylingAutofield {
   border-radius: 21px !important;
 }
 
-.OTLastCheckbox{
+.OTLastCheckbox {
   display: flex;
   flex-direction: row;
   margin-left: 10px;
@@ -792,22 +908,23 @@
 
 /* SUBJECTIVE TEST CSS  */
 /* .fixingSubjTestWidth{ */
-  /* width: 39%; */
+/* width: 39%; */
 /* } */
-.addSubjUploadBox{
+.addSubjUploadBox {
   display: flex;
   flex-direction: row;
   justify-content: space-between !important;
   border-radius: 15px;
   background-color: #ebf1f3;
-  color:#818181;
+  color: #818181;
   position: relative;
   top: 28px;
   left: 34px;
   width: 83%;
   padding: 1px 24px;
 }
-.createNewTestBtn{
+
+.createNewTestBtn {
   background-color: #0f7af5 !important;
   color: #ffffff !important;
   text-transform: none !important;
@@ -817,14 +934,16 @@
   position: relative;
   top: 14px;
 }
-.A-searchImageSection{
+
+.A-searchImageSection {
   height: 42% !important;
   width: 100% !important;
   text-align: center !important;
   position: relative;
   top: 50px;
 }
-.subjBoldPara{
+
+.subjBoldPara {
   /* position: relative; */
   /* top: 41px; */
   /* left: -1px; */
@@ -840,27 +959,30 @@
   width: 95%;
   border-bottom: 1px seashell grey;
 }
-.subjTestBox{
+
+.subjTestBox {
   margin: 4% 3% !important;
 }
-.subjTestBox h4{
+
+.subjTestBox h4 {
   margin-bottom: 2%;
 }
-.subjTestAttachFiles{
+
+.subjTestAttachFiles {
   background-color: #e2ecf0 !important;
-    color: #0f7af5 !important;
-    border-radius: 15px !important;
-    padding: 11px 39px;
-    position: relative;
-    left: -1px;
-    width: 18%;
+  color: #0f7af5 !important;
+  border-radius: 15px !important;
+  padding: 11px 39px;
+  position: relative;
+  left: -1px;
+  width: 18%;
 }
 
 /* .stylingAutofieldSubjTest{
   border-radius: 21px !important;
 } */
 .subjTestAddTestBtn {
-  background-color: #43c5f0  !important;
+  background-color: #43c5f0 !important;
   color: #ffffff !important;
   border-radius: 12px !important;
   text-transform: none !important;
@@ -869,18 +991,21 @@
   margin-top: 14px !important;
   padding: 7px 24px !important;
 }
-.demoClasssss{
+
+.demoClasssss {
   display: flex;
   justify-content: right;
   margin: 9px;
 }
-.wholeBOxxx{
+
+.wholeBOxxx {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   margin: 20px 2px;
 }
+
 .subjTestFolderDrawer {
   border-top-left-radius: 10px !important;
   border-bottom-left-radius: 10px !important;
@@ -890,16 +1015,18 @@
   /* padding-left: -3px; */
   border-bottom: 1px seashell grey;
 }
-.addImgPara{
+
+.addImgPara {
   display: flex;
-    flex-direction: row;
-    width: 87%;
-    position: relative;
-    top: -27px;
-    left: 17px;
-    color: grey;
+  flex-direction: row;
+  width: 87%;
+  position: relative;
+  top: -27px;
+  left: 17px;
+  color: grey;
 }
-.yellowBoxDiscription{
+
+.yellowBoxDiscription {
   background-color: #f4f4b7 !important;
   width: 77%;
   position: relative;
@@ -908,8 +1035,9 @@
   padding: 18px 26px;
   border-radius: 15px;
 }
-.createnAddtestbtn{
-  background-color: #43c5f0  !important;
+
+.createnAddtestbtn {
+  background-color: #43c5f0 !important;
   color: #ffffff !important;
   border-radius: 12px !important;
   /* position: relative; */
@@ -919,4 +1047,18 @@
   padding: -2px 0px !important;
   margin-left: 75% !important;
   margin-top: 5px !important;
+}
+
+/* added for the Editor */
+
+.custom-editor .ql-container {
+  min-height: 150px;
+  height: 50px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.custom-editor .ql-editor {
+  font-size: 16px;
 }

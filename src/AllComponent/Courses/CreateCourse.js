@@ -76,9 +76,10 @@ const CreateCourses = ({ handleHeaderLabels }) => {
 
   const handleInputChange = (type, value) => {
     if (type === "basicInfo") {
+      console.log("Value=----->,", value);
       setBasicInfo(value);
     } else if (type === "editPrice") {
-      console.log("Value=----->,", value);
+      // console.log("Value=----->,", value);
       handleCreateCourse(value);
     } else if (
       type === "editPriceLifeTime" ||
@@ -111,6 +112,10 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         category_id: basicInfo?.Category?.category_id,
         sub_category_id: basicInfo?.subCategory?.category_id,
         thumbnail_path: basicInfo?.thumbnailPath,
+        thumbnail_path_desktop:basicInfo?.thumbnail_path_desktop,
+        thumbnail_path_mobile:basicInfo?.thumbnail_path_mobile,
+        thumbnail_video_path:basicInfo?.thumbnail_video_path,
+        thumbnail_video_description:basicInfo?.thumbnail_video_description,
         created_by: 1,
         start_date: "2024-04-30",
         end_date: "2024-05-30",
