@@ -140,6 +140,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                   <li className="myCourses">
                     <Link to="/admin/YourCourses" className="textDecoration">
                       <Typography
+                        id="hoverrr"
                         className={
                           highlight === "YourCourses" ? "hoverrr2 paddingD" : "paddingD"
                         }
@@ -153,6 +154,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                   <li className="listDesign">
                     <Link to="/admin/CouponMain" className="textDecoration">
                       <Typography
+                        id="hoverrr"
                         className={
                           highlight === "CreateCoupon" ? "hoverrr2 paddingD" : "paddingD"
                         }
@@ -203,6 +205,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                   <li className="myCourses">
                     <Link to="/admin/User" className="textDecoration">
                       <Typography
+                        id="hoverrr"
                         className={highlightPeople === "User" ? "hoverrr2 paddingD" : "paddingD"}
                         sx={{ textDecoration: "none", color: "grey", mt: -1 }}
                         onClick={() => handleHighlightPeople("User")}
@@ -214,6 +217,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                   <li className="listDesign">
                     <Link to="/admin/MyTeam" className="textDecoration">
                       <Typography
+                        id="hoverrr"
                         className={highlightPeople === "MyTeam" ? "hoverrr2 paddingD" : "paddingD"}
                         sx={{ textDecoration: "none", color: "grey", mt: -2.5 }}
                         onClick={() => handleHighlightPeople("MyTeam")}
