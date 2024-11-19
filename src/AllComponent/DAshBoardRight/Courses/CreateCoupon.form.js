@@ -7,73 +7,105 @@ import FormControl from "@mui/material/FormControl";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import "../../CSSFile/Coupon.css";
 import { getCoupon, putCoupon } from "../../ActionFactory/apiActions";
-import dayjs from 'dayjs';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import dayjs from "dayjs";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import moment from "moment";
+import { ToastContainer, toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 
 const CreateCouponForm = ({}) => {
-  const [coupontype, setCoupontype] = useState()
-  const [startDate, setStartDate] = useState(dayjs('2022-04-17'))
-  const [endDate, setEndDate] = useState(dayjs('2022-04-17'))
-  const [discountamount, setDiscountamount] = useState()
-  const [totaluser, setTotaluser] = useState()
-  const [minimumorder, setMinimumorder] = useState()
-  const [couponcode, setCouponcode] = useState()
+  const [coupontype, setCoupontype] = useState("");
+  const [startDate, setStartDate] = useState(dayjs("2022-04-17"));
+  const [endDate, setEndDate] = useState(dayjs("2022-04-17"));
+  const [discountamount, setDiscountamount] = useState("");
+  const [totaluser, setTotaluser] = useState("");
+  const [minimumorder, setMinimumorder] = useState("");
+  const [couponcode, setCouponcode] = useState("");
+  const [isValid, setIsValid] = useState(true);
 
   const handleFlatDiscount = (event) => {
-    setDiscountamount(event.target.value)
-  }
+     // Get the value from the event
+     const newValue = event.target.value;
+
+     // Only allow numbers and ensure the length doesn't exceed 10
+     if (/^\d*$/.test(newValue) && newValue.length <= 10) {
+      setDiscountamount(newValue);
+       setIsValid(true);
+     } else {
+       setIsValid(false);
+     }
+  
+  };
   const handleStartDate = (event) => {
-    setStartDate(event)
-  }
+    setStartDate(event);
+  };
   const handleEndDate = (event) => {
-    setEndDate(event)
-  }
+    setEndDate(event);
+  };
   const handleNoOfUse = (event) => {
-    setTotaluser(event.target.value)
-  }
+    setTotaluser(event.target.value);
+  };
   const handleMinimumOrder = (event) => {
-    setMinimumorder(event.target.value)
-  }
+    setMinimumorder(event.target.value);
+  };
   const handleCouponCOde = (event) => {
-    setCouponcode(event.target.value)
-  }
+    setCouponcode(event.target.value);
+  };
   const handleChange = (event) => {
     setCoupontype(event.target.value);
-  }
-
-const handleCreateCoupon = () => {
-  const payload = {
-    coupon_type: coupontype,
-    coupon_code: couponcode,
-    coupon_max_user:totaluser,
-    start_date:   moment(new Date(startDate)).format("YYYY-MM-DD"),
-    end_date:   moment(new Date(endDate)).format("YYYY-MM-DD"),
-    discount_amount: discountamount, 
-    discount_percent: "discountpercent",
-    minimum_order: minimumorder,
-    created_by: JSON.parse(
-      localStorage.getItem("loggedInUser")
-    ).user_id, 
   };
-  putCoupon({
-    payload,
-    callBack: (response) => {},
-    error: (error) => {
-    }
-  })
-}
   
+  const navigate = useNavigate();
+
+  const handleCreateCoupon = () => {
+    console.log(coupontype === "" ,
+      couponcode === "" ,
+      totaluser === "" ,
+      discountamount === "" ,
+      minimumorder === "", "hel")
+    if (
+      coupontype === "" &&
+      couponcode === "" &&
+      totaluser === "" &&
+      discountamount === "" &&
+      minimumorder === ""
+    ) {
+      toast.error("All Field are required", {
+        autoClose: 500,
+      });
+    } else {
+      const payload = {
+        coupon_type: coupontype,
+        coupon_code: couponcode,
+        coupon_max_user: totaluser,
+        start_date: moment(new Date(startDate)).format("YYYY-MM-DD"),
+        end_date: moment(new Date(endDate)).format("YYYY-MM-DD"),
+        discount_amount: discountamount,
+        discount_percent: "discountpercent",
+        minimum_order: minimumorder,
+        created_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
+      };
+      putCoupon({
+        payload,
+        callBack: (response) => {},
+        error: (error) => {},
+      });
+      navigate("/admin/CouponMain");
+      toast.success("Coupon successful Created");
+    }
+  };
+
   return (
     <Box className="courseMainTrack">
       <div className="formMain">
         <Typography fontWeight={600} required>
           Discount Type
         </Typography>
- 
+
         <FormControl className="radioButtonForm">
           <RadioGroup
             row
@@ -99,8 +131,11 @@ const handleCreateCoupon = () => {
           Flat Discount
         </Typography>
         <TextField
+          type="number"
+          // inputProps={{ maxLength: 10, tabIndex: 1,className: "textField" }}
+          // disabled={discountamount?.length === 10 }
           inputProps={{ className: "textField" }}
-          sx={{ mt: 1,width: "93%" }}
+          sx={{ mt: 1, width: "93%" }}
           fullWidth
           size="small"
           placeholder="Enter discount amount"
@@ -119,39 +154,39 @@ const handleCreateCoupon = () => {
               Start Date
             </Typography>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer components={['DatePicker', 'DatePicker']}>
-        {/* <DatePicker label="Uncontrolled picker" defaultValue={dayjs('2022-04-17')} /> */}
-        <DatePicker
-          // label="Controlled picker"
-          value={startDate}
-          onChange={handleStartDate}
-        />
-      </DemoContainer>
-    </LocalizationProvider>
+              <DemoContainer components={["DatePicker", "DatePicker"]}>
+                {/* <DatePicker label="Uncontrolled picker" defaultValue={dayjs('2022-04-17')} /> */}
+                <DatePicker
+                  // label="Controlled picker"
+                  value={startDate}
+                  onChange={handleStartDate}
+                />
+              </DemoContainer>
+            </LocalizationProvider>
           </Box>
           <Box className="marginscndBox">
             <Typography fontWeight={600} className="editFirstText">
-             End Date
+              End Date
             </Typography>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer components={['DatePicker', 'DatePicker']}>
-        {/* <DatePicker label="Uncontrolled picker" defaultValue={dayjs('2022-04-17')} /> */}
-        <DatePicker
-          // label="Controlled picker"
-          value={endDate}
-          onChange={handleEndDate}
-        />
-      </DemoContainer>
-    </LocalizationProvider>
+              <DemoContainer components={["DatePicker", "DatePicker"]}>
+                {/* <DatePicker label="Uncontrolled picker" defaultValue={dayjs('2022-04-17')} /> */}
+                <DatePicker
+                  // label="Controlled picker"
+                  value={endDate}
+                  onChange={handleEndDate}
+                />
+              </DemoContainer>
+            </LocalizationProvider>
           </Box>
-          
         </Box>
         <Box sx={{ marginTop: "5%" }} className="editFirstBox">
           <Box>
             <Typography fontWeight={600} className="editFirstText">
-             Minimum Order Value
+              Minimum Order Value
             </Typography>
             <TextField
+              type="number"
               sx={{ width: 260, marginTop: "4% !important" }}
               inputProps={{ className: "textField" }}
               fullWidth
@@ -161,7 +196,9 @@ const handleCreateCoupon = () => {
               className="BoxShadow"
               InputProps={{
                 startAdornment: (
-                  <CurrencyRupeeIcon sx={{ color: "#aca9a9", fontSize: "1.1em" }} />
+                  <CurrencyRupeeIcon
+                    sx={{ color: "#aca9a9", fontSize: "1.1em" }}
+                  />
                 ),
               }}
               onChange={handleMinimumOrder}
@@ -169,9 +206,10 @@ const handleCreateCoupon = () => {
           </Box>
           <Box className="marginscndBox">
             <Typography fontWeight={600} className="editFirstText">
-             No of Use
+              No of Use
             </Typography>
             <TextField
+              type="number"
               sx={{ width: 260, marginTop: "4% !important" }}
               inputProps={{ className: "textField" }}
               fullWidth
@@ -189,7 +227,7 @@ const handleCreateCoupon = () => {
         <TextField
           inputProps={{ className: "textField" }}
           fullWidth
-          sx={{ mt: 1,width: "93%" }}
+          sx={{ mt: 1, width: "93%" }}
           size="small"
           placeholder="1"
           id="fullWidth"
@@ -197,11 +235,15 @@ const handleCreateCoupon = () => {
           onChange={handleCouponCOde}
         />
         <Box className="divider"></Box>
-        <Button variant="contained" className="coursesButton"
-        onClick={handleCreateCoupon}>
+        <Button
+          variant="contained"
+          className="coursesButton"
+          onClick={handleCreateCoupon}
+        >
           Create
         </Button>
       </div>
+      <ToastContainer />
     </Box>
   );
 };

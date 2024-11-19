@@ -27,6 +27,9 @@ import Select from "@mui/material/Select";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import Divider from '@mui/material/Divider'; 
 import { getCoupon } from "../ActionFactory/apiActions";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -567,6 +570,8 @@ const CouponBox = () => {
           <Typography sx={{ml: 1}} className="DeleteRed"> Delete</Typography>
         </Box>
       </Popover>
+      
+      <ToastContainer />
     </div>
   );
 };
