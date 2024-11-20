@@ -23,6 +23,7 @@ import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import SaveIcon from "@mui/icons-material/Save";
 import { useNavigate } from "react-router-dom";
 import { getCourseContentById } from "../../ActionFactory/apiActions";
+import { ToastContainer, toast } from "react-toastify";
 
 function AddContent({
   handleInputChange,
@@ -73,7 +74,11 @@ function AddContent({
           });
           setModuleDescription(arr);
         },
-      });
+        error: (error) => {
+          toast.error(error.message);
+          // console.log(error);
+        },
+      })
     }
     getContentType({
       callBack: (response) => {
@@ -82,7 +87,6 @@ function AddContent({
     });
   }, []);
   const handleAddContent = (event, idx) => {
-    console.log("event---->",event,"idxx--->",idx)
     event.stopPropagation();
     // if (idx === expanded) {
     //   setExpanded(null);
@@ -171,15 +175,12 @@ function AddContent({
   };
 
   const handleInputOnAddContent = (e, index) => {
-    // e.preventDefault();
-    console.log("indexxx", index, moduleDescription);
     if (moduleDescription) {
       let storedValues = Object.assign({}, moduleDescription);
       moduleDescription.map((item,idx)=>{
         if(idx===index){
           
           item.moduleName = e;
-           console.log("index///item",idx.moduleName,"item.moduleName",item,"storedValues",storedValues)
           setModuleDescription(storedValues);
         }
       })
@@ -264,7 +265,6 @@ function AddContent({
   };
 
   const handleOpenNCloseAccordian = (e, index) => {
-    console.log("eeeeee=>", e, "indexx===>", index);
     if (index === expanded) {
       setExpanded(null);
     } else {

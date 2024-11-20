@@ -29,9 +29,9 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
 import LoaderComponent from "../../../../Util/LoaderComponent";
+import CustomTextEditor from "../../../../Util/CustomTextEditor";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
-
 const AntSwitch = styled(Switch)(({ theme }) => ({
   width: 28,
   height: 16,
@@ -106,17 +106,17 @@ function TestPortalMain() {
   const [openAddOptions, setAddOptions] = useState(false);
   const [addOptionText, setAddOptionText] = useState("");
   const [typesOfQns, setTypesOfQns] = useState("");
-const [selectedTypeQns, setSelectedTypeQns] = useState("single-select");
-const [ openInstruction, setOpenInstruction] = useState(false);
- const [instructionsString, setInstructionsString]=useState("");
- const [testInstructions, setTestInstructions] = useState("")
+  const [selectedTypeQns, setSelectedTypeQns] = useState("single-select");
+  const [openInstruction, setOpenInstruction] = useState(false);
+  const [instructionsString, setInstructionsString] = useState("");
+  const [testInstructions, setTestInstructions] = useState("");
   const [selectedTypeNId, setSelectedTypeNId] = useState();
   const [addNewSectionNav, setAddNewSectionNav] = useState();
+  const [content, setContent] = useState("");
 
   const handleClickOpen = (editedQns, index) => {
     setEditedQuestion(editedQns);
     setTypesOfQns(editedQns.question_type);
-    console.log("dnkdm", index);
     setOpen(true);
   };
   const handleClose = () => {
@@ -164,7 +164,6 @@ const [ openInstruction, setOpenInstruction] = useState(false);
   const handleAddSection = () => {
     if (addNewSectionNav === "addNewSectionNav") {
       setMcqopen(false);
-      // console.log("right palce");
       const payload = {
         test_id: test_id,
         test_type_id: selectedTestType.test_type_id,
@@ -173,7 +172,6 @@ const [ openInstruction, setOpenInstruction] = useState(false);
         no_of_question: 5,
         marks_per_question: 4,
       };
-      // console.log("payload==>", payload);
       createTestInfo({
         payload,
         callBack: (res) => {
@@ -182,7 +180,6 @@ const [ openInstruction, setOpenInstruction] = useState(false);
         },
       });
     } else {
-      // console.log("else palce");
       setOpenqns(!openqns);
       setCqopen(true);
       setMcqopen(false);
@@ -405,9 +402,9 @@ const [ openInstruction, setOpenInstruction] = useState(false);
     }
     setEditedQuestion(editedOptions);
   };
-  const handleChange=(event)=>{
-    setInstructionsString(event.target.value)
-  }
+  const handleChange = (event) => {
+    setInstructionsString(event.target.value);
+  };
 
   const handleOpen = () => {
     setOpenInstruction(true);
@@ -418,7 +415,6 @@ const [ openInstruction, setOpenInstruction] = useState(false);
   };
 
   const handleAddInstruction = () => {
-    // console.log("djfhbjkl");
     const payload = {
       test_id: test_id,
       test_type_id: selectedTestType.test_type_id,
@@ -442,11 +438,11 @@ const [ openInstruction, setOpenInstruction] = useState(false);
   const handleAddTestInstruction = (value) => {
     setTestInstructions(value);
   };
-
+  const handleChangeOnEditor = (e) => {
+    setContent(e);
+  };
   return (
     <div className="grid-container-TestPortal ">
-      
-      {console.log("setOpenInstruction",instructionsString)}
       <TestProtalHeader testData={testData} />
       <LoaderComponent loaderState={loaderState} />
       <TestNavAndLeft
@@ -479,57 +475,62 @@ const [ openInstruction, setOpenInstruction] = useState(false);
         setMcqopen={setMcqopen}
         setTestInfoId={setTestInfoId}
       />
-       <BootstrapDialog
-      onClose={()=>setOpenInstruction(false)}
-      aria-labelledby="customized-dialog-title"
-      open={openInstruction}
-    >
-      <DialogTitle
-        sx={{ m: 0, p: 2, alignItems: "center", textAlign: "center" }}
-        id="customized-dialog-title"
+      <BootstrapDialog
+        onClose={() => setOpenInstruction(false)}
+        aria-labelledby="customized-dialog-title"
+        open={openInstruction}
       >
-        Test Instructions
-      </DialogTitle>
-      <IconButton
-        aria-label="close"
-        onClick={()=>setOpenInstruction(false)}
-        sx={{
-          position: "absolute",
-          right: 8,
-          top: 8,
-          color: (theme) => theme.palette.grey[500],
-        }}
-      >
-        <CloseIcon />
-      </IconButton>
-
-      <DialogContent dividers>
-        <Typography gutterBottom>
-          <b>Test Instructions</b>
-        </Typography>
-        <Box
-          className="testInstTextField"
-          component="form"
+        <DialogTitle
+          sx={{ m: 0, p: 2, alignItems: "center", textAlign: "center" }}
+          id="customized-dialog-title"
+        >
+          Test Instructions
+        </DialogTitle>
+        <IconButton
+          aria-label="close"
+          onClick={() => setOpenInstruction(false)}
           sx={{
-            "& > :not(style)": { m: 1, width: "25ch" },
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
           }}
-          noValidate
-          autoComplete="off"
         >
-          <TextField id="outlined-basic" variant="outlined" onChange={handleChange} value={instructionsString}/>
-        </Box>
-      </DialogContent>
+          <CloseIcon />
+        </IconButton>
 
-      <DialogActions>
-        <Button
-          autoFocus
-          onClick={()=>setOpenInstruction(false)}
-          className="doneBtnInstPage"
-        >
-          Done
-        </Button>
-      </DialogActions>
-    </BootstrapDialog>
+        <DialogContent dividers>
+          <Typography gutterBottom>
+            <b>Test Instructions</b>
+          </Typography>
+          <Box
+            className="testInstTextField"
+            component="form"
+            sx={{
+              "& > :not(style)": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              id="outlined-basic"
+              variant="outlined"
+              onChange={handleChange}
+              value={instructionsString}
+            />
+          </Box>
+        </DialogContent>
+
+        <DialogActions>
+          <Button
+            autoFocus
+            onClick={() => setOpenInstruction(false)}
+            className="doneBtnInstPage"
+          >
+            Done
+          </Button>
+        </DialogActions>
+      </BootstrapDialog>
       <BootstrapDialog
         className="PopUP"
         onClose={handleCloseDialogMCQ}
@@ -982,26 +983,27 @@ const [ openInstruction, setOpenInstruction] = useState(false);
           <CloseIcon />
         </IconButton>
 
-        <DialogContent dividers>
+        <DialogContent
+          dividers
+          style={{
+            height: "500px",
+            width: "550px",
+          }}
+        >
           <Typography gutterBottom>
             <b>Test Instructions</b>
           </Typography>
-          <Box
-            className="testInstTextField"
-            component="form"
-            sx={{
-              "& > :not(style)": { m: 1, width: "25ch" },
-            }}
-            // noValidate
-            // autoComplete="off"
-          >
-            <TextField
-              id="outlined-basic"
-              variant="outlined"
-              onChange={(e) => handleAddTestInstruction(e.target.value)}
-              value={testInstructions}
-            />
-          </Box>
+
+          <CustomTextEditor
+            value={content}
+            onChange={(e) => handleChangeOnEditor(e)}
+            placeholder="Write something..."
+            // style={{
+            //   height: "500px",
+            //   width: "800px",
+            // }}
+          />
+          {/* </Box> */}
         </DialogContent>
 
         <DialogActions>

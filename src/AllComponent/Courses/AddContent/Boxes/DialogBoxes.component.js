@@ -487,7 +487,7 @@ const DialogBoxes = ({
             <UploadFileRoundedIcon className="VideoIcon" />
             <Box className="videoDottedBorder">
               <Typography gutterBottom className="UploadDoc">
-                <b> Upload Videosss(s)</b>
+                <b> Upload Video(s)</b>
               </Typography>
               <Typography className="VideoPara">
                 You can upload upto 20 files at a time. Maximum file size that

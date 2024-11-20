@@ -39,7 +39,6 @@ export const getAllCoursesFilter = ({
   error,
 }) => {
   let url = new URL(`${APIS.allCoursesFilter}`);
-  console.log(is_publish, duration_type_id, category_id, "lineno31 ApiAction");
   if (is_publish) {
     url.searchParams.set("is_publish", is_publish);
   }
@@ -78,21 +77,17 @@ export const banner = ({ callBack, error }) => {
     });
 };
 
-export const getCoupon = ({callBack, error }) => {
+export const getCoupon = ({ callBack, error }) => {
   const url = APIS.getCoupon;
-  axios
-    .get(url)
-    .then((response) => {
-      callBack(response);
-    })
+  axios.get(url).then((response) => {
+    callBack(response);
+  });
 };
 export const putCoupon = ({ payload, callBack, error }) => {
   const url = APIS.getCoupon;
-  axios
-    .post(url, payload)
-    .then((response) => {
-      callBack(response);
-    })
+  axios.post(url, payload).then((response) => {
+    callBack(response);
+  });
 };
 
 export const bannerTypeapi = ({ callBack, error }) => {
@@ -133,8 +128,6 @@ export const bannerPage = ({ callBack, error }) => {
 
 export const uploadBanner = ({ payload, callBack, error }) => {
   const url = APIS.banner;
-  // Log the payload to check if active_status is included
-  // console.log("Payload being sent to upload banner:", payload);
   axios
     .post(url, payload)
     .then((response) => {
@@ -177,8 +170,6 @@ export const deleteBanner = ({ web_banner_id, callBack, error }) => {
       error(errorMessage);
     });
 };
-
-
 
 export const addwebinar = ({ payload, callBack, error }) => {
   const url = APIS.addwebinar;
@@ -445,7 +436,6 @@ export const createTestInfo = ({ payload, id, callBack }) => {
       callBack(response);
     });
   }
-  console.log("idddd", id);
 };
 export const getTestType = ({ callBack }) => {
   const url = APIS.testType;
@@ -486,11 +476,16 @@ export const getBlog = ({ payload, callBack, error }) => {
     });
 };
 
-export const getCourseContentById = ({ callBack, courseId }) => {
+export const getCourseContentById = ({ callBack, courseId, error }) => {
   const url = APIS.getCourseContent + "/" + courseId;
-  axios.get(url).then((response) => {
-    callBack(response);
-  });
+  axios
+    .get(url)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
 };
 
 export const postBlog = ({ payload, callBack, error }) => {
