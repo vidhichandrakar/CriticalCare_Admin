@@ -2,23 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import yellowEnvlope from "../../Media/Images/yellowEnvlope.jpeg";
-import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { Box, Tooltip, Typography } from "@mui/material";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { getDuration } from "../ActionFactory/apiActions";
-import DurationConfiguration from "./DurationConfiguration";
+import { tripmHtmlTagsToNormalFormat } from "../../Util/CommonHtmlTagsToTextConvertor";
 
 const YourCoursesCard = ({ allCourses, userData }) => {
   const [durationData, setDuration] = useState([]);
-  const [discountPercent, setDiscountPercent] = useState([
-    {
-      price: "",
-      offer_price: "",
-    },
-  ]);
-  
-  
-
   const navigate = useNavigate();
 
   const handleDiscountPercent = (price, offer_price) => {
@@ -30,8 +20,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
         const userCallBack = response?.data;
         setDuration(userCallBack);
       },
-      error: (error) => {
-      },
+      error: (error) => {},
     });
   }, []);
   const handleCourse = (id) => {
@@ -84,23 +73,31 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                     )}
                   </div>
                   <div className="col-md-8 rightCard">
-                  <Tooltip title={item.course_name}>
-                    <Typography className="courseHeader wrap-text-50">
-                      {item.course_name}
-                    </Typography>
-                    </Tooltip>
-                    <Tooltip title={item.description}>
-                      <Typography className="wrap-text-50">
-                        {item.description}
+                    <Tooltip arrow title={item.course_name}>
+                      <Typography arrow className="courseHeader wrap-text-50">
+                        {item.course_name}
                       </Typography>
                     </Tooltip>
-
-                    {/* {item?.durations?.length === 1 ? (
-                      <Box className="multiplevalidityAvailBox">
-                        Multiple Validity Available
-                      </Box>
-                    ) : null} */}
-                    {item?.durations[item?.durations?.length - 1]?.duration_type_id === 2 ? (
+                    <Tooltip
+                      title={tripmHtmlTagsToNormalFormat(item?.description)}
+                      arrow
+                    >
+                      <Typography
+                        className="wrap-text-50"
+                        style={{
+                          whiteSpace: "nowrap",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          maxWidth: "19ch",
+                          color: "#918d8d",
+                          fontSize: "0.9rem",
+                        }}
+                      >
+                        {tripmHtmlTagsToNormalFormat(item?.description)}
+                      </Typography>
+                    </Tooltip>
+                    {item?.durations[item?.durations?.length - 1]
+                      ?.duration_type_id === 2 ? (
                       <Box>
                         <Box className="multiplevalidityAvailBox">
                           Multiple Validity Available
@@ -112,12 +109,15 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                               item?.durations[item?.durations?.length - 1]
                                 ?.duration_id
                             }{" "}
-                            {item?.durations[item?.durations?.length - 1]
-                                ?.duration_name}
+                            {
+                              item?.durations[item?.durations?.length - 1]
+                                ?.duration_name
+                            }
                           </Typography>
                         </div>
                       </Box>
-                    ) : item?.durations[item?.durations?.length - 1]?.duration_type_id === 1 ? (
+                    ) : item?.durations[item?.durations?.length - 1]
+                        ?.duration_type_id === 1 ? (
                       <Box>
                         <Box className="multiplevalidityAvailBox">
                           Single Validity
@@ -129,16 +129,20 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                               item?.durations[item?.durations?.length - 1]
                                 ?.duration_id
                             }{" "}
-                            {item?.durations[item?.durations?.length - 1]
-                                ?.duration_name}
+                            {
+                              item?.durations[item?.durations?.length - 1]
+                                ?.duration_name
+                            }
                           </Typography>
                         </div>
                       </Box>
-                    ) : item?.durations[item?.durations?.length - 1]?.duration_type_id === 3 ? (
+                    ) : item?.durations[item?.durations?.length - 1]
+                        ?.duration_type_id === 3 ? (
                       <Box className="multiplevalidityAvailBox">
                         LifeTime Validity
                       </Box>
-                    ) : item?.durations[item?.durations?.length - 1]?.duration_type_id === 4 ? (
+                    ) : item?.durations[item?.durations?.length - 1]
+                        ?.duration_type_id === 4 ? (
                       <Box className="multiplevalidityAvailBox">
                         Course Expire
                       </Box>
@@ -148,24 +152,30 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                       <div
                         className={
                           // item?.durations?.length == 3
-                          item?.durations[item?.durations?.length - 1]?.duration_type_id >= 3
+                          item?.durations[item?.durations?.length - 1]
+                            ?.duration_type_id >= 3
                             ? "priceAndOfferprice-singleValidity"
                             : "priceAndOfferprice"
                         }
                       >
-                      <Typography className="offerPrice">
-                        ₹{item.durations[item?.durations?.length - 1]?.offer_price}
-                      </Typography>
-                      <Typography className="durationText price">
-                        ₹{item.durations[item?.durations?.length - 1]?.price}
-                      </Typography>
+                        <Typography className="offerPrice">
+                          ₹
+                          {
+                            item.durations[item?.durations?.length - 1]
+                              ?.offer_price
+                          }
+                        </Typography>
+                        <Typography className="durationText price">
+                          ₹{item.durations[item?.durations?.length - 1]?.price}
+                        </Typography>
                       </div>
 
                       <div>
                         <Box
                           className={
-                            item?.durations[item?.durations?.length - 1]?.duration_type_id >= 3
-                            ? "discountPercentage-multiValidity"
+                            item?.durations[item?.durations?.length - 1]
+                              ?.duration_type_id >= 3
+                              ? "discountPercentage-multiValidity"
                               : "discountPercentage-singleValidity"
                           }
                         >
@@ -183,7 +193,6 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                           </Typography>
                         </Box>
                       </div>
-
                     </div>
                   </div>
                   <div className="col-md-2 lastCard">
@@ -202,8 +211,6 @@ const YourCoursesCard = ({ allCourses, userData }) => {
             );
           })
         : null}
-     
-     
     </>
   );
 };

@@ -79,7 +79,7 @@ const BannerCard = ({ bannerAPI, handleClickEdit, handlePreviewBox }) => {
           <div className="InsideBannerBox">
             <main className="InsideMainBox">
               <CardActions className="BannerHead">
-                <Typography>Image</Typography>
+                <Typography>{value.web_banner_title}</Typography>
                 <Button
                   className="Deletebtn"
                   onClick={() => value.web_banner_id && handleDelete(value.web_banner_id)}
@@ -123,8 +123,10 @@ const BannerCard = ({ bannerAPI, handleClickEdit, handlePreviewBox }) => {
               {storedFilePath.map((row) => row.id === value.id && row.value)}
 
               <p className="fontSize1">{value.description}</p>
-              <div className="BannerHead BorderBottom">
-                <p>{value.web_banner_title}</p>
+              <div className="BannerHead BorderBottom" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <p style={{ margin: "8px", flex: 1, textAlign: 'left' }}>{value.web_banner_title}</p>
+                <div style={{ display: 'flex', gap: '10px' }}> {/* Container for buttons with spacing */}
+
                 <Button
                   className="previewBtn"
                   onClick={() => handlePreviewBox(value)} // Pass the value to handlePreviewBox
@@ -137,6 +139,7 @@ const BannerCard = ({ bannerAPI, handleClickEdit, handlePreviewBox }) => {
                 >
                   Change
                 </Button>
+                </div>
               </div>
               <div className="RemoveButton">
                 <Typography>

@@ -27,6 +27,7 @@ import IconButton from "@mui/material/IconButton";
 import yellowEnvlope from "../../../Media/Images/yellowEnvlope.jpeg";
 import Header from "../../Courses/Header";
 import { Typography } from "@material-ui/core";
+import { tripmHtmlTagsToNormalFormat } from "../../../Util/CommonHtmlTagsToTextConvertor";
 
 const Trics1FreeMockTest = ({ onDelete }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -73,7 +74,6 @@ const Trics1FreeMockTest = ({ onDelete }) => {
           courseId,
           callBack: (response) => {
             const userCallBack = response?.data[0];
-            console.log("userCallBack---->",userCallBack)
             setCourseData(userCallBack);
           },
         });
@@ -142,6 +142,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
       },
     });
   };
+
   return (
     <div className="grid-container">
       <Header
@@ -158,7 +159,6 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                 {capitalizeFirstLetter(courseData?.course_name)}
               </p>
               <hr />
-
               <p className="blackPara">Description</p>
               <TextField
                 sx={{ mt: -2 }}
@@ -169,7 +169,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                 maxRows={4}
                 className="DescBoxShadow "
                 variant="standard"
-                value={courseData?.description}
+                value={tripmHtmlTagsToNormalFormat(courseData?.description)}
               />
               <div className="PricenOfferPrice">
                 <div>

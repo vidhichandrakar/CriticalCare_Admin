@@ -81,7 +81,6 @@ function TestNavAndLeft({
   };
 
   const handleAddSectionNav = (type) => {
-    // console.log("addNewSectionNav",type);
     setAddNewSectionNav(type);
     const selectedOption = testType.filter((test) => test.test_type_name);
     handleTestType(selectedOption[0]);
@@ -219,28 +218,25 @@ function TestNavAndLeft({
               <b>Test Sections</b>
             </Typography>
           </AccordionSummary>
-          <AccordionDetails sx={{padding: 0}}>
+          <AccordionDetails sx={{ padding: 0 }}>
             <Divider />
             {/* <Box className="testsectionnameMainBox"> */}
             <Box className="testsectionname">
-            {numberOfMcqQns?.map((item) => {
-              return (
-                 <Box>
+              {numberOfMcqQns?.map((item) => {
+                return (
+                  <Box>
                     <div className="sectionOneFourQues">
                       <h5> {item?.test_section_name}</h5>
-                      <div style={{marginRight: "3%"}}>
+                      <div style={{ marginRight: "3%" }}>
                         <EditIcon className="editIconTestSection" />
                         <DeleteIcon className="deleteIconTestSection" />
                       </div>
-                      
                     </div>
                     <Divider />
                   </Box>
-               
-              );
-            })}
+                );
+              })}
             </Box>
-            {console.log("numberOfMcqQns===>", numberOfMcqQns)}
             <Box>
               <Box
                 className="addNreScsnTestSection"
@@ -249,7 +245,7 @@ function TestNavAndLeft({
                 <AddCircleOutlineIcon
                   sx={{ position: "relative", top: "5px", right: "5px" }}
                 />
-              Add New Section
+                Add New Section
               </Box>
             </Box>
             {/* </Box> */}

@@ -19,6 +19,16 @@ const CreateCourses = ({ handleHeaderLabels }) => {
   const [trackerPage, setTackerPage] = useState(0);
   const [basicInfo, setBasicInfo] = useState({});
   const [courseIdForContent, setCourseIdForContent] = useState({});
+  const [courseData, setCourseData] = useState([]);
+  const [loaderState, setLoaderState] = useState(false);
+  const [validity, setValidity] = useState([{}]);
+  const [mulitiDuration, setMulitiDuration] = useState([{}]);
+  const [attachments, setAttachment] = useState([{}]);
+  let location = useLocation();
+  const courseId = location.state?.id;
+  const navigate = useNavigate();
+
+  const [hideTrackerForEditFlow, setHideTrackerForEditFlow] = useState(false);
   const [editPrice, setEditPrice] = useState([
     {
       duration: "20",
@@ -43,14 +53,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       duration_id: "",
     },
   ]);
-  const [courseData, setCourseData] = useState([]);
-  const [loaderState, setLoaderState] = useState(false);
-  const [validity, setValidity] = useState([{}]);
-  const [mulitiDuration, setMulitiDuration] = useState([{}]);
-  const [attachments, setAttachment] = useState([{}]);
-  let location = useLocation();
-  const courseId = location.state?.id;
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (courseId) {
@@ -60,6 +62,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         callBack: (response) => {
           const userCallBack = response?.data[0];
           setCourseData(userCallBack);
+          setHideTrackerForEditFlow(true);
           setLoaderState(false);
           if (userCallBack?.contents?.length) {
             setAttachment(userCallBack?.contents);
@@ -76,10 +79,8 @@ const CreateCourses = ({ handleHeaderLabels }) => {
 
   const handleInputChange = (type, value) => {
     if (type === "basicInfo") {
-      console.log("Value=----->,", value);
       setBasicInfo(value);
     } else if (type === "editPrice") {
-      // console.log("Value=----->,", value);
       handleCreateCourse(value);
     } else if (
       type === "editPriceLifeTime" ||
@@ -108,14 +109,14 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         course_detail: "hello details", //same as above
         course_FAQ: "This is FAQ", //same as above
         about_course: basicInfo?.Description,
-        team_member_id: basicInfo.team_member_id, 
+        team_member_id: basicInfo.team_member_id,
         category_id: basicInfo?.Category?.category_id,
         sub_category_id: basicInfo?.subCategory?.category_id,
         thumbnail_path: basicInfo?.thumbnailPath,
-        thumbnail_path_desktop:basicInfo?.thumbnail_path_desktop,
-        thumbnail_path_mobile:basicInfo?.thumbnail_path_mobile,
-        thumbnail_video_path:basicInfo?.thumbnail_video_path,
-        thumbnail_video_description:basicInfo?.thumbnail_video_description,
+        thumbnail_path_desktop: basicInfo?.thumbnail_path_desktop,
+        thumbnail_path_mobile: basicInfo?.thumbnail_path_mobile,
+        thumbnail_video_path: basicInfo?.thumbnail_video_path,
+        thumbnail_video_description: basicInfo?.thumbnail_video_description,
         created_by: 1,
         start_date: "2024-04-30",
         end_date: "2024-05-30",
@@ -125,18 +126,6 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       payload = {
         courseDetails: courseDetails,
         courseDurations: courseDurations,
-        // course_batchDetails: {
-        //   type: String,
-        //   required: true,
-        // },
-        // course_detail: {
-        //   type: String, // hard coded coz of backend ppl asked to put hardcoded value
-        //   required: true,
-        // },
-        // course_FAQ: {
-        //   type: String,
-        //   required: true,
-        // },
       };
     } catch (error) {
       console.log(error);
@@ -175,6 +164,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       <Tracker
         trackerPage={trackerPage}
         handleTrackerPage={handleTrackerPage}
+        hideTrackerForEditFlow={hideTrackerForEditFlow}
       />
       {trackerPage === 0 ? (
         <CreateForm

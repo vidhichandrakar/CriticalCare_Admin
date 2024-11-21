@@ -6,7 +6,8 @@ import {
   Dialog,
   IconButton,
 } from "@mui/material";
-import React, { useEffect, useState, useRef, useCallback } from "react";
+import Popover from "@mui/material/Popover";
+import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import UploadIcon from "@mui/icons-material/Upload";
 import AddLinkIcon from "@mui/icons-material/AddLink";
@@ -57,7 +58,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     thumbnail_path_desktop: null,
     thumbnail_path_mobile: null,
     thumbnail_video_path: null,
-    thumbnail_video_description:null,
+    thumbnail_video_description: null,
     team_member_id: "",
   });
   const [imgUpload, setImageWhileUpload] = useState("");
@@ -67,15 +68,14 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const [loaderState, setLoaderState] = useState(false);
   const [teamMember, setTeamMember] = useState([]);
   const [selectedTeamMemberName, setSelectedTeamMemberName] = useState("");
-  // const [acceptType, setAcceptType] = useState("");
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [link, setLink] = useState("");
+  const [inputLink, setInputLink] = useState("");
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+  let acceptType;
 
-let acceptType;
-  useEffect(()=>{
-    console.log("sjsj")
-  },[acceptType])
   const onInroVideoDrop = async (files) => {
-    // event.preventDefault();
-    // console.log("type====--->", type);
     let payload = new FormData();
     payload.append("file", files[0], files[0]?.name);
     let storedValues = Object.assign({}, storedBasicInfo);
@@ -83,7 +83,6 @@ let acceptType;
     uploadFile({
       payload,
       callBack: (response) => {
-        console.log("response-->", response);
         if (acceptType === "desktop") {
           storedValues.thumbnail_path_desktop = response?.data?.path;
         } else if (acceptType === "mobile") {
@@ -98,15 +97,6 @@ let acceptType;
     });
     // setStoredBasicInfo(storedValues);
   };
-
-  // const acceptFileFormat =
-  //   acceptType === "video"
-  //     ? { "video/mp4": [".mp4"] }
-  //     : {
-  //         "image/jpeg": [".jpeg"],
-  //         "image/png": [".png"],
-  //         "image/jpg": [".jpg"],
-  //       };
 
   const {
     getRootProps: getIntroVideoRootProps,
@@ -188,15 +178,16 @@ let acceptType;
         });
       }
 
-      storedValues.thumbnail_path_desktop = courseData?.thumbnail_path;
-      storedValues.thumbnail_path_mobile = courseData?.thumbnail_path;
+      storedValues.thumbnail_path_desktop = courseData?.thumbnail_path_desktop;
+      storedValues.thumbnail_path_mobile = courseData?.thumbnail_path_mobile;
+      storedValues.thumbnail_video_path = courseData?.thumbnail_video_path;
+      setLink(courseData?.thumbnail_video_description);
 
       setStoredBasicInfo(storedValues);
     }
   }, [courseData, cat]);
 
   const handleInput = (value, type) => {
-    // console.log("valuesss-->",typeof value);
     let storedValues = Object.assign({}, storedBasicInfo);
     if (/^\s/.test(value)) value = "";
     if (type === "name") {
@@ -221,6 +212,9 @@ let acceptType;
     } else if (type == "file") {
       storedValues.thumbnail_path_desktop = value[0];
       storedValues.thumbnail_path_mobile = value[0];
+      storedValues.thumbnail_video_path = value[0];
+    } else if (type === "link") {
+      storedValues.thumbnail_video_description = value;
     }
     setStoredBasicInfo(storedValues);
 
@@ -257,8 +251,6 @@ let acceptType;
       toast.error("Description Should not be less then 3 character", {
         autoClose: 500,
       });
-
-      ///need to aaddd type the toster in common util file
     } else if (storedBasicInfo.Category === "") {
       toast.error("Please Select Category", {
         autoClose: 500,
@@ -308,15 +300,28 @@ let acceptType;
   };
 
   const handleUpload = (type) => {
-    console.log("type=======>",type)
     acceptType = type;
-    // setAcceptType(type);
-    console.log("acceptTypes=======>",acceptType)
+  };
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleAddLink = () => {
+    if (inputLink.trim()) {
+      setLink(inputLink);
+      handleInput(inputLink, "link");
+      setInputLink("");
+      handleClose();
+    }
   };
 
   return (
     <div className="formMain">
-      {console.log("acceptType--->", acceptType)}
       <div className="FlexRow">
         {CommonTypography({ fontWeight: 600, label: "Name" })}
         {hideValidationTickName && (
@@ -381,7 +386,6 @@ let acceptType;
               variant="outlined-multiline-static"
               startIcon={<UploadIcon className="iconThumbicon" />}
               className="iconThumb"
-              // onClick={()=>setUploadedFileType("desktop")}
               onClick={() => handleUpload("desktop")}
             >
               Upload Desktop Image
@@ -417,7 +421,6 @@ let acceptType;
                   variant="outlined-multiline-static"
                   startIcon={<UploadIcon className="iconThumbicon" />}
                   className="iconThumb"
-                  // onClick={()=>setUploadedFileType("mobile")}
                   onClick={() => handleUpload("mobile")}
                 >
                   Upload Mobile Image
@@ -427,14 +430,13 @@ let acceptType;
                   <b>800px x 600px, PNG or JPEG file</b>
                 </Typography>
                 <LoaderComponent loaderState={loaderState} />
-                {imgUpload === "" &&
-                  storedBasicInfo?.thumbnail_path_mobile && (
-                    <img
-                      src={storedBasicInfo?.thumbnail_path_mobile}
-                      width={140}
-                      height={"auto"}
-                    />
-                  )}
+                {imgUpload === "" && storedBasicInfo?.thumbnail_path_mobile && (
+                  <img
+                    src={storedBasicInfo?.thumbnail_path_mobile}
+                    width={140}
+                    height={"auto"}
+                  />
+                )}
                 {imgUpload != "" && (
                   <img
                     src={storedBasicInfo?.thumbnail_path_mobile}
@@ -451,7 +453,7 @@ let acceptType;
       {CommonTypography({
         fontWeight: 600,
         sx: { marginTop: "5%" },
-        label: "Add Video & Link",
+        label: "Add Video Or Link",
       })}
       <Box className="categoryBox">
         <div {...getIntroVideoTypeRootProps({ className: "dropzone" })}>
@@ -462,7 +464,6 @@ let acceptType;
               variant="outlined-multiline-static"
               startIcon={<UploadIcon className="iconThumbicon" />}
               className="iconThumb"
-              // onClick={()=>setUploadedFileType("desktop")}
               onClick={() => handleUpload("video")}
             >
               Upload Video
@@ -471,16 +472,18 @@ let acceptType;
               Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
             </Typography>
             <LoaderComponent loaderState={loaderState} />
-            {imgUpload === "" && storedBasicInfo?.thumbnail_path_desktop && (
-              <img
-                src={storedBasicInfo?.thumbnail_path_desktop}
-                width={140}
-                height={"auto"}
-              />
+            {imgUpload === "" && storedBasicInfo?.thumbnail_video_path && (
+              <video width="140" height="auto" controls>
+                <source
+                  src={storedBasicInfo?.thumbnail_video_path}
+                  type="video/mp4"
+                />
+                Your browser does not support the video tag.
+              </video>
             )}
             {imgUpload != "" && (
               <img
-                src={storedBasicInfo?.thumbnail_path_desktop}
+                src={storedBasicInfo?.thumbnail_video_path}
                 width={140}
                 height={"auto"}
               />
@@ -489,43 +492,69 @@ let acceptType;
         </div>
 
         <Box sx={{ marginTop: "1%" }}>
-          <div {...getIntroVideoRootProps({ className: "dropzone" })}>
-            <input {...getIntroVideoInputProps()} />
-            <Box className="rightCat">
-              <Box>
-                <Button
-                  component="label"
-                  variant="outlined-multiline-static"
-                  startIcon={<AddLinkIcon className="iconThumbicon" />}
-                  className="iconThumb"
-                  // onClick={()=>setUploadedFileType("mobile")}
-                  onClick={() => handleUpload("mobile")}
-                >
-                  Add Link
-                </Button>
-                <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
-                  Recommended Image size :{" "}
-                  <b>800px x 600px, PNG or JPEG file</b>
-                </Typography>
-                <LoaderComponent loaderState={loaderState} />
-                {imgUpload === "" &&
-                  storedBasicInfo?.thumbnail_path_mobile && (
-                    <img
-                      src={storedBasicInfo?.thumbnail_path_mobile}
-                      width={140}
-                      height={"auto"}
-                    />
-                  )}
-                {imgUpload != "" && (
-                  <img
-                    src={storedBasicInfo?.thumbnail_path_mobile}
-                    width={140}
-                    height={"auto"}
+          <Box className="rightCat">
+            <Box>
+              <Button
+                variant="outlined-multiline-static"
+                startIcon={<AddLinkIcon />}
+                onClick={handleClick}
+              >
+                Add Link
+              </Button>
+              <Popover
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "center",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "center",
+                }}
+              >
+                <div style={{ padding: "16px" }}>
+                  <TextField
+                    label="Enter Link"
+                    variant="outlined"
+                    size="small"
+                    value={inputLink}
+                    onChange={(e) => setInputLink(e.target.value)}
+                    fullWidth
                   />
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleAddLink}
+                    style={{ marginTop: "8px" }}
+                  >
+                    Add Link
+                  </Button>
+                </div>
+              </Popover>
+
+              <Typography sx={{ marginTop: "3%" }} className="fontRecommend">
+                Recommended Image size : <b>800px x 600px, PNG or JPEG file</b>
+              </Typography>
+              <LoaderComponent loaderState={loaderState} />
+              <div style={{ marginTop: "16px" }}>
+                {link && (
+                  <p>
+                    <a
+                      href={link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: "#0073e6", textDecoration: "none" }}
+                    >
+                      {link}
+                    </a>
+                  </p>
                 )}
-              </Box>
+              </div>
             </Box>
-          </div>
+          </Box>
         </Box>
       </Box>
 

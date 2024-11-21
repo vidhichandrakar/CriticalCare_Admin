@@ -4,12 +4,51 @@ import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 
-const Tracker = ({ trackerPage, handleTrackerPage }) => {
+const Tracker = ({
+  trackerPage,
+  handleTrackerPage,
+  hideTrackerForEditFlow,
+}) => {
   const steps = ["Basic Information", "Edit price", "Add Content"];
+  const stepForEditFlow = ["Basic Information", "Edit price"];
 
   return (
     <Box className="createBoxHeader trackerBox">
-      <Box className="trackerMainBox">
+      {hideTrackerForEditFlow ? (
+        <>
+          <Box className="trackerMainBox">
+            <Stepper
+              activeStep={trackerPage}
+              className="trackerStep"
+              alternativeLabel
+            >
+              {stepForEditFlow.map((label, index) => (
+                <Step key={index} onClick={() => handleTrackerPage(index)}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+          </Box>
+        </>
+      ) : (
+        <>
+          <Box className="trackerMainBox">
+            {" "}
+            <Stepper
+              activeStep={trackerPage}
+              className="trackerStep"
+              alternativeLabel
+            >
+              {steps.map((label, index) => (
+                <Step key={index} onClick={() => handleTrackerPage(index)}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+          </Box>
+        </>
+      )}
+      {/* <Box className="trackerMainBox">
         {" "}
         <Stepper
           activeStep={trackerPage}
@@ -22,7 +61,7 @@ const Tracker = ({ trackerPage, handleTrackerPage }) => {
             </Step>
           ))}
         </Stepper>
-      </Box>
+      </Box> */}
     </Box>
   );
 };
