@@ -94,6 +94,14 @@ export const putCoupon = ({ payload, callBack, error }) => {
       callBack(response);
     })
 };
+export const EditCoupon = ({coupon_id, payload, callBack, error }) => {
+  const url = APIS.getCoupon + "/" + coupon_id;
+  axios
+    .get(url, payload)
+    .then((response) => {
+      callBack(response);
+    })
+};
 
 export const bannerTypeapi = ({ callBack, error }) => {
   const url = APIS.banner + "/webbannertype";

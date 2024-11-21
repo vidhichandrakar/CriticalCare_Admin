@@ -1,12 +1,12 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import "../../CSSFile/Coupon.css";
-import { getCoupon, putCoupon } from "../../ActionFactory/apiActions";
+import { EditCoupon, getCoupon, putCoupon } from "../../ActionFactory/apiActions";
 import dayjs from "dayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -14,7 +14,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
 const CreateCouponForm = ({}) => {
@@ -28,17 +28,7 @@ const CreateCouponForm = ({}) => {
   const [isValid, setIsValid] = useState(true);
 
   const handleFlatDiscount = (event) => {
-     // Get the value from the event
-     const newValue = event.target.value;
-
-     // Only allow numbers and ensure the length doesn't exceed 10
-     if (/^\d*$/.test(newValue) && newValue.length <= 10) {
-      setDiscountamount(newValue);
-       setIsValid(true);
-     } else {
-       setIsValid(false);
-     }
-  
+    setDiscountamount(event.target.value)
   };
   const handleStartDate = (event) => {
     setStartDate(event);
@@ -58,6 +48,24 @@ const CreateCouponForm = ({}) => {
   const handleChange = (event) => {
     setCoupontype(event.target.value);
   };
+
+  useEffect(() => {
+    console.log("check")
+    EditCoupon({
+      coupon_id,
+      callBack: (response) => {
+        const data = response.data;
+        console.log(data, "data")
+        setDiscountamount(data.discount_amount)
+        setTotaluser(data.coupon_max_user)
+        setCoupontype(data.coupon_type)
+        setCouponcode(data.coupon_code)
+        setMinimumorder(data.minimum_order)
+      },
+      error: (err) => {
+      }
+    });
+  }, []);
   
   const navigate = useNavigate();
 
@@ -98,6 +106,11 @@ const CreateCouponForm = ({}) => {
       toast.success("Coupon successful Created");
     }
   };
+
+  let location = useLocation();
+  const coupon_id = location?.state?.id;
+
+  
 
   return (
     <Box className="courseMainTrack">

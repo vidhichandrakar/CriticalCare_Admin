@@ -29,6 +29,7 @@ import Divider from '@mui/material/Divider';
 import { getCoupon } from "../ActionFactory/apiActions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -50,18 +51,25 @@ const CouponBox = () => {
   const [openSecond, setOpenSecond] = useState(false);
   const [personName, setPersonName] = useState([]);
   const [coupondata, setCoupondata] = useState();
+  const [openId, setOpenId] = useState(0);
+  const navigate = useNavigate();
 
   const handleShowDetail = (value) => {
     setShowDetail(value);
     setShowDetailFlag(!showDetailFlag);
   };
 
-  const handleClick = (event) => {
+  const handleClick = (event, id) => {
     setAnchorEl(event.currentTarget);
+    setOpenId(id);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleEdit = (event, id) => {
+        navigate("/admin/CreateCoupon", { state: { id: openId } });
   };
 
   const open = Boolean(anchorEl);
@@ -166,7 +174,9 @@ const CouponBox = () => {
                       aria-describedby={id}
                       variant="contained"
                       sx={{ cursor: "pointer" }}
-                      onClick={handleClick}
+                      onClick={(event) =>
+                        handleClick(event, data.coupon_id)
+                      }
                     />
                   </Box>
                 </div>
@@ -539,7 +549,7 @@ const CouponBox = () => {
       ))}
       <Popover
         sx={{ m: -7, mt: 0.7 }}
-        id={ids}
+        id={openId}
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
@@ -548,18 +558,11 @@ const CouponBox = () => {
           horizontal: "right",
         }}
       >
-        {/* <Box sx={{ p: 1, mt: -1, mr: 5 ,display: "flex" }}> */}
-        <Box  className="EditButton" sx={{ p: 1}}>
-
-          {" "}
-          <NoteAltOutlinedIcon className="coloricon"/>
-          <Typography sx={{ml: 1}}> Details</Typography>
-        </Box>
-        <Divider/>
-        <Box className="EditButton" sx={{ p: 1}} >
-          {" "}
+        
+        <Box className="EditButton" sx={{ p: 1}} 
+        onClick={handleEdit}>
           <HistorySharpIcon  className="coloricon"/>
-          <Typography sx={{ml: 1}}> View Edit History</Typography>
+          <Typography sx={{ml: 1}}>Edit</Typography>
         </Box>
         <Divider/>
         {/* <Box sx={{ p: 1, mt: -1, mr: 5,display: "flex" }}> */}
