@@ -15,7 +15,7 @@ import SearchBar from "../../Util/SearchBar";
 import Popover from "@mui/material/Popover";
 import CourseHeader from "../Courses/CoursesHeader";
 import SideBar from "../AdminDashboardMain/SideBar";
-import { testPortalColumns } from "../../Data/JsonData";
+import { CategoryPortalColumns } from "../../Data/JsonData";
 import BlockIcon from "@mui/icons-material/Block";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Checkbox from "@mui/material/Checkbox";
@@ -32,7 +32,6 @@ import moment from "moment/moment";
 import axios from "axios";
 import {
   deleteMember,
-  deleteTestPortal,
   deleteUser,
   getTeamByID,
   getAllUsersApi,
@@ -43,6 +42,7 @@ import {
   createTestPortal,
   getCategory,
   updateCategory,
+  deleteCategory
 } from "../ActionFactory/apiActions";
 import { TablePagination } from "@mui/material";
 import Stack from "@mui/material/Stack";
@@ -224,32 +224,33 @@ const Categores = () => {
   const handleEdit = (value) => {
     setHideCatConfig(true);
     setSelectedConfigValue(value);
-   let category_id = openId;
-   updateCategory({
-    category_id,
-    callBack: (response) => {
-      const data = response.data;
-      let storedValues = Object.assign({}, userData);
-      storedValues.memberName = data.category_name;
-      // setUserData(storedValues);
-    },
-    
-  });
+    let category_id = openId;
+    updateCategory({
+      category_id,
+      callBack: (response) => {
+        const data = response.data;
+        let storedValues = Object.assign({}, userData);
+        storedValues.memberName = data.category_name;
+        // setUserData(storedValues);
+      },
+
+    });
   };
 
   useEffect(() => {
-      // setLoaderState(true);
-      getCategory({
-        callBack: (response) => {
-          const userCallBack = response?.data;
-          setUserData(userCallBack);
-          // console.log("userCallBack===>",userCallBack);
-        },
-      });
-    
+    // setLoaderState(true);
+    getCategory({
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setUserData(userCallBack);
+        // console.log(" categories data ===>", userCallBack);
+      },
+    });
+
   }, []);
 
   const handleClick = (event, id) => {
+
     setAnchorEl(event.currentTarget);
     setOpenId(id);
   };
@@ -257,10 +258,16 @@ const Categores = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   const handleDeleteClick = () => {
+    if (!openId) {
+      toast.error("Please select a category to delete.");
+      return;
+    }
     handleClose();
     setIsOpen(true);
   };
+
 
   const handleConfirmDelete = () => {
     handleDelete();
@@ -272,11 +279,16 @@ const Categores = () => {
   };
 
   const handleDelete = () => {
-    const userId = openId;
-    deleteTestPortal({
-      userId,
+    if (!openId) {
+      toast.error("No category selected for deletion");
+      return;
+    }
+
+    deleteCategory({
+      category_id: openId, // Ensure the correct field name is used
       callBack: () => {
-        getTest({
+        toast.success("Category deleted successfully!");
+        getCategory({
           callBack: (response) => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
@@ -285,11 +297,12 @@ const Categores = () => {
         handleClose();
       },
       error: (error) => {
-        toast.error(error.message);
-        // console.log(error);
+        toast.error(error.message || "Failed to delete category");
+        console.error("Delete Error: ", error);
       },
     });
   };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -310,7 +323,7 @@ const Categores = () => {
     setOpen(false);
   };
 
-  console.log(openId, "openId")
+
   const handleInput = (value, type) => {
     let storedValues = Object.assign({}, addTest);
     if (type === "TestName") {
@@ -347,7 +360,6 @@ const Categores = () => {
           callBack: (response) => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
-            // console.log("irhthjn plce")
             // setLoaderState(false);
           },
         });
@@ -355,7 +367,7 @@ const Categores = () => {
     });
   };
 
-  
+
   return (
     <div className="grid-container">
       <Header
@@ -401,7 +413,7 @@ const Categores = () => {
             className="width13 addTestimonialButton"
             onClick={() => handleCatConfig("Category")}
           >
-            + Add Test
+            + Category
           </Button>
           <BootstrapDialog
             className="PopUP"
@@ -429,7 +441,7 @@ const Categores = () => {
             </IconButton>
 
             <DialogContent dividers>
-              <Typography gutterBottom>Test Name</Typography>
+              <Typography gutterBottom>Category</Typography>
               <TextField
                 inputProps={{ className: "textField" }}
                 fullWidth
@@ -479,7 +491,7 @@ const Categores = () => {
               </Box>
             </DialogContent>
             <DialogContent dividers>
-              
+
               <Typography gutterBottom sx={{ mt: 2 }}>
                 Active time duration
               </Typography>
@@ -538,7 +550,7 @@ const Categores = () => {
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  {testPortalColumns.map((column) => (
+                  {CategoryPortalColumns.map((column) => (
                     <TableCell
                       key={column.id}
                       align={column.align}
@@ -554,34 +566,34 @@ const Categores = () => {
               <TableBody className="parentTable">
                 {userData.length
                   ? (rowsPerPage > 0
-                      ? userData.slice(
-                          page * rowsPerPage,
-                          page * rowsPerPage + rowsPerPage
-                        )
-                      : userData
-                    ).map((row) => {
-                      return (
-                        <TableRow
-                          hover
-                          className="TableHover"
-                          role="checkbox"
-                          tabIndex={-1}
-                          key={row?.code}
-                        >
-                          <TableCell className="alignTableBody">
-                            {row?.category_name}
-                          </TableCell>
-                         
-                          <TableCell sx={{ textAlign: "center" }}>
-                            <MoreVertIcon
-                              onClick={(event) =>
-                                handleClick(event, row?.category_id)
-                              }
-                            />
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })
+                    ? userData.slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage
+                    )
+                    : userData
+                  ).map((row) => {
+                    return (
+                      <TableRow
+                        hover
+                        className="TableHover"
+                        role="checkbox"
+                        tabIndex={-1}
+                        key={row?.code}
+                      >
+                        <TableCell className="alignTableBody">
+                          {row?.category_name}
+                        </TableCell>
+
+                        <TableCell sx={{ textAlign: "center" }}>
+                          <MoreVertIcon
+                            onClick={(event) =>
+                              handleClick(event, row?.category_id)
+                            }
+                          />
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })
                   : null}
 
                 <Popover
@@ -598,7 +610,7 @@ const Categores = () => {
                   <Box
                     className="redDeleteofTestPortal redDelete"
                     onClick={handleDeleteClick}
-                    sx={{borderBottom: "1px solid #eee", color: "red"}}
+                    sx={{ borderBottom: "1px solid #eee", color: "red" }}
 
                   >
                     {" "}
@@ -646,19 +658,19 @@ const Categores = () => {
           </TableContainer>
         </Paper>
       </div>
-      <ToastContainer />
+      <ToastContainer containerId={"friendRequest"} />
       <DailogBox
         isOpen={isOpen}
         handleConfirmDelete={handleConfirmDelete}
         handleDeleteClick={handleDeleteClick}
         handleCancelDelete={handleCancelDelete}
       />
-     {hideCatConfig &&  <Configuration
-            selectedConfigValue={selectedConfigValue}
-            handleCloseCat={handleCloseCat}
-            hideCatConfig={hideCatConfig}
-            category_id = {openId}
-          />}
+      {hideCatConfig && <Configuration
+        selectedConfigValue={selectedConfigValue}
+        handleCloseCat={handleCloseCat}
+        hideCatConfig={hideCatConfig}
+        category_id={openId}
+      />}
     </div>
   );
 };

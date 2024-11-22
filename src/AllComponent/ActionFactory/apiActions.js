@@ -218,6 +218,8 @@ export const getCategory = ({ callBack }) => {
     callBack(response);
   });
 };
+
+
 export const updateCategory = ({ category_id, payload, callBack }) => {
   const url = APIS.getCategory + "/" + category_id;
   axios.put(url, payload).then((response) => {
@@ -231,6 +233,28 @@ export const createCategory = ({ payload, callBack }) => {
     callBack(response);
   });
 };
+
+// export const deleteCategory = ({ category_id, callBack, error }) => {
+//   const url = `${APIS.getCategory}/${category_id}`;
+//   axios
+//     .delete(url)
+//     .then((response) => {
+//       callBack(response);
+//     })
+//     .catch((errorMessage) => {
+//       error(errorMessage);
+//     });
+// };
+
+export const deleteCategory = ({ category_id, callBack, error }) => {
+  const url = `${APIS.getCategory}/${category_id}`;
+  axios
+    .delete(url)
+    .then((response) => callBack && callBack(response))
+    .catch((err) => error && error(err));
+};
+
+
 
 export const updateDuration = ({ payload, callBack }) => {
   const url = APIS.updateDuration;

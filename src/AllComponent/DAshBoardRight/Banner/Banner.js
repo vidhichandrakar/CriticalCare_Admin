@@ -738,7 +738,7 @@ const Banner = () => {
 
       </div>
 
-      <ToastContainer />
+      <ToastContainer containerId={"friendRequest"} />
     </Fragment>
   );
 };
