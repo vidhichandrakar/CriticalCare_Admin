@@ -83,7 +83,19 @@ export const getCoupon = ({ callBack, error }) => {
     callBack(response);
   });
 };
-export const putCoupon = ({ payload, callBack, error }) => {
+export const putCoupon = ({coupon_id, payload, callBack, error }) => {
+  const url = APIS.getCoupon + "/" + coupon_id;
+  axios.put(url, payload).then((response) => {
+    callBack(response);
+  });
+};
+export const deleteCoupon = ({coupon_id, callBack, error }) => {
+  const url = APIS.getCoupon + "/" + coupon_id;
+  axios.delete(url).then((response) => {
+    callBack(response);
+  });
+};
+export const postCoupon = ({ payload, callBack, error }) => {
   const url = APIS.getCoupon;
   axios.post(url, payload).then((response) => {
     callBack(response);
@@ -276,6 +288,12 @@ export const getTeam = ({ callBack, error }) => {
 export const getTeamByID = ({ teamId, callBack }) => {
   const url = APIS.updateMember + "/" + teamId;
   axios.get(url).then((response) => {
+    callBack(response);
+  });
+};
+export const putTeamByID = ({payload, teamId, callBack }) => {
+  const url = APIS.updateMember + "/" + teamId;
+  axios.put(url, payload).then((response) => {
     callBack(response);
   });
 };
