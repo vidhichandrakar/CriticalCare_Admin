@@ -250,3 +250,15 @@ export const CategoryPortalColumns = [
   },
 ];
 
+export const TeamPortalColumns = [
+  {
+    id: "team_member",
+    label: "Team Member",
+  },
+  {
+    id: "Actions",
+    label: "Actions",
+    align: "center",
+  },
+];
+
