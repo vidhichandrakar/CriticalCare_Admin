@@ -250,16 +250,18 @@ const MyTeam = () => {
         email_id: addTeam.emailID,
         phone_no: addTeam.PhoneNo,
       };
-     setTimeout(() => {
+      handleClose()
       putTeamByID({
         payload,
         teamId,
         callBack: (response) => {
+          // const userCallBack = response?.data;
+          // console.log(userCallBack, "response")
+          // setUserData(userCallBack);
           toast.success("Created successfully");
           setOpen(false);
         },
-      });
-     }, 1000);} else{     
+      });} else{     
     const payload = {
       member_name: addTeam.memberName,
       email_id: addTeam.emailID,
@@ -534,7 +536,7 @@ const MyTeam = () => {
           </TableContainer>
         </Paper>
       </div>
-      <ToastContainer />
+      <ToastContainer containerId={"friendRequest"} />
       <DailogBox
           isOpen={isOpen}
           handleConfirmDelete={handleConfirmDelete}

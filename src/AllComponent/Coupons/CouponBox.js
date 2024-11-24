@@ -82,7 +82,6 @@ const CouponBox = () => {
             callBack: (response) => {
               const userCallBack = response?.data;
               setCoupondata(userCallBack);
-             
             },
             error: (error) => {
               toast.error(error.message);
