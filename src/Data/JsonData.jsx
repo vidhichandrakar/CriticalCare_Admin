@@ -238,3 +238,27 @@ export const testPortalColumns = [
   },
 ];
 
+export const CategoryPortalColumns = [
+  {
+    id: "category_name",
+    label: "Categories",
+  },
+  {
+    id: "Actions",
+    label: "Actions",
+    align: "center",
+  },
+];
+
+export const TeamPortalColumns = [
+  {
+    id: "team_member",
+    label: "Team Member",
+  },
+  {
+    id: "Actions",
+    label: "Actions",
+    align: "center",
+  },
+];
+
