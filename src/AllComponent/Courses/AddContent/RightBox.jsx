@@ -12,13 +12,12 @@ import { useDropzone } from "react-dropzone";
 import { uploadFile } from "../../ActionFactory/apiActions";
 import ContentSlider from "./Boxes/Slider.component";
 import DialogBoxes from "./Boxes/DialogBoxes.component";
-import QuizIcon from '@mui/icons-material/Quiz';
-import LiveTvIcon from '@mui/icons-material/LiveTv';
-import VideocamIcon from '@mui/icons-material/Videocam';
-import ImageIcon from '@mui/icons-material/Image';
+import QuizIcon from "@mui/icons-material/Quiz";
+import LiveTvIcon from "@mui/icons-material/LiveTv";
+import VideocamIcon from "@mui/icons-material/Videocam";
+import ImageIcon from "@mui/icons-material/Image";
 import { Box } from "@material-ui/core";
-import "../../CSSFile/Content.css"
-
+import "../../CSSFile/Content.css";
 
 const RightBox = ({
   contentType,
@@ -88,9 +87,51 @@ const RightBox = ({
     }
   }, []);
 
+  const handleAddLink = (inputLink, inputName) => {
+    let inputNameValue = inputName.trim(); // Remove leading and trailing spaces
+    if(uploadedFileType.content_type_name=="Video"){
+      if (inputNameValue && !inputNameValue.endsWith(".mp4")) {
+        inputNameValue = inputNameValue.replace(/\s+/g, "") + ".mp4"; // Remove all spaces and add .mp4
+      }
+    }
+    // else if(uploadedFileType.content_type_name=="Image"){
+    //   if (inputNameValue && !inputNameValue.endsWith(".jpg")) {
+    //     inputNameValue = inputNameValue.replace(/\s+/g, "") + ".jpg"; // Remove all spaces and add .mp4
+    //   }
+    // }
+    // if (inputNameValue && !inputNameValue.endsWith(".mp4")) {
+    //   inputNameValue = inputNameValue.replace(/\s+/g, "") + ".mp4"; // Remove all spaces and add .mp4
+    // }
+    console.log("inputNameValue---->", inputNameValue);
+
+    let arr = [...uploadedVideo];
+    let arr2 = {
+      content_name: "",
+      content_url: "",
+      content_type: "",
+      content_type_id: "",
+    };
+    arr2.content_name = inputNameValue;
+    arr2.content_url = inputLink;
+    arr2.content_type = uploadedFileType.content_type_name;
+    arr2.content_type_id = uploadedFileType.content_type_id;
+    if (courseData?.contents?.length) {
+      arr2.course_id = courseData.course_id;
+    }
+    arr.push(arr2);
+    console.log("arr2;", arr2, inputLink);
+    setUploadedVideo(arr);
+    handleInputChange("addContent", arr);
+    handleVideoName(arr);
+    setVideoqopen(false);
+    setImgopen(false);
+    setDocopen(false);
+    setZipopen(false);
+  };
+
   //this function is for to add all items
 
-  const onInroVideoDrop = async (files) => {                     
+  const onInroVideoDrop = async (files) => {
     let payload = new FormData();
     payload.append("file", files[0], files[0]?.name);
     setLoaderState(true);
@@ -196,7 +237,7 @@ const RightBox = ({
   };
   const handleClickOpenIC = () => {
     setIcopen(true);
-    setUploadPopupOpen(true)
+    setUploadPopupOpen(true);
   };
   const handleCloseDialogIC = () => {
     setIcopen(false);
@@ -279,10 +320,7 @@ const RightBox = ({
       <div className="rightBoxComplete">
         {addContentList.map((list) => {
           return (
-            <Box
-              className="rightBoxTypography "
-              onClick={list.onClickHandler}
-            >
+            <Box className="rightBoxTypography " onClick={list.onClickHandler}>
               {list.Component}
               {list.name}
             </Box>
@@ -320,6 +358,8 @@ const RightBox = ({
         courseData={courseData}
       />
       <DialogBoxes
+        // setContentlink={setContentlink}
+        handleAddLink={handleAddLink}
         handleCloseDialogIC={handleCloseDialogIC}
         icopened={icopened}
         handleCloseDialogImg={handleCloseDialogImg}

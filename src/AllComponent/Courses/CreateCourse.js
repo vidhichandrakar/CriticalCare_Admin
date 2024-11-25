@@ -161,6 +161,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
 
   return (
     <Box className="courseMainTrack">
+      {console.log("courseId->",courseId)}
       <Tracker
         trackerPage={trackerPage}
         handleTrackerPage={handleTrackerPage}

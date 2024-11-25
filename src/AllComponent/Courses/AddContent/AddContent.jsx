@@ -43,14 +43,12 @@ function AddContent({
   const [error, setError] = useState(false);
   const [getAddedContentData, setGetAddedContentData] = useState({});
   const [uploadPopupOpen, setUploadPopupOpen] = useState(false);
+  // const [anchorEl1, setAnchorEl1] = useState(null);
+  // const [link, setLink] = useState("");
+  // const [inputLink, setInputLink] = useState("");
+  // const open1 = Boolean(anchorEl1);
   const navigate = useNavigate();
-  const [payload, setPayload] = useState({
-    courseModuleDetails: {
-      module_name: "",
-      course_id: 3,
-    },
-    courseContents: [],
-  });
+ 
   const [moduleDescription, setModuleDescription] = useState([
     {
       id: 0,
@@ -78,7 +76,7 @@ function AddContent({
           toast.error(error.message);
           // console.log(error);
         },
-      })
+      });
     }
     getContentType({
       callBack: (response) => {
@@ -88,6 +86,7 @@ function AddContent({
   }, []);
   const handleAddContent = (event, idx) => {
     event.stopPropagation();
+    console.log("kjhgfcghjk");
     // if (idx === expanded) {
     //   setExpanded(null);
     // } else {
@@ -105,6 +104,7 @@ function AddContent({
   };
 
   const handleVideoName = (value) => {
+    console.log("valouyh",value)
     let arr = [];
     setVideoDesc(value);
 
@@ -118,17 +118,11 @@ function AddContent({
     });
     setModuleDescription(arr);
   };
-  const handleCreateCourse = () => {
-    // no use of this before remove double check it
-    if (courseData.length !== null) {
-      handleInputChange("addContent", videoDesc);
-    }
-    let createCourse = 3;
-    handleTrackerPage(3, createCourse);
-  };
+ 
   const handleAddUrl = (type, value) => {
     if (type === "uploadUrl") {
       setVideoDesc(value);
+      console.log("type", type, "url->", value);
     }
   };
   const extractVideoId = (url) => {
@@ -177,13 +171,12 @@ function AddContent({
   const handleInputOnAddContent = (e, index) => {
     if (moduleDescription) {
       let storedValues = Object.assign({}, moduleDescription);
-      moduleDescription.map((item,idx)=>{
-        if(idx===index){
-          
+      moduleDescription.map((item, idx) => {
+        if (idx === index) {
           item.moduleName = e;
           setModuleDescription(storedValues);
         }
-      })
+      });
     } else {
       if (e === "") {
         setError(true);
@@ -398,6 +391,7 @@ function AddContent({
                         </Box>
                       ) : handleImageType(item?.content_name?.split(".")[1]) ? (
                         <Box className="videoBox">
+                          {console.log("item---->",item)}
                           <Box className="leftVideo">
                             <img
                               src={item.content_url}
@@ -456,7 +450,7 @@ function AddContent({
                         ) ? (
                         <Box className="videoZipAndDoc">
                           <Box className="zipAndDoc">
-                            <a href={item.url} target="_blank">
+                            <a href={item.content_url} target="_blank">
                               <NoteIcon className="zipFolderPrevIcon" />
                             </a>
                             <Typography
@@ -482,11 +476,12 @@ function AddContent({
                         </Box>
                       ) : (
                         <>
+                        {console.log("item0000000",item)}
                           <Box className="videoBox">
                             <iframe
                               width="350"
                               height="120"
-                              src={handleUploadLink(item.url, item)}
+                              src={handleUploadLink(item.content_url, item)}
                               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                               allowFullScreen
                               title="Embedded YouTube Video"
@@ -512,6 +507,7 @@ function AddContent({
                     }}
                     sx={{ mt: 1 }}
                   >
+                     
                     <Box>
                       <RightBox
                         contentType={contentType}
