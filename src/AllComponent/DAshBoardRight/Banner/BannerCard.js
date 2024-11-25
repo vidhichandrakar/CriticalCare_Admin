@@ -42,28 +42,27 @@ const BannerCard = ({ bannerAPI, handleClickEdit, handlePreviewBox }) => {
     deleteBanner({
       web_banner_id,
       callBack: (response) => {
-        console.log("Banner deleted successfully:", response);
         toast.success("Banner Image deleted Successfully!", { autoClose: 500 });
         setImageList(imageList.filter((banner) => banner.web_banner_id !== web_banner_id)); // Update the list without the deleted banner
       },
       error: (error) => {
-        console.error("Error deleting banner:", error);
+
         toast.error("Failed to delete the banner image.");
       },
     });
   };
 
-  const handleImageUpload = (value, id) => {
-    let updatedPaths = [...storedFilePath];
-    const existingEntryIndex = updatedPaths.findIndex((data) => data.id === id);
+  // const handleImageUpload = (value, id) => {
+  //   let updatedPaths = [...storedFilePath];
+  //   const existingEntryIndex = updatedPaths.findIndex((data) => data.id === id);
 
-    if (existingEntryIndex > -1) {
-      updatedPaths[existingEntryIndex].value = value;
-    } else {
-      updatedPaths.push({ id, value });
-    }
-    setStoredFilePath(updatedPaths);
-  };
+  //   if (existingEntryIndex > -1) {
+  //     updatedPaths[existingEntryIndex].value = value;
+  //   } else {
+  //     updatedPaths.push({ id, value });
+  //   }
+  //   setStoredFilePath(updatedPaths);
+  // };
 
   const handleClickPopUp = () => {
     setOpenPopUp(!openPopUp);
@@ -101,7 +100,7 @@ const BannerCard = ({ bannerAPI, handleClickEdit, handlePreviewBox }) => {
                 ) : (
                   <img src={imge} height="120" width="250" className="BannerImage image" alt="Default Banner" />
                 )}
-                <div className="middle">
+                {/* <div className="middle">
                   <Button className="text" component="label">
                     <ModeIcon className="PencilIcon" />
                     Change
@@ -113,7 +112,7 @@ const BannerCard = ({ bannerAPI, handleClickEdit, handlePreviewBox }) => {
                       }
                     />
                   </Button>
-                </div>
+                </div> */}
               </div>
 
               <div style={{ color: "green" }} className="flexrow">
@@ -127,18 +126,18 @@ const BannerCard = ({ bannerAPI, handleClickEdit, handlePreviewBox }) => {
                 <p style={{ margin: "8px", flex: 1, textAlign: 'left' }}>{value.web_banner_title}</p>
                 <div style={{ display: 'flex', gap: '10px' }}> {/* Container for buttons with spacing */}
 
-                <Button
-                  className="previewBtn"
-                  onClick={() => handlePreviewBox(value)} // Pass the value to handlePreviewBox
-                >
-                  Preview
-                </Button>
-                <Button
-                  className="changeBtn"
-                  onClick={() => handleClickEdit(value)}
-                >
-                  Change
-                </Button>
+                  <Button
+                    className="previewBtn"
+                    onClick={() => handlePreviewBox(value)} // Pass the value to handlePreviewBox
+                  >
+                    Preview
+                  </Button>
+                  <Button
+                    className="changeBtn"
+                    onClick={() => handleClickEdit(value)}
+                  >
+                    Change
+                  </Button>
                 </div>
               </div>
               <div className="RemoveButton">

@@ -15,7 +15,7 @@ import SearchBar from "../../Util/SearchBar";
 import Popover from "@mui/material/Popover";
 import CourseHeader from "../Courses/CoursesHeader";
 import SideBar from "../AdminDashboardMain/SideBar";
-import { testPortalColumns } from "../../Data/JsonData";
+import { TeamPortalColumns } from "../../Data/JsonData";
 import BlockIcon from "@mui/icons-material/Block";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Checkbox from "@mui/material/Checkbox";
@@ -37,11 +37,15 @@ import {
   getTeamByID,
   getAllUsersApi,
   getTeam,
+  getAllTeamMembers,
+  deleteTeamMember,
   updateTeam,
   getTest,
   getTestByID,
   createTestPortal,
   getCategory,
+  deleteCategory,
+
 } from "../ActionFactory/apiActions";
 import { TablePagination } from "@mui/material";
 import Stack from "@mui/material/Stack";
@@ -223,7 +227,7 @@ const TeamMember = () => {
   useEffect(() => {
    
       // setLoaderState(true);
-      getTeam({
+    getAllTeamMembers({
         callBack: (response) => {
           const userCallBack = response?.data;
           setUserData(userCallBack);
@@ -234,6 +238,7 @@ const TeamMember = () => {
   }, []);
 
   const handleClick = (event, id) => {
+    console.log("Member ID : ", id)
     setAnchorEl(event.currentTarget);
     setOpenId(id);
   };
@@ -242,6 +247,10 @@ const TeamMember = () => {
     setAnchorEl(null);
   };
   const handleDeleteClick = () => {
+    if (!openId) {
+      toast.error("Please select a member to delete.");
+      return;
+    }
     handleClose();
     setIsOpen(true);
   };
@@ -256,24 +265,25 @@ const TeamMember = () => {
   };
 
   const handleDelete = () => {
-    const userId = openId;
-    deleteTestPortal({
-      userId,
+    if (!openId) {
+      toast.error("No member selected for deletion");
+      return;
+    }
+    deleteTeamMember({
+      memberId: openId, // Corrected key
       callBack: () => {
-        getTest({
-          callBack: (response) => {
-            const userCallBack = response?.data;
-            setUserData(userCallBack);
-          },
-        });
+        toast.success("Member deleted successfully!");
+        setUserData((prev) => prev.filter((user) => user.member_id !== openId));
         handleClose();
       },
-      error: (error) => {
-        toast.error(error.message);
-        // console.log(error);
+      error: (err) => {
+        console.error("Delete Error:", err);
+        toast.error("Failed to delete member");
       },
     });
   };
+
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -400,7 +410,7 @@ const TeamMember = () => {
             className="width13 addTestimonialButton"
             onClick={() => handleCatConfig("Team Member")}
           >
-            + Team Member
+            + Member
           </Button>
           <BootstrapDialog
             className="PopUP"
@@ -537,7 +547,7 @@ const TeamMember = () => {
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  {testPortalColumns.map((column) => (
+                  {TeamPortalColumns.map((column) => (
                     <TableCell
                       key={column.id}
                       align={column.align}
@@ -580,7 +590,7 @@ const TeamMember = () => {
                           <TableCell sx={{ textAlign: "center" }}>
                             <MoreVertIcon
                               onClick={(event) =>
-                                handleClick(event, row?.test_id)
+                                handleClick(event, row?.member_id)
                               }
                             />
                           </TableCell>

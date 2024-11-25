@@ -49,8 +49,8 @@ const RouterMain = () => {
             <Route exact path="/admin/chat" element= {<Chat />}> </Route>
             <Route exact path="/admin/TestFirstPage" element= {<TestPortalMain />}> </Route> 
             <Route exact path="/admin/AddContent" element= {<AddContent />}> </Route>           
-            <Route exact path="/admin/Categores" element= {<Categores />}> </Route>           
-            <Route exact path="/admin/Subcategores" element= {<Subcategores />}> </Route>           
+            <Route exact path="/admin/Categories" element= {<Categores />}> </Route>           
+            <Route exact path="/admin/Subcategories" element= {<Subcategores />}> </Route>           
             <Route exact path="/admin/TeamMember" element= {<TeamMember />}> </Route>           
     </Routes>
     </div>
