@@ -46,9 +46,11 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setHighlight(window.location.pathname.replace("/", ""));
-    setHighlightPeople(window.location.pathname.replace("/", ""));
-  }, [localStorage.getItem("activeMenu")]);
+    // Sync the active menu on load
+    const activeMenu = localStorage.getItem("activeMenu");
+    setHighlight(activeMenu);
+    setHighlightPeople(activeMenu);
+  }, []);
 
   const handleCatConfig = (value) => {
     setHideCatConfig(true);
@@ -79,23 +81,11 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
 
   const handleHighlight = (type) => {
     localStorage.setItem("activeMenu", type);
-    localStorage.setItem("subMenuPeople", false);
-    if (
-      type === "YourCourses" ||
-      type === "CreateCoupon" ||
-      type === "catagory" ||
-      type === "upcoimgCourses" ||
-      type === "Testimonial"
-    ) {
-      localStorage.setItem("subMenuCourses", true);
-    } else {
-      localStorage.setItem("subMenuCourses", false);
-    }
+    setHighlight(type); // Immediately update the state
   };
 
   const handleHighlightPeople = (type) => {
     setHighlightPeople(type);
-    // setHighlight(null);
     localStorage.setItem("activeMenu", type);
     if (type === "User" || type === "MyTeam") {
       setHighlightPeople(type);
@@ -107,8 +97,6 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
 
   const handleHideSubCat = () => {
     setHideSubConfig(!hideSubConfig);
-    // localStorage.setItem("subMenuCourses", false);
-    // localStorage.setItem("subMenuPeople", false);
   };
 
   function handleCloseNew() {
@@ -119,282 +107,232 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
     setPopForBlog(!popForBlog);
   };
 
+
   return (
-    <aside
-      id="sidebar"
-      className={openSidebarToggle ? "sidebar-responsive" : ""}
-    >
+    <aside id="sidebar" className={openSidebarToggle ? "sidebar-responsive" : ""}>
       <div className="Sider-Box">
-        <div className="sidebar-title">
-          <div className="sidebar-brand">
-            <img src={Logo} className="SideBarLogo" />
+        {/* Logo Section */}
+        <div className="sidebar-logo">
+          <div >
+            <div >
+              <img src={Logo} className="SideBarLogo" alt="Logo" />
+            </div>
           </div>
-          <span className="icon close_icon" onClick={OpenSidebar}>
-            X
-          </span>
+        </div>
+        <div className="sidebar-list-container">
+          <div className="sidebar-list sidebar-list-item BottomLine">
+            <Link to="/admin/DashBoard">
+              <Box
+                className={`hoverrr ${highlight === "DashBoard" ? "hoverrr2" : ""}`}
+                onClick={() => {
+                  handleHighlight("DashBoard");
+                }}
+              >
+                <DashboardIcon className="icon" />
+                <Typography>DashBoard</Typography>
+              </Box>
+            </Link>
+
+            <Link to="/admin/YourCourses">
+              <ListItemButton onClick={handleClickCollapse} className="listButton">
+                <MenuBookIcon className="blueHoverIcon" />
+                <ListItemText primary="Courses" className="coursesHead" />
+                {openCollapse ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+
+              <Collapse in={openCollapse} unmountOnExit>
+                <List component="div" sx={{ marginLeft: "1%" }}>
+                  <ul type="disc">
+                    <li className="myCourses">
+                      <Link to="/admin/YourCourses" className="textDecoration">
+                        <Typography
+                          id="hoverrr"
+                          className={
+                            highlight === "YourCourses" ? "hoverrr2 paddingD" : "paddingD"
+                          }
+                          sx={{ mt: -1, color: "grey" }}
+                          onClick={() => handleHighlight("YourCourses")}
+                        >
+                          My Courses
+                        </Typography>
+                      </Link>
+                    </li>
+                    <li className="listDesign">
+                      <Link to="/admin/CouponMain" className="textDecoration">
+                        <Typography
+                          id="hoverrr"
+                          className={
+                            highlight === "CreateCoupon" ? "hoverrr2 paddingD" : "paddingD"
+                          }
+                          sx={{ mt: -2.5, color: "grey" }}
+                          onClick={() => handleHighlight("CreateCoupon")}
+                        >
+                          Manage Coupons
+                        </Typography>
+                      </Link>
+                    </li>
+                  </ul>
+                </List>
+              </Collapse>
+            </Link>
+
+            <Link to="/admin/TestPortal">
+              <Box
+                className={`hoverrr ${highlight === "TestPortal" ? "hoverrr2" : ""}`}
+                sx={{ mt: -2 }}
+                onClick={() => handleHighlight("TestPortal")}
+              >
+                <AssignmentIcon className="icon" />
+                <Typography>Test Portal</Typography>
+              </Box>
+            </Link>
+
+            <Link to="/admin/Analytics">
+              <Box
+                className={`hoverrr ${highlight === "Analytics" ? "hoverrr2" : ""}`}
+                sx={{ mt: -2 }}
+                onClick={() => handleHighlight("Analytics")}
+              >
+                <SignalCellularAltIcon className="icon" />
+                <Typography>Analytics</Typography>
+              </Box>
+            </Link>
+
+            <Link to="/admin/User">
+              <ListItemButton onClick={handleClickPeople} className="listButton">
+                <PersonIcon />
+                <ListItemText primary="People" className="coursesHead" />
+                {openPeople ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+
+              <Collapse in={openPeople} unmountOnExit>
+                <List component="div">
+                  <ul>
+                    <li className="myCourses">
+                      <Link to="/admin/User" className="textDecoration">
+                        <Typography
+                          id="hoverrr"
+                          className={highlightPeople === "User" ? "hoverrr2 paddingD" : "paddingD"}
+                          sx={{ textDecoration: "none", color: "grey", mt: -1 }}
+                          onClick={() => handleHighlightPeople("User")}
+                        >
+                          User
+                        </Typography>
+                      </Link>
+                    </li>
+                    <li className="listDesign">
+                      <Link to="/admin/MyTeam" className="textDecoration">
+                        <Typography
+                          id="hoverrr"
+                          className={highlightPeople === "MyTeam" ? "hoverrr2 paddingD" : "paddingD"}
+                          sx={{ textDecoration: "none", color: "grey", mt: -2.5 }}
+                          onClick={() => handleHighlightPeople("MyTeam")}
+                        >
+                          My Team
+                        </Typography>
+                      </Link>
+                    </li>
+                  </ul>
+                </List>
+              </Collapse>
+            </Link>
+
+            <Link to="/admin/Testimonial">
+              <Box
+                className={`hoverrr ${highlight === "Testimonial" ? "hoverrr2" : ""}`}
+                sx={{ mt: -2 }}
+                onClick={() => handleHighlight("Testimonial")}
+              >
+                <DescriptionIcon className="icon" sx={{ fontSize: "1.4em" }} />
+                <Typography>Testimonial</Typography>
+              </Box>
+            </Link>
+
+            <Link>
+              <ListItemButton onClick={handleHideSubCat} className="listButton">
+                <SortIcon />
+                <ListItemText primary="Configuration" className="coursesHead" />
+                {hideSubConfig ? <ExpandLess /> : <ExpandMore />}
+              </ListItemButton>
+
+              <Collapse in={hideSubConfig} timeout="auto" unmountOnExit>
+                <List component="div">
+                  <ul sx={{ Height: "100%" }}>
+                    <li className="myCourses" onClick={() => handleCatConfig("Category")}>
+                      <Link className="textDecoration">
+                        <Typography sx={{ textDecoration: "none", color: "grey" }}>
+                          Category
+                        </Typography>
+                      </Link>
+                    </li>
+                    <li className="listDesign" onClick={() => handleCatConfig("SubCategory")}>
+                      <Link className="textDecoration">
+                        <Typography sx={{ textDecoration: "none", color: "grey" }}>
+                          Sub Category
+                        </Typography>
+                      </Link>
+                    </li>
+                    <li className="listDesign" onClick={() => handleCatConfig("Duration")}>
+                      <Link className="textDecoration">
+                        <Typography sx={{ textDecoration: "none", color: "grey" }}>
+                          Duration
+                        </Typography>
+                      </Link>
+                    </li>
+                    <li className="listDesign" onClick={() => handleCatConfig("Team Member")}>
+                      <Link className="textDecoration">
+                        <Typography sx={{ textDecoration: "none", color: "grey" }}>
+                          Team Member
+                        </Typography>
+                      </Link>
+                    </li>
+                    <li className="listDesign" onClick={() => handleCatConfig("Webinar")}>
+                      <Link className="textDecoration">
+                        <Typography sx={{ textDecoration: "none", color: "grey" }}>
+                          Webinar
+                        </Typography>
+                      </Link>
+                    </li>
+                  </ul>
+                </List>
+              </Collapse>
+            </Link>
+
+            <Link to="/admin/Categories">
+              <Box
+                className={`hoverrr ${highlight === "Categories" ? "hoverrr2" : ""}`}
+                sx={{ mt: -2 }}
+                onClick={() => handleHighlight("Categories")}
+              >
+                <AssignmentIcon className="icon" />
+                <Typography>Categories</Typography>
+              </Box>
+            </Link>
+
+            <Link to="/admin/Subcategories">
+              <Box
+                className={`hoverrr ${highlight === "Subcategories" ? "hoverrr2" : ""}`}
+                sx={{ mt: -2 }}
+                onClick={() => handleHighlight("Subcategories")}
+              >
+                <AssignmentIcon className="icon" />
+                <Typography>Subcategories</Typography>
+              </Box>
+            </Link>
+
+            <Link to="/admin/TeamMember">
+              <Box
+                className={`hoverrr ${highlight === "TeamMember" ? "hoverrr2" : ""}`}
+                sx={{ mt: -2 }}
+                onClick={() => handleHighlight("TeamMember")}
+              >
+                <AssignmentIcon className="icon" />
+                <Typography>Team Member</Typography>
+              </Box>
+            </Link>
+          </div>
         </div>
 
-        <div className="sidebar-list sidebar-list-item BottomLine">
-          <Link to="/admin/DashBoard">
-            <Box
-              id="hoverrr"
-              className={highlight === "DashBoard" ? "hoverrr2" : ""}
-              sx={{ mt: 1 }}
-              onClick={() => handleHighlight("DashBoard")}
-            >
-              <DashboardIcon className="icon" />
-              <Typography>DashBoard</Typography>
-            </Box>
-          </Link>
-
-          <Link to="/admin/YourCourses">
-            <ListItemButton
-              onClick={handleClickCollapse}
-              className="listButton"
-            >
-              <MenuBookIcon className="blueHoverIcon" />
-              <ListItemText primary="Courses" className="coursesHead" />
-              {openCollapse ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-
-            <Collapse in={openCollapse} unmountOnExit>
-              <List component="div" sx={{ marginLeft: "1%" }}>
-                <ul type="disc">
-                  <li className="myCourses">
-                    <Link to="/admin/YourCourses" className="textDecoration">
-                      <Typography
-                        id="hoverrr"
-                        className={
-                          highlight === "YourCourses"
-                            ? "hoverrr2 paddingD"
-                            : "paddingD"
-                        }
-                        sx={{ mt: -1, color: "grey" }}
-                        onClick={() => handleHighlight("YourCourses")}
-                      >
-                        My Courses
-                      </Typography>
-                    </Link>
-                  </li>
-                  <li className="listDesign">
-                    <Link to="/admin/CouponMain" className="textDecoration">
-                      <Typography
-                        id="hoverrr"
-                        className={
-                          highlight === "CreateCoupon"
-                            ? "hoverrr2 paddingD"
-                            : "paddingD"
-                        }
-                        sx={{ mt: -2.5, color: "grey" }}
-                        onClick={() => handleHighlight("CreateCoupon")}
-                      >
-                        Manage Coupons
-                      </Typography>
-                    </Link>
-                  </li>
-                </ul>
-              </List>
-            </Collapse>
-          </Link>
-          <Link to="/admin/TestPortal">
-            <Box
-              id="hoverrr"
-              className={highlight === "TestPortal" ? "hoverrr2" : ""}
-              sx={{ mt: -2 }}
-              onClick={() => handleHighlight("TestPortal")}
-            >
-              <AssignmentIcon className="icon" />
-              <Typography>Test Portal</Typography>
-            </Box>
-          </Link>
-          <Link to="/admin/Analytics">
-            <Box
-              id="hoverrr"
-              className={highlight === "Analytics" ? "hoverrr2" : ""}
-              sx={{ mt: -2 }}
-              onClick={() => handleHighlight("Analytics")}
-            >
-              <SignalCellularAltIcon className="icon" />
-              <Typography>Analytics</Typography>
-            </Box>
-          </Link>
-
-          <Link to="/admin/User">
-            <ListItemButton onClick={handleClickPeople} className="listButton">
-              <PersonIcon />
-              <ListItemText primary="People" className="coursesHead" />
-              {openPeople ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-
-            <Collapse in={openPeople} unmountOnExit>
-              <List component="div">
-                <ul>
-                  <li className="myCourses">
-                    <Link to="/admin/User" className="textDecoration">
-                      <Typography
-                        id="hoverrr"
-                        className={
-                          highlightPeople === "User"
-                            ? "hoverrr2 paddingD"
-                            : "paddingD"
-                        }
-                        sx={{ textDecoration: "none", color: "grey", mt: -1 }}
-                        onClick={() => handleHighlightPeople("User")}
-                      >
-                        User
-                      </Typography>
-                    </Link>
-                  </li>
-                  <li className="listDesign">
-                    <Link to="/admin/MyTeam" className="textDecoration">
-                      <Typography
-                        id="hoverrr"
-                        className={
-                          highlightPeople === "MyTeam"
-                            ? "hoverrr2 paddingD"
-                            : "paddingD"
-                        }
-                        sx={{ textDecoration: "none", color: "grey", mt: -2.5 }}
-                        onClick={() => handleHighlightPeople("MyTeam")}
-                      >
-                        My Team
-                      </Typography>
-                    </Link>
-                  </li>
-                </ul>
-              </List>
-            </Collapse>
-          </Link>
-
-          <Link to="/admin/Testimonial">
-            <Box
-              id="hoverrr"
-              className={highlight === "Testimonial" ? "hoverrr2" : ""}
-              sx={{ mt: -2 }}
-              onClick={() => handleHighlight("Testimonial")}
-            >
-              <DescriptionIcon className="icon" sx={{ fontSize: "1.4em" }} />
-              <Typography>Testimonial</Typography>
-            </Box>
-          </Link>
-          <Link>
-            <ListItemButton onClick={handleHideSubCat} className="listButton">
-              <SortIcon />
-              <ListItemText primary="Configuration" className="coursesHead" />
-              {hideSubConfig ? <ExpandLess /> : <ExpandMore />}
-            </ListItemButton>
-
-            <Collapse in={hideSubConfig} timeout="auto" unmountOnExit>
-              <List component="div">
-                <ul sx={{ Height: "100%" }}>
-                  <li
-                    className="myCourses"
-                    onClick={() => handleCatConfig("Category")}
-                  >
-                    <Link className="textDecoration">
-                      <Typography
-                        sx={{ textDecoration: "none", color: "grey" }}
-                        className="textDecoration"
-                      >
-                        Category
-                      </Typography>
-                    </Link>
-                  </li>
-                  <li
-                    className="listDesign"
-                    onClick={() => handleCatConfig("SubCategory")}
-                  >
-                    <Link className="textDecoration">
-                      <Typography
-                        sx={{ textDecoration: "none", color: "grey" }}
-                        className="textDecoration"
-                      >
-                        Sub Category
-                      </Typography>
-                    </Link>
-                  </li>
-                  <li
-                    className="listDesign"
-                    onClick={() => handleCatConfig("Duration")}
-                  >
-                    <Link className="textDecoration">
-                      <Typography
-                        sx={{ textDecoration: "none", color: "grey" }}
-                        className="textDecoration"
-                      >
-                        Duration
-                      </Typography>
-                    </Link>
-                  </li>
-                  <li className="listDesign">
-                    <Link
-                      className="textDecoration"
-                      onClick={() => handleCatConfig("Team Member")}
-                    >
-                      <Typography
-                        sx={{ textDecoration: "none", color: "grey" }}
-                        className="textDecoration"
-                      >
-                        Team Member
-                      </Typography>
-                    </Link>
-                  </li>
-                  <li className="listDesign">
-                    <Link
-                      className="textDecoration"
-                      onClick={() => handleCatConfig("Webinar")}
-                    >
-                      <Typography
-                        sx={{ textDecoration: "none", color: "grey" }}
-                        className="textDecoration"
-                      >
-                        Webinar
-                      </Typography>
-                    </Link>
-                  </li>
-                </ul>
-              </List>
-            </Collapse>
-          </Link>
-          {/* <Link> */}
-          <Link to="/admin/Categores">
-            <Box
-              id="hoverrr"
-              className={highlight === "TestPortal" ? "hoverrr2" : ""}
-              sx={{ mt: -2 }}
-              onClick={() => handleClickOnBlog()}
-            >
-              <AssignmentIcon className="icon" />
-              <Typography>Blog</Typography>
-              <Typography>Categores</Typography>
-            </Box>
-          </Link>
-          <Link to="/admin/Subcategores">
-            <Box
-              id="hoverrr"
-              className={highlight === "TestPortal" ? "hoverrr2" : ""}
-              sx={{ mt: -2 }}
-              onClick={() => handleHighlight("TestPortal")}
-            >
-              <AssignmentIcon className="icon" />
-              <Typography>Subcategores</Typography>
-            </Box>
-          </Link>
-          <Link to="/admin/TeamMember">
-            <Box
-              id="hoverrr"
-              className={highlight === "TestPortal" ? "hoverrr2" : ""}
-              sx={{ mt: -2 }}
-              onClick={() => handleHighlight("TestPortal")}
-            >
-              <AssignmentIcon className="icon" />
-              <Typography>Team Member</Typography>
-            </Box>
-          </Link>
-        </div>
-        {popForBlog && (
-          <AddBlog popForBlog={popForBlog} setPopForBlog={setPopForBlog} />
-        )}
         {hideCatConfig && (
           <Configuration
             selectedConfigValue={selectedConfigValue}
@@ -405,6 +343,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
       </div>
     </aside>
   );
+
 }
 
 export default SideBar;

@@ -31,6 +31,7 @@ import {
   getTeamByID,
   getTeam,
   updateTeam,
+  putTeamByID,
 } from "../../ActionFactory/apiActions";
 import { TablePagination } from "@mui/material";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
@@ -192,6 +193,7 @@ const MyTeam = () => {
       },
     });
   };
+
   const handleDeleteClick = () => {
     handleClose();
     setIsOpen(true);
@@ -241,6 +243,25 @@ const MyTeam = () => {
     setAddTeam(storedValues);
   };
   const handleCreateTeam = () => {
+    const teamId = openId
+    if(teamId){
+      const payload = {
+        member_name: addTeam.memberName,
+        email_id: addTeam.emailID,
+        phone_no: addTeam.PhoneNo,
+      };
+      handleClose()
+      putTeamByID({
+        payload,
+        teamId,
+        callBack: (response) => {
+          // const userCallBack = response?.data;
+          // console.log(userCallBack, "response")
+          // setUserData(userCallBack);
+          toast.success("Created successfully");
+          setOpen(false);
+        },
+      });} else{     
     const payload = {
       member_name: addTeam.memberName,
       email_id: addTeam.emailID,
@@ -253,6 +274,7 @@ const MyTeam = () => {
         setOpen(false);
       },
     });
+      }
   };
 
   const handleEdit = () => {
@@ -514,7 +536,7 @@ const MyTeam = () => {
           </TableContainer>
         </Paper>
       </div>
-      <ToastContainer />
+      <ToastContainer containerId={"friendRequest"} />
       <DailogBox
           isOpen={isOpen}
           handleConfirmDelete={handleConfirmDelete}

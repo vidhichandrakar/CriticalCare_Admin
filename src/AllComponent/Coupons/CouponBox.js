@@ -26,10 +26,11 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import Divider from '@mui/material/Divider'; 
-import { getCoupon } from "../ActionFactory/apiActions";
+import { deleteCoupon, getCoupon } from "../ActionFactory/apiActions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useNavigate } from "react-router-dom";
+import moment from "moment/moment";
 
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -50,19 +51,47 @@ const CouponBox = () => {
   const [openSecond, setOpenSecond] = useState(false);
   const [personName, setPersonName] = useState([]);
   const [coupondata, setCoupondata] = useState();
+  const [openId, setOpenId] = useState(0);
+  const navigate = useNavigate();
 
   const handleShowDetail = (value) => {
     setShowDetail(value);
     setShowDetailFlag(!showDetailFlag);
   };
 
-  const handleClick = (event) => {
+  const handleClick = (event, id) => {
     setAnchorEl(event.currentTarget);
+    setOpenId(id);
   };
 
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleEdit = (event, id) => {
+        navigate("/admin/CreateCoupon", { state: { id: openId } });
+  };
+  const handleDelete = () => {
+    const coupon_id = openId
+    deleteCoupon({
+      coupon_id,
+      callBack: () => {
+        handleClose();
+        setTimeout(() => {
+          getCoupon({
+            callBack: (response) => {
+              const userCallBack = response?.data;
+              setCoupondata(userCallBack);
+            },
+            error: (error) => {
+              toast.error(error.message);
+            },
+          });
+        }, 1000);
+       
+      },
+    });
+  }
 
   const open = Boolean(anchorEl);
   const ids = open ? "simple-popover" : undefined;
@@ -166,16 +195,19 @@ const CouponBox = () => {
                       aria-describedby={id}
                       variant="contained"
                       sx={{ cursor: "pointer" }}
-                      onClick={handleClick}
+                      onClick={(event) =>
+                        handleClick(event, data.coupon_id)
+                      }
                     />
                   </Box>
                 </div>
 
                 <div className="flexrow">
                   <Box className="couponRightBox flexrow">
-                    <Typography sx={{fontSize: "0.9rem"}}>{data.start_date}, {data.end_date}</Typography>
+                    {/* <Typography sx={{fontSize: "0.9rem"}}>{data.start_date}, {data.end_date}</Typography> */}
+                    <Typography sx={{fontSize: "0.9rem"}}>{ moment(new Date(data.start_date)).format("YYYY-MM-DD")}, { moment(new Date(data.end_date)).format("YYYY-MM-DD")}</Typography>
                     <Box className="verticalDividerTwo"></Box>
-                    <Typography sx={{fontSize: "0.9rem"}}className="UsedText">Used 1 times</Typography>
+                    <Typography sx={{fontSize: "0.9rem"}}className="UsedText">{data.coupon_max_user} times</Typography>
                   </Box>
 
                   <Box>
@@ -536,10 +568,11 @@ const CouponBox = () => {
             </div>
           ) : null}
         </Box>
-      ))}
+      ))
+      }
       <Popover
         sx={{ m: -7, mt: 0.7 }}
-        id={ids}
+        id={openId}
         open={open}
         anchorEl={anchorEl}
         onClose={handleClose}
@@ -548,23 +581,17 @@ const CouponBox = () => {
           horizontal: "right",
         }}
       >
-        {/* <Box sx={{ p: 1, mt: -1, mr: 5 ,display: "flex" }}> */}
-        <Box  className="EditButton" sx={{ p: 1}}>
-
-          {" "}
-          <NoteAltOutlinedIcon className="coloricon"/>
-          <Typography sx={{ml: 1}}> Details</Typography>
-        </Box>
-        <Divider/>
-        <Box className="EditButton" sx={{ p: 1}} >
-          {" "}
+        
+        <Box className="EditButton" sx={{ p: 1}} 
+        onClick={handleEdit}>
           <HistorySharpIcon  className="coloricon"/>
-          <Typography sx={{ml: 1}}> View Edit History</Typography>
+          <Typography sx={{ml: 1}}>Edit</Typography>
         </Box>
         <Divider/>
         {/* <Box sx={{ p: 1, mt: -1, mr: 5,display: "flex" }}> */}
-        <Box className="EditButton" sx={{ p: 1}}>
-
+        <Box className="EditButton" sx={{ p: 1}}
+         onClick={handleDelete}
+         >
           {" "}
           <RestoreFromTrashSharpIcon className="DeleteRed"/> 
           <Typography sx={{ml: 1}} className="DeleteRed"> Delete</Typography>

@@ -409,9 +409,11 @@ const Banner = () => {
                         <Box
                           component="img"
                           sx={{
-                            height: 155,
+                            width: "100%", // Fill parent's width
+                            height: "auto", // Maintain aspect ratio
+                            //height: 155,
                             display: "block",
-                            maxWidth: 300,
+                            //maxWidth: "auto",
                             overflow: "hidden",
                             width: "100%",
                           }}
@@ -426,9 +428,11 @@ const Banner = () => {
                             <Box
                               component="img"
                               sx={{
-                                height: 155,
+                                width: "100%", // Fill parent's width
+                                height: "auto", // Maintain aspect ratio
+                                //height: 155,
                                 display: "block",
-                                maxWidth: 300,
+                                //maxWidth: 300,
                                 overflow: "hidden",
                                 width: "100%",
                               }}

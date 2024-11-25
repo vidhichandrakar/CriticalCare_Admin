@@ -150,6 +150,9 @@
 .changeBtn{
     text-transform: none !important;
 }
+.previewBtn {
+    text-transform: none !important;
+}
 .fontSize1{
     color: grey;
     font-size: 1rem;
