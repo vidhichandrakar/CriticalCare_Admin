@@ -76,10 +76,12 @@ const RightBox = ({
     thumbnailPath: null,
   });
   const [uploadedVideo, setUploadedVideo] = useState([]);
+  const [uploadedVideoLink, setUploadedVideoLink] = useState([]);
   const [storeVideo, setStoreVideo] = useState();
   const [acceptType, setAcceptType] = useState({});
   const [uploadedFileType, setUploadedFileType] = useState({});
   const [drawerUrl, setDrawerUrl] = useState(false);
+  const [contentAddedLinks, setContentAddedLinks] = useState([]);
 
   useEffect(() => {
     if (courseData?.contents?.length) {
@@ -88,23 +90,20 @@ const RightBox = ({
   }, []);
 
   const handleAddLink = (inputLink, inputName) => {
-    let inputNameValue = inputName.trim(); // Remove leading and trailing spaces
-    if(uploadedFileType.content_type_name=="Video"){
+    let inputNameValue = inputName.trim();
+    if (uploadedFileType.content_type_name == "Video") {
       if (inputNameValue && !inputNameValue.endsWith(".mp4")) {
-        inputNameValue = inputNameValue.replace(/\s+/g, "") + ".mp4"; // Remove all spaces and add .mp4
+        inputNameValue = inputNameValue.replace(/\s+/g, "") + ".mp4";
       }
     }
-    // else if(uploadedFileType.content_type_name=="Image"){
-    //   if (inputNameValue && !inputNameValue.endsWith(".jpg")) {
-    //     inputNameValue = inputNameValue.replace(/\s+/g, "") + ".jpg"; // Remove all spaces and add .mp4
-    //   }
-    // }
-    // if (inputNameValue && !inputNameValue.endsWith(".mp4")) {
-    //   inputNameValue = inputNameValue.replace(/\s+/g, "") + ".mp4"; // Remove all spaces and add .mp4
-    // }
-    console.log("inputNameValue---->", inputNameValue);
 
-    let arr = [...uploadedVideo];
+    setContentAddedLinks([
+      ...contentAddedLinks,
+      { name: inputNameValue, link: inputLink },
+    ]);
+
+    // let arr = [...uploadedVideo];
+    let arr = [...uploadedVideoLink];
     let arr2 = {
       content_name: "",
       content_url: "",
@@ -119,8 +118,7 @@ const RightBox = ({
       arr2.course_id = courseData.course_id;
     }
     arr.push(arr2);
-    console.log("arr2;", arr2, inputLink);
-    setUploadedVideo(arr);
+    setUploadedVideoLink(arr);
     handleInputChange("addContent", arr);
     handleVideoName(arr);
     setVideoqopen(false);
@@ -153,7 +151,6 @@ const RightBox = ({
           arr2.course_id = courseData.course_id;
         }
         arr.push(arr2);
-        // console.log("jhgcvhjkl;")
         setUploadedVideo(arr);
         handleInputChange("addContent", arr);
         handleVideoName(arr);
@@ -171,7 +168,6 @@ const RightBox = ({
     getInputProps: getIntroVideoInputProps,
   } = useDropzone({
     onDrop: onInroVideoDrop,
-    // onChange: (event) => console.log("kokokokok",event),
     accept: acceptType,
   });
 
@@ -230,7 +226,6 @@ const RightBox = ({
       (item) => item.content_type_name === "Image"
     );
     setUploadedFileType(imgType[0]);
-    // console.log("clickedModuleIdx=>",clickedModuleIdx)
   };
   const handleCloseDialogImg = () => {
     setImgopen(false);
@@ -353,7 +348,9 @@ const RightBox = ({
         handleAddUrl={handleAddUrl}
         uploadedFileType={uploadedFileType}
         uploadedVideo={uploadedVideo}
+        uploadedVideoLink={uploadedVideoLink}
         setUploadedVideo={setUploadedVideo}
+        setUploadedVideoLink={setUploadedVideoLink}
         handleInputChange={handleInputChange}
         courseData={courseData}
       />

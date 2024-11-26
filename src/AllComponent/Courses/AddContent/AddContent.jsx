@@ -48,7 +48,7 @@ function AddContent({
   // const [inputLink, setInputLink] = useState("");
   // const open1 = Boolean(anchorEl1);
   const navigate = useNavigate();
- 
+
   const [moduleDescription, setModuleDescription] = useState([
     {
       id: 0,
@@ -86,12 +86,6 @@ function AddContent({
   }, []);
   const handleAddContent = (event, idx) => {
     event.stopPropagation();
-    console.log("kjhgfcghjk");
-    // if (idx === expanded) {
-    //   setExpanded(null);
-    // } else {
-    //   setExpanded(idx);
-    // }
     if (idx !== expanded) {
       setExpanded(idx);
     }
@@ -104,25 +98,22 @@ function AddContent({
   };
 
   const handleVideoName = (value) => {
-    console.log("valouyh",value)
-    let arr = [];
-    setVideoDesc(value);
-
-    moduleDescription.map((item, index) => {
-      let storedValues = Object.assign({}, item);
-      if (item.id === clickedModuleIdx) {
-        storedValues.moduleName = addModulesText;
-        storedValues.item = value;
+    let updatedModuleDescription = moduleDescription.map((module) => {
+      if (module.id === clickedModuleIdx) {
+        return {
+          ...module,
+          moduleName: addModulesText,
+          item: [...module.item, ...(Array.isArray(value) ? value : [value])],
+        };
       }
-      arr.push(storedValues);
+      return module;
     });
-    setModuleDescription(arr);
+    setModuleDescription(updatedModuleDescription);
   };
- 
+
   const handleAddUrl = (type, value) => {
     if (type === "uploadUrl") {
       setVideoDesc(value);
-      console.log("type", type, "url->", value);
     }
   };
   const extractVideoId = (url) => {
@@ -268,7 +259,6 @@ function AddContent({
   return (
     <>
       <div style={{ height: "120px" }}>
-        {console.log("moduleDescription==>", moduleDescription)}
         {moduleDescription.map((moduleItem, index) => (
           <div style={{ margin: "20px" }}>
             <Accordion
@@ -355,7 +345,6 @@ function AddContent({
                   helperText={error ? "Module name is required" : ""}
                 />
               </AccordionDetails>
-
               <AccordionActions style={{ flexFlow: "column" }}>
                 <Box className="contentInnerLeftBox">
                   {!moduleItem?.item?.length ? (
@@ -391,7 +380,6 @@ function AddContent({
                         </Box>
                       ) : handleImageType(item?.content_name?.split(".")[1]) ? (
                         <Box className="videoBox">
-                          {console.log("item---->",item)}
                           <Box className="leftVideo">
                             <img
                               src={item.content_url}
@@ -476,7 +464,6 @@ function AddContent({
                         </Box>
                       ) : (
                         <>
-                        {console.log("item0000000",item)}
                           <Box className="videoBox">
                             <iframe
                               width="350"
@@ -507,7 +494,6 @@ function AddContent({
                     }}
                     sx={{ mt: 1 }}
                   >
-                     
                     <Box>
                       <RightBox
                         contentType={contentType}

@@ -161,11 +161,11 @@ const CreateCourses = ({ handleHeaderLabels }) => {
 
   return (
     <Box className="courseMainTrack">
-      {console.log("courseId->",courseId)}
       <Tracker
         trackerPage={trackerPage}
         handleTrackerPage={handleTrackerPage}
         hideTrackerForEditFlow={hideTrackerForEditFlow}
+        courseId={courseId}
       />
       {trackerPage === 0 ? (
         <CreateForm
