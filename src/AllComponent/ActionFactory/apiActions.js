@@ -288,10 +288,15 @@ export const addTeamMember = ({ payload, callBack, error }) => {
   axios
     .post(url, payload)
     .then((response) => {
-      callBack(response);
+      if (callBack) callBack(response);
     })
     .catch((errorMessage) => {
-      error(errorMessage);
+      console.error("Add Team Member Error:", errorMessage.response?.data || errorMessage.message);
+      if (error && typeof error === "function") {
+        error(errorMessage.response?.data || {
+          message: "An unexpected error occurred.",
+        });
+      }
     });
 };
 
@@ -327,6 +332,8 @@ export const updateMemberDetails = ({ payload, callBack }) => {
     callBack(response);
   });
 };
+
+
 export const getTeam = ({ callBack, error }) => {
   const url = APIS.updateMember;
   axios

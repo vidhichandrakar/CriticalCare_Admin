@@ -20,6 +20,7 @@ import {
   updateCategory,
   updateDuration,
   updateMemberDetails,
+  addTeamMember
 } from "../ActionFactory/apiActions";
 import { ToastContainer, toast } from "react-toastify";
 import { Box, Divider, Typography } from "@mui/material";
@@ -192,11 +193,12 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue, cat
         email_id: saveMemberDetails.email_id,
         phone_no: saveMemberDetails.phone_no,
       };
-      updateMemberDetails({
+      console.log("payload member : ", payload)
+      addTeamMember({
         payload,
         callBack: (response) => {
           toast.success("Member Successful created");
-          setUpdatedCat({ category_name: "" })
+          setUpdatedCat({ member_name: "" })
           handleCloseCat();
         },
       });
@@ -457,7 +459,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue, cat
                 />
               </DialogContent>
             </>
-          ) : (
+                ) : selectedConfigValue === "Team Member" ? (
             <>
               <DialogContent dividers>
                 {CommonTypography(
@@ -523,7 +525,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue, cat
                 </div>
               </DialogContent>
             </>
-          )}
+          ) : null}
         </DialogContent>
         <DialogActions>
           <Button
