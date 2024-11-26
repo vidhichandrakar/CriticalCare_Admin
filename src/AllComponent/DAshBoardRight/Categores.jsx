@@ -658,7 +658,6 @@ const Categores = () => {
           </TableContainer>
         </Paper>
       </div>
-      <ToastContainer containerId={"friendRequest"} />
       <DailogBox
         isOpen={isOpen}
         handleConfirmDelete={handleConfirmDelete}
