@@ -12,13 +12,12 @@ import { useDropzone } from "react-dropzone";
 import { uploadFile } from "../../ActionFactory/apiActions";
 import ContentSlider from "./Boxes/Slider.component";
 import DialogBoxes from "./Boxes/DialogBoxes.component";
-import QuizIcon from '@mui/icons-material/Quiz';
-import LiveTvIcon from '@mui/icons-material/LiveTv';
-import VideocamIcon from '@mui/icons-material/Videocam';
-import ImageIcon from '@mui/icons-material/Image';
+import QuizIcon from "@mui/icons-material/Quiz";
+import LiveTvIcon from "@mui/icons-material/LiveTv";
+import VideocamIcon from "@mui/icons-material/Videocam";
+import ImageIcon from "@mui/icons-material/Image";
 import { Box } from "@material-ui/core";
-import "../../CSSFile/Content.css"
-
+import "../../CSSFile/Content.css";
 
 const RightBox = ({
   contentType,
@@ -77,10 +76,12 @@ const RightBox = ({
     thumbnailPath: null,
   });
   const [uploadedVideo, setUploadedVideo] = useState([]);
+  const [uploadedVideoLink, setUploadedVideoLink] = useState([]);
   const [storeVideo, setStoreVideo] = useState();
   const [acceptType, setAcceptType] = useState({});
   const [uploadedFileType, setUploadedFileType] = useState({});
   const [drawerUrl, setDrawerUrl] = useState(false);
+  const [contentAddedLinks, setContentAddedLinks] = useState([]);
 
   useEffect(() => {
     if (courseData?.contents?.length) {
@@ -88,9 +89,47 @@ const RightBox = ({
     }
   }, []);
 
+  const handleAddLink = (inputLink, inputName) => {
+    let inputNameValue = inputName.trim();
+    if (uploadedFileType.content_type_name == "Video") {
+      if (inputNameValue && !inputNameValue.endsWith(".mp4")) {
+        inputNameValue = inputNameValue.replace(/\s+/g, "") + ".mp4";
+      }
+    }
+
+    setContentAddedLinks([
+      ...contentAddedLinks,
+      { name: inputNameValue, link: inputLink },
+    ]);
+
+    // let arr = [...uploadedVideo];
+    let arr = [...uploadedVideoLink];
+    let arr2 = {
+      content_name: "",
+      content_url: "",
+      content_type: "",
+      content_type_id: "",
+    };
+    arr2.content_name = inputNameValue;
+    arr2.content_url = inputLink;
+    arr2.content_type = uploadedFileType.content_type_name;
+    arr2.content_type_id = uploadedFileType.content_type_id;
+    if (courseData?.contents?.length) {
+      arr2.course_id = courseData.course_id;
+    }
+    arr.push(arr2);
+    setUploadedVideoLink(arr);
+    handleInputChange("addContent", arr);
+    handleVideoName(arr);
+    setVideoqopen(false);
+    setImgopen(false);
+    setDocopen(false);
+    setZipopen(false);
+  };
+
   //this function is for to add all items
 
-  const onInroVideoDrop = async (files) => {                     
+  const onInroVideoDrop = async (files) => {
     let payload = new FormData();
     payload.append("file", files[0], files[0]?.name);
     setLoaderState(true);
@@ -112,7 +151,6 @@ const RightBox = ({
           arr2.course_id = courseData.course_id;
         }
         arr.push(arr2);
-        // console.log("jhgcvhjkl;")
         setUploadedVideo(arr);
         handleInputChange("addContent", arr);
         handleVideoName(arr);
@@ -130,7 +168,6 @@ const RightBox = ({
     getInputProps: getIntroVideoInputProps,
   } = useDropzone({
     onDrop: onInroVideoDrop,
-    // onChange: (event) => console.log("kokokokok",event),
     accept: acceptType,
   });
 
@@ -189,14 +226,13 @@ const RightBox = ({
       (item) => item.content_type_name === "Image"
     );
     setUploadedFileType(imgType[0]);
-    // console.log("clickedModuleIdx=>",clickedModuleIdx)
   };
   const handleCloseDialogImg = () => {
     setImgopen(false);
   };
   const handleClickOpenIC = () => {
     setIcopen(true);
-    setUploadPopupOpen(true)
+    setUploadPopupOpen(true);
   };
   const handleCloseDialogIC = () => {
     setIcopen(false);
@@ -279,10 +315,7 @@ const RightBox = ({
       <div className="rightBoxComplete">
         {addContentList.map((list) => {
           return (
-            <Box
-              className="rightBoxTypography "
-              onClick={list.onClickHandler}
-            >
+            <Box className="rightBoxTypography " onClick={list.onClickHandler}>
               {list.Component}
               {list.name}
             </Box>
@@ -315,11 +348,15 @@ const RightBox = ({
         handleAddUrl={handleAddUrl}
         uploadedFileType={uploadedFileType}
         uploadedVideo={uploadedVideo}
+        uploadedVideoLink={uploadedVideoLink}
         setUploadedVideo={setUploadedVideo}
+        setUploadedVideoLink={setUploadedVideoLink}
         handleInputChange={handleInputChange}
         courseData={courseData}
       />
       <DialogBoxes
+        // setContentlink={setContentlink}
+        handleAddLink={handleAddLink}
         handleCloseDialogIC={handleCloseDialogIC}
         icopened={icopened}
         handleCloseDialogImg={handleCloseDialogImg}

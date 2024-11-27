@@ -17,6 +17,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { TextField } from "@mui/material";
 import TipsAndUpdatesTwoToneIcon from "@mui/icons-material/TipsAndUpdatesTwoTone";
 import UploadFileRoundedIcon from "@mui/icons-material/UploadFileRounded";
+import { CommonAddLinkField } from "../../../../Util/CommonAddLinkField";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -29,6 +30,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 const DialogBoxes = ({
+  handleAddLink,
   handleCloseDialogIC,
   icopened,
   handleCloseDialogImg,
@@ -46,6 +48,9 @@ const DialogBoxes = ({
   storedBasicInfo,
   toggleDrawerUrl,
 }) => {
+  const onAddLink = (inputLink, inputName) => {
+    handleAddLink(inputLink,inputName);
+  };
   return (
     <>
       <BootstrapDialog
@@ -285,13 +290,7 @@ const DialogBoxes = ({
             </Box>
 
             <Box sx={{ marginTop: "12px" }}>Or</Box>
-
-            <Typography
-              className="orPasteURL"
-              onClick={toggleDrawerUrl("right", true)}
-            >
-              Paste URL
-            </Typography>
+            <CommonAddLinkField onAddLink={onAddLink} />
           </Box>
         </DialogContent>
       </BootstrapDialog>
@@ -367,13 +366,7 @@ const DialogBoxes = ({
             </Box>
 
             <Box sx={{ marginTop: "12px" }}>Or</Box>
-
-            <Typography
-              className="orPasteURL"
-              onClick={toggleDrawerUrl("right", true)}
-            >
-              Paste URL
-            </Typography>
+            <CommonAddLinkField onAddLink={onAddLink} />
           </Box>
         </DialogContent>
       </BootstrapDialog>
@@ -449,13 +442,7 @@ const DialogBoxes = ({
             </Box>
 
             <Box sx={{ marginTop: "12px" }}>Or</Box>
-
-            <Typography
-              className="orPasteURL"
-              onClick={toggleDrawerUrl("right", true)}
-            >
-              Paste URL
-            </Typography>
+            <CommonAddLinkField onAddLink={onAddLink} />
           </Box>
         </DialogContent>
       </BootstrapDialog>
@@ -531,12 +518,7 @@ const DialogBoxes = ({
             </Box>
 
             <Box sx={{ marginTop: "12px" }}>Or</Box>
-            <Typography
-              className="orPasteURL"
-              onClick={toggleDrawerUrl("right", true)}
-            >
-              Paste URL
-            </Typography>
+            <CommonAddLinkField onAddLink={onAddLink} />
           </Box>
         </DialogContent>
       </BootstrapDialog>

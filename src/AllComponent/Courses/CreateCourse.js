@@ -165,6 +165,7 @@ const CreateCourses = ({ handleHeaderLabels }) => {
         trackerPage={trackerPage}
         handleTrackerPage={handleTrackerPage}
         hideTrackerForEditFlow={hideTrackerForEditFlow}
+        courseId={courseId}
       />
       {trackerPage === 0 ? (
         <CreateForm

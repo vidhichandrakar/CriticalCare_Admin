@@ -8,9 +8,11 @@ const Tracker = ({
   trackerPage,
   handleTrackerPage,
   hideTrackerForEditFlow,
+  courseId,
 }) => {
   const steps = ["Basic Information", "Edit price", "Add Content"];
   const stepForEditFlow = ["Basic Information", "Edit price"];
+  const stepForEditAddCOntent = ["Add Content"];
 
   return (
     <Box className="createBoxHeader trackerBox">

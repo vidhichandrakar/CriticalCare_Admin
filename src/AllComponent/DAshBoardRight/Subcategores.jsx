@@ -15,7 +15,7 @@ import SearchBar from "../../Util/SearchBar";
 import Popover from "@mui/material/Popover";
 import CourseHeader from "../Courses/CoursesHeader";
 import SideBar from "../AdminDashboardMain/SideBar";
-import { testPortalColumns } from "../../Data/JsonData";
+import { CategoryPortalColumns } from "../../Data/JsonData";
 import BlockIcon from "@mui/icons-material/Block";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Checkbox from "@mui/material/Checkbox";
@@ -42,6 +42,7 @@ import {
   getTestByID,
   createTestPortal,
   getCategory,
+  deleteCategory
 } from "../ActionFactory/apiActions";
 import { TablePagination } from "@mui/material";
 import Stack from "@mui/material/Stack";
@@ -221,16 +222,16 @@ const Subcategores = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-   
-      // setLoaderState(true);
-      getCategory({
-        callBack: (response) => {
-          const userCallBack = response?.data;
-          setUserData(userCallBack);
-          // console.log("userCallBack===>",userCallBack);
-        },
-      });
-    
+
+    // setLoaderState(true);
+    getCategory({
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setUserData(userCallBack);
+        // console.log("userCallBack===>",userCallBack);
+      },
+    });
+
   }, []);
 
   const handleClick = (event, id) => {
@@ -242,6 +243,10 @@ const Subcategores = () => {
     setAnchorEl(null);
   };
   const handleDeleteClick = () => {
+    if (!openId) {
+      toast.error("Please select a category to delete.");
+      return;
+    }
     handleClose();
     setIsOpen(true);
   };
@@ -256,11 +261,16 @@ const Subcategores = () => {
   };
 
   const handleDelete = () => {
-    const userId = openId;
-    deleteTestPortal({
-      userId,
+    if (!openId) {
+      toast.error("No category selected for deletion");
+      return;
+    }
+
+    deleteCategory({
+      category_id: openId, // Ensure the correct field name is used
       callBack: () => {
-        getTest({
+        toast.success("Category deleted successfully!");
+        getCategory({
           callBack: (response) => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
@@ -269,8 +279,8 @@ const Subcategores = () => {
         handleClose();
       },
       error: (error) => {
-        toast.error(error.message);
-        // console.log(error);
+        toast.error(error.message || "Failed to delete category");
+        console.error("Delete Error: ", error);
       },
     });
   };
@@ -330,7 +340,6 @@ const Subcategores = () => {
           callBack: (response) => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
-            // console.log("irhthjn plce")
             // setLoaderState(false);
           },
         });
@@ -428,7 +437,7 @@ const Subcategores = () => {
             </IconButton>
 
             <DialogContent dividers>
-              <Typography gutterBottom>Test Name</Typography>
+              <Typography gutterBottom>Category</Typography>
               <TextField
                 inputProps={{ className: "textField" }}
                 fullWidth
@@ -478,7 +487,7 @@ const Subcategores = () => {
               </Box>
             </DialogContent>
             <DialogContent dividers>
-              
+
               <Typography gutterBottom sx={{ mt: 2 }}>
                 Active time duration
               </Typography>
@@ -537,7 +546,7 @@ const Subcategores = () => {
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  {testPortalColumns.map((column) => (
+                  {CategoryPortalColumns.map((column) => (
                     <TableCell
                       key={column.id}
                       align={column.align}
@@ -553,40 +562,40 @@ const Subcategores = () => {
               <TableBody className="parentTable">
                 {userData.length
                   ? (rowsPerPage > 0
-                      ? userData.slice(
-                          page * rowsPerPage,
-                          page * rowsPerPage + rowsPerPage
-                        )
-                      : userData
-                    ).map((row) => {
-                      return (
-                        <TableRow
-                          hover
-                          className="TableHover"
-                          role="checkbox"
-                          tabIndex={-1}
-                          key={row?.code}
-                        >
-                          <TableCell className="alignTableBody">
-                            {row?.category_name}
-                          </TableCell>
-                          <TableCell className="alignTableBody">
-                            {`${row?.duration_hour}hr : ${row?.duration_minute}min`}
-                          </TableCell>
-                          <TableCell className="alignTableBody">
-                            {moment(row?.createdAt).format("MM/DD/YYYY")}
-                          </TableCell>
+                    ? userData.slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage
+                    )
+                    : userData
+                  ).map((row) => {
+                    return (
+                      <TableRow
+                        hover
+                        className="TableHover"
+                        role="checkbox"
+                        tabIndex={-1}
+                        key={row?.code}
+                      >
+                        <TableCell className="alignTableBody">
+                          {row?.category_name}
+                        </TableCell>
+                        <TableCell className="alignTableBody">
+                          {`${row?.duration_hour}hr : ${row?.duration_minute}min`}
+                        </TableCell>
+                        <TableCell className="alignTableBody">
+                          {moment(row?.createdAt).format("MM/DD/YYYY")}
+                        </TableCell>
 
-                          <TableCell sx={{ textAlign: "center" }}>
-                            <MoreVertIcon
-                              onClick={(event) =>
-                                handleClick(event, row?.test_id)
-                              }
-                            />
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })
+                        <TableCell sx={{ textAlign: "center" }}>
+                          <MoreVertIcon
+                            onClick={(event) =>
+                              handleClick(event, row?.category_id)
+                            }
+                          />
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })
                   : null}
 
                 <Popover
@@ -603,7 +612,7 @@ const Subcategores = () => {
                   <Box
                     className="redDeleteofTestPortal redDelete"
                     onClick={handleDeleteClick}
-                    sx={{borderBottom: "1px solid #eee", color: "red"}}
+                    sx={{ borderBottom: "1px solid #eee", color: "red" }}
 
                   >
                     {" "}
@@ -658,10 +667,10 @@ const Subcategores = () => {
         handleCancelDelete={handleCancelDelete}
       />
       <Configuration
-            selectedConfigValue={selectedConfigValue}
-            handleCloseCat={handleCloseCat}
-            hideCatConfig={hideCatConfig}
-          />
+        selectedConfigValue={selectedConfigValue}
+        handleCloseCat={handleCloseCat}
+        hideCatConfig={hideCatConfig}
+      />
     </div>
   );
 };

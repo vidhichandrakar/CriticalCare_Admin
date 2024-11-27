@@ -45,6 +45,7 @@ const Url = ({
   };
 
   const handleInput = (value, type) => {
+
     if (type === "contentName") {
       setContentName(value);
     } else if (type === "url") {

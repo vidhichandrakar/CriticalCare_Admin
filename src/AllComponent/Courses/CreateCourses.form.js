@@ -495,9 +495,9 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           <Box className="rightCat">
             <Box>
               <Button
-                variant="outlined-multiline-static"
                 startIcon={<AddLinkIcon />}
                 onClick={handleClick}
+                variant="text"
               >
                 Add Link
               </Button>
