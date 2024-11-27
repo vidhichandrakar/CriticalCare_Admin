@@ -145,7 +145,7 @@ const MyTeam = () => {
   });
   const [loaderState, setLoaderState] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -225,6 +225,10 @@ const MyTeam = () => {
   };
   const handleCloseDialog = () => {
     setOpen(false);
+    setTimeout(() => {
+      
+    handleGetTeam()
+    }, 3000);
     setAddTeam({
       memberName: "",
       emailID: "",
@@ -242,39 +246,57 @@ const MyTeam = () => {
     }
     setAddTeam(storedValues);
   };
+  const handleGetTeam = ()=>{
+    getTeam({
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setUserData(userCallBack);
+        setLoaderState(false);
+      },
+      error: (error) => {
+        toast.error(error.message);
+      },
+    });
+  }
   const handleCreateTeam = () => {
     const teamId = openId
-    if(teamId){
+    if (teamId) {
       const payload = {
         member_name: addTeam.memberName,
         email_id: addTeam.emailID,
         phone_no: addTeam.PhoneNo,
+        "member_photo_url": "string",
+        "member_type_id": 1
+
       };
       handleClose()
       putTeamByID({
         payload,
         teamId,
         callBack: (response) => {
-          // const userCallBack = response?.data;
-          // console.log(userCallBack, "response")
-          // setUserData(userCallBack);
+          handleGetTeam()
           toast.success("Created successfully");
           setOpen(false);
         },
-      });} else{     
-    const payload = {
-      member_name: addTeam.memberName,
-      email_id: addTeam.emailID,
-      phone_no: addTeam.PhoneNo,
-    };
-    updateTeam({
-      payload,
-      callBack: (response) => {
-        toast.success("Created successfully");
-        setOpen(false);
-      },
-    });
-      }
+      });
+    } else {
+      const payload = {
+        member_name: addTeam.memberName,
+        email_id: addTeam.emailID,
+        phone_no: addTeam.PhoneNo,
+        "member_photo_url": "string",
+        "member_type_id": 1
+
+      };
+      updateTeam({
+        payload,
+        callBack: (response) => {
+          handleGetTeam()
+          toast.success("Created successfully");
+          setOpen(false);
+        },
+      });
+    }
   };
 
   const handleEdit = () => {
@@ -299,40 +321,40 @@ const MyTeam = () => {
   return (
     <div className="grid-container">
       <Header
-          Heading={"My Team"}
-          subHeading={"View, Filter & Manage all your users"}
-        />
+        Heading={"My Team"}
+        subHeading={"View, Filter & Manage all your users"}
+      />
       <SideBar />
       <div className=" main-container">
-        
+
         <LoaderComponent loaderState={loaderState} />
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">
             {/* <SearchBar mt="2%" placeholder="Search by name" /> */}
             <div className="wid100">
-          <Paper
-            component="form"
-            sx={{
-              ml: 0,
-              mt: "41px",
-              mb: "15px",
-              display: "flex",
-              alignItems: "center",
-              backgroundColor: "#e4e4e459",
-              borderRadius: "10px",
-            }}
-          >
-            <IconButton sx={{ p: "10px" }} aria-label="menu">
-              <SearchIcon />
-            </IconButton>
-            <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-            <InputBase
-              sx={{ ml: 1, flex: 1 }}
-              placeholder="Search your course by name"
-              inputProps={{ "aria-label": "search your course by name" }}
-            />
-          </Paper>
-        </div>
+              <Paper
+                component="form"
+                sx={{
+                  ml: 0,
+                  mt: "41px",
+                  mb: "15px",
+                  display: "flex",
+                  alignItems: "center",
+                  backgroundColor: "#e4e4e459",
+                  borderRadius: "10px",
+                }}
+              >
+                <IconButton sx={{ p: "10px" }} aria-label="menu">
+                  <SearchIcon />
+                </IconButton>
+                <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+                <InputBase
+                  sx={{ ml: 1, flex: 1 }}
+                  placeholder="Search your course by name"
+                  inputProps={{ "aria-label": "search your course by name" }}
+                />
+              </Paper>
+            </div>
 
             <Button className="filterButton mt43">
               <FilterAltIcon /> Filter
@@ -447,39 +469,39 @@ const MyTeam = () => {
               <TableBody className="parentTable">
                 {userData.length
                   ? (rowsPerPage > 0
-                      ? userData.slice(
-                          page * rowsPerPage,
-                          page * rowsPerPage + rowsPerPage
-                        )
-                      : userData
-                    ).map((row) => {
-                      return (
-                        <TableRow
-                          hover
-                          className="TableHover"
-                          role="checkbox"
-                          tabIndex={-1}
-                          key={row?.code}
-                        >
-                          <TableCell className="useInfoCheckbox">
-                            <Typography className="PhoneText">
-                              {row.member_name}
-                            </Typography>
-                          </TableCell>
-                          <TableCell className="fullNameHead">
-                            {row.email_id}
-                          </TableCell>
-                          <TableCell>{row.phone_no}</TableCell>
-                          <TableCell>
-                            <MoreVertIcon //need to remove this hardcode this code, more ... three drops in last column
-                              onClick={(event) =>
-                                handleClick(event, row.member_id)
-                              }
-                            />
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })
+                    ? userData.slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage
+                    )
+                    : userData
+                  ).map((row) => {
+                    return (
+                      <TableRow
+                        hover
+                        className="TableHover"
+                        role="checkbox"
+                        tabIndex={-1}
+                        key={row?.code}
+                      >
+                        <TableCell className="useInfoCheckbox">
+                          <Typography className="PhoneText">
+                            {row.member_name}
+                          </Typography>
+                        </TableCell>
+                        <TableCell className="fullNameHead">
+                          {row.email_id}
+                        </TableCell>
+                        <TableCell>{row.phone_no}</TableCell>
+                        <TableCell>
+                          <MoreVertIcon //need to remove this hardcode this code, more ... three drops in last column
+                            onClick={(event) =>
+                              handleClick(event, row.member_id)
+                            }
+                          />
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })
                   : null}
                 <Popover
                   sx={{ m: -7, mt: 0.2, ml: -15 }}
@@ -495,9 +517,9 @@ const MyTeam = () => {
                   <Box
                     className="redDeleteofTestPortal redDelete"
                     onClick={handleDeleteClick}
-                    sx={{borderBottom: "1px solid #eee", padding: "2%" }}
+                    sx={{ borderBottom: "1px solid #eee", padding: "2%" }}
                   >
-                    
+
                     <DeleteIcon className="deleteIcon" /> Delete{" "}
                   </Box>
                   <Box
@@ -531,18 +553,17 @@ const MyTeam = () => {
                 // className="Pagination"
                 />
               </TableFooter>}
-             
+
             </Table>
           </TableContainer>
         </Paper>
       </div>
-      <ToastContainer containerId={"friendRequest"} />
       <DailogBox
-          isOpen={isOpen}
-          handleConfirmDelete={handleConfirmDelete}
-          handleDeleteClick={handleDeleteClick}
-          handleCancelDelete={handleCancelDelete}
-        />
+        isOpen={isOpen}
+        handleConfirmDelete={handleConfirmDelete}
+        handleDeleteClick={handleDeleteClick}
+        handleCancelDelete={handleCancelDelete}
+      />
     </div>
   );
 };

@@ -41,7 +41,12 @@ const MenuProps = {
   },
 };
 
-function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue, category_id=0 }) {
+function Configuration({
+  hideCatConfig,
+  handleCloseCat,
+  selectedConfigValue,
+  category_id = 0,
+}) {
   const theme = useTheme();
   const [updatedCat, setUpdatedCat] = useState({ category_name: "" });
   const [updatedDuration, setUpdatedDuration] = useState({ duration_name: "" });
@@ -61,14 +66,14 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue, cat
   const [webinarsDisplayLocation, setWebinarsDisplayLocation] = useState("");
 
   const handleTitleChange = (e) => {
-    setWebinarstitle(e.target.value)
-  }
+    setWebinarstitle(e.target.value);
+  };
   const handleUrlChange = (e) => {
-    setWebinarsurl(e.target.value)
-  }
+    setWebinarsurl(e.target.value);
+  };
   const handleDisplayLocationChange = (e) => {
-    setWebinarsDisplayLocation(e.target.value)
-  }
+    setWebinarsDisplayLocation(e.target.value);
+  };
   useEffect(() => {
     if (selectedConfigValue === "SubCategory") {
       getCategory({
@@ -80,14 +85,14 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue, cat
           toast.error(error.message);
         },
       });
-    }else if (selectedConfigValue === "Category" &&  category_id != 0) {
+    } else if (selectedConfigValue === "Category" && category_id != 0) {
       updateCategory({
         category_id,
         callBack: (response) => {
           let storedValues = Object.assign({}, updatedCat);
-      storedValues.category_name = response?.data?.category_name
+          storedValues.category_name = response?.data?.category_name;
           setUpdatedCat(storedValues);
-          console.log(storedValues,"storedValues")
+          console.log(storedValues, "storedValues");
         },
         error: (error) => {
           toast.error(error.message);
@@ -151,9 +156,8 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue, cat
         payload,
         callBack: (response) => {
           toast.success("Category created successfully!");
-          setUpdatedCat({ category_name: "" })
+          setUpdatedCat({ category_name: "" });
           handleCloseCat();
-
         },
       });
     }
@@ -172,7 +176,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue, cat
         payload,
         callBack: (response) => {
           toast.success("Successful duration created");
-          setUpdatedCat({ category_name: "" })
+          setUpdatedCat({ category_name: "" });
           handleCloseCat();
         },
       });
@@ -191,12 +195,14 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue, cat
         member_name: saveMemberDetails.member_name,
         email_id: saveMemberDetails.email_id,
         phone_no: saveMemberDetails.phone_no,
+        member_photo_url: "string",
+        member_type_id: 1,
       };
       updateMemberDetails({
         payload,
         callBack: (response) => {
           toast.success("Member Successful created");
-          setUpdatedCat({ category_name: "" })
+          setUpdatedCat({ category_name: "" });
           handleCloseCat();
         },
       });
@@ -219,7 +225,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue, cat
         payload,
         callBack: (response) => {
           //  console.log("line150 wale haw hum")
-          setUpdatedCat({ category_name: "" })
+          setUpdatedCat({ category_name: "" });
           handleCloseCat();
           toast.success("Category created successfully!");
         },
@@ -227,7 +233,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue, cat
     }
   };
 
-  const handleWebinarChanges = () =>{
+  const handleWebinarChanges = () => {
     const payload = {
       title: webinarstitle,
       url: webinarsurl,
@@ -237,19 +243,18 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue, cat
       created_by: 1,
       active_status: "Y",
       createdAt: "2024-09-16T10:04:53.927Z",
-      UpdatedAT: "2024-09-16T10:10:23.149Z"
-  }
-  
-  addwebinar({
-    payload,
-    callBack: (response) => {
-      setUpdatedCat({ category_name: "" })
-      handleCloseCat();
-      toast.success("Webinar created successfully!");
-    },
-  });
-}
+      UpdatedAT: "2024-09-16T10:10:23.149Z",
+    };
 
+    addwebinar({
+      payload,
+      callBack: (response) => {
+        setUpdatedCat({ category_name: "" });
+        handleCloseCat();
+        toast.success("Webinar created successfully!");
+      },
+    });
+  };
 
   const handleChange = (e) => {
     setSelectedCategory(e.target.value);
@@ -268,7 +273,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue, cat
             const formData = new FormData(event.currentTarget);
             const formJson = Object.fromEntries(formData.entries());
             const email = formJson.email;
-            setUpdatedCat({ category_name: "" })
+            setUpdatedCat({ category_name: "" });
             handleCloseCat();
           },
         }}
@@ -279,9 +284,13 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue, cat
           <Typography style={{ width: "100%", fontSize: "1.3rem" }}>
             Add {selectedConfigValue}
           </Typography>{" "}
-          <CloseIcon className="closeHover" onClick={() =>{
-            setUpdatedCat({ category_name: "" })
-            handleCloseCat()}} />
+          <CloseIcon
+            className="closeHover"
+            onClick={() => {
+              setUpdatedCat({ category_name: "" });
+              handleCloseCat();
+            }}
+          />
         </DialogTitle>
 
         <DialogContent className="confiDivider">
@@ -307,7 +316,7 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue, cat
                   (Option = {
                     handleInput: handleInput,
                     type: "description",
-                    value: updatedCat.category_name
+                    value: updatedCat.category_name,
                   })
                 )}
               </DialogContent>
@@ -407,29 +416,23 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue, cat
                 />
                 <div className="flexrow mt4">
                   <div className="flexcol">
-                    {CommonTypography(
-                      { fontWeight: 600, label: "Start Date" },
-                   
-                    )}
+                    {CommonTypography({ fontWeight: 600, label: "Start Date" })}
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DemoContainer
                         components={["DateTimePicker", "DateTimePicker"]}
-                        sx={{minWidth: 200}}
+                        sx={{ minWidth: 200 }}
                       >
                         <DateTimePicker
                           value={startValue}
                           onChange={(newValue) => setStartValue(newValue)}
-                          sx={{minWidth: 200}}
+                          sx={{ minWidth: 200 }}
                         />
                       </DemoContainer>
                     </LocalizationProvider>
                   </div>
                   <div className="flexcol ml2">
-                    {CommonTypography(
-                      { fontWeight: 600, label: "End Date" },
-                    
-                    )}
-                   <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    {CommonTypography({ fontWeight: 600, label: "End Date" })}
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DemoContainer
                         components={["DateTimePicker", "DateTimePicker"]}
                         // sx={{maxWidth: 100}}
@@ -437,14 +440,15 @@ function Configuration({ hideCatConfig, handleCloseCat, selectedConfigValue, cat
                         <DateTimePicker
                           value={endvalue}
                           onChange={(newValue) => setEndvalue(newValue)}
-                          sx={{maxWidth: 20}}
+                          sx={{ maxWidth: 20 }}
                         />
                       </DemoContainer>
                     </LocalizationProvider>
                   </div>
                 </div>
-                {CommonTypography({ fontWeight: 600, label: "Display Locations" },
-                   (Option = {
+                {CommonTypography(
+                  { fontWeight: 600, label: "Display Locations" },
+                  (Option = {
                     className: "addCatHeading",
                   })
                 )}
