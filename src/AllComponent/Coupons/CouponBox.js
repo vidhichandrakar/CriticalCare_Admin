@@ -582,14 +582,14 @@ const CouponBox = () => {
         }}
       >
         
-        <Box className="EditButton" sx={{ p: 1}} 
+        <Box className="EditButton" sx={{ p: 1, cursor: "pointer"}} 
         onClick={handleEdit}>
           <HistorySharpIcon  className="coloricon"/>
           <Typography sx={{ml: 1}}>Edit</Typography>
         </Box>
         <Divider/>
         {/* <Box sx={{ p: 1, mt: -1, mr: 5,display: "flex" }}> */}
-        <Box className="EditButton" sx={{ p: 1}}
+        <Box className="EditButton" sx={{ p: 1, cursor: "pointer"}}
          onClick={handleDelete}
          >
           {" "}
