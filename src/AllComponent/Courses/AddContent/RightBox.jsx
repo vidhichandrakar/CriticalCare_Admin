@@ -93,7 +93,7 @@ const RightBox = ({
     let inputNameValue = inputName.trim();
     if (uploadedFileType.content_type_name == "Video") {
       if (inputNameValue && !inputNameValue.endsWith(".mp4")) {
-        inputNameValue = inputNameValue.replace(/\s+/g, "") + ".mp4";
+        inputNameValue = inputNameValue.replace(/\s+/g, "") ;
       }
     }
 

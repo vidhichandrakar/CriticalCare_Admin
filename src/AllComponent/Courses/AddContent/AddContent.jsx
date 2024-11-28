@@ -45,7 +45,7 @@ function AddContent({
   const [uploadPopupOpen, setUploadPopupOpen] = useState(false);
   // const [anchorEl1, setAnchorEl1] = useState(null);
   // const [link, setLink] = useState("");
-  // const [inputLink, setInputLink] = useState("");
+  // const [aadedInputLink, setAddedInputLink] = useState(false);
   // const open1 = Boolean(anchorEl1);
   const navigate = useNavigate();
 
@@ -353,7 +353,7 @@ function AddContent({
                     </Box>
                   ) : (
                     moduleItem?.item.map((item) =>
-                      moduleItem?.content_name?.split(".")[1] === "mp4" ? (
+                      item?.content_name?.split(".")[1] === "mp4" ? (
                         <Box className="videoBox">
                           <video className="contentsVideo">
                             <source src={item.content_url} type="video/mp4" />
