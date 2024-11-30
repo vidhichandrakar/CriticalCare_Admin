@@ -274,9 +274,19 @@ const MyTeam = () => {
         payload,
         teamId,
         callBack: (response) => {
-          handleGetTeam()
-          toast.success("Created successfully");
-          setOpen(false);
+          getTeam({
+            callBack: (response) => {
+              const userCallBack = response?.data;
+              setUserData(userCallBack);
+              handleClose();
+              toast.success("Created successfully");
+              setOpen(false);
+            },
+            error: (error) => {
+              toast.error(error.message);
+            },
+          });
+         
         },
       });
     } else {

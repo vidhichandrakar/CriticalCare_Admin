@@ -332,7 +332,7 @@ const LoginEmailandPassword = () => {
           />
         </Box>
 
-        {getOTP !== "" && (
+        {/* {getOTP !== "" && (
           <Box sx={{ mt: 2 }} className="OTPMainBox">
             <TextField
               autoFocus
@@ -393,6 +393,19 @@ const LoginEmailandPassword = () => {
               }}
             />
           </Box>
+        )} */}
+        {getOTP !== "" && (
+          <Box>
+             <TextField
+             id="fullWidth"
+             placeholder="Enter Password"
+             className="phoneTextField
+               BoxShadowLogin"
+             sx={{ color: "#000" }}
+             variant="outlined" 
+             type="password"
+            />
+            </Box>
         )}
 
         {hideOTPBtn && getOTP === "" && (
@@ -407,7 +420,7 @@ const LoginEmailandPassword = () => {
         )}
         {getOTP && (
           <Box className="LoginBtnBox">
-            <Box className="ResendButton">
+            {/* <Box className="ResendButton">
               <p>Don't recieve the OTP ?</p>
               <Button
                 variant="contained"
@@ -417,15 +430,16 @@ const LoginEmailandPassword = () => {
               >
                 <p className="resendOTP">{seconds > 0 ? `RESEND OTP ( ${seconds} sec)` : `RESEND OTP `}</p>
               </Button>
-            </Box>
-
-            <Button
+            </Box> */}
+             <Button
               variant="contained"
               className="LoginBtn"
               onClick={() => handleUserLogin()}
             >
               Login
             </Button>
+            <Typography className="ResendButton" sx={{cursor: "pointer"}}>Forget Password?</Typography>
+           
           </Box>
         )}
       </Box>
