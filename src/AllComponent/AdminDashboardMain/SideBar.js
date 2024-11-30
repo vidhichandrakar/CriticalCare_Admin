@@ -103,7 +103,6 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
     setAnchorE2(null);
   }
   const handleClickOnBlog = () => {
-    console.log("oijoik");
     setPopForBlog(!popForBlog);
   };
 

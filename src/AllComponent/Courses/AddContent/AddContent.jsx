@@ -45,7 +45,7 @@ function AddContent({
   const [uploadPopupOpen, setUploadPopupOpen] = useState(false);
   // const [anchorEl1, setAnchorEl1] = useState(null);
   // const [link, setLink] = useState("");
-  // const [inputLink, setInputLink] = useState("");
+  // const [aadedInputLink, setAddedInputLink] = useState(false);
   // const open1 = Boolean(anchorEl1);
   const navigate = useNavigate();
 
@@ -74,7 +74,6 @@ function AddContent({
         },
         error: (error) => {
           toast.error(error.message);
-          // console.log(error);
         },
       });
     }
@@ -102,7 +101,7 @@ function AddContent({
       if (module.id === clickedModuleIdx) {
         return {
           ...module,
-          moduleName: addModulesText,
+          moduleName: module.moduleName,
           item: [...module.item, ...(Array.isArray(value) ? value : [value])],
         };
       }
@@ -160,28 +159,11 @@ function AddContent({
   };
 
   const handleInputOnAddContent = (e, index) => {
-    if (moduleDescription) {
-      let storedValues = Object.assign({}, moduleDescription);
-      moduleDescription.map((item, idx) => {
-        if (idx === index) {
-          item.moduleName = e;
-          setModuleDescription(storedValues);
-        }
-      });
-    } else {
-      if (e === "") {
-        setError(true);
-      } else {
-        setError(false);
-        setAddModulesText(e);
-      }
-    }
-
     let arr = [];
     setAddModulesText(e);
-    moduleDescription.map((item, index) => {
+    moduleDescription.map((item, idx) => {
       let storedValues = Object.assign({}, item);
-      if (item.id === index) {
+      if (idx === index) {
         storedValues.moduleName = e;
       }
       arr.push(storedValues);
@@ -195,8 +177,8 @@ function AddContent({
     } else {
       const payload = {
         courseModuleDetails: {
-          module_name: addModulesText,
-          course_id: courseIdForContent.course_id,
+          module_name: moduleDescription?.moduleName,
+          course_id: courseIdForContent?.course_id,
         },
         courseAttachments: videoDesc,
       };
@@ -336,7 +318,7 @@ function AddContent({
                   id="fullWidth"
                   type="TestName"
                   defaultValue={moduleItem.content}
-                  value={addModulesText}
+                  value={moduleItem.moduleName}
                   onChange={(e) =>
                     handleInputOnAddContent(e.target.value, index)
                   }
@@ -353,7 +335,7 @@ function AddContent({
                     </Box>
                   ) : (
                     moduleItem?.item.map((item) =>
-                      moduleItem?.content_name?.split(".")[1] === "mp4" ? (
+                      item?.content_name?.split(".")[1] === "mp4" ? (
                         <Box className="videoBox">
                           <video className="contentsVideo">
                             <source src={item.content_url} type="video/mp4" />

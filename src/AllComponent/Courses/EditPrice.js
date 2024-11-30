@@ -302,7 +302,6 @@ const EditPrice = ({
         if (parseInt(storedValues.price) > parseInt(storedValues.offer_price)) {
           let copyArr = [];
           copyArr.push(storedValues);
-          console.log("copyArr==>",copyArr)
           handleInputChange("editPrice", copyArr);
           handleTrackerPage(2);
         } else {
@@ -321,7 +320,6 @@ const EditPrice = ({
         if (parseInt(storedValues.price) > parseInt(storedValues.offer_price)) {
           let copyArr = [];
           copyArr.push(storedValues);
-          console.log("copyArr=>",copyArr[0])
           handleInputChange("editPriceLifeTime", copyArr[0]);
           handleTrackerPage(2);
         } else {

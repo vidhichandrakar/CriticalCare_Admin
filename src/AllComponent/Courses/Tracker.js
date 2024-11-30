@@ -12,11 +12,45 @@ const Tracker = ({
 }) => {
   const steps = ["Basic Information", "Edit price", "Add Content"];
   const stepForEditFlow = ["Basic Information", "Edit price"];
-  const stepForEditAddCOntent = ["Add Content"];
+  const stepForEditAddContent = ["Add Content"];
 
   return (
     <Box className="createBoxHeader trackerBox">
-      {hideTrackerForEditFlow ? (
+      {hideTrackerForEditFlow &&
+      localStorage.getItem("addContent") === "true" ? (
+        <>
+          <Box className="trackerMainBox">
+            {" "}
+            <Stepper
+              activeStep={trackerPage}
+              className="trackerStep"
+              alternativeLabel
+            >
+              {stepForEditAddContent.map((label, index) => (
+                <Step key={index} onClick={() => handleTrackerPage(index)}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+          </Box>
+        </>
+      ) : !hideTrackerForEditFlow ? (
+        <>
+          <Box className="trackerMainBox">
+            <Stepper
+              activeStep={trackerPage}
+              className="trackerStep"
+              alternativeLabel
+            >
+              {steps.map((label, index) => (
+                <Step key={index} onClick={() => handleTrackerPage(index)}>
+                  <StepLabel>{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+          </Box>
+        </>
+      ) : (
         <>
           <Box className="trackerMainBox">
             <Stepper
@@ -32,38 +66,7 @@ const Tracker = ({
             </Stepper>
           </Box>
         </>
-      ) : (
-        <>
-          <Box className="trackerMainBox">
-            {" "}
-            <Stepper
-              activeStep={trackerPage}
-              className="trackerStep"
-              alternativeLabel
-            >
-              {steps.map((label, index) => (
-                <Step key={index} onClick={() => handleTrackerPage(index)}>
-                  <StepLabel>{label}</StepLabel>
-                </Step>
-              ))}
-            </Stepper>
-          </Box>
-        </>
       )}
-      {/* <Box className="trackerMainBox">
-        {" "}
-        <Stepper
-          activeStep={trackerPage}
-          className="trackerStep"
-          alternativeLabel
-        >
-          {steps.map((label, index) => (
-            <Step key={index} onClick={() => handleTrackerPage(index)}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
-        </Stepper>
-      </Box> */}
     </Box>
   );
 };

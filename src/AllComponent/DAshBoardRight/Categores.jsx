@@ -42,7 +42,7 @@ import {
   createTestPortal,
   getCategory,
   updateCategory,
-  deleteCategory
+  deleteCategory,
 } from "../ActionFactory/apiActions";
 import { TablePagination } from "@mui/material";
 import Stack from "@mui/material/Stack";
@@ -233,7 +233,6 @@ const Categores = () => {
         storedValues.memberName = data.category_name;
         // setUserData(storedValues);
       },
-
     });
   };
 
@@ -243,14 +242,11 @@ const Categores = () => {
       callBack: (response) => {
         const userCallBack = response?.data;
         setUserData(userCallBack);
-        // console.log(" categories data ===>", userCallBack);
       },
     });
-
   }, []);
 
   const handleClick = (event, id) => {
-
     setAnchorEl(event.currentTarget);
     setOpenId(id);
   };
@@ -267,7 +263,6 @@ const Categores = () => {
     handleClose();
     setIsOpen(true);
   };
-
 
   const handleConfirmDelete = () => {
     handleDelete();
@@ -323,7 +318,6 @@ const Categores = () => {
     setOpen(false);
   };
 
-
   const handleInput = (value, type) => {
     let storedValues = Object.assign({}, addTest);
     if (type === "TestName") {
@@ -346,7 +340,7 @@ const Categores = () => {
       duration_hour: parseInt(addTest.testDuration),
       duration_minute: parseInt(addTest.hours),
       active_duration_from: parseInt(addTest.from),
-      active_duration_to: parseInt(addTest.to)
+      active_duration_to: parseInt(addTest.to),
     };
     createTestPortal({
       payload,
@@ -366,7 +360,6 @@ const Categores = () => {
       },
     });
   };
-
 
   return (
     <div className="grid-container">
@@ -491,7 +484,6 @@ const Categores = () => {
               </Box>
             </DialogContent>
             <DialogContent dividers>
-
               <Typography gutterBottom sx={{ mt: 2 }}>
                 Active time duration
               </Typography>
@@ -506,9 +498,7 @@ const Categores = () => {
                     className="BoxShadowInputField"
                     type="TestDuration"
                     value={addTest?.form}
-                    onChange={(e) =>
-                      handleInput(e.target.value, "From")
-                    }
+                    onChange={(e) => handleInput(e.target.value, "From")}
                   />
                   <p className="TimeText"> From </p>
                 </Box>
@@ -566,34 +556,34 @@ const Categores = () => {
               <TableBody className="parentTable">
                 {userData.length
                   ? (rowsPerPage > 0
-                    ? userData.slice(
-                      page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
-                    )
-                    : userData
-                  ).map((row) => {
-                    return (
-                      <TableRow
-                        hover
-                        className="TableHover"
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={row?.code}
-                      >
-                        <TableCell className="alignTableBody">
-                          {row?.category_name}
-                        </TableCell>
+                      ? userData.slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
+                      : userData
+                    ).map((row) => {
+                      return (
+                        <TableRow
+                          hover
+                          className="TableHover"
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={row?.code}
+                        >
+                          <TableCell className="alignTableBody">
+                            {row?.category_name}
+                          </TableCell>
 
-                        <TableCell sx={{ textAlign: "center" }}>
-                          <MoreVertIcon
-                            onClick={(event) =>
-                              handleClick(event, row?.category_id)
-                            }
-                          />
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })
+                          <TableCell sx={{ textAlign: "center" }}>
+                            <MoreVertIcon
+                              onClick={(event) =>
+                                handleClick(event, row?.category_id)
+                              }
+                            />
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })
                   : null}
 
                 <Popover
@@ -611,7 +601,6 @@ const Categores = () => {
                     className="redDeleteofTestPortal redDelete"
                     onClick={handleDeleteClick}
                     sx={{ borderBottom: "1px solid #eee", color: "red" }}
-
                   >
                     {" "}
                     <DeleteIcon className="deleteIcon" /> Delete{" "}
@@ -664,12 +653,14 @@ const Categores = () => {
         handleDeleteClick={handleDeleteClick}
         handleCancelDelete={handleCancelDelete}
       />
-      {hideCatConfig && <Configuration
-        selectedConfigValue={selectedConfigValue}
-        handleCloseCat={handleCloseCat}
-        hideCatConfig={hideCatConfig}
-        category_id={openId}
-      />}
+      {hideCatConfig && (
+        <Configuration
+          selectedConfigValue={selectedConfigValue}
+          handleCloseCat={handleCloseCat}
+          hideCatConfig={hideCatConfig}
+          category_id={openId}
+        />
+      )}
     </div>
   );
 };

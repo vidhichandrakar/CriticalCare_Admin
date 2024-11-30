@@ -131,12 +131,13 @@ const LoginEmailandPassword = () => {
 
   const handleResendOTP = () => {
     setOtp({
-    value: "",
-    otp1: "",
-    otp2: "",
-    otp3: "",
-    otp4: "",
-    disable: true,})
+      value: "",
+      otp1: "",
+      otp2: "",
+      otp3: "",
+      otp4: "",
+      disable: true,
+    });
 
     setLoaderState(true);
     const payload = {
@@ -208,8 +209,7 @@ const LoginEmailandPassword = () => {
     setOtp(prevOtp);
     setDisableLogiBtn(false);
 
-   
-       if (type === "otp1" && prevOtp.otp1 != "") {
+    if (type === "otp1" && prevOtp.otp1 != "") {
       textField2Ref.current.focus();
     } else if (type === "otp2" && prevOtp.otp2 != "") {
       textField3Ref.current.focus();
@@ -226,7 +226,6 @@ const LoginEmailandPassword = () => {
   };
 
   const handleKeyDown = (event, type, originalNum) => {
-    // console.log(event, "backspaceOTP");
     let prevOtp = { ...otpValue };
     if (typeof phoneNO !== "undefined" && phoneNO?.length) {
       if (phoneNO?.length === 10 && event.keyCode === 13) {
@@ -251,16 +250,14 @@ const LoginEmailandPassword = () => {
           setTimeout(() => {
             textField1Ref?.current?.focus();
           }, 100);
-        }
-         else if (type === "otp3") {
+        } else if (type === "otp3") {
           let prevOtp = { ...otpValue };
           prevOtp[type] = "";
           setOtp(prevOtp);
           setTimeout(() => {
             textField2Ref?.current?.focus();
           }, 100);
-        }
-       else if (type === "otp4") {
+        } else if (type === "otp4") {
           let prevOtp = { ...otpValue };
           prevOtp[type] = "";
           setOtp(prevOtp);
@@ -280,10 +277,8 @@ const LoginEmailandPassword = () => {
           getOTP ? "BoxWidth" : "BoxWidth phoneTextField2 initialBoxWidth"
         }
       >
-        {console.log(otpValue, "otpvalue")}
         {isVisible && (
           <Box className="OTPCard">
-
             <Typography sx={{ mt: 1, fontSize: 21, color: "#199884" }}>
               <span className="OTPInTheBox">OTP Recieved:</span>{" "}
               <b className="OTPRecieved"> {getOTP}</b>
@@ -396,16 +391,16 @@ const LoginEmailandPassword = () => {
         )} */}
         {getOTP !== "" && (
           <Box>
-             <TextField
-             id="fullWidth"
-             placeholder="Enter Password"
-             className="phoneTextField
+            <TextField
+              id="fullWidth"
+              placeholder="Enter Password"
+              className="phoneTextField
                BoxShadowLogin"
-             sx={{ color: "#000" }}
-             variant="outlined" 
-             type="password"
+              sx={{ color: "#000" }}
+              variant="outlined"
+              type="password"
             />
-            </Box>
+          </Box>
         )}
 
         {hideOTPBtn && getOTP === "" && (
@@ -431,15 +426,16 @@ const LoginEmailandPassword = () => {
                 <p className="resendOTP">{seconds > 0 ? `RESEND OTP ( ${seconds} sec)` : `RESEND OTP `}</p>
               </Button>
             </Box> */}
-             <Button
+            <Button
               variant="contained"
               className="LoginBtn"
               onClick={() => handleUserLogin()}
             >
               Login
             </Button>
-            <Typography className="ResendButton" sx={{cursor: "pointer"}}>Forget Password?</Typography>
-           
+            <Typography className="ResendButton" sx={{ cursor: "pointer" }}>
+              Forget Password?
+            </Typography>
           </Box>
         )}
       </Box>

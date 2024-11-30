@@ -9,24 +9,31 @@ import FormControl from "@mui/material/FormControl";
 import Box from "@mui/material/Box";
 import "./BannerPopUp.css";
 import { FormHelperText, Typography } from "@mui/material";
-import { CommonTypography, commonSelect, commonTextField } from "../../../Util/CommonFields";
+import {
+  CommonTypography,
+  commonSelect,
+  commonTextField,
+} from "../../../Util/CommonFields";
 import SelectedCoursesPopup from "./SelectedCoursesPopup";
 import SearchIcon from "@mui/icons-material/Search";
-import Demoimg from "../../../Media/Images/banner3.jpg"
+import Demoimg from "../../../Media/Images/banner3.jpg";
 import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
-import Checkbox from '@mui/material/Checkbox';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import CloseIcon from '@mui/icons-material/Close';
-import { getSubcategoryList, getCategory } from "../../ActionFactory/apiActions";
+import Checkbox from "@mui/material/Checkbox";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import CloseIcon from "@mui/icons-material/Close";
+import {
+  getSubcategoryList,
+  getCategory,
+} from "../../ActionFactory/apiActions";
 import Select from "@mui/material/Select";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import MenuItem from "@mui/material/MenuItem";
 import attachmentimgae from "../../../Media/Images/undraw_attached_file_re_0n9b.svg";
 
-import InputLabel from '@mui/material/InputLabel';
+import InputLabel from "@mui/material/InputLabel";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -38,10 +45,9 @@ const MenuProps = {
   },
 };
 
-const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function BannerPopUp({ openPopUp, handleClickPopUp, bannerAPI }) {
-
   const [selectedValue, setSelectedValue] = useState("");
   const [dropdownValue, setDropdownValue] = useState("");
   const [hideSpecipicCourse, setHideSpecipicCourse] = useState(false);
@@ -60,9 +66,7 @@ function BannerPopUp({ openPopUp, handleClickPopUp, bannerAPI }) {
 
   const [cat, setCat] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState();
-  const [show, setShow] = useState(false)
-
-
+  const [show, setShow] = useState(false);
 
   const handleChangeOnRadio = (e) => {
     setSelectedValue(e.target.value);
@@ -107,10 +111,7 @@ function BannerPopUp({ openPopUp, handleClickPopUp, bannerAPI }) {
     setOpenPopUps(!openPopUps);
   };
 
-
-
   useEffect(() => {
-
     getCategory({
       callBack: (response) => {
         const userCallBack = response?.data;
@@ -119,15 +120,11 @@ function BannerPopUp({ openPopUp, handleClickPopUp, bannerAPI }) {
     });
   }, []);
 
-
-
   const handleChange = (e) => {
     setSelectedCategory(e.target.value.category_name);
-    console.log(e.target.value.category_name, "Lineno109")
   };
 
   return (
-
     <React.Fragment>
       <Dialog
         open={openPopUp}
@@ -143,17 +140,17 @@ function BannerPopUp({ openPopUp, handleClickPopUp, bannerAPI }) {
           },
         }}
       >
-        <DialogTitle className="popUpheader flexrow">Banner Upload
-
+        <DialogTitle className="popUpheader flexrow">
+          Banner Upload
           <CloseIcon onClick={handleClickPopUp} sx={{ cursor: "pointer" }} />
         </DialogTitle>
-        <DialogContent style={{marginTop:"4%"}}>
+        <DialogContent style={{ marginTop: "4%" }}>
           <Box sx={{ minWidth: 420 }}>
-            <FormControl fullWidth variant="outlined" >
-            <Typography className="addCatHeadingCat">Type</Typography>
+            <FormControl fullWidth variant="outlined">
+              <Typography className="addCatHeadingCat">Type</Typography>
               <Select
                 labelId="demo-simple-select-label"
-                sx={{mt:1}}
+                sx={{ mt: 1 }}
                 id="demo-simple-select"
                 // value={age}
                 // label="Age"
@@ -166,11 +163,11 @@ function BannerPopUp({ openPopUp, handleClickPopUp, bannerAPI }) {
             </FormControl>
           </Box>
           <Box sx={{ minWidth: 420 }}>
-            <FormControl fullWidth variant="outlined" >
-            <Typography className="addCatHeadingCat">Position</Typography>
+            <FormControl fullWidth variant="outlined">
+              <Typography className="addCatHeadingCat">Position</Typography>
               <Select
                 labelId="demo-simple-select-label"
-                sx={{mt:1}}
+                sx={{ mt: 1 }}
                 id="demo-simple-select"
                 // value={age}
                 // label="Age"
@@ -184,8 +181,6 @@ function BannerPopUp({ openPopUp, handleClickPopUp, bannerAPI }) {
           </Box>
         </DialogContent>
 
-
-
         <div className="popUpDoneBtn">
           <Button
             style={{ width: "100px", float: "right" }}
@@ -196,8 +191,6 @@ function BannerPopUp({ openPopUp, handleClickPopUp, bannerAPI }) {
         </div>
       </Dialog>
     </React.Fragment>
-
-
   );
 }
 
