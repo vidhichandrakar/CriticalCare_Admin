@@ -476,44 +476,6 @@ const YourCourses = () => {
             </Drawer>
           </div>
         </Box>
-        {/* <Popover
-          id={id}
-          open={open}
-          anchorEl={anchorEl}
-          onClose={handleClose}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "left",
-          }}
-          sx={{ mt: "5px" }}
-          value={value}
-        >
-          <MenuItem
-            sx={{ mb: -1 }}
-            value={"published"}
-            onClick={() => handleFilterCourse("published")}
-          >
-            <span className="ccLogout">Publish</span>
-          </MenuItem>
-          <Divider />
-
-          <MenuItem
-            sx={{ mt: -1, mb : -1 }}
-            value={"not published"}
-            onClick={() => handleFilterCourse("not published")}
-          >
-            <span className="ccLogout">Not Publish</span>
-          </MenuItem>
-
-          <Divider />
-          <MenuItem
-            sx={{ mt: -1 }}
-            value={"published"}
-            onClick={() => handleFilterCourse("All Courses")}
-          >
-            <span className="ccLogout">All Courses</span>
-          </MenuItem>
-        </Popover> */}
 
         <Box className="Add-main-cards">
           <YourCoursesCard
