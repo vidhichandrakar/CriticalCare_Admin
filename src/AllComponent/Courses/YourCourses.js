@@ -211,11 +211,12 @@ const YourCourses = () => {
       // onKeyDown={toggleDrawer(anchor, false)}
     >
     <Box className="FilterHead">
-      <Typography>Filter</Typography>
+      <Typography sx={{fontSize: "1.5rem"}}>Filter</Typography>
       <CloseIcon onClick={toggleDrawer(anchor, false)} className="Crossicon"/>
     </Box>
       <Divider />
-      <Box>
+      <Box sx={{display: "flex", flexDirection: "column", justifyContent: "space-between"}}>
+        <Box>
         <Box className="CategoriesBOx">
           {/* <Typography>Categories / Sub-categories</Typography> */}
           {/* <Box
@@ -265,7 +266,19 @@ const YourCourses = () => {
                 )}
                 <FormControl sx={{ width: 540 }}>
                   <Select
-                    value={cat.category_name}
+                    // value={cat.category_name}
+                    value={
+                      cat.category_name !== ""
+                        ? cat.category_name
+                        : `Select Team Member`
+                    }
+                    renderValue={() => {
+                      return cat.category_name !== "" ? (
+                        <Typography>{cat.category_name}</Typography>
+                      ) : (
+                        <Typography> Select Team Member</Typography>
+                      );
+                    }}
                     onChange={(e) => handleChange(e)}
                     className="addCatTextField"
                   >
@@ -338,8 +351,9 @@ const YourCourses = () => {
           </Button> 
         </Box>
         </Box>
-        <Box sx={{ml:2}}>
-          <Button onClick={handleAllFilterChange}>
+        </Box>
+        <Box sx={{ml:2}} className="FilterApplyButton">
+          <Button onClick={handleAllFilterChange} variant="contained" sx={{width: "10vw"}}>
             apply
           </Button>
         </Box>

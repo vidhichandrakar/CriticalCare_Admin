@@ -185,7 +185,7 @@ display: flex;
 }
 .sidebar-list-item>a {
   text-decoration: none;
-  margin-top: 20px;
+  margin-top: 15px;
   color: grey;
   font-size: 1rem;
 }
@@ -1091,6 +1091,11 @@ display: flex;
   background-color: #e2f2ff42;
   padding: 10px;
   border-radius: 10px;
+}
+.FilterApplyButton{
+  position: absolute;
+  top: 92%;
+  left: 68%;
 }
 .TrickstextField {
   color: grey !important;
