@@ -42,7 +42,7 @@ import {
   getTestByID,
   createTestPortal,
   getCategory,
-  deleteCategory
+  deleteCategory,
 } from "../ActionFactory/apiActions";
 import { TablePagination } from "@mui/material";
 import Stack from "@mui/material/Stack";
@@ -222,16 +222,12 @@ const Subcategores = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-
-    // setLoaderState(true);
     getCategory({
       callBack: (response) => {
         const userCallBack = response?.data;
         setUserData(userCallBack);
-        // console.log("userCallBack===>",userCallBack);
       },
     });
-
   }, []);
 
   const handleClick = (event, id) => {
@@ -326,7 +322,7 @@ const Subcategores = () => {
       duration_hour: parseInt(addTest.testDuration),
       duration_minute: parseInt(addTest.hours),
       active_duration_from: parseInt(addTest.from),
-      active_duration_to: parseInt(addTest.to)
+      active_duration_to: parseInt(addTest.to),
     };
     createTestPortal({
       payload,
@@ -487,7 +483,6 @@ const Subcategores = () => {
               </Box>
             </DialogContent>
             <DialogContent dividers>
-
               <Typography gutterBottom sx={{ mt: 2 }}>
                 Active time duration
               </Typography>
@@ -502,9 +497,7 @@ const Subcategores = () => {
                     className="BoxShadowInputField"
                     type="TestDuration"
                     value={addTest?.form}
-                    onChange={(e) =>
-                      handleInput(e.target.value, "From")
-                    }
+                    onChange={(e) => handleInput(e.target.value, "From")}
                   />
                   <p className="TimeText"> From </p>
                 </Box>
@@ -562,40 +555,40 @@ const Subcategores = () => {
               <TableBody className="parentTable">
                 {userData.length
                   ? (rowsPerPage > 0
-                    ? userData.slice(
-                      page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
-                    )
-                    : userData
-                  ).map((row) => {
-                    return (
-                      <TableRow
-                        hover
-                        className="TableHover"
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={row?.code}
-                      >
-                        <TableCell className="alignTableBody">
-                          {row?.category_name}
-                        </TableCell>
-                        <TableCell className="alignTableBody">
-                          {`${row?.duration_hour}hr : ${row?.duration_minute}min`}
-                        </TableCell>
-                        <TableCell className="alignTableBody">
-                          {moment(row?.createdAt).format("MM/DD/YYYY")}
-                        </TableCell>
+                      ? userData.slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
+                      : userData
+                    ).map((row) => {
+                      return (
+                        <TableRow
+                          hover
+                          className="TableHover"
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={row?.code}
+                        >
+                          <TableCell className="alignTableBody">
+                            {row?.category_name}
+                          </TableCell>
+                          <TableCell className="alignTableBody">
+                            {`${row?.duration_hour}hr : ${row?.duration_minute}min`}
+                          </TableCell>
+                          <TableCell className="alignTableBody">
+                            {moment(row?.createdAt).format("MM/DD/YYYY")}
+                          </TableCell>
 
-                        <TableCell sx={{ textAlign: "center" }}>
-                          <MoreVertIcon
-                            onClick={(event) =>
-                              handleClick(event, row?.category_id)
-                            }
-                          />
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })
+                          <TableCell sx={{ textAlign: "center" }}>
+                            <MoreVertIcon
+                              onClick={(event) =>
+                                handleClick(event, row?.category_id)
+                              }
+                            />
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })
                   : null}
 
                 <Popover
@@ -613,7 +606,6 @@ const Subcategores = () => {
                     className="redDeleteofTestPortal redDelete"
                     onClick={handleDeleteClick}
                     sx={{ borderBottom: "1px solid #eee", color: "red" }}
-
                   >
                     {" "}
                     <DeleteIcon className="deleteIcon" /> Delete{" "}

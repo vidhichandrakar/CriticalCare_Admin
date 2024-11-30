@@ -138,7 +138,6 @@ const CouponBox = () => {
   };
 
   useEffect(() => {
-    console.log("check")
     getCoupon({
       callBack: (response) => {
         setCoupondata(response.data);
@@ -149,7 +148,6 @@ const CouponBox = () => {
   }, []);
   return (
     <div>
-      {console.log(coupondata, "coupondata")}
       {coupondata?.map((data) => (
         <Box>
           <Box className="courseMainCoupon">

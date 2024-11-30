@@ -45,7 +45,6 @@ import {
   createTestPortal,
   getCategory,
   deleteCategory,
-
 } from "../ActionFactory/apiActions";
 import { TablePagination } from "@mui/material";
 import Stack from "@mui/material/Stack";
@@ -225,20 +224,15 @@ const TeamMember = () => {
   };
 
   useEffect(() => {
-   
-      // setLoaderState(true);
     getAllTeamMembers({
-        callBack: (response) => {
-          const userCallBack = response?.data;
-          setUserData(userCallBack);
-          // console.log("userCallBack===>",userCallBack);
-        },
-      });
-    
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setUserData(userCallBack);
+      },
+    });
   }, []);
 
   const handleClick = (event, id) => {
-    console.log("Member ID : ", id)
     setAnchorEl(event.currentTarget);
     setOpenId(id);
   };
@@ -283,7 +277,6 @@ const TeamMember = () => {
     });
   };
 
-
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -326,7 +319,7 @@ const TeamMember = () => {
       duration_hour: parseInt(addTest.testDuration),
       duration_minute: parseInt(addTest.hours),
       active_duration_from: parseInt(addTest.from),
-      active_duration_to: parseInt(addTest.to)
+      active_duration_to: parseInt(addTest.to),
     };
     createTestPortal({
       payload,
@@ -340,8 +333,6 @@ const TeamMember = () => {
           callBack: (response) => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
-            // console.log("irhthjn plce")
-            // setLoaderState(false);
           },
         });
       },
@@ -488,7 +479,6 @@ const TeamMember = () => {
               </Box>
             </DialogContent>
             <DialogContent dividers>
-              
               <Typography gutterBottom sx={{ mt: 2 }}>
                 Active time duration
               </Typography>
@@ -503,9 +493,7 @@ const TeamMember = () => {
                     className="BoxShadowInputField"
                     type="TestDuration"
                     value={addTest?.form}
-                    onChange={(e) =>
-                      handleInput(e.target.value, "From")
-                    }
+                    onChange={(e) => handleInput(e.target.value, "From")}
                   />
                   <p className="TimeText"> From </p>
                 </Box>
@@ -613,8 +601,7 @@ const TeamMember = () => {
                   <Box
                     className="redDeleteofTestPortal redDelete"
                     onClick={handleDeleteClick}
-                    sx={{borderBottom: "1px solid #eee", color: "red"}}
-
+                    sx={{ borderBottom: "1px solid #eee", color: "red" }}
                   >
                     {" "}
                     <DeleteIcon className="deleteIcon" /> Delete{" "}
@@ -668,10 +655,10 @@ const TeamMember = () => {
         handleCancelDelete={handleCancelDelete}
       />
       <Configuration
-            selectedConfigValue={selectedConfigValue}
-            handleCloseCat={handleCloseCat}
-            hideCatConfig={hideCatConfig}
-          />
+        selectedConfigValue={selectedConfigValue}
+        handleCloseCat={handleCloseCat}
+        hideCatConfig={hideCatConfig}
+      />
     </div>
   );
 };

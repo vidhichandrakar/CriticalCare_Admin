@@ -257,12 +257,10 @@ const Banner = () => {
         updateBanner({
           payload,
           callBack: (response) => {
-            console.log("Update response:", response);
             toast.success("Banner Updated Successfully");
             // Refresh banner data if necessary
             banner({
               callBack: (response) => {
-                console.log("Updated API response:", response.data);
                 setBannerAPI(response.data);
               },
             });
@@ -276,12 +274,10 @@ const Banner = () => {
         uploadBanner({
           payload,
           callBack: (response) => {
-            console.log("Add response:", response);
             toast.success("Banner Created Successfully");
             // Refresh banner data if necessary
             banner({
               callBack: (response) => {
-                console.log("API response:", response.data);
                 setBannerAPI(response.data);
               },
             });

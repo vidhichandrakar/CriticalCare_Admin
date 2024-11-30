@@ -6,7 +6,12 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import "../../CSSFile/Coupon.css";
-import { EditCoupon, getCoupon, postCoupon, putCoupon } from "../../ActionFactory/apiActions";
+import {
+  EditCoupon,
+  getCoupon,
+  postCoupon,
+  putCoupon,
+} from "../../ActionFactory/apiActions";
 import dayjs from "dayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -28,7 +33,7 @@ const CreateCouponForm = ({}) => {
   const [isValid, setIsValid] = useState(true);
 
   const handleFlatDiscount = (event) => {
-    setDiscountamount(event.target.value)
+    setDiscountamount(event.target.value);
   };
   const handleStartDate = (event) => {
     setStartDate(event);
@@ -50,33 +55,25 @@ const CreateCouponForm = ({}) => {
   };
 
   useEffect(() => {
-    console.log("check")
-  if(coupon_id){
-    EditCoupon({
-      coupon_id,
-      callBack: (response) => {
-        const data = response.data;
-        console.log(data, "data")
-        setDiscountamount(data.discount_amount)
-        setTotaluser(data.coupon_max_user)
-        setCoupontype(data.coupon_type)
-        setCouponcode(data.coupon_code)
-        setMinimumorder(data.minimum_order)
-      },
-      error: (err) => {
-      }
-    });
-  }
+    if (coupon_id) {
+      EditCoupon({
+        coupon_id,
+        callBack: (response) => {
+          const data = response.data;
+          setDiscountamount(data.discount_amount);
+          setTotaluser(data.coupon_max_user);
+          setCoupontype(data.coupon_type);
+          setCouponcode(data.coupon_code);
+          setMinimumorder(data.minimum_order);
+        },
+        error: (err) => {},
+      });
+    }
   }, []);
-  
+
   const navigate = useNavigate();
 
   const handleCreateCoupon = () => {
-    console.log(coupontype === "" ,
-      couponcode === "" ,
-      totaluser === "" ,
-      discountamount === "" ,
-      minimumorder === "", "hel")
     if (
       coupontype === "" ||
       couponcode === "" ||
@@ -87,10 +84,8 @@ const CreateCouponForm = ({}) => {
       toast.error("All Field are required", {
         autoClose: 500,
       });
-     } 
-    
-    else  { 
-      if (coupon_id){
+    } else {
+      if (coupon_id) {
         const payload = {
           coupon_type: coupontype,
           coupon_code: couponcode,
@@ -110,36 +105,31 @@ const CreateCouponForm = ({}) => {
         });
         navigate("/admin/CouponMain");
         toast.success("Coupon successful Created");
+      } else {
+        const payload = {
+          coupon_type: coupontype,
+          coupon_code: couponcode,
+          coupon_max_user: totaluser,
+          start_date: moment(new Date(startDate)).format("YYYY-MM-DD"),
+          end_date: moment(new Date(endDate)).format("YYYY-MM-DD"),
+          discount_amount: discountamount,
+          discount_percent: "discountpercent",
+          minimum_order: minimumorder,
+          created_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
+        };
+        postCoupon({
+          payload,
+          callBack: (response) => {},
+          error: (error) => {},
+        });
+        navigate("/admin/CouponMain");
+        toast.success("Coupon successful Created");
       }
-      
-    else {  
-      const payload = {
-      coupon_type: coupontype,
-      coupon_code: couponcode,
-      coupon_max_user: totaluser,
-      start_date: moment(new Date(startDate)).format("YYYY-MM-DD"),
-      end_date: moment(new Date(endDate)).format("YYYY-MM-DD"),
-      discount_amount: discountamount,
-      discount_percent: "discountpercent",
-      minimum_order: minimumorder,
-      created_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
-    };
-    postCoupon({
-      payload,
-      callBack: (response) => {},
-      error: (error) => {},
-    });
-    navigate("/admin/CouponMain");
-    toast.success("Coupon successful Created");
-  }
-
-  }
+    }
   };
 
   let location = useLocation();
   const coupon_id = location?.state?.id;
-
-  
 
   return (
     <Box className="courseMainTrack">
@@ -174,10 +164,10 @@ const CreateCouponForm = ({}) => {
           Flat Discount
         </Typography>
         <TextField
-        value={discountamount}
+          value={discountamount}
           type="number"
           // inputProps={{ maxLength: 10, tabIndex: 1,className: "textField" }}
-          // disabled={discountamount?.length === 10 }  
+          // disabled={discountamount?.length === 10 }
           inputProps={{ className: "textField" }}
           sx={{ mt: 1, width: "93%" }}
           fullWidth

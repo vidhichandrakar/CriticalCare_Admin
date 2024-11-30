@@ -10,7 +10,13 @@ import YourCoursesCard from "./YourCoursesCard";
 import { YourCoursesCardData } from "../../Data/JsonData";
 import SideBar from "../AdminDashboardMain/SideBar";
 import { Link } from "react-router-dom";
-import { getAllCourses, getAllUsersApi, getCategory, getCourseDuration, getAllCoursesFilter } from "../ActionFactory/apiActions";
+import {
+  getAllCourses,
+  getAllUsersApi,
+  getCategory,
+  getCourseDuration,
+  getAllCoursesFilter,
+} from "../ActionFactory/apiActions";
 import LoaderComponent from "../../Util/LoaderComponent";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -22,19 +28,19 @@ import Divider from "@mui/material/Divider";
 import PersonIcon from "@mui/icons-material/Person";
 import Popover from "@mui/material/Popover";
 import MenuItem from "@mui/material/MenuItem";
-import CloseIcon from '@mui/icons-material/Close';
-import Drawer from '@mui/material/Drawer';
+import CloseIcon from "@mui/icons-material/Close";
+import Drawer from "@mui/material/Drawer";
 // import CloseIcon from "@mui/icons-material/Close";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import Checkbox from "@mui/material/Checkbox";
 import Autocomplete from "@mui/material/Autocomplete";
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import InboxIcon from "@mui/icons-material/MoveToInbox";
+import MailIcon from "@mui/icons-material/Mail";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import { TextField } from "@mui/material";
 import { CommonTypography, commonTextField } from "../../Util/CommonFields";
@@ -48,9 +54,6 @@ import Paper from "@mui/material/Paper";
 import IconButton from "@mui/material/IconButton";
 import { error } from "ajv/dist/vocabularies/applicator/dependencies";
 
-
-
-
 const YourCourses = () => {
   const [allCourses, setAllCourses] = useState([]);
   const [loaderState, setLoaderState] = useState(false);
@@ -63,7 +66,7 @@ const YourCourses = () => {
   const [state, setState] = React.useState({
     right: false,
   });
-  const [testName, setTestName] = useState([])
+  const [testName, setTestName] = useState([]);
   const [cat, setCat] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState();
   const [durationType, setDurationType] = useState([{}]);
@@ -74,84 +77,69 @@ const YourCourses = () => {
   const [durationname, setDurationname] = useState({});
   const [searchQuery, setSearchQuery] = useState("");
 
-
   useEffect(() => {
-     
-      getCategory({
-        callBack: (response) => {
-          const userCallBack = response?.data;
-          setCat(userCallBack);
-        },
-        error: (error) => {
-          toast.error(error.message);
-        },
-      });
-      getCourseDuration({
-        callBack: (response) => {
-          setDurationType(response.data);
-        },
-      });
-    
+    getCategory({
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setCat(userCallBack);
+      },
+      error: (error) => {
+        toast.error(error.message);
+      },
+    });
+    getCourseDuration({
+      callBack: (response) => {
+        setDurationType(response.data);
+      },
+    });
   }, []);
 
-  const handleFilterChange = ({duration_type_id = "", category_id = "" , is_publish = "" }) => {
-    // console.log(filterValue, durationname ,selectedCategory, "line90 publishdurationcategory")
+  const handleFilterChange = ({
+    duration_type_id = "",
+    category_id = "",
+    is_publish = "",
+  }) => {
     getAllCoursesFilter({
-
       duration_type_id: duration_type_id,
       category_id: category_id,
-      is_publish: is_publish ,
-      callBack: (response) =>{
-        // console.log(response, "line95")
+      is_publish: is_publish,
+      callBack: (response) => {
         const userCallBack = response?.data;
         setAllCourses(userCallBack);
         setCourseData(userCallBack);
       },
-      error: () =>{
-
-      }
-    })
-  }
+      error: () => {},
+    });
+  };
   const handleChange = (e) => {
     setSelectedCategory(e.target.value.category_id);
-    // console.log(e.target.value.category_id, "Lineno109")
-    // handleFilterChange({category_id: e.target.value.category_id})
-    
   };
 
   const handleFilterCourse = (type) => {
     setFilterValue(type);
-    // handleFilterChange({is_publish: type})
   };
 
   const handleDurationChange = (e) => {
-    
     setDurationname(e.target.value.duration_type_id);
-    // handleFilterChange({duration_type_id : e.target.value.duration_type_id})
-    
-    // console.log(e, "line120 handleduratipon")
-    // console.log(e.target.value.duration_type_id, "line121 handleduratipon")
-    // console.log(durationname, "line124 handleduratipon")
-   
-  }; 
+  };
 
-  const handleAllFilterChange = ({duration_type_id = "", category_id = "" , is_publish = ""}) => {
+  const handleAllFilterChange = ({
+    duration_type_id = "",
+    category_id = "",
+    is_publish = "",
+  }) => {
     getAllCoursesFilter({
-
-      duration_type_id:durationname,
+      duration_type_id: durationname,
       category_id: selectedCategory,
-      is_publish: filterValue ,
-      callBack: (response) =>{
-        // console.log(response, "line95")
+      is_publish: filterValue,
+      callBack: (response) => {
         const userCallBack = response?.data;
         setAllCourses(userCallBack);
         setCourseData(userCallBack);
       },
-      error: () =>{
-
-      }
-    })
-  }
+      error: () => {},
+    });
+  };
 
   const handleInput = (value, type, event) => {
     if (
@@ -185,7 +173,10 @@ const YourCourses = () => {
       } else if (type === "emailId") {
         storedValues.email_id = value;
       } else if (type === "phoneNo") {
-        storedValues.phone_no = validatePhoneNo(value, saveMemberDetails.phone_no);
+        storedValues.phone_no = validatePhoneNo(
+          value,
+          saveMemberDetails.phone_no
+        );
       }
       setSaveMemberDetails(storedValues);
     } else if (type === "SubCategory") {
@@ -194,7 +185,10 @@ const YourCourses = () => {
   };
 
   const toggleDrawer = (anchor, open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
       return;
     }
     setState({ ...state, [anchor]: open });
@@ -207,13 +201,16 @@ const YourCourses = () => {
     <Box
       // sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
       role="presentation"
-      
+
       // onKeyDown={toggleDrawer(anchor, false)}
     >
-    <Box className="FilterHead">
-      <Typography>Filter</Typography>
-      <CloseIcon onClick={toggleDrawer(anchor, false)} className="Crossicon"/>
-    </Box>
+      <Box className="FilterHead">
+        <Typography>Filter</Typography>
+        <CloseIcon
+          onClick={toggleDrawer(anchor, false)}
+          className="Crossicon"
+        />
+      </Box>
       <Divider />
       <Box>
         <Box className="CategoriesBOx">
@@ -253,100 +250,90 @@ const YourCourses = () => {
             )}
           />
         </Box> */}
-         <div>
-                {CommonTypography(
-                  {
-                    fontWeight: 600,
-                    label: "Categories / Sub-categories",
-                  },
-                  (Option = {
-                    className: "addCatHeading",
-                  })
-                )}
-                <FormControl sx={{ width: 540 }}>
-                  <Select
-                    value={cat.category_name}
-                    onChange={(e) => handleChange(e)}
-                    className="addCatTextField"
-                  >
-                    {cat.map((item) => (
-                      <MenuItem key={item._id} value={item}>
-                        {item.category_name}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </div>
+          <div>
+            {CommonTypography(
+              {
+                fontWeight: 600,
+                label: "Categories / Sub-categories",
+              },
+              (Option = {
+                className: "addCatHeading",
+              })
+            )}
+            <FormControl sx={{ width: 540 }}>
+              <Select
+                value={cat.category_name}
+                onChange={(e) => handleChange(e)}
+                className="addCatTextField"
+              >
+                {cat.map((item) => (
+                  <MenuItem key={item._id} value={item}>
+                    {item.category_name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
         </Box>
         <Box className="CategoriesBOx">
           <Typography>Course Type</Typography>
           <FormControl sx={{ width: 540 }}>
-                  <Select
-
-                    value={durationType.duration_name}
-                    onChange={(e) => handleDurationChange(e)}
-                    className="addCatTextField"
-                  >
-                    {durationType.map((item) => (
-                      <MenuItem key={item.duration_id} value={item}>
-                        {item.duration_type_name}
-                        {/* {console.log(item, "item line 234")} */}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                  
-                </FormControl>
-          <Box>
-
-          </Box>
+            <Select
+              value={durationType.duration_name}
+              onChange={(e) => handleDurationChange(e)}
+              className="addCatTextField"
+            >
+              {durationType.map((item) => (
+                <MenuItem key={item.duration_id} value={item}>
+                  {item.duration_type_name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Box></Box>
         </Box>
         <Box className="CategoriesBOx">
           <Typography>Course Status</Typography>
           <Box
-          sx={{
-           marginTop: 1,
-           display: "flex",
-           flexDirection: "row",
-           justifyContent: "space-evenly"
-
-          }}
-        >
-             <Button
-             variant="outlined"
-            value={"published"}
-            sx={{mt: 1}}
-            onClick={() => handleFilterCourse("published")}
-            
+            sx={{
+              marginTop: 1,
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-evenly",
+            }}
           >
-            Publish
-          </Button>
-          <Button
-          variant="outlined"
-            value={"not published"}
-            sx={{mt: 1}}
-            onClick={() => handleFilterCourse("not published")}
-          >
-            Not Publish
-          </Button>
-          <Button
-          variant="outlined"
-            value={"All Courses"}
-            sx={{mt: 1}}
-            onClick={() => handleFilterCourse("All Courses")}
-          >
-            All Courses
-          </Button> 
+            <Button
+              variant="outlined"
+              value={"published"}
+              sx={{ mt: 1 }}
+              onClick={() => handleFilterCourse("published")}
+            >
+              Publish
+            </Button>
+            <Button
+              variant="outlined"
+              value={"not published"}
+              sx={{ mt: 1 }}
+              onClick={() => handleFilterCourse("not published")}
+            >
+              Not Publish
+            </Button>
+            <Button
+              variant="outlined"
+              value={"All Courses"}
+              sx={{ mt: 1 }}
+              onClick={() => handleFilterCourse("All Courses")}
+            >
+              All Courses
+            </Button>
+          </Box>
         </Box>
-        </Box>
-        <Box sx={{ml:2}}>
-          <Button onClick={handleAllFilterChange}>
-            apply
-          </Button>
+        <Box sx={{ ml: 2 }}>
+          <Button onClick={handleAllFilterChange}>apply</Button>
         </Box>
       </Box>
     </Box>
   );
-
 
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
@@ -378,8 +365,8 @@ const YourCourses = () => {
         // toast.error(error.message);
         setLoaderState(false);
       },
-    })
-  }
+    });
+  };
 
   useEffect(() => {
     if (redirectRestriction()) {
@@ -397,7 +384,6 @@ const YourCourses = () => {
             },
             error: (error) => {
               toast.error(error.message);
-              // console.log(error.message);
               setLoaderState(false);
             },
           });
@@ -405,7 +391,6 @@ const YourCourses = () => {
         },
         error: (error) => {
           toast.error(error.message);
-          // console.log(error.message);
           setLoaderState(false);
         },
       });
@@ -417,7 +402,7 @@ const YourCourses = () => {
   // useEffect(() => {
   //   if (filterValue == "All Courses") {
   //     setAllCourses(courseData);
-  //   } 
+  //   }
   //   else {
   //     const filterCourseData = courseData?.filter(
   //       (item) => item?.is_publish == filterValue
@@ -430,9 +415,7 @@ const YourCourses = () => {
   //   //   );
   //   //   setAllCourses(filterCourseData);
   //   // }
-  // }, [filterValue]); 
-
-  
+  // }, [filterValue]);
 
   return (
     <div className="grid-container">
@@ -445,48 +428,48 @@ const YourCourses = () => {
         <LoaderComponent loaderState={loaderState} />
         <Box className="subHeaderMycourses">
           <div className="wid100">
-          <Paper
-            component="form"
-            sx={{
-              ml: 0,
-              mb: "15px",
-              display: "flex",
-              alignItems: "center",
-              backgroundColor: "#e4e4e459",
-              borderRadius: "10px",
-            }}
+            <Paper
+              component="form"
+              sx={{
+                ml: 0,
+                mb: "15px",
+                display: "flex",
+                alignItems: "center",
+                backgroundColor: "#e4e4e459",
+                borderRadius: "10px",
+              }}
+            >
+              <IconButton sx={{ p: "10px" }} aria-label="menu">
+                <SearchIcon />
+              </IconButton>
+              <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+
+              <InputBase
+                sx={{ ml: 1, flex: 1 }}
+                placeholder="Search your course by name"
+                inputProps={{ "aria-label": "search your course by name" }}
+                onChange={handleSearchChange}
+              />
+            </Paper>
+          </div>
+
+          <div
+            className="MyCOurseFilterBtn filterButton"
+            onClick={toggleDrawer("right", true)}
           >
-            <IconButton sx={{ p: "10px" }} aria-label="menu">
-              <SearchIcon />
-            </IconButton>
-            <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-
-            <InputBase
-              sx={{ ml: 1, flex: 1 }}
-              placeholder="Search your course by name"
-              inputProps={{ "aria-label": "search your course by name" }}
-              onChange={handleSearchChange}
-            />
-
-          </Paper>
-        </div>
-
-          <div className="MyCOurseFilterBtn filterButton" onClick={toggleDrawer('right', true)}>
-            <Button className="filterButtonssss" >
+            <Button className="filterButtonssss">
               <FilterAltIcon /> Filter
             </Button>
           </div>
           <div>
-     
-          <Drawer
-            anchor={'right'}
-            open={state['right']}
-            onClose={toggleDrawer('right', false)}
-          >
-            {list('right')}
-          </Drawer>
-    
-    </div>
+            <Drawer
+              anchor={"right"}
+              open={state["right"]}
+              onClose={toggleDrawer("right", false)}
+            >
+              {list("right")}
+            </Drawer>
+          </div>
         </Box>
         {/* <Popover
           id={id}

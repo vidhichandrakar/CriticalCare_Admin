@@ -33,36 +33,8 @@ function TestFirstPage({
   setSelectedTypeNId,
   handleTestType,
   setMcqopen,
-  setTestInfoId
+  setTestInfoId,
 }) {
-
-  // const [testInstructions, setTestInstructions] = useState("");
-  // const [open, setOpen] = useState(false);
-
-
-  // const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  //   "& .MuiDialogContent-root": {
-  //     padding: theme.spacing(2),
-  //   },
-  //   "& .MuiDialogActions-root": {
-  //     padding: theme.spacing(1),
-  //   },
-  // }));
-
-  // const handleOpen = () => {
-  //   setOpen(true);
-  // };
-
-  // const handleClose = () => {
-  //   setOpen(false);
-  // };
-
-  // const handleAddTestInstruction = (value) => {
-  //   // console.log(value);
-  //   let instruct = value
-  //   console.log(instruct);
-  //   setTestInstructions(instruct);
-  // };
   return (
     <div className="testRightSection">
       <TestInstructions

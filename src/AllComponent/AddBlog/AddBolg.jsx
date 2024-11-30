@@ -44,7 +44,6 @@ function AddBolg({ popForBlog, setPopForBlog }) {
     uploadFile({
       payload,
       callBack: (response) => {
-        console.log("response", response);
         changedValue.image_url = response?.data?.path;
         setAddBlogDetails(changedValue);
         setLoaderState(false);
@@ -76,7 +75,6 @@ function AddBolg({ popForBlog, setPopForBlog }) {
   };
 
   const handleBlogInputChange = (e, type) => {
-    console.log("e,", e, "thpe", type);
     let typedValues = Object.assign({}, addBlogDetails);
     if (type == "description") {
       typedValues.description = e;
@@ -88,17 +86,14 @@ function AddBolg({ popForBlog, setPopForBlog }) {
     typedValues.created_by = JSON.parse(
       localStorage.getItem("loggedInUser")
     ).user_id;
-    console.log("alues------->", typedValues);
     setAddBlogDetails(typedValues);
   };
   const handleSaveBlog = () => {
     // setPopForBlog(false);
-    console.log("sjckd", addBlogDetails);
     setLoaderState(true);
     postBlog({
       payload: addBlogDetails,
       callBack: (response) => {
-        console.log("response", response);
         // loaderState
         toast.success("Blog posted Successfully", {
           autoClose: 500,

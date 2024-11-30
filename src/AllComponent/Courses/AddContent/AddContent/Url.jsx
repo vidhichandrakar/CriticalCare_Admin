@@ -22,7 +22,7 @@ const Url = ({
   uploadedVideo,
   setUploadedVideo,
   handleInputChange,
-  courseData
+  courseData,
 }) => {
   const [state, setState] = React.useState({
     top: false,
@@ -45,7 +45,6 @@ const Url = ({
   };
 
   const handleInput = (value, type) => {
-
     if (type === "contentName") {
       setContentName(value);
     } else if (type === "url") {
@@ -65,7 +64,6 @@ const Url = ({
     setUploadedVideo(uploadedUrl);
     handleAddUrl("uploadUrl", uploadedUrl);
     handleInputChange("addContent", uploadedUrl);
-    console.log("hvcvbhjkl")
   };
 
   return (
