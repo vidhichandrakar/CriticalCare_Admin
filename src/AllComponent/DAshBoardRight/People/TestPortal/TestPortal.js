@@ -209,12 +209,10 @@ const TestPortal = () => {
 
   useEffect(() => {
     if (redirectRestriction()) {
-      // setLoaderState(true);
       getTest({
         callBack: (response) => {
           const userCallBack = response?.data;
           setUserData(userCallBack);
-          // console.log("userCallBack===>",userCallBack);
         },
       });
     } else {
@@ -259,7 +257,6 @@ const TestPortal = () => {
       },
       error: (error) => {
         toast.error(error.message);
-        // console.log(error);
       },
     });
   };
@@ -305,7 +302,7 @@ const TestPortal = () => {
       duration_hour: parseInt(addTest.testDuration),
       duration_minute: parseInt(addTest.hours),
       active_duration_from: parseInt(addTest.from),
-      active_duration_to: parseInt(addTest.to)
+      active_duration_to: parseInt(addTest.to),
     };
     createTestPortal({
       payload,
@@ -319,8 +316,6 @@ const TestPortal = () => {
           callBack: (response) => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
-            // console.log("irhthjn plce")
-            // setLoaderState(false);
           },
         });
       },
@@ -467,7 +462,6 @@ const TestPortal = () => {
               </Box>
             </DialogContent>
             <DialogContent dividers>
-              
               <Typography gutterBottom sx={{ mt: 2 }}>
                 Active time duration
               </Typography>
@@ -482,9 +476,7 @@ const TestPortal = () => {
                     className="BoxShadowInputField"
                     type="TestDuration"
                     value={addTest?.form}
-                    onChange={(e) =>
-                      handleInput(e.target.value, "From")
-                    }
+                    onChange={(e) => handleInput(e.target.value, "From")}
                   />
                   <p className="TimeText"> From </p>
                 </Box>
@@ -592,8 +584,7 @@ const TestPortal = () => {
                   <Box
                     className="redDeleteofTestPortal redDelete"
                     onClick={handleDeleteClick}
-                    sx={{borderBottom: "1px solid #eee", color: "red"}}
-
+                    sx={{ borderBottom: "1px solid #eee", color: "red" }}
                   >
                     {" "}
                     <DeleteIcon className="deleteIcon" /> Delete{" "}

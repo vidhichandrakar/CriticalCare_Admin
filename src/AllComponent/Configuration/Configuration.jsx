@@ -92,7 +92,6 @@ function Configuration({
           let storedValues = Object.assign({}, updatedCat);
           storedValues.category_name = response?.data?.category_name;
           setUpdatedCat(storedValues);
-          console.log(storedValues, "storedValues");
         },
         error: (error) => {
           toast.error(error.message);
@@ -211,7 +210,6 @@ function Configuration({
   const handleSubCatChanges = () => {
     const selectedValue = selectedCategory.category_id;
     if (subCategory === "" || selectedValue === "") {
-      console.log("cfdvknfdbnfvbfjvnbfjvnfbvjf");
       toast.error("Sub Category not be empty");
     } else {
       const userId = JSON.parse(localStorage.getItem("loggedInUser")).user_id;
@@ -224,8 +222,7 @@ function Configuration({
       createSubCategory({
         payload,
         callBack: (response) => {
-          //  console.log("line150 wale haw hum")
-          setUpdatedCat({ category_name: "" });
+          setUpdatedCat({ category_name: "" })
           handleCloseCat();
           toast.success("Category created successfully!");
         },
@@ -262,7 +259,6 @@ function Configuration({
 
   return (
     <React.Fragment>
-      {console.log(category_id, "category_id12")}
       <Dialog
         open={hideCatConfig}
         onClose={handleCloseCat}

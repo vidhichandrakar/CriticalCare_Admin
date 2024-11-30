@@ -20,46 +20,31 @@ import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { getOnlineTest } from "../../../ActionFactory/apiActions";
 
-
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
-const OnlineTest = ({
-  anchor,
-  handelclose,
-  ot,
-  setOt,}) => {
-  
-  const [testName, setTestName] = useState([])
+const OnlineTest = ({ anchor, handelclose, ot, setOt }) => {
+  const [testName, setTestName] = useState([]);
   const top100Films = [
     { title: "The Shawshank Redemption", year: 1994 },
     { title: "The Godfather", year: 1972 },
- 
   ];
-  useEffect(()=>{
+  useEffect(() => {
     getOnlineTest({
-      callBack:(response)=>{
+      callBack: (response) => {
         setTestName(response.data);
-      }
-    })
-
-  },[])
-
+      },
+    });
+  }, []);
 
   return (
-    <Box
-      className="folderDrawer"
-      role="presentation"
-      // onClick={toggleDrawer(anchor, false)}
-      // onKeyDown={toggleDrawer(anchor, false)}
-    >
-      {console.log("testNametestName",testName)}
+    <Box className="folderDrawer" role="presentation">
       <h2 style={{ marginLeft: "4%" }}>Add Online Test</h2>
       <IconButton
         aria-label="close"
-        onClick={handelclose("right", false, ot , setOt)}
+        onClick={handelclose("right", false, ot, setOt)}
         sx={{
           position: "absolute",
           right: 8,

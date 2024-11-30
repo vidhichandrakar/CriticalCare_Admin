@@ -1,7 +1,7 @@
 import { Box, Button, Typography, Divider } from "@mui/material";
 import React, { useState } from "react";
 import StarBorderOutlinedIcon from "@mui/icons-material/StarBorderOutlined";
-import StarIcon from '@mui/icons-material/Star';
+import StarIcon from "@mui/icons-material/Star";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import EditIcon from "@mui/icons-material/Edit";
@@ -53,7 +53,6 @@ function CreateQNS({
 
   const handleClick = (event, testInfoId) => {
     setAnchorEl(event.currentTarget);
-    // console.log("testInfoId",testInfoId)
     setTestInfoId(testInfoId);
   };
 
@@ -67,24 +66,19 @@ function CreateQNS({
     handleClickOpen(editedQns[0], index);
     let editedOptions = editedQns[0];
     localStorage.setItem("editedOptions", JSON.stringify(editedOptions));
-    // console.log("count=>", pagee);
   };
 
   const handleClickOpenMCQ = (type) => {
     const testTypeNId = testType.filter((item) => item.test_type_name === type);
-    // console.log("testTypeNId,",testTypeNId)
     setSelectedTypeNId({
       test_type_id: testTypeNId[0].test_type_id,
       test_type_name: testTypeNId[0].test_type_name,
     });
 
     let condition = numberOfMcqQns[numberOfMcqQns?.length - 1];
-    // console.log("condition====>",condition)
     if (condition?.test_questions?.length !== 0) {
       setCqopen(true);
-      // console.log("condition====>", "true");
     } else {
-      // console.log("condition====>", "flase");
       const selectedOption = testType.filter(
         (test) => test.test_type_name === type
       );
@@ -92,29 +86,21 @@ function CreateQNS({
       setMcqopen(true);
     }
   };
-  // const handleOpenAccordianAtATime=(index) = (e, isExpanded) => {
-  //   console.log("indexxxxxxx", index);
-    // setExpanded(isExpanded ? panel : false);
-    // setExpanded(index)
-    // console.log("index ? index", index === index ? true : false);
-  // };
+
   return (
     <div className="MainQnsBox">
-      {/* {console.log("addNewSectionNav", addNewSectionNav)} */}
-
       {opencreaterqns || numberOfMcqQns?.length !== 0 ? (
         <Box>
           {numberOfMcqQns?.map((item, indexSeq) => (
             <>
-              <Accordion
-              >
+              <Accordion>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1-content"
                   id="panel1-header"
                 >
                   <div className="BoxHead">
-                    <Typography sx={{fontSize: "1.5rem"}}>
+                    <Typography sx={{ fontSize: "1.5rem" }}>
                       <b>{item.test_section_name}</b>
                     </Typography>
                     <Button
@@ -216,20 +202,37 @@ function CreateQNS({
                                   id={count}
                                   sx
                                 >
-                                  <EditIcon sx={{color: "#5d5a5ae3"}}/>
-                                  <Typography sx={{ml: "8px"}}>Edit</Typography>
+                                  <EditIcon sx={{ color: "#5d5a5ae3" }} />
+                                  <Typography sx={{ ml: "8px" }}>
+                                    Edit
+                                  </Typography>
                                 </Box>
-                                <Box className="curseorpointer" sx={{marginLeft: "100px"}}>
-                                  <ContentCopyIcon sx={{color: "#5d5a5ae3"}}/>
-                                  <Typography sx={{ml: "8px"}}>Copy</Typography>
+                                <Box
+                                  className="curseorpointer"
+                                  sx={{ marginLeft: "100px" }}
+                                >
+                                  <ContentCopyIcon
+                                    sx={{ color: "#5d5a5ae3" }}
+                                  />
+                                  <Typography sx={{ ml: "8px" }}>
+                                    Copy
+                                  </Typography>
                                 </Box>
                                 <Box className="curseorpointer">
-                                  <TextIncreaseRoundedIcon sx={{color: "#5d5a5ae3"}}/>{" "}
-                                  <Typography sx={{ml: "8px"}}>Edit Marks</Typography>
+                                  <TextIncreaseRoundedIcon
+                                    sx={{ color: "#5d5a5ae3" }}
+                                  />{" "}
+                                  <Typography sx={{ ml: "8px" }}>
+                                    Edit Marks
+                                  </Typography>
                                 </Box>
                                 <Box className="curseorpointer">
-                                  <DeleteOutlineRoundedIcon sx={{color: "#5d5a5ae3"}}/>
-                                  <Typography sx={{ml: "8px"}}>Delete</Typography>
+                                  <DeleteOutlineRoundedIcon
+                                    sx={{ color: "#5d5a5ae3" }}
+                                  />
+                                  <Typography sx={{ ml: "8px" }}>
+                                    Delete
+                                  </Typography>
                                 </Box>
                               </div>
                             </div>

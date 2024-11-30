@@ -47,10 +47,9 @@ const YourCoursesCard = ({ allCourses, userData }) => {
               >
                 <div className="row" style={{ alignItems: "start" }}>
                   <div className="col-md-5">
-                    {item.thumbnail_path ? (
+                    {item.thumbnail_path_desktop ? (
                       <img
-                        // src={`data:image/png;base64,${item.thumbnail_path}`}
-                        src={item.thumbnail_path}
+                        src={item.thumbnail_path_desktop}
                         width={180}
                         height={150}
                         style={{
