@@ -13,12 +13,7 @@ import {
   getContentType,
 } from "../../ActionFactory/apiActions";
 import attachmentimgae from "../../../Media/Images/undraw_attached_file_re_0n9b.svg";
-import Divider from "@material-ui/core/Divider";
-import FolderZipIcon from "@mui/icons-material/FolderZip";
 import NoteIcon from "@mui/icons-material/Note";
-import Stack from "@mui/material/Stack";
-import ModeEditIcon from "@mui/icons-material/ModeEdit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import PlaylistAddIcon from "@mui/icons-material/PlaylistAdd";
 import SaveIcon from "@mui/icons-material/Save";
 import { useNavigate } from "react-router-dom";
@@ -84,6 +79,7 @@ function AddContent({
     });
   }, []);
   const handleAddContent = (event, idx) => {
+    console.log("jhgfghjkl");
     event.stopPropagation();
     if (idx !== expanded) {
       setExpanded(idx);
@@ -360,64 +356,66 @@ function AddContent({
                             </Typography>
                           </Box>
                         </Box>
-                      ) : handleImageType(item?.content_name?.split(".")[1]) ? (
-                        <Box className="videoBox">
-                          <Box className="leftVideo">
-                            <img
-                              src={item.content_url}
-                              className="contentsImg"
-                            />
-                            <Divider
-                              orientation="vertical"
-                              sx={{ marginLeft: "36px" }}
-                            />
-                            <Typography
-                              className="typoStyleImg"
-                              style={{
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                maxWidth: "100%", // Adjust as needed
-                              }}
-                            >
-                              {item.content_name.length > 20
-                                ? `${item.content_name.slice(0, 20)}...`
-                                : item.content_name}
-                            </Typography>
-                          </Box>
-                          <Box>
-                            <Typography className="deleteIconContent">
-                              Delete
-                            </Typography>
-                          </Box>
-                        </Box>
-                      ) : item?.content_name?.split(".")[1] === "zip" ? (
-                        <Box className="videoZipAndDoc">
-                          <Box className="zipAndDoc">
-                            <FolderZipIcon className="zipFolderPrevIcon" />
-                            <Typography
-                              style={{
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                maxWidth: "100%", // Adjust as needed
-                              }}
-                              className="typoStyleZipAndDoc"
-                            >
-                              {item.content_name.length > 20
-                                ? `${item.content_name.slice(0, 20)}...`
-                                : item.content_name}
-                            </Typography>
-                          </Box>
-                          <Box>
-                            <Typography className="deleteIconContent-zipAndDoc">
-                              Delete
-                            </Typography>
-                          </Box>
-                        </Box>
-                      ) : handleDocumentType(
-                          item?.content_name?.split(".")[1]
-                        ) ? (
+                      ) : //  :
+                      //  handleImageType(item?.content_name?.split(".")[1]) ? (
+                      //   <Box className="videoBox">
+                      //     <Box className="leftVideo">
+                      //       <img
+                      //         src={item.content_url}
+                      //         className="contentsImg"
+                      //       />
+                      //       <Divider
+                      //         orientation="vertical"
+                      //         sx={{ marginLeft: "36px" }}
+                      //       />
+                      //       <Typography
+                      //         className="typoStyleImg"
+                      //         style={{
+                      //           whiteSpace: "nowrap",
+                      //           overflow: "hidden",
+                      //           textOverflow: "ellipsis",
+                      //           maxWidth: "100%", // Adjust as needed
+                      //         }}
+                      //       >
+                      //         {item.content_name.length > 20
+                      //           ? `${item.content_name.slice(0, 20)}...`
+                      //           : item.content_name}
+                      //       </Typography>
+                      //     </Box>
+                      //     <Box>
+                      //       <Typography className="deleteIconContent">
+                      //         Delete
+                      //       </Typography>
+                      //     </Box>
+                      //   </Box>
+                      // )
+                      // : item?.content_name?.split(".")[1] === "zip" ? (
+                      //   <Box className="videoZipAndDoc">
+                      //     <Box className="zipAndDoc">
+                      //       <FolderZipIcon className="zipFolderPrevIcon" />
+                      //       <Typography
+                      //         style={{
+                      //           whiteSpace: "nowrap",
+                      //           overflow: "hidden",
+                      //           textOverflow: "ellipsis",
+                      //           maxWidth: "100%", // Adjust as needed
+                      //         }}
+                      //         className="typoStyleZipAndDoc"
+                      //       >
+                      //         {item.content_name.length > 20
+                      //           ? `${item.content_name.slice(0, 20)}...`
+                      //           : item.content_name}
+                      //       </Typography>
+                      //     </Box>
+                      //     <Box>
+                      //       <Typography className="deleteIconContent-zipAndDoc">
+                      //         Delete
+                      //       </Typography>
+                      //     </Box>
+                      //   </Box>
+                      // )
+
+                      handleDocumentType(item?.content_name?.split(".")[1]) ? (
                         <Box className="videoZipAndDoc">
                           <Box className="zipAndDoc">
                             <a href={item.content_url} target="_blank">
@@ -478,6 +476,7 @@ function AddContent({
                   >
                     <Box>
                       <RightBox
+                        setAnchorEl={setAnchorEl}
                         contentType={contentType}
                         handleVideoName={handleVideoName}
                         handleInputChange={handleInputChange}

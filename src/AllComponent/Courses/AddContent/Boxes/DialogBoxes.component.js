@@ -1,21 +1,16 @@
 import React from "react";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import UploadIcon from "@mui/icons-material/Upload";
 import LoaderComponent from "../../../../Util/LoaderComponent";
 import FolderIcon from "@mui/icons-material/Folder";
 import { styled } from "@mui/material/styles";
 import { Box, Button, Typography } from "@mui/material";
 import Dialog from "@mui/material/Dialog";
-import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Checkbox from "@mui/material/Checkbox";
-import { TextField } from "@mui/material";
-import TipsAndUpdatesTwoToneIcon from "@mui/icons-material/TipsAndUpdatesTwoTone";
 import UploadFileRoundedIcon from "@mui/icons-material/UploadFileRounded";
 import { CommonAddLinkField } from "../../../../Util/CommonAddLinkField";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
@@ -49,7 +44,7 @@ const DialogBoxes = ({
   toggleDrawerUrl,
 }) => {
   const onAddLink = (inputLink, inputName) => {
-    handleAddLink(inputLink,inputName);
+    handleAddLink(inputLink, inputName);
   };
   return (
     <>
@@ -217,7 +212,7 @@ const DialogBoxes = ({
           </Button>
         </Box>
       </BootstrapDialog>
-      <BootstrapDialog
+      {/* <BootstrapDialog
         className="PopUP"
         onClose={handleCloseDialogImg}
         aria-labelledby="customized-dialog-title"
@@ -293,8 +288,8 @@ const DialogBoxes = ({
             <CommonAddLinkField onAddLink={onAddLink} />
           </Box>
         </DialogContent>
-      </BootstrapDialog>
-      <BootstrapDialog
+      </BootstrapDialog> */}
+      {/* <BootstrapDialog
         className="PopUP"
         onClose={handleCloseDialogZip}
         aria-labelledby="customized-dialog-title"
@@ -369,7 +364,8 @@ const DialogBoxes = ({
             <CommonAddLinkField onAddLink={onAddLink} />
           </Box>
         </DialogContent>
-      </BootstrapDialog>
+      </BootstrapDialog> */}
+
       <BootstrapDialog
         className="PopUP"
         onClose={handleCloseDialogDoc}

@@ -8,28 +8,17 @@ import Fade from "@mui/material/Fade";
 import { Box, Button, Divider } from "@mui/material";
 import "./AllTestPortal.css";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import FormatColorTextIcon from "@mui/icons-material/FormatColorText";
 import HdrAutoIcon from "@mui/icons-material/HdrAuto";
-import Checkbox from "@mui/material/Checkbox";
 import FlipToFrontIcon from "@mui/icons-material/FlipToFront";
-import FileDownloadOutlinedIcon from "@mui/icons-material/FileDownloadOutlined";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Switch from "@mui/material/Switch";
 import Radio from "@mui/material/Radio";
 import LaunchIcon from "@mui/icons-material/Launch";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
-import { TextField } from "@mui/material";
-import TipsAndUpdatesTwoToneIcon from "@mui/icons-material/TipsAndUpdatesTwoTone";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -122,12 +111,12 @@ function TestNavAndLeft({
               <b>Multiple Choice Questions</b>
             </Typography>
             <Divider />
-            <Typography
+            {/* <Typography
               className="testOptions"
               onClick={() => handleClickOpenMCQ("True/False")}
             >
               <b>True/False Questions</b>
-            </Typography>
+            </Typography> */}
             <Divider />
             <Typography
               className="testOptions"
@@ -136,16 +125,16 @@ function TestNavAndLeft({
               <b>Comprehension Questions</b>
             </Typography>
             <Divider />
-            <Typography
+            {/* <Typography
               className="testOptions"
               onClick={() => handleClickOpenMCQ("Fill in the blanks")}
             >
               <b>Fill in the Blanks Questions</b>
-            </Typography>
+            </Typography> */}
             <Divider />
-            <Typography className="testOptions">
+            {/* <Typography className="testOptions">
               <b>Integer Type Questions</b>
-            </Typography>
+            </Typography> */}
           </AccordionDetails>
         </Accordion>
 
@@ -252,7 +241,7 @@ function TestNavAndLeft({
           </AccordionDetails>
         </Accordion>
 
-        <Accordion className="grading">
+        {/* <Accordion className="grading">
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel2-content"
@@ -277,7 +266,7 @@ function TestNavAndLeft({
               </Box>
             </Typography>
           </AccordionDetails>
-        </Accordion>
+        </Accordion> */}
 
         <Accordion className="grading">
           <AccordionSummary
