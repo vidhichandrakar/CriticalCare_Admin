@@ -20,6 +20,7 @@ import {
   updateCategory,
   updateDuration,
   updateMemberDetails,
+  uploadFile,
 } from "../ActionFactory/apiActions";
 import { ToastContainer, toast } from "react-toastify";
 import { Box, Divider, Typography } from "@mui/material";
@@ -29,7 +30,9 @@ import dayjs, { Dayjs } from "dayjs";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { useDropzone } from "react-dropzone";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -64,6 +67,53 @@ function Configuration({
   const [webinarstitle, setWebinarstitle] = useState("");
   const [webinarsurl, setWebinarsurl] = useState("");
   const [webinarsDisplayLocation, setWebinarsDisplayLocation] = useState("");
+  const [storedMobileInfo, setStoredMobileInfo] = useState({
+    thumbnailPath: [], // Store paths for Team member images
+  });
+  const [imagePreviewsMobile, setImagePreviewsMobile] = useState([]);
+  
+  const onMobileImageDrop = async (files) => {
+    let storedValues = { ...storedMobileInfo };
+    const newPreviews = [...imagePreviewsMobile];
+
+    for (let i = 0; i < files.length; i++) {
+      let payload = new FormData();
+      payload.append("file", files[i], files[i]?.name);
+
+      await uploadFile({
+        payload,
+        callBack: (response) => {
+          storedValues.thumbnailPath.push(response?.data?.path);
+          let reader = new FileReader();
+          reader.onloadend = () => {
+            newPreviews.push(reader.result);
+            setImagePreviewsMobile(newPreviews);
+          };
+          reader.readAsDataURL(files[i]);
+
+          toast.success("Team Member  Image Uploaded Successfully!", {
+            autoClose: 500,
+          });
+        },
+      });
+    }
+
+    setStoredMobileInfo(storedValues);
+  };
+
+  const {
+    getRootProps: getMobileImageRootProps,
+    getInputProps: getMobileImageInputProps,
+  } = useDropzone({
+    onDrop: onMobileImageDrop,
+    accept: {
+      "image/jpeg": [".jpeg"],
+      "image/png": [".png"],
+      "image/jpg": [".jpg"],
+    },
+    multiple: true,
+  });
+ 
 
   const handleTitleChange = (e) => {
     setWebinarstitle(e.target.value);
@@ -520,6 +570,28 @@ function Configuration({
                       })
                     )}
                   </div>
+                 
+                </div>
+                <div className="UploadBttons">
+                  <div {...getMobileImageRootProps({ className: "dropzone" })}>
+                    <input {...getMobileImageInputProps()} />
+                    <Button variant="outlined">
+                      <AddCircleOutlineRoundedIcon /> <span style={{ marginLeft: "1%" }}>Upload Team Member Image</span>
+                    </Button>
+                  </div>
+                  <Typography
+                    sx={{ mt: 2, fontSize: "0.7rem", color: "grey" }}
+                  >
+                    *We recommend uploading an image in 942*510 pixels
+                    resolution
+                  </Typography>
+                  <Box sx={{ display: "flex", flexWrap: "wrap", mt: 2 }}>
+                    {imagePreviewsMobile.map((src, index) => (
+                      <Box key={index} sx={{ position: "relative", mr: 2, mb: 2 }}>
+                        <img src={src} alt={`Mobile Preview ${index}`} width="140" height={"auto"} />
+                      </Box>
+                    ))}
+                  </Box>
                 </div>
               </DialogContent>
             </>

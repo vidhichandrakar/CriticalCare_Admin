@@ -68,7 +68,8 @@ const YourCourses = () => {
   });
   const [testName, setTestName] = useState([]);
   const [cat, setCat] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState();
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [categoryName, setCategoryName] = useState("");
   const [durationType, setDurationType] = useState([{}]);
   const [updatedCat, setUpdatedCat] = useState({});
   const [updatedDuration, setUpdatedDuration] = useState({});
@@ -112,6 +113,8 @@ const YourCourses = () => {
     });
   };
   const handleChange = (e) => {
+    setCategoryName(e.target.value.category_name)
+    console.log(e, "ee")
     setSelectedCategory(e.target.value.category_id);
   };
 
@@ -263,7 +266,14 @@ const YourCourses = () => {
             )}
             <FormControl sx={{ width: 540 }}>
               <Select
-                value={cat.category_name}
+                value={categoryName!==""? categoryName : "fjng" }
+                renderValue={() => {
+                  return categoryName !== "" ? (
+                    <Typography>{categoryName}</Typography>
+                  ) : (
+                    <Typography> Select Categories</Typography>
+                  );
+                }}
                 onChange={(e) => handleChange(e)}
                 className="addCatTextField"
               >
@@ -276,11 +286,25 @@ const YourCourses = () => {
             </FormControl>
           </div>
         </Box>
+        {console.log(durationType,"dddddddd")}
         <Box className="CategoriesBOx">
           <Typography>Course Type</Typography>
           <FormControl sx={{ width: 540 }}>
             <Select
-              value={durationType.duration_name}
+              // value={sdurationType.duration_name}
+              value={
+                durationType.duration_name !== ""
+                  ? durationType.duration_name
+                  : `Select Team Member`
+              }
+
+              renderValue={() => {
+                return durationType.duration_name !== "" ? (
+                  <Typography>{durationType.duration_name}</Typography>
+                ) : (
+                  <Typography> Select Team Member</Typography>
+                );
+              }}
               onChange={(e) => handleDurationChange(e)}
               className="addCatTextField"
             >
