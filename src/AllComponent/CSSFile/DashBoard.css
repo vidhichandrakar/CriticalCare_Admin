@@ -794,7 +794,6 @@ display: flex;
   border-radius: 10px !important;
   overflow-y: unset !important;
 }
-
 .CreateBtn {
   padding: 5px 25px !important;
   margin: 20px !important;
@@ -891,6 +890,10 @@ display: flex;
   padding: 0px 13px !important;
   margin-top: 22px !important;
   height: 33px !important;
+}
+.resetbutton{
+  width: 22% !important;
+  margin-left: 1% !important;
 }
 .width25 {
   width: 25% !important;

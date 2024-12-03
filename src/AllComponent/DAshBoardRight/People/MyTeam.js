@@ -17,13 +17,7 @@ import CourseHeader from "../../Courses/CoursesHeader";
 import SideBar from "../../AdminDashboardMain/SideBar";
 import { teamColumns } from "../../../Data/JsonData";
 import DeleteIcon from "@mui/icons-material/Delete";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
-import { styled } from "@mui/material/styles";
-import Dialog from "@mui/material/Dialog";
 import { Box, TableFooter, TextField } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import {
@@ -49,15 +43,9 @@ import { DailogBox } from "../../../Util/CommonFields";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Divider from "@mui/material/Divider";
+import MembersignupPopup from "./MembersignupPopup";
+import ResetPassword from "./ResetPassword";
 
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  "& .MuiDialogContent-root": {
-    padding: theme.spacing(2),
-  },
-  "& .MuiDialogActions-root": {
-    padding: theme.spacing(1),
-  },
-}));
 
 function TablePaginationActions(props) {
   const [loaderState, setLoaderState] = useState(false);
@@ -138,6 +126,7 @@ const MyTeam = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const id = open ? "simple-popover" : undefined;
   const [opened, setOpen] = useState(false);
+  const [resetOpened, setResetOpen] = useState(false);
   const [addTeam, setAddTeam] = useState({
     memberName: "",
     emailID: "",
@@ -211,6 +200,23 @@ const MyTeam = () => {
   const handleClickOpen = () => {
     setOpen(true);
   };
+  const handleCloseDialog = () => {
+    setOpen(false);
+    setTimeout(() => {
+    handleGetTeam()
+    }, 3000);
+    setAddTeam({
+      memberName: "",
+      emailID: "",
+      PhoneNo: "",
+    });
+  };
+  const handleClickOpenReset = () => {
+    setResetOpen(true);
+  };
+  const handleClickClosereset = () => {
+    setResetOpen(false);
+  };
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -223,18 +229,7 @@ const MyTeam = () => {
   const handleAddTeam = () => {
     setOpen(true);
   };
-  const handleCloseDialog = () => {
-    setOpen(false);
-    setTimeout(() => {
-      
-    handleGetTeam()
-    }, 3000);
-    setAddTeam({
-      memberName: "",
-      emailID: "",
-      PhoneNo: "",
-    });
-  };
+ 
   const handleInput = (value, type) => {
     let storedValues = Object.assign({}, addTeam);
     if (type === "MemberName") {
@@ -331,7 +326,7 @@ const MyTeam = () => {
   return (
     <div className="grid-container">
       <Header
-        Heading={"My Team"}
+        Heading={"Team Member"}
         subHeading={"View, Filter & Manage all your users"}
       />
       <SideBar />
@@ -371,89 +366,15 @@ const MyTeam = () => {
             </Button>
           </div>
           <Button className="width13 addTestimonialButton" onClick={handleClickOpen}>
-            {" "}
-            + Add Team{" "}
+            + Add Team
           </Button>
-          <BootstrapDialog
-            className="PopUP"
-            onClose={handleCloseDialog}
-            aria-labelledby="customized-dialog-title"
-            open={opened}
-          >
-            <DialogTitle
-              sx={{ m: 0, p: 2, fontSize: "1rem" }}
-              id="customized-dialog-title"
-            >
-              Add New Member
-            </DialogTitle>
-            <IconButton
-              aria-label="close"
-              onClick={handleCloseDialog}
-              sx={{
-                position: "absolute",
-                right: 8,
-                top: 8,
-                color: (theme) => theme.palette.grey[500],
-              }}
-            >
-              <CloseIcon />
-            </IconButton>
+          <Button className="width13 addTestimonialButton resetbutton" onClick={handleClickOpenReset}>
+            Reset Password
+          </Button>
 
-            <DialogContent dividers>
-              <Typography gutterBottom>Member Name</Typography>
-              <TextField
-                inputProps={{ className: "textField" }}
-                fullWidth
-                size="small"
-                id="fullWidth"
-                className="BoxShadowInputField"
-                type="MemberName"
-                value={addTeam.memberName}
-                onChange={(e) => handleInput(e.target.value, "MemberName")}
-              />
-              <Typography gutterBottom sx={{ mt: 2 }}>
-                Email ID
-              </Typography>
-              <Box className="FlexRow" sx={{ mt: -1 }}>
-                <Typography className="FlexRow">
-                  <TextField
-                    inputProps={{ className: "textField" }}
-                    fullWidth
-                    size="small"
-                    id="fullWidth"
-                    className="BoxShadowInputField"
-                    type="EmailID"
-                    value={addTeam.emailID}
-                    // onChange={(e) => setInput(e.target.value)}
-                    onChange={(e) => handleInput(e.target.value, "EmailID")}
-                  />
-                  <p className="TimeText"> Phone No. </p>
-                </Typography>
-                <Typography className="FlexRow">
-                  <TextField
-                    inputProps={{ className: "textField" }}
-                    fullWidth
-                    size="small"
-                    id="fullWidth"
-                    className="BoxShadowInputField"
-                    sx={{ ml: 4 }}
-                    value={addTeam.PhoneNo}
-                    type="PhoneNo"
-                    onChange={(e) => handleInput(e.target.value, "PhoneNo")}
-                  />{" "}
-                </Typography>
-              </Box>
-            </DialogContent>
-            <DialogActions>
-              <Button
-                variant="contained"
-                className="CreateBtn"
-                onClick={handleCreateTeam}
-              >
-                Create
-              </Button>
-            </DialogActions>
-          </BootstrapDialog>
+          <MembersignupPopup opened={opened} handleCloseDialog={handleCloseDialog}/>
+
+          <ResetPassword opened={resetOpened} handleClickClosereset={handleClickClosereset}/>
         </div>{" "}
         <Paper
           sx={{ width: "100%", overflow: "hidden" }}

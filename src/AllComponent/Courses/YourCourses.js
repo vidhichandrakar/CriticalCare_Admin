@@ -76,6 +76,7 @@ const YourCourses = () => {
   const [saveMemberDetails, setSaveMemberDetails] = useState({});
   const [subCategory, setSubCategory] = useState({});
   const [durationname, setDurationname] = useState({});
+  const [selecteddurationame, setSelecteddurationame] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
@@ -124,6 +125,8 @@ const YourCourses = () => {
 
   const handleDurationChange = (e) => {
     setDurationname(e.target.value.duration_type_id);
+    setSelecteddurationame(e.target.value.duration_type_name);
+    console.log(e, "ee")
   };
 
   const handleAllFilterChange = ({
@@ -208,7 +211,7 @@ const YourCourses = () => {
       // onKeyDown={toggleDrawer(anchor, false)}
     >
       <Box className="FilterHead">
-        <Typography>Filter</Typography>
+        <Typography sx={{fontSize: "1.4rem"}}>Filter</Typography>
         <CloseIcon
           onClick={toggleDrawer(anchor, false)}
           className="Crossicon"
@@ -286,23 +289,24 @@ const YourCourses = () => {
             </FormControl>
           </div>
         </Box>
-        {console.log(durationType,"dddddddd")}
+        {/* {console.log(durationType,"dddddddd")} */}
         <Box className="CategoriesBOx">
           <Typography>Course Type</Typography>
           <FormControl sx={{ width: 540 }}>
             <Select
-              // value={sdurationType.duration_name}
+              // value={durationType.duration_name}
               value={
-                durationType.duration_name !== ""
-                  ? durationType.duration_name
+                selecteddurationame !== ""
+                  ? selecteddurationame
                   : `Select Team Member`
               }
 
               renderValue={() => {
-                return durationType.duration_name !== "" ? (
-                  <Typography>{durationType.duration_name}</Typography>
+                {console.log(selecteddurationame,"dddddddd")}
+                return selecteddurationame !== "" ? (
+                  <Typography>{selecteddurationame}</Typography>
                 ) : (
-                  <Typography> Select Team Member</Typography>
+                  <Typography> Select Course Type</Typography>
                 );
               }}
               onChange={(e) => handleDurationChange(e)}

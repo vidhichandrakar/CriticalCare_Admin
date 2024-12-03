@@ -316,7 +316,7 @@ const User = () => {
   return (
     <div className="grid-container">
       <Header
-        Heading={"Users "}
+        Heading={"Students"}
         subHeading={"View, Filter & Manage all your users"}
       />
       <SideBar />
