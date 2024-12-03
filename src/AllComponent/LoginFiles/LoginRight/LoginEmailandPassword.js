@@ -327,7 +327,7 @@ const LoginEmailandPassword = () => {
           />
         </Box>
 
-        {/* {getOTP !== "" && (
+        {getOTP !== "" && (
           <Box sx={{ mt: 2 }} className="OTPMainBox">
             <TextField
               autoFocus
@@ -388,7 +388,7 @@ const LoginEmailandPassword = () => {
               }}
             />
           </Box>
-        )} */}
+        )}
         {getOTP !== "" && (
           <Box>
             <TextField
