@@ -1,21 +1,12 @@
 import React, { Fragment, useState, useEffect } from "react";
-import FolderIcon from "@mui/icons-material/Folder";
-import { Typography } from "@mui/material";
-import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import NoteIcon from "@mui/icons-material/Note";
-import LandscapeIcon from "@mui/icons-material/Landscape";
-import FolderZipIcon from "@mui/icons-material/FolderZip";
-import DownloadForOfflineSharpIcon from "@mui/icons-material/DownloadForOfflineSharp";
 import ImportContent from "./AddContent/ImportContent";
 import { useDropzone } from "react-dropzone";
 import { uploadFile } from "../../ActionFactory/apiActions";
 import ContentSlider from "./Boxes/Slider.component";
 import DialogBoxes from "./Boxes/DialogBoxes.component";
-import QuizIcon from "@mui/icons-material/Quiz";
-import LiveTvIcon from "@mui/icons-material/LiveTv";
 import VideocamIcon from "@mui/icons-material/Videocam";
-import ImageIcon from "@mui/icons-material/Image";
 import { Box } from "@material-ui/core";
 import "../../CSSFile/Content.css";
 
@@ -27,6 +18,7 @@ const RightBox = ({
   handleAddUrl,
   clickedModuleIdx,
   setUploadPopupOpen,
+  setAnchorEl,
 }) => {
   const [state, setState] = useState({
     top: false,
@@ -93,7 +85,7 @@ const RightBox = ({
     let inputNameValue = inputName.trim();
     if (uploadedFileType.content_type_name == "Video") {
       if (inputNameValue && !inputNameValue.endsWith(".mp4")) {
-        inputNameValue = inputNameValue.replace(/\s+/g, "") ;
+        inputNameValue = inputNameValue.replace(/\s+/g, "");
       }
     }
 
@@ -155,6 +147,7 @@ const RightBox = ({
         handleInputChange("addContent", arr);
         handleVideoName(arr);
         setLoaderState(false);
+        setAnchorEl(false);
         setVideoqopen(false);
         setImgopen(false);
         setDocopen(false);
@@ -263,21 +256,21 @@ const RightBox = ({
     };
 
   const addContentList = [
-    {
-      name: "Folder",
-      Component: <FolderIcon className="folderIconRightBox" />,
-      onClickHandler: toggleDrawer("right", true, state, setState),
-    },
+    // {
+    //   name: "Folder",
+    //   Component: <FolderIcon className="folderIconRightBox" />,
+    //   onClickHandler: toggleDrawer("right", true, state, setState),
+    // },
     {
       name: "Video",
       Component: <VideocamIcon className="folderIconRightBox" />,
       onClickHandler: () => handleClickOpenVideo(vd, setVd),
     },
-    {
-      name: "online Test",
-      Component: <QuizIcon className="folderIconRightBox" />,
-      onClickHandler: toggleDrawer("right", true, ot, setOt),
-    },
+    // {
+    //   name: "online Test",
+    //   Component: <QuizIcon className="folderIconRightBox" />,
+    //   onClickHandler: toggleDrawer("right", true, ot, setOt),
+    // },
     {
       name: "Subjective Test",
       Component: <AssignmentIcon className="folderIconRightBox" />,
@@ -288,26 +281,26 @@ const RightBox = ({
       Component: <NoteIcon className="folderIconRightBox" />,
       onClickHandler: () => handleClickOpenDoc(doc, setDoc),
     },
-    {
-      name: "Image",
-      Component: <ImageIcon className="folderIconRightBox" />,
-      onClickHandler: () => handleClickOpenImg(image, setImage),
-    },
-    {
-      name: "Zip File",
-      Component: <FolderZipIcon className="folderIconRightBox" />,
-      onClickHandler: () => handleClickOpenZip(zip, setZip),
-    },
-    {
-      name: "Import Content",
-      Component: <DownloadForOfflineSharpIcon className="folderIconRightBox" />,
-      onClickHandler: () => handleClickOpenIC(ic, setIc),
-    },
-    {
-      name: "Import Live",
-      Component: <LiveTvIcon className="folderIconRightBox" />,
-      onClickHandler: toggleDrawer("right", true, il, setIL),
-    },
+    // {
+    //   name: "Image",
+    //   Component: <ImageIcon className="folderIconRightBox" />,
+    //   onClickHandler: () => handleClickOpenImg(image, setImage),
+    // },
+    // {
+    //   name: "Zip File",
+    //   Component: <FolderZipIcon className="folderIconRightBox" />,
+    //   onClickHandler: () => handleClickOpenZip(zip, setZip),
+    // },
+    // {
+    //   name: "Import Content",
+    //   Component: <DownloadForOfflineSharpIcon className="folderIconRightBox" />,
+    //   onClickHandler: () => handleClickOpenIC(ic, setIc),
+    // },
+    // {
+    //   name: "Import Live",
+    //   Component: <LiveTvIcon className="folderIconRightBox" />,
+    //   onClickHandler: toggleDrawer("right", true, il, setIL),
+    // },
   ];
 
   return (

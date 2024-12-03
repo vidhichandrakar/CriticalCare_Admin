@@ -106,7 +106,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                           <Typography className="durationText">
                             {
                               item?.durations[item?.durations?.length - 1]
-                                ?.duration_id
+                                ?.duration
                             }{" "}
                             {
                               item?.durations[item?.durations?.length - 1]
@@ -126,7 +126,7 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                           <Typography className="durationText">
                             {
                               item?.durations[item?.durations?.length - 1]
-                                ?.duration_id
+                                ?.duration
                             }{" "}
                             {
                               item?.durations[item?.durations?.length - 1]

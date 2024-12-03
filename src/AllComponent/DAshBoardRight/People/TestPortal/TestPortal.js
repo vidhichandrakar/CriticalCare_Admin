@@ -65,6 +65,11 @@ import Switch from "@mui/material/Switch";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Divider from "@mui/material/Divider";
+import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const AntSwitch = styled(Switch)(({ theme }) => ({
@@ -289,9 +294,13 @@ const TestPortal = () => {
     } else if (type === "Hours") {
       storedValues.hours = value;
     } else if (type === "From") {
-      storedValues.from = value;
+      storedValues.from = moment(new Date(value)).format(
+        "MMMM Do YYYY, hh:mm:ss"
+      );
     } else if (type === "To") {
-      storedValues.to = value;
+      storedValues.to = moment(new Date(value)).format(
+        "MMMM Do YYYY, hh:mm:ss"
+      );
     }
     setAddTest(storedValues);
   };
@@ -301,8 +310,8 @@ const TestPortal = () => {
       created_by: 12,
       duration_hour: parseInt(addTest.testDuration),
       duration_minute: parseInt(addTest.hours),
-      active_duration_from: parseInt(addTest.from),
-      active_duration_to: parseInt(addTest.to),
+      active_duration_from: addTest.from,
+      active_duration_to: addTest.to,
     };
     createTestPortal({
       payload,
@@ -466,35 +475,53 @@ const TestPortal = () => {
                 Active time duration
               </Typography>
               <Box className="FlexRow" sx={{ mt: -1 }}>
-                <Box className="FlexRow">
-                  <TextField
-                    inputProps={{ className: "textField" }}
-                    fullWidth
-                    size="small"
-                    placeholder="04/01/2024 11:00"
-                    id="fullWidth"
-                    className="BoxShadowInputField"
-                    type="TestDuration"
-                    value={addTest?.form}
-                    onChange={(e) => handleInput(e.target.value, "From")}
-                  />
+                <Box>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DemoContainer components={["DateTimePicker"]}>
+                      <DateTimePicker
+                        disablePast
+                        sx={{ width: 200 }}
+                        value={addTest?.form}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            sx={{ m: 0.5, mt: 0.7, background: "#fff" }}
+                          />
+                        )}
+                        label="Select Expiry Date and Time"
+                        onChange={(e) => handleInput(e, "From")}
+                        type="TestDuration"
+                        id="fullWidth"
+                        className="BoxShadowInputField"
+                      />
+                    </DemoContainer>
+                  </LocalizationProvider>
                   <p className="TimeText"> From </p>
                 </Box>
-                <Typography className="FlexRow">
-                  <TextField
-                    inputProps={{ className: "textField" }}
-                    fullWidth
-                    size="small"
-                    placeholder="05/01/2024 11:00"
-                    id="fullWidth"
-                    className="BoxShadowInputField"
-                    sx={{ ml: 4 }}
-                    value={addTest?.to}
-                    type="hours"
-                    onChange={(e) => handleInput(e.target.value, "To")}
-                  />{" "}
-                  <p className="TimeText">To</p>
-                </Typography>
+
+                <Box>
+                  <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    <DemoContainer components={["DateTimePicker"]}>
+                      <DateTimePicker
+                        disablePast
+                        sx={{ width: 200 }}
+                        value={addTest?.form}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            sx={{ m: 0.5, mt: 0.7, background: "#fff" }}
+                          />
+                        )}
+                        label="Select Expiry Date and Time"
+                        onChange={(e) => handleInput(e, "To")}
+                        type="TestDuration"
+                        id="fullWidth"
+                        className="BoxShadowInputField"
+                      />
+                    </DemoContainer>
+                  </LocalizationProvider>
+                  <p className="TimeText"> From </p>
+                </Box>
               </Box>
             </DialogContent>
             <DialogActions>
