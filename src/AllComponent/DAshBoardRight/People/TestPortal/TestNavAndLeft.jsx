@@ -138,7 +138,7 @@ function TestNavAndLeft({
           </AccordionDetails>
         </Accordion>
 
-        <Accordion className="grading">
+        {/* <Accordion className="grading">
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel2-content"
@@ -155,6 +155,16 @@ function TestNavAndLeft({
               <div className="checkboxAndText">
                 <input type="checkbox" />
                 <b>Multiple Choice</b>
+              </div>
+              <div className="fourOneBox">
+                <Box className="boxFour">4</Box>
+                <Box className="boxOne">1</Box>
+              </div>
+            </Typography>
+            <Typography className="gradingContent">
+              <div className="checkboxAndText">
+                <input type="checkbox" />
+                <b>Comprehension Question</b>
               </div>
               <div className="fourOneBox">
                 <Box className="boxFour">4</Box>
@@ -194,7 +204,7 @@ function TestNavAndLeft({
             <Divider />
             <Button className="gradingSubmitBtn">Submit</Button>
           </AccordionDetails>
-        </Accordion>
+        </Accordion> */}
 
         <Accordion className="grading">
           <AccordionSummary
