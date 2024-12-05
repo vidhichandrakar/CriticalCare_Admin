@@ -335,8 +335,8 @@ const MyTeam = () => {
         <LoaderComponent loaderState={loaderState} />
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">
-            {/* <SearchBar mt="2%" placeholder="Search by name" /> */}
-            <div className="wid100">
+           
+            {/* <div className="wid100">
               <Paper
                 component="form"
                 sx={{
@@ -360,10 +360,10 @@ const MyTeam = () => {
                 />
               </Paper>
             </div>
-
+            Temprory commented this searchbar and filter so don't dare to remove this
             <Button className="filterButton mt43">
               <FilterAltIcon /> Filter
-            </Button>
+            </Button> */}
           </div>
           <Button className="width13 addTestimonialButton" onClick={handleClickOpen}>
             + Add Team

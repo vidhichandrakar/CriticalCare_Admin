@@ -350,9 +350,11 @@ const User = () => {
 
             </Paper>
           </div>
-          <Button className="filterButton mt43">
+           
+          {/* Temprory commented this searchbar and filter so don't dare to remove this */}
+          {/* <Button className="filterButton mt43">
             <FilterAltIcon className="filterIcon" /> Filter
-          </Button>
+          </Button> */}
         </div>
         {checkedValue.length > 0 ? (
           <div className="countSelectedValue">

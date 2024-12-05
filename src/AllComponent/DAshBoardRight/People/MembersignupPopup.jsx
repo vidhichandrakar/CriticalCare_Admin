@@ -33,6 +33,26 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   }
 
 function MembersignupPopup({handleCloseDialog, opened}) {
+  const registerUser = (type, value, path = "", inputValues) => {
+    const { Name, emailId, number, hospitalName, qualification, affillation } = inputValues;
+    const payload = {
+      user_name: Name,
+      email_id: emailId,
+      phone_no: parseInt(number),
+      hospital_name: hospitalName,
+      current_affilation: affillation,
+      qualification: qualification,
+    };
+    // createUser({ payload, callBack: (response) => {
+    //   // Toaster({message:"User created successfully"})
+    // },
+    // error:(error)=>{
+    // console.error(error);
+    // // Toaster({message:"Something went wrong!"});
+    // }});
+    // handleLoginOption(type, value, path);
+  };
+  
   return (
     <div>
       <BootstrapDialog
@@ -100,15 +120,15 @@ function MembersignupPopup({handleCloseDialog, opened}) {
             return errorMsg;
           }}
           validateOnChange={true}
-        //   onSubmit={(submitData) => {}}
+          onSubmit={(submitData) => {}}
         >
           {(formik) => (
             <Form 
-            // onSubmit={formik.handleSubmit}
+            onSubmit={formik.handleSubmit}
             >
-              {console.log(formik)}
+              {console.log(formik.values, "formik")}
               <TextField
-                // inputProps={{ className: "textField" }}
+                inputProps={{ className: "textField" }}
                 sx={{
                   textAlign: "center !important",
                 //   marginTop: "15% !important",
@@ -119,13 +139,13 @@ function MembersignupPopup({handleCloseDialog, opened}) {
                 id="fullWidth"
                 name="Name"
                 className="BoxShadow"
-                // value={formik.values.Name}
-                // onChange={formik.handleChange}
+                value={formik.values.Name}
+                onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
               <RedBar />
               <TextField
-                // inputProps={{ className: "textField" }}
+                inputProps={{ className: "textField" }}
                 sx={{ textAlign: "center !important" }}
                 fullWidth
                 size="small"
@@ -133,8 +153,8 @@ function MembersignupPopup({handleCloseDialog, opened}) {
                 id="fullWidth"
                 name="emailId"
                 className="BoxShadow"
-                // value={formik.values.emailId}
-                // onChange={formik.handleChange}
+                value={formik.values.emailId}
+                onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
               <RedBar />
@@ -145,14 +165,14 @@ function MembersignupPopup({handleCloseDialog, opened}) {
                 label="Phone Number"
                 id="fullWidth"
                 sx={{ textAlign: "center !important" }}
-                // value={formik.values.number}
-                // onChange={(event) =>
-                //   formik.setFieldValue(
-                //     "number",
-                //     event.target.value.replace(/\D/g, "")
-                //   )
-                // }
-                // onBlur={formik.handleBlur}
+                value={formik.values.number}
+                onChange={(event) =>
+                  formik.setFieldValue(
+                    "number",
+                    event.target.value.replace(/\D/g, "")
+                  )
+                }
+                onBlur={formik.handleBlur}
                 name="number"
                 className="BoxShadow"
               />
@@ -165,8 +185,8 @@ function MembersignupPopup({handleCloseDialog, opened}) {
                 id="fullWidth"
                 className="BoxShadow"
                 name="hospitalName"
-                // value={formik.values.hospitalName}
-                // onChange={formik.handleChange}
+                value={formik.values.hospitalName}
+                onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
               <RedBar />
@@ -178,8 +198,8 @@ function MembersignupPopup({handleCloseDialog, opened}) {
                 id="fullWidth"
                 className="BoxShadow"
                 name="qualification"
-                // value={formik.values.qualification}
-                // onChange={formik.handleChange}
+                value={formik.values.qualification}
+                onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
               <RedBar />
@@ -192,8 +212,8 @@ function MembersignupPopup({handleCloseDialog, opened}) {
                 id="fullWidth"
                 className="BoxShadow"
                 name="affillation"
-                // value={formik.values.affillation}
-                // onChange={formik.handleChange}
+                value={formik.values.affillation}
+                onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
               
@@ -203,14 +223,14 @@ function MembersignupPopup({handleCloseDialog, opened}) {
                 variant="contained"
                 disabled={isNotEmptyObject(formik.errors)}
                 className="otpButton"
-                // onClick={() =>
-                //   registerUser(
-                //     "loggIn",
-                //     formik.values.number,
-                //     "signUp",
-                //     formik.values
-                //   )
-                // }
+                onClick={() =>
+                  registerUser(
+                    "loggIn",
+                    formik.values.number,
+                    "signUp",
+                    formik.values
+                  )
+                }
               >
                 Register
               </Button>

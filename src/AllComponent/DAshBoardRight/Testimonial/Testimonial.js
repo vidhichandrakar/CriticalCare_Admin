@@ -268,7 +268,7 @@ const Testimonial = () => {
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">
             {/* <SearchBar mt="2%" placeholder="Search by name" /> */}
-            <div className="wid100">
+            {/* <div className="wid100">
           <Paper
             component="form"
             sx={{
@@ -291,11 +291,11 @@ const Testimonial = () => {
               inputProps={{ "aria-label": "search your course by name" }}
             />
           </Paper>
-        </div>
-
+          </div>
+            Temprory commented this searchbar and filter so don't dare to remove this
             <Button className="filterButton mt43">
               <FilterAltIcon /> Filter
-            </Button>
+            </Button> */}
           </div>
           <Button className="width25 addTestimonialButton" onClick={handleClickOpen}>
             + Add Testimonial

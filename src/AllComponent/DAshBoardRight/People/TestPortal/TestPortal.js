@@ -359,7 +359,7 @@ const TestPortal = () => {
         <LoaderComponent loaderState={loaderState} />
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">
-            <div className="wid100">
+            {/* <div className="wid100">
               <Paper
                 component="form"
                 sx={{
@@ -383,10 +383,10 @@ const TestPortal = () => {
                 />
               </Paper>
             </div>
-
+            Temprory commented this searchbar and filter so don't dare to remove this
             <Button className="filterButton mt43">
               <FilterAltIcon /> Filter
-            </Button>
+            </Button> */}
           </div>
 
           <Button
