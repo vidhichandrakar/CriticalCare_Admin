@@ -11,6 +11,8 @@ import IconButton from "@mui/material/IconButton";
 import { Box, TableFooter, TextField } from "@mui/material";
 import { Formik, Form, useFormik } from "formik";
 import { isEmptyObject, isNotEmptyObject } from "../../../Util/CommonUtils";
+import { Md5Converter } from '../../../Util/md5Convertor';
+import { adminLogin } from '../../ActionFactory/apiActions';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiDialogContent-root": {
@@ -35,6 +37,8 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 function MembersignupPopup({handleCloseDialog, opened}) {
   const registerUser = (type, value, path = "", inputValues) => {
     const { Name, emailId, number, hospitalName, qualification, affillation } = inputValues;
+    console.log("password",Md5Converter(number))
+    const password = Md5Converter(number);
     const payload = {
       user_name: Name,
       email_id: emailId,
@@ -42,14 +46,18 @@ function MembersignupPopup({handleCloseDialog, opened}) {
       hospital_name: hospitalName,
       current_affilation: affillation,
       qualification: qualification,
+      password:password,
+      user_photo:"photo",
+      user_type_id:2,
+      block:"N"//by default "N"
     };
-    // createUser({ payload, callBack: (response) => {
-    //   // Toaster({message:"User created successfully"})
-    // },
-    // error:(error)=>{
-    // console.error(error);
-    // // Toaster({message:"Something went wrong!"});
-    // }});
+    adminLogin({ payload, callBack: (response) => {
+      // Toaster({message:"User created successfully"})
+    },
+    error:(error)=>{
+    console.error(error);
+    // Toaster({message:"Something went wrong!"});
+    }});
     // handleLoginOption(type, value, path);
   };
   

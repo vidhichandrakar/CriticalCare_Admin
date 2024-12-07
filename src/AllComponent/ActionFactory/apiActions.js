@@ -470,7 +470,17 @@ export const login = ({ payload, callBack, error }) => {
       error(errorMessage);
     });
 };
-
+export const adminLogin = ({ payload, callBack, error }) => {
+  const url = APIS.adminLogin;
+  axios
+    .post(url, payload)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
 export const verifyOtp = ({ payload, callBack, error }) => {
   const url = APIS.verifyLogin;
   axios

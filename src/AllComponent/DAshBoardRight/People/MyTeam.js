@@ -26,6 +26,7 @@ import {
   getTeam,
   updateTeam,
   putTeamByID,
+  getAllUsersApi,
 } from "../../ActionFactory/apiActions";
 import { TablePagination } from "@mui/material";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
@@ -140,7 +141,7 @@ const MyTeam = () => {
   useEffect(() => {
     if (redirectRestriction()) {
       // setLoaderState(true);
-      getTeam({
+      getAllUsersApi({
         callBack: (response) => {
           const userCallBack = response?.data;
           setUserData(userCallBack);
@@ -416,7 +417,7 @@ const MyTeam = () => {
                       >
                         <TableCell className="useInfoCheckbox">
                           <Typography className="PhoneText">
-                            {row.member_name}
+                            {row.user_name}
                           </Typography>
                         </TableCell>
                         <TableCell className="fullNameHead">
