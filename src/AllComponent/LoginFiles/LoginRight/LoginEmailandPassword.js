@@ -266,7 +266,7 @@ const LoginEmailandPassword = () => {
           <TextField
             autoFocus
             id="fullWidth"
-            placeholder="Mobile Number"
+            placeholder="Mobile Number or Email Address"
             className="phoneTextField
               BoxShadowLogin"
             sx={{ color: "#000" }}
@@ -279,18 +279,18 @@ const LoginEmailandPassword = () => {
             onChange={(event) =>
               setPhoneNo(event?.target?.value)
             }
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <p className="phoneTextFieldStartIcon">
-                    <Box className="indiaBox">
-                      <img src={India} className="indiaImg" />
-                    </Box>{" "}
-                    <p className="startText"> +91 - </p>
-                  </p>
-                </InputAdornment>
-              ),
-            }}
+            // InputProps={{
+            //   startAdornment: (
+            //     <InputAdornment position="start">
+            //       <p className="phoneTextFieldStartIcon">
+            //         <Box className="indiaBox">
+            //           <img src={India} className="indiaImg" />
+            //         </Box>{" "}
+            //         <p className="startText"> +91 - </p>
+            //       </p>
+            //     </InputAdornment>
+            //   ),
+            // }}
           />
         </Box>
 
