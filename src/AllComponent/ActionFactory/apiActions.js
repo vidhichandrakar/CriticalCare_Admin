@@ -596,6 +596,7 @@ export const addContentOnCreateCourse = ({ payload, callBack }) => {
     callBack(response);
   });
 };
+
 export const getBlog = ({ payload, callBack, error }) => {
   const url = APIS.addBlog;
   axios
@@ -608,6 +609,21 @@ export const getBlog = ({ payload, callBack, error }) => {
     });
 };
 
+export const getBlogs = ({ callBack, error }) => {
+  console.log("workoing")
+  const url = APIS.addBlog;
+  axios.get(url).then((response) => {
+    callBack(response);
+  }).catch((errorMessage) => {
+  });
+};
+
+export const deleteBlog = ({ bloglist_id, callBack }) => {
+  const url = APIS.deleteBlog + "/" + bloglist_id;
+  axios.delete(url).then((response) => {
+    callBack(response);
+  });
+};
 export const getCourseContentById = ({ callBack, courseId, error }) => {
   const url = APIS.getCourseContent + "/" + courseId;
   axios

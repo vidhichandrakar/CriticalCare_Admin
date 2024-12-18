@@ -224,7 +224,7 @@ function AddBolg({ popForBlog, setPopForBlog }) {
 
           <DialogActions>
             <Button variant="outlined" color="error" onClick={handleClose}>
-              Cancel
+              Cancel as
             </Button>
             <Button variant="contained" onClick={handleSaveBlog}>
               Add
