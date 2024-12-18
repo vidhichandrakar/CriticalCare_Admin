@@ -215,7 +215,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                           sx={{ textDecoration: "none", color: "grey", mt: -1 }}
                           onClick={() => handleHighlightPeople("User")}
                         >
-                          User
+                          Students
                         </Typography>
                       </Link>
                     </li>
@@ -227,7 +227,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                           sx={{ textDecoration: "none", color: "grey", mt: -2.5 }}
                           onClick={() => handleHighlightPeople("MyTeam")}
                         >
-                          My Team
+                        Team Member
                         </Typography>
                       </Link>
                     </li>

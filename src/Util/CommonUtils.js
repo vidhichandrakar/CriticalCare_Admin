@@ -11,3 +11,7 @@ export const validateEmail =(email)=>{
     let mail = !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
     return mail;
 }
+
+export function isNotEmptyObject(obj) {
+  return obj && typeof obj === "object" && Object.keys(obj).length;
+}

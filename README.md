@@ -11,3 +11,6 @@ Please install this for the editor (use --f if needed)
 
 npm install react-quill 
 
+--crypto-js 
+
+npm i -f crypto-js

@@ -20,6 +20,7 @@ import blueEnvlope from "../../../Media/Images/blueEnvlope.jpeg";
 import CircularProgress from "@mui/material/CircularProgress";
 import { validatePhoneNo } from "../../../Util/CommonUtils";
 import loginMan from "../../../Media/Images/loginMan.png";
+import { Md5Converter } from "../../../Util/md5Convertor";
 
 const LoginEmailandPassword = () => {
   const [userLogin, setUserLogin] = useState({
@@ -48,7 +49,7 @@ const LoginEmailandPassword = () => {
   const [isResendDisabled, setIsResendDisabled] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const [showOTPCard, setShowOTPCard] = useState(false);
-
+  const [ password, setPassword]= useState("")
   let navigation = useNavigate();
   useEffect(() => {
     let interval = null;
@@ -78,46 +79,19 @@ const LoginEmailandPassword = () => {
   }, []);
 
   const handleUserLogin = () => {
-    let typedOtp = parseInt(
-      otpValue.otp1 + otpValue.otp2 + otpValue.otp3 + otpValue.otp4
-    );
+    // let typedOtp = parseInt(
+    //   otpValue.otp1 + otpValue.otp2 + otpValue.otp3 + otpValue.otp4
+    // );
     setLoaderState(true);
-    if (phoneNO?.length !== 10) {
-      toast.error("Enter 10 digit phone number");
-      setLoaderState(false);
-    } else if (loginWay === "") {
+
       const payload = {
-        phone_no: phoneNO?.toString(),
+        email_id:phoneNO,
+        password: Md5Converter(password),
       };
       login({
         payload,
         callBack: (response) => {
-          setLoginWay("Get OTP");
-          setGetOTP(response.data.OTP);
-          setHideOTPBtn(false);
           setLoaderState(false);
-          setSeconds(60);
-          setIsActive(true);
-          setIsVisible(!isVisible);
-        },
-        error: (error) => {
-          toast.error(error.response.data.message);
-          setLoaderState(false);
-        },
-      });
-    } else if (loginWay !== "") {
-      const payload = {
-        phone_no: phoneNO?.toString(),
-        OTP: typedOtp,
-      };
-      verifyOtp({
-        payload,
-        callBack: (response) => {
-          setUserInfo({
-            userId: response.data.user_id,
-            userName: response.data.user_name,
-            user_photo: response.data.user_photo,
-          });
           navigation("/admin/DashBoard");
           localStorage.setItem("loggedInUser", JSON.stringify(response?.data));
         },
@@ -126,7 +100,7 @@ const LoginEmailandPassword = () => {
           setLoaderState(false);
         },
       });
-    }
+   
   };
 
   const handleResendOTP = () => {
@@ -221,7 +195,7 @@ const LoginEmailandPassword = () => {
   const handleLoginPhoneByOTP = (value, type) => {
     setDisableLogiBtn(false);
     if (type === "password") {
-      setPhoneNo(validatePhoneNo(value, phoneNO));
+      setPhoneNo(value);
     }
   };
 
@@ -277,14 +251,7 @@ const LoginEmailandPassword = () => {
           getOTP ? "BoxWidth" : "BoxWidth phoneTextField2 initialBoxWidth"
         }
       >
-        {isVisible && (
-          <Box className="OTPCard">
-            <Typography sx={{ mt: 1, fontSize: 21, color: "#199884" }}>
-              <span className="OTPInTheBox">OTP Recieved:</span>{" "}
-              <b className="OTPRecieved"> {getOTP}</b>
-            </Typography>
-          </Box>
-        )}
+       
         <Typography className="loginText">
           {/*   */}
 
@@ -299,31 +266,31 @@ const LoginEmailandPassword = () => {
           <TextField
             autoFocus
             id="fullWidth"
-            placeholder="Mobile Number"
+            placeholder="Mobile Number or Email Address"
             className="phoneTextField
               BoxShadowLogin"
             sx={{ color: "#000" }}
             variant="outlined"
-            inputProps={{ maxLength: 10, tabIndex: 1 }}
-            disabled={phoneNO?.length === 10 && getOTP !== ""}
-            type="number"
+            inputProps={{  tabIndex: 1 }}
+            // disabled={phoneNO?.length === 10 && getOTP !== ""}
+            // type="number"
             value={phoneNO}
             onKeyDown={(event) => handleKeyDown(event)}
             onChange={(event) =>
-              handleLoginPhoneByOTP(event.target.value, "password")
+              setPhoneNo(event?.target?.value)
             }
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <p className="phoneTextFieldStartIcon">
-                    <Box className="indiaBox">
-                      <img src={India} className="indiaImg" />
-                    </Box>{" "}
-                    <p className="startText"> +91 - </p>
-                  </p>
-                </InputAdornment>
-              ),
-            }}
+            // InputProps={{
+            //   startAdornment: (
+            //     <InputAdornment position="start">
+            //       <p className="phoneTextFieldStartIcon">
+            //         <Box className="indiaBox">
+            //           <img src={India} className="indiaImg" />
+            //         </Box>{" "}
+            //         <p className="startText"> +91 - </p>
+            //       </p>
+            //     </InputAdornment>
+            //   ),
+            // }}
           />
         </Box>
 
@@ -389,7 +356,7 @@ const LoginEmailandPassword = () => {
             />
           </Box>
         )} */}
-        {getOTP !== "" && (
+        
           <Box>
             <TextField
               id="fullWidth"
@@ -399,45 +366,20 @@ const LoginEmailandPassword = () => {
               sx={{ color: "#000" }}
               variant="outlined"
               type="password"
+              onChange={(event)=>setPassword(event?.target?.value)}
             />
           </Box>
-        )}
-
-        {hideOTPBtn && getOTP === "" && (
+       
+      
           <Button
             variant="contained"
             className="LoginBtn"
             sx={{ marginTop: "10%" }}
             onClick={() => handleUserLogin()}
           >
-            Get OTP
+            Login
           </Button>
-        )}
-        {getOTP && (
-          <Box className="LoginBtnBox">
-            {/* <Box className="ResendButton">
-              <p>Don't recieve the OTP ?</p>
-              <Button
-                variant="contained"
-                className="ResendBtn"
-                onClick={() => handleResendOTP()}
-                disabled={seconds}
-              >
-                <p className="resendOTP">{seconds > 0 ? `RESEND OTP ( ${seconds} sec)` : `RESEND OTP `}</p>
-              </Button>
-            </Box> */}
-            <Button
-              variant="contained"
-              className="LoginBtn"
-              onClick={() => handleUserLogin()}
-            >
-              Login
-            </Button>
-            <Typography className="ResendButton" sx={{ cursor: "pointer" }}>
-              Forget Password?
-            </Typography>
-          </Box>
-        )}
+      
       </Box>
       <ToastContainer />
     </div>
