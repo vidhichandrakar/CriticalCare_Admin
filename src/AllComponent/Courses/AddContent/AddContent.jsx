@@ -28,7 +28,6 @@ import SaveIcon from "@mui/icons-material/Save";
 import { useNavigate } from "react-router-dom";
 import { getCourseContentById } from "../../ActionFactory/apiActions";
 import { ToastContainer, toast } from "react-toastify";
-import AddContent1 from "./AddContent1";
 
 function AddContent({
   handleInputChange,
