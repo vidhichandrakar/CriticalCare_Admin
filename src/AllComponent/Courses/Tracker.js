@@ -34,7 +34,7 @@ const Tracker = ({
             </Stepper>
           </Box>
         </>
-      ) : !hideTrackerForEditFlow ? (
+      ) : courseId && hideTrackerForEditFlow ? (
         <>
           <Box className="trackerMainBox">
             <Stepper
@@ -42,7 +42,7 @@ const Tracker = ({
               className="trackerStep"
               alternativeLabel
             >
-              {steps.map((label, index) => (
+              {stepForEditFlow.map((label, index) => (
                 <Step key={index} onClick={() => handleTrackerPage(index)}>
                   <StepLabel>{label}</StepLabel>
                 </Step>
@@ -58,7 +58,7 @@ const Tracker = ({
               className="trackerStep"
               alternativeLabel
             >
-              {stepForEditFlow.map((label, index) => (
+              {steps.map((label, index) => (
                 <Step key={index} onClick={() => handleTrackerPage(index)}>
                   <StepLabel>{label}</StepLabel>
                 </Step>

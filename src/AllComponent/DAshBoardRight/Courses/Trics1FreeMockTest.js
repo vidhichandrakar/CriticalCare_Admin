@@ -268,11 +268,10 @@ const Trics1FreeMockTest = ({ onDelete }) => {
               </div>
               <p className="greyPara">44</p>
             </div>
-
             <div>
-              {courseData?.thumbnail_path ? (
+              {courseData?.thumbnail_path_desktop ? (
                 <img
-                  src={courseData?.thumbnail_path}
+                  src={courseData?.thumbnail_path_desktop}
                   className="rightSideRow"
                 />
               ) : (

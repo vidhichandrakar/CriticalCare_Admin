@@ -27,7 +27,8 @@ export const APIS = {
   banner: REACT_APP_API + "/webbanner",
   getBanner: REACT_APP_API + "/webbanner/webpage",
   addwebinar: REACT_APP_API + "/blog/freewebinar",
-  getCourseContent: REACT_APP_API + "/course/modulebycourse",
+  getCourseContent: REACT_APP_API + "/course/getmodulebycourse",
   addBlog: REACT_APP_API + "/blog/bloglist",
   getCoupon: REACT_APP_API + "/coupon",
+  getModuleContentCount: REACT_APP_API + "/course/module",
 };

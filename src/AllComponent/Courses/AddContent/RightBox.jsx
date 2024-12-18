@@ -3,7 +3,7 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import NoteIcon from "@mui/icons-material/Note";
 import ImportContent from "./AddContent/ImportContent";
 import { useDropzone } from "react-dropzone";
-import { uploadFile } from "../../ActionFactory/apiActions";
+import { getModuleByContentCount, uploadFile } from "../../ActionFactory/apiActions";
 import ContentSlider from "./Boxes/Slider.component";
 import DialogBoxes from "./Boxes/DialogBoxes.component";
 import VideocamIcon from "@mui/icons-material/Videocam";
@@ -19,6 +19,7 @@ const RightBox = ({
   clickedModuleIdx,
   setUploadPopupOpen,
   setAnchorEl,
+  setContentData
 }) => {
   const [state, setState] = useState({
     top: false,
@@ -74,16 +75,33 @@ const RightBox = ({
   const [uploadedFileType, setUploadedFileType] = useState({});
   const [drawerUrl, setDrawerUrl] = useState(false);
   const [contentAddedLinks, setContentAddedLinks] = useState([]);
-
+  // const [moduleId, setModuleId] = useState({})
+  // let moduleId = contentType.map((item)=>{
+  //   return( item.module_id)})
+  // let moduleId = contentType.map((item)=>{
+  //   return(
+  //     item.module_id
+  //   )
+  // })
+// 
   useEffect(() => {
     if (courseData?.contents?.length) {
       setUploadedVideo(courseData.contents);
     }
+    // else if (contentType){
+      
+    
+    //   getModuleByContentCount({
+         
+        
+    //   })
+      
+    // }
   }, []);
 
   const handleAddLink = (inputLink, inputName) => {
     let inputNameValue = inputName.trim();
-    if (uploadedFileType.content_type_name == "Video") {
+    if (uploadedFileType.content_type_id == 1) {
       if (inputNameValue && !inputNameValue.endsWith(".mp4")) {
         inputNameValue = inputNameValue.replace(/\s+/g, "");
       }
@@ -113,6 +131,7 @@ const RightBox = ({
     setUploadedVideoLink(arr);
     handleInputChange("addContent", arr);
     handleVideoName(arr);
+ 
     setVideoqopen(false);
     setImgopen(false);
     setDocopen(false);
@@ -174,6 +193,7 @@ const RightBox = ({
     );
     setUploadedFileType(videoType[0]);
   };
+
   const handleCloseDialogVideo = () => {
     setVideoqopen(false);
   };
