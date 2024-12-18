@@ -83,13 +83,13 @@ export const getCoupon = ({ callBack, error }) => {
     callBack(response);
   });
 };
-export const putCoupon = ({coupon_id, payload, callBack, error }) => {
+export const putCoupon = ({ coupon_id, payload, callBack, error }) => {
   const url = APIS.getCoupon + "/" + coupon_id;
   axios.put(url, payload).then((response) => {
     callBack(response);
   });
 };
-export const deleteCoupon = ({coupon_id, callBack, error }) => {
+export const deleteCoupon = ({ coupon_id, callBack, error }) => {
   const url = APIS.getCoupon + "/" + coupon_id;
   axios.delete(url).then((response) => {
     callBack(response);
@@ -101,13 +101,11 @@ export const postCoupon = ({ payload, callBack, error }) => {
     callBack(response);
   });
 };
-export const EditCoupon = ({coupon_id, payload, callBack, error }) => {
+export const EditCoupon = ({ coupon_id, payload, callBack, error }) => {
   const url = APIS.getCoupon + "/" + coupon_id;
-  axios
-    .get(url, payload)
-    .then((response) => {
-      callBack(response);
-    })
+  axios.get(url, payload).then((response) => {
+    callBack(response);
+  });
 };
 
 export const bannerTypeapi = ({ callBack, error }) => {
@@ -236,7 +234,6 @@ export const getCategory = ({ callBack }) => {
   });
 };
 
-
 export const updateCategory = ({ category_id, payload, callBack }) => {
   const url = APIS.getCategory + "/" + category_id;
   axios.put(url, payload).then((response) => {
@@ -270,7 +267,6 @@ export const deleteCategory = ({ category_id, callBack, error }) => {
     .then((response) => callBack && callBack(response))
     .catch((err) => error && error(err));
 };
-
 
 //TeamMember
 // Get all team members
@@ -362,7 +358,7 @@ export const getTeamByID = ({ teamId, callBack }) => {
     callBack(response);
   });
 };
-export const putTeamByID = ({payload, teamId, callBack }) => {
+export const putTeamByID = ({ payload, teamId, callBack }) => {
   const url = APIS.updateMember + "/" + teamId;
   axios.put(url, payload).then((response) => {
     callBack(response);
@@ -388,14 +384,12 @@ export const updateTeam = ({ payload, callBack }) => {
   });
 };
 
-
 export const updateDuration = ({ payload, callBack }) => {
   const url = APIS.updateDuration;
   axios.post(url, payload).then((response) => {
     callBack(response);
   });
 };
-
 
 export const createTestPortal = ({ payload, callBack, error }) => {
   const url = APIS.getTest;
@@ -409,7 +403,6 @@ export const createTestPortal = ({ payload, callBack, error }) => {
     });
 };
 
-
 export const deleteTestPortal = ({ userId, callBack, error }) => {
   const url = APIS.getTest + "/" + userId;
   axios
@@ -421,8 +414,6 @@ export const deleteTestPortal = ({ userId, callBack, error }) => {
       error(errorMessage);
     });
 };
-
-
 
 export const getTestimonal = ({ callBack }) => {
   const url = APIS.getTestimonal;
@@ -640,6 +631,18 @@ export const postBlog = ({ payload, callBack, error }) => {
   const url = APIS.addBlog;
   axios
     .post(url, payload)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
+
+export const getModuleByContentCount = ({ callBack, moduleId, error }) => {
+  const url = APIS.getModuleContentCount + "/" + moduleId;
+  axios
+    .get(url)
     .then((response) => {
       callBack(response);
     })

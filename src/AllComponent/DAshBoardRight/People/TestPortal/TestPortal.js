@@ -433,16 +433,20 @@ const TestPortal = () => {
                 value={addTest?.testName}
                 onChange={(e) => handleInput(e.target.value, "TestName")}
               />
-              <Typography gutterBottom sx={{ mt: 2 }}>
+              <Typography gutterBottom sx={{ mt: 2, mb: 2 }}>
                 Test Duration
               </Typography>
-              <Box className="FlexRow" sx={{ mt: -1 }}>
+              <Box
+                style={{ display: "flex", width: "100%" }}
+                // className="FlexRow"
+                sx={{ mt: -1 }}
+              >
                 <Typography className="FlexRow">
                   <TextField
                     inputProps={{ className: "textField" }}
                     fullWidth
                     size="small"
-                    placeholder="0"
+                    placeholder="In Hours"
                     id="fullWidth"
                     className="BoxShadowInputField"
                     type="TestDuration"
@@ -451,14 +455,14 @@ const TestPortal = () => {
                       handleInput(e.target.value, "TestDuration")
                     }
                   />
-                  <p className="TimeText"> Hour </p>
+                  {/* <p className="TimeText"> Hour </p> */}
                 </Typography>
                 <Typography className="FlexRow">
                   <TextField
                     inputProps={{ className: "textField" }}
                     fullWidth
                     size="small"
-                    placeholder="0"
+                    placeholder="In Minutes"
                     id="fullWidth"
                     className="BoxShadowInputField"
                     sx={{ ml: 4 }}
@@ -466,15 +470,15 @@ const TestPortal = () => {
                     type="hours"
                     onChange={(e) => handleInput(e.target.value, "Hours")}
                   />{" "}
-                  <p className="TimeText">Minute</p>
+                  {/* <p className="TimeText">Minute</p> */}
                 </Typography>
               </Box>
             </DialogContent>
-            <DialogContent dividers>
+            <DialogContent>
               <Typography gutterBottom sx={{ mt: 2 }}>
                 Active time duration
               </Typography>
-              <Box className="FlexRow" sx={{ mt: -1 }}>
+              <Box className="FlexRow" sx={{ mt: -1 }} gap={2}>
                 <Box>
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DemoContainer components={["DateTimePicker"]}>
@@ -485,10 +489,19 @@ const TestPortal = () => {
                         renderInput={(params) => (
                           <TextField
                             {...params}
-                            sx={{ m: 0.5, mt: 0.7, background: "#fff" }}
+                            sx={{
+                              m: 0.5,
+                              mt: 0.7,
+                              background: "#fff",
+                              height: 40, // Set your desired height here
+                              "& .MuiInputBase-root": {
+                                height: 40, // Adjust input height
+                              },
+                              gap: 2,
+                            }}
                           />
                         )}
-                        label="Select Expiry Date and Time"
+                        label="Start Date and Time"
                         onChange={(e) => handleInput(e, "From")}
                         type="TestDuration"
                         id="fullWidth"
@@ -496,7 +509,6 @@ const TestPortal = () => {
                       />
                     </DemoContainer>
                   </LocalizationProvider>
-                  <p className="TimeText"> From </p>
                 </Box>
 
                 <Box>
@@ -512,7 +524,7 @@ const TestPortal = () => {
                             sx={{ m: 0.5, mt: 0.7, background: "#fff" }}
                           />
                         )}
-                        label="Select Expiry Date and Time"
+                        label="End Date and Time"
                         onChange={(e) => handleInput(e, "To")}
                         type="TestDuration"
                         id="fullWidth"
@@ -520,7 +532,6 @@ const TestPortal = () => {
                       />
                     </DemoContainer>
                   </LocalizationProvider>
-                  <p className="TimeText"> From </p>
                 </Box>
               </Box>
             </DialogContent>

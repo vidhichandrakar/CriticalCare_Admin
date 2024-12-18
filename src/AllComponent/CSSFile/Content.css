@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: row;
   width: 94%;
-
 }
 
 .contentleftBox {
@@ -22,7 +21,7 @@
 .contentInnerLeftBox {
   display: flex;
   flex-direction: column;
-  margin-left: -13px;
+  width: 100%;
 }
 
 .noContent {
@@ -91,12 +90,12 @@
 
 .folderIconContent {
   font-size: 5em !important;
-  color: #0075FF !important;
+  color: #0075ff !important;
 }
 
 .folderIconContentTwo {
   font-size: 3.5em !important;
-  color: #0075FF !important;
+  color: #0075ff !important;
   margin-top: 2%;
 }
 
@@ -147,8 +146,6 @@
 
 /* RIGHTBOX CSS  */
 
-
-
 .rightBoxComplete {
   width: 13vw;
 }
@@ -167,11 +164,10 @@
 .rightBoxTypography:hover {
   background-color: rgba(197, 197, 197, 0.454);
   border-radius: 10px;
-
 }
 
 .folderIconRightBox {
-  color: #0075FF !important;
+  color: #0075ff !important;
   margin-right: 7%;
   margin-bottom: -2%;
 }
