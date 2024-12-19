@@ -28,7 +28,6 @@ import SaveIcon from "@mui/icons-material/Save";
 import { useNavigate } from "react-router-dom";
 import { getCourseContentById } from "../../ActionFactory/apiActions";
 import { ToastContainer, toast } from "react-toastify";
-import AddContent1 from "./AddContent1";
 
 function AddContent({
   handleInputChange,
@@ -435,49 +434,69 @@ function AddContent({
                   </Box>
                   {/* // for Video Test // */}
                   <Grid container spacing={2} direction="row" wrap="wrap">
-                    {itemContent?.contents?.Video?.data?.map((item) => (
-                      <Grid item xs={12} sm={6} md={4} key={index}>
-                        <Card sx={{ maxWidth: 345, padding: "5px" }}>
-                          <CardActionArea>
-                            {isYouTubeLink(item?.content_url) ? (
-                              // Render YouTube video with thumbnail
-                              <CardMedia
-                                component="iframe"
-                                height="200"
-                                src={`https://www.youtube.com/embed/${extractYouTubeId(
-                                  item?.content_url
-                                )}`}
-                                allowFullScreen
-                                title="YouTube Video"
-                              />
-                            ) : (
-                              // Render other videos
-                              <CardMedia
-                                component="video"
-                                height="200"
-                                controls
-                                src={item?.content_url}
-                                poster={getThumbnailUrl(item?.content_url)} // Use thumbnail as a poster
-                                title="Video Content"
-                              />
-                            )}
-                          </CardActionArea>
-                          <Typography
+                    {itemContent?.contents?.Video?.data?.length ? (
+                      <>
+                        {" "}
+                        {itemContent?.contents?.Video?.data?.map((item) => (
+                          <Grid item xs={12} sm={6} md={4} key={index}>
+                            {console.log("checking")}
+                            <Card sx={{ maxWidth: 345, padding: "5px" }}>
+                              <CardActionArea>
+                                {isYouTubeLink(item?.content_url) ? (
+                                  // Render YouTube video with thumbnail
+                                  <CardMedia
+                                    component="iframe"
+                                    height="200"
+                                    src={`https://www.youtube.com/embed/${extractYouTubeId(
+                                      item?.content_url
+                                    )}`}
+                                    allowFullScreen
+                                    title="YouTube Video"
+                                  />
+                                ) : (
+                                  // Render other videos
+                                  <CardMedia
+                                    component="video"
+                                    height="200"
+                                    controls
+                                    src={item?.content_url}
+                                    poster={getThumbnailUrl(item?.content_url)} // Use thumbnail as a poster
+                                    title="Video Content"
+                                  />
+                                )}
+                              </CardActionArea>
+                              <Typography
+                                style={{
+                                  textAlign: "center",
+                                }}
+                                gutterBottom
+                                variant="h5"
+                                component="div"
+                                marginTop="10px"
+                              >
+                                {item?.content_name
+                                  ? MyComponent(item?.content_name)
+                                  : "Loading Video Name"}
+                              </Typography>
+                            </Card>
+                          </Grid>
+                        ))}
+                      </>
+                    ) : (
+                      <>
+                        {" "}
+                        <Box className="noContent">
+                          <img
+                            src={attachmentimgae}
+                            height="290px"
+                            width="320px"
                             style={{
                               textAlign: "center",
                             }}
-                            gutterBottom
-                            variant="h5"
-                            component="div"
-                            marginTop="10px"
-                          >
-                            {item?.content_name
-                              ? MyComponent(item?.content_name)
-                              : "Loading Video Name"}
-                          </Typography>
-                        </Card>
-                      </Grid>
-                    ))}
+                          />
+                        </Box>
+                      </>
+                    )}
                   </Grid>
 
                   {/* ///for Documents */}
@@ -486,7 +505,7 @@ function AddContent({
                     <Typography
                       style={{
                         textAlign: "center",
-                        margin: "20px",
+                        margin: "10px",
                       }}
                       gutterBottom
                       variant="h5"
@@ -496,39 +515,55 @@ function AddContent({
                     </Typography>
                   </Box>
                   <Grid container spacing={2} direction="row" wrap="wrap">
-                    {itemContent?.contents?.Document?.data?.map((item) => (
-                      <Grid item xs={12} sm={6} md={4} key={index}>
-                        <Card sx={{ maxWidth: 345, padding: "5px" }}>
-                          <CardActionArea>
-                            {isPdfFile(item.content_url) ? (
-                              // Render PDF preview
-                              <iframe
-                                src={item.content_url}
+                    {itemContent?.contents?.Document?.data?.length ? (
+                      <>
+                        {itemContent?.contents?.Document?.data?.map((item) => (
+                          <Grid item xs={12} sm={6} md={4} key={index}>
+                            {console.log("ppopopo")}
+                            <Card sx={{ maxWidth: 345, padding: "5px" }}>
+                              <CardActionArea>
+                                {isPdfFile(item.content_url) ? (
+                                  // Render PDF preview
+                                  <iframe
+                                    src={item.content_url}
+                                    style={{
+                                      width: "100%",
+                                      height: "200px",
+                                      border: "none",
+                                    }}
+                                    title="PDF Preview"
+                                  ></iframe>
+                                ) : null}
+                              </CardActionArea>
+                              <Typography
                                 style={{
-                                  width: "100%",
-                                  height: "200px",
-                                  border: "none",
+                                  textAlign: "center",
                                 }}
-                                title="PDF Preview"
-                              ></iframe>
-                            ) : null}
-                          </CardActionArea>
-                          <Typography
-                            style={{
-                              textAlign: "center",
-                            }}
-                            gutterBottom
-                            variant="h5"
-                            component="div"
-                            marginTop="10px"
-                          >
-                            {item.content_name
-                              ? MyComponent(item.content_name)
-                              : "Loading Video Name"}
-                          </Typography>
-                        </Card>
-                      </Grid>
-                    ))}
+                                gutterBottom
+                                variant="h5"
+                                component="div"
+                                marginTop="10px"
+                              >
+                                {item.content_name
+                                  ? MyComponent(item.content_name)
+                                  : "Loading Video Name"}
+                              </Typography>
+                            </Card>
+                          </Grid>
+                        ))}
+                      </>
+                    ) : (
+                      <>
+                        {" "}
+                        <Box>
+                          <img
+                            src={attachmentimgae}
+                            height="290px"
+                            width="320px"
+                          />
+                        </Box>
+                      </>
+                    )}
                   </Grid>
                 </Box>
                 <div>
