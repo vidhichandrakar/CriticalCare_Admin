@@ -17,6 +17,7 @@ import {
   createCategory,
   createSubCategory,
   getCategory,
+  postBlog,
   updateCategory,
   updateDuration,
   updateMemberDetails,
@@ -33,6 +34,10 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useDropzone } from "react-dropzone";
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import AddCircleOutlineRoundedIcon from "@mui/icons-material/AddCircleOutlineRounded";
+import AddBolg from "../AddBlog/AddBolg.jsx";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
+import UploadIcon from "@mui/icons-material/Upload";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -70,7 +75,49 @@ function Configuration({
   const [storedMobileInfo, setStoredMobileInfo] = useState({
     thumbnailPath: [], // Store paths for Team member images
   });
-  const [imagePreviewsMobile, setImagePreviewsMobile] = useState([]);
+  const [imagePreviewsMobile, setImagePreviewsMobile] = useState([]); const [imgUpload, setImageWhileUpload] = useState("");
+    const [loaderState, setLoaderState] = useState(false);  
+      const [popForBlog, setPopForBlog] = useState(false);
+    const [addBlogDetails, setAddBlogDetails] = useState({
+      title: "",
+      description: "",
+      image_url: "",
+      display_locations: "",
+      popular: "N", //hard coded need to check it with Backend ppl
+      created_by: "",
+    });
+
+    const onInroVideoDrop = async (files) => {
+      let payload = new FormData();
+      payload.append("file", files[0], files[0]?.name);
+      let changedValue = Object.assign({}, addBlogDetails);
+      setLoaderState(true);
+      uploadFile({
+        payload,
+        callBack: (response) => {
+          changedValue.image_url = response?.data?.path;
+          setAddBlogDetails(changedValue);
+          setLoaderState(false);
+        },
+      });
+      // setStoredBasicInfo(storedValues);
+    };
+
+    const {
+      getRootProps: getIntroVideoRootProps,
+      getInputProps: getIntroVideoInputProps,
+    } = useDropzone({
+      onDrop: onInroVideoDrop,
+      onChange: (event) => console.log(event),
+      accept: {
+        "image/jpeg": [".jpeg"],
+        "image/png": [".png"],
+        "image/jpg": [".jpg"],
+        "video/mp4": [".mp4"],
+      },
+    });
+    
+ 
   
   const onMobileImageDrop = async (files) => {
     let storedValues = { ...storedMobileInfo };
@@ -307,6 +354,37 @@ function Configuration({
     setSelectedCategory(e.target.value);
   };
 
+   const handleBlogInputChange = (e, type) => {
+      let typedValues = Object.assign({}, addBlogDetails);
+      if (type == "description") {
+        typedValues.description = e;
+      } else if (type == "displayLocation") {
+        typedValues.display_locations = e;
+      } else if (type == "title") {
+        typedValues.title = e;
+      }
+      typedValues.created_by = JSON.parse(
+        localStorage.getItem("loggedInUser")
+      ).user_id;
+      setAddBlogDetails(typedValues);
+    };
+    const handleSaveBlog = () => {
+      // setPopForBlog(false);
+      setLoaderState(true);
+      postBlog({
+        payload: addBlogDetails,
+        callBack: (response) => {
+          // loaderState
+          toast.success("Blog posted Successfully", {
+            autoClose: 500,
+          });
+          setLoaderState(false);
+          setPopForBlog(false);
+          handleCloseCat();
+        },
+      });
+    };
+  
   return (
     <React.Fragment>
       <Dialog
@@ -439,6 +517,116 @@ function Configuration({
                   </FormControl>
                 </div>
               </DialogContent>
+            </>
+          ) : selectedConfigValue === "AddBlog" ? (
+            <>
+              <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              <Paper
+                sx={(theme) => ({
+                  p: 2,
+                  margin: "auto",
+                  // maxWidth: 1000,
+                  flexGrow: 5,
+                  backgroundColor: "#fff",
+                  ...theme.applyStyles("dark", {
+                    backgroundColor: "#1A2027",
+                  }),
+                })}
+              >
+                <Grid spacing={1}>
+                  <Grid item xs={12} sm={6} md={4}>
+                    <Box>
+                      Title
+                      <TextField
+                        fullWidth
+                        placeholder="title"
+                        id="fullWidth"
+                        sx={{ mt: 1, mb: 2 }}
+                        onChange={(e) =>
+                          handleBlogInputChange(e.target.value, "title")
+                        }
+                      />
+                    </Box>
+                    <Box>
+                      Description
+                      <TextField
+                        inputProps={{ className: "textField" }}
+                        fullWidth
+                        id="outlined-multiline-static"
+                        multiline
+                        rows={4}
+                        placeholder="Enter course description"
+                        className="DescBoxShadow"
+                        // value={storedBasicInfo.Description}
+                        onChange={(e) =>
+                          handleBlogInputChange(e.target.value, "description")
+                        }
+                      />
+                    </Box>
+                    <Box mt={2}>
+                      Display Locations
+                      <TextField
+                        fullWidth
+                        placeholder="title"
+                        id="fullWidth"
+                        sx={{ mt: 1, mb: 2 }}
+                        onChange={(e) =>
+                          handleBlogInputChange(
+                            e.target.value,
+                            "displayLocation"
+                          )
+                        }
+                      />
+                    </Box>
+                  </Grid>
+                  <Grid item xs={12} sm={6} md={12}>
+                    {/* <Box > */}
+                    {/* <img
+                      src="https://bootdey.com/img/Content/avatar/avatar2.png"
+                      class="rounded-circle mr-1"
+                      alt="William Harris"
+                      width="270"
+                      height="365"
+                    /> */}
+                    {/* </Box> */}
+                    <div {...getIntroVideoRootProps({ className: "dropzone" })}>
+                      <input {...getIntroVideoInputProps()} />
+                      <Box className="thumbnailUpload">
+                        <Typography
+                          sx={{ marginTop: "3%" }}
+                          className="fontRecommend"
+                        ></Typography>
+                        {/* <LoaderComponent loaderState={loaderState} /> */}
+                        {imgUpload === "" && addBlogDetails?.image_url && (
+                          <img
+                            src={addBlogDetails?.image_url}
+                            width="270"
+                            height="365"
+                          />
+                        )}
+                        {imgUpload != "" && (
+                          <img
+                            src={addBlogDetails?.image_url}
+                            width={140}
+                            height={"auto"}
+                          />
+                        )}
+                        <Button
+                          component="label"
+                          variant="outlined-multiline-static"
+                          startIcon={<UploadIcon className="iconThumbicon" />}
+                          className="iconThumb"
+                        >
+                          Upload Thumbnail Image
+                        </Button>
+                      </Box>
+                    </div>
+                  </Grid>
+                </Grid>
+              </Paper>
+            </DialogContentText>
+          </DialogContent>
             </>
           ) : selectedConfigValue === "Webinar" ? (
             <>
@@ -663,6 +851,20 @@ function Configuration({
                 }}
                 variant="outlined"
                 onClick={handleWebinarChanges}
+              >
+                Save
+              </Button>
+            </>
+          ) : selectedConfigValue === "AddBlog" ? (
+            <>
+              <Button
+                sx={{
+                  textTransform: "none",
+                  padding: "3px 0px",
+                  marginRight: "16px",
+                }}
+                variant="outlined"
+                onClick={handleSaveBlog}
               >
                 Save
               </Button>

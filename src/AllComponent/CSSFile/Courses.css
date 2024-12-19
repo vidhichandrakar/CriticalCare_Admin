@@ -245,6 +245,13 @@
   color: #918d8d;
   font-size: 0.9rem !important;
 }
+.wrap-text-100 {
+  /* display: inline-block; */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 30ch;
+}
 
 .multiplevalidityAvailBox {
   color: #0f7af5 !important;

@@ -25,6 +25,8 @@ import AddContent from '../Courses/AddContent/AddContent';
 import Categores from '../DAshBoardRight/Categores';
 import Subcategores from '../DAshBoardRight/Subcategores';
 import TeamMember from '../DAshBoardRight/TeamMember';
+import AddBolg from '../AddBlog/AddBolg';
+import AddBlog from '../DAshBoardRight/AddBlog';
 
 const RouterMain = () => {
   return (
@@ -52,6 +54,7 @@ const RouterMain = () => {
             <Route exact path="/admin/Categories" element= {<Categores />}> </Route>           
             <Route exact path="/admin/Subcategories" element= {<Subcategores />}> </Route>           
             <Route exact path="/admin/TeamMember" element= {<TeamMember />}> </Route>           
+            <Route exact path="/admin/BLogs" element= {<AddBlog />}> </Route>           
     </Routes>
     </div>
   )

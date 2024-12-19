@@ -31,5 +31,6 @@ export const APIS = {
   getCourseContent: REACT_APP_API + "/course/getmodulebycourse",
   addBlog: REACT_APP_API + "/blog/bloglist",
   getCoupon: REACT_APP_API + "/coupon",
+  deleteBlog: REACT_APP_API + "/blog/bloglist",
   getModuleContentCount: REACT_APP_API + "/course/module",
 };

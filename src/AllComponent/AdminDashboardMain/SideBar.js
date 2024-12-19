@@ -292,6 +292,13 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                         </Typography>
                       </Link>
                     </li>
+                    <li className="listDesign" onClick={() => handleCatConfig("AddBlog")}>
+                      <Link className="textDecoration">
+                        <Typography sx={{ textDecoration: "none", color: "grey" }}>
+                          Add BLog
+                        </Typography>
+                      </Link>
+                    </li>
                   </ul>
                 </List>
               </Collapse>
@@ -305,6 +312,16 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               >
                 <AssignmentIcon className="icon" />
                 <Typography>Categories</Typography>
+              </Box>
+            </Link>
+            <Link to="/admin/BLogs">
+              <Box
+                className={`hoverrr ${highlight === "Blogs" ? "hoverrr2" : ""}`}
+                sx={{ mt: -2 }}
+                onClick={() => handleHighlight("Blogs")}
+              >
+                <AssignmentIcon className="icon" />
+                <Typography>Blogs</Typography>
               </Box>
             </Link>
 
