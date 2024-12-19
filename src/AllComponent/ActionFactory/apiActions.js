@@ -352,8 +352,8 @@ export const getTeam = ({ callBack, error }) => {
     });
 };
 
-export const getTeamByID = ({ teamId, callBack }) => {
-  const url = APIS.updateMember + "/" + teamId;
+export const getAllUsers = ({ userId, callBack }) => {
+  const url = APIS.getAllUsers+ "/" + userId;
   axios.get(url).then((response) => {
     callBack(response);
   });
@@ -465,6 +465,17 @@ export const adminLogin = ({ payload, callBack, error }) => {
   const url = APIS.adminLogin;
   axios
     .post(url, payload)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
+export const resetpass = ({user_id, payload, callBack, error }) => {
+  const url = APIS.adminLogin + "/" + "resetpass/" + user_id;
+  axios
+    .put(url, payload)
     .then((response) => {
       callBack(response);
     })

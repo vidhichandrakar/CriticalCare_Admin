@@ -27,6 +27,7 @@ import {
   updateTeam,
   putTeamByID,
   getAllUsersApi,
+  getAllUsers,
 } from "../../ActionFactory/apiActions";
 import { TablePagination } from "@mui/material";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
@@ -307,9 +308,9 @@ const MyTeam = () => {
 
   const handleEdit = () => {
     setOpen(true);
-    const teamId = openId;
-    getTeamByID({
-      teamId,
+    const userId = openId;
+    getAllUsers({
+      userId,
       callBack: (response) => {
         const data = response.data;
         let storedValues = Object.assign({}, addTeam);
@@ -427,7 +428,7 @@ const MyTeam = () => {
                         <TableCell>
                           <MoreVertIcon //need to remove this hardcode this code, more ... three drops in last column
                             onClick={(event) =>
-                              handleClick(event, row.member_id)
+                              handleClick(event, row.user_id)
                             }
                           />
                         </TableCell>

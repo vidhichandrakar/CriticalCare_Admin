@@ -225,10 +225,32 @@ function MembersignupPopup({handleCloseDialog, opened}) {
                 onBlur={formik.handleBlur}
               />
               
-              <Button
+              {/* <Button
               sx={{mt: 2}}
                 fullWidth
                 variant="contained"
+               
+              >
+                Register
+              </Button> */}
+              <div style={{display:"flex", justifyContent: "right", marginTop: "5%"}}>
+        <Button
+            variant="outlined"
+            onClick={handleCloseDialog}
+            sx={{
+              borderColor: "red",
+              color: "red",
+              textTransform: "none",
+              marginRight: "12px",
+              padding: "3px 0px",
+            }}
+          >
+            Cancel
+          </Button>
+           <Button variant="outlined"   sx={{
+                  textTransform: "none",
+                  padding: "3px 0px",
+                }}
                 disabled={isNotEmptyObject(formik.errors)}
                 className="otpButton"
                 onClick={() =>
@@ -238,10 +260,8 @@ function MembersignupPopup({handleCloseDialog, opened}) {
                     "signUp",
                     formik.values
                   )
-                }
-              >
-                Register
-              </Button>
+                }>Register</Button>
+      </div>
             </Form>
           )}
         </Formik>
