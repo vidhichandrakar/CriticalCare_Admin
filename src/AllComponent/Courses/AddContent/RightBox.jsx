@@ -55,6 +55,7 @@ const RightBox = ({
     left: false,
   });
   const [videoopened, setVideoqopen] = useState(false);
+  const [subtestopened, setSubtestopen] = useState(false);
   const [docopened, setDocopen] = useState(false);
   const [zipopened, setZipopen] = useState(false);
   const [imgopened, setImgopen] = useState(false);
@@ -197,6 +198,12 @@ const RightBox = ({
   const handleCloseDialogVideo = () => {
     setVideoqopen(false);
   };
+  const handleopenDialogSubjectiveTest = () => {
+    setSubtestopen(true);
+  };
+  const handleCloseDialogSubjectiveTest = () => {
+    setSubtestopen(false);
+  };
   const handleClickOpenDoc = () => {
     setAcceptType({
       "document/doc": [".doc"],
@@ -294,7 +301,7 @@ const RightBox = ({
     {
       name: "Subjective Test",
       Component: <AssignmentIcon className="folderIconRightBox" />,
-      onClickHandler: toggleDrawer("right", true, st, setSt),
+      onClickHandler: () => handleopenDialogSubjectiveTest(st, setSt),
     },
     {
       name: "Document",
@@ -379,6 +386,8 @@ const RightBox = ({
         handleCloseDialogDoc={handleCloseDialogDoc}
         docopened={docopened}
         handleCloseDialogVideo={handleCloseDialogVideo}
+        handleCloseDialogSubjectiveTest={handleCloseDialogSubjectiveTest}
+        subtestopened={subtestopened}
         videoopened={videoopened}
         imgUpload={imgUpload}
         getIntroVideoInputProps={getIntroVideoInputProps}

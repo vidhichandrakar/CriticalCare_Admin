@@ -15,7 +15,7 @@ import SearchBar from "../../Util/SearchBar";
 import Popover from "@mui/material/Popover";
 import CourseHeader from "../Courses/CoursesHeader";
 import SideBar from "../AdminDashboardMain/SideBar";
-import { CategoryPortalColumns } from "../../Data/JsonData";
+import { SubCategoryPortalColumns } from "../../Data/JsonData";
 import BlockIcon from "@mui/icons-material/Block";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Checkbox from "@mui/material/Checkbox";
@@ -43,6 +43,7 @@ import {
   createTestPortal,
   getCategory,
   deleteCategory,
+  getSubCategory,
 } from "../ActionFactory/apiActions";
 import { TablePagination } from "@mui/material";
 import Stack from "@mui/material/Stack";
@@ -206,6 +207,7 @@ const Subcategores = () => {
     testDuration: "",
     hours: "",
   });
+  const[cat, setCat] = useState([])
   const [loaderState, setLoaderState] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [hideCatConfig, setHideCatConfig] = useState(false);
@@ -222,10 +224,18 @@ const Subcategores = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getCategory({
+    getSubCategory({
       callBack: (response) => {
         const userCallBack = response?.data;
         setUserData(userCallBack);
+      },
+    });
+  }, []);
+  useEffect(() => {
+    getCategory({
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setCat(userCallBack);
       },
     });
   }, []);
@@ -539,7 +549,7 @@ const Subcategores = () => {
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  {CategoryPortalColumns.map((column) => (
+                  {SubCategoryPortalColumns.map((column) => (
                     <TableCell
                       key={column.id}
                       align={column.align}
@@ -573,11 +583,9 @@ const Subcategores = () => {
                             {row?.category_name}
                           </TableCell>
                           <TableCell className="alignTableBody">
-                            {`${row?.duration_hour}hr : ${row?.duration_minute}min`}
+                            {row?.category_name}
                           </TableCell>
-                          <TableCell className="alignTableBody">
-                            {moment(row?.createdAt).format("MM/DD/YYYY")}
-                          </TableCell>
+
 
                           <TableCell sx={{ textAlign: "center" }}>
                             <MoreVertIcon
@@ -662,6 +670,7 @@ const Subcategores = () => {
         selectedConfigValue={selectedConfigValue}
         handleCloseCat={handleCloseCat}
         hideCatConfig={hideCatConfig}
+        catdata = {cat}
       />
     </div>
   );

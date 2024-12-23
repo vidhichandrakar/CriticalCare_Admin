@@ -257,20 +257,20 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               <Collapse in={hideSubConfig} timeout="auto" unmountOnExit>
                 <List component="div">
                   <ul sx={{ Height: "100%" }}>
-                    <li className="myCourses" onClick={() => handleCatConfig("Category")}>
+                    {/* <li className="myCourses" onClick={() => handleCatConfig("Category")}>
                       <Link className="textDecoration">
                         <Typography sx={{ textDecoration: "none", color: "grey" }}>
                           Category
                         </Typography>
                       </Link>
-                    </li>
-                    <li className="listDesign" onClick={() => handleCatConfig("SubCategory")}>
+                    </li> */}
+                    {/* <li className="listDesign" onClick={() => handleCatConfig("SubCategory")}>
                       <Link className="textDecoration">
                         <Typography sx={{ textDecoration: "none", color: "grey" }}>
                           Sub Category
                         </Typography>
                       </Link>
-                    </li>
+                    </li> */}
                     <li className="listDesign" onClick={() => handleCatConfig("Duration")}>
                       <Link className="textDecoration">
                         <Typography sx={{ textDecoration: "none", color: "grey" }}>
@@ -278,13 +278,13 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                         </Typography>
                       </Link>
                     </li>
-                    <li className="listDesign" onClick={() => handleCatConfig("Team Member")}>
+                    {/* <li className="listDesign" onClick={() => handleCatConfig("Team Member")}>
                       <Link className="textDecoration">
                         <Typography sx={{ textDecoration: "none", color: "grey" }}>
                           Team Member
                         </Typography>
                       </Link>
-                    </li>
+                    </li> */}
                     <li className="listDesign" onClick={() => handleCatConfig("Webinar")}>
                       <Link className="textDecoration">
                         <Typography sx={{ textDecoration: "none", color: "grey" }}>
@@ -314,6 +314,16 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                 <Typography>Categories</Typography>
               </Box>
             </Link>
+            <Link to="/admin/Subcategories">
+              <Box
+                className={`hoverrr ${highlight === "Subcategories" ? "hoverrr2" : ""}`}
+                sx={{ mt: -2 }}
+                onClick={() => handleHighlight("Subcategories")}
+              >
+                <AssignmentIcon className="icon" />
+                <Typography>Subcategories</Typography>
+              </Box>
+            </Link>
             <Link to="/admin/BLogs">
               <Box
                 className={`hoverrr ${highlight === "Blogs" ? "hoverrr2" : ""}`}
@@ -325,16 +335,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               </Box>
             </Link>
 
-            <Link to="/admin/Subcategories">
-              <Box
-                className={`hoverrr ${highlight === "Subcategories" ? "hoverrr2" : ""}`}
-                sx={{ mt: -2 }}
-                onClick={() => handleHighlight("Subcategories")}
-              >
-                <AssignmentIcon className="icon" />
-                <Typography>Subcategories</Typography>
-              </Box>
-            </Link>
+           
 
             <Link to="/admin/TeamMember">
               <Box

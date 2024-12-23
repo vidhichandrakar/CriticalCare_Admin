@@ -247,7 +247,7 @@ const MyTeam = () => {
     getTeam({
       callBack: (response) => {
         const userCallBack = response?.data;
-        setUserData(userCallBack);
+        // setUserData(userCallBack);
         setLoaderState(false);
       },
       error: (error) => {

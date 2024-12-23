@@ -233,6 +233,12 @@ export const getCategory = ({ callBack }) => {
     callBack(response);
   });
 };
+export const getSubCategory = ({ callBack }) => {
+  const url = APIS.getSubCategory;
+  axios.get(url).then((response) => {
+    callBack(response);
+  });
+};
 
 export const updateCategory = ({ category_id, payload, callBack }) => {
   const url = APIS.getCategory + "/" + category_id;
