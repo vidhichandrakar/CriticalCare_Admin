@@ -13,6 +13,15 @@ import SearchIcon from "@mui/icons-material/Search";
 import Checkbox from "@mui/material/Checkbox";
 import UploadFileRoundedIcon from "@mui/icons-material/UploadFileRounded";
 import { CommonAddLinkField } from "../../../../Util/CommonAddLinkField";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import { useState } from "react";
+import { useEffect } from "react";
+import { getTest } from "../../../ActionFactory/apiActions";
+import { DialogActions } from "@material-ui/core";
+import Divider from "@mui/material/Divider";
+
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -36,6 +45,8 @@ const DialogBoxes = ({
   docopened,
   handleCloseDialogVideo,
   videoopened,
+  handleCloseDialogSubjectiveTest,
+  subtestopened,
   imgUpload,
   getIntroVideoInputProps,
   getIntroVideoRootProps,
@@ -43,11 +54,40 @@ const DialogBoxes = ({
   storedBasicInfo,
   toggleDrawerUrl,
 }) => {
+  
+  const [cat, setCat] = useState([]);
+  const [categoryName, setCategoryName] = useState("");
   const onAddLink = (inputLink, inputName) => {
     handleAddLink(inputLink, inputName);
   };
+  const handleChange = (e) => {
+    setCategoryName(e?.target?.value?.test_name)
+    console.log(e , "ee")
+    // setSelectedCategory(e.target.value.category_id);
+  };
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: 200, // Set the maximum height
+        overflowY: "auto", // Enable scrolling for overflow
+      },
+    },
+  };
+  useEffect(() => {
+    getTest({
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setCat(userCallBack);
+      },
+      error: (error) => {
+        // toast.error(error.message);
+      },
+    });
+  }, []);
+
   return (
     <>
+    {console.log(cat, "cat")}
       <BootstrapDialog
         className="PopUP"
         onClose={handleCloseDialogIC}
@@ -212,159 +252,6 @@ const DialogBoxes = ({
           </Button>
         </Box>
       </BootstrapDialog>
-      {/* <BootstrapDialog
-        className="PopUP"
-        onClose={handleCloseDialogImg}
-        aria-labelledby="customized-dialog-title"
-        open={imgopened}
-      >
-        <DialogTitle
-          sx={{ m: 0, p: 2, fontSize: "1rem" }}
-          id="customized-dialog-title"
-        ></DialogTitle>
-        <IconButton
-          aria-label="close"
-          onClick={handleCloseDialogImg}
-          sx={{
-            position: "absolute",
-            right: 8,
-            top: 8,
-            color: (theme) => theme.palette.grey[500],
-          }}
-        >
-          <CloseIcon />
-        </IconButton>
-
-        <DialogContent>
-          <Box className="VideoBox">
-            <UploadFileRoundedIcon className="VideoIcon" />
-
-            <Box className="videoDottedBorder">
-              <Typography gutterBottom className="UploadDoc">
-                <b> Upload Image(s)</b>
-              </Typography>
-              <Typography className="VideoPara">
-                You can upload upto 20 files at a time. Maximum file size that
-                can be attached is 4 MB.
-              </Typography>
-
-              <div {...getIntroVideoRootProps({ className: "dropzone" })}>
-                <input {...getIntroVideoInputProps()} />
-                <Box className="thumbnailUpload buttonBOx">
-                  <Button
-                    variant="contained"
-                    className="SelectButton"
-                    // onClick={handleCreateTeam}
-                  >
-                    Select File(s)
-                  </Button>
-                  <Typography
-                    sx={{ marginTop: "3%" }}
-                    className="fontRecommend"
-                  >
-                    Recommended Image size :{" "}
-                    <b>800px x 600px, PNG or JPEG file</b>
-                  </Typography>
-                  <LoaderComponent loaderState={loaderState} />
-                  {imgUpload === "" && storedBasicInfo?.thumbnailPath && (
-                    <img
-                      src={storedBasicInfo?.thumbnailPath}
-                      width={140}
-                      height={"auto"}
-                    />
-                  )}
-                  {imgUpload != "" && (
-                    <img
-                      src={storedBasicInfo?.thumbnailPath}
-                      width={140}
-                      height={"auto"}
-                    />
-                  )}
-                </Box>
-              </div>
-            </Box>
-
-            <Box sx={{ marginTop: "12px" }}>Or</Box>
-            <CommonAddLinkField onAddLink={onAddLink} />
-          </Box>
-        </DialogContent>
-      </BootstrapDialog> */}
-      {/* <BootstrapDialog
-        className="PopUP"
-        onClose={handleCloseDialogZip}
-        aria-labelledby="customized-dialog-title"
-        open={zipopened}
-      >
-        <DialogTitle
-          sx={{ m: 0, p: 2, fontSize: "1rem" }}
-          id="customized-dialog-title"
-        ></DialogTitle>
-        <IconButton
-          aria-label="close"
-          onClick={handleCloseDialogZip}
-          sx={{
-            position: "absolute",
-            right: 8,
-            top: 8,
-            color: (theme) => theme.palette.grey[500],
-          }}
-        >
-          <CloseIcon />
-        </IconButton>
-
-        <DialogContent>
-          <Box className="VideoBox">
-            <UploadFileRoundedIcon className="VideoIcon" />
-            <Box className="videoDottedBorder">
-              <Typography gutterBottom className="UploadDoc">
-                <b> Upload Zip File(s)</b>
-              </Typography>
-              <Typography className="VideoPara">
-                You can upload upto 20 files at a time. Maximum file size that
-                can be attached is 40 MB.
-              </Typography>
-
-              <div {...getIntroVideoRootProps({ className: "dropzone" })}>
-                <input {...getIntroVideoInputProps()} />
-                <Box className="thumbnailUpload buttonBOx">
-                  <Button
-                    variant="contained"
-                    className="SelectButton"
-                    // onClick={handleCreateTeam}
-                  >
-                    Select File(s)
-                  </Button>
-                  <Typography
-                    sx={{ marginTop: "3%" }}
-                    className="fontRecommend"
-                  >
-                    Recommended Image size :{" "}
-                    <b>800px x 600px, PNG or JPEG file</b>
-                  </Typography>
-                  <LoaderComponent loaderState={loaderState} />
-                  {imgUpload === "" && storedBasicInfo?.thumbnailPath && (
-                    <img
-                      src={storedBasicInfo?.thumbnailPath}
-                      width={140}
-                      height={"auto"}
-                    />
-                  )}
-                  {imgUpload != "" && (
-                    <img
-                      src={storedBasicInfo?.thumbnailPath}
-                      width={140}
-                      height={"auto"}
-                    />
-                  )}
-                </Box>
-              </div>
-            </Box>
-
-            <Box sx={{ marginTop: "12px" }}>Or</Box>
-            <CommonAddLinkField onAddLink={onAddLink} />
-          </Box>
-        </DialogContent>
-      </BootstrapDialog> */}
 
       <BootstrapDialog
         className="PopUP"
@@ -442,6 +329,76 @@ const DialogBoxes = ({
           </Box>
         </DialogContent>
       </BootstrapDialog>
+
+      <BootstrapDialog
+        className="PopUP"
+        onClose={handleCloseDialogSubjectiveTest}
+        aria-labelledby="customized-dialog-title"
+        open={subtestopened}
+      >
+        <DialogTitle
+          sx={{ m: 0, p: 2, fontSize: "1rem" }}
+          id="customized-dialog-title"
+        ></DialogTitle>
+        <Typography sx={{mt: -2, ml:3, fontWeight: 600}}>
+        Add Subjective Test
+        </Typography>
+        <IconButton
+          aria-label="close"
+          onClick={handleCloseDialogSubjectiveTest}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 10,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+        <Divider sx={{mt:1}}/>
+        <DialogContent>
+          <Box>
+          <FormControl sx={{ width: 540 }}>
+              <Select
+               MenuProps={MenuProps}
+                value={categoryName!==""? categoryName : "fjng" }
+                renderValue={(v) => {
+                  console.log(categoryName,"categoryName")
+                  console.log(v,"categoryName")
+                  return categoryName !== "" ? (
+                    <Typography>{categoryName}</Typography>
+                  ) : (
+                    <Typography> Select Test</Typography>
+                  );
+                }}
+                onChange={(e) => handleChange(e)}
+                className="addCatTextField"
+                sx={{mt: 2}}
+              >
+                {cat.map((item) => (
+                  <MenuItem key={item._id} value={item} >
+                    {item.test_name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+        </DialogContent>
+        <DialogActions>
+                        <Button
+                          sx={{
+                            textTransform: "none",
+                            padding: "3px 0px",
+                            marginRight: "16px",
+                          }}
+                          variant="outlined"
+                          // onClick={handleConfigChanges}
+                        >
+                          Save
+                        </Button>
+        </DialogActions>
+      </BootstrapDialog>
+
       <BootstrapDialog
         className="PopUP"
         onClose={handleCloseDialogVideo}

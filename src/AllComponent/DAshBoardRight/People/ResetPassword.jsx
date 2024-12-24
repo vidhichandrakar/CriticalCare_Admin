@@ -11,6 +11,11 @@ import IconButton from "@mui/material/IconButton";
 import { Box, TableFooter, TextField } from "@mui/material";
 import { Formik, Form, useFormik } from "formik";
 import { isEmptyObject, isNotEmptyObject } from "../../../Util/CommonUtils";
+import { resetpass } from "../../ActionFactory/apiActions";
+import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import { Md5Converter } from "../../../Util/md5Convertor";
+import { ToastContainer, toast } from "react-toastify";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -32,22 +37,95 @@ function RedBar() {
   );
 }
 
-function ResetPassword({ handleClickClosereset, opened }) {
-  const registerUser = (type, value, path = "", inputValues) => {
-    const { OldPassword, NewPassword, ConfirmPassword } = inputValues;
-    const payload = {
-      user_name: OldPassword,
-      email_id: NewPassword,
-      phone_no: ConfirmPassword,
-    };
-    // createUser({ payload, callBack: (response) => {
-    //   // Toaster({message:"User created successfully"})
-    // },
-    // error:(error)=>{
-    // console.error(error);
-    // // Toaster({message:"Something went wrong!"});
-    // }});
-    // handleLoginOption(type, value, path);
+const ResetPassword = ({ handleClickClosereset, opened }) => {
+  const [oldPassword, setOldPassword] = useState("");
+  const [formData, setFormData] = useState({
+    newPassword: "",
+    confirmPassword: "",
+  });
+
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const userid = JSON.parse(localStorage.getItem("loggedInUser"));
+  const user_id = userid.user_id;
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+  const handleOldChange = (e) => {
+    setOldPassword(e.target.value);
+  };
+
+  const validatePassword = (password) => {
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*]/.test(password);
+
+    return (
+      password.length >= minLength &&
+      hasUpperCase &&
+      hasLowerCase &&
+      hasNumber &&
+      hasSpecialChar
+    );
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { newPassword, confirmPassword } = formData;
+
+    if (newPassword !== confirmPassword) {
+      toast.error("Passwords do not match.", {
+        autoClose: 1500,
+      });
+      return;
+    }
+
+    if (!validatePassword(newPassword)) {
+      toast.error(
+        "Password must be at least 8 characters long and include uppercase, lowercase, a number, and a special character.",
+        {
+          autoClose: 5000,
+        }
+      );
+      return;
+    }
+    if (oldPassword === newPassword) {
+      toast.error("NewPassWord does not match with OldPassWord", {
+        autoClose: 2000,
+      });
+      return;
+    }
+
+    setError("");
+
+    try {
+      const payload = {
+        oldPassword: Md5Converter(oldPassword),
+        newPassword: Md5Converter(newPassword),
+      };
+      resetpass({
+        payload,
+        user_id,
+        callBack: (response) => {
+          toast.success("Password changed Successful", {
+            autoClose: 1500,
+          });
+        },
+        error: (err) => {
+          toast.error("OldPassword do not match", {
+            autoClose: 1500,
+          });
+        },
+      });
+    } catch (err) {
+      toast.success("An error occurred. Please try again.", {
+        autoClose: 1500,
+      });
+    }
   };
 
   return (
@@ -80,30 +158,31 @@ function ResetPassword({ handleClickClosereset, opened }) {
         </IconButton>
 
         <DialogContent dividers>
-          <Formik
-            initialValues={{
-              OldPassword: "",
-              NewPassword: "",
-              ConfirmPassword: "",
-            }}
-            // validate={(data, nam) => {
-            //   let errorMsg = {};
-            //   let {
-            //     OldPassword,
-            //     NewPassword,
-            //     ConfirmPassword,
-            //   } = data;
-            //   if (!OldPassword) errorMsg.OldPassword = "OldPassword is mandatory";
-            //   if (!NewPassword) errorMsg.NewPassword = "Contact Number is mandatory";
-            //   if (!ConfirmPassword) errorMsg.ConfirmPassword = "Affiliation address is mandatory";
-
-            //   return errorMsg;
-            // }}
-            validateOnChange={true}
-            onSubmit={(submitData) => {}}
-          >
-            {(formik) => (
-              <Form onSubmit={formik.handleSubmit}>
+          <div style={{ display: "flex", justifyContent: "right" }}>
+            {error && <p style={{ color: "red" }}>{error}</p>}
+            {success && <p style={{ color: "green" }}>{success}</p>}
+            <form>
+              <div>
+                <TextField
+                  inputProps={{ className: "textField" }}
+                  sx={{
+                    textAlign: "center !important",
+                    minWidth: "35vw",
+                    //   marginTop: "15% !important",
+                  }}
+                  fullWidth
+                  size="small"
+                  className="BoxShadow"
+                  label="Old Password"
+                  type="password"
+                  id="oldPassword"
+                  name="oldPassword"
+                  value={oldPassword}
+                  onChange={handleOldChange}
+                  required
+                />
+              </div>
+              <div style={{ marginTop: "5%" }}>
                 <TextField
                   inputProps={{ className: "textField" }}
                   sx={{
@@ -112,70 +191,73 @@ function ResetPassword({ handleClickClosereset, opened }) {
                   }}
                   fullWidth
                   size="small"
-                  label="Old Password"
-                  type="password"
-                  id="fullWidth"
-                  name="OldPassword"
                   className="BoxShadow"
-                  value={formik.values.OldPassword}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
+                  label="New Password"
+                  type="password"
+                  id="newPassword"
+                  name="newPassword"
+                  value={formData.newPassword}
+                  onChange={handleChange}
+                  required
                 />
-                <RedBar />
+              </div>
+              <div style={{ marginTop: "5%" }}>
                 <TextField
-                  // inputProps={{ className: "textField" }}
-                  sx={{ textAlign: "center !important" }}
+                  inputProps={{ className: "textField" }}
+                  sx={{
+                    textAlign: "center !important",
+                    //   marginTop: "15% !important",
+                  }}
                   fullWidth
                   size="small"
-                  label="Enter Password"
-                  type="password"
-                  id="fullWidth"
-                  name="NewPassword"
                   className="BoxShadow"
-                  value={formik.values.NewPassword}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                />
-                <RedBar />
-                <TextField
-                  fullWidth
-                  // inputProps={{ maxLength: 10, className: "textField" }}
-                  size="small"
                   label="Confirm Password"
                   type="password"
-                  id="fullWidth"
-                  sx={{ textAlign: "center !important" }}
-                  value={formik.values.ConfirmPassword}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  name="ConfirmPassword"
-                  className="BoxShadow"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  required
                 />
-
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "right",
+                  marginTop: "5%",
+                }}
+              >
                 <Button
-                  sx={{ mt: 2 }}
-                  fullWidth
-                  variant="contained"
-                  disabled={isNotEmptyObject(formik.errors)}
-                  className="otpButton"
-                  onClick={() =>
-                    registerUser(
-                      "loggIn",
-                      formik.values.number,
-                      "signUp",
-                      formik.values
-                    )
-                  }
+                  variant="outlined"
+                  onClick={handleClickClosereset}
+                  sx={{
+                    borderColor: "red",
+                    color: "red",
+                    textTransform: "none",
+                    marginRight: "12px",
+                    padding: "3px 0px",
+                  }}
                 >
-                  Rest Password
+                  Cancel
                 </Button>
-              </Form>
-            )}
-          </Formik>
+                <Button
+                  variant="outlined"
+                  sx={{
+                    textTransform: "none",
+                    padding: "3px 0px",
+                  }}
+                  type="submit"
+                >
+                  Update
+                </Button>
+              </div>
+            </form>
+          </div>
         </DialogContent>
       </BootstrapDialog>
+      <ToastContainer />
     </div>
   );
-}
+};
 
 export default ResetPassword;

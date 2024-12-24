@@ -5,6 +5,7 @@ export const APIS = {
   allCourses: REACT_APP_API + "/course",
   allCoursesFilter: REACT_APP_API + "/course?",
   getCategory: REACT_APP_API + "/category",
+  getSubCategory: REACT_APP_API + "/category/subcategory",
   updateDuration: REACT_APP_API + "/duration",
   teamMember: REACT_APP_API + "/teamMember",
   updateMember: REACT_APP_API + "/teamMember",

@@ -54,6 +54,7 @@ function Configuration({
   handleCloseCat,
   selectedConfigValue,
   category_id = 0,
+  catdata,
 }) {
   const theme = useTheme();
   const [updatedCat, setUpdatedCat] = useState({ category_name: "" });
@@ -175,7 +176,7 @@ function Configuration({
     if (selectedConfigValue === "SubCategory") {
       getCategory({
         callBack: (response) => {
-          const userCallBack = response?.data;
+          const userCallBack = response;
           setCat(userCallBack);
         },
         error: (error) => {
@@ -387,6 +388,7 @@ function Configuration({
   
   return (
     <React.Fragment>
+       {console.log(cat, "cat")}
       <Dialog
         open={hideCatConfig}
         onClose={handleCloseCat}
@@ -486,11 +488,12 @@ function Configuration({
                   )}
                   <FormControl sx={{ width: 540 }}>
                     <Select
-                      value={cat.category_name}
+                      value={catdata.category_name}
                       onChange={(e) => handleChange(e)}
                       className="addCatTextField "
                     >
-                      {cat.map((item) => (
+                    
+               {catdata.map((item) => (
                         <MenuItem key={item._id} value={item}>
                           {item.category_name}
                         </MenuItem>
