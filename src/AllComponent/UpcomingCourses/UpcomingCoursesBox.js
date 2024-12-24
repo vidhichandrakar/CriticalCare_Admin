@@ -92,9 +92,7 @@ const UpcomingCourseBox = ({}) => {
       };
       getBlog({
         payload,
-        callBack: (response) => {
-          console.log(response, "BLogresopnseesses");
-        },
+        callBack: (response) => {},
       });
     }
   };

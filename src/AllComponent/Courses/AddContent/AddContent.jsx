@@ -28,6 +28,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import { useNavigate } from "react-router-dom";
 import { getCourseContentById } from "../../ActionFactory/apiActions";
 import { ToastContainer, toast } from "react-toastify";
+import { isNotEmptyObject } from "../../../Util/CommonUtils";
 
 function AddContent({
   handleInputChange,
@@ -77,15 +78,20 @@ function AddContent({
       getCourseContentById({
         courseId: courseData?.course_id,
         callBack: (response) => {
-          let storedValues = Object.assign({}, moduleDescription);
-          storedValues = response.data.moduleDetails;
-          setModuleDescription(storedValues);
+          if (!isNotEmptyObject(response.data)) {
+            return moduleDescription;
+          } else {
+            let storedValues = Object.assign({}, moduleDescription);
+            storedValues = response.data.moduleDetails;
+            setModuleDescription(storedValues);
+          }
         },
         error: (error) => {
           toast.error(error.message);
         },
       });
     }
+
     getContentType({
       callBack: (response) => {
         setContentType(response.data);
@@ -436,14 +442,13 @@ function AddContent({
                   <Grid container spacing={2} direction="row" wrap="wrap">
                     {itemContent?.contents?.Video?.data?.length ? (
                       <>
-                        {" "}
                         {itemContent?.contents?.Video?.data?.map((item) => (
                           <Grid item xs={12} sm={6} md={4} key={index}>
-                            {console.log("checking")}
                             <Card sx={{ maxWidth: 345, padding: "5px" }}>
                               <CardActionArea>
                                 {isYouTubeLink(item?.content_url) ? (
                                   // Render YouTube video with thumbnail
+
                                   <CardMedia
                                     component="iframe"
                                     height="200"
@@ -484,7 +489,6 @@ function AddContent({
                       </>
                     ) : (
                       <>
-                        {" "}
                         <Box className="noContent">
                           <img
                             src={attachmentimgae}
@@ -519,7 +523,6 @@ function AddContent({
                       <>
                         {itemContent?.contents?.Document?.data?.map((item) => (
                           <Grid item xs={12} sm={6} md={4} key={index}>
-                            {console.log("ppopopo")}
                             <Card sx={{ maxWidth: 345, padding: "5px" }}>
                               <CardActionArea>
                                 {isPdfFile(item.content_url) ? (
@@ -554,7 +557,6 @@ function AddContent({
                       </>
                     ) : (
                       <>
-                        {" "}
                         <Box>
                           <img
                             src={attachmentimgae}
@@ -598,7 +600,6 @@ function AddContent({
             </Accordion>
           </div>
         ))}
-
         <Button
           onClick={handleAddModule}
           sx={{
