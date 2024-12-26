@@ -294,13 +294,9 @@ const TestPortal = () => {
     } else if (type === "Hours") {
       storedValues.hours = value;
     } else if (type === "From") {
-      storedValues.from = moment(new Date(value)).format(
-        "MMMM Do YYYY, hh:mm:ss"
-      );
+      storedValues.from = value;
     } else if (type === "To") {
-      storedValues.to = moment(new Date(value)).format(
-        "MMMM Do YYYY, hh:mm:ss"
-      );
+      storedValues.to = value;
     }
     setAddTest(storedValues);
   };
@@ -313,6 +309,7 @@ const TestPortal = () => {
       active_duration_from: addTest.from,
       active_duration_to: addTest.to,
     };
+    console.log("Datee", addTest);
     createTestPortal({
       payload,
       callBack: (response) => {
@@ -334,19 +331,6 @@ const TestPortal = () => {
   const handleEdit = () => {
     const testId = openId;
     navigate("/admin/TestFirstPage", { state: { id: openId } });
-
-    // getTestByID({
-    //   testId,
-    //   callBack: (response) => {
-    //     // toast.success("");
-    //     const data = response.data;
-    //     let storedValues = Object.assign({}, addTest);
-    //     storedValues.testName = data?.test_name;
-    //     storedValues.testDuration = data?.duration_minute;
-    //     storedValues.hours = data?.duration_hour;
-    //     setAddTest(storedValues);
-    //   },
-    // });
   };
   return (
     <div className="grid-container">
@@ -358,36 +342,7 @@ const TestPortal = () => {
       <div className="main-container">
         <LoaderComponent loaderState={loaderState} />
         <div className="testPortalSearchBarSection">
-          <div className="searchnfilter">
-            {/* <div className="wid100">
-              <Paper
-                component="form"
-                sx={{
-                  ml: 0,
-                  mt: "41px",
-                  mb: "15px",
-                  display: "flex",
-                  alignItems: "center",
-                  backgroundColor: "#e4e4e459",
-                  borderRadius: "10px",
-                }}
-              >
-                <IconButton sx={{ p: "10px" }} aria-label="menu">
-                  <SearchIcon />
-                </IconButton>
-                <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-                <InputBase
-                  sx={{ ml: 1, flex: 1 }}
-                  placeholder="Search your course by name"
-                  inputProps={{ "aria-label": "search your course by name" }}
-                />
-              </Paper>
-            </div>
-            Temprory commented this searchbar and filter so don't dare to remove this
-            <Button className="filterButton mt43">
-              <FilterAltIcon /> Filter
-            </Button> */}
-          </div>
+          <div className="searchnfilter"></div>
 
           <Button
             className="width13 addTestimonialButton"
@@ -436,11 +391,7 @@ const TestPortal = () => {
               <Typography gutterBottom sx={{ mt: 2, mb: 2 }}>
                 Test Duration
               </Typography>
-              <Box
-                style={{ display: "flex", width: "100%" }}
-                // className="FlexRow"
-                sx={{ mt: -1 }}
-              >
+              <Box style={{ display: "flex", width: "100%" }} sx={{ mt: -1 }}>
                 <Typography className="FlexRow">
                   <TextField
                     inputProps={{ className: "textField" }}
@@ -455,7 +406,6 @@ const TestPortal = () => {
                       handleInput(e.target.value, "TestDuration")
                     }
                   />
-                  {/* <p className="TimeText"> Hour </p> */}
                 </Typography>
                 <Typography className="FlexRow">
                   <TextField
@@ -470,7 +420,6 @@ const TestPortal = () => {
                     type="hours"
                     onChange={(e) => handleInput(e.target.value, "Hours")}
                   />{" "}
-                  {/* <p className="TimeText">Minute</p> */}
                 </Typography>
               </Box>
             </DialogContent>
@@ -660,7 +609,6 @@ const TestPortal = () => {
                     onPageChange={handleChangePage}
                     onRowsPerPageChange={handleChangeRowsPerPage}
                     ActionsComponent={TablePaginationActions}
-                    // className="Pagination"
                   />
                 </TableFooter>
               )}
