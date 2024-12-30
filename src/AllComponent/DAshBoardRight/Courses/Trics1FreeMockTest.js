@@ -160,7 +160,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
               </p>
               <hr />
               <p className="blackPara">Description</p>
-              <TextField
+              {/* <TextField
                 sx={{ mt: -2 }}
                 inputProps={{ className: "textField" }}
                 fullWidth
@@ -170,7 +170,11 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                 className="DescBoxShadow "
                 variant="standard"
                 value={tripmHtmlTagsToNormalFormat(courseData?.description)}
-              />
+              /> */}
+               <p className="greyPara">
+                {tripmHtmlTagsToNormalFormat(courseData?.description)}
+              </p>
+              <hr />
               <div className="PricenOfferPrice">
                 <div>
                   <p className="blackPara">Price</p>
