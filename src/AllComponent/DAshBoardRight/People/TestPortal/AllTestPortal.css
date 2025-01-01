@@ -437,12 +437,19 @@
     height: 39px;
     /* margin-top: 14px; */
 }
+.deleteComponent{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+}
 
 .deleteIconSixthPage{
-    font-size: 1rem !important;
-    margin-bottom: -3px;
-    margin-left: 41px;
-    margin-right: 7px;
+    /* font-size: 1rem !important; */
+    /* margin-top: 3px; */
+    margin-left: 10px;
+    /* margin-right: 7px; */
     cursor: pointer;
 }
 .borderingOptions{

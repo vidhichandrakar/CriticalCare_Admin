@@ -618,12 +618,13 @@ export const getBlog = ({ payload, callBack, error }) => {
 };
 
 export const getBlogs = ({ callBack, error }) => {
-  console.log("workoing")
   const url = APIS.addBlog;
-  axios.get(url).then((response) => {
-    callBack(response);
-  }).catch((errorMessage) => {
-  });
+  axios
+    .get(url)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {});
 };
 
 export const deleteBlog = ({ bloglist_id, callBack }) => {

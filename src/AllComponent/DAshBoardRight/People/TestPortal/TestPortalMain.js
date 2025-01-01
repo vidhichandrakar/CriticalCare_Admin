@@ -30,6 +30,8 @@ import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
 import LoaderComponent from "../../../../Util/LoaderComponent";
 import CustomTextEditor from "../../../../Util/CustomTextEditor";
+import ReactQuill from "react-quill";
+import EditIcon from "@mui/icons-material/Edit";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const AntSwitch = styled(Switch)(({ theme }) => ({
@@ -104,6 +106,7 @@ function TestPortalMain() {
   const [open, setOpen] = useState(false);
   const [editedQuestion, setEditedQuestion] = useState();
   const [openAddOptions, setAddOptions] = useState(false);
+  const [openeditoptions, setOpeneditoptions] = useState(false);
   const [addOptionText, setAddOptionText] = useState("");
   const [typesOfQns, setTypesOfQns] = useState("");
   const [selectedTypeQns, setSelectedTypeQns] = useState("single-select");
@@ -113,6 +116,7 @@ function TestPortalMain() {
   const [selectedTypeNId, setSelectedTypeNId] = useState();
   const [addNewSectionNav, setAddNewSectionNav] = useState();
   const [content, setContent] = useState("");
+  const [editpopup, setEditpopup] = useState("")
 
   const handleClickOpen = (editedQns, index) => {
     setEditedQuestion(editedQns);
@@ -324,11 +328,12 @@ function TestPortalMain() {
 
   const handleEditQestion = (e) => {
     let editedTextQuestion = Object.assign({}, editedQuestion);
-    editedTextQuestion.question_text = e.target.value;
+    editedTextQuestion.question_text = e;
+    console.log(e, "e");
     setEditedQuestion(editedTextQuestion);
   };
 
-  const handleRadioOptionChanges = (e, option_id) => {
+  const handleRadioOptionChanges = (e, editpopup, option_id) => {
     let editedOptionText = Object.assign({}, editedQuestion);
     editedOptionText?.question_options.map((option) => {
       if (option.option_id === option_id) {
@@ -345,6 +350,14 @@ function TestPortalMain() {
     );
     deletedOption.question_options = upatedOptions;
     setEditedQuestion(deletedOption);
+  };
+
+  const handleEditOption = (index, option_text, option_id) => {
+    setOpeneditoptions(true);
+    setEditpopup(option_text);
+  };
+  const handleCloseDialogForEdit = () => {
+    setOpeneditoptions(false);
   };
 
   const handleAddOptionPop = (e) => {
@@ -769,13 +782,30 @@ function TestPortalMain() {
               </div>
             </div>
           </div>
-
+          {/* 
           <TextField
             className="thisIsMCQBtn"
             id="outlined-helperText"
             defaultValue="This is an MCQ question"
             value={editedQuestion?.question_text}
             onChange={(e) => handleEditQestion(e)}
+          /> */}
+          <ReactQuill
+            value={editedQuestion?.question_text}
+            onChange={(e) => handleEditQestion(e)}
+            defaultValue="This is an MCQ question"
+            className="thisIsMCQBtn"
+            id="outlined-helperText"
+            fullWidth
+            modules={{
+              toolbar: [
+                [{ header: "1" }, { header: "2" }],
+                [{ list: "ordered" }, { list: "bullet" }],
+                ["bold", "italic", "underline", "strike"],
+                [{ color: [] }, { background: [] }],
+                [{ align: [] }]
+              ],
+            }}
           />
 
           <FormControl>
@@ -832,17 +862,20 @@ function TestPortalMain() {
                             handleRadioOptionChanges(e, item.option_id)
                           }
                         />
-
                         <div className="deleteComponent">
-                          <h5
+                          <EditIcon
+                            className="deleteIconSixthPage"
+                            onClick={(e) =>
+                              handleEditOption(index, item.option_text, item.option_id)
+                            }
+                          />
+
+                          <DeleteIcon
+                            className="deleteIconSixthPage"
                             onClick={(e) =>
                               handleDeleteOption(index, item.option_id)
                             }
-                            style={{ cursor: "pointer" }}
-                          >
-                            <DeleteIcon className="deleteIconSixthPage" />
-                            Delete
-                          </h5>
+                          />
                         </div>
                       </div>
                     );
@@ -900,7 +933,62 @@ function TestPortalMain() {
             Add New option
           </Button>
           <div>
-            {" "}
+            <BootstrapDialog
+              className="optionsFeid"
+              onClose={handleCloseDialogForEdit}
+              aria-labelledby="customized-dialog-title"
+              open={openeditoptions}
+            >
+              <DialogTitle
+                sx={{ m: 0, p: 2, fontSize: "1rem" }}
+                id="customized-dialog-title"
+              >
+                Edit Option
+              </DialogTitle>
+              <IconButton
+                aria-label="close"
+                onClick={handleCloseDialogForEdit}
+                sx={{
+                  position: "absolute",
+                  right: 8,
+                  top: 8,
+                  color: (theme) => theme.palette.grey[500],
+                }}
+              >
+                <CloseIcon />
+              </IconButton>
+
+              <DialogContent dividers>
+                <ReactQuill
+                  value={editpopup}
+                  onChange={(e) =>
+                    handleRadioOptionChanges(e, editpopup)
+                  }
+                  defaultValue="This is an MCQ question"
+                  className="thisIsMCQBtn"
+                  id="outlined-helperText"
+                  fullWidth
+                  modules={{
+                    toolbar: [
+                      [{ header: "1" }, { header: "2" }],
+                      [{ list: "ordered" }, { list: "bullet" }],
+                      ["bold", "italic", "underline", "strike"],
+                      [{ color: [] }, { background: [] }],
+                      [{ align: [] }],
+                    ],
+                  }}
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  variant="contained"
+                  className="CreateBtn"
+                  onClick={(e) => handleAddOption(e)}
+                >
+                  Update
+                </Button>
+              </DialogActions>
+            </BootstrapDialog>
             <BootstrapDialog
               className="optionsFeid"
               onClose={handleCloseDialogForAdd}

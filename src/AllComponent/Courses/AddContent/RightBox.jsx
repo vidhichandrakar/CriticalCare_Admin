@@ -118,7 +118,7 @@ const RightBox = ({
     let arr2 = {
       content_name: "",
       content_url: "",
-      content_type: "",
+      content_type_name: "",
       content_type_id: "",
     };
     arr2.content_name = inputNameValue;

@@ -27,7 +27,7 @@ import IconButton from "@mui/material/IconButton";
 import yellowEnvlope from "../../../Media/Images/yellowEnvlope.jpeg";
 import Header from "../../Courses/Header";
 import { Typography } from "@material-ui/core";
-import { tripmHtmlTagsToNormalFormat } from "../../../Util/CommonHtmlTagsToTextConvertor";
+import { tripmHtmlTagsToNormalFormat, tripmHtmlTagsToNormalFormatinside } from "../../../Util/CommonHtmlTagsToTextConvertor";
 
 const Trics1FreeMockTest = ({ onDelete }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -159,7 +159,12 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                 {capitalizeFirstLetter(courseData?.course_name)}
               </p>
               <hr />
+             
               <p className="blackPara">Description</p>
+              <p className="greyPara">
+              {tripmHtmlTagsToNormalFormatinside(courseData?.description)}
+              </p>
+              <hr />
               {/* <TextField
                 sx={{ mt: -2 }}
                 inputProps={{ className: "textField" }}
@@ -171,10 +176,6 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                 variant="standard"
                 value={tripmHtmlTagsToNormalFormat(courseData?.description)}
               /> */}
-               <p className="greyPara">
-                {tripmHtmlTagsToNormalFormat(courseData?.description)}
-              </p>
-              <hr />
               <div className="PricenOfferPrice">
                 <div>
                   <p className="blackPara">Price</p>

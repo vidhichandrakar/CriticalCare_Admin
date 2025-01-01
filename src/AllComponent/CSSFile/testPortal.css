@@ -79,7 +79,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin: 1%;
+    margin: 1px;
     width: 100%;
 }
 .testsectionnameMainBox{
