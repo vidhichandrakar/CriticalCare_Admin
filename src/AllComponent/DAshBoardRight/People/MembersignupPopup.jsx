@@ -12,7 +12,12 @@ import { Box, TableFooter, TextField } from "@mui/material";
 import { Formik, Form, useFormik } from "formik";
 import { isEmptyObject, isNotEmptyObject } from "../../../Util/CommonUtils";
 import { Md5Converter } from '../../../Util/md5Convertor';
-import { adminLogin } from '../../ActionFactory/apiActions';
+import { adminLogin, getUserType } from '../../ActionFactory/apiActions';
+import { useEffect } from 'react';
+import { useState } from 'react';
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     "& .MuiDialogContent-root": {
@@ -35,6 +40,9 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   }
 
 function MembersignupPopup({handleCloseDialog, opened}) {
+  const [cat, setCat] = useState("")
+  const [userType, setUserType] = useState("")
+  const [userTypeeid, setUserTypeid] = useState("")
   const registerUser = (type, value, path = "", inputValues) => {
     const { Name, emailId, number, hospitalName, qualification, affillation } = inputValues;
     console.log("password",Md5Converter(number))
@@ -48,7 +56,7 @@ function MembersignupPopup({handleCloseDialog, opened}) {
       qualification: qualification,
       password:password,
       user_photo:"photo",
-      user_type_id:2,
+      user_type_id: userTypeeid,
       block:"N"//by default "N"
     };
     adminLogin({ payload, callBack: (response) => {
@@ -59,7 +67,28 @@ function MembersignupPopup({handleCloseDialog, opened}) {
     // Toaster({message:"Something went wrong!"});
     }});
     // handleLoginOption(type, value, path);
+    handleCloseDialog();
+    window.location.reload()
   };
+
+   useEffect(() => {
+    getUserType({
+         callBack: (response) => {
+           const userCallBack = response?.data;
+           setCat(userCallBack);
+         },
+         error: (error) => {
+          //  toast.error(error.message);
+         },
+       });
+     }, []);
+
+     const handleChange = (e) => {
+      setUserType(e.target.value.user_type_text)
+      console.log(e, "ee")
+      setUserTypeid(e.target.value.user_type_id);
+      console.log(e.target.value.user_type_id , "vbvb");
+    };
   
   return (
     <div>
@@ -224,6 +253,26 @@ function MembersignupPopup({handleCloseDialog, opened}) {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
+              <FormControl sx={{ width: 565 }}>
+              <Select
+                value={userType!==""? userType : "fjng" }
+                renderValue={() => {
+                  return userType !== "" ? (
+                    <Typography>{userType}</Typography>
+                  ) : (
+                    <Typography> Select User Role</Typography>
+                  );
+                }}
+                onChange={(e) => handleChange(e)}
+                className="addCatTextField"
+              >
+                {cat.map((item) => (
+                  <MenuItem key={item._id} value={item}>
+                    {item.user_type_text}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
               
               {/* <Button
               sx={{mt: 2}}

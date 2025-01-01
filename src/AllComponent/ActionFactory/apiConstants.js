@@ -34,4 +34,5 @@ export const APIS = {
   getCoupon: REACT_APP_API + "/coupon",
   deleteBlog: REACT_APP_API + "/blog/bloglist",
   getModuleContentCount: REACT_APP_API + "/course/module",
+  getUserType:  REACT_APP_API + "/user/type"
 };

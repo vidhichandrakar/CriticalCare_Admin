@@ -886,7 +886,7 @@ function TestPortalMain() {
               <>
                 {editedQuestion?.question_options?.map((item, index) => {
                   return (
-                    <div className="deleteComponent">
+                    
                       <Box className="CheckBOx">
                         <Checkbox
                           onChange={(e) =>
@@ -908,17 +908,32 @@ function TestPortalMain() {
                             handleRadioOptionChanges(e, item.option_id)
                           }
                         />
-                        <h5
+                        <div className="deleteComponent">
+                          <EditIcon
+                            className="deleteIconSixthPage"
+                            onClick={(e) =>
+                              handleEditOption(index, item.option_text, item.option_id)
+                            }
+                          />
+
+                          <DeleteIcon
+                            className="deleteIconSixthPage"
+                            onClick={(e) =>
+                              handleDeleteOption(index, item.option_id)
+                            }
+                          />
+                        </div>
+                        {/* <Box
                           onClick={(e) =>
                             handleDeleteOption(index, item.option_id)
                           }
-                          style={{ cursor: "pointer" }}
+                          style={{ cursor: "pointer", alignItems: "center", display: "flex" }}
                         >
                           <DeleteIcon className="deleteIconSixthPage" />
                           Delete
-                        </h5>
+                        </Box> */}
                       </Box>
-                    </div>
+                    
                   );
                 })}
               </>
@@ -961,9 +976,9 @@ function TestPortalMain() {
               <DialogContent dividers>
                 <ReactQuill
                   value={editpopup}
-                  onChange={(e) =>
-                    handleRadioOptionChanges(e, editpopup)
-                  }
+                  // onChange={(e) =>
+                  //   handleRadioOptionChanges(e, editpopup)
+                  // }
                   defaultValue="This is an MCQ question"
                   className="thisIsMCQBtn"
                   id="outlined-helperText"
@@ -1039,12 +1054,12 @@ function TestPortalMain() {
             </BootstrapDialog>
           </div>
 
-          <p>Solution</p>
+          {/* <p>Solution</p>
           <TextField
             className="thisIsMCQBtn"
             id="outlined-helperText"
             defaultValue="Enter detailed solution for your students"
-          />
+          /> */}
         </DialogContent>
       </BootstrapDialog>
       <BootstrapDialog
