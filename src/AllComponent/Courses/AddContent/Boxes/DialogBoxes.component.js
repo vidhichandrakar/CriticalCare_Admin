@@ -56,15 +56,16 @@ const DialogBoxes = ({
 }) => {
   
   const [cat, setCat] = useState([]);
+  // const handleChange = (e) => {
+  //   setCategoryName(e?.target?.value?.test_name)
+  //   console.log(e , "ee")
+  //   // setSelectedCategory(e.target.value.category_id);
+  // };
   const [categoryName, setCategoryName] = useState("");
   const onAddLink = (inputLink, inputName) => {
     handleAddLink(inputLink, inputName);
   };
-  const handleChange = (e) => {
-    setCategoryName(e?.target?.value?.test_name)
-    console.log(e , "ee")
-    // setSelectedCategory(e.target.value.category_id);
-  };
+ 
   const MenuProps = {
     PaperProps: {
       style: {
@@ -73,17 +74,7 @@ const DialogBoxes = ({
       },
     },
   };
-  useEffect(() => {
-    getTest({
-      callBack: (response) => {
-        const userCallBack = response?.data;
-        setCat(userCallBack);
-      },
-      error: (error) => {
-        // toast.error(error.message);
-      },
-    });
-  }, []);
+
 
   return (
     <>
@@ -330,7 +321,7 @@ const DialogBoxes = ({
         </DialogContent>
       </BootstrapDialog>
 
-      <BootstrapDialog
+      {/* <BootstrapDialog
         className="PopUP"
         onClose={handleCloseDialogSubjectiveTest}
         aria-labelledby="customized-dialog-title"
@@ -397,7 +388,7 @@ const DialogBoxes = ({
                           Save
                         </Button>
         </DialogActions>
-      </BootstrapDialog>
+      </BootstrapDialog> */}
 
       <BootstrapDialog
         className="PopUP"

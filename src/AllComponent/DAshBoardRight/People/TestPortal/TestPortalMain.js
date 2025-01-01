@@ -961,8 +961,7 @@ function TestPortalMain() {
               <DialogContent dividers>
                 <ReactQuill
                   value={editpopup}
-                  onChange={(e) =>
-                    handleRadioOptionChanges(e, editpopup)
+                  onChange={(e) =>{}
                   }
                   defaultValue="This is an MCQ question"
                   className="thisIsMCQBtn"
