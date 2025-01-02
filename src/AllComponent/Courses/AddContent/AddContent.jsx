@@ -10,6 +10,12 @@ import {
   CardContent,
 } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
+
+import { DialogActions } from "@material-ui/core";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 import AccordionActions from "@mui/material/AccordionActions";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -20,6 +26,8 @@ import RightBox from "./RightBox";
 import {
   addContentOnCreateCourse,
   getContentType,
+  getTest,
+  updateTestPortal,
 } from "../../ActionFactory/apiActions";
 import attachmentimgae from "../../../Media/Images/undraw_attached_file_re_0n9b.svg";
 import NoteIcon from "@mui/icons-material/Note";
@@ -29,6 +37,20 @@ import { useNavigate } from "react-router-dom";
 import { getCourseContentById } from "../../ActionFactory/apiActions";
 import { ToastContainer, toast } from "react-toastify";
 import { isNotEmptyObject } from "../../../Util/CommonUtils";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import Divider from "@mui/material/Divider";
+import Dialog from "@mui/material/Dialog";
+import { styled } from "@mui/material/styles";
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  "& .MuiDialogContent-root": {
+    padding: theme.spacing(2),
+  },
+  "& .MuiDialogActions-root": {
+    padding: theme.spacing(1),
+  },
+}));
 
 function AddContent({
   handleInputChange,
@@ -72,7 +94,41 @@ function AddContent({
       },
     },
   ]);
-
+const [cat, setCat] = useState([]);
+const [ selectedTestId, setSelectedTestId] = useState("")
+  const [subtestopened, setSubtestopen] = useState(false);
+const handleopenDialogSubjectiveTest = () => {
+  setSubtestopen(true);
+};
+const handleCloseDialogSubjectiveTest = () => {
+  setSubtestopen(false);
+};
+  const handleChange = (e) => {
+    setCategoryName(e?.target?.value?.test_name)
+    console.log(e , "ee")
+    setSelectedTestId(e?.target?.value?.test_id)
+    // setSelectedCategory(e.target.value.category_id);
+  };
+  
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: 200, // Set the maximum height
+        overflowY: "auto", // Enable scrolling for overflow
+      },
+    },
+  };
+  const [categoryName, setCategoryName] = useState("");
+  const handleSaveTest =()=>{
+    console.log(categoryName)
+    const payload={course_id:courseData?.course_id}
+    updateTestPortal({
+      payload,
+      testId:selectedTestId,
+      callBack:()=>{},
+      error:()=>{}
+    })
+  }
   useEffect(() => {
     if (courseData?.course_id) {
       getCourseContentById({
@@ -98,7 +154,17 @@ function AddContent({
       },
     });
   }, [courseData]);
-
+  useEffect(() => {
+    getTest({
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setCat(userCallBack);
+      },
+      error: (error) => {
+        // toast.error(error.message);
+      },
+    });
+  }, []);
   const handleAddContent = (event, idx) => {
     event.stopPropagation();
     if (idx !== expanded) {
@@ -610,6 +676,17 @@ function AddContent({
         >
           Add Module
         </Button>
+        <Button
+          onClick={handleopenDialogSubjectiveTest}
+          sx={{
+            position: "absolute",
+            bottom: 30,
+            marginLeft:"10%"
+          }}
+          variant="contained"
+        >
+          Add Test
+        </Button>
         <Box>
           <Button
             onClick={handleSaveAllAttachedModule}
@@ -637,6 +714,75 @@ function AddContent({
           Exit
         </Button>
       </div>
+         <BootstrapDialog
+        className="PopUP"
+        onClose={handleCloseDialogSubjectiveTest}
+        aria-labelledby="customized-dialog-title"
+        open={subtestopened}
+      >
+        <DialogTitle
+          sx={{ m: 0, p: 2, fontSize: "1rem" }}
+          id="customized-dialog-title"
+        ></DialogTitle>
+        <Typography sx={{mt: -2, ml:3, fontWeight: 600}}>
+        Add Subjective Test
+        </Typography>
+        <IconButton
+          aria-label="close"
+          onClick={handleCloseDialogSubjectiveTest}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 10,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+        <Divider sx={{mt:1}}/>
+        <DialogContent>
+          <Box>
+          <FormControl sx={{ width: 540 }}>
+              <Select
+               MenuProps={MenuProps}
+                value={categoryName!==""? categoryName : "fjng" }
+                renderValue={(v) => {
+                  console.log(categoryName,"categoryName")
+                  console.log(v,"categoryName")
+                  return categoryName !== "" ? (
+                    <Typography>{categoryName}</Typography>
+                  ) : (
+                    <Typography> Select Test</Typography>
+                  );
+                }}
+                onChange={(e) => handleChange(e)}
+                className="addCatTextField"
+                sx={{mt: 2}}
+              >
+                {cat.map((item) => (
+                  <MenuItem key={item._id} value={item} >
+                    {item.test_name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+        </DialogContent>
+        <DialogActions>
+                        <Button
+                          sx={{
+                            textTransform: "none",
+                            padding: "3px 0px",
+                            marginRight: "16px",
+                          }}
+                          variant="outlined"
+                          onClick={handleSaveTest}
+                        >
+                          Save
+                        </Button>
+        </DialogActions>
+      </BootstrapDialog>
+
     </>
   );
 }

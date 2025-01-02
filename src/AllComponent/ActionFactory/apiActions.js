@@ -434,7 +434,17 @@ export const createTestPortal = ({ payload, callBack, error }) => {
       // error(errorMessage);
     });
 };
-
+export const updateTestPortal = ({ payload,testId, callBack, error }) => {
+  const url = APIS.getTest+"/"+testId;
+  axios
+    .put(url, payload)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      // error(errorMessage);
+    });
+};
 export const deleteTestPortal = ({ userId, callBack, error }) => {
   const url = APIS.getTest + "/" + userId;
   axios

@@ -32,6 +32,7 @@ import LoaderComponent from "../../../../Util/LoaderComponent";
 import CustomTextEditor from "../../../../Util/CustomTextEditor";
 import ReactQuill from "react-quill";
 import EditIcon from "@mui/icons-material/Edit";
+import { tripmHtmlTagsToNormalFormatinside } from "../../../../Util/CommonHtmlTagsToTextConvertor";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 const AntSwitch = styled(Switch)(({ theme }) => ({
@@ -333,16 +334,25 @@ function TestPortalMain() {
     setEditedQuestion(editedTextQuestion);
   };
 
-  const handleRadioOptionChanges = (e, editpopup, option_id) => {
+  const handleRadioOptionChanges = (e) => {
     let editedOptionText = Object.assign({}, editedQuestion);
     editedOptionText?.question_options.map((option) => {
-      if (option.option_id === option_id) {
-        option.option_text = e.target.value;
+      if (option.option_id === selectedOptionId) {
+        option.option_text = e;
       }
     });
     setEditedQuestion(editedOptionText);
   };
-
+  const handleOptionEditorChange=(e)=>{
+    let editedOptionText = Object.assign({}, editedQuestion);
+    editedOptionText?.question_options.map((option) => {
+      if (option.option_id === selectedOptionId) {
+        option.option_text = e;
+      }
+      
+    });
+    setEditedQuestion(editedOptionText);
+  }
   const handleDeleteOption = (index, option) => {
     let deletedOption = Object.assign({}, editedQuestion);
     const upatedOptions = editedQuestion.question_options.filter(
@@ -351,10 +361,11 @@ function TestPortalMain() {
     deletedOption.question_options = upatedOptions;
     setEditedQuestion(deletedOption);
   };
-
+  const [selectedOptionId, setSelectedOptionId] = useState("")
   const handleEditOption = (index, option_text, option_id) => {
     setOpeneditoptions(true);
     setEditpopup(option_text);
+    setSelectedOptionId(option_id)
   };
   const handleCloseDialogForEdit = () => {
     setOpeneditoptions(false);
@@ -853,7 +864,7 @@ function TestPortalMain() {
                           name="radio-buttons"
                           inputProps={{ "aria-label": "A" }}
                         />
-                        <TextField
+                        {/* <TextField
                           className="optionsFeid"
                           id="outlined-helperText"
                           defaultValue="Option 1"
@@ -861,7 +872,8 @@ function TestPortalMain() {
                           onChange={(e) =>
                             handleRadioOptionChanges(e, item.option_id)
                           }
-                        />
+                        /> */}
+                        <Box  className="optionsFeid">{tripmHtmlTagsToNormalFormatinside(item.option_text)}</Box>
                         <div className="deleteComponent">
                           <EditIcon
                             className="deleteIconSixthPage"
@@ -976,20 +988,19 @@ function TestPortalMain() {
               <DialogContent dividers>
                 <ReactQuill
                   value={editpopup}
-                  // onChange={(e) =>
-                  //   handleRadioOptionChanges(e, editpopup)
-                  // }
+                  onChange={(e)=>handleOptionEditorChange(e)}
                   defaultValue="This is an MCQ question"
                   className="thisIsMCQBtn"
                   id="outlined-helperText"
                   fullWidth
                   modules={{
                     toolbar: [
-                      [{ header: "1" }, { header: "2" }],
+                      [ "paragraph"],
                       [{ list: "ordered" }, { list: "bullet" }],
                       ["bold", "italic", "underline", "strike"],
                       [{ color: [] }, { background: [] }],
                       [{ align: [] }],
+                      ["image"]
                     ],
                   }}
                 />
