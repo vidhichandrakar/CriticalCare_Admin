@@ -49,6 +49,7 @@ import { DailogBox } from "../../../Util/CommonFields";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Divider from "@mui/material/Divider";
+import StudentRegisterPopup from "./StudentRegisterPopup";
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -135,6 +136,12 @@ const User = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredItems, setFilteredItems] = useState();
+  const [opened, setOpen] = useState(false);
+  const [addTeam, setAddTeam] = useState({
+      memberName: "",
+      emailID: "",
+      PhoneNo: "",
+    });
 
   const navigate = useNavigate();
 
@@ -288,6 +295,21 @@ const User = () => {
     [order, orderBy, page, rowsPerPage, userData]
   );
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleCloseDialog = () => {
+    setOpen(false);
+    // setTimeout(() => {
+    // handleGetTeam()
+    // }, 3000);
+    // setAddTeam({
+    //   memberName: "",
+    //   emailID: "",
+    //   PhoneNo: "",
+    // });
+  };
+
   // search filter
   const handleSearchChange = (search) => {
     const query = search.target.value;
@@ -322,7 +344,7 @@ const User = () => {
       <SideBar />
       <div className="main-container">
         <LoaderComponent loaderState={loaderState} />
-        <div className="searchnfilter">
+        <div className="searchnfilter " style={{display: "flex", flexDirection: "row" , justifyContent: "space-between", alignItems: "center"}}>
           <div className="wid100">
             <Paper
               component="form"
@@ -355,7 +377,11 @@ const User = () => {
           {/* <Button className="filterButton mt43">
             <FilterAltIcon className="filterIcon" /> Filter
           </Button> */}
-        </div>
+           <Button className="addTestimonialButton addstudent" onClick={handleClickOpen}>
+            + Add Students
+          </Button>
+           
+        </div><StudentRegisterPopup opened={opened} handleCloseDialog={handleCloseDialog}/>
         {checkedValue.length > 0 ? (
           <div className="countSelectedValue">
             <Button className="countedCheckBox" disabled>

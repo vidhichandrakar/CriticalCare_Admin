@@ -515,6 +515,19 @@ export const adminLogin = ({ payload, callBack, error }) => {
       error(errorMessage);
     });
 };
+export const createUser = ({ payload, callBack, error }) => {
+  const url = APIS.getAllstudent;
+  axios
+    .post(url, payload)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
+
+
 export const resetpass = ({user_id, payload, callBack, error }) => {
   const url = APIS.adminLogin + "/" + "resetpass/" + user_id;
   axios
