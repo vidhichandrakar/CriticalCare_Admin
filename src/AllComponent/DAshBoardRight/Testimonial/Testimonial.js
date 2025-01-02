@@ -339,22 +339,27 @@ const Testimonial = () => {
                 onChange={(e) => handleInput(e.target.value, "author")}
               />
 
-                <Typography gutterBottom sx={{ mt: 2 }}>
-                  Comments
-                </Typography>
-                <TextField
-                  inputProps={{ className: "textField" }}
-                  id="outlined-multiline-flexible"
-                  // label="Multiline"
-                  multiline
+              <Typography gutterBottom sx={{ mt: 2 }}>
+                Comments
+              </Typography>
+              <TextField
+                id="outlined-multiline-flexible"
+                // label="Multiline"
+                multiline
                 size="small"
-                  maxRows={4}
-                  fullWidth
-                  
-                  className="BoxShadowInputField"
-                  // type="comments"
-                  onChange={(e) => handleInput(e.target.value, "comments")}
-                />
+                maxRows={4}
+                fullWidth
+                type="range"
+                inputProps={{
+                  className: "textField",
+                  min: 130, // Minimum value
+                  max: 150, // Maximum value
+                }}
+                className="BoxShadowInputField"
+                sx={{width: "30vw"}}
+                // type="comments"
+                onChange={(e) => handleInput(e.target.value, "comments")}
+              />
             </DialogContent>
             <DialogActions>
               <Button

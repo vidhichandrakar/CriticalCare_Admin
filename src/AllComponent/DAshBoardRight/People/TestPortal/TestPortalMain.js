@@ -826,7 +826,7 @@ function TestPortalMain() {
             }}
           />
 
-          <FormControl>
+          <FormControl sx={{width: "100%"}}>
             <div className="answersAndSingle">
               <FormLabel
                 id="demo-radio-buttons-group-label"
@@ -857,7 +857,8 @@ function TestPortalMain() {
                 >
                   {editedQuestion?.question_options?.map((item, index) => {
                     return (
-                      <div className="addingDeleteOptions">
+                      <div className="addingDeleteOptions" style={{justifyContent: "space-between"}}>
+                         <Box sx={{display: "flex", flexDirection: "row", alignItems: "center"}}>
                         <Radio
                           checked={item.is_correct}
                           onChange={(e) =>
@@ -871,16 +872,7 @@ function TestPortalMain() {
                           name="radio-buttons"
                           inputProps={{ "aria-label": "A" }}
                         />
-                        {/* <TextField
-                          className="optionsFeid"
-                          id="outlined-helperText"
-                          defaultValue="Option 1"
-                          value={item.option_text}
-                          onChange={(e) =>
-                            handleRadioOptionChanges(e, item.option_id)
-                          }
-                        /> */}
-                        <Box  className="optionsFeid">{tripmHtmlTagsToNormalFormatinside(item.option_text)}</Box>
+                        <Box  className="optionsFeid">{tripmHtmlTagsToNormalFormatinside(item.option_text)}</Box></Box>
                         <div className="deleteComponent">
                           <EditIcon
                             className="deleteIconSixthPage"
@@ -896,6 +888,7 @@ function TestPortalMain() {
                             }
                           />
                         </div>
+                        
                       </div>
                     );
                   })}
@@ -1048,7 +1041,7 @@ function TestPortalMain() {
               </IconButton>
 
               <DialogContent dividers>
-                <TextField
+                {/* <TextField
                   inputProps={{ className: "textField" }}
                   fullWidth
                   size="small"
@@ -1058,6 +1051,24 @@ function TestPortalMain() {
                   type="TestName"
                   // value={addTest?.testName}
                   onChange={(e) => handleAddOptionText(e.target.value)}
+                /> */}
+                <ReactQuill
+                  // value={editpopup}
+                  onChange={(e) => handleAddOptionText(e)}
+                  // defaultValue="This is an MCQ question"
+                  className="thisIsMCQBtn"
+                  id="outlined-helperText"
+                  fullWidth
+                  modules={{
+                    toolbar: [
+                      [ "paragraph"],
+                      [{ list: "ordered" }, { list: "bullet" }],
+                      ["bold", "italic", "underline", "strike"],
+                      [{ color: [] }, { background: [] }],
+                      [{ align: [] }],
+                      ["image"]
+                    ],
+                  }}
                 />
               </DialogContent>
               <DialogActions>

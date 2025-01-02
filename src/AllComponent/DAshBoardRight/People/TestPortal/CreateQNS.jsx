@@ -18,6 +18,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Popover from "@mui/material/Popover";
+import { tripmHtmlTagsToNormalFormatinside } from "../../../../Util/CommonHtmlTagsToTextConvertor";
 // import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -127,9 +128,9 @@ function CreateQNS({
                           <div className="QnsBoxs">
                             <div className="MCQBox" key={indexSeq}>
                               <Typography
-                                sx={{ color: "rgba(0, 0, 0, 0.685)" }}
+                                sx={{ color: "rgba(0, 0, 0, 0.685)", display: "flex", alignItems: "center" }}
                               >
-                                {index + 1}. {questionTest.question_text}
+                                {index + 1}. {tripmHtmlTagsToNormalFormatinside(questionTest.question_text)}
                               </Typography>
                               {questionTest.question_type ===
                               "single-select" ? (
@@ -147,7 +148,7 @@ function CreateQNS({
                                               inputProps={{ "aria-label": "A" }}
                                             />
                                             <Typography>
-                                              {option.option_text}
+                                              {tripmHtmlTagsToNormalFormatinside(option.option_text)}
                                             </Typography>
                                           </div>
                                         );
