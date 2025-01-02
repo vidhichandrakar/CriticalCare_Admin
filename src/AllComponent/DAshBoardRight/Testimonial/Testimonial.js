@@ -345,11 +345,12 @@ const Testimonial = () => {
                 <TextField
                   inputProps={{ className: "textField" }}
                   id="outlined-multiline-flexible"
-                  label="Multiline"
+                  // label="Multiline"
                   multiline
                 size="small"
                   maxRows={4}
                   fullWidth
+                  
                   className="BoxShadowInputField"
                   // type="comments"
                   onChange={(e) => handleInput(e.target.value, "comments")}

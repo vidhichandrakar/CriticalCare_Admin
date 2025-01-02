@@ -14,6 +14,7 @@ import {
   getCourseById,
   publishOrEditCourse,
   getDuration,
+  getEnrollStudent,
 } from "../../ActionFactory/apiActions";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -28,12 +29,14 @@ import yellowEnvlope from "../../../Media/Images/yellowEnvlope.jpeg";
 import Header from "../../Courses/Header";
 import { Typography } from "@material-ui/core";
 import { tripmHtmlTagsToNormalFormat, tripmHtmlTagsToNormalFormatinside } from "../../../Util/CommonHtmlTagsToTextConvertor";
+import { useField } from "@mui/x-date-pickers/internals";
 
 const Trics1FreeMockTest = ({ onDelete }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [courseData, setCourseData] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [durationData, setDuration] = useState([]);
+  const [enrollStudent, setEnrollStudent] = useState("");
   let location = useLocation();
   const courseId = location.state?.id;
   const open = Boolean(anchorEl);
@@ -91,6 +94,18 @@ const Trics1FreeMockTest = ({ onDelete }) => {
       navigate("/admin");
     }
   }, [courseId]);
+  useEffect(() => {
+    getEnrollStudent({
+      courseId,
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setEnrollStudent(userCallBack);
+      },
+      error: (error) => {
+        // toast.error(error.message);
+      },
+    });
+  }, [])
 
   const durationName = durationData?.filter(
     (duraData) =>
@@ -141,6 +156,11 @@ const Trics1FreeMockTest = ({ onDelete }) => {
         navigate("/admin/YourCourses");
       },
     });
+  };
+
+  const handleExplore = (courseId) => {
+    console.log(courseId, "cou")
+    navigate("/admin/EnrollStudent", { state: { courseId: courseId } });
   };
 
   return (
@@ -265,13 +285,13 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                 <div>
                   <p className="blackPara">Student Enrolled</p>
                 </div>
-                <span className="blueViewAll pointer">
-                  <Link to="/admin/User" className="viewAllBlue">
+                <p className="blueViewAll pointer" onClick={() => handleExplore(courseData?.course_id)}>
+                  {/* <Link to="/admin/User" className="viewAllBlue"> */}
                     View All
-                  </Link>
-                </span>
+                  {/* </Link> */}
+                </p>
               </div>
-              <p className="greyPara">44</p>
+              <p className="greyPara">{enrollStudent.length}</p>
             </div>
             <div>
               {courseData?.thumbnail_path_desktop ? (

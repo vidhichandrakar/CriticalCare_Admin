@@ -20,7 +20,7 @@ import BlockIcon from "@mui/icons-material/Block";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Checkbox from "@mui/material/Checkbox";
 import axios from "axios";
-import { deleteUser, getAllUsersApi } from "../../ActionFactory/apiActions";
+import { deleteUser, getAllStudentApi, getAllUsersApi } from "../../ActionFactory/apiActions";
 import moment from "moment/moment";
 import { TableFooter, TablePagination } from "@mui/material";
 import Stack from "@mui/material/Stack";
@@ -141,7 +141,7 @@ const User = () => {
   useEffect(() => {
     if (redirectRestriction()) {
       // setLoaderState(true);
-      getAllUsersApi({
+      getAllStudentApi({
         callBack: (response) => {
           const userCallBack = response?.data;
           setUserData(userCallBack);
@@ -181,7 +181,7 @@ const User = () => {
     deleteUser({
       userId,
       callBack: () => {
-        getAllUsersApi({
+        getAllStudentApi({
           callBack: (response) => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
@@ -216,7 +216,7 @@ const User = () => {
       deleteUser({
         userId: item,
         callBack: () => {
-          getAllUsersApi({
+          getAllStudentApi({
             callBack: (response) => {
               const userCallBack = response?.data;
               setUserData(userCallBack);
@@ -297,7 +297,7 @@ const User = () => {
     //   item.toLOwerCase().includes(query.toLOwerCase())
     // );
     // setFilteredItems(filtered);
-    getAllUsersApi({
+    getAllStudentApi({
       searchString: query,
       callBack: (response) => {
         const userCallBack = response?.data;
@@ -453,7 +453,7 @@ const User = () => {
                       </TableCell>
 
                       <TableCell className="fullNameHead">
-                        {row.user_name}
+                        {row.student_name}
                       </TableCell>
 
                       <TableCell>
