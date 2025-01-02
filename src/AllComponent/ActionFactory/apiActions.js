@@ -15,6 +15,20 @@ export const getAllUsersApi = ({ callBack, searchString, error }) => {
       error(errorMessage);
     });
 };
+export const getAllStudentApi = ({ callBack, searchString, error }) => {
+  let url = new URL(`${APIS.getAllstudent}`);
+  if (searchString) {
+    url.searchParams.set("student_name", searchString);
+  }
+  axios
+    .get(url)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
 
 export const getAllCourses = ({ callBack, searchString, error }) => {
   let url = new URL(`${APIS.allCourses}`);
@@ -219,6 +233,12 @@ export const getCourseById = ({ courseId, callBack }) => {
     callBack(response);
   });
 };
+export const getEnrollStudent = ({ courseId, callBack }) => {
+  const url = APIS.getEnrollStudent + "/" + courseId;
+  axios.get(url).then((response) => {
+    callBack(response);
+  });
+};
 
 export const deleteCourses = ({ courseId, callBack }) => {
   const url = APIS.allCourses + "/" + courseId;
@@ -385,7 +405,7 @@ export const deleteMember = ({ userId, callBack, error }) => {
       callBack(response);
     })
     .catch((errorMessage) => {
-      error(errorMessage);
+      // error(errorMessage);
     });
 };
 

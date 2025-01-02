@@ -11,11 +11,11 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import SearchBar from "../../../Util/SearchBar";
+// import SearchBar from "../../../Util/SearchBar";
 import Popover from "@mui/material/Popover";
-import CourseHeader from "../../Courses/CoursesHeader";
-import SideBar from "../../AdminDashboardMain/SideBar";
-import { teamColumns } from "../../../Data/JsonData";
+// import CourseHeader from "../../Courses/CoursesHeader";
+import SideBar from "../AdminDashboardMain/SideBar";
+import { EnrollStudentlist } from "../../Data/JsonData";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import { Box, TableFooter, TextField } from "@mui/material";
@@ -28,7 +28,8 @@ import {
   putTeamByID,
   getAllUsersApi,
   getAllUsers,
-} from "../../ActionFactory/apiActions";
+  getEnrollStudent,
+} from "../ActionFactory/apiActions";
 import { TablePagination } from "@mui/material";
 import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
@@ -36,17 +37,20 @@ import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
 import { useTheme } from "@mui/material/styles";
 import PropTypes from "prop-types";
-import LoaderComponent from "../../../Util/LoaderComponent";
+// import LoaderComponent from "../Util/LoaderComponent";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { redirectRestriction } from "../../../Util/RedirectRestriction";
-import Header from "../../Courses/Header";
-import { DailogBox } from "../../../Util/CommonFields";
+import { redirectRestriction } from "../../Util/RedirectRestriction";
+import Header from "../Courses/Header";
+import { DailogBox } from "../../Util/CommonFields";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Divider from "@mui/material/Divider";
-import MembersignupPopup from "./MembersignupPopup";
-import ResetPassword from "./ResetPassword";
+
+import { useLocation } from "react-router-dom";
+// import MembersignupPopup from "./MembersignupPopup";
+// import ResetPassword from "./ResetPassword";
+// import { getEnrollStudent } from "ActionFactory/apiActions";
 
 
 function TablePaginationActions(props) {
@@ -118,7 +122,7 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-const MyTeam = () => {
+const EnrollStudent = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [openId, setOpenId] = useState(0);
   const [openData, setOpenData] = useState("");
@@ -136,26 +140,32 @@ const MyTeam = () => {
   });
   const [loaderState, setLoaderState] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [enrollStudent, setEnrollStudent] = useState("")
 
   const navigate = useNavigate();
+  let location = useLocation();
+  const courseId = location.state?.courseId;
+
+  
+
+ 
 
   useEffect(() => {
-    if (redirectRestriction()) {
-      // setLoaderState(true);
-      getAllUsersApi({
+    console.log(courseId, "user")
+      getEnrollStudent({
+        
+        courseId,
         callBack: (response) => {
+
           const userCallBack = response?.data;
-          setUserData(userCallBack);
-          setLoaderState(false);
+          console.log(userCallBack, "user")
+          setEnrollStudent(userCallBack);
         },
         error: (error) => {
-          toast.error(error.message);
+          // toast.error(error.message);
         },
       });
-    } else {
-      navigate("/admin");
-    }
-  }, []);
+    }, [])
 
   const handleClick = (event, id) => {
     setAnchorEl(event.currentTarget);
@@ -178,7 +188,7 @@ const MyTeam = () => {
             handleClose();
           },
           error: (error) => {
-            // toast.error(error.message);
+            toast.error(error.message);
           },
         });
       },
@@ -328,13 +338,13 @@ const MyTeam = () => {
   return (
     <div className="grid-container">
       <Header
-        Heading={"Team Member"}
+        Heading={"Enroll Student"}
         subHeading={"View, Filter & Manage all your users"}
       />
       <SideBar />
       <div className=" main-container">
 
-        <LoaderComponent loaderState={loaderState} />
+        {/* <LoaderComponent loaderState={loaderState} /> */}
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">
            
@@ -367,16 +377,6 @@ const MyTeam = () => {
               <FilterAltIcon /> Filter
             </Button> */}
           </div>
-          <Button className="width13 addTestimonialButton" onClick={handleClickOpen}>
-            + Add Team
-          </Button>
-          <Button className="width13 addTestimonialButton resetbutton" onClick={handleClickOpenReset}>
-            Reset Password
-          </Button>
-
-          <MembersignupPopup opened={opened} handleCloseDialog={handleCloseDialog}/>
-
-          <ResetPassword opened={resetOpened} handleClickClosereset={handleClickClosereset}/>
         </div>{" "}
         <Paper
           sx={{ width: "100%", overflow: "hidden" }}
@@ -386,7 +386,7 @@ const MyTeam = () => {
             <Table stickyHeader aria-label="sticky table">
               <TableHead>
                 <TableRow>
-                  {teamColumns.map((column) => (
+                  {EnrollStudentlist.map((column) => (
                     <TableCell
                       key={column.id}
                       align={column.align}
@@ -400,13 +400,13 @@ const MyTeam = () => {
               </TableHead>
 
               <TableBody className="parentTable">
-                {userData.length
+                {enrollStudent.length
                   ? (rowsPerPage > 0
-                    ? userData.slice(
+                    ? enrollStudent.slice(
                       page * rowsPerPage,
                       page * rowsPerPage + rowsPerPage
                     )
-                    : userData
+                    : enrollStudent
                   ).map((row) => {
                     return (
                       <TableRow
@@ -418,13 +418,10 @@ const MyTeam = () => {
                       >
                         <TableCell className="useInfoCheckbox">
                           <Typography className="PhoneText">
-                            {row.user_name}
+                            {row.student_name}
                           </Typography>
                         </TableCell>
-                        <TableCell className="fullNameHead">
-                          {row.email_id}
-                        </TableCell>
-                        <TableCell>{row.phone_no}</TableCell>
+                       
                         <TableCell>
                           <MoreVertIcon //need to remove this hardcode this code, more ... three drops in last column
                             onClick={(event) =>
@@ -465,11 +462,11 @@ const MyTeam = () => {
                   </Box>
                 </Popover>
               </TableBody>
-              {userData?.length > 5 && <TableFooter>
+              {enrollStudent?.length > 5 && <TableFooter>
                 <TablePagination
                   rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
                   // colSpan={3}
-                  count={userData.length}
+                  count={enrollStudent.length}
                   rowsPerPage={rowsPerPage}
                   page={page}
                   slotProps={{
@@ -501,4 +498,4 @@ const MyTeam = () => {
   );
 };
 
-export default MyTeam;
+export default EnrollStudent;

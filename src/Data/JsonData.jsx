@@ -210,6 +210,17 @@ export const teamColumns = [
     align: "center",
   },
 ];
+export const EnrollStudentlist = [
+  {
+    id: "Student Name",
+    label: "Student Name",
+  },
+  {
+    id: "Actions",
+    label: "Actions",
+    align: "center",
+  },
+];
 
 export const testimonalColumns = [
   {

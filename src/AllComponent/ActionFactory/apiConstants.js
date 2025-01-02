@@ -2,6 +2,7 @@ import { REACT_APP_API } from "../../runtime-config";
 
 export const APIS = {
   getAllUsers: REACT_APP_API + "/user",
+  getAllstudent: REACT_APP_API + "/student",
   allCourses: REACT_APP_API + "/course",
   allCoursesFilter: REACT_APP_API + "/course?",
   getCategory: REACT_APP_API + "/category",
@@ -34,5 +35,7 @@ export const APIS = {
   getCoupon: REACT_APP_API + "/coupon",
   deleteBlog: REACT_APP_API + "/blog/bloglist",
   getModuleContentCount: REACT_APP_API + "/course/module",
-  getUserType:  REACT_APP_API + "/user/type"
+  getUserType:  REACT_APP_API + "/user/type",
+  getEnrollStudent:  REACT_APP_API + "/coursepurchase/stdenroll",
+
 };
