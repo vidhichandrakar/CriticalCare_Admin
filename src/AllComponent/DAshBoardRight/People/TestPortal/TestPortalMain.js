@@ -344,14 +344,19 @@ function TestPortalMain() {
     setEditedQuestion(editedOptionText);
   };
   const handleOptionEditorChange=(e)=>{
+    setEditpopup(e)
+   
+  }
+  const handleUpdate=()=>{
     let editedOptionText = Object.assign({}, editedQuestion);
     editedOptionText?.question_options.map((option) => {
       if (option.option_id === selectedOptionId) {
-        option.option_text = e;
+        option.option_text = editpopup;
       }
       
     });
     setEditedQuestion(editedOptionText);
+    handleCloseDialogForEdit()
   }
   const handleDeleteOption = (index, option) => {
     let deletedOption = Object.assign({}, editedQuestion);
@@ -363,12 +368,14 @@ function TestPortalMain() {
   };
   const [selectedOptionId, setSelectedOptionId] = useState("")
   const handleEditOption = (index, option_text, option_id) => {
+    console.log("edit", option_text, option_id)
     setOpeneditoptions(true);
-    setEditpopup(option_text);
+    // setEditpopup(option_text);
     setSelectedOptionId(option_id)
   };
   const handleCloseDialogForEdit = () => {
     setOpeneditoptions(false);
+    setEditpopup("")
   };
 
   const handleAddOptionPop = (e) => {
@@ -1009,7 +1016,7 @@ function TestPortalMain() {
                 <Button
                   variant="contained"
                   className="CreateBtn"
-                  onClick={(e) => handleAddOption(e)}
+                  onClick={(e) => handleUpdate()}
                 >
                   Update
                 </Button>
