@@ -257,13 +257,12 @@ const Testimonial = () => {
 
   return (
     <div className="grid-container">
-           <Header
-          Heading={"Testimonial"}
-          subHeading={"Only published testiimonial are showm here"}
-        />
+      <Header
+        Heading={"Testimonial"}
+        subHeading={"Only published testiimonial are showm here"}
+      />
       <SideBar />
       <div className=" main-container">
-   
         <LoaderComponent loaderState={loaderState} />
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">
@@ -297,7 +296,10 @@ const Testimonial = () => {
               <FilterAltIcon /> Filter
             </Button> */}
           </div>
-          <Button className="width25 addTestimonialButton" onClick={handleClickOpen}>
+          <Button
+            className="width25 addTestimonialButton"
+            onClick={handleClickOpen}
+          >
             + Add Testimonial
           </Button>
           <BootstrapDialog
@@ -333,25 +335,25 @@ const Testimonial = () => {
                 size="small"
                 id="fullWidth"
                 className="BoxShadowInputField"
-                type="author"
+                // type="author"
                 onChange={(e) => handleInput(e.target.value, "author")}
               />
-              <Typography gutterBottom sx={{ mt: 2 }}>
-                Comments
-              </Typography>
-              <Box className="FlexRow" sx={{ mt: -1 }}>
-                <Typography className="FlexRow">
-                  <TextField
-                    inputProps={{ className: "textField" }}
-                    fullWidth
-                    size="small"
-                    id="fullWidth"
-                    className="BoxShadowInputField"
-                    type="comments"
-                    onChange={(e) => handleInput(e.target.value, "comments")}
-                  />
+
+                <Typography gutterBottom sx={{ mt: 2 }}>
+                  Comments
                 </Typography>
-              </Box>
+                <TextField
+                  inputProps={{ className: "textField" }}
+                  id="outlined-multiline-flexible"
+                  label="Multiline"
+                  multiline
+                size="small"
+                  maxRows={4}
+                  fullWidth
+                  className="BoxShadowInputField"
+                  // type="comments"
+                  onChange={(e) => handleInput(e.target.value, "comments")}
+                />
             </DialogContent>
             <DialogActions>
               <Button
@@ -444,36 +446,43 @@ const Testimonial = () => {
                   </Typography>
                 </Popover>
               </TableBody>
-              {userData?.length > 5 && <TableFooter>
-                <TablePagination
-                  rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                  count={userData.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  slotProps={{
-                    select: {
-                      inputProps: {
-                        "aria-label": "rows per page",
+              {userData?.length > 5 && (
+                <TableFooter>
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      { label: "All", value: -1 },
+                    ]}
+                    count={userData.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    slotProps={{
+                      select: {
+                        inputProps: {
+                          "aria-label": "rows per page",
+                        },
+                        native: true,
                       },
-                      native: true,
-                    },
-                  }}
-                  onPageChange={handleChangePage}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-                  ActionsComponent={TablePaginationActions}
-                // className="Pagination"
-                />
-              </TableFooter>}
+                    }}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                    ActionsComponent={TablePaginationActions}
+                    // className="Pagination"
+                  />
+                </TableFooter>
+              )}
             </Table>
           </TableContainer>
         </Paper>
       </div>
       <DailogBox
-          isOpen={isOpen}
-          handleConfirmDelete={handleConfirmDelete}
-          handleDeleteClick={handleDeleteClick}
-          handleCancelDelete={handleCancelDelete}
-        />
+        isOpen={isOpen}
+        handleConfirmDelete={handleConfirmDelete}
+        handleDeleteClick={handleDeleteClick}
+        handleCancelDelete={handleCancelDelete}
+      />
     </div>
   );
 };
