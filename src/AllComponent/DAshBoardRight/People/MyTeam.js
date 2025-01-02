@@ -171,14 +171,14 @@ const MyTeam = () => {
     deleteMember({
       userId,
       callBack: () => {
-        getTeam({
+        getAllUsersApi({
           callBack: (response) => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
             handleClose();
           },
           error: (error) => {
-            // toast.error(error.message);
+            toast.error(error.message);
           },
         });
       },

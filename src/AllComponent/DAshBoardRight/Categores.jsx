@@ -282,7 +282,7 @@ const Categores = () => {
     deleteCategory({
       category_id: openId, // Ensure the correct field name is used
       callBack: () => {
-        toast.success("Category deleted successfully!");
+        toast.error("Category deleted successfully!");
         getCategory({
           callBack: (response) => {
             const userCallBack = response?.data;

@@ -15,6 +15,7 @@ export const getAllUsersApi = ({ callBack, searchString, error }) => {
       error(errorMessage);
     });
 };
+
 export const getAllStudentApi = ({ callBack, searchString, error }) => {
   let url = new URL(`${APIS.getAllstudent}`);
   if (searchString) {
@@ -398,7 +399,7 @@ export const putTeamByID = ({ payload, teamId, callBack }) => {
 };
 
 export const deleteMember = ({ userId, callBack, error }) => {
-  const url = APIS.updateMember + "/" + userId;
+  const url = APIS.getAllUsers + "/" + userId;
   axios
     .delete(url)
     .then((response) => {

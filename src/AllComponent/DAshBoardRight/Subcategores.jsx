@@ -231,14 +231,7 @@ const Subcategores = () => {
       },
     });
   }, []);
-  useEffect(() => {
-    getCategory({
-      callBack: (response) => {
-        const userCallBack = response?.data;
-        setCat(userCallBack);
-      },
-    });
-  }, []);
+ 
 
   const handleClick = (event, id) => {
     setAnchorEl(event.currentTarget);
@@ -276,7 +269,7 @@ const Subcategores = () => {
       category_id: openId, // Ensure the correct field name is used
       callBack: () => {
         toast.success("Category deleted successfully!");
-        getCategory({
+        getSubCategory({
           callBack: (response) => {
             const userCallBack = response?.data;
             setUserData(userCallBack);
@@ -615,8 +608,7 @@ const Subcategores = () => {
                     onClick={handleDeleteClick}
                     sx={{ borderBottom: "1px solid #eee", color: "red" }}
                   >
-                    {" "}
-                    <DeleteIcon className="deleteIcon" /> Delete{" "}
+                    <DeleteIcon className="deleteIcon" /> Delete
                   </Box>
                   <Box
                     className="redDeleteofTestPortal blueBlockUser"

@@ -178,6 +178,7 @@ function Configuration({
         callBack: (response) => {
           const userCallBack = response;
           setCat(userCallBack);
+          window.location.reload()
         },
         error: (error) => {
           toast.error(error.message);
@@ -190,12 +191,14 @@ function Configuration({
           let storedValues = Object.assign({}, updatedCat);
           storedValues.category_name = response?.data?.category_name;
           setUpdatedCat(storedValues);
+          window.location.reload()
         },
         error: (error) => {
           toast.error(error.message);
         },
       });
     }
+    
   }, []);
 
   const handleInput = (value, type, event) => {
@@ -255,6 +258,7 @@ function Configuration({
           toast.success("Category created successfully!");
           setUpdatedCat({ category_name: "" });
           handleCloseCat();
+          window.location.reload()
         },
       });
     }
