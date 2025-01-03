@@ -20,7 +20,7 @@ import BlockIcon from "@mui/icons-material/Block";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Checkbox from "@mui/material/Checkbox";
 import axios from "axios";
-import { deleteUser, getAllStudentApi, getAllUsersApi } from "../../ActionFactory/apiActions";
+import { BlockStudent, deleteUser, getAllStudentApi, getAllUsersApi } from "../../ActionFactory/apiActions";
 import moment from "moment/moment";
 import { TableFooter, TablePagination } from "@mui/material";
 import Stack from "@mui/material/Stack";
@@ -137,6 +137,7 @@ const User = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredItems, setFilteredItems] = useState();
   const [opened, setOpen] = useState(false);
+  const [blockstudent, setBlock] = useState("");
   const [addTeam, setAddTeam] = useState({
       memberName: "",
       emailID: "",
@@ -174,9 +175,10 @@ const User = () => {
     }
   };
 
-  const handleClick = (event, id) => {
+  const handleClick = (event, id, block) => {
     setAnchorEl(event.currentTarget);
     setOpenId(id);
+    setBlock(block);
   };
 
   const handleClose = () => {
@@ -334,6 +336,32 @@ const User = () => {
     
   }
 
+  const handleBlock = () => {
+    handleClose()
+    console.log(openId, "work")
+    const payload = {
+      block: blockstudent === "Y" ? "N" : "Y" 
+    }
+    BlockStudent({
+      studentId: openId,
+      payload,
+      callBack: (response) => {
+        getAllStudentApi({
+          callBack: (response) => {
+            const userCallBack = response?.data;
+            setUserData(userCallBack);
+            setLoaderState(false);
+          },
+          error: (error) => {
+            toast.error(error.message);
+            setLoaderState(false);
+          },
+         
+        });
+      },
+    });
+  }
+
 
   return (
     <div className="grid-container">
@@ -465,7 +493,7 @@ const User = () => {
                             color: "rgb(216, 224, 240)",
                           }}
                           onChange={(event) =>
-                            handleChangeOnCheckBox(event, row.user_id)
+                            handleChangeOnCheckBox(event, row.student_id)
                           }
                         />
                         <div className="userCheckBoxDiv">
@@ -488,7 +516,7 @@ const User = () => {
 
                       <TableCell>
                         <MoreVertIcon //need to remove this hardcode this code, more ... three drops in last column
-                          onClick={(event) => handleClick(event, row.user_id)}
+                          onClick={(event) => handleClick(event, row.student_id, row.block)}
                         />
                       </TableCell>
                     </TableRow>
@@ -513,9 +541,11 @@ const User = () => {
                     {" "}
                     <DeleteIcon className="deleteIcon" /> Delete{" "}
                   </Box>
-                  <Box className="redDeleteofTestPortal redDelete ">
+                  <Box className={blockstudent == "Y" ? "redDeleteofTestPortal BlueButton" : "redDeleteofTestPortal redDelete"}
+                  // "" 
+                  onClick={handleBlock}>
                     {" "}
-                    <BlockIcon className="deleteIcon" /> Block User
+                    <BlockIcon className="deleteIcon"  /> {blockstudent == "Y" ? "Unblock Student" : "Block Student"} 
                   </Box>
                 </Popover>
               </TableBody>

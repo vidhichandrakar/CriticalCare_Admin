@@ -31,6 +31,20 @@ export const getAllStudentApi = ({ callBack, searchString, error }) => {
     });
 };
 
+export const BlockStudent = ({ callBack, studentId, payload }) => {
+  const url = APIS.getAllstudent + "/" + studentId;
+  axios.put(url, payload).then((response) => {
+    callBack(response);
+  });
+};
+
+// export const BlockStudent = ({ userId, callBack }) => {
+//   const url = APIS.getAllstudent + "/" + userId;
+//   axios.delete(url).then((response) => {
+//     callBack(response);
+//   });
+// };
+
 export const getAllCourses = ({ callBack, searchString, error }) => {
   let url = new URL(`${APIS.allCourses}`);
   if (searchString) {
@@ -79,6 +93,7 @@ export const deleteUser = ({ userId, callBack }) => {
     callBack(response);
   });
 };
+
 
 export const banner = ({ callBack, error }) => {
   const url = APIS.banner;
@@ -571,6 +586,7 @@ export const publishOrEditCourse = ({ callBack, courseId, payload }) => {
     callBack(response);
   });
 };
+
 
 export const getCourseDuration = ({ callBack }) => {
   const url = APIS.getCourseDuration;
