@@ -28,7 +28,10 @@ import IconButton from "@mui/material/IconButton";
 import yellowEnvlope from "../../../Media/Images/yellowEnvlope.jpeg";
 import Header from "../../Courses/Header";
 import { Typography } from "@material-ui/core";
-import { tripmHtmlTagsToNormalFormat, tripmHtmlTagsToNormalFormatinside } from "../../../Util/CommonHtmlTagsToTextConvertor";
+import {
+  tripmHtmlTagsToNormalFormat,
+  tripmHtmlTagsToNormalFormatinside,
+} from "../../../Util/CommonHtmlTagsToTextConvertor";
 import { useField } from "@mui/x-date-pickers/internals";
 
 const Trics1FreeMockTest = ({ onDelete }) => {
@@ -105,7 +108,7 @@ const Trics1FreeMockTest = ({ onDelete }) => {
         // toast.error(error.message);
       },
     });
-  }, [])
+  }, []);
 
   const durationName = durationData?.filter(
     (duraData) =>
@@ -159,7 +162,6 @@ const Trics1FreeMockTest = ({ onDelete }) => {
   };
 
   const handleExplore = (courseId) => {
-    console.log(courseId, "cou")
     navigate("/admin/EnrollStudent", { state: { courseId: courseId } });
   };
 
@@ -179,10 +181,10 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                 {capitalizeFirstLetter(courseData?.course_name)}
               </p>
               <hr />
-             
+
               <p className="blackPara">Description</p>
               <p className="greyPara">
-              {tripmHtmlTagsToNormalFormatinside(courseData?.description)}
+                {tripmHtmlTagsToNormalFormatinside(courseData?.description)}
               </p>
               <hr />
               {/* <TextField
@@ -285,9 +287,12 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                 <div>
                   <p className="blackPara">Student Enrolled</p>
                 </div>
-                <p className="blueViewAll pointer" onClick={() => handleExplore(courseData?.course_id)}>
+                <p
+                  className="blueViewAll pointer"
+                  onClick={() => handleExplore(courseData?.course_id)}
+                >
                   {/* <Link to="/admin/User" className="viewAllBlue"> */}
-                    View All
+                  View All
                   {/* </Link> */}
                 </p>
               </div>

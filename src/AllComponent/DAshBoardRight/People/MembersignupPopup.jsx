@@ -45,7 +45,6 @@ function MembersignupPopup({handleCloseDialog, opened}) {
   const [userTypeeid, setUserTypeid] = useState("")
   const registerUser = (type, value, path = "", inputValues) => {
     const { Name, emailId, number, hospitalName, qualification, affillation } = inputValues;
-    console.log("password",Md5Converter(number))
     const password = Md5Converter(number);
     const payload = {
       user_name: Name,
@@ -85,9 +84,7 @@ function MembersignupPopup({handleCloseDialog, opened}) {
 
      const handleChange = (e) => {
       setUserType(e.target.value.user_type_text)
-      console.log(e, "ee")
       setUserTypeid(e.target.value.user_type_id);
-      console.log(e.target.value.user_type_id , "vbvb");
     };
   
   return (
@@ -163,7 +160,6 @@ function MembersignupPopup({handleCloseDialog, opened}) {
             <Form 
             onSubmit={formik.handleSubmit}
             >
-              {console.log(formik.values, "formik")}
               <TextField
                 inputProps={{ className: "textField" }}
                 sx={{

@@ -52,7 +52,6 @@ import { useLocation } from "react-router-dom";
 // import ResetPassword from "./ResetPassword";
 // import { getEnrollStudent } from "ActionFactory/apiActions";
 
-
 function TablePaginationActions(props) {
   const [loaderState, setLoaderState] = useState(false);
   const theme = useTheme();
@@ -140,32 +139,24 @@ const EnrollStudent = () => {
   });
   const [loaderState, setLoaderState] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [enrollStudent, setEnrollStudent] = useState("")
+  const [enrollStudent, setEnrollStudent] = useState("");
 
   const navigate = useNavigate();
   let location = useLocation();
   const courseId = location.state?.courseId;
 
-  
-
- 
-
   useEffect(() => {
-    console.log(courseId, "user")
-      getEnrollStudent({
-        
-        courseId,
-        callBack: (response) => {
-
-          const userCallBack = response?.data;
-          console.log(userCallBack, "user")
-          setEnrollStudent(userCallBack);
-        },
-        error: (error) => {
-          // toast.error(error.message);
-        },
-      });
-    }, [])
+    getEnrollStudent({
+      courseId,
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setEnrollStudent(userCallBack);
+      },
+      error: (error) => {
+        // toast.error(error.message);
+      },
+    });
+  }, []);
 
   const handleClick = (event, id) => {
     setAnchorEl(event.currentTarget);
@@ -215,7 +206,7 @@ const EnrollStudent = () => {
   const handleCloseDialog = () => {
     setOpen(false);
     setTimeout(() => {
-    handleGetTeam()
+      handleGetTeam();
     }, 3000);
     setAddTeam({
       memberName: "",
@@ -241,7 +232,7 @@ const EnrollStudent = () => {
   const handleAddTeam = () => {
     setOpen(true);
   };
- 
+
   const handleInput = (value, type) => {
     let storedValues = Object.assign({}, addTeam);
     if (type === "MemberName") {
@@ -253,7 +244,7 @@ const EnrollStudent = () => {
     }
     setAddTeam(storedValues);
   };
-  const handleGetTeam = ()=>{
+  const handleGetTeam = () => {
     getTeam({
       callBack: (response) => {
         const userCallBack = response?.data;
@@ -264,19 +255,18 @@ const EnrollStudent = () => {
         toast.error(error.message);
       },
     });
-  }
+  };
   const handleCreateTeam = () => {
-    const teamId = openId
+    const teamId = openId;
     if (teamId) {
       const payload = {
         member_name: addTeam.memberName,
         email_id: addTeam.emailID,
         phone_no: addTeam.PhoneNo,
-        "member_photo_url": "string",
-        "member_type_id": 1
-
+        member_photo_url: "string",
+        member_type_id: 1,
       };
-      handleClose()
+      handleClose();
       putTeamByID({
         payload,
         teamId,
@@ -293,7 +283,6 @@ const EnrollStudent = () => {
               toast.error(error.message);
             },
           });
-         
         },
       });
     } else {
@@ -301,14 +290,13 @@ const EnrollStudent = () => {
         member_name: addTeam.memberName,
         email_id: addTeam.emailID,
         phone_no: addTeam.PhoneNo,
-        "member_photo_url": "string",
-        "member_type_id": 1
-
+        member_photo_url: "string",
+        member_type_id: 1,
       };
       updateTeam({
         payload,
         callBack: (response) => {
-          handleGetTeam()
+          handleGetTeam();
           toast.success("Created successfully");
           setOpen(false);
         },
@@ -343,11 +331,9 @@ const EnrollStudent = () => {
       />
       <SideBar />
       <div className=" main-container">
-
         {/* <LoaderComponent loaderState={loaderState} /> */}
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">
-           
             {/* <div className="wid100">
               <Paper
                 component="form"
@@ -402,36 +388,36 @@ const EnrollStudent = () => {
               <TableBody className="parentTable">
                 {enrollStudent.length
                   ? (rowsPerPage > 0
-                    ? enrollStudent.slice(
-                      page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
-                    )
-                    : enrollStudent
-                  ).map((row) => {
-                    return (
-                      <TableRow
-                        hover
-                        className="TableHover"
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={row?.code}
-                      >
-                        <TableCell className="useInfoCheckbox">
-                          <Typography className="PhoneText">
-                            {row.student_name}
-                          </Typography>
-                        </TableCell>
-                       
-                        <TableCell>
-                          <MoreVertIcon //need to remove this hardcode this code, more ... three drops in last column
-                            onClick={(event) =>
-                              handleClick(event, row.user_id)
-                            }
-                          />
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })
+                      ? enrollStudent.slice(
+                          page * rowsPerPage,
+                          page * rowsPerPage + rowsPerPage
+                        )
+                      : enrollStudent
+                    ).map((row) => {
+                      return (
+                        <TableRow
+                          hover
+                          className="TableHover"
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={row?.code}
+                        >
+                          <TableCell className="useInfoCheckbox">
+                            <Typography className="PhoneText">
+                              {row.student_name}
+                            </Typography>
+                          </TableCell>
+
+                          <TableCell>
+                            <MoreVertIcon //need to remove this hardcode this code, more ... three drops in last column
+                              onClick={(event) =>
+                                handleClick(event, row.user_id)
+                              }
+                            />
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })
                   : null}
                 <Popover
                   sx={{ m: -7, mt: 0.2, ml: -15 }}
@@ -449,7 +435,6 @@ const EnrollStudent = () => {
                     onClick={handleDeleteClick}
                     sx={{ borderBottom: "1px solid #eee", padding: "2%" }}
                   >
-
                     <DeleteIcon className="deleteIcon" /> Delete{" "}
                   </Box>
                   <Box
@@ -462,28 +447,34 @@ const EnrollStudent = () => {
                   </Box>
                 </Popover>
               </TableBody>
-              {enrollStudent?.length > 5 && <TableFooter>
-                <TablePagination
-                  rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                  // colSpan={3}
-                  count={enrollStudent.length}
-                  rowsPerPage={rowsPerPage}
-                  page={page}
-                  slotProps={{
-                    select: {
-                      inputProps: {
-                        "aria-label": "rows per page",
+              {enrollStudent?.length > 5 && (
+                <TableFooter>
+                  <TablePagination
+                    rowsPerPageOptions={[
+                      5,
+                      10,
+                      25,
+                      { label: "All", value: -1 },
+                    ]}
+                    // colSpan={3}
+                    count={enrollStudent.length}
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    slotProps={{
+                      select: {
+                        inputProps: {
+                          "aria-label": "rows per page",
+                        },
+                        native: true,
                       },
-                      native: true,
-                    },
-                  }}
-                  onPageChange={handleChangePage}
-                  onRowsPerPageChange={handleChangeRowsPerPage}
-                  ActionsComponent={TablePaginationActions}
-                // className="Pagination"
-                />
-              </TableFooter>}
-
+                    }}
+                    onPageChange={handleChangePage}
+                    onRowsPerPageChange={handleChangeRowsPerPage}
+                    ActionsComponent={TablePaginationActions}
+                    // className="Pagination"
+                  />
+                </TableFooter>
+              )}
             </Table>
           </TableContainer>
         </Paper>

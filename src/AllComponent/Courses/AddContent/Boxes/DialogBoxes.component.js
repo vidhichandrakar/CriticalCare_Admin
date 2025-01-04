@@ -56,11 +56,6 @@ const DialogBoxes = ({
 }) => {
   
   const [cat, setCat] = useState([]);
-  // const handleChange = (e) => {
-  //   setCategoryName(e?.target?.value?.test_name)
-  //   console.log(e , "ee")
-  //   // setSelectedCategory(e.target.value.category_id);
-  // };
   const [categoryName, setCategoryName] = useState("");
   const onAddLink = (inputLink, inputName) => {
     handleAddLink(inputLink, inputName);
@@ -78,7 +73,6 @@ const DialogBoxes = ({
 
   return (
     <>
-    {console.log(cat, "cat")}
       <BootstrapDialog
         className="PopUP"
         onClose={handleCloseDialogIC}
