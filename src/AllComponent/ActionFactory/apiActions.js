@@ -31,6 +31,20 @@ export const getAllStudentApi = ({ callBack, searchString, error }) => {
     });
 };
 
+export const BlockStudent = ({ callBack, studentId, payload }) => {
+  const url = APIS.getAllstudent + "/" + studentId;
+  axios.put(url, payload).then((response) => {
+    callBack(response);
+  });
+};
+
+// export const BlockStudent = ({ userId, callBack }) => {
+//   const url = APIS.getAllstudent + "/" + userId;
+//   axios.delete(url).then((response) => {
+//     callBack(response);
+//   });
+// };
+
 export const getAllCourses = ({ callBack, searchString, error }) => {
   let url = new URL(`${APIS.allCourses}`);
   if (searchString) {
@@ -79,6 +93,7 @@ export const deleteUser = ({ userId, callBack }) => {
     callBack(response);
   });
 };
+
 
 export const banner = ({ callBack, error }) => {
   const url = APIS.banner;
@@ -515,6 +530,19 @@ export const adminLogin = ({ payload, callBack, error }) => {
       error(errorMessage);
     });
 };
+export const createUser = ({ payload, callBack, error }) => {
+  const url = APIS.getAllstudent;
+  axios
+    .post(url, payload)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
+
+
 export const resetpass = ({user_id, payload, callBack, error }) => {
   const url = APIS.adminLogin + "/" + "resetpass/" + user_id;
   axios
@@ -558,6 +586,7 @@ export const publishOrEditCourse = ({ callBack, courseId, payload }) => {
     callBack(response);
   });
 };
+
 
 export const getCourseDuration = ({ callBack }) => {
   const url = APIS.getCourseDuration;

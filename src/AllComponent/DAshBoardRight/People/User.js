@@ -20,7 +20,7 @@ import BlockIcon from "@mui/icons-material/Block";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Checkbox from "@mui/material/Checkbox";
 import axios from "axios";
-import { deleteUser, getAllStudentApi, getAllUsersApi } from "../../ActionFactory/apiActions";
+import { BlockStudent, deleteUser, getAllStudentApi, getAllUsersApi } from "../../ActionFactory/apiActions";
 import moment from "moment/moment";
 import { TableFooter, TablePagination } from "@mui/material";
 import Stack from "@mui/material/Stack";
@@ -49,6 +49,7 @@ import { DailogBox } from "../../../Util/CommonFields";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Divider from "@mui/material/Divider";
+import StudentRegisterPopup from "./StudentRegisterPopup";
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -135,6 +136,13 @@ const User = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredItems, setFilteredItems] = useState();
+  const [opened, setOpen] = useState(false);
+  const [blockstudent, setBlock] = useState("");
+  const [addTeam, setAddTeam] = useState({
+      memberName: "",
+      emailID: "",
+      PhoneNo: "",
+    });
 
   const navigate = useNavigate();
 
@@ -167,9 +175,10 @@ const User = () => {
     }
   };
 
-  const handleClick = (event, id) => {
+  const handleClick = (event, id, block) => {
     setAnchorEl(event.currentTarget);
     setOpenId(id);
+    setBlock(block);
   };
 
   const handleClose = () => {
@@ -288,6 +297,21 @@ const User = () => {
     [order, orderBy, page, rowsPerPage, userData]
   );
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleCloseDialog = () => {
+    setOpen(false);
+    // setTimeout(() => {
+    // handleGetTeam()
+    // }, 3000);
+    // setAddTeam({
+    //   memberName: "",
+    //   emailID: "",
+    //   PhoneNo: "",
+    // });
+  };
+
   // search filter
   const handleSearchChange = (search) => {
     const query = search.target.value;
@@ -312,6 +336,32 @@ const User = () => {
     
   }
 
+  const handleBlock = () => {
+    handleClose()
+    console.log(openId, "work")
+    const payload = {
+      block: blockstudent === "Y" ? "N" : "Y" 
+    }
+    BlockStudent({
+      studentId: openId,
+      payload,
+      callBack: (response) => {
+        getAllStudentApi({
+          callBack: (response) => {
+            const userCallBack = response?.data;
+            setUserData(userCallBack);
+            setLoaderState(false);
+          },
+          error: (error) => {
+            toast.error(error.message);
+            setLoaderState(false);
+          },
+         
+        });
+      },
+    });
+  }
+
 
   return (
     <div className="grid-container">
@@ -322,7 +372,7 @@ const User = () => {
       <SideBar />
       <div className="main-container">
         <LoaderComponent loaderState={loaderState} />
-        <div className="searchnfilter">
+        <div className="searchnfilter " style={{display: "flex", flexDirection: "row" , justifyContent: "space-between", alignItems: "center"}}>
           <div className="wid100">
             <Paper
               component="form"
@@ -355,7 +405,11 @@ const User = () => {
           {/* <Button className="filterButton mt43">
             <FilterAltIcon className="filterIcon" /> Filter
           </Button> */}
-        </div>
+           <Button className="addTestimonialButton addstudent" onClick={handleClickOpen}>
+            + Add Students
+          </Button>
+           
+        </div><StudentRegisterPopup opened={opened} handleCloseDialog={handleCloseDialog}/>
         {checkedValue.length > 0 ? (
           <div className="countSelectedValue">
             <Button className="countedCheckBox" disabled>
@@ -439,7 +493,7 @@ const User = () => {
                             color: "rgb(216, 224, 240)",
                           }}
                           onChange={(event) =>
-                            handleChangeOnCheckBox(event, row.user_id)
+                            handleChangeOnCheckBox(event, row.student_id)
                           }
                         />
                         <div className="userCheckBoxDiv">
@@ -462,7 +516,7 @@ const User = () => {
 
                       <TableCell>
                         <MoreVertIcon //need to remove this hardcode this code, more ... three drops in last column
-                          onClick={(event) => handleClick(event, row.user_id)}
+                          onClick={(event) => handleClick(event, row.student_id, row.block)}
                         />
                       </TableCell>
                     </TableRow>
@@ -487,9 +541,11 @@ const User = () => {
                     {" "}
                     <DeleteIcon className="deleteIcon" /> Delete{" "}
                   </Box>
-                  <Box className="redDeleteofTestPortal redDelete ">
+                  <Box className={blockstudent == "Y" ? "redDeleteofTestPortal BlueButton" : "redDeleteofTestPortal redDelete"}
+                  // "" 
+                  onClick={handleBlock}>
                     {" "}
-                    <BlockIcon className="deleteIcon" /> Block User
+                    <BlockIcon className="deleteIcon"  /> {blockstudent == "Y" ? "Unblock Student" : "Block Student"} 
                   </Box>
                 </Popover>
               </TableBody>
