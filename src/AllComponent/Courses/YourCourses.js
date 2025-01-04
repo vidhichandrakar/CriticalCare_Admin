@@ -115,7 +115,6 @@ const YourCourses = () => {
   };
   const handleChange = (e) => {
     setCategoryName(e.target.value.category_name)
-    console.log(e, "ee")
     setSelectedCategory(e.target.value.category_id);
   };
 
@@ -126,7 +125,6 @@ const YourCourses = () => {
   const handleDurationChange = (e) => {
     setDurationname(e.target.value.duration_type_id);
     setSelecteddurationame(e.target.value.duration_type_name);
-    console.log(e, "ee")
   };
 
   const handleAllFilterChange = ({
@@ -289,12 +287,10 @@ const YourCourses = () => {
             </FormControl>
           </div>
         </Box>
-        {/* {console.log(durationType,"dddddddd")} */}
         <Box className="CategoriesBOx">
           <Typography>Course Type</Typography>
           <FormControl sx={{ width: 540 }}>
             <Select
-              // value={durationType.duration_name}
               value={
                 selecteddurationame !== ""
                   ? selecteddurationame
@@ -302,7 +298,6 @@ const YourCourses = () => {
               }
 
               renderValue={() => {
-                {console.log(selecteddurationame,"dddddddd")}
                 return selecteddurationame !== "" ? (
                   <Typography>{selecteddurationame}</Typography>
                 ) : (

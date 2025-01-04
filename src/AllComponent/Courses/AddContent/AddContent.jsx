@@ -43,6 +43,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Divider from "@mui/material/Divider";
 import Dialog from "@mui/material/Dialog";
 import { styled } from "@mui/material/styles";
+import ViewTestContents from "./ViewTestContents";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -94,22 +95,22 @@ function AddContent({
       },
     },
   ]);
-const [cat, setCat] = useState([]);
-const [ selectedTestId, setSelectedTestId] = useState("")
+  const [cat, setCat] = useState([]);
+  const [selectedTestId, setSelectedTestId] = useState("");
   const [subtestopened, setSubtestopen] = useState(false);
-const handleopenDialogSubjectiveTest = () => {
-  setSubtestopen(true);
-};
-const handleCloseDialogSubjectiveTest = () => {
-  setSubtestopen(false);
-};
-  const handleChange = (e) => {
-    setCategoryName(e?.target?.value?.test_name)
-    console.log(e , "ee")
-    setSelectedTestId(e?.target?.value?.test_id)
-    // setSelectedCategory(e.target.value.category_id);
+  const [viewTestDialog, setViewTestDialog] = useState(false);
+
+  const handleopenDialogSubjectiveTest = () => {
+    setSubtestopen(true);
   };
-  
+  const handleCloseDialogSubjectiveTest = () => {
+    setSubtestopen(false);
+  };
+  const handleChange = (e) => {
+    setCategoryName(e?.target?.value?.test_name);
+    setSelectedTestId(e?.target?.value?.test_id);
+  };
+
   const MenuProps = {
     PaperProps: {
       style: {
@@ -119,16 +120,15 @@ const handleCloseDialogSubjectiveTest = () => {
     },
   };
   const [categoryName, setCategoryName] = useState("");
-  const handleSaveTest =()=>{
-    console.log(categoryName)
-    const payload={course_id:courseData?.course_id}
+  const handleSaveTest = () => {
+    const payload = { course_id: courseData?.course_id };
     updateTestPortal({
       payload,
-      testId:selectedTestId,
-      callBack:()=>{},
-      error:()=>{}
-    })
-  }
+      testId: selectedTestId,
+      callBack: () => {},
+      error: () => {},
+    });
+  };
   useEffect(() => {
     if (courseData?.course_id) {
       getCourseContentById({
@@ -401,6 +401,10 @@ const handleCloseDialogSubjectiveTest = () => {
     return truncatedName;
   };
   const isPdfFile = (url) => url.endsWith(".pdf");
+
+  const hadlleShowAddedTest = () => {
+    setViewTestDialog(true);
+  };
   return (
     <>
       <div style={{ height: "120px" }}>
@@ -676,17 +680,33 @@ const handleCloseDialogSubjectiveTest = () => {
         >
           Add Module
         </Button>
-        <Button
-          onClick={handleopenDialogSubjectiveTest}
-          sx={{
-            position: "absolute",
-            bottom: 30,
-            marginLeft:"10%"
-          }}
-          variant="contained"
-        >
-          Add Test
-        </Button>
+        <Box>
+          <Button
+            onClick={handleopenDialogSubjectiveTest}
+            sx={{
+              position: "absolute",
+              bottom: 30,
+              marginLeft: "10%",
+            }}
+            variant="contained"
+          >
+            Add Test
+          </Button>
+        </Box>
+        <Box>
+          <Button
+            sx={{
+              position: "fixed", // Stay at the bottom even when scrolling
+              left: "82%", // Center horizontally
+              bottom: "30px", // Adjust the distance from the bottom
+              transform: "translateX(-50%)", // Offset to truly center the button
+            }}
+            variant="contained"
+            onClick={hadlleShowAddedTest}
+          >
+            View Tests
+          </Button>
+        </Box>
         <Box>
           <Button
             onClick={handleSaveAllAttachedModule}
@@ -713,8 +733,13 @@ const handleCloseDialogSubjectiveTest = () => {
         >
           Exit
         </Button>
+        <ViewTestContents
+          viewTestDialog={viewTestDialog}
+          courseId={courseData?.course_id}
+          setViewTestDialog={setViewTestDialog}
+        />
       </div>
-         <BootstrapDialog
+      <BootstrapDialog
         className="PopUP"
         onClose={handleCloseDialogSubjectiveTest}
         aria-labelledby="customized-dialog-title"
@@ -724,8 +749,8 @@ const handleCloseDialogSubjectiveTest = () => {
           sx={{ m: 0, p: 2, fontSize: "1rem" }}
           id="customized-dialog-title"
         ></DialogTitle>
-        <Typography sx={{mt: -2, ml:3, fontWeight: 600}}>
-        Add Subjective Test
+        <Typography sx={{ mt: -2, ml: 3, fontWeight: 600 }}>
+          Add Subjective Test
         </Typography>
         <IconButton
           aria-label="close"
@@ -739,16 +764,14 @@ const handleCloseDialogSubjectiveTest = () => {
         >
           <CloseIcon />
         </IconButton>
-        <Divider sx={{mt:1}}/>
+        <Divider sx={{ mt: 1 }} />
         <DialogContent>
           <Box>
-          <FormControl sx={{ width: 540 }}>
+            <FormControl sx={{ width: 540 }}>
               <Select
-               MenuProps={MenuProps}
-                value={categoryName!==""? categoryName : "fjng" }
+                MenuProps={MenuProps}
+                value={categoryName !== "" ? categoryName : "fjng"}
                 renderValue={(v) => {
-                  console.log(categoryName,"categoryName")
-                  console.log(v,"categoryName")
                   return categoryName !== "" ? (
                     <Typography>{categoryName}</Typography>
                   ) : (
@@ -757,10 +780,10 @@ const handleCloseDialogSubjectiveTest = () => {
                 }}
                 onChange={(e) => handleChange(e)}
                 className="addCatTextField"
-                sx={{mt: 2}}
+                sx={{ mt: 2 }}
               >
                 {cat.map((item) => (
-                  <MenuItem key={item._id} value={item} >
+                  <MenuItem key={item._id} value={item}>
                     {item.test_name}
                   </MenuItem>
                 ))}
@@ -769,20 +792,19 @@ const handleCloseDialogSubjectiveTest = () => {
           </Box>
         </DialogContent>
         <DialogActions>
-                        <Button
-                          sx={{
-                            textTransform: "none",
-                            padding: "3px 0px",
-                            marginRight: "16px",
-                          }}
-                          variant="outlined"
-                          onClick={handleSaveTest}
-                        >
-                          Save
-                        </Button>
+          <Button
+            sx={{
+              textTransform: "none",
+              padding: "3px 0px",
+              marginRight: "16px",
+            }}
+            variant="outlined"
+            onClick={handleSaveTest}
+          >
+            Save
+          </Button>
         </DialogActions>
       </BootstrapDialog>
-
     </>
   );
 }
