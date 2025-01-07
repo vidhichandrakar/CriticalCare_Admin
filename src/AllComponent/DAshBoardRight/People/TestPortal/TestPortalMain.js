@@ -819,7 +819,8 @@ function TestPortalMain() {
                 [{ list: "ordered" }, { list: "bullet" }],
                 ["bold", "italic", "underline", "strike"],
                 [{ color: [] }, { background: [] }],
-                [{ align: [] }]
+                [{ align: [] }],
+                ["image"]
               ],
             }}
           />

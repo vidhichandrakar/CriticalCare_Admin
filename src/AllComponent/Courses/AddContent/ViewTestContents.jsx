@@ -88,7 +88,7 @@ export default function ViewTestContents({
           <Divider sx={{ mt: 1 }} />
           <DialogContent>
             <Box className="TestinstructionBox">
-              {allTestDetails?.map((item, index) => (
+              {allTestDetails?.length && allTestDetails?.map((item, index) => (
                 <Box className="cardiologyEachBox">
                   <Box>
                     <Typography className="testHead">
