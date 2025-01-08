@@ -309,7 +309,6 @@ const TestPortal = () => {
       active_duration_from: addTest.from,
       active_duration_to: addTest.to,
     };
-    console.log("Datee", addTest);
     createTestPortal({
       payload,
       callBack: (response) => {

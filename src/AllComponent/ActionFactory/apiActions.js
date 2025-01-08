@@ -741,3 +741,18 @@ export const getModuleByContentCount = ({ callBack, moduleId, error }) => {
       error(errorMessage);
     });
 };
+
+export const getTestBycourseId = ({ callBack, courseId, error }) => {
+  const url = APIS.getTestBycourseId + "/" + courseId;
+  axios
+    .get(url)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
+
+
+

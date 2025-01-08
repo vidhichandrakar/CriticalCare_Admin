@@ -330,7 +330,6 @@ function TestPortalMain() {
   const handleEditQestion = (e) => {
     let editedTextQuestion = Object.assign({}, editedQuestion);
     editedTextQuestion.question_text = e;
-    console.log(e, "e");
     setEditedQuestion(editedTextQuestion);
   };
 
@@ -368,7 +367,6 @@ function TestPortalMain() {
   };
   const [selectedOptionId, setSelectedOptionId] = useState("")
   const handleEditOption = (index, option_text, option_id) => {
-    console.log("edit", option_text, option_id)
     setOpeneditoptions(true);
     // setEditpopup(option_text);
     setSelectedOptionId(option_id)
@@ -821,7 +819,8 @@ function TestPortalMain() {
                 [{ list: "ordered" }, { list: "bullet" }],
                 ["bold", "italic", "underline", "strike"],
                 [{ color: [] }, { background: [] }],
-                [{ align: [] }]
+                [{ align: [] }],
+                ["image"]
               ],
             }}
           />
