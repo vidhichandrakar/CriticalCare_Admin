@@ -38,3 +38,19 @@ input[type=number]::-webkit-outer-spin-button {
   border-radius: 10px;
 
 }
+
+.ytp-button {
+  display: none;
+}
+
+.ytp-share-button {
+  display: none;
+}
+
+.ytp-share-button-visible {
+  display: none;
+}
+
+.ytp-show-share-title {
+  display: none;
+}
