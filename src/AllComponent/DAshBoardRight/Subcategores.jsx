@@ -223,11 +223,20 @@ const Subcategores = () => {
   };
   const navigate = useNavigate();
 
+
   useEffect(() => {
     getSubCategory({
       callBack: (response) => {
         const userCallBack = response?.data;
         setUserData(userCallBack);
+      },
+    });
+  }, []);
+  useEffect(() => {
+    getCategory({
+      callBack: (response) => {
+        const userCallBack = response?.data;
+        setCat(userCallBack);
       },
     });
   }, []);

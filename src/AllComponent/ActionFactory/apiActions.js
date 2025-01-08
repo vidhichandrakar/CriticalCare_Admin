@@ -282,6 +282,13 @@ export const getSubCategory = ({ callBack }) => {
   });
 };
 
+
+export const updateSubCategory = ({ category_id, payload, callBack }) => {
+  const url = APIS.getSubCategory + "/" + category_id;
+  axios.put(url, payload).then((response) => {
+    callBack(response);
+  });
+};
 export const updateCategory = ({ category_id, payload, callBack }) => {
   const url = APIS.getCategory + "/" + category_id;
   axios.put(url, payload).then((response) => {
