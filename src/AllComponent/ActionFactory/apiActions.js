@@ -699,6 +699,15 @@ export const getBlogs = ({ callBack, error }) => {
     })
     .catch((errorMessage) => {});
 };
+export const getBlogsbyId = ({bloglist_id, callBack, error }) => {
+  const url = APIS.addBlog + "/" + bloglist_id;;
+  axios
+    .get(url)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {});
+};
 
 export const deleteBlog = ({ bloglist_id, callBack }) => {
   const url = APIS.deleteBlog + "/" + bloglist_id;

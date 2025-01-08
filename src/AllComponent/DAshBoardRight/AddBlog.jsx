@@ -8,12 +8,15 @@ import Popover from "@mui/material/Popover";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { DailogBox } from "../../Util/CommonFields";
+import Configuration from "../Configuration/Configuration";
 
 const AddBlog = () => {
   const [blogCards, setBlogCards] = useState([]);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [openId, setOpenId] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedConfigValue, setSelectedConfigValue] = useState("");
+  const [hideCatConfig, setHideCatConfig] = useState(false);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -78,6 +81,16 @@ const AddBlog = () => {
     });
   };
 
+  const handleCatConfig = (id, value) => {
+    setHideCatConfig(true);
+    setSelectedConfigValue(value);
+    setOpenId(id);
+  };
+
+  const handleCloseCat = () => {
+    setHideCatConfig(false);
+  };
+
   return (
     <div className="grid-container">
       <Header
@@ -108,7 +121,10 @@ const AddBlog = () => {
                         // onClick={handleEdit}
                         // onClick={() => handleEdit("Category")}
                       >
-                        <EditIcon sx={{ cursor: "pointer" }} />
+                        <EditIcon
+                          sx={{ cursor: "pointer" }}
+                          onClick={() => handleCatConfig(item.bloglist_id ,"AddBlog")}
+                        />
                       </Box>
                       <Box
                         className="redDeleteofTestPortal redDelete"
@@ -142,6 +158,12 @@ const AddBlog = () => {
           handleConfirmDelete={handleConfirmDelete}
           handleDeleteClick={handleDeleteClick}
           handleCancelDelete={handleCancelDelete}
+        />
+        <Configuration
+          selectedConfigValue={selectedConfigValue}
+          handleCloseCat={handleCloseCat}
+          hideCatConfig={hideCatConfig}
+          openId= {openId}
         />
       </div>
     </div>

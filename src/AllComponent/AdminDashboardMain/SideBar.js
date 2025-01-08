@@ -292,7 +292,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                         </Typography>
                       </Link>
                     </li>
-                    <li className="listDesign" onClick={() => handleCatConfig("AddBlog")}>
+                    <li className="listDesign" onClick={() => handleCatConfig("Blog")}>
                       <Link className="textDecoration">
                         <Typography sx={{ textDecoration: "none", color: "grey" }}>
                           Add BLog

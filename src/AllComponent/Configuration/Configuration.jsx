@@ -16,7 +16,10 @@ import {
   addwebinar,
   createCategory,
   createSubCategory,
+  getBlogs,
+  getBlogsbyId,
   getCategory,
+  getTestByID,
   postBlog,
   updateCategory,
   updateDuration,
@@ -55,6 +58,7 @@ function Configuration({
   selectedConfigValue,
   category_id = 0,
   catdata,
+  openId,
 }) {
   const theme = useTheme();
   const [updatedCat, setUpdatedCat] = useState({ category_name: "" });
@@ -117,7 +121,16 @@ function Configuration({
         "video/mp4": [".mp4"],
       },
     });
-    
+     useEffect(() => {
+      console.log(openId, "ids")
+      getBlogsbyId({
+          bloglist_id: openId,
+          callBack: (response) => {
+            const userCallBack = response?.data;
+            // setBlogCards(userCallBack);
+          },
+        });
+      }, [openId]);
  
   
   const onMobileImageDrop = async (files) => {
@@ -169,9 +182,9 @@ function Configuration({
   const handleUrlChange = (e) => {
     setWebinarsurl(e.target.value);
   };
-  const handleDisplayLocationChange = (e) => {
-    setWebinarsDisplayLocation(e.target.value);
-  };
+  // const handleDisplayLocationChange = (e) => {
+  //   setWebinarsDisplayLocation(e.target.value);
+  // };
   useEffect(() => {
     if (selectedConfigValue === "SubCategory") {
       getCategory({
@@ -338,7 +351,7 @@ function Configuration({
       url: webinarsurl,
       start_date: startValue,
       End_date: endvalue,
-      display_locations: webinarsDisplayLocation,
+      display_locations: "webinarsDisplayLocation",
       created_by: 1,
       active_status: "Y",
       createdAt: "2024-09-16T10:04:53.927Z",
@@ -687,7 +700,7 @@ function Configuration({
                     </LocalizationProvider>
                   </div>
                 </div>
-                {CommonTypography(
+                {/* {CommonTypography(
                   { fontWeight: 600, label: "Display Locations" },
                   (Option = {
                     className: "addCatHeading",
@@ -699,7 +712,7 @@ function Configuration({
                   id="fullWidth"
                   sx={{ mt: 1, mb: 2 }}
                   onChange={handleDisplayLocationChange}
-                />
+                /> */}
               </DialogContent>
             </>
           ) : (
