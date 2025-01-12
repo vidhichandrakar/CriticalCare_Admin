@@ -26,7 +26,9 @@ import RightBox from "./RightBox";
 import {
   addContentOnCreateCourse,
   getContentType,
+  getCoupon,
   getTest,
+  putCoupon,
   updateTestPortal,
 } from "../../ActionFactory/apiActions";
 import attachmentimgae from "../../../Media/Images/undraw_attached_file_re_0n9b.svg";
@@ -80,6 +82,7 @@ function AddContent({
   const navigate = useNavigate();
 
   const [addedItemsInModules, setAddedItemsInModules] = useState([]);
+  const [couponName, setCouponName] = useState("")
   const [moduleDescription, setModuleDescription] = useState([
     {
       id: 0,
@@ -96,12 +99,21 @@ function AddContent({
     },
   ]);
   const [cat, setCat] = useState([]);
+  const [catcoupon, setCatcoupon] = useState([]);
   const [selectedTestId, setSelectedTestId] = useState("");
+  const [selectedCouponId, setSelectedCouponId] = useState("");
   const [subtestopened, setSubtestopen] = useState(false);
+  const [coupon, setCoupon] = useState(false)
   const [viewTestDialog, setViewTestDialog] = useState(false);
 
   const handleopenDialogSubjectiveTest = () => {
     setSubtestopen(true);
+  };
+  const handleopenDialogCoupon = () => {
+    setCoupon(true);
+  };
+  const handlecloseDialogCoupon = () => {
+    setCoupon(false);
   };
   const handleCloseDialogSubjectiveTest = () => {
     setSubtestopen(false);
@@ -109,6 +121,10 @@ function AddContent({
   const handleChange = (e) => {
     setCategoryName(e?.target?.value?.test_name);
     setSelectedTestId(e?.target?.value?.test_id);
+  };
+  const handleCouponChange = (e) => {
+    setCouponName(e?.target?.value?.coupon_code);
+    setSelectedCouponId(e?.target?.value?.coupon_id);
   };
 
   const MenuProps = {
@@ -129,6 +145,21 @@ function AddContent({
       error: () => {},
     });
   };
+  const handleSaveCouponTest = () => {
+    const payload = { course_id: courseData?.course_id };
+    console.log(selectedCouponId, "we")
+    putCoupon({
+      payload,
+      coupon_id: selectedCouponId,
+      
+      callBack: () => {},
+      error: () => {},
+    });
+    handlecloseDialogCoupon();
+    setCouponName("")
+  };
+
+
   useEffect(() => {
     if (courseData?.course_id) {
       getCourseContentById({
@@ -165,6 +196,16 @@ function AddContent({
       },
     });
   }, []);
+   useEffect(() => {
+      getCoupon({
+        callBack: (response) => {
+          console.log(response.data, "work")
+          setCatcoupon(response.data);
+        },
+        error: (err) => {
+        }
+      });
+    }, []);
   const handleAddContent = (event, idx) => {
     event.stopPropagation();
     if (idx !== expanded) {
@@ -697,7 +738,7 @@ function AddContent({
           <Button
             sx={{
               position: "fixed", // Stay at the bottom even when scrolling
-              left: "82%", // Center horizontally
+              left: "39%", // Center horizontally
               bottom: "30px", // Adjust the distance from the bottom
               transform: "translateX(-50%)", // Offset to truly center the button
             }}
@@ -709,10 +750,23 @@ function AddContent({
         </Box>
         <Box>
           <Button
+            onClick={handleopenDialogCoupon}
+            sx={{
+              position: "absolute",
+              bottom: 30,
+              marginLeft: "28%",
+            }}
+            variant="contained"
+          >
+            Add Coupon
+          </Button>
+        </Box>
+        <Box>
+          <Button
             onClick={handleSaveAllAttachedModule}
             sx={{
               position: "fixed", // Stay at the bottom even when scrolling
-              left: "60%", // Center horizontally
+              left: "90%", // Center horizontally
               bottom: "30px", // Adjust the distance from the bottom
               transform: "translateX(-50%)", // Offset to truly center the button
             }}
@@ -767,7 +821,7 @@ function AddContent({
         <Divider sx={{ mt: 1 }} />
         <DialogContent>
           <Box>
-            <FormControl sx={{ width: 540 }}>
+          <FormControl sx={{ width: 540 }}>
               <Select
                 MenuProps={MenuProps}
                 value={categoryName !== "" ? categoryName : "fjng"}
@@ -800,6 +854,74 @@ function AddContent({
             }}
             variant="outlined"
             onClick={handleSaveTest}
+          >
+            Save
+          </Button>
+        </DialogActions>
+      </BootstrapDialog>
+      <BootstrapDialog
+        className="PopUP"
+        onClose={handlecloseDialogCoupon}
+        aria-labelledby="customized-dialog-title"
+        open={coupon}
+      >
+        <DialogTitle
+          sx={{ m: 0, p: 2, fontSize: "1rem" }}
+          id="customized-dialog-title"
+        ></DialogTitle>
+        <Typography sx={{ mt: -2, ml: 3, fontWeight: 600 }}>
+          Add Coupon
+        </Typography>
+        <IconButton
+          aria-label="close"
+          onClick={handlecloseDialogCoupon}
+          sx={{
+            position: "absolute",
+            right: 8,
+            top: 10,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
+        <Divider sx={{ mt: 1 }} />
+        <DialogContent>
+          <Box>
+           
+                {console.log(couponName, "work")}
+            <FormControl sx={{ width: 540 }}>
+              <Select
+                MenuProps={MenuProps}
+                value={couponName !== "" ? couponName : "fjng"}
+                renderValue={(v) => {
+                  return couponName !== "" ? (
+                    <Typography>{couponName}</Typography>
+                  ) : (
+                    <Typography> Select Coupon</Typography>
+                  );
+                }}
+                onChange={(e) => handleCouponChange(e)}
+                className="addCatTextField"
+                sx={{ mt: 2 }}
+              >
+                {catcoupon.map((item) => (
+                  <MenuItem key={item._id} value={item}>
+                    {item.coupon_code}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            sx={{
+              textTransform: "none",
+              padding: "3px 0px",
+              marginRight: "16px",
+            }}
+            variant="outlined"
+            onClick={handleSaveCouponTest}
           >
             Save
           </Button>

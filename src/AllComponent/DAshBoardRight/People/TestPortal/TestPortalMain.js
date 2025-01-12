@@ -117,7 +117,7 @@ function TestPortalMain() {
   const [selectedTypeNId, setSelectedTypeNId] = useState();
   const [addNewSectionNav, setAddNewSectionNav] = useState();
   const [content, setContent] = useState("");
-  const [editpopup, setEditpopup] = useState("")
+  const [editpopup, setEditpopup] = useState("");
 
   const handleClickOpen = (editedQns, index) => {
     setEditedQuestion(editedQns);
@@ -342,21 +342,19 @@ function TestPortalMain() {
     });
     setEditedQuestion(editedOptionText);
   };
-  const handleOptionEditorChange=(e)=>{
-    setEditpopup(e)
-   
-  }
-  const handleUpdate=()=>{
+  const handleOptionEditorChange = (e) => {
+    setEditpopup(e);
+  };
+  const handleUpdate = () => {
     let editedOptionText = Object.assign({}, editedQuestion);
     editedOptionText?.question_options.map((option) => {
       if (option.option_id === selectedOptionId) {
         option.option_text = editpopup;
       }
-      
     });
     setEditedQuestion(editedOptionText);
-    handleCloseDialogForEdit()
-  }
+    handleCloseDialogForEdit();
+  };
   const handleDeleteOption = (index, option) => {
     let deletedOption = Object.assign({}, editedQuestion);
     const upatedOptions = editedQuestion.question_options.filter(
@@ -365,15 +363,15 @@ function TestPortalMain() {
     deletedOption.question_options = upatedOptions;
     setEditedQuestion(deletedOption);
   };
-  const [selectedOptionId, setSelectedOptionId] = useState("")
+  const [selectedOptionId, setSelectedOptionId] = useState("");
   const handleEditOption = (index, option_text, option_id) => {
     setOpeneditoptions(true);
     // setEditpopup(option_text);
-    setSelectedOptionId(option_id)
+    setSelectedOptionId(option_id);
   };
   const handleCloseDialogForEdit = () => {
     setOpeneditoptions(false);
-    setEditpopup("")
+    setEditpopup("");
   };
 
   const handleAddOptionPop = (e) => {
@@ -444,26 +442,28 @@ function TestPortalMain() {
   };
 
   const handleAddInstruction = () => {
+    console.log("work");
     const payload = {
       test_id: test_id,
       test_type_id: selectedTestType.test_type_id,
       test_section_name: "for testing", //need to work on this
-      test_section_Instruction: testInstructions,
+      test_section_Instruction: content,
       no_of_question: 5,
       marks_per_question: 4,
     };
-    if (testInstructions) {
-      createTestInfo({
-        id: testInfoId,
-        payload,
-        callBack: (res) => {
-          getTestByIdData();
-          // setTestInfoId(res.data.test_info_id);
-          setOpenInstruction(false);
-        },
-      });
-    }
+    // if (testInstructions) {
+    createTestInfo({
+      id: testInfoId,
+      payload,
+      callBack: (res) => {
+        getTestByIdData();
+        // setTestInfoId(res.data.test_info_id);
+        setOpenInstruction(false);
+      },
+    });
+    // }
   };
+
   const handleAddTestInstruction = (value) => {
     setTestInstructions(value);
   };
@@ -504,10 +504,10 @@ function TestPortalMain() {
         setMcqopen={setMcqopen}
         setTestInfoId={setTestInfoId}
       />
-      <BootstrapDialog
+      {/* <BootstrapDialog
         onClose={() => setOpenInstruction(false)}
         aria-labelledby="customized-dialog-title"
-        open={openInstruction}
+        // open={openInstruction}
       >
         <DialogTitle
           sx={{ m: 0, p: 2, alignItems: "center", textAlign: "center" }}
@@ -559,7 +559,7 @@ function TestPortalMain() {
             Done
           </Button>
         </DialogActions>
-      </BootstrapDialog>
+      </BootstrapDialog> */}
       <BootstrapDialog
         className="PopUP"
         onClose={handleCloseDialogMCQ}
@@ -820,12 +820,12 @@ function TestPortalMain() {
                 ["bold", "italic", "underline", "strike"],
                 [{ color: [] }, { background: [] }],
                 [{ align: [] }],
-                ["image"]
+                ["image"],
               ],
             }}
           />
 
-          <FormControl sx={{width: "100%"}}>
+          <FormControl sx={{ width: "100%" }}>
             <div className="answersAndSingle">
               <FormLabel
                 id="demo-radio-buttons-group-label"
@@ -856,27 +856,45 @@ function TestPortalMain() {
                 >
                   {editedQuestion?.question_options?.map((item, index) => {
                     return (
-                      <div className="addingDeleteOptions" style={{justifyContent: "space-between"}}>
-                         <Box sx={{display: "flex", flexDirection: "row", alignItems: "center"}}>
-                        <Radio
-                          checked={item.is_correct}
-                          onChange={(e) =>
-                            handleChangeOption(
-                              e,
-                              item.option_id,
-                              item.question_id
-                            )
-                          }
-                          value="a"
-                          name="radio-buttons"
-                          inputProps={{ "aria-label": "A" }}
-                        />
-                        <Box  className="optionsFeid">{tripmHtmlTagsToNormalFormatinside(item.option_text)}</Box></Box>
+                      <div
+                        className="addingDeleteOptions"
+                        style={{ justifyContent: "space-between" }}
+                      >
+                        <Box
+                          sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                          }}
+                        >
+                          <Radio
+                            checked={item.is_correct}
+                            onChange={(e) =>
+                              handleChangeOption(
+                                e,
+                                item.option_id,
+                                item.question_id
+                              )
+                            }
+                            value="a"
+                            name="radio-buttons"
+                            inputProps={{ "aria-label": "A" }}
+                          />
+                          <Box className="optionsFeid">
+                            {tripmHtmlTagsToNormalFormatinside(
+                              item.option_text
+                            )}
+                          </Box>
+                        </Box>
                         <div className="deleteComponent">
                           <EditIcon
                             className="deleteIconSixthPage"
                             onClick={(e) =>
-                              handleEditOption(index, item.option_text, item.option_id)
+                              handleEditOption(
+                                index,
+                                item.option_text,
+                                item.option_id
+                              )
                             }
                           />
 
@@ -887,7 +905,6 @@ function TestPortalMain() {
                             }
                           />
                         </div>
-                        
                       </div>
                     );
                   })}
@@ -897,44 +914,47 @@ function TestPortalMain() {
               <>
                 {editedQuestion?.question_options?.map((item, index) => {
                   return (
-                    
-                      <Box className="CheckBOx">
-                        <Checkbox
-                          onChange={(e) =>
-                            handleChangeOption(
-                              e,
-                              item.option_id,
-                              item.question_id
+                    <Box className="CheckBOx">
+                      <Checkbox
+                        onChange={(e) =>
+                          handleChangeOption(
+                            e,
+                            item.option_id,
+                            item.question_id
+                          )
+                        }
+                        checked={item.is_correct}
+                        {...label}
+                      />
+                      <TextField
+                        className="optionsFeid"
+                        id="outlined-helperText"
+                        defaultValue="Option 1"
+                        value={item.option_text}
+                        onChange={(e) =>
+                          handleRadioOptionChanges(e, item.option_id)
+                        }
+                      />
+                      <div className="deleteComponent">
+                        <EditIcon
+                          className="deleteIconSixthPage"
+                          onClick={(e) =>
+                            handleEditOption(
+                              index,
+                              item.option_text,
+                              item.option_id
                             )
                           }
-                          checked={item.is_correct}
-                          {...label}
                         />
-                        <TextField
-                          className="optionsFeid"
-                          id="outlined-helperText"
-                          defaultValue="Option 1"
-                          value={item.option_text}
-                          onChange={(e) =>
-                            handleRadioOptionChanges(e, item.option_id)
+
+                        <DeleteIcon
+                          className="deleteIconSixthPage"
+                          onClick={(e) =>
+                            handleDeleteOption(index, item.option_id)
                           }
                         />
-                        <div className="deleteComponent">
-                          <EditIcon
-                            className="deleteIconSixthPage"
-                            onClick={(e) =>
-                              handleEditOption(index, item.option_text, item.option_id)
-                            }
-                          />
-
-                          <DeleteIcon
-                            className="deleteIconSixthPage"
-                            onClick={(e) =>
-                              handleDeleteOption(index, item.option_id)
-                            }
-                          />
-                        </div>
-                        {/* <Box
+                      </div>
+                      {/* <Box
                           onClick={(e) =>
                             handleDeleteOption(index, item.option_id)
                           }
@@ -943,8 +963,7 @@ function TestPortalMain() {
                           <DeleteIcon className="deleteIconSixthPage" />
                           Delete
                         </Box> */}
-                      </Box>
-                    
+                    </Box>
                   );
                 })}
               </>
@@ -987,19 +1006,19 @@ function TestPortalMain() {
               <DialogContent dividers>
                 <ReactQuill
                   value={editpopup}
-                  onChange={(e)=>handleOptionEditorChange(e)}
+                  onChange={(e) => handleOptionEditorChange(e)}
                   defaultValue="This is an MCQ question"
                   className="thisIsMCQBtn"
                   id="outlined-helperText"
                   fullWidth
                   modules={{
                     toolbar: [
-                      [ "paragraph"],
+                      ["paragraph"],
                       [{ list: "ordered" }, { list: "bullet" }],
                       ["bold", "italic", "underline", "strike"],
                       [{ color: [] }, { background: [] }],
                       [{ align: [] }],
-                      ["image"]
+                      ["image"],
                     ],
                   }}
                 />
@@ -1060,12 +1079,12 @@ function TestPortalMain() {
                   fullWidth
                   modules={{
                     toolbar: [
-                      [ "paragraph"],
+                      ["paragraph"],
                       [{ list: "ordered" }, { list: "bullet" }],
                       ["bold", "italic", "underline", "strike"],
                       [{ color: [] }, { background: [] }],
                       [{ align: [] }],
-                      ["image"]
+                      ["image"],
                     ],
                   }}
                 />
@@ -1117,7 +1136,7 @@ function TestPortalMain() {
         <DialogContent
           dividers
           style={{
-            height: "500px",
+            // height: "500px",
             width: "550px",
           }}
         >
@@ -1125,7 +1144,7 @@ function TestPortalMain() {
             <b>Test Instructions</b>
           </Typography>
 
-          <CustomTextEditor
+          {/* <CustomTextEditor
             value={content}
             onChange={(e) => handleChangeOnEditor(e)}
             placeholder="Write something..."
@@ -1133,7 +1152,34 @@ function TestPortalMain() {
             //   height: "500px",
             //   width: "800px",
             // }}
-          />
+          /> */}
+
+          {/* <TextField
+            fullWidth
+            multiline
+            rows={4}
+            defaultValue="Default Value"
+            id="fullWidth"
+            
+          /> */}
+
+          <ReactQuill
+                value={content}
+                onChange={(e) => handleChangeOnEditor(e)}
+                // placeholder={placeholder}
+                multiline
+                rows={4}
+                modules={{
+                  toolbar: [
+                    [{ header: '1' }, { header: '2' }, { font: [] }],
+                    [{ list: 'ordered' }, { list: 'bullet' }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    ['link', 'image'],
+                  ],
+                }}
+                // style={{ style }}
+              />
+
           {/* </Box> */}
         </DialogContent>
 

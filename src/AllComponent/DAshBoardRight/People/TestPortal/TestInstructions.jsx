@@ -5,6 +5,7 @@ import "./AllTestPortal.css";
 import EditIcon from "@mui/icons-material/Edit";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
+import { tripmHtmlTagsToNormalFormatinside } from "../../../../Util/CommonHtmlTagsToTextConvertor";
 
 function TestInstructions({ testData, setOpen, handleOpen }) {
   return (
@@ -35,22 +36,22 @@ function TestInstructions({ testData, setOpen, handleOpen }) {
             </Typography>
           </div>
 
-          <Box className="testInstructionsBtn flexrow" sx={{ mt: 3, mb: 2 }}>
+          <Box className="testInstructionsBtn " sx={{ mt: 3, mb: 2 }}>
             {/* <Box className="flexrow testInstructions"> */}
             <Typography>
               <b>Test Instructions:</b>
-            </Typography>{" "}
+            </Typography>
             <Typography sx={{ color: "#000", ml: "4px" }}>
-              {testData?.testInfoDetails?.length
+              {tripmHtmlTagsToNormalFormatinside(testData?.testInfoDetails?.length
                 ? testData?.testInfoDetails[
                     testData?.testInfoDetails?.length - 1
                   ].test_section_Instruction
-                : ""}
+                : "")}
             </Typography>
             <span>
               <Typography
                 sx={{
-                  marginLeft: "10px",
+                  // marginLeft: "10px",
                   textTransform: "none",
                   color: "#19588f",
                   // ml: "-8px",
@@ -59,7 +60,7 @@ function TestInstructions({ testData, setOpen, handleOpen }) {
                 }}
                 onClick={handleOpen}
               >
-                Click here to add{" "}
+                Click here to add
               </Typography>
             </span>
           </Box>
