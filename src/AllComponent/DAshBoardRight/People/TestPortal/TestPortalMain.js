@@ -243,7 +243,7 @@ function TestPortalMain() {
         payload,
         callBack: (res) => {
           const count = noOfQuestion;
-
+          console.log(selectedTypeNId, "iddd")
           const divArray = Array.from({ length: count });
           let arr = [];
           divArray.map((item) => {
@@ -283,13 +283,29 @@ function TestPortalMain() {
                   { option_text: "Crow", is_correct: false },
                 ],
               });
-            }
-          });
+            } else if (
+              selectedTypeNId?.test_type_id === 3
+            ) {
+              arr.push(
+                  {
+                    "question_text": "Explain the process of photosynthesis.",
+                    "question_type": "Comprehension",
+                    "options": [
+                      { "option_text": "sunlight" },
+                      { "option_text": "chlorophyll" },
+                      { "option_text": "carbon dioxide"},
+                      { "option_text": "oxygen" }
+                    ]
+                  }
+               );
+        }
+      });
+
           const loadPay = {
             test_info_id: testInfoId,
             questions: arr,
           };
-          setLoaderState(true);
+          // setLoaderState(true);
           createNumberOfQuestions({
             payload: loadPay,
             callBack: (res) => {
