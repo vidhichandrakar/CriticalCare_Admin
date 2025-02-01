@@ -22,7 +22,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, InputLabel, OutlinedInput, Select, TextField, Typography } from "@mui/material";
 import TipsAndUpdatesTwoToneIcon from "@mui/icons-material/TipsAndUpdatesTwoTone";
 import Stack from "@mui/material/Stack";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -704,7 +704,31 @@ function TestPortalMain() {
               />
             </Box>
           </Box>
-
+          <FormControl
+          >
+            <Select
+              labelId="demo-multiple-name-label"
+              id="demo-multiple-name"
+              multiple
+              small
+              label="Section"
+              sx={{ minWidth: 550, mt: 4 }}
+              // value={personName}
+              // onChange={handleChange}
+              input={<OutlinedInput label="Name" />}
+            // MenuProps={MenuProps}
+            >
+              {/* {names.map((name) => (
+                <MenuItem
+                  key={name}
+                  value={name}
+                  style={getStyles(name, personName, theme)}
+                >
+                  {name}
+                </MenuItem>
+              ))} */}
+            </Select>
+          </FormControl>
           <Box className="CheckBOx">
             <Checkbox {...label} />
             <Typography>Negative Marks</Typography>

@@ -378,7 +378,7 @@ const Banner = () => {
                 </Typography>
               </div>
             </div>
-            <div className="PreviewBox">
+            {/* <div className="PreviewBox">
               <Typography sx={{ color: "black" }}>Preview</Typography>
               <Typography sx={{ mt: 1 }}>
                 See how the banners will appear to students using your app. You
@@ -400,7 +400,7 @@ const Banner = () => {
                     autoplay={false}
                   >
                     {/* Check if previewImage exists, if so show that, else show default images */}
-                    {previewImage ? (
+                    {/* {previewImage ? (
                       <div>
                         <Box
                           component="img"
@@ -561,7 +561,7 @@ const Banner = () => {
                   View previous banners
                 </Typography>
               </Box>
-            </div>
+            </div>  */}
           </div>
         </div>
         <PreviousBannerPopup

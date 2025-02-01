@@ -271,13 +271,13 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                         </Typography>
                       </Link>
                     </li> */}
-                    <li className="listDesign" onClick={() => handleCatConfig("Duration")}>
+                    {/* <li className="listDesign" onClick={() => handleCatConfig("Duration")}>
                       <Link className="textDecoration">
                         <Typography sx={{ textDecoration: "none", color: "grey" }}>
                           Duration
                         </Typography>
                       </Link>
-                    </li>
+                    </li> */}
                     {/* <li className="listDesign" onClick={() => handleCatConfig("Team Member")}>
                       <Link className="textDecoration">
                         <Typography sx={{ textDecoration: "none", color: "grey" }}>
@@ -292,13 +292,13 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                         </Typography>
                       </Link>
                     </li>
-                    <li className="listDesign" onClick={() => handleCatConfig("Blog")}>
+                    {/* <li className="listDesign" onClick={() => handleCatConfig("Blog")}>
                       <Link className="textDecoration">
                         <Typography sx={{ textDecoration: "none", color: "grey" }}>
                           Add BLog
                         </Typography>
                       </Link>
-                    </li>
+                    </li> */}
                   </ul>
                 </List>
               </Collapse>
