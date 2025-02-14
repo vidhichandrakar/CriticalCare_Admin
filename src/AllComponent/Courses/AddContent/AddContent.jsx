@@ -448,7 +448,7 @@ function AddContent({
   };
   return (
     <>
-      <div style={{ height: "120px" }}>
+      <div>
         {moduleDescription?.map((itemContent, index) => (
           <div style={{ margin: "20px" }}>
             <Accordion
@@ -738,7 +738,7 @@ function AddContent({
           <Button
             sx={{
               position: "fixed", // Stay at the bottom even when scrolling
-              left: "39%", // Center horizontally
+              left: "41%", // Center horizontally
               bottom: "30px", // Adjust the distance from the bottom
               transform: "translateX(-50%)", // Offset to truly center the button
             }}
