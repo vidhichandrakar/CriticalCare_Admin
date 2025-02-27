@@ -784,7 +784,7 @@ function TestPortalMain() {
               </span>
             </div>
 
-            <div className="mcqbuttons">
+            {/* <div className="mcqbuttons">
               <Stack direction="row" spacing={2}>
                 <Button variant="contained" disabled className="previousMCQBtn">
                   Previous
@@ -796,7 +796,7 @@ function TestPortalMain() {
                   Next
                 </Button>
               </Stack>
-            </div>
+            </div> */}
           </div>
         </DialogTitle>
         <IconButton
