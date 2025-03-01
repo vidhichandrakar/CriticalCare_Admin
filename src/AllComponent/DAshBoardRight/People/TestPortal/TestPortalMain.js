@@ -22,7 +22,15 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
-import { Box, Button, InputLabel, OutlinedInput, Select, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  InputLabel,
+  OutlinedInput,
+  Select,
+  TextField,
+  Typography,
+} from "@mui/material";
 import TipsAndUpdatesTwoToneIcon from "@mui/icons-material/TipsAndUpdatesTwoTone";
 import Stack from "@mui/material/Stack";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -243,7 +251,6 @@ function TestPortalMain() {
         payload,
         callBack: (res) => {
           const count = noOfQuestion;
-          console.log(selectedTypeNId, "iddd")
           const divArray = Array.from({ length: count });
           let arr = [];
           divArray.map((item) => {
@@ -283,23 +290,19 @@ function TestPortalMain() {
                   { option_text: "Crow", is_correct: false },
                 ],
               });
-            } else if (
-              selectedTypeNId?.test_type_id === 3
-            ) {
-              arr.push(
-                  {
-                    "question_text": "Explain the process of photosynthesis.",
-                    "question_type": "Comprehension",
-                    "options": [
-                      { "option_text": "sunlight" },
-                      { "option_text": "chlorophyll" },
-                      { "option_text": "carbon dioxide"},
-                      { "option_text": "oxygen" }
-                    ]
-                  }
-               );
-        }
-      });
+            } else if (selectedTypeNId?.test_type_name === "Comprehensive") {
+              arr.push({
+                question_text: "Explain the process of photosynthesis.",
+                question_type: "comprehensive",
+                options: [
+                  { option_text: "sunlight", is_correct: false },
+                  { option_text: "chlorophyll", is_correct: false },
+                  { option_text: "carbon dioxide", is_correct: false },
+                  { option_text: "oxygen", is_correct: false },
+                ],
+              });
+            }
+          });
 
           const loadPay = {
             test_info_id: testInfoId,
@@ -458,7 +461,6 @@ function TestPortalMain() {
   };
 
   const handleAddInstruction = () => {
-    console.log("work");
     const payload = {
       test_id: test_id,
       test_type_id: selectedTestType.test_type_id,
@@ -704,8 +706,7 @@ function TestPortalMain() {
               />
             </Box>
           </Box>
-          <FormControl
-          >
+          <FormControl>
             <Select
               labelId="demo-multiple-name-label"
               id="demo-multiple-name"
@@ -716,7 +717,7 @@ function TestPortalMain() {
               // value={personName}
               // onChange={handleChange}
               input={<OutlinedInput label="Name" />}
-            // MenuProps={MenuProps}
+              // MenuProps={MenuProps}
             >
               {/* {names.map((name) => (
                 <MenuItem
@@ -784,19 +785,19 @@ function TestPortalMain() {
               </span>
             </div>
 
-            {/* <div className="mcqbuttons">
+            <div className="mcqbuttons">
               <Stack direction="row" spacing={2}>
-                <Button variant="contained" disabled className="previousMCQBtn">
+                {/* <Button variant="contained" disabled className="previousMCQBtn">
                   Previous
-                </Button>
+                </Button> */}
                 <Button onClick={handelSaveOption} className="saveMCQBtn">
                   Save
                 </Button>
-                <Button variant="contained" disabled className="nextMCQBtn">
+                {/* <Button variant="contained" disabled className="nextMCQBtn">
                   Next
-                </Button>
+                </Button> */}
               </Stack>
-            </div> */}
+            </div>
           </div>
         </DialogTitle>
         <IconButton
@@ -871,7 +872,11 @@ function TestPortalMain() {
                 id="demo-radio-buttons-group-label"
                 sx={{ lineHeight: "2.5rem" }}
               >
-                <b>Answers</b>
+                <b>
+                  {editedQuestion?.question_type === "comprehensive"
+                    ? "Key Words"
+                    : "Answers"}{" "}
+                </b>
               </FormLabel>
 
               <select
@@ -1003,6 +1008,63 @@ function TestPortalMain() {
                           <DeleteIcon className="deleteIconSixthPage" />
                           Delete
                         </Box> */}
+                    </Box>
+                  );
+                })}
+              </>
+            ) : typesOfQns === "comprehensive" ? (
+              <>
+                {editedQuestion?.question_options?.map((item, index) => {
+                  return (
+                    <Box className="/">
+                      {/* <Checkbox
+                    onChange={(e) =>
+                      handleChangeOption(
+                        e,
+                        item.option_id,
+                        item.question_id
+                      )
+                    }
+                    checked={item.is_correct}
+                    {...label}
+                  /> */}
+                      <TextField
+                        className="optionsFeid"
+                        id="outlined-helperText"
+                        defaultValue="Option 1"
+                        value={item.option_text}
+                        onChange={(e) =>
+                          handleRadioOptionChanges(e, item.option_id)
+                        }
+                      />
+                      <div className="deleteComponent">
+                        <EditIcon
+                          className="deleteIconSixthPage"
+                          onClick={(e) =>
+                            handleEditOption(
+                              index,
+                              item.option_text,
+                              item.option_id
+                            )
+                          }
+                        />
+
+                        <DeleteIcon
+                          className="deleteIconSixthPage"
+                          onClick={(e) =>
+                            handleDeleteOption(index, item.option_id)
+                          }
+                        />
+                      </div>
+                      {/* <Box
+                      onClick={(e) =>
+                        handleDeleteOption(index, item.option_id)
+                      }
+                      style={{ cursor: "pointer", alignItems: "center", display: "flex" }}
+                    >
+                      <DeleteIcon className="deleteIconSixthPage" />
+                      Delete
+                    </Box> */}
                     </Box>
                   );
                 })}
@@ -1204,21 +1266,21 @@ function TestPortalMain() {
           /> */}
 
           <ReactQuill
-                value={content}
-                onChange={(e) => handleChangeOnEditor(e)}
-                // placeholder={placeholder}
-                multiline
-                rows={4}
-                modules={{
-                  toolbar: [
-                    [{ header: '1' }, { header: '2' }, { font: [] }],
-                    [{ list: 'ordered' }, { list: 'bullet' }],
-                    ['bold', 'italic', 'underline', 'strike'],
-                    ['link', 'image'],
-                  ],
-                }}
-                // style={{ style }}
-              />
+            value={content}
+            onChange={(e) => handleChangeOnEditor(e)}
+            // placeholder={placeholder}
+            multiline
+            rows={4}
+            modules={{
+              toolbar: [
+                [{ header: "1" }, { header: "2" }, { font: [] }],
+                [{ list: "ordered" }, { list: "bullet" }],
+                ["bold", "italic", "underline", "strike"],
+                ["link", "image"],
+              ],
+            }}
+            // style={{ style }}
+          />
 
           {/* </Box> */}
         </DialogContent>
