@@ -157,12 +157,14 @@ display: flex;
   flex-direction: row;
   color: grey;
   /* Default color */
+  text-decoration: none !important;
 }
 
 .hoverrr2 {
   background-color: #e5f7fd !important;
   border-right: 3px solid #0075ff !important;
   color: #0075ff !important;
+  text-decoration: none !important;
 }
 
 .hoverrr:hover {
@@ -170,6 +172,7 @@ display: flex;
   cursor: pointer;
   border-right: 3px solid #0075ff !important;
   color: #0075ff !important;
+  /* text-decoration: none; */
 }
 
 .paddingD {
