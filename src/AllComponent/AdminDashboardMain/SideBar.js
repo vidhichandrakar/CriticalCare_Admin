@@ -106,14 +106,16 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
     setPopForBlog(!popForBlog);
   };
 
-
   return (
-    <aside id="sidebar" className={openSidebarToggle ? "sidebar-responsive" : ""}>
+    <aside
+      id="sidebar"
+      className={openSidebarToggle ? "sidebar-responsive" : ""}
+    >
       <div className="Sider-Box">
         {/* Logo Section */}
         <div className="sidebar-logo">
-          <div >
-            <div >
+          <div>
+            <div>
               <img src={Logo} className="SideBarLogo" alt="Logo" />
             </div>
           </div>
@@ -122,7 +124,9 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
           <div className="sidebar-list sidebar-list-item BottomLine">
             <Link to="/admin/DashBoard">
               <Box
-                className={`hoverrr ${highlight === "DashBoard" ? "hoverrr2" : ""}`}
+                className={`hoverrr ${
+                  highlight === "DashBoard" ? "hoverrr2" : ""
+                }`}
                 onClick={() => {
                   handleHighlight("DashBoard");
                 }}
@@ -133,7 +137,10 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
             </Link>
 
             <Link to="/admin/YourCourses">
-              <ListItemButton onClick={handleClickCollapse} className="listButton">
+              <ListItemButton
+                onClick={handleClickCollapse}
+                className="listButton"
+              >
                 <MenuBookIcon className="blueHoverIcon" />
                 <ListItemText primary="Courses" className="coursesHead" />
                 {openCollapse ? <ExpandLess /> : <ExpandMore />}
@@ -147,7 +154,9 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                         <Typography
                           id="hoverrr"
                           className={
-                            highlight === "YourCourses" ? "hoverrr2 paddingD" : "paddingD"
+                            highlight === "YourCourses"
+                              ? "hoverrr2 paddingD"
+                              : "paddingD"
                           }
                           sx={{ mt: -1, color: "grey" }}
                           onClick={() => handleHighlight("YourCourses")}
@@ -161,13 +170,45 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                         <Typography
                           id="hoverrr"
                           className={
-                            highlight === "CreateCoupon" ? "hoverrr2 paddingD" : "paddingD"
+                            highlight === "CreateCoupon"
+                              ? "hoverrr2 paddingD"
+                              : "paddingD"
                           }
                           sx={{ mt: -2.5, color: "grey" }}
                           onClick={() => handleHighlight("CreateCoupon")}
                         >
                           Manage Coupons
                         </Typography>
+                      </Link>
+                    </li>
+                    <li className="listDesign">
+                      <Link to="/admin/Categories" className="textDecoration">
+                        <Box
+                          id="hoverrr"
+                          className={`hoverrr ${
+                            highlight === "YourCourses" ? "hoverrr2" : ""
+                          }`}
+                          sx={{ mt: -2 }}
+                          onClick={() => handleHighlight("Categories")}
+                        >
+                          <Typography>Categories</Typography>
+                        </Box>
+                      </Link>
+                    </li>
+                    <li className="listDesign">
+                      <Link
+                        to="/admin/Subcategories"
+                        className="textDecoration"
+                      >
+                        <Box
+                          className={`hoverrr ${
+                            highlight === "Subcategories" ? "hoverrr2" : ""
+                          }`}
+                          sx={{ mt: -2 }}
+                          onClick={() => handleHighlight("Subcategories")}
+                        >
+                          <Typography>Subcategories</Typography>
+                        </Box>
                       </Link>
                     </li>
                   </ul>
@@ -177,7 +218,9 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
 
             <Link to="/admin/TestPortal">
               <Box
-                className={`hoverrr ${highlight === "TestPortal" ? "hoverrr2" : ""}`}
+                className={`hoverrr ${
+                  highlight === "TestPortal" ? "hoverrr2" : ""
+                }`}
                 sx={{ mt: -2 }}
                 onClick={() => handleHighlight("TestPortal")}
               >
@@ -188,7 +231,9 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
 
             <Link to="/admin/Analytics">
               <Box
-                className={`hoverrr ${highlight === "Analytics" ? "hoverrr2" : ""}`}
+                className={`hoverrr ${
+                  highlight === "Analytics" ? "hoverrr2" : ""
+                }`}
                 sx={{ mt: -2 }}
                 onClick={() => handleHighlight("Analytics")}
               >
@@ -198,7 +243,10 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
             </Link>
 
             <Link to="/admin/User">
-              <ListItemButton onClick={handleClickPeople} className="listButton">
+              <ListItemButton
+                onClick={handleClickPeople}
+                className="listButton"
+              >
                 <PersonIcon />
                 <ListItemText primary="People" className="coursesHead" />
                 {openPeople ? <ExpandLess /> : <ExpandMore />}
@@ -211,7 +259,11 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                       <Link to="/admin/User" className="textDecoration">
                         <Typography
                           id="hoverrr"
-                          className={highlightPeople === "User" ? "hoverrr2 paddingD" : "paddingD"}
+                          className={
+                            highlightPeople === "User"
+                              ? "hoverrr2 paddingD"
+                              : "paddingD"
+                          }
                           sx={{ textDecoration: "none", color: "grey", mt: -1 }}
                           onClick={() => handleHighlightPeople("User")}
                         >
@@ -223,11 +275,19 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                       <Link to="/admin/MyTeam" className="textDecoration">
                         <Typography
                           id="hoverrr"
-                          className={highlightPeople === "MyTeam" ? "hoverrr2 paddingD" : "paddingD"}
-                          sx={{ textDecoration: "none", color: "grey", mt: -2.5 }}
+                          className={
+                            highlightPeople === "MyTeam"
+                              ? "hoverrr2 paddingD"
+                              : "paddingD"
+                          }
+                          sx={{
+                            textDecoration: "none",
+                            color: "grey",
+                            mt: -2.5,
+                          }}
                           onClick={() => handleHighlightPeople("MyTeam")}
                         >
-                        Team Member
+                          Users
                         </Typography>
                       </Link>
                     </li>
@@ -238,7 +298,9 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
 
             <Link to="/admin/Testimonial">
               <Box
-                className={`hoverrr ${highlight === "Testimonial" ? "hoverrr2" : ""}`}
+                className={`hoverrr ${
+                  highlight === "Testimonial" ? "hoverrr2" : ""
+                }`}
                 sx={{ mt: -2 }}
                 onClick={() => handleHighlight("Testimonial")}
               >
@@ -257,72 +319,21 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               <Collapse in={hideSubConfig} timeout="auto" unmountOnExit>
                 <List component="div">
                   <ul sx={{ Height: "100%" }}>
-                    {/* <li className="myCourses" onClick={() => handleCatConfig("Category")}>
+                    <li
+                      className="listDesign"
+                      onClick={() => handleCatConfig("Webinar")}
+                    >
                       <Link className="textDecoration">
-                        <Typography sx={{ textDecoration: "none", color: "grey" }}>
-                          Category
-                        </Typography>
-                      </Link>
-                    </li> */}
-                    {/* <li className="listDesign" onClick={() => handleCatConfig("SubCategory")}>
-                      <Link className="textDecoration">
-                        <Typography sx={{ textDecoration: "none", color: "grey" }}>
-                          Sub Category
-                        </Typography>
-                      </Link>
-                    </li> */}
-                    {/* <li className="listDesign" onClick={() => handleCatConfig("Duration")}>
-                      <Link className="textDecoration">
-                        <Typography sx={{ textDecoration: "none", color: "grey" }}>
-                          Duration
-                        </Typography>
-                      </Link>
-                    </li> */}
-                    {/* <li className="listDesign" onClick={() => handleCatConfig("Team Member")}>
-                      <Link className="textDecoration">
-                        <Typography sx={{ textDecoration: "none", color: "grey" }}>
-                          Team Member
-                        </Typography>
-                      </Link>
-                    </li> */}
-                    <li className="listDesign" onClick={() => handleCatConfig("Webinar")}>
-                      <Link className="textDecoration">
-                        <Typography sx={{ textDecoration: "none", color: "grey" }}>
+                        <Typography
+                          sx={{ textDecoration: "none", color: "grey" }}
+                        >
                           Webinar
                         </Typography>
                       </Link>
                     </li>
-                    {/* <li className="listDesign" onClick={() => handleCatConfig("Blog")}>
-                      <Link className="textDecoration">
-                        <Typography sx={{ textDecoration: "none", color: "grey" }}>
-                          Add BLog
-                        </Typography>
-                      </Link>
-                    </li> */}
                   </ul>
                 </List>
               </Collapse>
-            </Link>
-
-            <Link to="/admin/Categories">
-              <Box
-                className={`hoverrr ${highlight === "Categories" ? "hoverrr2" : ""}`}
-                sx={{ mt: -2 }}
-                onClick={() => handleHighlight("Categories")}
-              >
-                <AssignmentIcon className="icon" />
-                <Typography>Categories</Typography>
-              </Box>
-            </Link>
-            <Link to="/admin/Subcategories">
-              <Box
-                className={`hoverrr ${highlight === "Subcategories" ? "hoverrr2" : ""}`}
-                sx={{ mt: -2 }}
-                onClick={() => handleHighlight("Subcategories")}
-              >
-                <AssignmentIcon className="icon" />
-                <Typography>Subcategories</Typography>
-              </Box>
             </Link>
             <Link to="/admin/BLogs">
               <Box
@@ -335,11 +346,11 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               </Box>
             </Link>
 
-           
-
             <Link to="/admin/TeamMember">
               <Box
-                className={`hoverrr ${highlight === "TeamMember" ? "hoverrr2" : ""}`}
+                className={`hoverrr ${
+                  highlight === "TeamMember" ? "hoverrr2" : ""
+                }`}
                 sx={{ mt: -2 }}
                 onClick={() => handleHighlight("TeamMember")}
               >
@@ -360,7 +371,6 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
       </div>
     </aside>
   );
-
 }
 
 export default SideBar;
