@@ -23,7 +23,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
 const CreateCouponForm = ({}) => {
-  const [coupontype, setCoupontype] = useState("");
+  const [coupontype, setCoupontype] = useState("Flat Discounts");
   const [startDate, setStartDate] = useState(dayjs(new Date()));
   const [endDate, setEndDate] = useState(dayjs(new Date()));
   const [discountamount, setDiscountamount] = useState("");
@@ -172,12 +172,12 @@ const CreateCouponForm = ({}) => {
           sx={{ mt: 1, width: "93%" }}
           fullWidth
           size="small"
-          placeholder=" Enter discount percentage"
+          placeholder={coupontype==="Flat Discounts"?" Enter flat discount":" Enter discount percentage"}
           id="fullWidth"
           className="BoxShadow"
           InputProps={{
             startAdornment: (
-              <Typography sx={{ color: "#aca9a9", fontSize: "1.1em" }}>% </Typography>
+              coupontype==="Flat Discounts"?<Box sx={{ color: "#aca9a9", fontSize: "1.1em" }}> ₹</Box>: <Typography sx={{ color: "#aca9a9", fontSize: "1.1em" }}>% </Typography>
             ),
           }}
           onChange={handleFlatDiscount}

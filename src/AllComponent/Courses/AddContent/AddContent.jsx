@@ -143,17 +143,19 @@ function AddContent({
     updateTestPortal({
       payload,
       testId: selectedTestId,
-      callBack: () => {},
-      error: () => {},
+      callBack: () => {
+        handleCloseDialogSubjectiveTest();
+      },
+      error: (error) => {
+        console.error(error);
+      },
     });
   };
   const handleSaveCouponTest = () => {
     const payload = { course_id: courseData?.course_id };
-    console.log(selectedCouponId, "we")
     putCoupon({
       payload,
       coupon_id: selectedCouponId,
-      
       callBack: () => {},
       error: () => {},
     });
