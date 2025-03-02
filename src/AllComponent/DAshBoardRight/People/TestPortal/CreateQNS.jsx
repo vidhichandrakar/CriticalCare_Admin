@@ -128,9 +128,16 @@ function CreateQNS({
                           <div className="QnsBoxs">
                             <div className="MCQBox" key={indexSeq}>
                               <Typography
-                                sx={{ color: "rgba(0, 0, 0, 0.685)", display: "flex", alignItems: "center" }}
+                                sx={{
+                                  color: "rgba(0, 0, 0, 0.685)",
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
                               >
-                                {index + 1}. {tripmHtmlTagsToNormalFormatinside(questionTest.question_text)}
+                                {index + 1}.{" "}
+                                {tripmHtmlTagsToNormalFormatinside(
+                                  questionTest.question_text
+                                )}
                               </Typography>
                               {questionTest.question_type ===
                               "single-select" ? (
@@ -148,7 +155,9 @@ function CreateQNS({
                                               inputProps={{ "aria-label": "A" }}
                                             />
                                             <Typography>
-                                              {tripmHtmlTagsToNormalFormatinside(option.option_text)}
+                                              {tripmHtmlTagsToNormalFormatinside(
+                                                option.option_text
+                                              )}
                                             </Typography>
                                           </div>
                                         );
@@ -156,6 +165,42 @@ function CreateQNS({
                                     )}
                                   </RadioGroup>
                                 </>
+                              ) : questionTest.question_type ===
+                                "comprehensive" ? (
+                                <div>
+                                  <>
+                                    <RadioGroup
+                                      aria-labelledby="demo-radio-buttons-group-label"
+                                      name="radio-buttons-group"
+                                    >
+                                      <Typography
+                                        style={{
+                                          marginTop: "15px",
+                                          marginBottom: "15px",
+                                        }}
+                                      >
+                                        Key Words
+                                      </Typography>
+                                      {questionTest.question_options.map(
+                                        (option) => {
+                                          return (
+                                            <div className="addingDeleteOptions mt1">
+                                              {/* <Checkbox
+                                                checked={option.is_correct}
+                                                {...label}
+                                              /> */}
+                                              {/* lllllll */}
+
+                                              <Typography>
+                                                {option.option_text}
+                                              </Typography>
+                                            </div>
+                                          );
+                                        }
+                                      )}
+                                    </RadioGroup>
+                                  </>
+                                </div>
                               ) : (
                                 <div>
                                   <>
@@ -253,7 +298,6 @@ function CreateQNS({
                       <Typography className="headofbox">
                         Let's add questions
                       </Typography>
-                     
                     </div>
                   )}
                 </AccordionDetails>

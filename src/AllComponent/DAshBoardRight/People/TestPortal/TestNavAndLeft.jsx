@@ -36,7 +36,6 @@ function TestNavAndLeft({
   setAddNewSectionNav,
 }) {
   const [expanded, setExpanded] = useState(false);
-
   const handleClickOpenMCQ = (type) => {
     const testTypeNId = testType.filter((item) => item.test_type_name === type);
     setSelectedTypeNId({
