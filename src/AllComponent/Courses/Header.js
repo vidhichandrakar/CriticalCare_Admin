@@ -96,13 +96,13 @@ const Header = ({ Heading, subHeading, LinkAddress, OpenSidebar }) => {
             </MenuItem>
             <Divider/>
 
-            <MenuItem className="selectDesign hoverrr" value={"Profiles"}>
+            {/* <MenuItem className="selectDesign hoverrr" value={"Profiles"}>
               <CurrencyRupeeIcon className="designingIcons" />
               <span className="ccLogout">Recharge</span>
             </MenuItem>
-            <Divider/>
+            <Divider/> */}
 
-            <MenuItem className="selectDesign hoverrr" value={"Profiled"}>
+            {/* <MenuItem className="selectDesign hoverrr" value={"Profiled"}>
               <SettingsRoundedIcon className="designingIcons" />
               <span className="ccLogout">Settings</span>
             </MenuItem>
@@ -111,8 +111,8 @@ const Header = ({ Heading, subHeading, LinkAddress, OpenSidebar }) => {
             <MenuItem className="selectDesign hoverrr" value={"Profilea"}>
               <QuizRoundedIcon className="designingIcons" />
               <span className="ccLogout">Help and Support</span>
-            </MenuItem>
-            <Divider/>
+            </MenuItem> */}
+            {/* <Divider/> */}
 
             <Link to="/admin" className="textDecorationDD">
               <MenuItem
