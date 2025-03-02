@@ -14,10 +14,10 @@ function TestProtalHeader({testData}) {
             </Link>
             <p style={{fontSize: "1.5rem", marginLeft: "10px"}}>{testData?.test_name}</p>
           </div>
-          <div className="previewnsaveBtn">
+          {/* <div className="previewnsaveBtn">
             <Button className="previewNavBtn" variant="outlined">Preview</Button>
             <Button className="saveTestNavBtn" variant="outlined" disabled>Save Test</Button>
-          </div>
+          </div> */}
         </div>
     // </div>
   )

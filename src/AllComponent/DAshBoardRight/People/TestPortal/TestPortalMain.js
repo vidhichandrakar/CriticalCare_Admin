@@ -706,7 +706,7 @@ function TestPortalMain() {
               />
             </Box>
           </Box>
-          <FormControl>
+          {/* <FormControl>
             <Select
               labelId="demo-multiple-name-label"
               id="demo-multiple-name"
@@ -728,8 +728,8 @@ function TestPortalMain() {
                   {name}
                 </MenuItem>
               ))} */}
-            </Select>
-          </FormControl>
+            {/* </Select>
+          </FormControl> */}
           <Box className="CheckBOx">
             <Checkbox {...label} />
             <Typography>Negative Marks</Typography>
