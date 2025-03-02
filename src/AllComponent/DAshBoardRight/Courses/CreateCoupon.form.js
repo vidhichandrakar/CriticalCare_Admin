@@ -172,12 +172,12 @@ const CreateCouponForm = ({}) => {
           sx={{ mt: 1, width: "93%" }}
           fullWidth
           size="small"
-          placeholder="Enter discount amount"
+          placeholder=" Enter discount percentage"
           id="fullWidth"
           className="BoxShadow"
           InputProps={{
             startAdornment: (
-              <CurrencyRupeeIcon sx={{ color: "#aca9a9", fontSize: "1.1em" }} />
+              <Typography sx={{ color: "#aca9a9", fontSize: "1.1em" }}>% </Typography>
             ),
           }}
           onChange={handleFlatDiscount}
