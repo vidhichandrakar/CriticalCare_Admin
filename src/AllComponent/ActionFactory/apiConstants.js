@@ -35,7 +35,7 @@ export const APIS = {
   getCoupon: REACT_APP_API + "/coupon",
   deleteBlog: REACT_APP_API + "/blog/bloglist",
   getModuleContentCount: REACT_APP_API + "/course/module",
-  getUserType:  REACT_APP_API + "/user/type",
-  getEnrollStudent:  REACT_APP_API + "/coursepurchase/stdenroll",
+  getUserType: REACT_APP_API + "/user/type",
+  getEnrollStudent: REACT_APP_API + "/coursepurchase/stdenroll",
   getTestBycourseId: REACT_APP_API + "/test/testbycourse",
 };

@@ -500,6 +500,7 @@ function TestPortalMain() {
         numberOfMcqQns={numberOfMcqQns}
         setSelectedTypeNId={setSelectedTypeNId}
         setAddNewSectionNav={setAddNewSectionNav}
+        getTestByIdData={getTestByIdData}
       />
 
       <TestFirstPage

@@ -94,7 +94,6 @@ export const deleteUser = ({ userId, callBack }) => {
   });
 };
 
-
 export const banner = ({ callBack, error }) => {
   const url = APIS.banner;
   axios
@@ -282,7 +281,6 @@ export const getSubCategory = ({ callBack }) => {
   });
 };
 
-
 export const updateSubCategory = ({ category_id, payload, callBack }) => {
   const url = APIS.getSubCategory + "/" + category_id;
   axios.put(url, payload).then((response) => {
@@ -408,7 +406,7 @@ export const getTeam = ({ callBack, error }) => {
 };
 
 export const getAllUsers = ({ userId, callBack }) => {
-  const url = APIS.getAllUsers+ "/" + userId;
+  const url = APIS.getAllUsers + "/" + userId;
   axios.get(url).then((response) => {
     callBack(response);
   });
@@ -457,8 +455,8 @@ export const createTestPortal = ({ payload, callBack, error }) => {
       // error(errorMessage);
     });
 };
-export const updateTestPortal = ({ payload,testId, callBack, error }) => {
-  const url = APIS.getTest+"/"+testId;
+export const updateTestPortal = ({ payload, testId, callBack, error }) => {
+  const url = APIS.getTest + "/" + testId;
   axios
     .put(url, payload)
     .then((response) => {
@@ -549,8 +547,7 @@ export const createUser = ({ payload, callBack, error }) => {
     });
 };
 
-
-export const resetpass = ({user_id, payload, callBack, error }) => {
+export const resetpass = ({ user_id, payload, callBack, error }) => {
   const url = APIS.adminLogin + "/" + "resetpass/" + user_id;
   axios
     .put(url, payload)
@@ -593,7 +590,6 @@ export const publishOrEditCourse = ({ callBack, courseId, payload }) => {
     callBack(response);
   });
 };
-
 
 export const getCourseDuration = ({ callBack }) => {
   const url = APIS.getCourseDuration;
@@ -699,8 +695,8 @@ export const getBlogs = ({ callBack, error }) => {
     })
     .catch((errorMessage) => {});
 };
-export const getBlogsbyId = ({bloglist_id, callBack, error }) => {
-  const url = APIS.addBlog + "/" + bloglist_id;;
+export const getBlogsbyId = ({ bloglist_id, callBack, error }) => {
+  const url = APIS.addBlog + "/" + bloglist_id;
   axios
     .get(url)
     .then((response) => {
@@ -763,5 +759,9 @@ export const getTestBycourseId = ({ callBack, courseId, error }) => {
     });
 };
 
-
-
+export const removeTestSection = ({ callBack, testInfoId }) => {
+  const url = APIS.testInfo + "/" + testInfoId;
+  axios.delete(url).then((response) => {
+    callBack(response);
+  });
+};

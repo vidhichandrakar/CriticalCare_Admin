@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -14,6 +14,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { styled } from "@mui/material/styles";
 import Dialog from "@mui/material/Dialog";
+import { removeTestSection } from "../../../ActionFactory/apiActions";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -34,6 +35,7 @@ function TestNavAndLeft({
   numberOfMcqQns,
   setSelectedTypeNId,
   setAddNewSectionNav,
+  getTestByIdData,
 }) {
   const [expanded, setExpanded] = useState(false);
   const handleClickOpenMCQ = (type) => {
@@ -62,6 +64,16 @@ function TestNavAndLeft({
     const selectedOption = testType.filter((test) => test.test_type_name);
     handleTestType(selectedOption[0]);
     setMcqopen(true);
+  };
+
+  const handleDeletSections = (item, index) => {
+    console.log("jhjkl", item?.test_info_id, "index--->", index);
+    removeTestSection({
+      testInfoId: item?.test_info_id,
+      callBack: (response) => {
+        getTestByIdData();
+      },
+    });
   };
   return (
     <aside id="sidePart">
@@ -126,14 +138,17 @@ function TestNavAndLeft({
             <Divider />
             {/* <Box className="testsectionnameMainBox"> */}
             <Box className="testsectionname">
-              {numberOfMcqQns?.map((item) => {
+              {numberOfMcqQns?.map((item, index) => {
                 return (
                   <Box>
                     <div className="sectionOneFourQues">
                       <h5> {item?.test_section_name}</h5>
                       <div style={{ marginRight: "3%" }}>
                         <EditIcon className="editIconTestSection" />
-                        <DeleteIcon className="deleteIconTestSection" />
+                        <DeleteIcon
+                          onClick={() => handleDeletSections(item, index)}
+                          className="deleteIconTestSection"
+                        />
                       </div>
                     </div>
                     <Divider />
