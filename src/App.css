@@ -27,3 +27,11 @@
   font-weight: 400 !important;
   font-size: 0.8rem !important;
 }
+.deleteContent {
+  color: red;
+  position: relative;
+  margin-top: 4%;
+}
+.deleteContent:hover{
+  cursor: pointer;
+}

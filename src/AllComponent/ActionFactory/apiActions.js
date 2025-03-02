@@ -241,6 +241,17 @@ export const createCourse = ({ courseData, callBack, error }) => {
       error(errorMsg);
     });
 };
+export const deleteContentById= ({contentId, callBack, error})=>{
+  const url = APIS.content + contentId;
+  axios
+    .delete(url)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMsg) => {
+      error(errorMsg);
+    });
+}
 
 export const getCourseById = ({ courseId, callBack }) => {
   const url = APIS.allCourses + "/" + courseId;

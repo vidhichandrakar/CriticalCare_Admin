@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 
+import DeleteIcon from "@mui/icons-material/Delete";
 import { DialogActions } from "@material-ui/core";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
@@ -25,6 +26,7 @@ import Popover from "@mui/material/Popover";
 import RightBox from "./RightBox";
 import {
   addContentOnCreateCourse,
+  deleteContentById,
   getContentType,
   getCoupon,
   getTest,
@@ -418,7 +420,36 @@ function AddContent({
       setUploadPopupOpen(true);
     }
   };
-
+  const handleDeleteContent =(id)=>{
+    if(id){
+      deleteContentById({
+        contentId:id,
+        callBack:response=>{
+          toast.success("Content Deleted Successfully");
+          if (courseData?.course_id) {
+            getCourseContentById({
+              courseId: courseData?.course_id,
+              callBack: (response) => {
+                if (!isNotEmptyObject(response.data)) {
+                  return moduleDescription;
+                } else {
+                  let storedValues = Object.assign({}, moduleDescription);
+                  storedValues = response.data.moduleDetails;
+                  setModuleDescription(storedValues);
+                }
+              },
+              error: (error) => {
+                toast.error(error.message);
+              },
+            });
+          }
+        },
+        error:errMsg=>{
+          console.error(errMsg)
+        }
+      })
+    }
+  }
   const isYouTubeLink = (url) => {
     return /youtube\.com|youtu\.be/.test(url);
   };
@@ -581,19 +612,34 @@ function AddContent({
                                   />
                                 )}
                               </CardActionArea>
-                              <Typography
-                                style={{
-                                  textAlign: "center",
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  flexDirection: "row",
+                                  width: "100%",
                                 }}
-                                gutterBottom
-                                variant="h5"
-                                component="div"
-                                marginTop="10px"
                               >
-                                {item?.content_name
-                                  ? MyComponent(item?.content_name)
-                                  : "Loading Video Name"}
-                              </Typography>
+                                <Typography
+                                  style={{
+                                    textAlign: "center",
+                                  }}
+                                  gutterBottom
+                                  variant="h5"
+                                  component="div"
+                                  marginTop="10px"
+                                  width="100%"
+                                >
+                                  {item?.content_name
+                                    ? MyComponent(item?.content_name)
+                                    : "Loading Video Name"}
+                                </Typography>
+                                <DeleteIcon
+                                  className="deleteContent"
+                                  onClick={() =>
+                                    handleDeleteContent(item?.content_id)
+                                  }
+                                />
+                              </Box>
                             </Card>
                           </Grid>
                         ))}
@@ -649,19 +695,34 @@ function AddContent({
                                   ></iframe>
                                 ) : null}
                               </CardActionArea>
-                              <Typography
-                                style={{
-                                  textAlign: "center",
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  flexDirection: "row",
+                                  width: "100%",
                                 }}
-                                gutterBottom
-                                variant="h5"
-                                component="div"
-                                marginTop="10px"
                               >
-                                {item.content_name
-                                  ? MyComponent(item.content_name)
-                                  : "Loading Video Name"}
-                              </Typography>
+                                <Typography
+                                  style={{
+                                    textAlign: "center",
+                                  }}
+                                  gutterBottom
+                                  variant="h5"
+                                  component="div"
+                                  marginTop="10px"
+                                  width={"100%"}
+                                >
+                                  {item.content_name
+                                    ? MyComponent(item.content_name)
+                                    : "Loading Video Name"}
+                                </Typography>
+                                <DeleteIcon
+                                  className="deleteContent"
+                                  onClick={() =>
+                                    handleDeleteContent(item?.content_id)
+                                  }
+                                />
+                              </Box>
                             </Card>
                           </Grid>
                         ))}
@@ -674,6 +735,7 @@ function AddContent({
                             height="290px"
                             width="320px"
                           />
+                          
                         </Box>
                       </>
                     )}
@@ -821,7 +883,7 @@ function AddContent({
         <Divider sx={{ mt: 1 }} />
         <DialogContent>
           <Box>
-          <FormControl sx={{ width: 540 }}>
+            <FormControl sx={{ width: 540 }}>
               <Select
                 MenuProps={MenuProps}
                 value={categoryName !== "" ? categoryName : "fjng"}
@@ -887,8 +949,7 @@ function AddContent({
         <Divider sx={{ mt: 1 }} />
         <DialogContent>
           <Box>
-           
-                {console.log(couponName, "work")}
+            {console.log(couponName, "work")}
             <FormControl sx={{ width: 540 }}>
               <Select
                 MenuProps={MenuProps}
