@@ -3,12 +3,16 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import NoteIcon from "@mui/icons-material/Note";
 import ImportContent from "./AddContent/ImportContent";
 import { useDropzone } from "react-dropzone";
-import { getModuleByContentCount, uploadFile } from "../../ActionFactory/apiActions";
+import {
+  getModuleByContentCount,
+  uploadFile,
+} from "../../ActionFactory/apiActions";
 import ContentSlider from "./Boxes/Slider.component";
 import DialogBoxes from "./Boxes/DialogBoxes.component";
 import VideocamIcon from "@mui/icons-material/Videocam";
 import { Box } from "@material-ui/core";
 import "../../CSSFile/Content.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const RightBox = ({
   contentType,
@@ -19,7 +23,7 @@ const RightBox = ({
   clickedModuleIdx,
   setUploadPopupOpen,
   setAnchorEl,
-  setContentData
+  setContentData,
 }) => {
   const [state, setState] = useState({
     top: false,
@@ -76,6 +80,7 @@ const RightBox = ({
   const [uploadedFileType, setUploadedFileType] = useState({});
   const [drawerUrl, setDrawerUrl] = useState(false);
   const [contentAddedLinks, setContentAddedLinks] = useState([]);
+  const [toastErrorVideo, setToastErrorVideo] = useState();
   // const [moduleId, setModuleId] = useState({})
   // let moduleId = contentType.map((item)=>{
   //   return( item.module_id)})
@@ -84,19 +89,17 @@ const RightBox = ({
   //     item.module_id
   //   )
   // })
-// 
+  //
   useEffect(() => {
     if (courseData?.contents?.length) {
       setUploadedVideo(courseData.contents);
     }
     // else if (contentType){
-      
-    
+
     //   getModuleByContentCount({
-         
-        
+
     //   })
-      
+
     // }
   }, []);
 
@@ -132,7 +135,7 @@ const RightBox = ({
     setUploadedVideoLink(arr);
     handleInputChange("addContent", arr);
     handleVideoName(arr);
- 
+
     setVideoqopen(false);
     setImgopen(false);
     setDocopen(false);
@@ -142,38 +145,84 @@ const RightBox = ({
   //this function is for to add all items
 
   const onInroVideoDrop = async (files) => {
+    console.log("file----->", files);
+    const maxSize = 40 * 1024 * 1024; //for 40mb
     let payload = new FormData();
-    payload.append("file", files[0], files[0]?.name);
-    setLoaderState(true);
-    uploadFile({
-      payload,
-      callBack: (response) => {
-        let arr = [...uploadedVideo];
-        let arr2 = {
-          content_name: "",
-          content_url: "",
-          content_type: "",
-          content_type_id: "",
-        };
-        arr2.content_name = response?.data?.fileName;
-        arr2.content_url = response?.data?.path;
-        arr2.content_type = uploadedFileType.content_type_name;
-        arr2.content_type_id = uploadedFileType.content_type_id;
-        if (courseData?.contents?.length) {
-          arr2.course_id = courseData.course_id;
-        }
-        arr.push(arr2);
-        setUploadedVideo(arr);
-        handleInputChange("addContent", arr);
-        handleVideoName(arr);
-        setLoaderState(false);
-        setAnchorEl(false);
-        setVideoqopen(false);
-        setImgopen(false);
-        setDocopen(false);
-        setZipopen(false);
-      },
+    const validFiles = files.filter((file) => {
+      if (file.size > maxSize) {
+        // toast?.error(`File "${file?.name}" exceeds the 40MB limit.`);
+        setToastErrorVideo(
+          toast?.error(`File "${file?.name}" exceeds the 40MB limit.`)
+        );
+        return false;
+      }
+      payload.append("file", files[0], files[0]?.name);
+      return payload;
     });
+    if (validFiles.length > 0) {
+      setLoaderState(true);
+      uploadFile({
+        payload,
+        callBack: (response) => {
+          let arr = [...uploadedVideo];
+          let arr2 = {
+            content_name: "",
+            content_url: "",
+            content_type: "",
+            content_type_id: "",
+          };
+          arr2.content_name = response?.data?.fileName;
+          arr2.content_url = response?.data?.path;
+          arr2.content_type = uploadedFileType.content_type_name;
+          arr2.content_type_id = uploadedFileType.content_type_id;
+          if (courseData?.contents?.length) {
+            arr2.course_id = courseData.course_id;
+          }
+          arr.push(arr2);
+          setUploadedVideo(arr);
+          handleInputChange("addContent", arr);
+          handleVideoName(arr);
+          setLoaderState(false);
+          setAnchorEl(false);
+          setVideoqopen(false);
+          setImgopen(false);
+          setDocopen(false);
+          setZipopen(false);
+        },
+      });
+    }
+
+    // payload.append("file", files[0], files[0]?.name);
+    // setLoaderState(true);
+    // uploadFile({
+    //   payload,
+    //   callBack: (response) => {
+    //     let arr = [...uploadedVideo];
+    //     let arr2 = {
+    //       content_name: "",
+    //       content_url: "",
+    //       content_type: "",
+    //       content_type_id: "",
+    //     };
+    //     arr2.content_name = response?.data?.fileName;
+    //     arr2.content_url = response?.data?.path;
+    //     arr2.content_type = uploadedFileType.content_type_name;
+    //     arr2.content_type_id = uploadedFileType.content_type_id;
+    //     if (courseData?.contents?.length) {
+    //       arr2.course_id = courseData.course_id;
+    //     }
+    //     arr.push(arr2);
+    //     setUploadedVideo(arr);
+    //     handleInputChange("addContent", arr);
+    //     handleVideoName(arr);
+    //     setLoaderState(false);
+    //     setAnchorEl(false);
+    //     setVideoqopen(false);
+    //     setImgopen(false);
+    //     setDocopen(false);
+    //     setZipopen(false);
+    //   },
+    // });
   };
 
   const {
@@ -395,6 +444,7 @@ const RightBox = ({
         loaderState={loaderState}
         storedBasicInfo={storedBasicInfo}
         toggleDrawerUrl={toggleDrawerUrl}
+        toastErrorVideo={toastErrorVideo}
       />
     </Fragment>
   );

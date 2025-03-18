@@ -41,6 +41,7 @@ const ContentSlider = ({
   setUploadedVideo,
   handleInputChange,
   courseData,
+  moreThenFourtyMb,
 }) => {
   return (
     <>
@@ -122,6 +123,7 @@ const ContentSlider = ({
           toggleDrawer={toggleDrawer}
           st={st}
           setSt={setSt}
+          moreThenFourtyMb={moreThenFourtyMb}
         />
       </Drawer>
       <Drawer

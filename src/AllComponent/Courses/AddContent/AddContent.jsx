@@ -26,6 +26,7 @@ import Popover from "@mui/material/Popover";
 import RightBox from "./RightBox";
 import {
   addContentOnCreateCourse,
+  addContentOnCreateCourse1,
   deleteContentById,
   getContentType,
   getCoupon,
@@ -84,7 +85,7 @@ function AddContent({
   const navigate = useNavigate();
 
   const [addedItemsInModules, setAddedItemsInModules] = useState([]);
-  const [couponName, setCouponName] = useState("")
+  const [couponName, setCouponName] = useState("");
   const [moduleDescription, setModuleDescription] = useState([
     {
       id: 0,
@@ -105,7 +106,7 @@ function AddContent({
   const [selectedTestId, setSelectedTestId] = useState("");
   const [selectedCouponId, setSelectedCouponId] = useState("");
   const [subtestopened, setSubtestopen] = useState(false);
-  const [coupon, setCoupon] = useState(false)
+  const [coupon, setCoupon] = useState(false);
   const [viewTestDialog, setViewTestDialog] = useState(false);
 
   const handleopenDialogSubjectiveTest = () => {
@@ -149,19 +150,16 @@ function AddContent({
   };
   const handleSaveCouponTest = () => {
     const payload = { course_id: courseData?.course_id };
-    console.log(selectedCouponId, "we")
     putCoupon({
       payload,
       coupon_id: selectedCouponId,
-      
+
       callBack: () => {},
       error: () => {},
     });
     handlecloseDialogCoupon();
-    setCouponName("")
+    setCouponName("");
   };
-
-
   useEffect(() => {
     if (courseData?.course_id) {
       getCourseContentById({
@@ -198,16 +196,15 @@ function AddContent({
       },
     });
   }, []);
-   useEffect(() => {
-      getCoupon({
-        callBack: (response) => {
-          console.log(response.data, "work")
-          setCatcoupon(response.data);
-        },
-        error: (err) => {
-        }
-      });
-    }, []);
+  useEffect(() => {
+    getCoupon({
+      callBack: (response) => {
+        console.log(response.data, "work");
+        setCatcoupon(response.data);
+      },
+      error: (err) => {},
+    });
+  }, []);
   const handleAddContent = (event, idx) => {
     event.stopPropagation();
     if (idx !== expanded) {
@@ -222,8 +219,8 @@ function AddContent({
   };
 
   const handleVideoName = (value) => {
-    let updatedModuleDescription = moduleDescription.map((module) => {
-      if (module.id === clickedModuleIdx) {
+    let updatedModuleDescription = moduleDescription.map((module, index) => {
+      if (index === clickedModuleIdx) {
         if (value[0]?.content_type === "Video") {
           return {
             ...module,
@@ -334,8 +331,8 @@ function AddContent({
 
   const handleSaveModule = (index) => {
     let attachement = [];
-    let Documents = moduleDescription[0]?.contents.Document.data;
-    let Video = moduleDescription[0]?.contents.Video.data;
+    let Documents = moduleDescription[0]?.contents?.Document?.data;
+    let Video = moduleDescription[0]?.contents?.Video?.data;
     let dataConcatenate;
     if (Documents) {
       attachement = attachement.concat(Documents);
@@ -373,8 +370,8 @@ function AddContent({
   async function callAttachFilesOneByOne(moduleDescription) {
     for (const item of moduleDescription) {
       let attachement = [];
-      let Documents = item?.contents.Document.data;
-      let Video = item?.contents.Video.data;
+      let Documents = item?.contents?.Document?.data;
+      let Video = item?.contents?.Video?.data;
       let dataConcatenate;
       if (Documents) {
         attachement = attachement.concat(Documents);
@@ -382,6 +379,7 @@ function AddContent({
       if (Video) {
         dataConcatenate = attachement.concat(Video);
       }
+
       const payload = {
         courseModuleDetails: {
           module_name: item.module_name,
@@ -392,7 +390,7 @@ function AddContent({
         courseAttachments: dataConcatenate,
       };
       try {
-        await addContentOnCreateCourse({
+        await addContentOnCreateCourse1({
           payload: payload,
           callBack: (response) => {
             navigate("/admin/YourCourses");
@@ -405,7 +403,19 @@ function AddContent({
     }
   }
   const handleSaveAllAttachedModule = () => {
-    if (addModulesText === "") {
+    let flag;
+    moduleDescription.map((item) => {
+      if (item.module_name === "") {
+        // return true;
+        // setError(true);
+        flag = true;
+      } else {
+        flag = false;
+      }
+    });
+    // let addTextCondition = addText.every((item) => item === true);
+    // console.log("moduleDescription------->", moduleDescription);
+    if (flag) {
       setError(true);
     } else {
       callAttachFilesOneByOne(moduleDescription);
@@ -420,11 +430,11 @@ function AddContent({
       setUploadPopupOpen(true);
     }
   };
-  const handleDeleteContent =(id)=>{
-    if(id){
+  const handleDeleteContent = (id) => {
+    if (id) {
       deleteContentById({
-        contentId:id,
-        callBack:response=>{
+        contentId: id,
+        callBack: (response) => {
           toast.success("Content Deleted Successfully");
           if (courseData?.course_id) {
             getCourseContentById({
@@ -444,12 +454,12 @@ function AddContent({
             });
           }
         },
-        error:errMsg=>{
-          console.error(errMsg)
-        }
-      })
+        error: (errMsg) => {
+          console.error(errMsg);
+        },
+      });
     }
-  }
+  };
   const isYouTubeLink = (url) => {
     return /youtube\.com|youtu\.be/.test(url);
   };
@@ -735,7 +745,6 @@ function AddContent({
                             height="290px"
                             width="320px"
                           />
-                          
                         </Box>
                       </>
                     )}

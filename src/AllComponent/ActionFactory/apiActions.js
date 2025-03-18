@@ -684,6 +684,12 @@ export const addContentOnCreateCourse = ({ payload, callBack }) => {
     callBack(response);
   });
 };
+export const addContentOnCreateCourse1 = ({ payload, callBack }) => {
+  const url = APIS.module;
+  axios.put(url, payload).then((response) => {
+    callBack(response);
+  });
+};
 
 export const getBlog = ({ payload, callBack, error }) => {
   const url = APIS.addBlog;

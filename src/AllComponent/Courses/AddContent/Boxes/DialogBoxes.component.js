@@ -21,6 +21,7 @@ import { useEffect } from "react";
 import { getTest } from "../../../ActionFactory/apiActions";
 import { DialogActions } from "@material-ui/core";
 import Divider from "@mui/material/Divider";
+import { ToastContainer, toast } from "react-toastify";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -53,14 +54,14 @@ const DialogBoxes = ({
   loaderState,
   storedBasicInfo,
   toggleDrawerUrl,
+  toastErrorVideo,
 }) => {
-  
   const [cat, setCat] = useState([]);
   const [categoryName, setCategoryName] = useState("");
   const onAddLink = (inputLink, inputName) => {
     handleAddLink(inputLink, inputName);
   };
- 
+
   const MenuProps = {
     PaperProps: {
       style: {
@@ -69,7 +70,6 @@ const DialogBoxes = ({
       },
     },
   };
-
 
   return (
     <>
@@ -412,7 +412,7 @@ const DialogBoxes = ({
             <UploadFileRoundedIcon className="VideoIcon" />
             <Box className="videoDottedBorder">
               <Typography gutterBottom className="UploadDoc">
-                <b> Upload Video(s)</b>
+                <b> Upload Video(s) dfds</b>
               </Typography>
               <Typography className="VideoPara">
                 You can upload upto 20 files at a time. Maximum file size that
@@ -458,6 +458,7 @@ const DialogBoxes = ({
             <Box sx={{ marginTop: "12px" }}>Or</Box>
             <CommonAddLinkField onAddLink={onAddLink} />
           </Box>
+          <ToastContainer />
         </DialogContent>
       </BootstrapDialog>
     </>
