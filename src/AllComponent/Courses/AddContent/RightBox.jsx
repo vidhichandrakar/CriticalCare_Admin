@@ -347,11 +347,11 @@ const RightBox = ({
     //   Component: <QuizIcon className="folderIconRightBox" />,
     //   onClickHandler: toggleDrawer("right", true, ot, setOt),
     // },
-    {
-      name: "Subjective Test",
-      Component: <AssignmentIcon className="folderIconRightBox" />,
-      onClickHandler: () => handleopenDialogSubjectiveTest(st, setSt),
-    },
+    // {
+    //   name: "Subjective Test",
+    //   Component: <AssignmentIcon className="folderIconRightBox" />,
+    //   onClickHandler: () => handleopenDialogSubjectiveTest(st, setSt),
+    // },
     {
       name: "Document",
       Component: <NoteIcon className="folderIconRightBox" />,

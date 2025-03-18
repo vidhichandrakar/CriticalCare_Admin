@@ -144,8 +144,12 @@ function AddContent({
     updateTestPortal({
       payload,
       testId: selectedTestId,
-      callBack: () => {},
-      error: () => {},
+      callBack: () => {
+        handleCloseDialogSubjectiveTest();
+      },
+      error: (error) => {
+        console.error(error);
+      },
     });
   };
   const handleSaveCouponTest = () => {
