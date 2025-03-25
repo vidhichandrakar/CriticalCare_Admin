@@ -20,7 +20,7 @@ const ContentSlider = ({
   state,
   vd,
   doc,
-  image,
+  driveUrl,
   ic,
   il,
   ot,
@@ -28,7 +28,7 @@ const ContentSlider = ({
   zip,
   setVd,
   setDoc,
-  setImage,
+  setDriveUrl,
   setIc,
   setIl,
   setOt,
@@ -74,8 +74,8 @@ const ContentSlider = ({
       </Drawer>
       <Drawer
         anchor={"right"}
-        open={image["right"]}
-        onClose={toggleDrawer("right", false, image, setImage)}
+        open={driveUrl["right"]}
+        onClose={toggleDrawer("right", false, driveUrl, setDriveUrl)}
       >
         {Image("right")}
       </Drawer>

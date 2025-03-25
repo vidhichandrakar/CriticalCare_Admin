@@ -10,9 +10,12 @@ import {
 import ContentSlider from "./Boxes/Slider.component";
 import DialogBoxes from "./Boxes/DialogBoxes.component";
 import VideocamIcon from "@mui/icons-material/Videocam";
-import { Box } from "@material-ui/core";
+import { Box, Popover, TextField } from "@material-ui/core";
 import "../../CSSFile/Content.css";
 import { ToastContainer, toast } from "react-toastify";
+import AddToDriveIcon from "@mui/icons-material/AddToDrive";
+import { Button } from "@mui/material";
+import { CommonAddLinkField } from "../../../Util/CommonAddLinkField";
 
 const RightBox = ({
   contentType,
@@ -43,7 +46,7 @@ const RightBox = ({
   const [doc, setDoc] = useState({
     left: false,
   });
-  const [image, setImage] = useState({
+  const [driveUrl, setDriveUrl] = useState({
     left: false,
   });
   const [zip, setZip] = useState({
@@ -81,6 +84,13 @@ const RightBox = ({
   const [drawerUrl, setDrawerUrl] = useState(false);
   const [contentAddedLinks, setContentAddedLinks] = useState([]);
   const [toastErrorVideo, setToastErrorVideo] = useState();
+  const [anchoUrlr, setAnchorUrl] = useState(null);
+  const [anchorEl, setAnchorEl1] = useState(null);
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
+
+  const [inputLink, setInputLink] = useState("");
+  const [link, setLink] = useState("");
   // const [moduleId, setModuleId] = useState({})
   // let moduleId = contentType.map((item)=>{
   //   return( item.module_id)})
@@ -105,12 +115,12 @@ const RightBox = ({
 
   const handleAddLink = (inputLink, inputName) => {
     let inputNameValue = inputName.trim();
-    if (uploadedFileType.content_type_id == 1) {
-      if (inputNameValue && !inputNameValue.endsWith(".mp4")) {
-        inputNameValue = inputNameValue.replace(/\s+/g, "");
-      }
-    }
-
+    // if (uploadedFileType.content_type_id == 1) {
+    //   if (inputNameValue && !inputNameValue.endsWith(".mp4")) {
+    //     inputNameValue = inputNameValue.replace(/\s+/g, "");
+    //   }
+    // }
+console.log("inputNameValue---------->",inputNameValue)
     setContentAddedLinks([
       ...contentAddedLinks,
       { name: inputNameValue, link: inputLink },
@@ -133,6 +143,7 @@ const RightBox = ({
     }
     arr.push(arr2);
     setUploadedVideoLink(arr);
+    console.log("arrarrarr-------->",arr)
     handleInputChange("addContent", arr);
     handleVideoName(arr);
 
@@ -191,38 +202,6 @@ const RightBox = ({
         },
       });
     }
-
-    // payload.append("file", files[0], files[0]?.name);
-    // setLoaderState(true);
-    // uploadFile({
-    //   payload,
-    //   callBack: (response) => {
-    //     let arr = [...uploadedVideo];
-    //     let arr2 = {
-    //       content_name: "",
-    //       content_url: "",
-    //       content_type: "",
-    //       content_type_id: "",
-    //     };
-    //     arr2.content_name = response?.data?.fileName;
-    //     arr2.content_url = response?.data?.path;
-    //     arr2.content_type = uploadedFileType.content_type_name;
-    //     arr2.content_type_id = uploadedFileType.content_type_id;
-    //     if (courseData?.contents?.length) {
-    //       arr2.course_id = courseData.course_id;
-    //     }
-    //     arr.push(arr2);
-    //     setUploadedVideo(arr);
-    //     handleInputChange("addContent", arr);
-    //     handleVideoName(arr);
-    //     setLoaderState(false);
-    //     setAnchorEl(false);
-    //     setVideoqopen(false);
-    //     setImgopen(false);
-    //     setDocopen(false);
-    //     setZipopen(false);
-    //   },
-    // });
   };
 
   const {
@@ -284,18 +263,35 @@ const RightBox = ({
   const handleCloseDialogZip = () => {
     setZipopen(false);
   };
-  const handleClickOpenImg = () => {
-    setAcceptType({
-      "image/jpeg": [".jpeg"],
-      "image/png": [".png"],
-      "image/jpg": [".jpg"],
-    });
-    setImgopen(true);
-    let imgType = contentType.filter(
-      (item) => item.content_type_name === "Image"
-    );
-    setUploadedFileType(imgType[0]);
+
+  const handleClose = () => {
+    setAnchorEl1(null);
   };
+  const handleAddLinkUrl = () => {
+    if (inputLink.trim()) {
+      setLink(inputLink);
+      // handleInput(inputLink, "link");
+      setInputLink("");
+      handleClose();
+    }
+  };
+  const handleAddDriveUrl = () => {
+    // console.log("jhgvghjk-->", driveUrl,abc);
+    let docType = contentType.filter(
+      (item) => item.content_type_name === "URL"
+    );
+    setUploadedFileType(docType[0]);
+    setAnchorEl1(true);
+  };
+
+  const onAddLink = (inputLink, inputName) => {
+    handleAddLink(inputLink, inputName);
+    console.log("inputLink, inputName--->", inputLink, inputName);
+    setAnchorEl1(false);
+    setDocopen(false);
+    setVideoqopen(false);
+  };
+
   const handleCloseDialogImg = () => {
     setImgopen(false);
   };
@@ -357,11 +353,11 @@ const RightBox = ({
       Component: <NoteIcon className="folderIconRightBox" />,
       onClickHandler: () => handleClickOpenDoc(doc, setDoc),
     },
-    // {
-    //   name: "Image",
-    //   Component: <ImageIcon className="folderIconRightBox" />,
-    //   onClickHandler: () => handleClickOpenImg(image, setImage),
-    // },
+    {
+      name: "Drive",
+      Component: <AddToDriveIcon className="folderIconRightBox" />,
+      onClickHandler: () => handleAddDriveUrl(driveUrl, setDriveUrl),
+    },
     // {
     //   name: "Zip File",
     //   Component: <FolderZipIcon className="folderIconRightBox" />,
@@ -397,7 +393,7 @@ const RightBox = ({
         ImportContent={ImportContent}
         setVd={setVd}
         setDoc={setDoc}
-        setImage={setImage}
+        setDriveUrl={setDriveUrl}
         setIc={setIc}
         setIl={setIL}
         setOt={setOt}
@@ -407,7 +403,7 @@ const RightBox = ({
         state={state}
         vd={vd}
         doc={doc}
-        image={image}
+        driveUrl={driveUrl}
         ic={ic}
         il={il}
         ot={ot}
@@ -446,6 +442,24 @@ const RightBox = ({
         toggleDrawerUrl={toggleDrawerUrl}
         toastErrorVideo={toastErrorVideo}
       />
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "center",
+          horizontal: "center",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+      >
+        <div style={{ padding: "16px" }}>
+          <CommonAddLinkField onAddLink={onAddLink} />
+        </div>
+      </Popover>
     </Fragment>
   );
 };
