@@ -26,7 +26,7 @@ import Popover from "@mui/material/Popover";
 import RightBox from "./RightBox";
 import {
   addContentOnCreateCourse,
-  addContentOnCreateCourse1,
+  updateContentOnCreateCourse,
   deleteContentById,
   getContentType,
   getCoupon,
@@ -49,6 +49,7 @@ import Divider from "@mui/material/Divider";
 import Dialog from "@mui/material/Dialog";
 import { styled } from "@mui/material/styles";
 import ViewTestContents from "./ViewTestContents";
+import AddToDriveIcon from "@mui/icons-material/AddToDrive";
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
@@ -96,6 +97,9 @@ function AddContent({
           data: [],
         },
         Document: {
+          data: [],
+        },
+        URL: {
           data: [],
         },
       },
@@ -223,6 +227,7 @@ function AddContent({
   };
 
   const handleVideoName = (value) => {
+    console.log("va;lue----->", value);
     let updatedModuleDescription = moduleDescription.map((module, index) => {
       if (index === clickedModuleIdx) {
         if (value[0]?.content_type === "Video") {
@@ -239,6 +244,9 @@ function AddContent({
               Document: {
                 ...module.contents.Document,
               },
+              URL: {
+                ...module.contents.URL,
+              },
             },
           };
         } else if (value[0]?.content_type === "Document") {
@@ -251,6 +259,28 @@ function AddContent({
                   ...module.contents.Document.data,
                   ...(Array.isArray(value) ? value : [value]),
                 ],
+              },
+              Video: {
+                ...module.contents.Video,
+              },
+              URL: {
+                ...module?.contents.URL,
+              },
+            },
+          };
+        } else if (value[0]?.content_type === "URL") {
+          return {
+            ...module,
+            module_name: module.module_name,
+            contents: {
+              URL: {
+                data: [
+                  ...module?.contents?.URL?.data,
+                  ...(Array.isArray(value) ? value : [value]),
+                ],
+              },
+              Document: {
+                ...module?.contents.Document,
               },
               Video: {
                 ...module.contents.Video,
@@ -372,37 +402,44 @@ function AddContent({
   }
 
   async function callAttachFilesOneByOne(moduleDescription) {
+    console.log("pppppp---->", moduleDescription);
     for (const item of moduleDescription) {
-      let attachement = [];
-      let Documents = item?.contents?.Document?.data;
-      let Video = item?.contents?.Video?.data;
-      let dataConcatenate;
-      if (Documents) {
-        attachement = attachement.concat(Documents);
-      }
-      if (Video) {
-        dataConcatenate = attachement.concat(Video);
-      }
+      // console.log("item------->",item)
+      if (item.course_id) {
+        console.log("ondition item---->", item);
+        let attachement = [];
+        let Documents = item?.contents?.Document?.data;
+        let Video = item?.contents?.Video?.data;
+        let dataConcatenate;
+        if (Documents) {
+          attachement = attachement.concat(Documents);
+        }
+        if (Video) {
+          dataConcatenate = attachement.concat(Video);
+        }
 
-      const payload = {
-        courseModuleDetails: {
-          module_name: item.module_name,
-          course_id: courseData?.course_id
-            ? courseData?.course_id
-            : courseIdForContent?.course_id,
-        },
-        courseAttachments: dataConcatenate,
-      };
-      try {
-        await addContentOnCreateCourse1({
-          payload: payload,
-          callBack: (response) => {
-            navigate("/admin/YourCourses");
+        const payload = {
+          courseModuleDetails: {
+            module_name: item.module_name,
+            course_id: courseData?.course_id
+              ? courseData?.course_id
+              : courseIdForContent?.course_id,
           },
-        });
-        await sleep(500);
-      } catch (error) {
-        console.error("Error in adding content:", error);
+          courseAttachments: dataConcatenate,
+        };
+        try {
+          await updateContentOnCreateCourse({
+            payload: payload,
+            callBack: (response) => {
+              navigate("/admin/YourCourses");
+            },
+          });
+          await sleep(500);
+        } catch (error) {
+          console.error("Error in adding content:", error);
+        }
+      } else {
+        handleSaveModule();
       }
     }
   }
@@ -729,6 +766,89 @@ function AddContent({
                                   {item.content_name
                                     ? MyComponent(item.content_name)
                                     : "Loading Video Name"}
+                                </Typography>
+                                <DeleteIcon
+                                  className="deleteContent"
+                                  onClick={() =>
+                                    handleDeleteContent(item?.content_id)
+                                  }
+                                />
+                              </Box>
+                            </Card>
+                          </Grid>
+                        ))}
+                      </>
+                    ) : (
+                      <>
+                        <Box>
+                          <img
+                            src={attachmentimgae}
+                            height="290px"
+                            width="320px"
+                          />
+                        </Box>
+                      </>
+                    )}
+                  </Grid>
+
+                  {/* ////for drive link */}
+                  <Box>
+                    <Typography
+                      style={{
+                        textAlign: "center",
+                        margin: "10px",
+                      }}
+                      gutterBottom
+                      variant="h5"
+                      component="div"
+                    >
+                      {contentData?.contents?.Video?.count} Drive Url
+                    </Typography>
+                  </Box>
+                  <Grid container spacing={2} direction="row" wrap="wrap">
+                    {itemContent?.contents?.URL?.data?.length ? (
+                      <>
+                        {itemContent?.contents?.URL?.data?.map((item) => (
+                          <Grid item xs={12} sm={6} md={4} key={index}>
+                            <Card sx={{ maxWidth: 345, padding: "5px" }}>
+                              <CardActionArea>
+                                {item.content_url ? (
+                                  // Render PDF preview
+                                <a 
+                                href={item.content_url}
+                                >
+                                  <AddToDriveIcon
+                                    
+                                    style={{
+                                      width: "100%",
+                                      height: "200px",
+                                      border: "none",
+                                    }}
+                                     
+                                 />
+                                 </a>
+                                ) : null}
+                              </CardActionArea>
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  flexDirection: "row",
+                                  width: "100%",
+                                }}
+                              >
+                                <Typography
+                                  style={{
+                                    textAlign: "center",
+                                  }}
+                                  gutterBottom
+                                  variant="h5"
+                                  component="div"
+                                  marginTop="10px"
+                                  width={"100%"}
+                                >
+                                  {item.content_name
+                                    ? MyComponent(item.content_name)
+                                    : "Loading Url Name"}
                                 </Typography>
                                 <DeleteIcon
                                   className="deleteContent"
