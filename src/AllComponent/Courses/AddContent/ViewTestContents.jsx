@@ -44,12 +44,14 @@ export default function ViewTestContents({
   const [allTestDetails, setAllTestDetails] = useState([]);
 
   useEffect(() => {
-    getTestBycourseId({
-      courseId: courseId,
-      callBack: (response) => {
-        setAllTestDetails(response.data);
-      },
-    });
+    if (courseId) {
+      getTestBycourseId({
+        courseId: courseId,
+        callBack: (response) => {
+          setAllTestDetails(response.data);
+        },
+      });
+    }
   }, []);
   return (
     <>
@@ -88,16 +90,17 @@ export default function ViewTestContents({
           <Divider sx={{ mt: 1 }} />
           <DialogContent>
             <Box className="TestinstructionBox">
-              {allTestDetails?.length && allTestDetails?.map((item, index) => (
-                <Box className="cardiologyEachBox">
-                  <Box>
-                    <Typography className="testHead">
-                      <b>{item.test_name}</b>
-                    </Typography>
+              {allTestDetails?.length &&
+                allTestDetails?.map((item, index) => (
+                  <Box className="cardiologyEachBox">
+                    <Box>
+                      <Typography className="testHead">
+                        <b>{item.test_name}</b>
+                      </Typography>
+                    </Box>
+                    <Box style={{ cursor: "pointer" }}></Box>
                   </Box>
-                  <Box style={{ cursor: "pointer" }}></Box>
-                </Box>
-              ))}
+                ))}
             </Box>
           </DialogContent>
           <DialogActions>

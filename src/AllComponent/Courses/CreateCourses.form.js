@@ -76,26 +76,34 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   let acceptType;
 
   const onInroVideoDrop = async (files) => {
+    const maxSize = 40 * 1024 * 1024;
     let payload = new FormData();
-    payload.append("file", files[0], files[0]?.name);
-    let storedValues = Object.assign({}, storedBasicInfo);
-    setLoaderState(true);
-    uploadFile({
-      payload,
-      callBack: (response) => {
-        if (acceptType === "desktop") {
-          storedValues.thumbnail_path_desktop = response?.data?.path;
-        } else if (acceptType === "mobile") {
-          storedValues.thumbnail_path_mobile = response?.data?.path;
-        } else if (acceptType === "video") {
-          storedValues.thumbnail_video_path = response?.data?.path;
-        }
-
-        setStoredBasicInfo(storedValues);
-        setLoaderState(false);
-      },
+    const validFiles = files.filter((file) => {
+      if (file.size > maxSize) {
+        toast?.error(`File "${file?.name}" exceeds the 40MB limit.`);
+        return false;
+      }
+      payload.append("file", files[0], files[0]?.name);
+      return payload;
     });
-    // setStoredBasicInfo(storedValues);
+    if (validFiles.length > 0) {
+      let storedValues = Object.assign({}, storedBasicInfo);
+      setLoaderState(true);
+      uploadFile({
+        payload,
+        callBack: (response) => {
+          if (acceptType === "desktop") {
+            storedValues.thumbnail_path_desktop = response?.data?.path;
+          } else if (acceptType === "mobile") {
+            storedValues.thumbnail_path_mobile = response?.data?.path;
+          } else if (acceptType === "video") {
+            storedValues.thumbnail_video_path = response?.data?.path;
+          }
+          setStoredBasicInfo(storedValues);
+          setLoaderState(false);
+        },
+      });
+    }
   };
 
   const {
@@ -304,6 +312,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   };
 
   const handleClick = (event) => {
+    console.log("event---->",event.currentTarget)
     setAnchorEl(event.currentTarget);
   };
 
