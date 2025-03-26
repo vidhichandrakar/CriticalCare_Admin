@@ -5,6 +5,7 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import ForumIcon from "@mui/icons-material/Forum";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import BatchPredictionIcon from '@mui/icons-material/BatchPrediction';
 import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
 import PersonIcon from "@mui/icons-material/Person";
 import Typography from "@mui/material/Typography";
@@ -124,9 +125,8 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
           <div className="sidebar-list sidebar-list-item BottomLine">
             <Link to="/admin/DashBoard">
               <Box
-                className={`hoverrr ${
-                  highlight === "DashBoard" ? "hoverrr2" : ""
-                }`}
+                className={`hoverrr ${highlight === "DashBoard" ? "hoverrr2" : ""
+                  }`}
                 onClick={() => {
                   handleHighlight("DashBoard");
                 }}
@@ -185,9 +185,8 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                       <Link to="/admin/Categories" className="textDecoration">
                         <Box
                           id="hoverrr"
-                          className={`hoverrr ${
-                            highlight === "YourCourses" ? "hoverrr2" : ""
-                          }`}
+                          className={`hoverrr ${highlight === "YourCourses" ? "hoverrr2" : ""
+                            }`}
                           sx={{ mt: -2 }}
                           onClick={() => handleHighlight("Categories")}
                         >
@@ -201,9 +200,8 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                         className="textDecoration"
                       >
                         <Box
-                          className={`hoverrr ${
-                            highlight === "Subcategories" ? "hoverrr2" : ""
-                          }`}
+                          className={`hoverrr ${highlight === "Subcategories" ? "hoverrr2" : ""
+                            }`}
                           sx={{ mt: -2 }}
                           onClick={() => handleHighlight("Subcategories")}
                         >
@@ -218,9 +216,8 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
 
             <Link to="/admin/TestPortal">
               <Box
-                className={`hoverrr ${
-                  highlight === "TestPortal" ? "hoverrr2" : ""
-                }`}
+                className={`hoverrr ${highlight === "TestPortal" ? "hoverrr2" : ""
+                  }`}
                 sx={{ mt: -2 }}
                 onClick={() => handleHighlight("TestPortal")}
               >
@@ -229,11 +226,24 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
               </Box>
             </Link>
 
+            {/* haloanku */}
+            <Link to="/admin/Batch">
+              <Box
+                className={`hoverrr ${highlight === "Batch" ? "hoverrr2" : ""
+                  }`}
+                sx={{ mt: -2 }}
+                onClick={() => handleHighlight("Batch")}
+              >
+                <BatchPredictionIcon className="icon" />
+                <Typography>Batch</Typography>
+              </Box>
+            </Link>
+            {/* haloanku */}
+
             <Link to="/admin/Analytics">
               <Box
-                className={`hoverrr ${
-                  highlight === "Analytics" ? "hoverrr2" : ""
-                }`}
+                className={`hoverrr ${highlight === "Analytics" ? "hoverrr2" : ""
+                  }`}
                 sx={{ mt: -2 }}
                 onClick={() => handleHighlight("Analytics")}
               >
@@ -298,9 +308,8 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
 
             <Link to="/admin/Testimonial">
               <Box
-                className={`hoverrr ${
-                  highlight === "Testimonial" ? "hoverrr2" : ""
-                }`}
+                className={`hoverrr ${highlight === "Testimonial" ? "hoverrr2" : ""
+                  }`}
                 sx={{ mt: -2 }}
                 onClick={() => handleHighlight("Testimonial")}
               >
@@ -348,9 +357,8 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
 
             <Link to="/admin/TeamMember">
               <Box
-                className={`hoverrr ${
-                  highlight === "TeamMember" ? "hoverrr2" : ""
-                }`}
+                className={`hoverrr ${highlight === "TeamMember" ? "hoverrr2" : ""
+                  }`}
                 sx={{ mt: -2 }}
                 onClick={() => handleHighlight("TeamMember")}
               >
