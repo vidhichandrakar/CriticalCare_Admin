@@ -137,6 +137,7 @@ console.log("inputNameValue---------->",inputNameValue)
     arr2.content_name = inputNameValue;
     arr2.content_url = inputLink;
     arr2.content_type = uploadedFileType.content_type_name;
+    arr2.content_type_name = uploadedFileType.content_type_name;
     arr2.content_type_id = uploadedFileType.content_type_id;
     if (courseData?.contents?.length) {
       arr2.course_id = courseData.course_id;
@@ -179,12 +180,12 @@ console.log("inputNameValue---------->",inputNameValue)
           let arr2 = {
             content_name: "",
             content_url: "",
-            content_type: "",
+            content_type_name: "",
             content_type_id: "",
           };
           arr2.content_name = response?.data?.fileName;
           arr2.content_url = response?.data?.path;
-          arr2.content_type = uploadedFileType.content_type_name;
+          arr2.content_type_name = uploadedFileType.content_type_name;
           arr2.content_type_id = uploadedFileType.content_type_id;
           if (courseData?.contents?.length) {
             arr2.course_id = courseData.course_id;
@@ -280,6 +281,7 @@ console.log("inputNameValue---------->",inputNameValue)
     let docType = contentType.filter(
       (item) => item.content_type_name === "URL"
     );
+    console.log(docType,"docType")
     setUploadedFileType(docType[0]);
     setAnchorEl1(true);
   };

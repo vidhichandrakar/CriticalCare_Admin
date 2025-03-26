@@ -57,7 +57,7 @@ const Url = ({
     let arr = {
       content_name: contentName,
       content_url: url,
-      content_type: uploadedFileType.content_type_name,
+      content_type_name: uploadedFileType.content_type_name,
       content_type_id: uploadedFileType.content_type_id,
     };
     uploadedUrl.push(arr);
