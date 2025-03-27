@@ -19,6 +19,7 @@ import {
   getBlogs,
   getBlogsbyId,
   getCategory,
+  getCategoryById,
   getTestByID,
   postBlog,
   updateCategory,
@@ -191,20 +192,18 @@ function Configuration({
         callBack: (response) => {
           const userCallBack = response;
           setCat(userCallBack);
-          window.location.reload()
         },
         error: (error) => {
           toast.error(error.message);
         },
       });
     } else if (selectedConfigValue === "Category" && category_id != 0) {
-      updateCategory({
+      getCategoryById({
         category_id,
         callBack: (response) => {
           let storedValues = Object.assign({}, updatedCat);
           storedValues.category_name = response?.data?.category_name;
           setUpdatedCat(storedValues);
-          window.location.reload()
         },
         error: (error) => {
           toast.error(error.message);
@@ -260,20 +259,39 @@ function Configuration({
     if (updatedCat.category_name === "") {
       toast.error("Enter Category");
     } else {
-      const payload = {
-        category_name: updatedCat.category_name,
-        created_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
-        modiefied_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
-      };
-      createCategory({
-        payload,
-        callBack: (response) => {
-          toast.success("Category created successfully!");
-          setUpdatedCat({ category_name: "" });
-          handleCloseCat();
-          window.location.reload()
-        },
-      });
+      if(category_id){
+        const payload = {
+          category_name: updatedCat.category_name,
+          created_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
+          modiefied_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
+        };
+        updateCategory({
+          category_id,
+          payload,
+          callBack: (response) => {
+            toast.success("Category created successfully!");
+            setUpdatedCat({ category_name: "" });
+            handleCloseCat();
+            window.location.reload()
+          },
+        });
+      }else{
+        const payload = {
+          category_name: updatedCat.category_name,
+          created_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
+          modiefied_by: JSON.parse(localStorage.getItem("loggedInUser")).user_id,
+        };
+        createCategory({
+          payload,
+          callBack: (response) => {
+            toast.success("Category created successfully!");
+            setUpdatedCat({ category_name: "" });
+            handleCloseCat();
+            window.location.reload()
+          },
+        });
+      }
+     
     }
   };
 

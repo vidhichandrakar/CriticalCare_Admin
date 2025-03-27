@@ -279,6 +279,12 @@ export const getCategory = ({ callBack }) => {
     callBack(response);
   });
 };
+export const getCategoryById = ({category_id, callBack }) => {
+  const url = APIS.getCategory+ "/" + category_id;
+  axios.get(url).then((response) => {
+    callBack(response);
+  });
+};
 export const getUserType = ({ callBack }) => {
   const url = APIS.getUserType;
   axios.get(url).then((response) => {

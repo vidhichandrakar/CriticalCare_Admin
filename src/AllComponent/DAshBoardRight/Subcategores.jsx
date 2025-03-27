@@ -357,20 +357,7 @@ const Subcategores = () => {
 
   const handleEdit = () => {
     const testId = openId;
-    navigate("/admin/TestFirstPage", { state: { id: openId } });
-
-    // getTestByID({
-    //   testId,
-    //   callBack: (response) => {
-    //     // toast.success("");
-    //     const data = response.data;
-    //     let storedValues = Object.assign({}, addTest);
-    //     storedValues.testName = data?.test_name;
-    //     storedValues.testDuration = data?.duration_minute;
-    //     storedValues.hours = data?.duration_hour;
-    //     setAddTest(storedValues);
-    //   },
-    // });
+   
   };
   return (
     <div className="grid-container">
@@ -621,7 +608,7 @@ const Subcategores = () => {
                   </Box>
                   <Box
                     className="redDeleteofTestPortal blueBlockUser"
-                    onClick={handleEdit}
+                    onClick={()=>handleCatConfig("SubCategory")}
                   >
                     <EditIcon className="deleteIcon" />
                     Edit
