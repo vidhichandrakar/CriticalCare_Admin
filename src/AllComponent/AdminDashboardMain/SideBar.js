@@ -81,10 +81,23 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   };
 
   const handleHighlight = (type) => {
-    console.log("type->", type);
-    setOpenCollapse(!openCollapse);
     localStorage.setItem("activeMenu", type);
     setHighlight(type); // Immediately update the state
+    if (
+      type === "DashBoard" ||
+      type === "TestPortal" ||
+      type === "Batch" ||
+      type === "Analytics" ||
+      type === "Testimonial" ||
+      type === "Analytics" ||
+      type === "Blogs" ||
+      type === "TeamMember"
+    ) {
+      setOpenCollapse(false);
+      setOpenPeople(false);
+      localStorage.setItem("subMenuCourses", false);
+      localStorage.setItem("subMenuPeople", false);
+    }
   };
 
   const handleHighlightPeople = (type) => {
@@ -135,7 +148,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                 }}
               >
                 <DashboardIcon className="icon" />
-                <Typography>DashBoard</Typography>
+                <Typography>Dashboard</Typography>
               </Box>
             </Link>
 
