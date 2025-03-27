@@ -316,7 +316,7 @@ const EditPrice = ({
       }
     } else if (selectDurationValue === "Lifetime Validity") {
       const storedValues = lifetimeValidation;
-      if (storedValues.price && storedValues.offer_price) {
+      if (storedValues.price) {
         if (parseInt(storedValues.price) ) {
           let copyArr = [];
           copyArr.push(storedValues);

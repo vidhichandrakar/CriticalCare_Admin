@@ -269,16 +269,18 @@ function AddContent({
             },
           };
         } else if (value[0]?.content_type === "URL") {
-          console.log("module",module)
+          console.log("module", module);
           return {
             ...module,
             module_name: module?.module_name,
             contents: {
               URL: {
-                data:module?.contents?.URL? [
-                   ...module?.contents?.URL?.data,
-                  ...(Array.isArray(value) ? value : [value]),
-                ]:[],
+                data: module?.contents?.URL
+                  ? [
+                      ...module?.contents?.URL?.data,
+                      ...(Array.isArray(value) ? value : [value]),
+                    ]
+                  : [],
               },
               Document: {
                 ...module?.contents.Document,
@@ -370,9 +372,9 @@ function AddContent({
   const handleSaveModule = (index) => {
     let attachement = [];
     let Documents = moduleDescription[0]?.contents?.Document?.data || [];
-    let Video = moduleDescription[0]?.contents?.Video?.data || []
-    let Url = moduleDescription[0]?.contents?.URL?.data ||[]
-    let dataConcatenate = [...Video, ...Documents, ...Url]
+    let Video = moduleDescription[0]?.contents?.Video?.data || [];
+    let Url = moduleDescription[0]?.contents?.URL?.data || [];
+    let dataConcatenate = [...Video, ...Documents, ...Url];
     if (moduleDescription[0]?.module_name === "") {
       setError(true);
     } else {
@@ -385,7 +387,7 @@ function AddContent({
         },
         courseAttachments: dataConcatenate,
       };
-      console.log("dataConcatenate-->",dataConcatenate,attachement)
+      console.log("dataConcatenate-->", dataConcatenate, attachement);
       addContentOnCreateCourse({
         payload: payload,
         callBack: (response) => {
@@ -408,13 +410,12 @@ function AddContent({
     for (const item of moduleDescription) {
       // console.log("item------->",item)
       if (item.course_id) {
-        
         let attachement = [];
         let Documents = item?.contents?.Document?.data || [];
-        let Video = item?.contents?.Video?.data || []
+        let Video = item?.contents?.Video?.data || [];
         let Url = item?.contents?.URL?.data || [];
         console.log("ondition item---->", Url, Documents, Video);
-        let dataConcatenate = [...Video, ...Documents, ...Url]
+        let dataConcatenate = [...Video, ...Documents, ...Url];
         const payload = {
           courseModuleDetails: {
             module_name: item.module_name,
@@ -424,7 +425,7 @@ function AddContent({
           },
           courseAttachments: dataConcatenate,
         };
-        console.log("dataConcatenate 22-->",dataConcatenate,attachement)
+        console.log("dataConcatenate 22-->", dataConcatenate, attachement);
         try {
           await updateContentOnCreateCourse({
             payload: payload,
@@ -812,19 +813,15 @@ function AddContent({
                               <CardActionArea>
                                 {item.content_url ? (
                                   // Render PDF preview
-                                <a 
-                                href={item.content_url}
-                                >
-                                  <AddToDriveIcon
-                                    
-                                    style={{
-                                      width: "100%",
-                                      height: "200px",
-                                      border: "none",
-                                    }}
-                                     
-                                 />
-                                 </a>
+                                  <a href={item.content_url}>
+                                    <AddToDriveIcon
+                                      style={{
+                                        width: "100%",
+                                        height: "200px",
+                                        border: "none",
+                                      }}
+                                    />
+                                  </a>
                                 ) : null}
                               </CardActionArea>
                               <Box
@@ -1029,11 +1026,12 @@ function AddContent({
                 className="addCatTextField"
                 sx={{ mt: 2 }}
               >
-                {cat?.map((item) => (
-                  <MenuItem key={item._id} value={item}>
-                    {item.test_name}
-                  </MenuItem>
-                ))}
+                {Array.isArray(cat) &&
+                  cat?.map((item) => (
+                    <MenuItem key={item._id} value={item}>
+                      {item.test_name}
+                    </MenuItem>
+                  ))}
               </Select>
             </FormControl>
           </Box>
