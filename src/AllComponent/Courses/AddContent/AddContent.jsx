@@ -269,15 +269,16 @@ function AddContent({
             },
           };
         } else if (value[0]?.content_type === "URL") {
+          console.log("module",module)
           return {
             ...module,
-            module_name: module.module_name,
+            module_name: module?.module_name,
             contents: {
               URL: {
-                data: [
-                  ...module?.contents?.URL?.data,
+                data:module?.contents?.URL? [
+                   ...module?.contents?.URL?.data,
                   ...(Array.isArray(value) ? value : [value]),
-                ],
+                ]:[],
               },
               Document: {
                 ...module?.contents.Document,
@@ -341,6 +342,9 @@ function AddContent({
         Document: {
           data: [],
         },
+        URL: {
+          data: [],
+        },
       },
     });
     setModuleDescription(addedContent);
@@ -365,15 +369,10 @@ function AddContent({
 
   const handleSaveModule = (index) => {
     let attachement = [];
-    let Documents = moduleDescription[0]?.contents?.Document?.data;
-    let Video = moduleDescription[0]?.contents?.Video?.data;
-    let dataConcatenate;
-    if (Documents) {
-      attachement = attachement.concat(Documents);
-    }
-    if (Video) {
-      dataConcatenate = attachement.concat(Video);
-    }
+    let Documents = moduleDescription[0]?.contents?.Document?.data || [];
+    let Video = moduleDescription[0]?.contents?.Video?.data || []
+    let Url = moduleDescription[0]?.contents?.URL?.data ||[]
+    let dataConcatenate = [...Video, ...Documents, ...Url]
     if (moduleDescription[0]?.module_name === "") {
       setError(true);
     } else {
@@ -386,9 +385,12 @@ function AddContent({
         },
         courseAttachments: dataConcatenate,
       };
+      console.log("dataConcatenate-->",dataConcatenate,attachement)
       addContentOnCreateCourse({
         payload: payload,
-        callBack: (response) => {},
+        callBack: (response) => {
+          toast.success("Module Saved Successfully");
+        },
       });
     }
   };
@@ -406,18 +408,13 @@ function AddContent({
     for (const item of moduleDescription) {
       // console.log("item------->",item)
       if (item.course_id) {
-        console.log("ondition item---->", item);
+        
         let attachement = [];
-        let Documents = item?.contents?.Document?.data;
-        let Video = item?.contents?.Video?.data;
-        let dataConcatenate;
-        if (Documents) {
-          attachement = attachement.concat(Documents);
-        }
-        if (Video) {
-          dataConcatenate = attachement.concat(Video);
-        }
-
+        let Documents = item?.contents?.Document?.data || [];
+        let Video = item?.contents?.Video?.data || []
+        let Url = item?.contents?.URL?.data || [];
+        console.log("ondition item---->", Url, Documents, Video);
+        let dataConcatenate = [...Video, ...Documents, ...Url]
         const payload = {
           courseModuleDetails: {
             module_name: item.module_name,
@@ -427,6 +424,7 @@ function AddContent({
           },
           courseAttachments: dataConcatenate,
         };
+        console.log("dataConcatenate 22-->",dataConcatenate,attachement)
         try {
           await updateContentOnCreateCourse({
             payload: payload,
@@ -581,7 +579,7 @@ function AddContent({
                       <Typography sx={{ ml: "4px" }}> Add Content</Typography>
                     </Box>
 
-                    <Box
+                    {/* <Box
                       color="primary"
                       onClick={() => handleSaveModule(index)}
                       sx={{
@@ -595,7 +593,7 @@ function AddContent({
                     >
                       <SaveIcon sx={{ fontSize: "1.1rem" }} />{" "}
                       <Typography sx={{ ml: "4px" }}>Save</Typography>
-                    </Box>
+                    </Box> */}
                   </Box>
                 </Box>
               </AccordionSummary>

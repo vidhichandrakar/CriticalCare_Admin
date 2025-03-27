@@ -223,17 +223,9 @@ const Categores = () => {
 
   const handleEdit = (value) => {
     setHideCatConfig(true);
+    console.log("cat",value)
     setSelectedConfigValue(value);
-    let category_id = openId;
-    updateCategory({
-      category_id,
-      callBack: (response) => {
-        const data = response.data;
-        let storedValues = Object.assign({}, userData);
-        storedValues.memberName = data.category_name;
-        // setUserData(storedValues);
-      },
-    });
+   
   };
 
   useEffect(() => {

@@ -73,7 +73,7 @@ export const AdditionalData = [
     heading: "Coupons",
   },
   {
-    href: "/admin/Trics1FreeMockTest",
+    href: "https://zoom.us/join",
     icon: <BookmarkAddedIcon />,
     heading: "Zoom",
   },
