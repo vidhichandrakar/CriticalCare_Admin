@@ -1031,7 +1031,7 @@ function AddContent({
                 className="addCatTextField"
                 sx={{ mt: 2 }}
               >
-                {cat.map((item) => (
+                {cat?.map((item) => (
                   <MenuItem key={item._id} value={item}>
                     {item.test_name}
                   </MenuItem>

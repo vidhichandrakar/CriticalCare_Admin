@@ -157,16 +157,35 @@ const YourCoursesCard = ({ allCourses, userData }) => {
                             : "priceAndOfferprice"
                         }
                       >
-                        <Typography className="offerPrice">
-                          ₹
-                          {
-                            item.durations[item?.durations?.length - 1]
-                              ?.offer_price
-                          }
-                        </Typography>
-                        <Typography className="durationText price">
-                          ₹{item.durations[item?.durations?.length - 1]?.price}
-                        </Typography>
+                        {item.durations[item?.durations?.length - 1]
+                          ?.offer_price ? (
+                          <>
+                            <Typography className="offerPrice">
+                              ₹
+                              {
+                                item.durations[item?.durations?.length - 1]
+                                  ?.offer_price
+                              }
+                            </Typography>
+                            <Typography className="durationText price">
+                              ₹
+                              {
+                                item.durations[item?.durations?.length - 1]
+                                  ?.price
+                              }
+                            </Typography>
+                          </>
+                        ) : (
+                          <>
+                            <Typography className="offerPrice">
+                              ₹
+                              {
+                                item.durations[item?.durations?.length - 1]
+                                  ?.price
+                              }
+                            </Typography>
+                          </>
+                        )}
                       </div>
 
                       <div>

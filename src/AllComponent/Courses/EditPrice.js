@@ -259,20 +259,20 @@ const EditPrice = ({
         storedValues.years = item?.duration_name;
         if (
           storedValues.duration &&
-          storedValues.price &&
-          storedValues.offer_price
+          storedValues.price 
+          // storedValues.offer_price
         ) {
-          if (
-            parseInt(storedValues.price) < parseInt(storedValues.offer_price)
-          ) {
-            emptyString =
-              "Offer Price Must multiple Be Less Then Regular Price!";
-            validate = true;
-          }
+          // if (
+          //   parseInt(storedValues.price) < parseInt(storedValues.offer_price)
+          // ) {
+          //   emptyString =
+          //     "Offer Price Must multiple Be Less Then Regular Price!";
+          //   validate = true;
+          // }
         } else if (
           storedValues.duration === "" ||
-          storedValues.price === "" ||
-          storedValues.offer_price === ""
+          storedValues.price === ""  
+          // storedValues.offer_price === ""
         ) {
           emptyString = "Required fields cannot be empty!";
           validate = true;
@@ -296,16 +296,16 @@ const EditPrice = ({
       const storedValues = singleValidity;
       if (
         storedValues.duration &&
-        storedValues.price &&
-        storedValues.offer_price
+        storedValues.price  
+        // storedValues.offer_price
       ) {
-        if (parseInt(storedValues.price) > parseInt(storedValues.offer_price)) {
+        if (parseInt(storedValues.price)) {
           let copyArr = [];
           copyArr.push(storedValues);
           handleInputChange("editPrice", copyArr);
           handleTrackerPage(2);
         } else {
-          toast.error("Offer Price Must Be Less Then Regular Price", {
+          toast.error("Required fields cannot be empty !", {
             autoClose: 500,
           });
         }
@@ -317,13 +317,13 @@ const EditPrice = ({
     } else if (selectDurationValue === "Lifetime Validity") {
       const storedValues = lifetimeValidation;
       if (storedValues.price && storedValues.offer_price) {
-        if (parseInt(storedValues.price) > parseInt(storedValues.offer_price)) {
+        if (parseInt(storedValues.price) ) {
           let copyArr = [];
           copyArr.push(storedValues);
           handleInputChange("editPriceLifeTime", copyArr[0]);
           handleTrackerPage(2);
         } else {
-          toast.error("Offer Price Must Be Less Then Regular Price", {
+          toast.error("Required fields cannot be empty!", {
             autoClose: 500,
           });
         }
@@ -337,16 +337,16 @@ const EditPrice = ({
       // handleInputChange("editPrice", [storedValues]);
       if (
         storedValues.price &&
-        storedValues.offer_price &&
+        // storedValues.offer_price &&
         storedValues.startDate
       ) {
-        if (parseInt(storedValues.price) > parseInt(storedValues.offer_price)) {
+        if (parseInt(storedValues.price)  ) {
           let copyArr = [];
           copyArr.push(storedValues);
           handleInputChange("editPriceWithExpiryDate", storedValues);
           handleTrackerPage(2);
         } else {
-          toast.error("Offer Price Must Be Less Then Regular Price", {
+          toast.error("Required fields cannot be empty!", {
             autoClose: 500,
           });
         }

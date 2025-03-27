@@ -15,7 +15,7 @@ import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Configuration from "../Configuration/Configuration";
-import { Height } from "@mui/icons-material";
+import { Height, TypeSpecimen } from "@mui/icons-material";
 import DescriptionIcon from "@mui/icons-material/Description";
 import SortIcon from "@mui/icons-material/Sort";
 import { Box } from "@mui/material";
@@ -44,13 +44,13 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   const [handleCollapse, setHandleCollapse] = useState();
   const [popForBlog, setPopForBlog] = useState(false);
   const navigate = useNavigate();
-
+  const activeMenu = localStorage.getItem("activeMenu");
   useEffect(() => {
     // Sync the active menu on load
-    const activeMenu = localStorage.getItem("activeMenu");
+    // const activeMenu = localStorage.getItem("activeMenu");
     setHighlight(activeMenu);
     setHighlightPeople(activeMenu);
-  }, []);
+  }, [activeMenu]);
 
   const handleCatConfig = (value) => {
     setHideCatConfig(true);
@@ -80,6 +80,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
   };
 
   const handleHighlight = (type) => {
+    console.log("type->",type)
     localStorage.setItem("activeMenu", type);
     setHighlight(type); // Immediately update the state
   };
@@ -186,7 +187,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                         <Box
                           id="hoverrr"
                           className={`hoverrr ${
-                            highlight === "YourCourses" ? "hoverrr2" : ""
+                            highlight === "Categories" ? "hoverrr2" : ""
                           }`}
                           sx={{ mt: -2 }}
                           onClick={() => handleHighlight("Categories")}

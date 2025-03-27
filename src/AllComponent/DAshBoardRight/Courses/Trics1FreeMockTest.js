@@ -202,20 +202,30 @@ const Trics1FreeMockTest = ({ onDelete }) => {
                 <div>
                   <p className="blackPara">Price</p>
                   <p className="greyPara">
-                    ₹
-                    {courseData?.durations?.length &&
+                  ₹ 
+                     {courseData?.durations?.length &&
                       courseData?.durations[courseData?.durations?.length - 1]
                         ?.price}
                   </p>
                 </div>
-                <div className="offerPrice">
+                {courseData?.durations?.length &&
+                      courseData?.durations[courseData?.durations?.length - 1]
+                        ?.offer_price?<> <div className="offerPrice">
+                        <p className="blackPara">Offer Price</p>
+                        <p className="greyPara">
+                        ₹{courseData?.durations?.length &&
+                            courseData?.durations[courseData?.durations?.length - 1]
+                              ?.offer_price}
+                        </p>
+                      </div></>:null}
+                {/* <div className="offerPrice">
                   <p className="blackPara">Offer Price</p>
                   <p className="greyPara">
                     {courseData?.durations?.length &&
                       courseData?.durations[courseData?.durations?.length - 1]
                         ?.offer_price}
                   </p>
-                </div>
+                </div> */}
               </div>
               <hr />
               {isNotEmptyArray(courseData) ? (
