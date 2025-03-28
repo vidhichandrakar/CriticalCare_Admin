@@ -243,7 +243,7 @@ export const testPortalColumns = [
     id: "test_name",
     label: "Test Name",
   },
- 
+
   {
     id: "vActions",
     label: "Duration",
@@ -253,7 +253,7 @@ export const testPortalColumns = [
     id: "date",
     label: "Date",
     // align: "center",
-  }, 
+  },
   {
     id: "Actions",
     label: "Actions",
@@ -292,6 +292,17 @@ export const TeamPortalColumns = [
   {
     id: "team_member",
     label: "Team Member",
+    align: "center",
+  },
+  {
+    id: "PhoneNumber",
+    label: "Phone Number",
+    align: "center",
+  },
+  {
+    id: "EmailId",
+    label: "Email Id",
+    align: "center",
   },
   {
     id: "Actions",
@@ -299,4 +310,3 @@ export const TeamPortalColumns = [
     align: "center",
   },
 ];
-

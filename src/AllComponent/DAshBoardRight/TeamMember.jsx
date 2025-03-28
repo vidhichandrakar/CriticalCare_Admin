@@ -226,6 +226,7 @@ const TeamMember = () => {
   useEffect(() => {
     getAllTeamMembers({
       callBack: (response) => {
+        console.log("response------>",response)
         const userCallBack = response?.data;
         setUserData(userCallBack);
       },
@@ -569,10 +570,12 @@ const TeamMember = () => {
                             {row?.member_name}
                           </TableCell>
                           <TableCell className="alignTableBody">
-                            {`${row?.duration_hour}hr : ${row?.duration_minute}min`}
+                            {/* {`${row?.duration_hour}hr : ${row?.duration_minute}min`} */}
+                            {row?.phone_no}
                           </TableCell>
                           <TableCell className="alignTableBody">
-                            {moment(row?.createdAt).format("MM/DD/YYYY")}
+                            {/* {moment(row?.createdAt).format("MM/DD/YYYY")} */}
+                            {row?.email_id}
                           </TableCell>
 
                           <TableCell sx={{ textAlign: "center" }}>

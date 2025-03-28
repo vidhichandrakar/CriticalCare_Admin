@@ -186,12 +186,26 @@ function Configuration({
   // const handleDisplayLocationChange = (e) => {
   //   setWebinarsDisplayLocation(e.target.value);
   // };
+  // console.log("hbwedfdskl",selectedConfigValue)
   useEffect(() => {
+    console.log("hbwedfdskl",selectedConfigValue)
     if (selectedConfigValue === "SubCategory") {
-      getCategory({
+      
+      // getCategory({
+      //   callBack: (response) => {
+      //     const userCallBack = response;
+      //     setCat(userCallBack);
+      //   },
+      //   error: (error) => {
+      //     toast.error(error.message);
+      //   },
+      // });
+      getCategoryById({
+        category_id,
         callBack: (response) => {
-          const userCallBack = response;
-          setCat(userCallBack);
+          let storedValues = Object.assign({}, updatedCat);
+          storedValues.category_name = response?.data?.category_name;
+          setCat(response);
         },
         error: (error) => {
           toast.error(error.message);
@@ -211,7 +225,7 @@ function Configuration({
       });
     }
     
-  }, []);
+  }, [selectedConfigValue]);
 
   const handleInput = (value, type, event) => {
     if (

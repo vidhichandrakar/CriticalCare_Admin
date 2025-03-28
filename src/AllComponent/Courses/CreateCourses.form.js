@@ -150,6 +150,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   }, []);
   useEffect(() => {
     if (courseData !== "") {
+      // console.log("curse Data--->",courseData.teamMembers[0].member_name )
       let storedValues = Object.assign({}, storedBasicInfo);
       storedValues.Name = courseData?.course_name;
       if (storedValues.Name?.length >= 4) {
@@ -190,6 +191,9 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       storedValues.thumbnail_path_mobile = courseData?.thumbnail_path_mobile;
       storedValues.thumbnail_video_path = courseData?.thumbnail_video_path;
       setLink(courseData?.thumbnail_video_description);
+      if (courseData?.teamMembers) {
+        setSelectedTeamMemberName(courseData?.teamMembers[0]?.member_name);
+      }
 
       setStoredBasicInfo(storedValues);
     }
@@ -312,7 +316,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   };
 
   const handleClick = (event) => {
-    console.log("event---->",event.currentTarget)
+    console.log("event---->", event.currentTarget);
     setAnchorEl(event.currentTarget);
   };
 
@@ -570,7 +574,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       <Box sx={{ marginTop: "5%" }} className="categoryBox">
         <Box>
           {CommonTypography(
-            { fontWeight: 600, label: "Add Team Memeber" },
+            { fontWeight: 600, label: "Add Faculty Name" },
             (Option = {
               className: "editFirstText",
             })

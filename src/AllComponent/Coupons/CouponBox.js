@@ -25,13 +25,12 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
-import Divider from '@mui/material/Divider'; 
+import Divider from "@mui/material/Divider";
 import { deleteCoupon, getCoupon } from "../ActionFactory/apiActions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import moment from "moment/moment";
-
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -69,10 +68,10 @@ const CouponBox = () => {
   };
 
   const handleEdit = (event, id) => {
-        navigate("/admin/CreateCoupon", { state: { id: openId } });
+    navigate("/admin/CreateCoupon", { state: { id: openId } });
   };
   const handleDelete = () => {
-    const coupon_id = openId
+    const coupon_id = openId;
     deleteCoupon({
       coupon_id,
       callBack: () => {
@@ -88,10 +87,9 @@ const CouponBox = () => {
             },
           });
         }, 1000);
-       
       },
     });
-  }
+  };
 
   const open = Boolean(anchorEl);
   const ids = open ? "simple-popover" : undefined;
@@ -142,10 +140,21 @@ const CouponBox = () => {
       callBack: (response) => {
         setCoupondata(response.data);
       },
-      error: (err) => {
-      }
+      error: (err) => {},
     });
   }, []);
+
+  const handleCouponeExpiredPostDate = (data) => {
+    let endDate = moment(new Date(data?.end_date)).format("YYYY-MM-DD");
+    let currentDate = moment().format("YYYY-MM-DD");
+
+    if (moment(endDate).isBefore(currentDate)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   return (
     <div>
       {coupondata?.map((data) => (
@@ -156,7 +165,9 @@ const CouponBox = () => {
               style={{ display: "flex", flexDirection: "row" }}
             >
               <Box className="couponLeftBox">
-                <Typography className="discount">₹{data.discount_amount} OFF</Typography>
+                <Typography className="discount">
+                  ₹{data.discount_amount} OFF
+                </Typography>
                 <Box className="yellowBox">
                   {" "}
                   <Typography style={{ marginBottom: "8%" }}>
@@ -171,31 +182,41 @@ const CouponBox = () => {
                   <Box className="DiscountBox">
                     <Typography>DISCOUNT</Typography>
                     <Box className="flexrow mt-2">
-                      <Typography sx={{fontSize: "0.9rem"}}>Created by 360 Critical care</Typography>
+                      <Typography sx={{ fontSize: "0.9rem" }}>
+                        Created by 360 Critical care
+                      </Typography>
                       <Box>
                         <CircleIcon className="circleIcon" />
                       </Box>
-                      <Typography sx={{fontSize: "0.9rem"}} className="UsedText">Public Coupon</Typography>
+                      <Typography
+                        sx={{ fontSize: "0.9rem" }}
+                        className="UsedText"
+                      >
+                        Public Coupon
+                      </Typography>
                     </Box>
                   </Box>
                   <Box className="couponLastBox">
                     <h6
                       style={{
                         color: "white",
-                        backgroundColor: "red",
+                        backgroundColor: handleCouponeExpiredPostDate(data)
+                          ? "red"
+                          : "green",
                         padding: 5,
                         marginRight: "16%",
                       }}
                     >
-                      EXPIRED
+                      {/* EXPIRED */}
+                      {handleCouponeExpiredPostDate(data)
+                        ? "EXPIRED"
+                        : "ACTIVE"}
                     </h6>
                     <MoreVertIcon
                       aria-describedby={id}
                       variant="contained"
                       sx={{ cursor: "pointer" }}
-                      onClick={(event) =>
-                        handleClick(event, data.coupon_id)
-                      }
+                      onClick={(event) => handleClick(event, data.coupon_id)}
                     />
                   </Box>
                 </div>
@@ -203,9 +224,17 @@ const CouponBox = () => {
                 <div className="flexrow">
                   <Box className="couponRightBox flexrow">
                     {/* <Typography sx={{fontSize: "0.9rem"}}>{data.start_date}, {data.end_date}</Typography> */}
-                    <Typography sx={{fontSize: "0.9rem"}}>{ moment(new Date(data.start_date)).format("YYYY-MM-DD")}, { moment(new Date(data.end_date)).format("YYYY-MM-DD")}</Typography>
+                    <Typography sx={{ fontSize: "0.9rem" }}>
+                      {moment(new Date(data.start_date)).format("YYYY-MM-DD")},{" "}
+                      {moment(new Date(data.end_date)).format("YYYY-MM-DD")}
+                    </Typography>
                     <Box className="verticalDividerTwo"></Box>
-                    <Typography sx={{fontSize: "0.9rem"}}className="UsedText">{data.coupon_max_user} times</Typography>
+                    <Typography
+                      sx={{ fontSize: "0.9rem" }}
+                      className="UsedText"
+                    >
+                      {data.coupon_max_user} times
+                    </Typography>
                   </Box>
 
                   <Box>
@@ -566,8 +595,7 @@ const CouponBox = () => {
             </div>
           ) : null}
         </Box>
-      ))
-      }
+      ))}
       <Popover
         sx={{ m: -7, mt: 0.7 }}
         id={openId}
@@ -579,23 +607,30 @@ const CouponBox = () => {
           horizontal: "right",
         }}
       >
-        
-        <Box className="EditButton" sx={{ p: 1, cursor: "pointer"}} 
-        onClick={handleEdit}>
-          <HistorySharpIcon  className="coloricon"/>
-          <Typography sx={{ml: 1}}>Edit</Typography>
+        <Box
+          className="EditButton"
+          sx={{ p: 1, cursor: "pointer" }}
+          onClick={handleEdit}
+        >
+          <HistorySharpIcon className="coloricon" />
+          <Typography sx={{ ml: 1 }}>Edit</Typography>
         </Box>
-        <Divider/>
+        <Divider />
         {/* <Box sx={{ p: 1, mt: -1, mr: 5,display: "flex" }}> */}
-        <Box className="EditButton" sx={{ p: 1, cursor: "pointer"}}
-         onClick={handleDelete}
-         >
+        <Box
+          className="EditButton"
+          sx={{ p: 1, cursor: "pointer" }}
+          onClick={handleDelete}
+        >
           {" "}
-          <RestoreFromTrashSharpIcon className="DeleteRed"/> 
-          <Typography sx={{ml: 1}} className="DeleteRed"> Delete</Typography>
+          <RestoreFromTrashSharpIcon className="DeleteRed" />
+          <Typography sx={{ ml: 1 }} className="DeleteRed">
+            {" "}
+            Delete
+          </Typography>
         </Box>
       </Popover>
-      
+
       <ToastContainer />
     </div>
   );

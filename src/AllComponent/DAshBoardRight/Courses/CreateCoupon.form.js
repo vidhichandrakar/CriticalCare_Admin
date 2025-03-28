@@ -192,6 +192,7 @@ const CreateCouponForm = ({}) => {
                 {/* <DatePicker label="Uncontrolled picker" defaultValue={dayjs('2022-04-17')} /> */}
                 <DatePicker
                   // label="Controlled picker"
+                  disablePast
                   value={startDate}
                   onChange={handleStartDate}
                 />
@@ -207,6 +208,7 @@ const CreateCouponForm = ({}) => {
                 {/* <DatePicker label="Uncontrolled picker" defaultValue={dayjs('2022-04-17')} /> */}
                 <DatePicker
                   // label="Controlled picker"
+                  disablePast
                   value={endDate}
                   onChange={handleEndDate}
                 />

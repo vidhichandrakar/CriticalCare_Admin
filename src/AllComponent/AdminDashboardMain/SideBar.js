@@ -320,7 +320,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                           }}
                           onClick={() => handleHighlightPeople("MyTeam")}
                         >
-                          Users
+                          Admin
                         </Typography>
                       </Link>
                     </li>
@@ -388,7 +388,7 @@ function SideBar({ openSidebarToggle, OpenSidebar }) {
                 onClick={() => handleHighlight("TeamMember")}
               >
                 <AssignmentIcon className="icon" />
-                <Typography>Team Member</Typography>
+                <Typography>Faculty</Typography>
               </Box>
             </Link>
           </div>
