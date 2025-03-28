@@ -1,7 +1,8 @@
 import img from "../Media/Images/banner2.jpg";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
-import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
+// import BookmarkAddedIcon from "@mui/icons-material/BookmarkAdded";
+import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import EastIcon from "@mui/icons-material/East";
 import cardimg from "../Media/Images/db7187e8-b7cf-47ed-8900-6de89dabde06.png";
 import { duration } from "@material-ui/core";
@@ -74,7 +75,8 @@ export const AdditionalData = [
   },
   {
     href: "https://zoom.us/join",
-    icon: <BookmarkAddedIcon />,
+    // icon: <BookmarkAddedIcon />,
+    icon: <MeetingRoomIcon />,
     heading: "Zoom",
   },
 ];
@@ -243,7 +245,7 @@ export const testPortalColumns = [
     id: "test_name",
     label: "Test Name",
   },
- 
+
   {
     id: "vActions",
     label: "Duration",
@@ -253,7 +255,7 @@ export const testPortalColumns = [
     id: "date",
     label: "Date",
     // align: "center",
-  }, 
+  },
   {
     id: "Actions",
     label: "Actions",
