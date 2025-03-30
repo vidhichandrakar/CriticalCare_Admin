@@ -39,4 +39,5 @@ export const APIS = {
   getEnrollStudent: REACT_APP_API + "/coursepurchase/stdenroll",
   getTestBycourseId: REACT_APP_API + "/test/testbycourse",
   content: REACT_APP_API + "/course/content/",
+  batch: REACT_APP_API + "/course/batch"
 };

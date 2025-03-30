@@ -5,6 +5,7 @@ import {
   Input,
   Dialog,
   IconButton,
+  Chip,
 } from "@mui/material";
 import Popover from "@mui/material/Popover";
 import React, { useEffect, useState } from "react";
@@ -24,6 +25,7 @@ import {
   commonTextField,
 } from "../../Util/CommonFields";
 import {
+  getBatch,
   getCategory,
   getSubcategoryList,
   getTeam,
@@ -35,7 +37,7 @@ import MenuItem from "@mui/material/MenuItem";
 import LoaderComponent from "../../Util/LoaderComponent";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-
+import CancelIcon from "@mui/icons-material/Cancel";
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -67,10 +69,12 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const [selectedCategoryList, setSelectedcategoryList] = useState("");
   const [loaderState, setLoaderState] = useState(false);
   const [teamMember, setTeamMember] = useState([]);
-  const [selectedTeamMemberName, setSelectedTeamMemberName] = useState("");
+  const [selectedTeamMemberName, setSelectedTeamMemberName] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
+  const [batchList, setBatchList] = useState([])
   const [link, setLink] = useState("");
   const [inputLink, setInputLink] = useState("");
+  const [batchValue, setBatchValue] = useState("")
   const open = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
   let acceptType;
@@ -99,7 +103,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           } else if (acceptType === "video") {
             storedValues.thumbnail_video_path = response?.data?.path;
           }
-          console.log("introo",storedValues)
+          console.log("introo", storedValues)
           setStoredBasicInfo(storedValues);
           setLoaderState(false);
         },
@@ -139,6 +143,16 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
         toast.error(error.message);
       },
     });
+    getBatch({
+      callBack: (response) => {
+        const { data } = response
+        if (data) {
+          setBatchList(data);
+        } else {
+          setBatchList([])
+        }
+      }
+    })
     getTeam({
       callBack: (response) => {
         const userCallBack = response?.data;
@@ -192,8 +206,10 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       storedValues.thumbnail_path_mobile = courseData?.thumbnail_path_mobile;
       storedValues.thumbnail_video_path = courseData?.thumbnail_video_path;
       setLink(courseData?.thumbnail_video_description);
-      if (courseData?.teamMembers) {
-        setSelectedTeamMemberName(courseData?.teamMembers[0]?.member_name);
+      if (courseData?.team_member_id) {
+        const presentTeamMembers = teamMember.filter(member => courseData?.team_member_id.includes(member.member_id));
+
+        setSelectedTeamMemberName(presentTeamMembers);
       }
 
       setStoredBasicInfo(storedValues);
@@ -228,6 +244,12 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       storedValues.thumbnail_video_path = value[0];
     } else if (type === "link") {
       storedValues.thumbnail_video_description = value;
+    } else if (type === "teamMember") {
+      if(value.length){
+      const memberIds = value.map(member => member.member_id);
+
+      storedValues.team_member_id = memberIds
+      }
     }
     setStoredBasicInfo(storedValues);
 
@@ -305,13 +327,20 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     handleInput(mainSubCatID, "subCategory");
   };
 
-  const handleChangeOnTeamMember = (e) => {
-    let teamMemberId = Object.assign({}, storedBasicInfo);
-    teamMemberId.team_member_id = e.target.value.member_id;
-    setStoredBasicInfo(teamMemberId);
-    setSelectedTeamMemberName(e.target.value.member_name);
-  };
 
+  const handleChangeOnTeamMember = (event) => {
+    setSelectedTeamMemberName(event.target.value);
+    handleInput(event.target.value,"teamMember")
+  };
+  const handleDelete = (memberToDelete) => {
+    setSelectedTeamMemberName((prev) =>
+      prev.filter((member) => member.member_id !== memberToDelete.member_id)
+    );
+    setTimeout(() => {
+      
+    handleInput(selectedTeamMemberName,"teamMember")
+    }, 2000);
+  };
   const handleUpload = (type) => {
     acceptType = type;
   };
@@ -333,7 +362,10 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
       handleClose();
     }
   };
-
+  const handleBatchChange = (event) => {
+    console.log(event?.target?.value)
+    setBatchValue(event?.target?.value)
+  }
   return (
     <div className="formMain">
       <div className="FlexRow">
@@ -582,28 +614,29 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           )}
           <FormControl sx={{ m: 1, minWidth: 240 }} className="categorySelect">
             <Select
-              value={
-                selectedTeamMemberName !== ""
-                  ? selectedTeamMemberName
-                  : `Select Team Member`
-              }
-              renderValue={() => {
-                return selectedTeamMemberName !== "" ? (
-                  <Typography>{selectedTeamMemberName}</Typography>
-                ) : (
-                  <Typography> Select Team Member</Typography>
-                );
-              }}
-              onChange={(e) => handleChangeOnTeamMember(e)}
-              input={<OutlinedInput />}
-              MenuProps={MenuProps}
-              inputProps={{ "aria-label": "Without label" }}
+              multiple
+              value={selectedTeamMemberName}
+              // label="Faculty Name"
+              onChange={handleChangeOnTeamMember}
+              // input={<OutlinedInput label="Select Faculty Name" />}
+              renderValue={(selected) => (
+                <div style={{ display: "flex", flexWrap: "wrap", gap: "5px" }}>
+                  {selected.map((member) => (
+                    <Chip key={member._id} label={member.member_name} onDelete={() => handleDelete(member)}
+                    deleteIcon={<CancelIcon />}
+       />
+                  ))}
+                </div>
+              )}
             >
-              {teamMember.map((item) => (
-                <MenuItem key={item._id} value={item}>
-                  {item.member_name}
-                </MenuItem>
-              ))}
+              {teamMember
+        .filter((item) => !selectedTeamMemberName.includes(item)) // Filter out already selected members
+        .map((item) => (
+          <MenuItem key={item._id} value={item}>
+            {item.member_name}
+          </MenuItem>
+        ))}
+
             </Select>
           </FormControl>
         </Box>
@@ -617,32 +650,15 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           )}
           <FormControl sx={{ m: 1, minWidth: 240 }} className="categorySelect">
             <Select
-              // value={
-              //   storedBasicInfo?.subCategory
-              //     ? storedBasicInfo?.subCategory
-              //     : `Select Sub Category`
-              // }
-              // renderValue={() => {
-              //   return storedBasicInfo.subCategory !== "" ? (
-              //     <Typography>
-              //       {storedBasicInfo?.subCategory?.category_name}
-              //     </Typography>
-              //   ) : (
-              //     <Typography> Select Sub Category</Typography>
-              //   );
-              // }}
-              // onChange={(e) => handleChangeOnSubCat(e)}
+              onChange={handleBatchChange}
+              value={batchValue}
               input={<OutlinedInput />}
               MenuProps={MenuProps}
               inputProps={{ "aria-label": "Without label" }}
-              // disabled={selectedCategoryList === ""}
             >
-              {/* {subCategoryList?.map((item) => ( */}
-              <MenuItem>
-                {/* {item.category_name} */}
-                batch
-              </MenuItem>
-              {/* ))} */}
+              {batchList?.map(data => <MenuItem value={data}>
+                {data?.batch_name}
+              </MenuItem>)}
             </Select>
           </FormControl>
         </Box>

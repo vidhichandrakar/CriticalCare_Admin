@@ -788,3 +788,15 @@ export const removeTestSection = ({ callBack, testInfoId }) => {
     callBack(response);
   });
 };
+
+export const getBatch = ({ callBack, error }) => {
+  const url = APIS.batch ;
+  axios
+    .get(url)
+    .then((response) => {
+      callBack(response);
+    })
+    .catch((errorMessage) => {
+      error(errorMessage);
+    });
+};
