@@ -190,7 +190,9 @@ console.log("inputNameValue---------->",inputNameValue)
           if (courseData?.contents?.length) {
             arr2.course_id = courseData.course_id;
           }
+          
           arr.push(arr2);
+          console.log("introo",arr)
           setUploadedVideo(arr);
           handleInputChange("addContent", arr);
           handleVideoName(arr);

@@ -168,6 +168,29 @@ function AddContent({
     handlecloseDialogCoupon();
     setCouponName("");
   };
+  const handleTransformedData = (data)=>{
+
+    const transformedData = data.map(module => ({
+      id: module.module_id || 0, // Use module_id as id
+      module_name: module.module_name || "",
+      contents: {
+        count: module.contents?.Video?.count || "", // Use Video count if available
+        Video: {
+          data: module.contents?.Video?.data || [],
+        },
+        Document: {
+          data: module.contents?.Document?.data || [],
+        },
+        URL: {
+          data: module.contents?.URL?.data || [],
+        },
+      },
+    }));
+    
+    console.log(transformedData);
+    setModuleDescription(transformedData)
+    
+  }
   useEffect(() => {
     if (courseData?.course_id) {
       getCourseContentById({
@@ -176,9 +199,7 @@ function AddContent({
           if (!isNotEmptyObject(response.data)) {
             return moduleDescription;
           } else {
-            let storedValues = Object.assign({}, moduleDescription);
-            storedValues = response.data.moduleDetails;
-            setModuleDescription(storedValues);
+            handleTransformedData(response.data.moduleDetails);
           }
         },
         error: (error) => {
@@ -227,17 +248,19 @@ function AddContent({
   };
 
   const handleVideoName = (value) => {
-    console.log("va;lue----->", value);
     let updatedModuleDescription = moduleDescription.map((module, index) => {
+      
+    console.log("va;lue----->", value, module);
       if (index === clickedModuleIdx) {
-        if (value[0]?.content_type === "Video") {
+        if (value[0]?.content_type_name === "Video") {
+
           return {
             ...module,
             module_name: module.module_name,
             contents: {
               Video: {
                 data: [
-                  ...module.contents.Video.data,
+                  ...module?.contents?.Video?.data,
                   ...(Array.isArray(value) ? value : [value]),
                 ],
               },
@@ -249,7 +272,7 @@ function AddContent({
               },
             },
           };
-        } else if (value[0]?.content_type === "Document") {
+        } else if (value[0]?.content_type_name === "Document") {
           return {
             ...module,
             module_name: module.module_name,
@@ -268,7 +291,7 @@ function AddContent({
               },
             },
           };
-        } else if (value[0]?.content_type === "URL") {
+        } else if (value[0]?.content_type_name === "URL") {
           console.log("module", module);
           return {
             ...module,
@@ -392,6 +415,7 @@ function AddContent({
         payload: payload,
         callBack: (response) => {
           toast.success("Module Saved Successfully");
+          navigate("/admin/YourCourses");
         },
       });
     }
@@ -726,10 +750,12 @@ function AddContent({
                     </Typography>
                   </Box>
                   <Grid container spacing={2} direction="row" wrap="wrap">
+                  {console.log("data",itemContent)}
                     {itemContent?.contents?.Document?.data?.length ? (
                       <>
                         {itemContent?.contents?.Document?.data?.map((item) => (
                           <Grid item xs={12} sm={6} md={4} key={index}>
+                            
                             <Card sx={{ maxWidth: 345, padding: "5px" }}>
                               <CardActionArea>
                                 {isPdfFile(item.content_url) ? (

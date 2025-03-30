@@ -99,6 +99,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
           } else if (acceptType === "video") {
             storedValues.thumbnail_video_path = response?.data?.path;
           }
+          console.log("introo",storedValues)
           setStoredBasicInfo(storedValues);
           setLoaderState(false);
         },
