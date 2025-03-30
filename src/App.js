@@ -6,14 +6,16 @@ import LoginPage from './AllComponent/LoginFiles/LoginPage'
 import RouterMain from './AllComponent/RouterMainFile/RouterMain'
 import Dashboard from './AllComponent/DAshBoardRight/Dashboard/Dashboard'
 import { ToastContainer } from 'react-toastify'
+import Counter from './AllComponent/redux/Counter'
 
 function App() {
 
   return (
     <>
-       <RouterMain />
-       <ToastContainer containerId={"request"}/>
+       {/* <RouterMain />
+       <ToastContainer containerId={"request"}/> */}
        {/* <Dashboard /> */}
+       <Counter />
     </>
   )
 }
