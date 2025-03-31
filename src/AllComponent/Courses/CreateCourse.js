@@ -105,7 +105,8 @@ const CreateCourses = ({ handleHeaderLabels }) => {
       const courseDetails = {
         course_name: basicInfo?.Name,
         description: basicInfo?.Description,
-        course_batchdetails: "passing as static need to change it", //passing as static will imlement once it willl present
+        course_batchdetails:"this batch include",
+        batch_id: basicInfo?.batch_id?.batch_id, //passing as static will imlement once it willl present
         course_detail: "hello details", //same as above
         course_FAQ: "This is FAQ", //same as above
         about_course: basicInfo?.Description,

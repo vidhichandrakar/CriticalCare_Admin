@@ -62,6 +62,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     thumbnail_video_path: null,
     thumbnail_video_description: null,
     team_member_id: "",
+    batch_id:"",
   });
   const [imgUpload, setImageWhileUpload] = useState("");
   const [cat, setCat] = useState([]);
@@ -247,9 +248,11 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
     } else if (type === "teamMember") {
       if(value.length){
       const memberIds = value.map(member => member.member_id);
-
       storedValues.team_member_id = memberIds
       }
+    }
+    else if(type === "batch"){
+      storedValues.batch_id= value
     }
     setStoredBasicInfo(storedValues);
 
@@ -365,6 +368,7 @@ const CreateForm = ({ handleTrackerPage, handleInputChange, courseData }) => {
   const handleBatchChange = (event) => {
     console.log(event?.target?.value)
     setBatchValue(event?.target?.value)
+    handleInput(event?.target?.value, "batch")
   }
   return (
     <div className="formMain">
