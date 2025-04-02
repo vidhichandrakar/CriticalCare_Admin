@@ -712,6 +712,7 @@ function Configuration({
                           value={startValue}
                           onChange={(newValue) => setStartValue(newValue)}
                           sx={{ minWidth: 200 }}
+                          disablePast
                         />
                       </DemoContainer>
                     </LocalizationProvider>
@@ -727,6 +728,7 @@ function Configuration({
                           value={endvalue}
                           onChange={(newValue) => setEndvalue(newValue)}
                           sx={{ maxWidth: 20 }}
+                          disablePast
                         />
                       </DemoContainer>
                     </LocalizationProvider>

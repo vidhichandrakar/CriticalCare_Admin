@@ -365,7 +365,7 @@ const Categores = () => {
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">
             <div className="wid100">
-              <Paper
+              {/* <Paper
                 component="form"
                 sx={{
                   ml: 0,
@@ -379,19 +379,19 @@ const Categores = () => {
               >
                 <IconButton sx={{ p: "10px" }} aria-label="menu">
                   <SearchIcon />
-                </IconButton>
-                <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+                </IconButton> */}
+                {/* <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
                 <InputBase
                   sx={{ ml: 1, flex: 1 }}
                   placeholder="Search your course by name"
                   inputProps={{ "aria-label": "search your course by name" }}
                 />
-              </Paper>
+              </Paper> */}
             </div>
 
-            <Button className="filterButton mt43">
+            {/* <Button className="filterButton mt43">
               <FilterAltIcon /> Filter
-            </Button>
+            </Button> */}
           </div>
 
           <Button

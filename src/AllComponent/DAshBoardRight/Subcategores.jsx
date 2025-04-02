@@ -323,7 +323,7 @@ const Subcategores = () => {
         <LoaderComponent loaderState={loaderState} />
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">
-            <div className="wid100">
+            {/* <div className="wid100">
               <Paper
                 component="form"
                 sx={{
@@ -350,7 +350,7 @@ const Subcategores = () => {
 
             <Button className="filterButton mt43">
               <FilterAltIcon /> Filter
-            </Button>
+            </Button> */}
           </div>
 
           <Button

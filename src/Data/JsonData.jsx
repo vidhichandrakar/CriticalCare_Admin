@@ -5,7 +5,11 @@ import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import EastIcon from "@mui/icons-material/East";
 import cardimg from "../Media/Images/db7187e8-b7cf-47ed-8900-6de89dabde06.png";
+import MissedVideoCallIcon from '@mui/icons-material/MissedVideoCall';
 import { duration } from "@material-ui/core";
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import ReceiptLongIcon from '@mui/icons-material/ReceiptLong';
+import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 
 export const AnalyticsSmallData = [
   {
@@ -76,7 +80,8 @@ export const AdditionalData = [
   {
     href: "https://zoom.us/join",
     // icon: <BookmarkAddedIcon />,
-    icon: <MeetingRoomIcon />,
+    // icon: <MeetingRoomIcon />,
+    icon: <MissedVideoCallIcon fontSize="medium"/>,
     heading: "Zoom",
   },
 ];
@@ -84,7 +89,7 @@ export const AdditionalData = [
 export const OfferData = [
   {
     href: "/admin/CreateCourses",
-    icon: <CollectionsIcon />,
+    icon: <MenuBookIcon />,
     head: "Course",
     title: "3 Published Course",
     button: "Create Course",
@@ -100,14 +105,14 @@ export const OfferData = [
   },
   {
     href: "/admin/Transaction",
-    icon: <CollectionsIcon />,
+    icon: <ReceiptLongIcon />,
     head: "Total Transactions",
     title: "30000",
     button: "Total Transactions",
     arrow: <EastIcon />,
   },
   {
-    icon: <CollectionsIcon />,
+    icon: <CurrencyRupeeIcon />,
     head: "Total Revenue",
     title: "50000",
     button: "Total Revenue",

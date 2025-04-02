@@ -369,7 +369,7 @@ const TeamMember = () => {
         <div className="testPortalSearchBarSection">
           <div className="searchnfilter">
             <div className="wid100">
-              <Paper
+              {/* <Paper
                 component="form"
                 sx={{
                   ml: 0,
@@ -390,12 +390,12 @@ const TeamMember = () => {
                   placeholder="Search your course by name"
                   inputProps={{ "aria-label": "search your course by name" }}
                 />
-              </Paper>
+              </Paper> */}
             </div>
 
-            <Button className="filterButton mt43">
-              <FilterAltIcon /> Filter
-            </Button>
+            {/* <Button className="filterButton mt43"> */}
+              {/* <FilterAltIcon /> Filter */}
+            {/* </Button> */}
           </div>
 
           <Button
