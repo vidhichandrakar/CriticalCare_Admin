@@ -1,3 +1,9 @@
+
+
+
+//🔵 Reducer (Who Updates the State?)
+
+
 import { createSlice } from "@reduxjs/toolkit";
 
 // Initial State

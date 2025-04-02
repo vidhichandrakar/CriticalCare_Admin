@@ -1,4 +1,9 @@
-import React from "react";
+/////////////////
+// 
+// 🟠 Store (Who Holds the Global State?)
+
+
+/////////////////
 import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "./counterSlice";
 
