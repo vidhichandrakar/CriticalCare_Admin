@@ -9,6 +9,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { DailogBox } from "../../Util/CommonFields";
 import Configuration from "../Configuration/Configuration";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
 
 const AddBlog = () => {
   const [blogCards, setBlogCards] = useState([]);
@@ -90,7 +91,11 @@ const AddBlog = () => {
   const handleCloseCat = () => {
     setHideCatConfig(false);
   };
-
+  const handleAddBlog=()=>{
+    console.log("oiuhgc")
+    setHideCatConfig(true);
+    // setSelectedConfigValue("AddBlog");
+  }
   return (
     <div className="grid-container">
       <Header
@@ -121,10 +126,12 @@ const AddBlog = () => {
                         // onClick={handleEdit}
                         // onClick={() => handleEdit("Category")}
                       >
-                        <EditIcon
+                        {/* <EditIcon
                           sx={{ cursor: "pointer" }}
-                          onClick={() => handleCatConfig(item.bloglist_id ,"AddBlog")}
-                        />
+                          onClick={() =>
+                            handleCatConfig(item.bloglist_id, "AddBlog")
+                          }
+                        /> */}
                       </Box>
                       <Box
                         className="redDeleteofTestPortal redDelete"
@@ -151,6 +158,18 @@ const AddBlog = () => {
                 </Box>
               );
             })}
+            <Box
+              sx={{
+                top: "88%",
+                position: "absolute",
+                zIndex: 1111,
+                right: 0,
+              }}
+              className="addCircle"
+              onClick={() =>handleAddBlog()}
+            >
+              <AddRoundedIcon className="addIcon" />
+            </Box>
           </Box>
         </Box>
         <DailogBox
@@ -163,7 +182,7 @@ const AddBlog = () => {
           selectedConfigValue={selectedConfigValue}
           handleCloseCat={handleCloseCat}
           hideCatConfig={hideCatConfig}
-          openId= {openId}
+          openId={openId}
         />
       </div>
     </div>

@@ -169,6 +169,7 @@ const Subcategores = () => {
   const [selectedConfigValue, setSelectedConfigValue] = useState("");
 
   const handleCatConfig = (value) => {
+    console.log("===<>",openId)
     setHideCatConfig(true);
     setSelectedConfigValue(value);
   };

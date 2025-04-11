@@ -52,7 +52,7 @@ export default function ViewTestContents({
         },
       });
     }
-  }, []);
+  }, [viewTestDialog===true]);
   return (
     <>
       <div>
