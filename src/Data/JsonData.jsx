@@ -284,10 +284,7 @@ export const SubCategoryPortalColumns = [
     id: "category_name",
     label: "SubCategories",
   },
-  {
-    id: "category_name",
-    label: "Categories",
-  },
+
   {
     id: "Actions",
     label: "Actions",

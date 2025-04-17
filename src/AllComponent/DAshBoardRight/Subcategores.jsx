@@ -178,13 +178,13 @@ const Subcategores = () => {
     setHideCatConfig(false);
   };
   const navigate = useNavigate();
-
+  const [ subCat, setSubCat] = useState([])
   useEffect(() => {
     getSubCategory({
       callBack: (response) => {
         const userCallBack = response?.data;
         setUserData(userCallBack);
-        setCat(userCallBack);
+        setSubCat(userCallBack);
       },
     });
   }, []);
@@ -518,17 +518,14 @@ const Subcategores = () => {
                         <TableRow
                           hover
                           className="TableHover"
-                          role="checkbox"
-                          tabIndex={-1}
+                          // role="checkbox"
+                          // tabIndex={-1}
                           key={row?.code}
                         >
                           <TableCell className="alignTableBody">
                             {row?.category_name}
                           </TableCell>
-                          <TableCell className="alignTableBody">
-                            {row?.category_name}
-                          </TableCell>
-
+                          
                           <TableCell sx={{ textAlign: "center" }}>
                             <MoreVertIcon
                               onClick={(event) =>
